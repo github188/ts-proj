@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<functions>
+    <function id="HelloList" description="HelloList" type="bo"
+        className="tower.test.bo.hello.BoHelloList"
+        forward="SwitchList" />
+        
+    <function id="SwitchList" 
+              description="SwitchHello" 
+              type="switch"
+              switchOn="[request]HELLO_WORLD.1.NAME">
+        <case match="张三" forward="InHelloListA"/>
+        <case match="李四" forward="InHelloListB"/>
+    </function>
+    
+    <function id="InHelloListA" description="InHelloList" type="jsp"
+        jspPath="/test/pages/hello/helloList.jsp" />
+    
+    <function id="InHelloListB" description="InHelloList" type="jsp"
+        jspPath="/test/pages/hello/helloListB.jsp" />
+</functions>
