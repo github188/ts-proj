@@ -326,7 +326,7 @@ try{
                 </tr>
                 <tr>
                   <td colspan="4" align="center" nowrap="nowrap">
-                    <input type="submit" class="submit" value="保存" onclick="doSubmit()">
+                    <input type="submit" class="submit" value="保存" >
                     <input type="button" class="button" onclick="doCancle1()" value="取消">               
 
    </td>
