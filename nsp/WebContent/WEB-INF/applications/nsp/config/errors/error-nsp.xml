@@ -119,7 +119,7 @@
 	</error>
 	<error>
 		<id>CR0005</id>
-		<message>没有输入施工反馈信息，请输入反馈信息后在保存</message>
+		<message>没有输入施工反馈信息，请输入反馈信息后再保存</message>
 		<hint></hint>
 	</error>
 	<error>
