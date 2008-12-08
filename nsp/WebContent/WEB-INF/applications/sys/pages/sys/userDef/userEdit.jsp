@@ -204,9 +204,9 @@
                             <script>var org = new Tower.Widget.Selector("OrgSelector","USER_ORG_ID","ctrl?FUNC_ID=SelectOrg&INPUT_TYPE=radio",{selected:["<%=userOrgId%>"]},{change:onChange})</script>
                           </td>
                           <td align="right">用户岗位：</td>
-                        <td><span id="userStatId">
+                        <td>
                             <script>new Tower.Widget.Selector("StatSelector","USER_STAT_ID","ctrl?FUNC_ID=SelectStat&INPUT_TYPE=radio",{selected:["<%=userStatId%>"]},{change:onChangeUser})</script>
-                          <span class="selectRequiredMsg">请选择一个项目。</span></span></td>
+                       </td>
                            
                      </tr>
                          <tr>
@@ -269,8 +269,6 @@ var sprytextfield5 = new Spry.Widget.ValidationTextField("linkTele", "phone_numb
 var sprytextfield6 = new Spry.Widget.ValidationTextField("linkEmail", "email", {maxChars:50, isRequired:false});
 var sprytextarea1 = new Spry.Widget.ValidationTextarea("sprytextarea1", {isRequired:false, maxChars:200});
 var spryselect1 = new Spry.Widget.ValidationSelect("status");
-var spryselect2 = new Spry.Widget.ValidationSelect("userStatId");
-var spryselect3 = new Spry.Widget.ValidationSelect("linkTeleSelct");
 var spryselect4 = new Spry.Widget.ValidationSelect("sex");
 //-->
 </script>
