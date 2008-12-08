@@ -158,6 +158,7 @@ public class ServletAmountStatListExcel extends HttpServlet implements Servlet {
 				}
 				for(int i = 0 ; i < classFor.size() ; i++ ){
 					classList = (List) classMap.get(classFor.get(i));
+					if(classList != null && classList.size() > 0){
 					sheet.mergeCells(0, n, 0, n+classList.size()-1);
 					for(int j = 0 ; j < classList.size() ; j ++){
 						typeList = (List) classList.get(j);
@@ -174,6 +175,7 @@ public class ServletAmountStatListExcel extends HttpServlet implements Servlet {
 						n ++ ;
 					}
 				}
+			}
 			}
 			/*int n = 3;
 			for(Iterator i = classMap.values().iterator(); i.hasNext();){
