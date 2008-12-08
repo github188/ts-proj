@@ -128,6 +128,7 @@
                 <%if(classes != null && classes.size() > 0 ){
                 	for(int i = 0 ; i < classFor.size() ; i++ ){
                 	   classList = (List) classes.get(classFor.get(i));
+                       if(classList != null){
                 	   for(int j = 0 ; j < classList.size() ; j ++){
                            typeList = (List)classList.get(j);
                            if(j == 0){
@@ -177,6 +178,7 @@
                              }
                           }
                      }
+                  }
                 }
                 %>
               </table>
