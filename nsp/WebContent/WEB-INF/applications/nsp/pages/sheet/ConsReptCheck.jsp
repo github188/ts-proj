@@ -230,7 +230,7 @@
                   <td align="right">施工反馈数量：</td>
                   <td>
                     <span id="spryAmountFeed">
-                    <input type="text" size="21" class="text" name="AMOUNT_AMOUNT_FEED_BACKFEED_BACK" value="">
+                    <input type="text" size="21" class="text" name="AMOUNT_FEED_BACK" value="">
                     <span class="requiredField"> *</span> <span class="textfieldRequiredMsg">需要提供一个值。</span><span class="textfieldInvalidFormatMsg">格式无效。</span><span class="textfieldMaxValueMsg">输入值大于所允许的最大值。</span></span></td>
                   <td align="right">施工剩余调入单位：</td>
                   <td>
