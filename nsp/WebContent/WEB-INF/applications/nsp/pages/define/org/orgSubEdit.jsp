@@ -273,7 +273,7 @@ try{
                 			<input type="hidden" name="FLAG" value="<%=flag %>">
               				<table width="490" border="0" cellpadding="0" cellspacing="0" class="list">
                	<tr>
-                  <td width="95" align="right" nowrap>部门名称：</td>
+                  <td width="95" align="right" nowrap>基站名称：</td>
                   <td width="174"><span id="spryOrgName">
                   <input type="text" class="text" name="ORG_NAME" value="<%=orgName %>"><span class="requiredField">*</span> <span class="textfieldRequiredMsg">需要提供一个值。</span><span class="textfieldMaxCharsMsg">已超过最大字符数50。</span></span></td>
                   <td align="right" nowrap>基站编号：</td>
@@ -319,7 +319,7 @@ try{
                 	<td></td><td></td>
                 </tr>
                 <tr>
-                  <td align="right" valign="top" nowrap>部门描述：</td>
+                  <td align="right" valign="top" nowrap>基站描述：</td>
                   <td colspan="3"><span id="spryOrgDesc">
                     <textarea rows="5" cols="50" class="textarea" name="ORG_DESC"><%=orgDesc %></textarea>
                     <br> <span class="textareaMaxCharsMsg">已超过最大字符数50。</span></span></td>
