@@ -102,9 +102,9 @@
      }
      var amountPrepare = form.AMOUNT_PREPARE.value;
      var amountFeedBack = form.AMOUNT_FEED_BACK.value;
-     if( amountFeedBack >= 0 ){
-        if(amountFeedBack > amountPrepare){
-          alert("施工反馈数量必须小于设备调度数量");
+     if( 1 * amountFeedBack >= 0 ){
+        if(1 * amountFeedBack > 1 * amountPrepare){
+          alert("施工反馈数量必须小于等于设备调度数量");
           return false;
         }
      }else{
@@ -230,7 +230,7 @@
                   <td align="right">施工反馈数量：</td>
                   <td>
                     <span id="spryAmountFeed">
-                    <input type="text" size="21" class="text" name="AMOUNT_FEED_BACK" value="">
+                    <input type="text" size="21" class="text" name="AMOUNT_AMOUNT_FEED_BACKFEED_BACK" value="">
                     <span class="requiredField"> *</span> <span class="textfieldRequiredMsg">需要提供一个值。</span><span class="textfieldInvalidFormatMsg">格式无效。</span><span class="textfieldMaxValueMsg">输入值大于所允许的最大值。</span></span></td>
                   <td align="right">施工剩余调入单位：</td>
                   <td>
