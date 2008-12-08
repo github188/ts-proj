@@ -90,11 +90,11 @@
      }
      var amount = form.AMOUNT_FEED.value;
      var amountAck = form.AMOUNT_FEED_BACK_ACK.value;
-     if(amountAck < 0){
+     if(1 * amountAck < 0){
        alert("施工反馈数必须为正数");
        return false;
      }else{
-      if(amountAck > amount == true){
+      if(1 * amountAck > 1 * amount == true){
          alert("填写施工确认数有误，必须小于等于施工反馈数");
          return false;
        }
