@@ -23,7 +23,7 @@
 	var psw2 = form1.PASSWORD2.value;
     var phone = form1.LINK_TELE.value;
     var org = form1.USER_ORG_ID.value;
-    var stat = form1.USER_STAT_NAME.value;
+    var stat = form1.USER_STAT_ID.value;
     /*if(!isTelephone(phone)){
         return false;
     }*/
@@ -63,18 +63,14 @@
 	 
   	window.location.href = "ctrl?FUNC_ID=UserList&USER_NAME="+form1.USER_NAME.value;
   }
-  function doSelUserOrg(){
-    selDialog("ctrl?FUNC_ID=SelectOrg","USER_ORG_ID","USER_ORG_NAME");
-  }
-  function doSelUserStat(){
-    selDialog("ctrl?FUNC_ID=SelectStat","USER_STAT_ID","USER_STAT_NAME");
-  }    
     function onChange(selectedIds,selector){
       	//alert(selector.element.innerHTML);
       	//for(var i = 0; i < selectedIds.length; i ++){
       	//	alert(selectedIds[i]);
       	//}
-      }
+    }
+    function onChangeUser(selectedIds,selector){
+    }
 -->
 </script>
 <%@ page import="tower.tmvc.XMLWrap"%>
@@ -206,14 +202,10 @@
                            <td align="right">所属机构：</td>
                           <td>
                             <script>var org = new Tower.Widget.Selector("OrgSelector","USER_ORG_ID","ctrl?FUNC_ID=SelectOrg&INPUT_TYPE=radio",{selected:["<%=userOrgId%>"]},{change:onChange})</script>
-                          <span id="linkTeleSelct">
-
-                          <span class="selectRequiredMsg">请选择一个项目。</span></span></td>
+                          </td>
                           <td align="right">用户岗位：</td>
                         <td><span id="userStatId">
-                           <input name="USER_STAT_ID" type="hidden" value="<%=userStatId %>" >
-			               <input name="USER_STAT_NAME" type="text" size="12" class="text" value="<%=userStatName %>" readonly>
-			               <input type="button" name="selectType" class="selButton" value="选择" onClick="doSelUserStat();" />
+                            <script>new Tower.Widget.Selector("StatSelector","USER_STAT_ID","ctrl?FUNC_ID=SelectStat&INPUT_TYPE=radio",{selected:["<%=userStatId%>"]},{change:onChangeUser})</script>
                           <span class="selectRequiredMsg">请选择一个项目。</span></span></td>
                            
                      </tr>
