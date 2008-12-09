@@ -45,6 +45,8 @@ public class BoBuyInList implements RootBo{
 		String userOrgId;
 		
 		//其他
+		Vector orgs;
+		StringBuffer orgIds = new StringBuffer();
 		StringBuffer sql;
 		StringBuffer sqlWhere;
 		QueryResult rs;
@@ -67,9 +69,33 @@ public class BoBuyInList implements RootBo{
 		/***********************************************************************
 		 * 执行业务逻辑、输出
 		 **********************************************************************/
-		 //如果登录用户为"青岛移动"则可以查询青岛下所有允许采购入库的机构的信息。
-		 //如果登录的用户是分公司，则只允许查询与该分工公司有关的记录。
-		 enSysOrg = dbSysOrg.findByKey(userOrgId);
+		 //检查用户所属机构ID是否为空，如果为空则抛出异常：RS0100；
+		 if(userOrgId == null || userOrgId.length()  ==0){
+			 throw new ErrorException("RS0100",null);
+		 }
+		 sqlWhere = new StringBuffer();
+		 sqlWhere.append(" STATION_FLAG = 'N'");
+		 sqlWhere.append(" AND BUY_IN_FLAG = 'Y'");
+		 sqlWhere.append(" AND ( PARENT_ID =");
+		 sqlWhere.append(transaction.formatString(userOrgId));
+		 sqlWhere.append(" 	OR ORG_ID =");
+		 sqlWhere.append(transaction.formatString(userOrgId));
+		 sqlWhere.append(" )");
+		 
+		 orgs = dbSysOrg.findAllWhere(sqlWhere.toString());
+			for(int i=0;i<orgs.size();i++){
+				enSysOrg = (EnSysOrg)orgs.get(i);
+				if( orgIds != null &&orgIds.toString().length()>0){
+					orgIds.append(",");
+				}
+				orgIds.append(enSysOrg.getOrgId());
+			}
+		 
+		 if(orgIds != null && orgIds.toString().length()>0){
+			 orgIds.insert(0," ( ");
+			 orgIds.append(" ) ");
+		 }
+		 
 		 sql = new StringBuffer();
 		 sql.append(" select  l.* ,s.org_name,t.type_name,u.user_name "); 
 		 sql.append(" from nsp.resource_buyin_list l ");
@@ -85,14 +111,19 @@ public class BoBuyInList implements RootBo{
 			 }
 			 sqlWhere.append("  l.ORG_ID=");
 			 sqlWhere.append(transaction.formatString(orgId));
-		 }else if (enSysOrg != null){
-			 if(enSysOrg.getParentId()!= null && enSysOrg.getParentId().length()>0){
+		 }else{
+			 //如果登录用户为"青岛移动"则可以查询青岛下所有允许采购入库的机构的信息。
+			 //如果登录的用户是分公司，则只允许查询与该分工公司有关的记录。
 				 if(sqlWhere.toString().length()>0){
 					 sqlWhere.append(" AND ");
 				 }
-				 sqlWhere.append("  l.ORG_ID=");
+				 sqlWhere.append("  l.ORG_ID IN (select org_id from sys_org a"+
+						 	     " where a.station_flag='N' and a.buy_in_flag='Y'"+ 
+						 		"and (a.parent_id=");
 				 sqlWhere.append(transaction.formatString(userOrgId));
-			 }
+				sqlWhere.append("or a.org_id=");
+				sqlWhere.append(transaction.formatString(userOrgId));
+				sqlWhere.append("))");
 		 }
 		 if(inOutFlag != null && inOutFlag.length() !=0){
 			 if(sqlWhere.toString().length()>0){
@@ -135,7 +166,6 @@ public class BoBuyInList implements RootBo{
 			 sql.append(sqlWhere);
 		 }
 		 sql.append(" ORDER BY l.IN_OPER_DATETIME DESC,t.RESOURCE_CLASS_ID ASC , t.TYPE_ID ASC");
-		 
 		 //查询操作并把查询到的数据返回到页面
 		 int page = Page.SetPageInfo(transaction, null, requestXml,
 					PubFunc.LEN_PAGE_COUNT, sql.toString());
