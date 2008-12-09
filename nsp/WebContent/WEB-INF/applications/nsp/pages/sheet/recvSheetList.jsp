@@ -18,17 +18,14 @@
 <jsp:include flush="true" page="../../../sys/pages/common/include/js.jsp"></jsp:include>
 
 <%@ page import="tower.tmvc.XMLWrap"%>
-<%@ page import="tower.common.util.Page"%>
 <%@ page import="tower.common.util.DateFunc"%>
 <% 
     XMLWrap xml ;
 
 	String outOrgId;
-	String outOrgName;
 	String listSta;
 	String resourceFlag;
 	String resourceId;
-	String resourceName;
     String resourceIdShow;
 	
 	String[] sheetIds;
@@ -48,12 +45,10 @@
     xml = (XMLWrap) XMLWrap.getRequestXml(request,session,application);
    
     outOrgId = xml.getInputValue("OUT_ORG_ID");
-    outOrgName = xml.getInputValue("OUT_ORG_NAME");
     listSta = xml.getInputValue("LIST_STATUS");
     resourceFlag = xml.getInputValue("RESOURCE_FLAG");
     resourceId = xml.getInputValue("RESOURCE_ID");
     resourceIdShow = xml.getInputValue("RESOURCE_ID_SHOW");
-    resourceName = xml.getInputValue("RESOURCE_NAME");
     
     sheetIds = xml.getItemValues("SHEET_PREPARE_LIST","SHEET_ID");
     prepareDates = xml.getItemValues("SHEET_PREPARE_LIST","PREPARE_DATE");
