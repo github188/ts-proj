@@ -5,7 +5,6 @@
 <%@ page import="tower.tmvc.XMLWrap"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.List"%>
-<%@page import="java.util.Iterator" %>
 <%!XMLWrap xml;
   HashMap classes;
   List orgName;
