@@ -143,7 +143,6 @@ function doSubmit(form) {
     <div class="panelHead">调度工单查询</div>
     <div class="panelContent">
       <div class="panelContent2">    
-     <div style="width:100%; height:100%; overflow:scroll">
         <!-- 查询面板 -->
         <div id="pannelQuery" class="panelQuery">
           <div class="panelHead"></div>
@@ -216,6 +215,7 @@ function doSubmit(form) {
           <div class="panelHead">这是文章标题</div>
           <div class="panelContent">
             <div class="panelContent2">
+             <div style="width:100%; height:350px; overflow:scroll">
               <!-- 列表内容 -->
                <form name="form2" action="ctrl" method="get" >
                	  <input type="hidden" name="FUNC_ID" value="SheetStatListExcel">
@@ -239,7 +239,7 @@ function doSubmit(form) {
 			  for (int i = 0; i < listIds.length; i++) {
 				if (i % 2 == 0) {%>
 				
-                <tr onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
+                <tr>
                   <td align="center" onClick="event.cancelBubble=true" cols="2" nowrap><%=sheetIds[i]%></td>
                   <td align="center" cols="2" nowrap><%=DateFunc.FormatDateTime(prepareDates[i])%></td>
                   <%for(int j=0; j< statusIds.length;j++){ %>
@@ -259,8 +259,8 @@ function doSubmit(form) {
                   <td align="center" nowrap>[<a href="JavaScript:doDetail('<%=listIds[i] %>')">详细信息</a>]</td>
                 </tr>
                <%} else {%>
-                   <tr class="dark" onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
-                   <td align="center" onClick="event.cancelBubble=true" cols="2"><%=sheetIds[i]%></td>
+                 <tr class="dark">
+                  <td align="center" onClick="event.cancelBubble=true" cols="2"><%=sheetIds[i]%></td>
                   <td align="center" cols="2"><%=DateFunc.FormatDateTime(prepareDates[i])%></td>
                    <%for(int j=0; j< statusIds.length;j++){ %>
                   	<%if(statusIds[j].equals(listStatuss[i])){%>
@@ -290,7 +290,6 @@ function doSubmit(form) {
           <div class="panelFoot"><div></div></div>
         </div>
         <!-- 列表面板结束 -->
-     </div>
       </div>
     
     </div>
