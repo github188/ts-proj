@@ -3,9 +3,6 @@ package tower.nsp.servlet;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
