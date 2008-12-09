@@ -31,7 +31,6 @@ public class BoConsReptList implements RootBo {
 	public void doBusiness(Transaction transaction, XMLWrap requestXml,
 			XMLWrap sessionXml, XMLWrap applicationXml, Logger logger)
 			throws ErrorException {
-		// TODO Auto-generated method stub
 
 		/***********************************************************************
 		 * 声明变量
@@ -104,14 +103,14 @@ public class BoConsReptList implements RootBo {
 				sqlIn.append(" and ");
 			}
 			sqlIn.append("PREPARE_DATE >= ");
-			sqlIn.append(transaction.formatString(DateFunc.ParseDateTime(prepareDateFrom)));
+			sqlIn.append(Transaction.formatString(DateFunc.ParseDateTime(prepareDateFrom)));
 		}
 		if(prepareDateTo != null && prepareDateTo.length() > 0){
 			if(sqlIn.toString().length() > 0){
 				sqlIn.append(" and ");
 			}
 			sqlIn.append("PREPARE_DATE <= ");
-			sqlIn.append(transaction.formatString(DateFunc.ParseDateTime(prepareDateTo)));
+			sqlIn.append(Transaction.formatString(DateFunc.ParseDateTime(prepareDateTo)));
 		}
 		if(sheetId != null && sheetId.length() > 0){
 			if(sql.toString().length() > 0){
@@ -126,7 +125,7 @@ public class BoConsReptList implements RootBo {
 				sql.append(" and ");
 			}
 			sql.append("OUT_ORG_ID = ");
-			sql.append(transaction.formatString(outOrgId));
+			sql.append(Transaction.formatString(outOrgId));
 		}
 		//判断查询条件是否为空，调入单位、调度单编号、调度日期中三项必须至少输入任意一项
 		/*if(sqlIn.toString().length()== 0 && sql.toString().length() == 0){
@@ -140,7 +139,7 @@ public class BoConsReptList implements RootBo {
 			}
 			sql.append("LIST_STATUS = '4' and ");
 			sql.append("IN_ORG_ID = ");
-			sql.append(transaction.formatString(orgId));
+			sql.append(Transaction.formatString(orgId));
 		}
 		if(classId != null && classId.length() > 0){
 			if(classFlag != null && classFlag.length() > 0){
@@ -153,7 +152,7 @@ public class BoConsReptList implements RootBo {
 					sql.append("RESOURCE_TYPE_ID = ");
 				}
 			}
-			sql.append(transaction.formatString(classId));
+			sql.append(Transaction.formatString(classId));
 		}
 		if(takeUserName != null && takeUserName.length() > 0){
 			if(sql.toString().length() > 0){
@@ -168,14 +167,14 @@ public class BoConsReptList implements RootBo {
 				sql.append(" and ");
 			}
 			sql.append("IN_OPER_DATETIME >=");
-			sql.append(transaction.formatString(DateFunc.ParseDateTime(inOperDateFrom)+"000000"));
+			sql.append(Transaction.formatString(DateFunc.ParseDateTime(inOperDateFrom)+"000000"));
 		}
 		if(inOperDateTo != null && inOperDateTo.length() > 0){
 			if(sql.toString().length() > 0){
 				sql.append(" and ");
 			}
 			sql.append("IN_OPER_DATETIME <=");
-			sql.append(transaction.formatString(DateFunc.ParseDateTime(inOperDateTo)+"235959"));
+			sql.append(Transaction.formatString(DateFunc.ParseDateTime(inOperDateTo)+"235959"));
 		}
 		if (sqlIn.toString().length() > 0) {
 			if(sql.toString().length() > 0){

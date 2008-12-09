@@ -2,7 +2,6 @@ package tower.nsp.bo.sheet;
 
 import org.apache.log4j.Logger;
 
-import tower.nsp.db.DbResourceBuyinList;
 import tower.nsp.db.DbResourceClass;
 import tower.nsp.db.DbResourceOrgAmount;
 import tower.nsp.db.DbResourcePrepareList;
