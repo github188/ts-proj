@@ -118,14 +118,14 @@ public class BoConsAckList implements RootBo {
 				sqlIn.append(" and ");
 			}
 			sqlIn.append("PREPARE_DATE >= ");
-			sqlIn.append(transaction.formatString(DateFunc.ParseDateTime(prepareDateFrom)));
+			sqlIn.append(Transaction.formatString(DateFunc.ParseDateTime(prepareDateFrom)));
 		}
 		if(prepareDateTo != null && prepareDateTo.length() > 0){
 			if(sqlIn.toString().length() > 0){
 				sqlIn.append(" and ");
 			}
 			sqlIn.append("PREPARE_DATE <= ");
-			sqlIn.append(transaction.formatString(DateFunc.ParseDateTime(prepareDateTo)));
+			sqlIn.append(Transaction.formatString(DateFunc.ParseDateTime(prepareDateTo)));
 		}
 		if(sheetId != null && sheetId.length() > 0){
 			if(sql.toString().length() > 0){
@@ -164,7 +164,7 @@ public class BoConsAckList implements RootBo {
 				}else{
 					sql.append("RESOURCE_TYPE_ID = ");
 				}
-				sql.append(transaction.formatString(classId));
+				sql.append(Transaction.formatString(classId));
 			}
 		}
 		//领取人
@@ -182,14 +182,14 @@ public class BoConsAckList implements RootBo {
 				sql.append(" and ");
 			}
 			sql.append(" TAKE_DATE >= ");
-			sql.append(transaction.formatString(DateFunc.ParseDateTime(takeDateFrom)));
+			sql.append(Transaction.formatString(DateFunc.ParseDateTime(takeDateFrom)));
 		}
 		if(takeDateTo != null && takeDateTo.length() > 0){
 			if(sql.toString().length() > 0){
 				sql.append(" and ");
 			}
 			sql.append(" TAKE_DATE <= ");
-			sql.append(transaction.formatString(DateFunc.ParseDateTime(takeDateTo)));
+			sql.append(Transaction.formatString(DateFunc.ParseDateTime(takeDateTo)));
 		}
 		//入库日期
 		if(inOperDateFrom != null && inOperDateFrom.length() > 0){
@@ -197,14 +197,14 @@ public class BoConsAckList implements RootBo {
 				sql.append(" and ");
 			}
 			sql.append("CONS_ACK_DATETIME >=");
-			sql.append(transaction.formatString(DateFunc.ParseDateTime(inOperDateFrom))+"000000");
+			sql.append(Transaction.formatString(DateFunc.ParseDateTime(inOperDateFrom))+"000000");
 		}
 		if(inOperDateTo != null && inOperDateTo.length() > 0){
 			if(sql.toString().length() > 0){
 				sql.append(" and ");
 			}
 			sql.append("CONS_ACK_DATETIME <=");
-			sql.append(transaction.formatString(DateFunc.ParseDateTime(inOperDateTo))+"235959");
+			sql.append(Transaction.formatString(DateFunc.ParseDateTime(inOperDateTo))+"235959");
 		}
 		//施工人
 		if(consUserName != null && consUserName.length() > 0){
@@ -221,14 +221,14 @@ public class BoConsAckList implements RootBo {
 				sql.append(" and ");
 			}
 			sql.append("CONS_FIN_DATE >= ");
-			sql.append(transaction.formatString(DateFunc.ParseDateTime(consFinDateFrom)));
+			sql.append(Transaction.formatString(DateFunc.ParseDateTime(consFinDateFrom)));
 		}
 		if(consFinDateTo != null && consFinDateTo.length() > 0){
 			if(sql.toString().length() > 0){
 				sql.append(" and ");
 			}
 			sql.append("CONS_FIN_DATE <= ");
-			sql.append(transaction.formatString(DateFunc.ParseDateTime(consFinDateTo)));
+			sql.append(Transaction.formatString(DateFunc.ParseDateTime(consFinDateTo)));
 		}
 		if (sqlIn.toString().length() > 0) {
 			if(sql.toString().length() > 0){
