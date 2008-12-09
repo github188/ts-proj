@@ -83,10 +83,8 @@ public class BoConsReptCheckQuery implements RootBo {
 			//获取调度入库单位的库存信息
 			if(enResourcePrepareList.getInStationId()!= null && enResourcePrepareList.getInStationId().length() > 0){
 				inUnitId = enResourcePrepareList.getInStationId();
-				//enResourceOrgAmountIn = dbResourceOrgAmount.findByKey(enResourcePrepareList.getOutStationId(), enResourcePrepareList.getResourceTypeId());
 			}else{
 				inUnitId = enResourcePrepareList.getInOrgId();
-				//enResourceOrgAmountIn = dbResourceOrgAmount.findByKey(enResourcePrepareList.getOutOrgId(), enResourcePrepareList.getResourceTypeId());
 			}
 			enResourceOrgAmountIn = dbResourceOrgAmount.findByKey(inUnitId, enResourcePrepareList.getResourceTypeId());
 

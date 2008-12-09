@@ -2,16 +2,8 @@ package tower.nsp.bo.sheet;
 
 import org.apache.log4j.Logger;
 
-import tower.nsp.db.DbResourceClass;
-import tower.nsp.db.DbResourcePrepareList;
-import tower.nsp.db.DbResourcePrepareSheet;
-import tower.nsp.db.DbResourceType;
 import tower.nsp.db.DbSysOrg;
 import tower.nsp.db.DbSysUser;
-import tower.nsp.en.EnResourceClass;
-import tower.nsp.en.EnResourcePrepareList;
-import tower.nsp.en.EnResourcePrepareSheet;
-import tower.nsp.en.EnResourceType;
 import tower.nsp.en.EnSysOrg;
 import tower.nsp.en.EnSysUser;
 import tower.tmvc.ErrorException;
@@ -128,19 +120,6 @@ public class BoConsAckCheckQuery implements RootBo {
 			}else{
 				throw new ErrorException("CA0006",null);
 			}
-			/*enResourcePrepareList = dbResourcePrepareList.findByKey(listId);
-			if(enResourcePrepareList != null){
-				enResourcePrepareSheet = dbResourcePrepareSheet.findByKey(enResourcePrepareList.getSheetId());
-				enResourceClass = dbResourceClass.findByKey(enResourcePrepareList.getResourceClassId());
-				enResourceType = dbResourceType.findByKey(enResourcePrepareList.getResourceTypeId());
-				int row = dbResourcePrepareList.setToXml(requestXml, enResourcePrepareList);
-				requestXml.setItemValue("RESOURCE_PREPARE_LIST", row, "PREPARE_USER", enResourcePrepareSheet.getPrepareDate());
-				requestXml.setItemValue("RESOURCE_PREPARE_LIST", row, "PREPARE_DATE", enResourcePrepareSheet.getPrepareDate());
-				requestXml.setItemValue("RESOURCE_PREPARE_LIST", row, "TYPE_NAME", enResourceType.getTypeName());
-				requestXml.setItemValue("RESOURCE_PREPARE_LIST", row, "CLASS_NAME", enResourceClass.getClassName());
-			}else{
-				throw new ErrorException("CA0006",null);
-			}*/
 		}else{
 			throw new ErrorException("CA0004",null);
 		}

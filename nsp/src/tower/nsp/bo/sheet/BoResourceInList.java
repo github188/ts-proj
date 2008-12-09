@@ -56,7 +56,6 @@ public class BoResourceInList implements RootBo {
 		StringBuffer sqlIn = new StringBuffer();
 
 		// 用户信息
-		String userId;
 		String orgId;
 
 		// 条件
@@ -74,7 +73,6 @@ public class BoResourceInList implements RootBo {
 		 * 获取输入
 		 **********************************************************************/
 		// 获取用户信息
-		userId = sessionXml.getItemValue("SYS_USER", 1, "USER_ID");
 		orgId = sessionXml.getItemValue("SYS_USER", 1, "USER_ORG_ID");
 		// 获取条件
 		sheetId = requestXml.getInputValue("SHEET_ID");

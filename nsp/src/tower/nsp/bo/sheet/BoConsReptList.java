@@ -7,19 +7,16 @@ import org.apache.log4j.Logger;
 import tower.common.util.DateFunc;
 import tower.common.util.Page;
 import tower.common.util.PubFunc;
-import tower.nsp.db.DbResourceBuyinList;
 import tower.nsp.db.DbResourceClass;
 import tower.nsp.db.DbResourcePrepareList;
 import tower.nsp.db.DbResourcePrepareSheet;
 import tower.nsp.db.DbResourceType;
 import tower.nsp.db.DbSysOrg;
-import tower.nsp.db.DbSysUser;
 import tower.nsp.en.EnResourceClass;
 import tower.nsp.en.EnResourcePrepareList;
 import tower.nsp.en.EnResourcePrepareSheet;
 import tower.nsp.en.EnResourceType;
 import tower.nsp.en.EnSysOrg;
-import tower.nsp.en.EnSysUser;
 import tower.tmvc.ErrorException;
 import tower.tmvc.RootBo;
 import tower.tmvc.Transaction;
@@ -57,7 +54,6 @@ public class BoConsReptList implements RootBo {
 		StringBuffer sqlIn = new StringBuffer();
 		
 		//用户信息
-		String userId;
 		String orgId;
 		
 		//条件
@@ -77,7 +73,6 @@ public class BoConsReptList implements RootBo {
 		 **********************************************************************/
 		
 		//获取用户信息
-		userId = sessionXml.getItemValue("SYS_USER", 1, "USER_ID");
 		orgId = sessionXml.getItemValue("SYS_USER", 1, "USER_ORG_ID");
 		//获取条件
 		sheetId = requestXml.getInputValue("QSHEET_ID");

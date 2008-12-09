@@ -1,6 +1,5 @@
 package tower.nsp.bo.sheet;
 
-import java.util.Vector;
 
 import org.apache.log4j.Logger;
 
@@ -51,10 +50,8 @@ public class BoResourceOutCheckList implements RootBo {
 		EnResourceClass enResourceClass;
 		DbResourceType dbResourceType;
 		EnResourceType enResourceType;
-		Vector resourceOuts;
 
 		String listId;
-		StringBuffer sql = new StringBuffer();
 
 		/***********************************************************************
 		 * 获取输入

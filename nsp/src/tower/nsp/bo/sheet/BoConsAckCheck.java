@@ -6,11 +6,9 @@ import tower.common.util.DateFunc;
 import tower.nsp.db.DbResourceOrgAmount;
 import tower.nsp.db.DbResourcePrepareList;
 import tower.nsp.db.DbResourceType;
-import tower.nsp.db.DbSysOrg;
 import tower.nsp.en.EnResourceOrgAmount;
 import tower.nsp.en.EnResourcePrepareList;
 import tower.nsp.en.EnResourceType;
-import tower.nsp.en.EnSysOrg;
 import tower.tmvc.ErrorException;
 import tower.tmvc.RootBo;
 import tower.tmvc.Transaction;
@@ -38,11 +36,7 @@ public class BoConsAckCheck implements RootBo {
 		EnResourcePrepareList enResourcePrepareList;
 		//资源库存
 		DbResourceOrgAmount dbResourceOrgAmount;
-		EnResourceOrgAmount enResourceOrgAmountIn;
 		EnResourceOrgAmount enResourceOrgAmountSpare;
-		//机构
-		DbSysOrg dbSysOrg;
-		EnSysOrg enSysOrg;
 		//资源型号
 		DbResourceType dbResourceType;
 		EnResourceType enResourceType;
@@ -70,7 +64,6 @@ public class BoConsAckCheck implements RootBo {
 		transaction.createDefaultConnection(null, false);
 		dbResourcePrepareList = new DbResourcePrepareList(transaction,null);
 		dbResourceOrgAmount = new DbResourceOrgAmount(transaction,null);
-		dbSysOrg = new DbSysOrg(transaction,null);
 		dbResourceType = new DbResourceType(transaction,null);
 		
 		/***********************************************************************
@@ -86,12 +79,9 @@ public class BoConsAckCheck implements RootBo {
 					//获取调度入库单位的库存信息
 					if(enResourcePrepareList.getInStationId()!= null && enResourcePrepareList.getInStationId().length() > 0){
 						inUnitId = enResourcePrepareList.getInStationId();
-						//enResourceOrgAmountIn = dbResourceOrgAmount.findByKey(enResourcePrepareList.getOutStationId(), enResourcePrepareList.getResourceTypeId());
 					}else{
 						inUnitId = enResourcePrepareList.getInOrgId();
-						//enResourceOrgAmountIn = dbResourceOrgAmount.findByKey(enResourcePrepareList.getOutOrgId(), enResourcePrepareList.getResourceTypeId());
 					}
-					enResourceOrgAmountIn = dbResourceOrgAmount.findByKey(inUnitId, enResourcePrepareList.getResourceTypeId());
 					
 					//更新调度工单明细
 					
@@ -120,24 +110,18 @@ public class BoConsAckCheck implements RootBo {
 					
 					dbResourcePrepareList.updateByKey(listId, enResourcePrepareList);
 					
-					/*//更新施工单位库存
-					enResourceOrgAmountIn.setOnlineAmount(enResourceOrgAmountIn.getOnlineAmount() - amountFeedBack + Long.parseLong(amountFeedBackAck));
-					dbResourceOrgAmount.updateByKey(inUnitId, enResourcePrepareList.getResourceTypeId(), enResourceOrgAmountIn);
-					
-					//更新剩余入库单位库存
-					enResourceOrgAmountSpare.setStockAmount(enResourceOrgAmountSpare.getStockAmount() - amountFeedBack + Long.parseLong(amountFeedBackAck));
-					dbResourceOrgAmount.updateByKey(enResourceOrgAmountSpare.getOrgId(), enResourcePrepareList.getResourceTypeId(), enResourceOrgAmountSpare);
-					*/
+					//更新施工单位库存
 					String sqlUpdate="update RESOURCE_ORG_AMOUNT r set r.ONLINE_AMOUNT = r.ONLINE_AMOUNT + " + amountFeedBack
 						+ ", r.INCONS_AMOUNT = r.INCONS_AMOUNT - " + enResourcePrepareList.getAmountPrepare()
 						+ " where r.ORG_ID = " + inUnitId + " and RESOURCE_TYPE_ID = " + enResourcePrepareList.getResourceTypeId();
 					transaction.doUpdate(null, sqlUpdate);
+					
+					//更新剩余入库单位库存,如果存在库存进行修改，如果没有进行添加。
 					enResourceOrgAmountSpare = dbResourceOrgAmount.findByKey(diffInUnitId, enResourcePrepareList.getResourceTypeId());
 					if(enResourceOrgAmountSpare != null){
 						String sqlUpdateIn="update RESOURCE_ORG_AMOUNT r set r.STOCK_AMOUNT = r.STOCK_AMOUNT + " + enResourcePrepareList.getAmountDiff()
 						+ " where r.ORG_ID = " + inUnitId + " and RESOURCE_TYPE_ID = " + enResourcePrepareList.getResourceTypeId();
 						
-						System.out.println("sqlUpdateIn"+sqlUpdateIn.toString());
 						transaction.doUpdate(null, sqlUpdateIn);
 					}else{
 						enResourceOrgAmountSpare = new EnResourceOrgAmount();

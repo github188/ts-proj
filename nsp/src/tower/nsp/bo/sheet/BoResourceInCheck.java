@@ -1,17 +1,13 @@
 package tower.nsp.bo.sheet;
 
-import java.util.Vector;
 
 import org.apache.log4j.Logger;
 
 import tower.common.util.DateFunc;
-import tower.nsp.db.DbResourceBuyinList;
 import tower.nsp.db.DbResourceOrgAmount;
 import tower.nsp.db.DbResourcePrepareList;
-import tower.nsp.db.DbResourcePrepareSheet;
 import tower.nsp.en.EnResourceOrgAmount;
 import tower.nsp.en.EnResourcePrepareList;
-import tower.nsp.en.EnResourcePrepareSheet;
 import tower.tmvc.ErrorException;
 import tower.tmvc.RootBo;
 import tower.tmvc.Transaction;
@@ -44,19 +40,17 @@ public class BoResourceInCheck implements RootBo {
 		//调度工单明细
 		DbResourcePrepareList dbResourcePrepareList;
 		EnResourcePrepareList enResourcePrepareList;
-		Vector resourceIns;
 		
-		String[] listId;
+		String listId;
 		String inOperUser;
 		String inOperDatetime;
 		
-		StringBuffer sql = new StringBuffer();
 		
 		/***********************************************************************
 		 * 获取输入
 		 **********************************************************************/
 		
-		listId = requestXml.getInputValues("LIST_ID");
+		listId = requestXml.getInputValue("LIST_ID");
 		inOperUser = sessionXml.getItemValue("SYS_USER", 1, "USER_ID");
 		inOperDatetime = DateFunc.GenNowTime();
 		
@@ -71,32 +65,22 @@ public class BoResourceInCheck implements RootBo {
 		/***********************************************************************
 		 * 执行业务逻辑、输出
 		 **********************************************************************/
-		if(listId != null && listId.length > 0){
-			sql.append("LIST_ID in('");
-			for(int i = 0 ; i < listId.length ; i++){
-				sql.append(listId[i]);
-				sql.append("','");
-			}
-			sql.append("')");
-			resourceIns = dbResourcePrepareList.findAllWhere(sql.toString());
-			if(resourceIns != null && resourceIns.size() > 0){
-				for(int i = 0 ; i < resourceIns.size() ; i++){
-					enResourcePrepareList = (EnResourcePrepareList) resourceIns.get(i);
+		if(listId != null && listId.length() > 0){
+			enResourcePrepareList = dbResourcePrepareList.findByKey(listId);
+			if(enResourcePrepareList != null){
 					String inUnitId;
 					//获取调度入库单位的库存信息
 					if(enResourcePrepareList.getInStationId()!= null && enResourcePrepareList.getInStationId().length() > 0){
 						inUnitId = enResourcePrepareList.getInStationId();
-						//enResourceOrgAmountIn = dbResourceOrgAmount.findByKey(enResourcePrepareList.getOutStationId(), enResourcePrepareList.getResourceTypeId());
 					}else{
 						inUnitId = enResourcePrepareList.getInOrgId();
-						//enResourceOrgAmountIn = dbResourceOrgAmount.findByKey(enResourcePrepareList.getOutOrgId(), enResourcePrepareList.getResourceTypeId());
 					}
 					enResourceOrgAmountIn = dbResourceOrgAmount.findByKey(inUnitId, enResourcePrepareList.getResourceTypeId());
 					//更新库存和工单明细信息
 					enResourcePrepareList.setInOperDatetime(inOperDatetime);
 					enResourcePrepareList.setInOperUserid(inOperUser);
 					enResourcePrepareList.setListStatus("4");
-					dbResourcePrepareList.updateByKey(listId[i], enResourcePrepareList);
+					dbResourcePrepareList.updateByKey(listId, enResourcePrepareList);
 					
 					if(enResourceOrgAmountIn != null){
 						String sqlUpdateIn = "update RESOURCE_ORG_AMOUNT r set r.PRE_IN_AMOUNT = " +
@@ -104,12 +88,8 @@ public class BoResourceInCheck implements RootBo {
 							",r.INCONS_AMOUNT = r.INCONS_AMOUNT + " + enResourcePrepareList.getAmountPrepare()+
 							" where r.ORG_ID = " + inUnitId + " and RESOURCE_TYPE_ID = " + enResourcePrepareList.getResourceTypeId();
 						transaction.doUpdate(null, sqlUpdateIn);
-						//enResourceOrgAmountIn.setPreInAmount(enResourceOrgAmountIn.getPreInAmount() - enResourcePrepareList.getAmountPrepare());
-						//enResourceOrgAmountIn.setInconsAmount(enResourceOrgAmountIn.getInconsAmount() - enResourcePrepareList.getAmountPrepare());
-						//dbResourceOrgAmount.updateByKey(inUnitId, enResourcePrepareList.getResourceTypeId(), enResourceOrgAmountIn);
 					}
 					
-				}
 			}else{
 				throw new ErrorException("RI0003",null);
 			}

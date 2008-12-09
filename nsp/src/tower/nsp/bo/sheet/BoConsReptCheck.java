@@ -47,8 +47,6 @@ public class BoConsReptCheck implements RootBo {
 		String consUserName;		//施工人姓名
 		String consFinDate;			//完工日期
 		String spareOrgId;			//施工剩余入库单位
-		//String spareOrgFlag;		//施工剩余入库单位标志
-		//String spareOrgParent;		//施工剩余入库单位父节点
 		
 		String consFinOperUserId;	//完成操作人CONS_FIN_OPER_USERID
 		String consFinOperDatetime;	//CONS_FIN_OPER_DATETIME
@@ -90,19 +88,6 @@ public class BoConsReptCheck implements RootBo {
 					&& spareOrgId != null && spareOrgId.length() > 0){
 				
 				if(enResourcePrepareList.getAmountPrepare() >= Long.parseLong(amountFeedBack)){
-					//enResourceOrgAmountSpare = dbResourceOrgAmount.findByKey("", enResourcePrepareList.getResourceTypeId());
-					
-					/*String inUnitId;
-					//获取调度入库单位的库存信息
-					if(enResourcePrepareList.getInStationId()!= null && enResourcePrepareList.getInStationId().length() > 0){
-						inUnitId = enResourcePrepareList.getInStationId();
-						//enResourceOrgAmountIn = dbResourceOrgAmount.findByKey(enResourcePrepareList.getOutStationId(), enResourcePrepareList.getResourceTypeId());
-					}else{
-						inUnitId = enResourcePrepareList.getInOrgId();
-						//enResourceOrgAmountIn = dbResourceOrgAmount.findByKey(enResourcePrepareList.getOutOrgId(), enResourcePrepareList.getResourceTypeId());
-					}
-					enResourceOrgAmountIn = dbResourceOrgAmount.findByKey(inUnitId, enResourcePrepareList.getResourceTypeId());
-					*/
 					//工单明细信息
 					enResourcePrepareList.setConsFinDate(DateFunc.ParseDateTime(consFinDate));
 					enResourcePrepareList.setConsFinOperDatetime(consFinOperDatetime);
@@ -119,13 +104,6 @@ public class BoConsReptCheck implements RootBo {
 					enResourcePrepareList.setConfAmountAfterCons(enResourcePrepareList.getAmountAfterCons() * enResourceType.getTypeConfAmount());
 					//施工剩余数
 					enResourcePrepareList.setAmountDiff(enResourcePrepareList.getAmountPrepare() - enResourcePrepareList.getAmountFeedBack());
-					//施工剩余入库单位
-					/*if(spareOrgFlag.equals("Y")){
-						enResourcePrepareList.setDiffInOrgId(spareOrgParent);
-						enResourcePrepareList.setDiffInStationId(spareOrgId);
-					}else{
-						enResourcePrepareList.setDiffInOrgId(spareOrgId);
-					}*/
 					//判断入库单位是否为基站
 					enSysOrg = dbSysOrg.findByKey(spareOrgId);
 					if(enSysOrg.getStationFlag().equals("Y")){
@@ -137,16 +115,6 @@ public class BoConsReptCheck implements RootBo {
 					enResourcePrepareList.setListStatus("5");
 					dbResourcePrepareList.updateByKey(listId, enResourcePrepareList);
 					
-					/*//更新施工单位库存
-					enResourceOrgAmountIn.setInconsAmount(enResourceOrgAmountIn.getInconsAmount() - enResourcePrepareList.getAmountFeedBack());
-					enResourceOrgAmountIn.setOnlineAmount(enResourceOrgAmountIn.getOnlineAmount() + enResourcePrepareList.getAmountFeedBack());
-					dbResourceOrgAmount.updateByKey(inUnitId, enResourcePrepareList.getResourceTypeId(), enResourceOrgAmountIn);
-					
-					//更新剩余入库单位库存
-					enResourceOrgAmountSpare = dbResourceOrgAmount.findByKey(spareOrgId, enResourcePrepareList.getResourceTypeId());
-					enResourceOrgAmountSpare.setStockAmount(enResourceOrgAmountSpare.getStockAmount() + enResourcePrepareList.getAmountDiff());
-					dbResourceOrgAmount.updateByKey(enResourceOrgAmountSpare.getOrgId(), enResourcePrepareList.getResourceTypeId(), enResourceOrgAmountSpare);
-					*/
 				}else{
 					throw new ErrorException("CR0006",null);
 				}
