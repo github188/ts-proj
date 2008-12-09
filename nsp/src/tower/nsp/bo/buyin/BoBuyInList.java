@@ -8,6 +8,8 @@ import tower.common.util.DateFunc;
 import tower.common.util.Page;
 import tower.common.util.PubFunc;
 import tower.nsp.db.DbResourceBuyinList;
+import tower.nsp.db.DbSysOrg;
+import tower.nsp.en.EnSysOrg;
 import tower.tmvc.ErrorException;
 import tower.tmvc.QueryResult;
 import tower.tmvc.QueryResultRow;
@@ -29,6 +31,10 @@ public class BoBuyInList implements RootBo{
 		/***********************************************************************
 		 * 声明变量
 		 **********************************************************************/
+		//机构db en
+		DbSysOrg dbSysOrg;
+		EnSysOrg enSysOrg;
+		
 		//输入参数：资源型号、入库登记日期(开始日期-结束日期)、备注及说明
 		String orgId;
 		String inOutFlag;
@@ -36,6 +42,7 @@ public class BoBuyInList implements RootBo{
 		String inOperDateTimeBng;
 		String inOperDateTimeEnd;
 		String inRemark;
+		String userOrgId;
 		
 		//其他
 		StringBuffer sql;
@@ -51,13 +58,18 @@ public class BoBuyInList implements RootBo{
 		inOperDateTimeBng = requestXml.getInputValue("IN_OPER_DATETIME_BNG");
 		inOperDateTimeEnd = requestXml.getInputValue("IN_OPER_DATETIME_END");
 		inRemark = requestXml.getInputValue("IN_REMARK");
+		userOrgId = sessionXml.getItemValue("SYS_USER",1, "USER_ORG_ID");
 		/***********************************************************************
 		 * 创建数据库连接、实例化DB、EN
 		 **********************************************************************/
 		 transaction.createDefaultConnection(null, true);
+		 dbSysOrg = new DbSysOrg(transaction,null);
 		/***********************************************************************
 		 * 执行业务逻辑、输出
 		 **********************************************************************/
+		 //如果登录用户为"青岛移动"则可以查询青岛下所有允许采购入库的机构的信息。
+		 //如果登录的用户是分公司，则只允许查询与该分工公司有关的记录。
+		 enSysOrg = dbSysOrg.findByKey(userOrgId);
 		 sql = new StringBuffer();
 		 sql.append(" select  l.* ,s.org_name,t.type_name,u.user_name "); 
 		 sql.append(" from nsp.resource_buyin_list l ");
@@ -73,6 +85,14 @@ public class BoBuyInList implements RootBo{
 			 }
 			 sqlWhere.append("  l.ORG_ID=");
 			 sqlWhere.append(transaction.formatString(orgId));
+		 }else if (enSysOrg != null){
+			 if(enSysOrg.getParentId()!= null && enSysOrg.getParentId().length()>0){
+				 if(sqlWhere.toString().length()>0){
+					 sqlWhere.append(" AND ");
+				 }
+				 sqlWhere.append("  l.ORG_ID=");
+				 sqlWhere.append(transaction.formatString(userOrgId));
+			 }
 		 }
 		 if(inOutFlag != null && inOutFlag.length() !=0){
 			 if(sqlWhere.toString().length()>0){
@@ -115,6 +135,7 @@ public class BoBuyInList implements RootBo{
 			 sql.append(sqlWhere);
 		 }
 		 sql.append(" ORDER BY l.IN_OPER_DATETIME DESC,t.RESOURCE_CLASS_ID ASC , t.TYPE_ID ASC");
+		 
 		 //查询操作并把查询到的数据返回到页面
 		 int page = Page.SetPageInfo(transaction, null, requestXml,
 					PubFunc.LEN_PAGE_COUNT, sql.toString());
