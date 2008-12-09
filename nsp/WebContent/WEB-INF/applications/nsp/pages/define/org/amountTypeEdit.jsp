@@ -284,7 +284,7 @@ try{
                    <td width="74" align="right" nowrap>资源型号：</td>
                    <%if(isAddFlag.equals("Y")){ %>
 		            <td nowrap><span id="spryResourceType">
-                      	<script>var type = new Tower.Widget.Selector("TypeSelector","TYPE_ID","ctrl?FUNC_ID=SelectTypeTree&INPUT_TYPE=radio",{selected:["<%=typeId%>"]},{change:onChange})</script>
+                      	<script>var type = new Tower.Widget.Selector("TypeSelector","TYPE_ID","ctrl?FUNC_ID=SelectTypeTree&INPUT_TYPE=radio",{selected:["<%=typeId%>"]},{change:onChange})</script><span class="requiredField">*</span>
 		           		 <span class="textfieldMaxCharsMsg">已超过最大字符数50。</span><span class="textfieldInvalidFormatMsg">格式无效。</span></span>
 		           	</td>
 		           	<%}else{ %>
