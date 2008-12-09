@@ -305,7 +305,7 @@ try{
                    <%}else{ %>
                      <input type="text" class="text" name="STOCK_AMOUNT" value="0"><span class="requiredField">*</span>
                    <%} %>
-                    <span class="textfieldMaxCharsMsg">已超过最大字符数50。</span><span class="textfieldInvalidFormatMsg">格式无效。</span>                  
+                    <span class="textfieldRequiredMsg">需要提供一个值。</span><span class="textfieldMaxCharsMsg">已超过最大字符数50。</span><span class="textfieldInvalidFormatMsg">格式无效。</span>                  
                     </span></td>
                 
                  	<td align="right" nowrap>施工占用：</td>
@@ -315,7 +315,7 @@ try{
                   	<%}else{ %>
                   		<input type="text" class="text" name="INCONS_AMOUNT" value="0"><span class="requiredField">*</span>
                   	<%} %>
-                  		<span class="textfieldMaxCharsMsg">已超过最大字符数50。</span> <span class="textfieldInvalidFormatMsg">格式无效。</span></span>
+                  		<span class="textfieldRequiredMsg">需要提供一个值。</span><span class="textfieldMaxCharsMsg">已超过最大字符数50。</span> <span class="textfieldInvalidFormatMsg">格式无效。</span></span>
                   	</td>
                 </tr>
                 <tr>
@@ -326,7 +326,7 @@ try{
                   	<%}else{ %>
                   		<input type="text" class="text" name="ONLINE_AMOUNT" value="0"><span class="requiredField">*</span>
                   	<%} %>
-                  		<span class="textfieldMaxCharsMsg">已超过最大字符数50。</span> <span class="textfieldInvalidFormatMsg">格式无效。</span></span></td>
+                  		<span class="textfieldRequiredMsg">需要提供一个值。</span><span class="textfieldMaxCharsMsg">已超过最大字符数50。</span> <span class="textfieldInvalidFormatMsg">格式无效。</span></span></td>
                 	<td align="right" nowrap>坏件数量：</td>
                   	<td><span id="spryBadAmount">
                   	<%if(badAmount != null && badAmount.length() != 0){ %>
@@ -334,7 +334,7 @@ try{
                  	<%}else{ %>
                   		<input type="text" class="text" name="BAD_AMOUNT" value="0"><span class="requiredField">*</span>
                   	<%} %>
-                  	<span class="textfieldMaxCharsMsg">已超过最大字符数50。</span> <span class="textfieldInvalidFormatMsg">格式无效。</span></span></td>
+                  	<span class="textfieldRequiredMsg">需要提供一个值。</span><span class="textfieldMaxCharsMsg">已超过最大字符数50。</span> <span class="textfieldInvalidFormatMsg">格式无效。</span></span></td>
                 </tr>
                 <tr>  
                     <td align="right" nowrap>预出库量：</td>
@@ -393,6 +393,12 @@ var sprytextfield2 = new Spry.Widget.ValidationTextField("spryInconsAmount", "in
 var sprytextfield3 = new Spry.Widget.ValidationTextField("spryOnlineAmount", "integer", {isRequired:false,maxChars:50});
 var sprytextfield4 = new Spry.Widget.ValidationTextField("spryBadAmount", "integer", {isRequired:false, maxChars:50});
 var sprytextfield5 = new Spry.Widget.ValidationTextField("spryResourceType", "none", {isRequired:false, maxChars:50});
+var sprytextfield6 = new Spry.Widget.ValidationTextField("spryStockAmount", "none", {required:50});
+var sprytextfield7 = new Spry.Widget.ValidationTextField("spryInconsAmount", "none", {required:50});
+var sprytextfield8 = new Spry.Widget.ValidationTextField("spryOnlineAmount", "none", {required:50});
+var sprytextfield9 = new Spry.Widget.ValidationTextField("spryBadAmount", "none", {required:50});
+var sprytextfield10 = new Spry.Widget.ValidationTextField("spryResourceType", "none", {required:50});
+
 //-->
 </script>
 </body>
