@@ -227,7 +227,7 @@
                     <th colspan="5" align="left">施工反馈信息</th>
                  </tr>
                  <tr>
-                  <td align="right">施工反馈数量：</td>
+                  <td align="right">施工数量：</td>
                   <td>
                     <span id="spryAmountFeed">
                     <input type="text" size="21" class="text" name="AMOUNT_FEED_BACK" value="">

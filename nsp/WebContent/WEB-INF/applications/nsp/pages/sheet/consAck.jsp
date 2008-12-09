@@ -187,7 +187,7 @@
                <tr>
               	<td align="right">施工前数量：</td>
               	<td><div><%=amountBeforeCon %></div></td>
-              	<td align="right">施工反馈数量：</td>
+              	<td align="right">施工数量：</td>
               	<td><div><%=amountFeedBack %></div></td>
               	<td align="right">施工后数量：</td>
               	<td><div><%=amountAfterCon %></div></td>
