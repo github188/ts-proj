@@ -29,9 +29,6 @@ public class BoBuyInList implements RootBo{
 		/***********************************************************************
 		 * 声明变量
 		 **********************************************************************/
-		//采购入库db en
-		DbResourceBuyinList dbResourceBuyinList;
-		
 		//输入参数：资源型号、入库登记日期(开始日期-结束日期)、备注及说明
 		String orgId;
 		String inOutFlag;
@@ -41,7 +38,6 @@ public class BoBuyInList implements RootBo{
 		String inRemark;
 		
 		//其他
-		Vector vEnResourceBuyinList;
 		StringBuffer sql;
 		StringBuffer sqlWhere;
 		QueryResult rs;
@@ -59,14 +55,13 @@ public class BoBuyInList implements RootBo{
 		 * 创建数据库连接、实例化DB、EN
 		 **********************************************************************/
 		 transaction.createDefaultConnection(null, true);
-		 dbResourceBuyinList = new DbResourceBuyinList(transaction,null);
 		/***********************************************************************
 		 * 执行业务逻辑、输出
 		 **********************************************************************/
 		 sql = new StringBuffer();
 		 sql.append(" select  l.* ,s.org_name,t.type_name,u.user_name "); 
 		 sql.append(" from nsp.resource_buyin_list l ");
-		sql.append(" join nsp.sys_org s on s.org_id = l.org_id ");
+		 sql.append(" join nsp.sys_org s on s.org_id = l.org_id ");
 		 sql.append(" left join nsp.resource_type t on t.type_id=l.resource_type_id ");
 		 sql.append(" left join nsp.sys_user u on u.user_id=l.in_oper_userId ");
 		 

@@ -3,9 +3,7 @@ package tower.nsp.bo.buyin;
 
 import org.apache.log4j.Logger;
 import tower.nsp.db.DbResourceBuyinList;
-import tower.nsp.db.DbResourceOrgAmount;
 import tower.nsp.en.EnResourceBuyinList;
-import tower.nsp.en.EnResourceOrgAmount;
 import tower.tmvc.ErrorException;
 import tower.tmvc.RootBo;
 import tower.tmvc.Transaction;
@@ -18,8 +16,9 @@ public class BoBuyInDel implements RootBo {
 	/**
 	 * 1、从页面获取参数：外购入库登记ID(LIST_ID)；                                         
 	 * 2、检查获取的参数：外购入库登记ID(LIST_ID)是否为，如果为空则抛出异常BI0102：                                                                                                                                                   
-	 * 3、根据外购入库登记ID(LIST_ID)从资源外购入库登记表(RESOURCE_BUYIN_LIST) 删除记录；通同时更新该机构的库存。     
+	 * 3、根据外购入库登记ID(LIST_ID)从资源外购入库登记表(RESOURCE_BUYIN_LIST) 删除记录同时更新该机构的库存。     
 	 */
+	@SuppressWarnings("static-access")
 	public void doBusiness(Transaction transaction, XMLWrap requestXml,
 			XMLWrap sessionXml, XMLWrap applicationXml, Logger logger)
 			throws ErrorException {
@@ -49,7 +48,7 @@ public class BoBuyInDel implements RootBo {
 		/***********************************************************************
 		 * 执行业务逻辑、输出
 		 **********************************************************************/
-		//检查获取的参数：外购入库登记ID(LIST_ID)是否为，如果为空则抛出异常BI0102：  
+		//检查获取的参数：外购入库登记ID(LIST_ID)是否为，如果为空则抛出异常BI0102：未输入必要的查询条件：入库登记ID！  
 		if(listId == null || listId.length()==0 ){
 			throw new ErrorException("BI0102",null);
 		}else{

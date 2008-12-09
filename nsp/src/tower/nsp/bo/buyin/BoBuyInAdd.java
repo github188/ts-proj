@@ -26,7 +26,9 @@ import tower.tmvc.XMLWrap;
  */
 public class BoBuyInAdd implements RootBo {
 	/**
-	 * 1、从页面获取参数：资源型号(RESOURCE_TYPE_ID)、出/入库数量(IN_AMOUNT)、出/入库标志(IN_OUT_FLAG)、备注及说明(IN_REMARK)；获取当前日期赋值给IN_OPER_DATETIME；从session中获取当前操作员ID赋值给IN_OPER_USERID；                                                                     
+	 * 1、从页面获取参数：资源型号(RESOURCE_TYPE_ID)、出/入库数量(IN_AMOUNT)、出/入库标志(IN_OUT_FLAG)、
+	 * 	  备注及说明(IN_REMARK)；获取当前日期赋值给IN_OPER_DATETIME；
+	 * 	  从session中获取当前操作员ID赋值给IN_OPER_USERID；                                                                     
 	 * 2、检查：“入库机构(ORG_ID)”不能为空，如果为空则抛出异常BI0100；“资源型号(RESOURCE_TYPE_ID)”不能为空，如果为空则抛出异常BI0101；                                                                                                                         
 	 * 3、检查通过则往资源外购入库登记表(RESOURCE_BUYIN_LIST)表中插入一条记录；                                                 
 	 * 4、更新入库机构的机构资源库存表(RESOURCE_ORG_AMOUNT)的库存数量(STOCK_AMOUNT)。                                                                                                                                                  
@@ -63,6 +65,7 @@ public class BoBuyInAdd implements RootBo {
 		String inOperUserid;
 		String inOperDatetime;
 		String listId;
+		
 		//其他
 		StringBuffer sql = new StringBuffer();
 		/***********************************************************************
@@ -116,11 +119,13 @@ public class BoBuyInAdd implements RootBo {
 		enResourceBuyinList.setInOutFlag(inOutFlag);
 		enResourceBuyinList.setOrgId(orgId);
 		enResourceBuyinList.setResourceTypeId(resourceTypeId);
+		
 		//往资源外购入库登记表(RESOURCE_BUYIN_LIST)表中插入一条记录；  
 		dbResourceBuyinList.insert(enResourceBuyinList);
 		
 		//如果是入库则入库机构的库存+采购数量；如果是出库则出库机构的库存-采购数量
 		if(inOutFlag.equals("I")){
+			
 			//更新入库机构的机构资源库存表(RESOURCE_ORG_AMOUNT)的库存数量(STOCK_AMOUNT);如果库存不存在建立库存。
 			int count = dbResourceOrgAmount.countByKey(orgId, resourceTypeId);
 			if(count <= 0){
