@@ -169,7 +169,7 @@
                   <td align="right">工单编号：</td>
                   <td><div><%=sheetId %></div></td>
                   <td align="right">调度日期：</td>
-                  <td><div><%=DateFunc.FormatDate(prepareDate) %></div></td>
+                  <td><div><%=DateFunc.FormatDateTime(prepareDate) %></div></td>
                   <td>&nbsp;</td>
                 </tr>
                 <tr>
@@ -198,9 +198,9 @@
                 </tr>
                 <tr>
                   <td align="right">出库日期：</td>
-                  <td><div><%=DateFunc.FormatDate(outOperDate).substring(0,10) %></div></td>
+                  <td><div><%=DateFunc.FormatDateTime(outOperDate).substring(0,10) %></div></td>
                   <td align="right">入库日期：</td>
-                  <td><div><%=DateFunc.FormatDate(inOperDate).substring(0,10) %></div></td>
+                  <td><div><%=DateFunc.FormatDateTime(inOperDate).substring(0,10) %></div></td>
                   <td>&nbsp;</td>
                 </tr>
                 <tr>
