@@ -388,16 +388,15 @@ try{
  <!-- 机构树 -->	 
     <script type="text/javascript">
 <!--
-var sprytextfield1 = new Spry.Widget.ValidationTextField("spryStockAmount", "integer", {isRequired:false, maxChars:50});
-var sprytextfield2 = new Spry.Widget.ValidationTextField("spryInconsAmount", "integer", {isRequired:false, maxChars:50});
-var sprytextfield3 = new Spry.Widget.ValidationTextField("spryOnlineAmount", "integer", {isRequired:false,maxChars:50});
-var sprytextfield4 = new Spry.Widget.ValidationTextField("spryBadAmount", "integer", {isRequired:false, maxChars:50});
+var sprytextfield1 = new Spry.Widget.ValidationTextField("spryStockAmount", "integer", {useCharacterMasking:true, maxValue:99999999, minValue:0});
+var sprytextfield2 = new Spry.Widget.ValidationTextField("spryInconsAmount", "integer", {useCharacterMasking:true, maxValue:99999999, minValue:0});
+var sprytextfield3 = new Spry.Widget.ValidationTextField("spryOnlineAmount", "integer", {useCharacterMasking:true, maxValue:99999999, minValue:0});
+var sprytextfield4 = new Spry.Widget.ValidationTextField("spryBadAmount", "integer", {useCharacterMasking:true, maxValue:99999999, minValue:0});
 var sprytextfield5 = new Spry.Widget.ValidationTextField("spryResourceType", "none", {isRequired:false, maxChars:50});
 var sprytextfield6 = new Spry.Widget.ValidationTextField("spryStockAmount", "none", {required:50});
 var sprytextfield7 = new Spry.Widget.ValidationTextField("spryInconsAmount", "none", {required:50});
 var sprytextfield8 = new Spry.Widget.ValidationTextField("spryOnlineAmount", "none", {required:50});
 var sprytextfield9 = new Spry.Widget.ValidationTextField("spryBadAmount", "none", {required:50});
-var sprytextfield10 = new Spry.Widget.ValidationTextField("spryResourceType", "none", {required:50});
 
 //-->
 </script>
