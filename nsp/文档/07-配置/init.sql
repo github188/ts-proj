@@ -197,9 +197,9 @@ CREATE TABLE `sys_id_creator` (
 
 /*!40000 ALTER TABLE `sys_id_creator` DISABLE KEYS */;
 INSERT INTO `sys_id_creator` (`CREATOR_ID`,`CREATOR_VALUE`,`CREATOR_REMARK`) VALUES 
- ('SORG_ID','4','Next ID of TYPE_ID'),
+ ('SORG_ID','1','Next ID of TYPE_ID'),
  ('STAT_ID','1','Next ID of TYPE_ID'),
- ('USER_ID','2','Next ID of TYPE_ID');
+ ('USER_ID','1','Next ID of TYPE_ID');
 /*!40000 ALTER TABLE `sys_id_creator` ENABLE KEYS */;
 
 
