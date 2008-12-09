@@ -334,12 +334,11 @@
 				<div class="panelHead"></div>
 				<div class="panelContent">
 				<div class="panelContent2">
-								<!-- 工作任务面板内容 -->
 				<form name="form1" action="ctrl" method="get" onSubmit="return doSubmit(this)">
 					<input type="hidden" name="FUNC_ID" value="OrgSubList" >
 					<input type="hidden" name="CUR_PAGE" vlaue="" >
 					<input type="hidden" name="ORG_ID"	value="<%=orgId1 %>">
-				<table width="100%" border="0" cellpadding="0" cellspacing="0">
+				<table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
 					<tr>
 						<td align="right" nowrap>基站名称：</td>
 						<td><input type="text" class="text" name="QORG_NAME"
@@ -347,6 +346,8 @@
 						<td align="right" nowrap>基站编号：</td>
 						<td><input type="text" class="text" name="QORG_CODE"
 							value="<%=orgCode %>"></td>
+						<td>
+						</td>
 					</tr>
 					<tr>
 						<td align="right" nowrap>联系人：</td>
@@ -359,6 +360,8 @@
 									<option value="<%=flagBuyIns[i] %>"><%=flagBuyInDescs[i] %></option>
 								<%} %>
 							</select>
+						</td>
+						<td>
 						</td>
 					</tr>
 					<tr>
@@ -376,9 +379,13 @@
 				</form>
 				<!-- 工作任务面板内容结束 --></div>
 				</div>
+				<div class="panelFoot">
 				<div></div>
 				</div>
+				</div>
 				<!-- 父级列表end-->
+				
+				
 				
 			 </td>
 			</tr>
