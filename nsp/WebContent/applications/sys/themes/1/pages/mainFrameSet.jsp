@@ -10,7 +10,7 @@
 <frameset rows="70,*,28" cols="*" frameborder="NO" border="0" framespacing="0">
   <frame src="ctrl?FUNC_ID=AppInfo" name="topFrame" scrolling="NO" noresize title="topFrame">
   <frameset id="middleFrames" cols="200,10,*" frameborder="NO" border="0" framespacing="0">
-    <frameset id="leftFrames" rows="73,39,*,14" cols="*" frameborder="NO" border="0" framespacing="0">
+    <frameset id="leftFrames" rows="73,39,*,14,5" cols="*" frameborder="NO" border="0" framespacing="0">
       <frame src="ctrl?FUNC_ID=LoginInfo" name="info" scrolling="NO" noresize title="infomation">
       <frame src="../sys/themes/1/pages/menuTop.jsp" name="menuTop" scrolling="NO" noresize title="menuTop">
       <frameset rows="*" cols="10,*,10" frameborder="NO" border="0" framespacing="0">
