@@ -70,7 +70,7 @@ public class BoOrgList implements RootBo {
 				if(enSysOrg != null){
 					int row = dbSysOrg.setToXml(requestXml, enSysOrg);
 					enSysOrgP = dbSysOrg.findByKey(enSysOrg.getParentId());
-					if(enSysOrg != null){
+					if(enSysOrgP != null){
 						requestXml.setItemValue("SYS_ORG", row, "SYS_PARENT_NAME", enSysOrgP.getOrgName());
 					}
 				}
