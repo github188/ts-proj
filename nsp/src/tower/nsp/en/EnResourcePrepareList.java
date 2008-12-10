@@ -155,6 +155,11 @@ public class EnResourcePrepareList implements java.io.Serializable {
     private String consAckDatetime;
 
     /**
+     * Type : char(1) Name : OUT_RESOURCE_STATUS
+     */
+    private String outResourceStatus;
+
+    /**
      * Type : char(10) Name : LIST_ID modify flag
      */
     private boolean _flagListId;
@@ -298,6 +303,11 @@ public class EnResourcePrepareList implements java.io.Serializable {
      * Type : char(14) Name : CONS_ACK_DATETIME modify flag
      */
     private boolean _flagConsAckDatetime;
+
+    /**
+     * Type : char(1) Name : OUT_RESOURCE_STATUS modify flag
+     */
+    private boolean _flagOutResourceStatus;
 
     /**
      * Sets the value for listId
@@ -935,6 +945,28 @@ public class EnResourcePrepareList implements java.io.Serializable {
      */
     public boolean hasChangeConsAckDatetime() {
         return _flagConsAckDatetime;
+    }
+
+    /**
+     * Sets the value for outResourceStatus
+     */
+    public void setOutResourceStatus(String outResourceStatus) {
+        this.outResourceStatus = outResourceStatus;
+        this._flagOutResourceStatus = true;
+    }
+
+    /**
+     * Gets the value for outResourceStatus
+     */
+    public String getOutResourceStatus() {
+        return outResourceStatus;
+    }
+
+    /**
+     * has the value for outResourceStatus changed?
+     */
+    public boolean hasChangeOutResourceStatus() {
+        return _flagOutResourceStatus;
     }
 
 }
