@@ -51,16 +51,18 @@ public class BoResourceOutCheck implements RootBo {
 		String takeDate;
 		String outOperUser;
 		String outOperDate;
-		String[] listId;
+		String listId;
+		String outType;
 
 		/***********************************************************************
 		 * 获取输入
 		 **********************************************************************/
 
 		outOperUser = sessionXml.getItemValue("SYS_USER", 1, "USER_ID");
-		listId = requestXml.getInputValues("LIST_ID");
+		listId = requestXml.getInputValue("LIST_ID");
 		takeUserName = requestXml.getInputValue("TAKE_USER_NAME");
 		takeDate = requestXml.getInputValue("TAKE_DATE");
+		outType = requestXml.getInputValue("OUT_RESOURCE_STATUS");
 		outOperDate = DateFunc.GenNowTime();
 
 		/***********************************************************************
@@ -78,7 +80,7 @@ public class BoResourceOutCheck implements RootBo {
 		 **********************************************************************/
 
 		//判断是否选择了要出库的工单
-		if (listId != null && listId.length > 0) {
+		if (listId != null && listId.length() > 0) {
 			
 			//判断是否输入了出库登记信息，领取人、领取日期
 			if (takeUserName != null && takeUserName.length() > 0
@@ -86,12 +88,9 @@ public class BoResourceOutCheck implements RootBo {
 				
 				//判断是否获取出库操作员为空
 				if (outOperUser != null && outOperUser.length() > 0) {
-					
-					//遍历修改选中要出库的工单信息
-					for (int i = 0; i < listId.length; i++) {
 						// 获取调度工单明细信息
 						enResourcePrepareList = dbResourcePrepareList
-								.findByKey(listId[i]);
+								.findByKey(listId);
 						// 获取调度出库单位的库存信息
 						String outUnitId;
 						String inUnitId;
@@ -139,14 +138,27 @@ public class BoResourceOutCheck implements RootBo {
 								enResourcePrepareList.setTakeDate(DateFunc.ParseDateTime(takeDate));
 								enResourcePrepareList.setTakeUserName(takeUserName);
 								enResourcePrepareList.setListStatus("3");
-								dbResourcePrepareList.updateByKey(listId[i],
+								dbResourcePrepareList.updateByKey(listId,
 										enResourcePrepareList);
 	
-								String sqlUpdate = "update RESOURCE_ORG_AMOUNT r set r.STOCK_AMOUNT = " +
+								//判断是从库存中调度还是在在线中调度
+								if(outType == null || outType.length() == 0 ){
+									throw new ErrorException("RO0008",null);
+								}else{
+									String sqlUpdate;
+									if(outType.equals(0)){
+										sqlUpdate = "update RESOURCE_ORG_AMOUNT r set r.STOCK_AMOUNT = " +
 										"r.STOCK_AMOUNT - " + enResourcePrepareList.getAmountPrepare()+
 										" , r.PRE_OUT_AMOUNT = r.PRE_OUT_AMOUNT - "+ enResourcePrepareList.getAmountPrepare()+
 										" where r.ORG_ID = " + outUnitId + " and RESOURCE_TYPE_ID = " + enResourcePrepareList.getResourceTypeId();
-								transaction.doUpdate(null, sqlUpdate);
+									}else{
+										sqlUpdate = "update RESOURCE_ORG_AMOUNT r set r.ONLINE_AMOUNT = " +
+										"r.ONLINE_AMOUNT - " + enResourcePrepareList.getAmountPrepare()+
+										" , r.PRE_OUT_AMOUNT = r.PRE_OUT_AMOUNT - "+ enResourcePrepareList.getAmountPrepare()+
+										" where r.ORG_ID = " + outUnitId + " and RESOURCE_TYPE_ID = " + enResourcePrepareList.getResourceTypeId();
+									}
+									transaction.doUpdate(null, sqlUpdate);
+								}
 	
 								//判断调入单位或基站的库存对象是否存在，如果存在更新库存，如果不存在添加库存对象
 								if(enResourceOrgAmountIn != null){
@@ -169,7 +181,6 @@ public class BoResourceOutCheck implements RootBo {
 						}else{
 							throw new ErrorException("RO0007", null);
 						}
-					}
 					
 				} else {
 					throw new ErrorException("RO0001", null);
