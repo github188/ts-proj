@@ -20,6 +20,7 @@
   String outOrg;
   String inStation;
   String outStation;
+  String outResourceStatus;
   
   String inOrgId;
   String inStationId;
@@ -52,6 +53,7 @@
   outOrg = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"OUT_ORG_NAME");
   inStation = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"IN_STATION_NAME");
   outStation = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"OUT_STATION_NAME");
+  outResourceStatus = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"OUT_RESOURCE_STATUS");
   
   inOrgId = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"IN_ORG_ID");
   inStationId = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"IN_STATION_ID");
@@ -219,8 +221,8 @@
                   <td>
                     <input name="AMOUNT_BEFORE_CONS" type="hidden" value="<%=amountBeforCons %>" >
                     <div><%=amountBeforCons %></div></td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
+                  <td align="right">设备状态：</td>
+                  <td><%if(outResourceStatus.equals(0)){ %>库存设备<%}else{ %>在线设备<%} %></td>
                   <td>&nbsp;</td>
                  </tr>
                  <tr>
