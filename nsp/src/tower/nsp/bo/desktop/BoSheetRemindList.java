@@ -1,7 +1,5 @@
 package tower.nsp.bo.desktop;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Vector;
 
 import org.apache.log4j.Logger;
@@ -59,8 +57,7 @@ public class BoSheetRemindList implements RootBo {
 		 Vector checkList;
 		 Vector vector = new Vector();
 		 
-		 Map map = new HashMap();
-		/***********************************************************************
+		 /***********************************************************************
 		 * 获取输入
 		 **********************************************************************/
 		 userOrgId = sessionXml.getItemValue("SYS_USER", 1, "USER_ORG_ID");
