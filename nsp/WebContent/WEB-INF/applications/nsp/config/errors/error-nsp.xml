@@ -314,6 +314,11 @@
 		<message>调出单位: '{0}' 中，没有资源类型: '{1}'的库存,请在机构定义中添加库存!</message>
 		<hint></hint>
 	</error>
+	<error>
+		<id>OS0207</id>
+		<message>未输入必输项：调出设备状态，请重新输入！</message>
+		<hint></hint>
+	</error>
 	<!-- 14-DesktopList-桌面提醒-->
 	<error>
 		<id>DL0100</id>

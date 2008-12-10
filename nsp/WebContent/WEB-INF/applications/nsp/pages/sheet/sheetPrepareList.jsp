@@ -38,6 +38,8 @@
 	String[] stockAmounts ;
 	String[] preOutAmount; 
 	String[] preInAmount; 
+	String[] onlineAmount;
+	String[] outResourceStatus;
 %>
 <% 
     xml = (XMLWrap) XMLWrap.getRequestXml(request,session,application);
@@ -57,7 +59,11 @@
 	stockAmounts = xml.getItemValues("SHEET_PREPARE_LIST","STOCK_AMOUNT");
 	preOutAmount = xml.getItemValues("SHEET_PREPARE_LIST","PRE_OUT_AMOUNT");
 	preInAmount = xml.getItemValues("SHEET_PREPARE_LIST","PRE_IN_AMOUNT");
+	onlineAmount = xml.getItemValues("SHEET_PREPARE_LIST","ONLINE_AMOUNT");
+	outResourceStatus = xml.getItemValues("SHEET_PREPARE_LIST","OUT_RESOURCE_STATUS");
 	
+	 String[] desc = {"库存设备","在线设备"};
+	 String[] value = {"0","1"};
 	String[] staValue= {"0","1","2","3","4","5","6"};
 	String[] staDes = {"未下发","已下发","已接收","已出库","已入库","施工完成","确认完成"};
 	int count=0;
@@ -139,17 +145,19 @@
               <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
               <tr>
                   <th><input type="checkbox" name="ALL_LIST_ID" onclick="SelectAll('ALL_LIST_ID','LIST_ID');" /></th>
-                  <th>调出单位</th>
-                  <th>调出基站</th>
-                  <th>设备类型</th>
-                  <th>设备型号</th>
-                  <th>库存数量</th>
+                  <th>调出<br>单位</th>
+                  <th>调出<br>基站</th>
+                  <th>设备<br>类型</th>
+                  <th>设备<br>型号</th>
+                  <th>库存<br>数量</th>
+                  <th>在线<br>数量</th>
                   <th>预出库</th>
                   <th>预入库</th>
-                  <th>调度数量</th>
-                  <th>调入单位</th>
-                  <th>调入基站</th>
-                  <th>状态</th>
+                  <th>调度<br>数量</th>
+                  <th>设备<br>状态</th>
+                  <th>调入<br>单位</th>
+                  <th>调入<br>基站</th>
+                  <th>工单<br>状态</th>
                   <th>[<a href=javaScript:doAdd('<%=sheetId %>');>添加</a>]</th>
                 </tr>
                
@@ -170,9 +178,17 @@
                   <td align="center"><%=resourceClassNames[i]%></td>
                   <td align="center"><%=resourceTypeNames[i]%></td>
                  <td align="center"><%=stockAmounts[i]%></td>
+                 <td align="center"><%=onlineAmount[i]%></td>
                   <td align="center"><%=preOutAmount[i]%></td>
                   <td align="center"><%=preInAmount[i]%></td>
                   <td align="center"><%=amountPrepares[i]%></td>
+                   <td align="center">
+                   <%for(int j=0;j<value.length;j++){ 
+                	   if(value[j].equals(outResourceStatus[i])){
+                   %>
+                   <%=desc[j]%>
+                   <%} }%>
+                   </td>
                   <td align="center"><%=inOrgNames[i]%></td>
                   <td align="center"><%=inStationNames[i]%></td>
                   <td align="center">

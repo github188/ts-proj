@@ -49,7 +49,7 @@ public class BoSheetPrepareAdd implements RootBo {
 		
 		//获取参数：工单Id、调度工单明细ID(LIST_ID)、调出单位(OUT_ORG_ID)、
 		//调出基站(OUT_STATION_ID)、调出设备类型(RESOURCE_CLASS_ID)、
-		//调出设备型号(RESOURCE_TYPE_ID)、调出数量(AMOUNT_PREPARE)、
+		//调出设备型号(RESOURCE_TYPE_ID)、调出数量(AMOUNT_PREPARE)、调出设备状态(OUT_RESOURCE_STATUS)
 		//调入单位(IN_ORG_ID)、调入基站(IN_STATION_ID)； 
 		String sheetId;
 		String listId;
@@ -58,6 +58,7 @@ public class BoSheetPrepareAdd implements RootBo {
 		String outStationFlag;
 		String outStationId="";
 		String outOrgParentId;
+		String outResourceStatus;
 		
 		String resourceClassId;
 		String resourceTypeId;
@@ -95,6 +96,7 @@ public class BoSheetPrepareAdd implements RootBo {
 		outOrgId = requestXml.getInputValue("OUT_ORG_ID");
 		outStationFlag = requestXml.getInputValue("OUT_STATION_FLAG");
 		outOrgParentId = requestXml.getInputValue("OUT_ORG_PARENT_ID");
+		outResourceStatus = requestXml.getInputValue("OUT_RESOURCE_STATUS");
 		
 		//resourceClassId = requestXml.getInputValue("RESOURCE_CLASS_ID");
 		resourceTypeId = requestXml.getInputValue("RESOURCE_TYPE_ID");
@@ -139,11 +141,22 @@ public class BoSheetPrepareAdd implements RootBo {
 		 //调出设备类型(RESOURCE_CLASS_ID)不能为空，如果为空则抛出异常OS0202；                
 		 //调出设备型号(RESOURCE_TYPE_ID)不能为空,如果为空则抛出异常OS0203；      
 		 //调入单位(IN_ORG_ID)、调入基站(IN_STATION_ID)至少有一个不能为空,如果为空则抛出异常OS0204； 
-		 //System.out.println("outOrgId="+outOrgId+outStationFlag+outOrgParentId);
-		 //System.out.println("inOrgId=" + inOrgId+inOrgParentId+inStationFlag);
-		 //System.out.println("resourceTypeId=" + resourceTypeId);
+		 //调出设备状态(OUT_RESOURCE_STATUS)不能为空，如果为空则抛出异常OS0207。
+		 if(outStationFlag.equals("Y")){
+			 outStationId = outOrgId;
+			 outOrgId = outOrgParentId;
+		 }
+		 
+		 if(inStationFlag.equals("Y")){
+			 inStationId = inOrgId;
+			 inOrgId = inOrgParentId;
+		 }
+		 
 		 if((outOrgId == null || outOrgId.length()==0 ) ){
 			 throw new ErrorException("OS0201",null);
+		 }
+		 if((outResourceStatus == null || outResourceStatus.length()==0 ) ){
+			 throw new ErrorException("OS0207",null);
 		 }
 		 if((inOrgId == null || inOrgId.length()==0 )){
 			 throw new ErrorException("OS0204",null);
@@ -162,14 +175,7 @@ public class BoSheetPrepareAdd implements RootBo {
 				 throw new ErrorException("OS0202",null);
 			 }
 		 }
-		 if(outStationFlag.equals("Y")){
-			 outStationId = outOrgId;
-			 outOrgId = outOrgParentId;
-		 }
-		 if(inStationFlag.equals("Y")){
-			 inStationId = inOrgId;
-			 inOrgId = inOrgParentId;
-		 }
+		
 		 
 		 //判断下发的工单明细中调出单位中该资源类型的库存是否存在，如果不存在抛出异常：OS0206:{0}机构下发{1}资源类的库存不存在，请增加库存！
 		 int count=0;
@@ -203,6 +209,7 @@ public class BoSheetPrepareAdd implements RootBo {
 			 //根据“调度工单明细ID(LIST_ID)”判断是编辑还是添加：“调度工单明细ID(LIST_ID)”为空则为添加；不为空则为编辑
 			 enResourcePrepareList.setOutOrgId(outOrgId);
 			 enResourcePrepareList.setOutStationId(outStationId);
+			 enResourcePrepareList.setOutResourceStatus(outResourceStatus);
 			 enResourcePrepareList.setResourceClassId(resourceClassId);
 			 enResourcePrepareList.setResourceTypeId(resourceTypeId);
 			 enResourcePrepareList.setAmountPrepare(amountPrepare1);
@@ -219,23 +226,6 @@ public class BoSheetPrepareAdd implements RootBo {
 				 dbResourcePrepareList.insert(enResourcePrepareList);
 			 }else{
 				 dbResourcePrepareList.updateByKey(listId, enResourcePrepareList);
-				 
-				 //如果工单的状态为"已下发"、“已接收”则同时更新库存：从该库存减去更新前的数量；
-	//			 if(listStatus.equals("1") ||listStatus.equals("２")){
-	//				 long amount = oldAmountPrepare1-amountPrepare1;
-	//			 	sql.append(" UPDATE RESOURCE_ORG_AMOUNT  SET ");
-	//				sql.append(" PRE_OUT_AMOUNT= PRE_OUT_AMOUNT-");
-	//				sql.append(amount);
-	//				sql.append(" WHERE ORG_ID=");
-	//				if(outStationId != null && outStationId.length()>0){
-	//					sql.append(transaction.formatString(outStationId));
-	//				}else{
-	//					sql.append(transaction.formatString(outOrgId));
-	//				}
-	//				sql.append(" AND RESOURCE_TYPE_ID =");
-	//				sql.append(transaction.formatString(resourceTypeId));
-	//				transaction.doUpdate(null, sql.toString());
-	//			 }
 				 
 			 }
 		}

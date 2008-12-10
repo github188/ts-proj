@@ -76,8 +76,8 @@
 	inAmount = xml.getItemValue("RESOURCE_BUYIN_LIST",1,"IN_AMOUNT");
 	inRemark = xml.getItemValue("RESOURCE_BUYIN_LIST",1,"IN_REMARK");
 	
-    String[] desc = {"出库","入库"};
-    String[] value = {"O","I"};
+    String[] desc = {"入库","出库"};
+    String[] value = {"I","O"};
 %>
 
 </head>
@@ -111,7 +111,6 @@
                       <td>
                       <span id="spryInOutFlag">
                       <select name="IN_OUT_FLAG" class="select" id="IN_OUT_FLAG" style="width:11em">
-                        <option value="">请选择</option>
                         <%for(int i=0;i<value.length;i++){ %>
                         <option value="<%=value[i] %>" <%if(value[i].equals(inOutFlag)){out.print("selected");} %>><%=desc[i] %></option>
                         <%} %>

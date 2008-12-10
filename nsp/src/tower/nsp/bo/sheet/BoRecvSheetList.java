@@ -107,7 +107,7 @@ public class BoRecvSheetList implements RootBo {
 		 }
 		
 		 sqlWhere.append(" ORDER BY LIST_STATUS ASC");
-		 System.out.println(sqlWhere.toString());
+		 
 		 //根据输入的查询条件从“调度工单明细(RESOURCE_PREPARE_LIST)”表中获取满足条件的数据并按照调度工单明细状态升序排序：
 		 rs = transaction.doQuery(null, sqlWhere.toString());
 		 
@@ -126,6 +126,7 @@ public class BoRecvSheetList implements RootBo {
 				requestXml.setItemValue("SHEET_PREPARE_LIST", row, "RESOURCE_CLASS_NAME", rsRow.getString("class_name"));
 				requestXml.setItemValue("SHEET_PREPARE_LIST", row, "RESOURCE_TYPE_NAME", rsRow.getString("type_name"));
 				requestXml.setItemValue("SHEET_PREPARE_LIST", row, "AMOUNT_PREPARE", rsRow.getString("AMOUNT_PREPARE"));
+				requestXml.setItemValue("SHEET_PREPARE_LIST", row, "OUT_RESOURCE_STATUS", rsRow.getString("OUT_RESOURCE_STATUS"));
 					
 		 }
 	}

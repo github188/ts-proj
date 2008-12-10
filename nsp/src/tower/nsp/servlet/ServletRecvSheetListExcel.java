@@ -53,6 +53,7 @@ import tower.tmvc.XMLWrap;
 		String[] resourceClassNames;
 		String[] resourceTypeNames;
 		String[] amountPrepare;
+		String[] outResourceStatus;
 		
 		String[] statuDesc={"下发","已接收"};
 		String[] statuVal={"1","2"};
@@ -72,6 +73,7 @@ import tower.tmvc.XMLWrap;
 		resourceClassNames = xml.getItemValues("SHEET_PREPARE_LIST","RESOURCE_CLASS_NAME");
 		resourceTypeNames = xml.getItemValues("SHEET_PREPARE_LIST","RESOURCE_TYPE_NAME");
 		amountPrepare = xml.getItemValues("SHEET_PREPARE_LIST","AMOUNT_PREPARE");
+		outResourceStatus = xml.getItemValues("SHEET_PREPARE_LIST","OUT_RESOURCE_STATUS");
 		
 		
 		
@@ -114,7 +116,8 @@ import tower.tmvc.XMLWrap;
 		createHead(0,3,"调出基站");
 		createHead(0,4,"调出设备类别");
 		createHead(0,5,"调出设备型号");
-		createHead(0,6,"调出数量");
+		createHead(0,5,"调出设备状态");
+		createHead(0,6,"调度数量");
 		createHead(0,7,"调入单位");
 		createHead(0,8,"调入基站");
 		createHead(0,9,"状态");
@@ -125,6 +128,7 @@ import tower.tmvc.XMLWrap;
 			createCell(i+1,3,outStationNames[i]);
 			createCell(i+1,4,resourceClassNames[i]);
 			createCell(i+1,5,resourceTypeNames[i]);
+			createCell(i+1,5,outResourceStatus[i]);
 			createCell(i+1,6,amountPrepare[i]);
 			createCell(i+1,7,inOrgNames[i]);
 			createCell(i+1,8,inStationNames[i]);

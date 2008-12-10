@@ -81,11 +81,15 @@ public class BoSheetPrepareDetail implements RootBo {
 				enSysOrg = dbSysOrg.findByKey(enResourcePrepareList
 						.getOutOrgId());
 				requestXml.setItemValue("RESOURCE_PREPARE_LIST", row,
+						"OUT_STATION_ID", enResourcePrepareList.getOutOrgId());
+				requestXml.setItemValue("RESOURCE_PREPARE_LIST", row,
+						"OUT_ORG_ID", "");
+				requestXml.setItemValue("RESOURCE_PREPARE_LIST", row,
 						"OUT_ORG_NAME", enSysOrg.getOrgName());
 				requestXml.setItemValue("RESOURCE_PREPARE_LIST", row,
 						"OUT_STATION_FLAG", "N");
 			}
-			// 如果调入基站不为空，则调入单位ID和name即时调入基站name；否则为调入机构的name
+			// 如果调入基站不为空，则调入单位ID和name即是调入基站name；否则为调入机构的name
 			if (enResourcePrepareList.getInStationId() != null
 					&& enResourcePrepareList.getInStationId().length() != 0) {
 				enSysOrg = dbSysOrg.findByKey(enResourcePrepareList
@@ -99,6 +103,10 @@ public class BoSheetPrepareDetail implements RootBo {
 			} else {
 				enSysOrg = dbSysOrg.findByKey(enResourcePrepareList
 						.getInOrgId());
+				requestXml.setItemValue("RESOURCE_PREPARE_LIST", row,
+						"IN_STATION_ID", enResourcePrepareList.getInOrgId());
+				requestXml.setItemValue("RESOURCE_PREPARE_LIST", row,
+						"IN_ORG_ID", "");
 				requestXml.setItemValue("RESOURCE_PREPARE_LIST", row,
 						"IN_ORG_NAME", enSysOrg.getOrgName());
 				requestXml.setItemValue("RESOURCE_PREPARE_LIST", row,

@@ -39,6 +39,7 @@
 	String[] resourceClassNames;
 	String[] resourceTypeNames;
 	String[] amountPrepare;
+	String[] outResourceStatus;
 	
 %>
 <% 
@@ -61,7 +62,10 @@
 	resourceClassNames = xml.getItemValues("SHEET_PREPARE_LIST","RESOURCE_CLASS_NAME");
 	resourceTypeNames = xml.getItemValues("SHEET_PREPARE_LIST","RESOURCE_TYPE_NAME");
 	amountPrepare = xml.getItemValues("SHEET_PREPARE_LIST","AMOUNT_PREPARE");
+	outResourceStatus = xml.getItemValues("SHEET_PREPARE_LIST","OUT_RESOURCE_STATUS");
 	
+	 String[] desc = {"库存设备","在线设备"};
+	 String[] value = {"0","1"};
 	String[] statuDesc={"下发","已接收"};
 	String[] statuVal={"1","2"};
 %>
@@ -185,8 +189,9 @@
                   <th>调度日期</th>
                   <th>调出单位</th>
                   <th>调出基站</th>
-                  <th>调出设备类别</th>
-                  <th>调出设备型号</th>
+                  <th>设备类别</th>
+                  <th>设备型号</th>
+                  <th>设备状态</th>
                   <th>调出数量</th>
                   <th>调入单位</th>
                   <th>调入基站</th>
@@ -213,6 +218,13 @@
                   <td align="center"><%=outStationNames[i]%></td>
                   <td align="center"><%=resourceClassNames[i]%></td>
                   <td align="center"><%=resourceTypeNames[i]%></td>
+                 <td align="center">
+                   <%for(int j=0;j<value.length;j++){ 
+                	   if(value[j].equals(outResourceStatus[i])){
+                   %>
+                   <%=desc[j]%>
+                   <%} }%>
+                   </td>
                    <td align="center"><%=amountPrepare[i]%></td>
                   <td align="center"><%=inOrgNames[i]%></td>
                   <td align="center"><%=inStationNames[i]%></td>

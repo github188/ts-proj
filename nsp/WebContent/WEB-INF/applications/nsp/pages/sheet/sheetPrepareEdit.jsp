@@ -30,6 +30,7 @@
    var outOrgName = form.OUT_ORG_NAME.value;
    var resourceTypeName = form.RESOURCE_TYPE_ID.value;
    var inOrgName = form.IN_ORG_NAME.value;
+   var ourResourceStatus = form.OUT_RESOURCE_STATUS.value;
   	var result = Spry.Widget.Form.validate(form);
     if (result == false){
       return result;
@@ -62,9 +63,15 @@
   		form.AMOUNT_PREPARE.focus();
   		return false;
   	}
+  	
+  	if(ourResourceStatus.length <=0 ){
+  		alert("调出设备状态不能为空,请选择！");
+  		form.selectInOrg.focus();
+  		return false;
+  	}
   	if(inOrgName.length <=0 ){
   		alert("调入单位不能为空,请重新输入！");
-  		form.selectInOrg.focus();
+  		form.OUT_RESOURCE_STATUS.focus();
   		return false;
   	}
   }
@@ -104,9 +111,7 @@
 	String outOrgId;
 	String outStationId;
 	String outOrgName;
-	String resourceClassId;
 	String resourceTypeId;
-	String resourceTypeName;
 	String amountPrepare;
 	String inOrgId;
 	String inStationId;
@@ -114,6 +119,7 @@
 	String outStationFlag;
 	String inStationFlag;
 	String listStatus;
+	String outResourceStatus;
 %>
 
 <% 
@@ -124,9 +130,7 @@
 	outOrgId = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"OUT_ORG_ID");
 	outStationId = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"OUT_STATION_ID");
 	outOrgName = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"OUT_ORG_NAME");
-	resourceClassId = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"RESOURCE_CLASS_ID");
 	resourceTypeId = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"RESOURCE_TYPE_ID");
-	resourceTypeName = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"RESOURCE_TYPE_NAME");
 	amountPrepare = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"AMOUNT_PREPARE");
 	inOrgName = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"IN_ORG_NAME");
 	inOrgId = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"IN_ORG_ID");
@@ -134,6 +138,10 @@
 	outStationFlag = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"OUT_STATION_FLAG");
 	inStationFlag = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"IN_STATION_FLAG");
 	listStatus = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"LIST_STATUS");
+	outResourceStatus = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"OUT_RESOURCE_STATUS");
+	
+	 String[] desc = {"库存设备","在线设备"};
+	 String[] value = {"0","1"};
 %>
 
 </head>
@@ -164,7 +172,7 @@
                    <input type="hidden" name="OLD_AMOUNT_PREPARE" value="<%=amountPrepare %>">
                      <table border="0" cellpadding="0" cellspacing="0">
                       <tr>
-                          <td width="100" align="right">调出单位：</td>
+                          <td width="120" align="right">调出单位：</td>
 		                  <td width="219">
 		                   <input name="OUT_ORG_ID" type="hidden" value="<%=outStationId %>" >
 		                   <input name="OUT_ORG_PARENT_ID" type="hidden" value="<%=outOrgId %>" >
@@ -172,17 +180,32 @@
 		                  <input type="text" class="text" name="OUT_ORG_NAME" value="<%=outOrgName %>">
 		                   <input type="button" name="selectOutOrg" class="selButton" value="选择" onClick="doSelOutOrg()" /><span class="requiredField">*</span>
 		                 </td>
-		                 <td width="120" align="right">调出设备型号：</td>
-	                    <td width="300">
-                          <script>var type = new Tower.Widget.Selector("TypeSelector","RESOURCE_TYPE_ID","ctrl?FUNC_ID=SelectTypeTree&INPUT_TYPE=radio",{selected:["<%=resourceTypeId%>"]},{change:onChange})</script><span class="requiredField">*</span>
-		                </td>
-		               </tr>  
-		              <tr>
-		              	<td width="100" align="right">调出数量：</td>
+		                 <td width="120" align="right">调度数量：</td>
 		                  <td width="219"><span id="spryAmount">
                           <input type="text" class="text" name="AMOUNT_PREPARE" value="<%=amountPrepare %>">
                           <span class="textfieldRequiredMsg">需要提供一个值。</span><span class="textfieldInvalidFormatMsg">格式无效。</span><span class="textfieldMaxValueMsg">输入值大于所允许的最大值。</span></span><span class="requiredField">*</span>		                 </td>
-	              	    <td width="120" align="right">调入单位：</td>
+		                 
+		                 
+		               </tr>  
+		              <tr>
+		               <td width="120" align="right">调出设备型号：</td>
+	                    <td width="300">
+                          <script>var type = new Tower.Widget.Selector("TypeSelector","RESOURCE_TYPE_ID","ctrl?FUNC_ID=SelectTypeTree&INPUT_TYPE=radio",{selected:["<%=resourceTypeId%>"]},{change:onChange})</script><span class="requiredField">*</span>
+		                </td>
+	              	    <td width="120" align="right">调出设备状态：</td>
+                        <td width="300">
+                         <span id="spryOutResourceStatus">
+	                     <select name="OUT_RESOURCE_STATUS" class="select" id="OUT_RESOURCE_STATUS" style="width:11em">
+                        <%for(int i=0;i<value.length;i++){ %>
+                        <option value="<%=value[i] %>" <%if(value[i].equals(outResourceStatus)){out.print("selected");} %>><%=desc[i] %></option>
+                        <%} %>
+                      </select>
+                      <span class="requiredField">*</span>
+                      <span class="selectRequiredMsg">请选择一个项目。</span></span>
+						 </td>
+		               </tr>
+		               <tr>
+		               <td width="120" align="right">调入单位：</td>
                         <td width="300">
 	                      <input name="IN_STATION_FLAG" type="hidden" value="<%=inStationFlag %>" >
 	                      <input name="IN_ORG_PARENT_ID" type="hidden" value="<%=inOrgId %>" >
@@ -190,6 +213,8 @@
 						  <input type="text" class="text" name="IN_ORG_NAME" value=<%=inOrgName %>> 
 						  <input type="button" name="selectInOrg" class="selButton" value="选择" onClick="doSelInOrg()" /><span class="requiredField">*</span>
 						 </td>
+						 <td></td>
+						 <td></td>
 		               </tr>
 		              	<tr>
                           <td colspan="4" align="center" nowrap="nowrap">&nbsp;</td>
@@ -221,6 +246,7 @@
   <script type="text/javascript">
 <!--
 var sprytextfield1 = new Spry.Widget.ValidationTextField("spryAmount", "integer", {useCharacterMasking:true, maxValue:99999999, minValue:0});
+var spryselect1 = new Spry.Widget.ValidationSelect("spryOutResourceStatus");
 //-->
   </script>
 </body>

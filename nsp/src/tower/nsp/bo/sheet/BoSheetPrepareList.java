@@ -100,6 +100,7 @@ public class BoSheetPrepareList implements RootBo {
 				requestXml.setItemValue("SHEET_PREPARE_LIST", row, "AMOUNT_PREPARE", rsRow.getString("AMOUNT_PREPARE"));
 				requestXml.setItemValue("SHEET_PREPARE_LIST", row, "IN_ORG_NAME", rsRow.getString("IN_ORG_NAME"));
 				requestXml.setItemValue("SHEET_PREPARE_LIST", row, "IN_STATION_NAME", rsRow.getString("IN_STATION_NAME"));
+				requestXml.setItemValue("SHEET_PREPARE_LIST", row, "OUT_RESOURCE_STATUS", rsRow.getString("OUT_RESOURCE_STATUS"));
 				if(rsRow.getString("OUT_STATION_ID") != null && rsRow.getString("OUT_STATION_ID").length() >0 ){
 					enResourceOrgAmount = dbResourceOrgAmount.findByKey(rsRow.getString("OUT_STATION_ID"), rsRow.getString("RESOURCE_TYPE_ID"));
 				}else{
@@ -109,6 +110,7 @@ public class BoSheetPrepareList implements RootBo {
 					requestXml.setItemValue("SHEET_PREPARE_LIST", row, "STOCK_AMOUNT",enResourceOrgAmount.getStockAmount());
 					requestXml.setItemValue("SHEET_PREPARE_LIST", row, "PRE_OUT_AMOUNT", enResourceOrgAmount.getPreOutAmount());
 					requestXml.setItemValue("SHEET_PREPARE_LIST", row, "PRE_IN_AMOUNT", enResourceOrgAmount.getPreInAmount());
+					requestXml.setItemValue("SHEET_PREPARE_LIST", row, "ONLINE_AMOUNT", enResourceOrgAmount.getOnlineAmount());
 				}
 			}
 	}
