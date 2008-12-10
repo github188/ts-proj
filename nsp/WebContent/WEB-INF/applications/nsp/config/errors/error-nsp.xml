@@ -80,6 +80,11 @@
 		<message>获取设备状态有误，不知道从库存还是在线进行调度</message>
 		<hint></hint>
 	</error>
+	<error>
+		<id>RO0009</id>
+		<message>该单位的在线数量不足，不能撤出足够的设备</message>
+		<hint></hint>
+	</error>
 	<!-- 05-ResourceIn-调度入库 -->
 	<error>
 		<id>RI0001</id>
