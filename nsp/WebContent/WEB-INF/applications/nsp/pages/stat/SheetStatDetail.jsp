@@ -42,6 +42,8 @@
 	
 	String[] statusIds ={"1","2","3","4","5","6"};
 	String[] statusDescs={"下发","已接受","已出库","已入库","施工完毕","确认完成"};
+  
+	String outResourceStatus = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"OUT_RESOURCE_STATUS");
 %>
 <html>
 <head>
@@ -123,8 +125,10 @@
               	<td><div class=""><%=inStationName %></div></td>
               </tr>
               <tr>
-              	<td align="right">数量:</td>
+              	<td align="right">调出数量:</td>
               	<td><div class=""><%=amountPrepare %></div></td>
+                <td align="right">设备状态：</td>
+                <td><%if(outResourceStatus.equals(0)){ %>库存设备<%}else{ %>在线设备<%} %></td>;
               </tr>
               <tr>
               <th colspan="6" align="left">出入库信息</th>
