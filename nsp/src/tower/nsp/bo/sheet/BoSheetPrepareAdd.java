@@ -188,7 +188,7 @@ public class BoSheetPrepareAdd implements RootBo {
 			throw new ErrorException("OS0206",new  Object[]{outOrgName,enResourceType.getTypeName()});
 		}else{
 		 
-			 //修改工单信息，根据sheetId是否存在，判断工单信息是添加还是编辑
+			 //生成工单信息，为工单明细提供工单ID
 			if(sheetId == null || sheetId.length() ==0 ){
 				 enResourcePrepareSheet = new EnResourcePrepareSheet();
 				 sheetId = SysIdCreator.GenNextId(transaction, null,
@@ -228,6 +228,15 @@ public class BoSheetPrepareAdd implements RootBo {
 				 dbResourcePrepareList.updateByKey(listId, enResourcePrepareList);
 				 
 			 }
+			 
+			 
+			 //修改或编辑工单信息，如果工单明天添加失败则工单明细添加不成功！
+				if(sheetId == null || sheetId.length() ==0 ){
+					 dbResourcePrepareSheet.insert(enResourcePrepareSheet);
+				 }else{
+					 dbResourcePrepareSheet.updateByKey(sheetId, enResourcePrepareSheet);
+				 }
+			 
 		}
 
 	}
