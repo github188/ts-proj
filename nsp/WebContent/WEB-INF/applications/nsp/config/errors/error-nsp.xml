@@ -75,6 +75,11 @@
 		<message>出库单位没有相应库存</message>
 		<hint></hint>
 	</error>
+	<error>
+		<id>RO0008</id>
+		<message>获取设备状态有误，不知道从库存还是在线进行调度</message>
+		<hint></hint>
+	</error>
 	<!-- 05-ResourceIn-调度入库 -->
 	<error>
 		<id>RI0001</id>
