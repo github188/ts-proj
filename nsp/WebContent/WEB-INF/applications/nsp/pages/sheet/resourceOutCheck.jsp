@@ -13,6 +13,7 @@
   String typeNames;
   String amountPrepares;
   String amounts;
+  String outResourceStatus;
   
   String sheetId;
   String dateFrom;
@@ -36,6 +37,7 @@
   typeNames = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"TYPE_NAME");
   amountPrepares = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"AMOUNT_PREPARE");
   amounts = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"OUT_ORG_AMOUNT");
+  outResourceStatus = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"OUT_RESOURCE_STATUS");
   
   sheetId = xml.getInputValue("QSHEET_ID");
   dateFrom = xml.getInputValue("QPREPARE_DATE_FROM");
@@ -150,6 +152,15 @@
                   <td><div><%=amountPrepares %></div></td>
                   <td align="right">当前库存：</td>
                   <td><div class="especiallyField"><%=amounts %></div></td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td align="right">设备状态：</td>
+                  <td><div><%if(outResourceStatus.equals(0)){ %>库存设备<%}else{ %>在线设备<%} %></div>
+                  <input type = "hidden" name="OUT_RESOURCE_STATUS" value="<%=outResourceStatus %>">
+                  </td>
+                  <td align="right">&nbsp;</td>
+                  <td>&nbsp;</td>
                   <td>&nbsp;</td>
                 </tr>
                 <tr>
