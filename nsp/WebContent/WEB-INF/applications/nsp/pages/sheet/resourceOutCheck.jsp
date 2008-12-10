@@ -156,7 +156,7 @@
                 </tr>
                 <tr>
                   <td align="right">设备状态：</td>
-                  <td><div><%if(outResourceStatus.equals(0)){ %>库存设备<%}else{ %>在线设备<%} %></div>
+                  <td><div><%if(outResourceStatus.equals("0")){ %>库存设备<%}else{ %>在线设备<%} %></div>
                   <input type = "hidden" name="OUT_RESOURCE_STATUS" value="<%=outResourceStatus %>">
                   </td>
                   <td align="right">&nbsp;</td>

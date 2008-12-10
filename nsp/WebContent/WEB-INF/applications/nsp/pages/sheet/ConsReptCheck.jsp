@@ -222,7 +222,7 @@
                     <input name="AMOUNT_BEFORE_CONS" type="hidden" value="<%=amountBeforCons %>" >
                     <div><%=amountBeforCons %></div></td>
                   <td align="right">设备状态：</td>
-                  <td><%if(outResourceStatus.equals(0)){ %>库存设备<%}else{ %>在线设备<%} %></td>
+                  <td><%if(outResourceStatus.equals("0")){ %>库存设备<%}else{ %>在线设备<%} %></td>
                   <td>&nbsp;</td>
                  </tr>
                  <tr>

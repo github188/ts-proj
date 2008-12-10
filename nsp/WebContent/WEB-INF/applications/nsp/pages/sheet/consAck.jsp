@@ -73,6 +73,7 @@
     consFinOperDateTime = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"CONS_FIN_OPER_DATETIME");
     	
     outResourceStatus = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"OUT_RESOURCE_STATUS");
+    System.out.println("outResourceStatus"+outResourceStatus);
 
 %>
 <html>
@@ -199,7 +200,7 @@
               	<td align="right">施工剩余数量：</td>
               	<td><div><%=amountdiff %></div></td>
                 <td align="right">设备状态：</td>
-                <td><%if(outResourceStatus.equals(0)){ %>库存设备<%}else{ %>在线设备<%} %></td>
+                <td><%if(outResourceStatus.equals("0")){ %>库存设备<%}else{ %>在线设备<%} %></td>
              </tr>
               <tr>  
                 <td align="right">施工人：</td>
