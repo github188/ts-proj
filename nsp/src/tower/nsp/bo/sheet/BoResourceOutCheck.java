@@ -108,16 +108,26 @@ public class BoResourceOutCheck implements RootBo {
 										.getResourceTypeId());
 						
 						if (enResourceOrgAmountOut != null) {
-							
-							//判断调出或库存是否存在负数，如果出现抛出异常
-							if (enResourceOrgAmountOut.getStockAmount()
-									- enResourcePrepareList.getAmountPrepare() < 0) {
-								enResourceClass = dbResourceClass.findByKey(enResourcePrepareList.getResourceClassId());
-								enResourceType = dbResourceType.findByKey(enResourcePrepareList.getResourceTypeId());
-								String[] message = {enResourceClass.getClassName(),enResourceType.getTypeName() };
-								throw new ErrorException("RO0003", message);
+							//判断是从库存中调度还是从在线中调度
+							if(outType.equals("0")){
+								//判断调出或库存是否存在负数，如果出现抛出异常
+								if (enResourceOrgAmountOut.getStockAmount()
+										- enResourcePrepareList.getAmountPrepare() < 0) {
+									enResourceClass = dbResourceClass.findByKey(enResourcePrepareList.getResourceClassId());
+									enResourceType = dbResourceType.findByKey(enResourcePrepareList.getResourceTypeId());
+									String[] message = {enResourceClass.getClassName(),enResourceType.getTypeName() };
+									throw new ErrorException("RO0003", message);
+								}
 							}else{
-
+								//判断调出该单位的在线数量是否符合调度数量
+								if (enResourceOrgAmountOut.getOnlineAmount()
+										- enResourcePrepareList.getAmountPrepare() < 0) {
+									enResourceClass = dbResourceClass.findByKey(enResourcePrepareList.getResourceClassId());
+									enResourceType = dbResourceType.findByKey(enResourcePrepareList.getResourceTypeId());
+									String[] message = {enResourceClass.getClassName(),enResourceType.getTypeName() };
+									throw new ErrorException("RO0009", message);
+								}
+							}
 								// 获取调度入库单位的库存信息
 								if (enResourcePrepareList.getInStationId() != null
 										&& enResourcePrepareList.getInStationId()
@@ -177,7 +187,6 @@ public class BoResourceOutCheck implements RootBo {
 									enResourceOrgAmountIn.setStockAmount(0);
 									dbResourceOrgAmount.insert(enResourceOrgAmountIn);
 								}
-							}
 						}else{
 							throw new ErrorException("RO0007", null);
 						}
