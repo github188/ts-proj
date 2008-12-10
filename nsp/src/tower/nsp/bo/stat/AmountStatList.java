@@ -2,7 +2,6 @@ package tower.nsp.bo.stat;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
@@ -155,7 +154,7 @@ public class AmountStatList implements RootBo {
 					}
 				} else {
 
-					Vector orgs = dbSysOrg.findAllWhere("PARENT_ID = "+ transaction.formatString(enSysOrg.getOrgId()));
+					Vector orgs = dbSysOrg.findAllWhere("PARENT_ID = "+ Transaction.formatString(enSysOrg.getOrgId()));
 					
 					// 各种型号库存
 					if (orgs != null && orgs.size() > 0) {
