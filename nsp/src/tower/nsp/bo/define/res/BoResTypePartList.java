@@ -1,7 +1,5 @@
 package tower.nsp.bo.define.res;
 
-import java.util.Vector;
-
 import org.apache.log4j.Logger;
 
 import tower.nsp.db.DbResourceClass;
