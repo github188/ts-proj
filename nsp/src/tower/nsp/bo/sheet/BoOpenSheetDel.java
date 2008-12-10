@@ -19,7 +19,7 @@ import tower.tmvc.XMLWrap;
  */
 public class BoOpenSheetDel implements RootBo {
 
-	@SuppressWarnings("static-access")
+	@SuppressWarnings({ "static-access", "unchecked" })
 	public void doBusiness(Transaction transaction, XMLWrap requestXml,
 			XMLWrap sessionXml, XMLWrap applicationXml, Logger logger)
 			throws ErrorException {

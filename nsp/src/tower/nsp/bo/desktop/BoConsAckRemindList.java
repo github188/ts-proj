@@ -4,7 +4,6 @@ import java.util.Vector;
 
 import org.apache.log4j.Logger;
 
-import tower.common.util.DateFunc;
 import tower.nsp.db.DbResourceClass;
 import tower.nsp.db.DbResourcePrepareList;
 import tower.nsp.db.DbResourcePrepareSheet;
@@ -30,14 +29,14 @@ public class BoConsAckRemindList implements RootBo {
 	public void doBusiness(Transaction transaction, XMLWrap requestXml,
 			XMLWrap sessionXml, XMLWrap applicationXml, Logger logger)
 			throws ErrorException {
-		// TODO Auto-generated method stub
-
 		/***********************************************************************
 		 * 声明变量
 		 **********************************************************************/
-
+		//调度工单明细db en
 		DbResourcePrepareList dbResourcePrepareList;
 		EnResourcePrepareList enResourcePrepareList;
+		
+		//
 		DbResourcePrepareSheet dbResourcePrepareSheet;
 		EnResourcePrepareSheet enResourcePrepareSheet;
 		DbSysOrg dbSysOrg;
@@ -50,10 +49,8 @@ public class BoConsAckRemindList implements RootBo {
 		Vector resourceIns;
 		
 		StringBuffer sql = new StringBuffer();
-		StringBuffer sqlIn = new StringBuffer();
 		
 		//用户信息
-		String userId;
 		String orgId;
 		
 		//条件
@@ -65,7 +62,6 @@ public class BoConsAckRemindList implements RootBo {
 		 **********************************************************************/
 		
 		//获取用户信息
-		userId = sessionXml.getItemValue("SYS_USER", 1, "USER_ID");
 		orgId = sessionXml.getItemValue("SYS_USER", 1, "USER_ORG_ID");
 		//获取条件
 		remindListId = requestXml.getInputValue("REMIND_LIST_ID");
@@ -97,7 +93,7 @@ public class BoConsAckRemindList implements RootBo {
 				sql.append(" and ");
 			}
 			sql.append("LIST_ID =");
-			sql.append(transaction.formatString(remindListId));
+			sql.append(Transaction.formatString(remindListId));
 		}
 		resourceIns = dbResourcePrepareList.findAllWhere(sql.toString());
 		if(resourceIns != null && resourceIns.size() > 0){

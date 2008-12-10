@@ -26,6 +26,7 @@ import tower.tmvc.XMLWrap;
  */
 public class AmountStatList implements RootBo {
 
+	@SuppressWarnings("unchecked")
 	public void doBusiness(Transaction transaction, XMLWrap requestXml,
 			XMLWrap sessionXml, XMLWrap applicationXml, Logger logger)
 			throws ErrorException {
