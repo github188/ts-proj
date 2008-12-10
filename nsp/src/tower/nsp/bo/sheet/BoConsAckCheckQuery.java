@@ -87,6 +87,7 @@ public class BoConsAckCheckQuery implements RootBo {
 				requestXml.setItemValue("RESOURCE_PREPARE_LIST", 1, "IN_STATION_NAME", row.getString("inSta"));
 				requestXml.setItemValue("RESOURCE_PREPARE_LIST", 1, "TYPE_NAME", row.getString("type_name"));
 				requestXml.setItemValue("RESOURCE_PREPARE_LIST", 1, "CLASS_NAME", row.getString("class_name"));
+				requestXml.setItemValue("RESOURCE_PREPARE_LIST", 1, "OUT_RESOURCE_STATUS", row.getString("OUT_RESOURCE_STATUS"));
 				
 				
 				requestXml.setItemValue("RESOURCE_PREPARE_LIST", 1, "TAKE_USER_NAME", row.getString("TAKE_USER_NAME"));
