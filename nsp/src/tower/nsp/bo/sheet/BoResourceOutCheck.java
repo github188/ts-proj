@@ -146,7 +146,7 @@ public class BoResourceOutCheck implements RootBo {
 									throw new ErrorException("RO0008",null);
 								}else{
 									String sqlUpdate;
-									if(outType.equals(0)){
+									if(outType.equals("0")){
 										sqlUpdate = "update RESOURCE_ORG_AMOUNT r set r.STOCK_AMOUNT = " +
 										"r.STOCK_AMOUNT - " + enResourcePrepareList.getAmountPrepare()+
 										" , r.PRE_OUT_AMOUNT = r.PRE_OUT_AMOUNT - "+ enResourcePrepareList.getAmountPrepare()+
