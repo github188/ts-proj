@@ -105,14 +105,14 @@ public class BoResourceInList implements RootBo {
 				sqlIn.append(" and ");
 			}
 			sqlIn.append("PREPARE_DATE >= ");
-			sqlIn.append(transaction.formatString(DateFunc.ParseDateTime(prepareDateFrom)));
+			sqlIn.append(Transaction.formatString(DateFunc.ParseDateTime(prepareDateFrom)));
 		}
 		if (prepareDateTo != null && prepareDateTo.length() > 0) {
 			if(sqlIn.toString().length() > 0){
 				sqlIn.append(" and ");
 			}
 			sqlIn.append("PREPARE_DATE <= ");
-			sqlIn.append(transaction.formatString(DateFunc.ParseDateTime(prepareDateTo)));
+			sqlIn.append(Transaction.formatString(DateFunc.ParseDateTime(prepareDateTo)));
 		}
 		if (sheetId != null && sheetId.length() > 0) {
 			if(sql.toString().length() > 0){
@@ -127,7 +127,7 @@ public class BoResourceInList implements RootBo {
 				sql.append(" and ");
 			}
 			sql.append("OUT_ORG_ID = ");
-			sql.append(transaction.formatString(outOrgId));
+			sql.append(Transaction.formatString(outOrgId));
 		}
 		// 判断查询条件是否为空，调入单位、调度单编号、调度日期中三项必须至少输入任意一项
 		/*if (sqlIn.toString().length() == 0 && sql.toString().length() == 0) {
@@ -141,7 +141,7 @@ public class BoResourceInList implements RootBo {
 			}
 			sql.append("LIST_STATUS = '3' and ");
 			sql.append("IN_ORG_ID = ");
-			sql.append(transaction.formatString(orgId));
+			sql.append(Transaction.formatString(orgId));
 
 		}
 		if (classId != null && classId.length() > 0) {
@@ -154,7 +154,7 @@ public class BoResourceInList implements RootBo {
 				}else{
 					sql.append("RESOURCE_TYPE_ID = ");
 				}
-				sql.append(transaction.formatString(classId));
+				sql.append(Transaction.formatString(classId));
 			}
 		}
 		if (takeUserName != null && takeUserName.length() > 0) {
@@ -170,14 +170,14 @@ public class BoResourceInList implements RootBo {
 				sql.append(" and ");
 			}
 			sql.append("TAKE_DATE >=");
-			sql.append(transaction.formatString(DateFunc.ParseDateTime(takeDateFrom)));
+			sql.append(Transaction.formatString(DateFunc.ParseDateTime(takeDateFrom)));
 		}
 		if (takeDateTo != null && takeDateTo.length() > 0) {
 			if(sql.toString().length() > 0){
 				sql.append(" and ");
 			}
 			sql.append("TAKE_DATE <=");
-			sql.append(transaction.formatString(DateFunc.ParseDateTime(takeDateTo)));
+			sql.append(Transaction.formatString(DateFunc.ParseDateTime(takeDateTo)));
 		}
 		if (sqlIn.toString().length() > 0) {
 			if(sql.toString().length() > 0){
