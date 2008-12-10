@@ -7,7 +7,6 @@ import org.apache.log4j.Logger;
 import tower.common.util.DateFunc;
 import tower.common.util.Page;
 import tower.common.util.PubFunc;
-import tower.nsp.db.DbResourceBuyinList;
 import tower.nsp.db.DbSysOrg;
 import tower.nsp.en.EnSysOrg;
 import tower.tmvc.ErrorException;

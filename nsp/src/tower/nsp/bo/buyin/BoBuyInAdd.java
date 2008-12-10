@@ -6,7 +6,6 @@ import org.apache.log4j.Logger;
 
 import tower.common.util.DateFunc;
 import tower.common.util.SysIdCreator;
-import tower.common.util.SysIdCreatorDefine;
 import tower.nsp.common.util.IdCreatorDefine;
 import tower.nsp.db.DbResourceBuyinList;
 import tower.nsp.db.DbResourceOrgAmount;
