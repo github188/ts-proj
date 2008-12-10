@@ -88,12 +88,12 @@ public class BoSheetOpen implements RootBo {
 				sql.append(enResourcePrepareList.getAmountPrepare());
 				sql.append(" WHERE ORG_ID=");
 				if(enResourcePrepareList.getOutStationId() != null && enResourcePrepareList.getOutStationId().length()>0){
-					sql.append(transaction.formatString(enResourcePrepareList.getOutStationId()));
+					sql.append(Transaction.formatString(enResourcePrepareList.getOutStationId()));
 				}else{
-					sql.append(transaction.formatString(enResourcePrepareList.getOutOrgId()));
+					sql.append(Transaction.formatString(enResourcePrepareList.getOutOrgId()));
 				}
 				sql.append(" AND RESOURCE_TYPE_ID =");
-				sql.append(transaction.formatString(enResourcePrepareList.getResourceTypeId()));
+				sql.append(Transaction.formatString(enResourcePrepareList.getResourceTypeId()));
 				transaction.doUpdate(null, sql.toString());
 			 }
 		 }
