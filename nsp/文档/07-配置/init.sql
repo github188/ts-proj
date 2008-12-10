@@ -126,6 +126,7 @@ CREATE TABLE `resource_prepare_list` (
   `CONS_FIN_OPER_DATETIME` char(14) default NULL,
   `CONS_ACK_USERID` char(6) default NULL,
   `CONS_ACK_DATETIME` char(14) default NULL,
+  `OUT_RESOURCE_STATUS` char(1) NOT NULL default '' COMMENT '0：库存设备\r\n1：在线设备',
   PRIMARY KEY  (`LIST_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
