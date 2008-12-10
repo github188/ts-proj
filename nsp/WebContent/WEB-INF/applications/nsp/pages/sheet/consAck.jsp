@@ -73,7 +73,6 @@
     consFinOperDateTime = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"CONS_FIN_OPER_DATETIME");
     	
     outResourceStatus = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"OUT_RESOURCE_STATUS");
-    System.out.println("outResourceStatus"+outResourceStatus);
 
 %>
 <html>
