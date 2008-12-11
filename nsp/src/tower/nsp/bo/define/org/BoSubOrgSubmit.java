@@ -68,9 +68,6 @@ public class BoSubOrgSubmit implements RootBo {
 		if(orgId == null || orgId.length()==0){
 			
 		}
-			
-		
-		
 		// 设置EN除ID外的字段
 		enOrg.setOrgName(orgName);
 		enOrg.setParentId(parentId);
@@ -122,8 +119,6 @@ public class BoSubOrgSubmit implements RootBo {
 			if(count2 > 0){
 				throw new ErrorException("AM0107",null);
 			}
-			// ID长度不为零表示修改
-//			enOrg.setStationFlag(stationFlag);
 			// 按ID更新数据库
 			dbOrg.updateByKey(orgId, enOrg);
 		}
