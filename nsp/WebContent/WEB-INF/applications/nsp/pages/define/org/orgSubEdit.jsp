@@ -233,7 +233,7 @@ try{
  <!-- 机构树 -->	 
 
 <div id="mainPanel" class="panel">
-<div class="panelHead">机构信息管理 - 机构添加/编辑</div>
+<div class="panelHead">机构信息管理 - 基站添加/编辑</div>
 <div class="panelContent">
 <div class="panelContent2" >
 <div style="width:100%; height:100%; overflow:scroll">
