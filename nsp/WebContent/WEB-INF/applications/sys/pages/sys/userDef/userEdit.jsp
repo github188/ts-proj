@@ -22,8 +22,8 @@
     var psw1 = form1.PASSWORD.value;
 	var psw2 = form1.PASSWORD2.value;
     var phone = form1.LINK_TELE.value;
-    var org = form1.USER_ORG_ID.value;
-    var stat = form1.USER_STAT_ID.value;
+    //var org = form1.USER_ORG_ID.value;
+    //var stat = form1.USER_STAT_ID.value;
     /*if(!isTelephone(phone)){
         return false;
     }*/
@@ -40,7 +40,7 @@
 			form1.PASSWORD.focus();
 			return false;
 		}
-        form1["PASSWORD"].value = MdFStr(form1["PASSWORD"].value);
+        
 	}
     
 	var result = Spry.Widget.Form.validate(form);
@@ -48,14 +48,24 @@
 	  return result;
 	}
 
-    if(org == null || org.length == 0 ){
+    if((typeof form.USER_ORG_ID) == "undefined" ){
       alert("用户所属机构不可以为空");
       return false;
+    }else if(form.USER_ORG_ID.value == null ||form.USER_ORG_ID.value.length <=0 ){
+    	 alert("用户所属机构不可以为空");
+      	return false;
     }
-    if(stat == null || stat.length == 0 ){
-      alert("用户所属岗位不能为空");
-      return false;
+    if((typeof form.USER_STAT_ID) == "undefined"){
+     	 alert("用户所属岗位不能为空");
+      	return false;
+    }else if(form.USER_STAT_ID.value == null ||form.USER_STAT_ID.value.length <=0 ){
+    	alert("用户所属岗位不能为空");
+        return false;
     }
+    
+    //加密密码
+    form1["PASSWORD"].value = MdFStr(form1["PASSWORD"].value);
+    
     form1.FUNC_ID.value="UserSubmit";
 	return true;
   }

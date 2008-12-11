@@ -206,6 +206,13 @@ try{
 <jsp:include flush="true" page="../../../../sys/pages/common/include/js.jsp"></jsp:include>
 <script type="text/javascript">
   function doSubmit(form) {
+   if((typeof form.TYPE_ID) == "undefined"){
+   		alert("资源型号不能为空，请选择！");
+   		return false;
+   }else if(form.TYPE_ID.value == null || form.TYPE_ID.value.length <=0){
+   		alert("资源型号不能为空，请选择！");
+   		return false;
+   }
     return Spry.Widget.Form.validate(form);
   }
   

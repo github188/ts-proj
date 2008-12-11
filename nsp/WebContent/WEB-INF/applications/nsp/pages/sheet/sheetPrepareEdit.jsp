@@ -28,7 +28,7 @@
    
    var outAmount = form.AMOUNT_PREPARE.value;
    var outOrgName = form.OUT_ORG_NAME.value;
-   var resourceTypeName = form.RESOURCE_TYPE_ID.value;
+   //var resourceTypeName = form.RESOURCE_TYPE_ID.value;
    var inOrgName = form.IN_ORG_NAME.value;
    var ourResourceStatus = form.OUT_RESOURCE_STATUS.value;
   	var result = Spry.Widget.Form.validate(form);
@@ -42,7 +42,10 @@
   		form.selectOutOrg.focus();
   		return false;
   	}
-  	if(resourceTypeName.length <=0 ){
+  	if((typeof form.RESOURCE_TYPE_ID) == "undefined" ){
+  		alert("调出资源类别不能为空,请重新输入！");
+  		return false;
+  	}else if(form.RESOURCE_TYPE_ID.value==null || form.RESOURCE_TYPE_ID.value.length <= 0){
   		alert("调出资源类别不能为空,请重新输入！");
   		return false;
   	}

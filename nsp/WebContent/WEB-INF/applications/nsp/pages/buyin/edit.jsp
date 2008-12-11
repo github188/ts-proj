@@ -28,32 +28,32 @@
    }
    function doSubmit(form){
      var inAmount = form.IN_AMOUNT.value;
-     var resourceType = form.TYPE_ID.value;
-     var inOrg = form.IN_ORGID.value; 
      var flag = form.IN_OUT_FLAG.value;
-    //必须为整数
-    var regExp =/^[\-\+]?\d*$/;
+    if((typeof form.IN_ORGID) == "undefined"){
+        alert("出/入库机构不能为空,请重新输入！");
+        return false;
+    }else if(form.IN_ORGID.value == null || form.IN_ORGID.value.length <=0){
+    	 alert("出/入库机构不能为空,请重新输入！");
+        return false;
+    }
+    
+    if((typeof form.TYPE_ID) == "undefined" ){
+      	alert("资源型号不能为空,请重新输入！");
+      	return false;
+     }
+  
+     if(inAmount.length <=0){
+           alert("出/入库数量不能为空，请重新输入！");
+          return false;
+        }else if(inAmount*1 < 0){
+          alert("出/入库数量必须大于零，请重新输入！");
+          return false;
+    }
     var result = Spry.Widget.Form.validate(form);
     if (result == false){
       return result;
     }
-    if(inOrg.length ==0 ){
-        alert("出/入库机构不能为空,请重新输入！");
-        return false;
-        
-    }else{
-      if(resourceType.length ==0 ){
-      	alert("资源型号不能为空,请重新输入！");
-      	return false;
-      }else{
-        if(inAmount > 0){
-          return true;
-        }else{
-          alert("出/入库数量必须大于零，请重新输入！");
-          return false;
-        }
-      }
-    }
+    
   }
 -->
 </script>
