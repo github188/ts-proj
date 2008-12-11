@@ -31,9 +31,9 @@
   selecePOrg = xml.getInputValue("SELECT_PARENT_ORG");
   
   String funcId = xml.getInputValue("FUNC_ID");
-  String inputType=xml.getInputValue("INPUT_TYPE");
-  String[] stationFlagId = {"N","Y"};
-  String[] stationFlagValue = {"公司","基站"};
+  //String inputType=xml.getInputValue("INPUT_TYPE");
+ // String[] stationFlagId = {"N","Y"};
+ //String[] stationFlagValue = {"公司","基站"};
 %>
               <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
               	<tr>

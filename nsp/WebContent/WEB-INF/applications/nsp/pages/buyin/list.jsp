@@ -29,8 +29,6 @@
 	String inOperDateTimeBgn;
 	String inOperDateTimeEnd;
 	String inRemark;
-	String typeName;
-	String orgName;
 	
 	String[]  listIds;
 	String[] inOutFlags;
@@ -49,8 +47,6 @@
    inOperDateTimeBgn = xml.getInputValue("IN_OPER_DATETIME_BNG");
    inOperDateTimeEnd = xml.getInputValue("IN_OPER_DATETIME_END");
    inRemark = xml.getInputValue("IN_REMARK");
-   orgName = xml.getInputValue("IN_ORG_NAME");
-   typeName = xml.getInputValue("TYPE_NAME");
    
    listIds = xml.getItemValues("RESOURCE_BUYIN_LIST","LIST_ID");
    inOutFlags = xml.getItemValues("RESOURCE_BUYIN_LIST","IN_OUT_FLAG");

@@ -25,9 +25,9 @@
 
 	String sheetId;
 	String inOrgId;
-    String inOrgName;
+   // String inOrgName;
     String classId;
-    String className;
+   //String className;
     String classFlag;
 	String prepareDateBgn;
 	String prepareDateEnd;
@@ -58,9 +58,9 @@
    
     sheetId = xml.getInputValue("SHEET_ID");
     inOrgId = xml.getInputValue("IN_ORG_ID");
-    inOrgName = xml.getInputValue("IN_ORG_NAME");
+    //inOrgName = xml.getInputValue("IN_ORG_NAME");
     classId = xml.getInputValue("RESOURCE_CLASS_ID");
-    className = xml.getInputValue("RESOURCE_CLASS_NAME");
+   // className = xml.getInputValue("RESOURCE_CLASS_NAME");
     classFlag = xml.getInputValue("RESOURCE_CLASS_FLAG");
     prepareDateBgn = xml.getInputValue("PREPARE_DATE_FROM");
     prepareDateEnd = xml.getInputValue("PREPARE_DATE_TO");
