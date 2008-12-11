@@ -62,7 +62,6 @@ public class BoResModelList implements RootBo {
 		//获取资源类别的名称
 		enResourceCalss = dbResourceClass.findByKey(resourClassId);
 		if(enResourceCalss != null){
-//			dbResourceClass.setToXml(sessionXml, enResourceCalss);
 			requestXml.setItemValue("RESOURCE_TYPE", 1, "RESOURCE_CLASS_NAME", enResourceCalss.getClassName());
 			requestXml.setItemValue("RESOURCE_TYPE", 1, "RESOURCE_CLASS_ID", enResourceCalss.getClassId());
 			sessionXml.addRow("RESOURCE_TYPE");
