@@ -27,12 +27,10 @@ public class BoSubOrgList implements RootBo {
 		DbSysOrg dbSysOrg;
 		EnSysOrg enSysOrg;
 		
-		//
-		Vector vEnSysOrg;
 		//参数声明
+		Vector vEnSysOrg;
 		String orgId;
 		StringBuffer sqlWhere;
-		
 		String orgName;
 		String orgCode;
 		String linkMan;
@@ -66,7 +64,7 @@ public class BoSubOrgList implements RootBo {
 		/***********************************************************************
 		 * 业务处理
 		 **********************************************************************/
-//		进行查询
+          //进行查询
 		 if(orgName != null && orgName.length() !=0){
 			 if(sqlWhere.toString().length()>0){
 				 sqlWhere.append(" AND ");
@@ -111,14 +109,12 @@ public class BoSubOrgList implements RootBo {
 			 sqlWhere.append("  BUY_IN_FLAG=");
 			 sqlWhere.append(transaction.formatString(buyInFlag));
 		 }
-//		 if(orgId != null && orgId.length() !=0){
-			 if(sqlWhere.toString().length()>0){
-				 sqlWhere.append(" AND ");
-			 }
-			 sqlWhere.append("  PARENT_ID=");
-			 sqlWhere.append(transaction.formatString(orgId));
-			 sqlWhere.append(" AND STATION_FLAG='Y'");
-//		 }
+		if(sqlWhere.toString().length()>0){
+			sqlWhere.append(" AND ");
+		}
+		sqlWhere.append("  PARENT_ID=");
+		sqlWhere.append(transaction.formatString(orgId));
+		sqlWhere.append(" AND STATION_FLAG='Y'");
 		 
 			 //根据查询条件从“机构(SYS_ORG)”表中获取满足条件的数据，并按照调度日期降序排序：
 		 if(sqlWhere.toString().length()>0){
@@ -132,9 +128,6 @@ public class BoSubOrgList implements RootBo {
 						+ " and " + "STATION_FLAG='Y'");
 		 }
 		
-//				requestXml.setItemValue("SYS_ORG_STATION", row, "CBUY_IN_FLAG",
-//						enSysOrg.getBuyInFlag());
-//			}
 			if(vEnSysOrg.size() >0){
 				enSysOrg = dbSysOrg.findByKey(orgId);
 				requestXml.addRow("SYS_ORG");
