@@ -83,6 +83,7 @@ public class BoSubOrgDelete implements RootBo {
 			// 此部门下包含用户，不能删除。
 			throw new ErrorException("SORG01", null);
 		}
+		
 		// 根据orgId查找下属部门数
 		subOrgCount = dbOrg.countWhere(" PARENT_ID ='"+ orgId+ "'");
 		if (subOrgCount > 0) {
