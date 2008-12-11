@@ -82,7 +82,6 @@ public class BoAmountTypeDetail implements RootBo {
 				 requestXml.setItemValue("RESOURCE_TYPE", 1, "CLASS_NAME", enResourceClass.getClassName());
 			 }
 		 }
-		 
 		 //库存信息
 		 enResourceOrgAmount = dbResourceOrgAmount.findByKey(orgId, resourceTypeId);
 		 if(enResourceOrgAmount != null){
