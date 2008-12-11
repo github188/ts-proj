@@ -91,7 +91,6 @@ public class BoOrgDetail implements RootBo {
 				requestXml.setItemValue("SYS_CHLID_ORG", row, "CORG_CODE", 
 						enOrg.getOrgCode());
 
-				// 判断是否有子部门
 			}
 
 		}
