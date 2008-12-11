@@ -58,8 +58,6 @@ public class BoSubOrgDetail implements RootBo {
 					if (enParentOrg != null) {
 						requestXml.setItemValue("SYS_ORG", row, "PARENT_NAME",
 								enParentOrg.getOrgName());
-//						int row1 = sessionXml.addRow("SYS_ORG");
-//						int cou = sessionXml.setItemValue("SYS_ORG", row1, "PARENT_ORG_ID", enOrg.getParentId());
 					}
 				}
 			}
