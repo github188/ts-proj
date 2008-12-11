@@ -80,7 +80,7 @@ public class BoAmountTypeSubmit implements RootBo {
 				
 				dbResourceOrgAmount.insert(enResourceOrgAmount);
 			}
-		}else if("N".equals(isAddFlag)){
+		}else if("N".equals(isAddFlag)){//编辑
 			enResourceOrgAmount.setStockAmount(Long.parseLong(stockAmount));
 			enResourceOrgAmount.setPreOutAmount(Long.parseLong(preOutAmount));
 			enResourceOrgAmount.setPreInAmount(Long.parseLong(preInAmount));
