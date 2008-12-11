@@ -65,10 +65,6 @@ public class BoAmountTypeList implements RootBo {
 		 dbSysOrg.setToXml(requestXml, enSysOrg);
 		 sessionXml.addRow("SYS_ORG");
 		 sessionXml.setItemValue("SYS_ORG", 1, "ORG_ID", orgId);
-//		 enSysOrg = dbSysOrg.findByKey(enSysOrg.getParentId());
-//		 if(enSysOrg != null){
-//			 requestXml.setItemValue("SYS_ORG", row, "PARENT_ORG_NAME", enSysOrg.getOrgName());
-//		 }
 		 
 		 //获取指定机构的资源设备类型及型号的资源库存。
 		sql.append(" select * from resource_class, resource_type");
