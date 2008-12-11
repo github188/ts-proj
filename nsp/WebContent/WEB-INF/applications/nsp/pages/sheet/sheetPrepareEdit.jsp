@@ -188,11 +188,11 @@
 		                 
 		               </tr>  
 		              <tr>
-		               <td width="120" align="right">调出设备型号：</td>
+		               <td width="120" align="right">设备型号：</td>
 	                    <td width="300">
                           <script>var type = new Tower.Widget.Selector("TypeSelector","RESOURCE_TYPE_ID","ctrl?FUNC_ID=SelectTypeTree&INPUT_TYPE=radio",{selected:["<%=resourceTypeId%>"]},{change:onChange})</script><span class="requiredField">*</span>
 		                </td>
-	              	    <td width="120" align="right">调出设备状态：</td>
+	              	    <td width="120" align="right">设备状态：</td>
                         <td width="300">
                          <span id="spryOutResourceStatus">
 	                     <select name="OUT_RESOURCE_STATUS" class="select" id="OUT_RESOURCE_STATUS" style="width:11em">

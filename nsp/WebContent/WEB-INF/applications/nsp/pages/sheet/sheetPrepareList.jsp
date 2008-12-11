@@ -18,7 +18,6 @@
 <jsp:include flush="true" page="../../../sys/pages/common/include/js.jsp"></jsp:include>
 
 <%@ page import="tower.tmvc.XMLWrap"%>
-<%@ page import="tower.common.util.Page"%>
 <%@ page import="tower.common.util.DateFunc"%>
 <% 
     XMLWrap xml ;
@@ -139,26 +138,27 @@
           <div class="panelContent">
             <div class="panelContent2">
               <!-- 列表内容 -->
+                <div style="width:100%; height:350px; overflow:scroll">
               <form action="ctrl" method="post"name="form1"  >
               <input type="hidden" name="FUNC_ID" value="SheetPrepareOpen">
               <input type="hidden" name="SHEET_ID" value="<%=sheetId %>">
               <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
               <tr>
                   <th><input type="checkbox" name="ALL_LIST_ID" onclick="SelectAll('ALL_LIST_ID','LIST_ID');" /></th>
-                  <th>调出<br>单位</th>
-                  <th>调出<br>基站</th>
-                  <th>设备<br>类型</th>
-                  <th>设备<br>型号</th>
-                  <th>库存<br>数量</th>
-                  <th>在线<br>数量</th>
-                  <th>预出库</th>
-                  <th>预入库</th>
-                  <th>调度<br>数量</th>
-                  <th>设备<br>状态</th>
-                  <th>调入<br>单位</th>
-                  <th>调入<br>基站</th>
-                  <th>工单<br>状态</th>
-                  <th>[<a href=javaScript:doAdd('<%=sheetId %>');>添加</a>]</th>
+                  <th nowrap>调出单位</th>
+                  <th nowrap>调出基站</th>
+                  <th nowrap>设备类型</th>
+                  <th nowrap>设备型号</th>
+                  <th nowrap>库存数量</th>
+                  <th nowrap>在线数量</th>
+                  <th nowrap>预出库</th>
+                  <th nowrap>预入库</th>
+                  <th nowrap>调度数量</th>
+                  <th nowrap>设备状态</th>
+                  <th nowrap>调入单位</th>
+                  <th nowrap>调入基站</th>
+                  <th nowrap>工单状态</th>
+                  <th nowrap>[<a href=javaScript:doAdd('<%=sheetId %>');>添加</a>]</th>
                 </tr>
                
                 <%for(int i=0;i<listIds.length;i++){ 
@@ -167,31 +167,31 @@
                 		style="class='dark'"; 
                 	}
                 %>
-                 <tr <%=style %> onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
-                  <td align="center">
+                 <tr <%=style %> >
+                  <td align="center" nowrap>
                    <%if( listStatus[i].equals("0")){ count++;%>
                   <input type="checkbox" name="LIST_ID" value="<%=listIds[i] %>"/>
                    <%} %>
                   </td>
-                  <td align="center"><%=outOrgNames[i]%></td>
-                  <td align="center"><%=outStationNames[i]%></td>
-                  <td align="center"><%=resourceClassNames[i]%></td>
-                  <td align="center"><%=resourceTypeNames[i]%></td>
-                 <td align="center"><%=stockAmounts[i]%></td>
-                 <td align="center"><%=onlineAmount[i]%></td>
-                  <td align="center"><%=preOutAmount[i]%></td>
-                  <td align="center"><%=preInAmount[i]%></td>
-                  <td align="center"><%=amountPrepares[i]%></td>
-                   <td align="center">
+                  <td align="center" nowrap><%=outOrgNames[i]%></td>
+                  <td align="center" nowrap><%=outStationNames[i]%></td>
+                  <td align="center" nowrap><%=resourceClassNames[i]%></td>
+                  <td align="center" nowrap><%=resourceTypeNames[i]%></td>
+                 <td align="center" nowrap><%=stockAmounts[i]%></td>
+                 <td align="center" nowrap><%=onlineAmount[i]%></td>
+                  <td align="center" nowrap><%=preOutAmount[i]%></td>
+                  <td align="center" nowrap><%=preInAmount[i]%></td>
+                  <td align="center" nowrap><%=amountPrepares[i]%></td>
+                   <td align="center" nowrap>
                    <%for(int j=0;j<value.length;j++){ 
                 	   if(value[j].equals(outResourceStatus[i])){
                    %>
                    <%=desc[j]%>
                    <%} }%>
                    </td>
-                  <td align="center"><%=inOrgNames[i]%></td>
-                  <td align="center"><%=inStationNames[i]%></td>
-                  <td align="center">
+                  <td align="center" nowrap><%=inOrgNames[i]%></td>
+                  <td align="center" nowrap><%=inStationNames[i]%></td>
+                  <td align="center" nowrap>
                   <%
               	
                   	for( int j=0;j<staDes.length;j++){
@@ -202,7 +202,7 @@
                   	}}
                   %>
 				  </td>
-                   <td align="center">
+                   <td align="center" nowrap>
                    <%if(listStatus[i].equals("0")){ %>
 	                   [
 	                   <a href="javaScript:doDel('<%=listIds[i] %>','<%=sheetId %>','<%=listStatus[i] %>');">删除</a>|
@@ -240,6 +240,7 @@
                  </tr>
               </table>
               </form>
+              </div>
               <!-- 列表内容结束 -->
             </div>
           </div>
