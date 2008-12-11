@@ -72,6 +72,7 @@ public class BoResModelDelete implements RootBo {
 			if(count1 != 0){
 				throw new ErrorException("RD0109",null);
 			}
+			
 			//删除该信息
 			dbResourceType.deleteByKey(typeId);
 		}
