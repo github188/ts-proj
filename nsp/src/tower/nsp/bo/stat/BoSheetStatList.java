@@ -174,11 +174,6 @@ public class BoSheetStatList implements RootBo {
 			sql.append("g.ORG_ID= ");
 			sql.append(transaction.formatString(orgId));
 		}
-//		if(orgId != null && orgId.length() != 0){
-//			sql.append(" and ");
-//			sql.append(" IN_ORG_ID LIKE	");
-//			sql.append(Transaction.formatString(orgId));
-//		}
 		sql.append(" order by a.LIST_ID");
 		
 		int page = Page.SetPageInfo(transaction, null, requestXml,
@@ -189,17 +184,12 @@ public class BoSheetStatList implements RootBo {
 		for(int i=0; i<rs.size(); i++){
 			QueryResultRow rsRow = rs.get(i);
 			if(rsRow != null){
-//				System.out.println("&&&&&&&&&&&&&");
-//				System.out.println(rsRow.getString(0));
 				int row = requestXml.addRow("DRESOURCE_PREPARE_LIST");
 				requestXml.setItemValue("DRESOURCE_PREPARE_LIST", row, "SHEET_ID", rsRow.getString(1));
-//				System.out.println("sheetId = "+rsRow.getString(1));
 				requestXml.setItemValue("DRESOURCE_PREPARE_LIST", row, "PREPARE_DATE", rsRow.getString(2));
 				requestXml.setItemValue("DRESOURCE_PREPARE_LIST", row, "LIST_STATUS", rsRow.getString(3));
 				requestXml.setItemValue("DRESOURCE_PREPARE_LIST", row, "OUT_ORG_NAME", rsRow.getString(4));
-//				System.out.println("OUT_ORG_NAME = "+rsRow.getString(4));
 				requestXml.setItemValue("DRESOURCE_PREPARE_LIST", row, "OUT_STATION_NAME", rsRow.getString(5));
-//				System.out.println("OUT_STATION_NAME ="+rsRow.getString(5));
 				requestXml.setItemValue("DRESOURCE_PREPARE_LIST", row, "RESOURCE_CLASS_NAME", rsRow.getString(6));
 				requestXml.setItemValue("DRESOURCE_PREPARE_LIST", row, "RESOURCE_TYPE_NAME", rsRow.getString(7));
 				requestXml.setItemValue("DRESOURCE_PREPARE_LIST", row, "AMOUNT_PREPARE", rsRow.getLong(8));
