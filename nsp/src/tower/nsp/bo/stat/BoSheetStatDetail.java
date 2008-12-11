@@ -106,66 +106,77 @@ public class BoSheetStatDetail implements RootBo {
 			if(enSysOrg != null){
 				requestXml.setItemValue("RESOURCE_PREPARE_LIST", row,"OUT_ORG_NAME", enSysOrg.getOrgName());
 			}
+			
 			//取出调入单位
 			enSysOrg = null;
 			enSysOrg = dbSysOrg.findByKey(enResourcePerpareList.getInOrgId());
 			if(enSysOrg != null){
 				requestXml.setItemValue("RESOURCE_PREPARE_LIST", row, "IN_ORG_NAME", enSysOrg.getOrgName());
 			}
+			
 			//取出剩余入库单位
 			enSysOrg = null;
 			enSysOrg = dbSysOrg.findByKey(enResourcePerpareList.getDiffInOrgId());
 			if(enSysOrg != null){
 				requestXml.setItemValue("RESOURCE_PREPARE_LIST", row, "DIFF_IN_ORG_NAME", enSysOrg.getOrgName());
 			}
+			
 			//取出剩余入库基站DIFF_IN_STATION_ID
 			enSysOrg = null;
 			enSysOrg = dbSysOrg.findByKey(enResourcePerpareList.getDiffInStationId());
 			if(enSysOrg != null){
 				requestXml.setItemValue("RESOURCE_PREPARE_LIST", row, "DIFF_IN_STATION_NAME", enSysOrg.getOrgName());
 			}
+			
 			//取出调出基站
 			enSysOrg = null;
 			enSysOrg = dbSysOrg.findByKey(enResourcePerpareList.getOutStationId());
 			if(enSysOrg != null){
 				requestXml.setItemValue("RESOURCE_PREPARE_LIST", row, "OUT_STATION_NAME", enSysOrg.getOrgName());
 			}
+			
 			//取出调入基站
 			enSysOrg = null;
 			enSysOrg = dbSysOrg.findByKey(enResourcePerpareList.getInStationId());
 			if(enSysOrg != null){
 				requestXml.setItemValue("RESOURCE_PREPARE_LIST", row, "IN_STATION_NAME", enSysOrg.getOrgName());
 			}
+			
 			//取出设备类别
 			enResourceClass = new EnResourceClass();
 			enResourceClass = dbResourceClass.findByKey(enResourcePerpareList.getResourceClassId());
 			if(enResourceClass != null){
 				requestXml.setItemValue("RESOURCE_PREPARE_LIST", row, "RESOURCE_CLASS_NAME", enResourceClass.getClassName());
 			}
+			
 			//取出设备型号
 			enResourceType = new EnResourceType();
 			enResourceType = dbResourceType.findByKey(enResourcePerpareList.getResourceTypeId());
 			if(enResourceType != null){
 				requestXml.setItemValue("RESOURCE_PREPARE_LIST", row, "RESOURCE_TYPE_NAME", enResourceType.getTypeName());
 			}
+			
 			//取出施工确认操作人员
 			enSysUser = new EnSysUser();
 			enSysUser = dbSysUser.findByKey(enResourcePerpareList.getConsAckUserid());
 			if(enSysUser != null){
 				requestXml.setItemValue("RESOURCE_PREPARE_LIST", row, "CONS_ACK_USERNAME", enSysUser.getUserName());
 			}
+			
 			//取出出库操作人员
 			enSysUser = new EnSysUser();
 			enSysUser = dbSysUser.findByKey(enResourcePerpareList.getOutOperUserid());
 			if(enSysUser != null){
 				requestXml.setItemValue("RESOURCE_PREPARE_LIST", row, "OUT_OPER_USERNAME", enSysUser.getUserName());
 			}
+			
 			//取出入库操作人员
 			enSysUser = new EnSysUser();
 			enSysUser = dbSysUser.findByKey(enResourcePerpareList.getInOperUserid());
 			if(enSysUser != null){
 				requestXml.setItemValue("RESOURCE_PREPARE_LIST", row, "IN_OPER_USERNAME", enSysUser.getUserName());
 			}
+			
 			//取出完工登记操作员
 			enSysUser = new EnSysUser();
 			enSysUser = dbSysUser.findByKey(enResourcePerpareList.getConsFinOperUserid());
