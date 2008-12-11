@@ -90,8 +90,6 @@ public class BoOrgSubmit implements RootBo {
 			// 添加至数据库
 			dbOrg.insert(enOrg);
 		} else {
-			// ID长度不为零表示修改
-//			enOrg.setStationFlag(stationFlag);
 			// 按ID更新数据库
 			dbOrg.updateByKey(orgId, enOrg);
 		}
