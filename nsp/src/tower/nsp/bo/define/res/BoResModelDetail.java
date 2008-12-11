@@ -75,7 +75,6 @@ public class BoResModelDetail implements RootBo {
 				throw new ErrorException("RD0106", null);
 			}
 		}
-
 	}
 
 }
