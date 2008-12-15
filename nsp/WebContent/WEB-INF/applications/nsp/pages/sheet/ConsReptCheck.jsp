@@ -260,17 +260,21 @@
                     <span class="textfieldRequiredMsg">需要提供一个值。</span><span class="textfieldInvalidFormatMsg">格式无效。</span></span>
                   </td>
                  </tr> 
-                 <tr>
-                   <td colspan="4" align="center" nowrap="nowrap">&nbsp;&nbsp;</td>
-                   <td>&nbsp;</td>
-                 </tr>
-                 <tr>
-                   <td colspan="4" align="center" nowrap="nowrap">
+                  <tr>
+                  <td align="center" colspan="5">&nbsp;</td>
+                </tr>
+              </table>
+               <table width="100%">
+                <tr>
+                  <td align="center" colspan="5">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td align="center" colspan="3">&nbsp;&nbsp;
                     <input type="submit" class="submit" value="保存">
                     <input type="reset" class="reset" onClick="history.back();"value="取消">
-                   </td>
-                   <td>&nbsp;</td>
-                 </tr>
+                  </td>
+                  <td colspan="2">&nbsp;</td>
+                </tr>
               </table>
               </form>
             <!-- 列表内容结束 -->
