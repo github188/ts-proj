@@ -211,13 +211,12 @@
                         <tr>
                            <td align="right">所属机构：</td>
                           <td>
-                            <script>var org = new Tower.Widget.Selector("OrgSelector","USER_ORG_ID","ctrl?FUNC_ID=SelectOrg&INPUT_TYPE=radio",{selected:["<%=userOrgId%>"]},{change:onChange})</script>
+                            <script>var org = new Tower.Widget.Selector("OrgSelector","USER_ORG_ID","ctrl?FUNC_ID=SelectOrg&INPUT_TYPE=radio",{selected:["<%=userOrgId%>"]},{change:onChange})</script><span class="requiredField">*</span>
                           </td>
                           <td align="right">用户岗位：</td>
                         <td>
-                            <script>new Tower.Widget.Selector("StatSelector","USER_STAT_ID","ctrl?FUNC_ID=SelectStat&INPUT_TYPE=radio",{selected:["<%=userStatId%>"]},{change:onChangeUser})</script>
+                            <script>new Tower.Widget.Selector("StatSelector","USER_STAT_ID","ctrl?FUNC_ID=SelectStat&INPUT_TYPE=radio",{selected:["<%=userStatId%>"]},{change:onChangeUser})</script><span class="requiredField">*</span>
                        </td>
-                           
                      </tr>
                          <tr>
                           <td align="right">联系电话：</td>
