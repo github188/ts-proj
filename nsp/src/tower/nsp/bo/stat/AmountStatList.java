@@ -81,7 +81,6 @@ public class AmountStatList implements RootBo {
 				String sqlClass = "select * from resource_class, resource_type"
 						+ " where resource_class.class_id = resource_type.resource_class_id"
 						+ " order by resource_class.class_id asc, resource_type.type_id asc;";
-				//System.out.println(sqlClass.toString());
 				rsClass = transaction.doQuery(null, sqlClass);
 				
 				if (rsClass == null || rsClass.size() == 0) {
@@ -210,6 +209,7 @@ public class AmountStatList implements RootBo {
 								// 遍历各个分公司，统计各个分公司库存
 								for (int i = 0; i < orgs.size(); i++) {
 									enSysOrg = (EnSysOrg) orgs.get(i);
+									org.add("");
 									//在首次遍历类型时，把每个公司的名字存放到list列表中
 									if (j == 0) {
 										org.add(enSysOrg.getOrgName());
@@ -251,7 +251,6 @@ public class AmountStatList implements RootBo {
 										typeList.add("0");
 									}
 								}
-								//System.out.println("onLine"+onLine+"amount"+amount+ "incons"+incons);
 								typeList.set(2, orgId + "," + typeId + ",1," + Long.toString(onLine));
 								typeList.set(3, orgId + "," + typeId + ",2," + Long.toString(amount));
 								typeList.set(4, orgId + "," + typeId + ",3," + Long.toString(incons));
@@ -259,7 +258,6 @@ public class AmountStatList implements RootBo {
 								String classId = row.getString("CLASS_ID");
 								classList.add(typeList);
 								classMap.put(classId, classList);
-								//System.out.println("多行"+row.getString("CLASS_NAME")+classId);
 								//判断是否是最后一个，最后一个没法获取下一个进行比较
 								if (rsClass.size()-1 != j) {
 									row = rsClass.get(j + 1);
@@ -285,13 +283,6 @@ public class AmountStatList implements RootBo {
 				requestXml.setItemValue("AMOUNT_STAT_LIST", 1, "AMOUNT_STAT_ORG",
 						org);
 				requestXml.setItemValue("AMOUNT_STAT_LIST", 1, "CLASS_FOR", classFor);
-				/*for(Iterator i = classMap.values().iterator(); i.hasNext();){
-					System.out.println("classMap"+classMap.toString());
-					i.next();
-				}
-				for(int i = 0 ; i< classFor.size() ; i ++){
-					System.out.println("classMap"+classMap.get(classFor.get(i)).toString());
-				}*/
 			}else{
 				throw new ErrorException("AS0001", null);
 			}
