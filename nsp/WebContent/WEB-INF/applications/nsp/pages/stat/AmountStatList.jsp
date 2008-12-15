@@ -103,9 +103,10 @@
                   <th nowrap rowspan="2">坏件<br>数量</th>
                   <%if(orgName != null && orgName.size() > 1) {
                     for(int i = 0 ; i < orgName.size() ; i ++){
+                      if(orgName.get(i) != null && !orgName.get(i).equals("")){
                   %>
                     <th colspan="4" ><%=orgName.get(i) %></th>
-                  <%     
+                  <%    } 
                       }
                   }
                   %>
@@ -113,6 +114,7 @@
                <tr>
                 <%if(orgName != null && orgName.size() > 1) {
                   for(int i = 0 ; i < orgName.size() ; i ++){
+                	  if(orgName.get(i) != null && orgName.get(i).equals("")){
                 %>
                 
                   <th nowrap>在线</th>
@@ -120,7 +122,8 @@
                   <th nowrap>施工</th>
                   <th nowrap>坏件</th>
                 
-                <%  }
+                <%    }
+                    }
                   }
                 %>
                 </tr>
