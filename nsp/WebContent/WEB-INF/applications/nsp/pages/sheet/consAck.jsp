@@ -147,57 +147,57 @@
               	<td width="20%" align="right">调出数量：</td>
               	<td width="20%"><div><%=amountPrepare %></div></td>
               </tr>
-              <tr>	
-              	<td align="right">调出单位：</td>
-              	<td><div><%=outOrgName %></div></td>
-              	<td align="right">调出基站：</td>
-              	<td><div><%=outStationName %></div></td>
-              	<td align="right">资源类别：</td>
-              	<td><div><%=className %></div></td>
+              <tr>  
+                <td align="right">调出单位：</td>
+                <td><div><%=outOrgName %></div></td>
+                <td align="right">调出基站：</td>
+                <td><div><%=outStationName %></div></td>
+                <td align="right">资源类别：</td>
+                <td><div><%=className %></div></td>
               </tr>
-              <tr>	
-              	<td align="right">调入单位：</td>
-              	<td><div><%=inOrgName %></div></td>
-              	<td align="right">调入基站：</td>
-              	<td><div><%=inStationName %></div></td>
-              	<td align="right">资源型号：</td>
-              	<td><div><%=typeName %></div></td>
+              <tr>  
+                <td align="right">调入单位：</td>
+                <td><div><%=inOrgName %></div></td>
+                <td align="right">调入基站：</td>
+                <td><div><%=inStationName %></div></td>
+                <td align="right">资源型号：</td>
+                <td><div><%=typeName %></div></td>
               </tr>
               <tr>
               <th colspan="6" align="left">出入库信息</th>
               </tr>
-              <tr>	
-              	<td align="right">领取人：</td>
-              	<td><div><%=takeUserName %></div></td>
-              	<td align="right">领取日期：</td>
-              	<td><div><%=DateFunc.FormatDateTime(takeDate) %></div></td>
-              	<td align="right">出库日期：</td>
-              	<td><div><%=DateFunc.FormatDateTime(outOperDateTime).substring(0,10) %></div></td>
+              <tr>  
+                <td align="right">领取人：</td>
+                <td><div><%=takeUserName %></div></td>
+                <td align="right">领取日期：</td>
+                <td><div><%=DateFunc.FormatDateTime(takeDate) %></div></td>
+                <td align="right">出库日期：</td>
+                <td><div><%=DateFunc.FormatDateTime(outOperDateTime).substring(0,10) %></div></td>
               </tr>
               <tr>
-              	<td align="right">出库操作员：</td>
-              	<td><div><%=outOperUserName %></div></td>
+                <td align="right">出库操作员：</td>
+                <td><div><%=outOperUserName %></div></td>
                 <td align="right">入库操作员：</td>
                 <td><div><%=inOperUserName %></div></td>
-              	<td align="right">入库日期：</td>
-              	<td><div><%=DateFunc.FormatDateTime(inOperDateTime).substring(0,10) %></div></td>
+                <td align="right">入库日期：</td>
+                <td><div><%=DateFunc.FormatDateTime(inOperDateTime).substring(0,10) %></div></td>
               </tr>
-               <tr>
+              <tr>
               <th colspan="6" align="left">施工反馈</th>
               </tr>
                <tr>
-              	<td align="right">施工前数量：</td>
-              	<td><div><%=amountBeforeCon %></div></td>
-              	<td align="right">施工数量：</td>
-              	<td><div><%=amountFeedBack %></div></td>
-              	<td align="right">施工后数量：</td>
-              	<td><div><%=amountAfterCon %></div></td>
+                <td align="right">施工前数量：</td>
+                <td><div><%=amountBeforeCon %></div></td>
+                <td align="right">施工数量：</td>
+                <td><div><%=amountFeedBack %></div></td>
+                <td align="right">施工后数量：</td>
+                <td><div><%=amountAfterCon %></div></td>
               </tr>
-              <tr>	
-              	<td align="right">施工后配置数：</td>
-              	<td><div><%=confAmountAfterCons %></div></td>
-              	<td align="right">施工剩余数量：</td>
-              	<td><div><%=amountdiff %></div></td>
+              <tr>  
+                <td align="right">施工后配置数：</td>
+                <td><div><%=confAmountAfterCons %></div></td>
+                <td align="right">施工剩余数量：</td>
+                <td><div><%=amountdiff %></div></td>
                 <td align="right">设备状态：</td>
                 <td><%if(outResourceStatus.equals("0")){ %>库存设备<%}else{ %>在线设备<%} %></td>
              </tr>
@@ -206,34 +206,37 @@
                 <td><div><%=consUserName %></div></td>
                 <td align="right">剩余入库单位：</td>
                 <td><div><%=diffInOrgName %></div></td>
-              	<td align="right">剩余入库基站：</td>
-              	<td><div><%=diffInStationName %></div></td>
+                <td align="right">剩余入库基站：</td>
+                <td><div><%=diffInStationName %></div></td>
                </tr>
                <tr> 
-              	<td align="right">完工日期：</td>
-              	<td><div><%=DateFunc.FormatDateTime(consFinDate) %></div></td>
-              	<td align="right">完工登记操作员：</td>
-              	<td><div><%=consFinOperUserName %></div></td>
-              	<td align="right">完工登记日期：</td>
-              	<td colspan="3" ><div><%=DateFunc.FormatDateTime(consFinOperDateTime).substring(0,10) %></div></td>
+                <td align="right">完工日期：</td>
+                <td><div><%=DateFunc.FormatDateTime(consFinDate) %></div></td>
+                <td align="right">完工登记操作员：</td>
+                <td><div><%=consFinOperUserName %></div></td>
+                <td align="right">完工登记日期：</td>
+                <td><div><%=DateFunc.FormatDateTime(consFinOperDateTime).substring(0,10) %></div></td>
               </tr>
                <tr>
               <th colspan="6" align="left">施工确认</th>
               </tr>
                <tr>
-              	<td align="right">施工确认数：</td>
-              	<td colspan="3"><span id="spryConsAck">
+                <td align="right">施工确认数：</td>
+                <td><span id="spryConsAck">
                 <input type="text" name="AMOUNT_FEED_BACK_ACK" class="text" size="15" value="<%=amountFeedBack %>"/>
-                <span class="requiredField"> *</span> <span class="textfieldRequiredMsg">需要提供一个值。</span><span class="textfieldInvalidFormatMsg">格式无效。</span><span class="textfieldMaxValueMsg">输入值大于所允许的最大值。</span></span></td>
-              	<td>&nbsp;</td>
-              	<td>&nbsp;</td>
-              	<td>&nbsp;</td>
-              	<td>&nbsp;</td>
+                <span class="requiredField"> *</span> <span class="textfieldRequiredMsg">需要提供一个值。</span><span class="textfieldInvalidFormatMsg">格式无效。</span><span class="textfieldMaxValueMsg">输入值大于所允许的最大值。</span></span>
+                </td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
               </tr>
+              </table>
+              <table align="center">
               <tr>
                    <td colspan="6" align="center" nowrap="nowrap">&nbsp;&nbsp;                   </td>
-                 </tr>
-                 <tr>
+              </tr>
+              <tr>
                    <td colspan="6" align="center" nowrap="nowrap">
                     <input type="submit" class="submit" value="保存">
                     <input type="reset" class="reset" onClick="history.back();"value="取消">                   </td>
