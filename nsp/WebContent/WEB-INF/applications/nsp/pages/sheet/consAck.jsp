@@ -222,11 +222,10 @@
               </tr>
                <tr>
                 <td align="right">施工确认数：</td>
-                <td><span id="spryConsAck">
+                <td colspan="2"><span id="spryConsAck">
                 <input type="text" name="AMOUNT_FEED_BACK_ACK" class="text" size="15" value="<%=amountFeedBack %>"/>
                 <span class="requiredField"> *</span> <span class="textfieldRequiredMsg">需要提供一个值。</span><span class="textfieldInvalidFormatMsg">格式无效。</span><span class="textfieldMaxValueMsg">输入值大于所允许的最大值。</span></span>
                 </td>
-                <td>&nbsp;</td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
