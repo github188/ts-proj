@@ -128,7 +128,7 @@
               	<td align="right">调出数量:</td>
               	<td><div class=""><%=amountPrepare %></div></td>
                 <td align="right">设备状态：</td>
-                <td><%if(outResourceStatus.equals("0")){ %>库存设备<%}else{ %>在线设备<%} %></td>;
+                <td><%if(outResourceStatus.equals("0")){ %>库存设备<%}else{ %>在线设备<%} %></td>
               </tr>
               <tr>
               <th colspan="6" align="left">出入库信息</th>
