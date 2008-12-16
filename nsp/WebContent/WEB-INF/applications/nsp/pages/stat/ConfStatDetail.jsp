@@ -158,24 +158,24 @@
 	              	  <th align="left" colspan="10">机构信息</th>
 	              </tr>
 	               <tr>
-	             <td align="right">机构编号：</td>
+	             <td align="right" colspan="2" nowrap>机构编号：</td>
                  <td ><%=orgCode %></td>
-                 <td align="right" >机构名称：</td>
+                 <td align="right" colspan="2"  nowrap>机构名称：</td>
                  <td  ><%=orgName %></td>
-                 <td align="right">所属机构：</td>
+                 <td align="right" colspan="2" nowrap>所属机构：</td>
                 <td ><%=parentOrgName %></td>
                 </tr>
                 <tr>
-                <td align="right">联系人：</td>
-                 <td><%=linkMan %></td>
-                  <td align="right">联系电话：</td>
-                 <td><%=linkTel %></td>
-               	 <td align="right">E-mail：</td>
-                 <td><%=linkEmail %></td>
+                <td align="right" colspan="2" nowrap>联系人：</td>
+                 <td ><%=linkMan %></td>
+                  <td align="right" colspan="2" nowrap>联系电话：</td>
+                 <td ><%=linkTel %></td>
+               	 <td align="right" colspan="2" nowrap>E-mail：</td>
+                 <td ><%=linkEmail %></td>
                  <td></td>
                 </tr>
                 <tr>
-                 <td align="right">是否为基站：</td>
+                 <td align="right" colspan="2" nowrap>是否为基站：</td>
                   <td >
                   <%for(int j=0;j<value.length;j++){ 
                 	  if(value[j].equals(stationFlag)){
@@ -183,7 +183,7 @@
                   	<%=Desc[j]%>
                   <%}} %>
                   </td>
-                 <td align="right">允许外购入库：</td>
+                 <td align="right" colspan="2" nowrap>允许外购入库：</td>
                <td >
                   <%for(int j=0;j<value.length;j++){ 
                 	  if(value[j].equals(buyInFlag)){
@@ -191,33 +191,27 @@
                   	<%=Desc[j]%>
                   <%}} %>
                   </td>
-                   <td></td>
-                   <td></td>
-                   <td></td>
+                  
                 </tr>
                  <tr>
-                <td align="right">备注及说明：</td>
-                 <td><%=orgRemark %></td>
-                  <td></td>
-                 <td></td>
-               	 <td></td>
-                 <td></td>
-                 <td></td>
+                <td align="right" colspan="2" nowrap>备注及说明：</td>
+                 <td colspan="8"><%=orgRemark %></td>
+                 
                 </tr>
 	               <tr>
 	              	  <th colspan="10" align="left">机构资源配置信息</th>
 	              </tr>
 	               <tr>
-	                  <th>类别</th>
-	                  <th>型号</th>
-	                  <th>库存数量</th>
-	                  <th>预出库</th>
-                      <th>预入库</th>
-	                  <th>施工占用</th>
-	                  <th>在线数量</th>
-	                  <th>在线配置</th>
-	                  <th>坏件数量</th>
-	                  <th>操作</th>
+	                  <th nowrap>类别</th>
+	                  <th nowrap>型号</th>
+	                  <th nowrap>库存数量</th>
+	                  <th nowrap>预出库</th>
+                      <th nowrap>预入库</th>
+	                  <th nowrap>施工占用</th>
+	                  <th nowrap>在线数量</th>
+	                  <th nowrap>在线配置</th>
+	                  <th nowrap>坏件数量</th>
+	                  <th nowrap>操作</th>
 	                </tr>
 	                <%for(int i=0;i<classNames.length;i++){
 	                	String style="";
@@ -226,16 +220,16 @@
 	                	}
 	                %>
 	                 <tr <%=style %> onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
-	                  <td align="center"><%=classNames[i]%></td>
-	                  <td align="center"><%=typeNames[i]%></td>
-	                  <td align="center"><%=stockAmounts[i]%></td>
-	                  <td align="center"><%=preOutAmount[i]%></td>
-	                  <td align="center"><%=preInAmount[i]%></td>
-                      <td align="center"><%=inConsAmount[i]%></td>
-	                  <td align="center"><%=onlineAmount[i]%></td>
-	                  <td align="center"><%=onLineConf[i]%></td>
-	                  <td align="center"><%=badAmounts[i]%></td>
-	                  <td align="center">
+	                  <td align="center" nowrap><%=classNames[i]%></td>
+	                  <td align="center" nowrap><%=typeNames[i]%></td>
+	                  <td align="center" nowrap><%=stockAmounts[i]%></td>
+	                  <td align="center" nowrap><%=preOutAmount[i]%></td>
+	                  <td align="center" nowrap><%=preInAmount[i]%></td>
+                      <td align="center" nowrap><%=inConsAmount[i]%></td>
+	                  <td align="center" nowrap><%=onlineAmount[i]%></td>
+	                  <td align="center" nowrap><%=onLineConf[i]%></td>
+	                  <td align="center" nowrap><%=badAmounts[i]%></td>
+	                  <td align="center" nowrap>
 	                  <%
 	                  	if(stockAmounts[i] != null && stockAmounts[i].length()>0){
 	                  		stockAmount =Long.parseLong(stockAmounts[i]);

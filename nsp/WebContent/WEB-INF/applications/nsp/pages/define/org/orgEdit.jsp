@@ -336,10 +336,9 @@ try{
                 </tr>
                 <tr>
                   <td align="right" valign="top" nowrap>部门描述：</td>
-                  <td colspan="3"><span id="spryOrgDesc">
+                  <td colspan="3"><span id="sprytextarea1">
                     <textarea rows="5" cols="50" class="textarea" name="ORG_DESC"><%=orgDesc %></textarea>
-                    <br>
-                  		 <span class="textareaMaxCharsMsg">已超过最大字符数50。</span></span></td>
+                    <span id="countsprytextarea1">&nbsp;</span>                    <span class="textareaMaxCharsMsg">已超过最大字符数。</span>                    </span></td>
                 </tr>
                 <tr>
                   <td colspan="4" align="center" nowrap="nowrap">
@@ -376,6 +375,7 @@ var sprytextfield5 = new Spry.Widget.ValidationTextField("spryOrgCode", "none", 
 var sprytextfield2 = new Spry.Widget.ValidationTextField("spryLinkMan", "none", {isRequired:false, maxChars:50});
 var sprytextfield3 = new Spry.Widget.ValidationTextField("spryLinkTele", "none", {isRequired:false});
 var sprytextfield4 = new Spry.Widget.ValidationTextField("spryLinkEmail", "email", {isRequired:false, maxChars:50});
+var sprytextarea1 = new Spry.Widget.ValidationTextarea("sprytextarea1", {isRequired:false, maxChars:200});
 //-->
 </script>
 </body>
