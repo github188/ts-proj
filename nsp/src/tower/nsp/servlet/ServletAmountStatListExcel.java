@@ -94,14 +94,8 @@ public class ServletAmountStatListExcel extends HttpServlet implements Servlet {
 			wb = Workbook.createWorkbook(baos, wbs);
 			sheet = wb.createSheet("资源库存统计", 0);
 			
-			/*sheet.mergeCells(0, 2, 2, 1);
-			sheet.mergeCells(0, 3, 3, 1);
-			sheet.mergeCells(0, 4, 4, 1);
-			*/
 			createTitleCell(0,0,"类别");
 			createTitleCell(1,0,"型号");
-			//createTitleCell(2,1,"类别");
-			//createTitleCell(3,2,"型号");
 			if(org != null){
 				if(org.size() >1){
 					//合并类型单元格
@@ -116,13 +110,22 @@ public class ServletAmountStatListExcel extends HttpServlet implements Servlet {
 					sheet.mergeCells(3, 0, 3, 1);
 					sheet.mergeCells(4, 0, 4, 1);
 					sheet.mergeCells(5, 0, 5, 1);
-					for(int i = 0 ; i < org.size() ; i++){
-						sheet.mergeCells(2+(i+1)*4, 0, 2+(i+1)*4+3, 0);
-						createTitleCell(2+(i+1)*4,0,org.get(i).toString());
-						createTitleCell(2+(i+1)*4,1,"在线");
-						createTitleCell(2+(i+1)*4+1,1,"库存");
-						createTitleCell(2+(i+1)*4+2,1,"施工");
-						createTitleCell(2+(i+1)*4+3,1,"坏件");
+					int i = 0 ;
+					if(org.size() == 2 && org.get(0).toString().length() == 0){
+						 i = 1;
+					}
+					int n = 0;
+					for( ; i < org.size() ; i++){
+						String orgName = (String) org.get(i);
+						if(orgName != null && orgName.length() > 0){
+							sheet.mergeCells(2+(n+1)*4, 0, 2+(n+1)*4+3, 0);
+							createTitleCell(2+(n+1)*4,0,org.get(i).toString());
+							createTitleCell(2+(n+1)*4,1,"在线");
+							createTitleCell(2+(n+1)*4+1,1,"库存");
+							createTitleCell(2+(n+1)*4+2,1,"施工");
+							createTitleCell(2+(n+1)*4+3,1,"坏件");
+						}
+						n++;
 					}
 				}else{
 					createTitleCell(2,0,"在线数量");
@@ -131,23 +134,6 @@ public class ServletAmountStatListExcel extends HttpServlet implements Servlet {
 					createTitleCell(5,0,"坏件数量");
 				}
 			}
-			/*if(org != null && org.size() == 1){
-				//String orgName = (String) org.get(0);
-				//createTitleCell(1,3,orgName);
-				
-			}else{
-				createCell(0,2,"在线");
-				createCell(0,3,"库存");
-				createCell(0,4,"施工");
-				for(int i = 0 ; i < org.size() ; i++){
-					String orgName = (String) org.get(0);
-					createTitleCell(1,5+i*3,orgName);
-					sheet.mergeCells(5+i*3, 0, 8+i*3, 0);
-					createCell(2,5+i*3,"在线");
-					createCell(2,5+i*3,"库存");
-					createCell(2,5+i*3,"施工");
-				}
-			}*/
 			int n;
 			if(org != null){
 				if(org.size() > 1){
@@ -176,16 +162,6 @@ public class ServletAmountStatListExcel extends HttpServlet implements Servlet {
 				}
 			}
 			}
-			/*int n = 3;
-			for(Iterator i = classMap.values().iterator(); i.hasNext();){
-				classList = (List) i.next();
-				sheet.mergeCells(n, 0, classList.size()-1, 0);
-				for(int j = 0 ; j < classList.size() ; j ++){
-					createCell(n,j+1,classList.get(j).toString());
-				}
-				n++;
-			}
-			*/
 			wb.write();
 			wb.close();
 			

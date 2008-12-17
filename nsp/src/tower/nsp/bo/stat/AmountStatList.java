@@ -207,9 +207,11 @@ public class AmountStatList implements RootBo {
 								long incons = 0;
 								long bad = 0;
 								// 遍历各个分公司，统计各个分公司库存
+								if(orgs.size() == 1 && j == 0){
+									org.add("");
+								}
 								for (int i = 0; i < orgs.size(); i++) {
 									enSysOrg = (EnSysOrg) orgs.get(i);
-									org.add("");
 									//在首次遍历类型时，把每个公司的名字存放到list列表中
 									if (j == 0) {
 										org.add(enSysOrg.getOrgName());
