@@ -114,7 +114,7 @@
                <tr>
                 <%if(orgName != null && orgName.size() > 1) {
                   for(int i = 0 ; i < orgName.size() ; i ++){
-                	  if(orgName.get(i) != null && orgName.get(i).equals("")){
+                	  if(orgName.get(i) != null && !orgName.get(i).equals("")){
                 %>
                 
                   <th nowrap>在线</th>
