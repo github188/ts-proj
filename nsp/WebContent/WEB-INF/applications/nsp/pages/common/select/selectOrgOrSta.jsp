@@ -35,8 +35,8 @@
   
   String funcId = xml.getInputValue("FUNC_ID");
   
-  String[] stationFlagId = {"N","Y"};
-  String[] stationFlagValue = {"公司","基站"};
+  String[] stationFlagId = {"Y","N"};
+  String[] stationFlagValue = {"基站","公司"};
 %>
 <html>
 <head>
@@ -122,20 +122,20 @@
                 <input type="hidden" name="CUR_PAGE" value="">
 	              <table>
 	              <tr>
+                    <td align="right">是否基站：</td>
+                    <td>
+                     <select name="SELECT_STATION" style="width:6em" class="select">
+                     <%for (int i = 0; i < stationFlagId.length; i++) {%>
+                                <%if (stationFlagId[i].equals(flag)) {%>
+                                <option value="<%=stationFlagId[i] %>" selected="selected"><%=stationFlagValue[i]%></option>
+                                <%} else {%>
+                                <option value="<%=stationFlagId[i] %>"><%=stationFlagValue[i]%></option>
+                                <%}%>
+                           <%}%>
+                     </select>
+                    </td>
 	                <td align="right">机构名称：</td>
 	                <td><input type="text" class="text" size="10" name="SELECT_ORG" value="<%=selectOrg %>"></td>
-	                <td align="right">是否基站：</td>
-	                <td>
-	                 <select name="SELECT_STATION" style="width:6em" class="select">
-	                 <%for (int i = 0; i < stationFlagId.length; i++) {%>
-                              <%if (stationFlagId[i].equals(flag)) {%>
-                              <option value="<%=stationFlagId[i] %>" selected="selected"><%=stationFlagValue[i]%></option>
-                              <%} else {%>
-                              <option value="<%=stationFlagId[i] %>"><%=stationFlagValue[i]%></option>
-                              <%}%>
-                         <%}%>
-	                 </select>
-	                </td>
                     <td>&nbsp;</td>
                   </tr>
                   <tr>
