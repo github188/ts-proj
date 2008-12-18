@@ -122,7 +122,7 @@
                 <input type="hidden" name="CUR_PAGE" value="">
 	              <table>
 	              <tr>
-                    <td align="right">是否基站：</td>
+                    <td align="right">是否为基站：</td>
                     <td>
                      <select name="SELECT_STATION" style="width:7em" class="select">
                      <%for (int i = 0; i < stationFlagId.length; i++) {%>
@@ -138,7 +138,7 @@
 	                <td><input type="text" class="text" size="10" name="SELECT_ORG" value="<%=selectOrg %>"></td>
                     <td align="right">所属机构：</td>
                     <td><input type="text" class="text" size="10" name="SELECT_PARENT_ORG" value="<%=selecePOrg %>"></td>
-                    <td align="right"><input type="submit" class="submit"  value="查询">
+                    <td align="right">&nbsp;&nbsp;<input type="submit" class="submit"  value="查询">
 	                    <input type="button" class="button" onClick="doClear();" value="重置"></td>
 	              </tr>
 	              </table>
