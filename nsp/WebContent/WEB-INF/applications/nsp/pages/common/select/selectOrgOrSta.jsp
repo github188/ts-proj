@@ -42,7 +42,7 @@
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>菜单</title>
+<title>选择机构</title>
 <jsp:include flush="true" page="../../../../sys/pages/common/include/css.jsp"></jsp:include>
 <jsp:include flush="true" page="../../../../sys/pages/common/include/js.jsp"></jsp:include>
 
@@ -124,7 +124,7 @@
 	              <tr>
                     <td align="right">是否基站：</td>
                     <td>
-                     <select name="SELECT_STATION" style="width:6em" class="select">
+                     <select name="SELECT_STATION" style="width:7em" class="select">
                      <%for (int i = 0; i < stationFlagId.length; i++) {%>
                                 <%if (stationFlagId[i].equals(flag)) {%>
                                 <option value="<%=stationFlagId[i] %>" selected="selected"><%=stationFlagValue[i]%></option>
@@ -136,13 +136,8 @@
                     </td>
 	                <td align="right">机构名称：</td>
 	                <td><input type="text" class="text" size="10" name="SELECT_ORG" value="<%=selectOrg %>"></td>
-                    <td>&nbsp;</td>
-                  </tr>
-                  <tr>
                     <td align="right">所属机构：</td>
                     <td><input type="text" class="text" size="10" name="SELECT_PARENT_ORG" value="<%=selecePOrg %>"></td>
-	                <td>&nbsp;</td>
-                    <td>&nbsp;</td>  
                     <td align="right"><input type="submit" class="submit"  value="查询">
 	                    <input type="button" class="button" onClick="doClear();" value="重置"></td>
 	              </tr>
