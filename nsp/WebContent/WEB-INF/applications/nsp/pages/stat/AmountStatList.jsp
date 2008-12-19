@@ -95,94 +95,82 @@
               <div style="width:100%; height:350px; overflow:scroll">
               <table width="100%" border="1" cellpadding="0" cellspacing="0" class="list">
                 <tr>
-                  <th nowrap rowspan="2" >类别</th>
-                  <th nowrap rowspan="2">型号</th>
-                  <th nowrap rowspan="2">在线<br>数量</th>
-                  <th nowrap rowspan="2">库存<br>数量</th>
-                  <th nowrap rowspan="2">施工<br>占用</th>
-                  <th nowrap rowspan="2">坏件<br>数量</th>
-                  <%if(orgName != null && orgName.size() > 1) {
-                    for(int i = 0 ; i < orgName.size() ; i ++){
-                      if(orgName.get(i) != null && !orgName.get(i).equals("")){
+                  <th nowrap rowspan="2" align="center">类别</th>
+                  <th nowrap rowspan="2" align="center">型号</th>
+                  <th nowrap rowspan="2" align="center">上月在<br>网数量</th>
+                  <th nowrap rowspan="2" align="center">本月在<br>网数量</th>
+                  <th nowrap rowspan="2" align="center">本月新<br>到数量</th>
+                  <th nowrap rowspan="2" align="center">库存数<br>量</th>
+                  <%if(orgName != null && orgName.size() > 0) {
                   %>
-                    <th colspan="4" ><%=orgName.get(i) %></th>
-                  <%    } 
-                      }
-                  }
+                    <th colspan="<%=orgName.size() %>" align="center">存放地点</th>
+                  <%
+                    } 
                   %>
                </tr>
                <tr>
-                <%if(orgName != null && orgName.size() > 1) {
-                  for(int i = 0 ; i < orgName.size() ; i ++){
+                <%if(orgName != null && orgName.size() > 0) {
+                  for(int i = 0 ; i < orgName.size() ; i++){
                 	  if(orgName.get(i) != null && !orgName.get(i).equals("")){
                 %>
-                
-                  <th nowrap>在线</th>
-                  <th nowrap>库存</th>
-                  <th nowrap>施工</th>
-                  <th nowrap>坏件</th>
-                
+                  <th nowrap><%=orgName.get(i) %></th>
                 <%    }
                     }
                   }
                 %>
                 </tr>
-                <%if(classes != null && classes.size() > 0 ){
-                	for(int i = 0 ; i < classFor.size() ; i++ ){
-                	   classList = (List) classes.get(classFor.get(i));
-                       if(classList != null){
-                	   for(int j = 0 ; j < classList.size() ; j ++){
-                           typeList = (List)classList.get(j);
-                           if(j == 0){
-                      
+                <%if(classes != null && classes.size() > 0) {
+                    for(int i  = 0 ; i < classFor.size() ; i++){
+                      classList = (List)classes.get(classFor.get(i)); 
+                      if(classList != null && classList.size() > 0){
+                         for(int j = 0 ; j < classList.size() ; j++){
+                            typeList = (List)classList.get(j);
+                            if(j == 0){ 
                 %>
                 <tr>
-                              <%
-                                for(int k = 0 ; k < typeList.size() ; k ++){
-                                   if(k == 0){
-                              %>
-                              <td nowrap rowspan="<%=classList.size() %>"><%=typeList.get(k) %></td>
-                              <%
-                                  }else{
-                                    if(k == 1){
-                              %>
-                                 <td><%=typeList.get(k) %></td>
-                              <%        
-                                    }else{
-                              %>
-                                <td align="center"><a href="JavaScript:doEveryList('<%=typeList.get(k) %>')"><%=typeList.get(k).toString().split(",")[3] %></a></td>
-                              <%    
-                                    }
-                                  }
-                                }
-                              %>
-                </tr>
-                            <%
-                             }else{
-                            %>
-                            <tr>
-                              <%
-                                for(int k = 1 ; k < typeList.size() ; k ++){
-                                	if(k == 1){
-                              %>
-                                      <td><%=typeList.get(k) %></td>
-                              <%
-                                	}else{
-                              %>
-                                    <td align="center"><a href="JavaScript:doEveryList('<%=typeList.get(k) %>')"><%=typeList.get(k).toString().split(",")[3] %></a></td>
-                             <%
-                                    
-                                  }
-                              }
-                              %>
-                            </tr>
-                            <% 
-                             }
+                   <%
+                      for(int k = 0 ; k < typeList.size() ; k ++){
+                        if(k == 0){
+                   %>
+                      <td nowrap rowspan="<%=classList.size() %>"><%=typeList.get(k) %></td>
+                   <% }else{
+                        if(k <= 4){
+                   %>
+                      <td><%=typeList.get(k) %></td>
+                   <%     }else{
+                   %>
+                      <td><a href="JavaScript:doEveryList('<%=typeList.get(k) %>')"><%=typeList.get(k).toString().split(",")[2] %></td>
+                   <% 
                           }
+                        }
                      }
-                  }
-                }
+                   %>
+                </tr>
+                <%  
+                           }else{
                 %>
+                <tr>
+                  <%
+                      for(int k = 1 ; k < typeList.size() ; k ++){
+                        if(k <= 4){
+                   %>
+                      <td><%=typeList.get(k) %></td>
+                   <% }else{
+                   %>
+                      <td><a href="JavaScript:doEveryList('<%=typeList.get(k) %>')"><%=typeList.get(k).toString().split(",")[2] %></td>
+                   <% 
+                        }
+                     }
+                   %>
+                </tr>
+                <%           
+                           }
+                         }
+                      }
+                    }
+                %>
+                
+                <%} %>
               </table>
               </div>
               <!-- 列表内容结束 -->
