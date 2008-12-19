@@ -381,7 +381,7 @@
 		jspPath="/../../servlet/ServletAmountStatListExcel" />
 		
 	<function id="AmountStatList" description="资源库存统计" type="bo"
-		className="tower.nsp.bo.stat.AmountStatList"
+		className="tower.nsp.bo.stat.BoAmountStatList"
 		forward="InAmountStatList" />
 		
 	<function id="AmountStatListExcel" description="资源库存统计表存为EXCEL" type="bo"
