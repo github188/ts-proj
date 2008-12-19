@@ -72,6 +72,13 @@ public class BoResourceChangeDetail implements RootBo{
 		 enResourceOrgAmount = dbResourceOrgAmount.findByKey(orgId, resourceTypeId);
 		 if(enResourceOrgAmount != null){
 			 int row2 = dbResourceOrgAmount.setToXml(requestXml, enResourceOrgAmount);
+			 enResourceType = dbResourceType.findByKey(resourceTypeId);
+			 if(enResourceType != null){
+				 long confAmount = enResourceType.getTypeConfAmount();
+				 long onlineAmount = enResourceOrgAmount.getOnlineAmount();
+				 requestXml.setItemValue("RESOURCE_ORG_AMOUNT", row2, "ONLIINE_CONF_AMOUNT",confAmount* onlineAmount);
+			 }
+			 
 			 enSysOrg = dbSysOrg.findByKey(enResourceOrgAmount.getOrgId());
 			 if(enSysOrg != null){
 			 	requestXml.setItemValue("RESOURCE_ORG_AMOUNT", row2, "ORG_NAME", enSysOrg.getOrgName());

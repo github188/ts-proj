@@ -18,7 +18,6 @@
 <jsp:include flush="true" page="../../../sys/pages/common/include/js.jsp"></jsp:include>
 
 <%@ page import="tower.tmvc.XMLWrap"%>
-<%@ page import="tower.common.util.Page"%>
 <% 
     XMLWrap xml ;
 	String flag;
@@ -46,6 +45,7 @@
 	String preInAmount; 
 	String onlineAmount;
 	String inConsAmount;
+	String onlineConfAmount;
 	String badAmount;
 	
 	
@@ -75,12 +75,12 @@
    preInAmount = xml.getItemValue("RESOURCE_ORG_AMOUNT",1,"PRE_IN_AMOUNT");
    onlineAmount = xml.getItemValue("RESOURCE_ORG_AMOUNT",1,"ONLINE_AMOUNT");
    inConsAmount = xml.getItemValue("RESOURCE_ORG_AMOUNT",1,"INCONS_AMOUNT");
+   onlineConfAmount = xml.getItemValue("RESOURCE_ORG_AMOUNT",1,"ONLIINE_CONF_AMOUNT");
    badAmount = xml.getItemValue("RESOURCE_ORG_AMOUNT",1,"BAD_AMOUNT");
   
    orgCodeQ = xml.getInputValue("ORG_CODE");
    orgNameQ = xml.getInputValue("ORG_NAME");
    stationFlagQ = xml.getInputValue("STATION_FLAG");
-   System.out.println("orgCodeChange" + orgCodeQ+orgNameQ+stationFlagQ);
    
    String[] value={"Y","N"};
    String[] Desc = {"是","否"};
@@ -238,16 +238,18 @@
                 </tr>
                 <tr>
                 <td align="right">预出库：</td>
-                 <td><%=preOutAmount %></td>
-                  <td align="right">施工占用：</td>
+                <td><%=preOutAmount %></td>
+                <td align="right">预入库：</td>
                  <td><%=preInAmount %></td>
-               	 <td align="right">在线数量：</td>
+                 <td align="right">施工占用：</td>
                  <td><%=inConsAmount %></td>
                 </tr>
                 <tr>
+                 <td align="right">在线数量：</td>
+                 <td><%=onlineAmount %></td>
                  <td align="right">在线配置：</td>
-                 <td ><%=inConsAmount%></td>
-                 <td align="right">当前坏件数量：</td>
+                 <td ><%=onlineConfAmount%></td>
+                 <td align="right">坏件数量：</td>
                  <td >
                   <input type="hidden" name="BAD_AMOUNT" value="<%=badAmount%>">
                  <%=badAmount%>
