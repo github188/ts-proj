@@ -69,6 +69,70 @@
 %>
 <script type="text/javascript">
 <!--
+	function doSubmit(form){
+   
+   var outAmount = form.AMOUNT_PREPARE.value;
+   var outOrgName = form.OUT_ORG_NAME.value;
+   var inOrgName = form.IN_ORG_NAME.value;
+   var ourResourceStatus = form.OUT_RESOURCE_STATUS.value;
+  	
+  	 //必须为整数
+    var regExp =/^[\-\+]?\d*$/;
+  	if(outOrgName.length <=0 ){
+  		alert("调出单位不能为空,请重新输入！");
+  		form.selectOutOrg.focus();
+  		return false;
+  	}
+  	if((typeof form.RESOURCE_TYPE_ID) == "undefined" ){
+  		alert("调出资源类别不能为空,请重新输入！");
+  		return false;
+  	}else if(form.RESOURCE_TYPE_ID.value==null || form.RESOURCE_TYPE_ID.value.length <= 0){
+  		alert("调出资源类别不能为空,请重新输入！");
+  		return false;
+  	}
+  	
+  	 if(outAmount.length <=0){
+   		alert("调出数量不能为空,请重新输入！");
+   		form.AMOUNT_PREPARE.focus();
+   		return false;
+   	}else  if (!regExp.test(outAmount)) {
+  				alert("调出数量必须为整数!")
+				return false;
+	}else if(outAmount <= 0){
+  		alert("调出数量必须大于零，请重新输入！");
+  		form.AMOUNT_PREPARE.focus();
+  		return false;
+  	}else if(outAmount.length >8){
+  		alert("调出数量超过允许输入的最大值，请重新输入！");
+  		form.AMOUNT_PREPARE.focus();
+  		return false;
+  	}
+  	var result = Spry.Widget.Form.validate(form);
+    if (result == false){
+      return result;
+    }
+  	if(ourResourceStatus.length <=0 ){
+  		alert("调出设备状态不能为空,请选择！");
+  		form.selectInOrg.focus();
+  		return false;
+  	}
+  	if(inOrgName.length <=0 ){
+  		alert("调入单位不能为空,请重新输入！");
+  		form.OUT_RESOURCE_STATUS.focus();
+  		return false;
+  	}
+  }
+  
+   function doSelOutOrg(){
+    selDialog("ctrl?FUNC_ID=SelectOrgOrStaJsp","OUT_ORG_ID","OUT_ORG_NAME","OUT_ORG_PARENT_ID","OUT_STATION_FLAG",650,550,false);
+  }
+   function doSelInOrg(){
+    selDialog("ctrl?FUNC_ID=SelectOrgOrStaJsp","IN_ORG_ID","IN_ORG_NAME","IN_ORG_PARENT_ID","IN_STATION_FLAG",650,550,false);
+  }
+  function doSelType(){
+    selDialog("ctrl?FUNC_ID=SelectTypeTree","RESOURCE_TYPE_ID","RESOURCE_TYPE_NAME","RESOURCE_CLASS_ID",null,null,true);
+  }
+  
 	function doDel(listId,sheetId,listSta){
 	  if(confirm("确定删除该数据？")){	
   	  		window.location="ctrl?FUNC_ID=SheetPrepareDel&LIST_ID="+listId+"&SHEET_ID="+sheetId+"&LIST_STATUS="+listSta;
@@ -94,13 +158,16 @@
     	form1["CUR_PAGE"].value = curPage;
     	form1.submit();
 	}
+	
+  function onChange(selectedIds,selector){
+	}	
 -->
 </script>
 </head>
 
 <body id="mainArea">
   <div id="mainPanel" class="panel">
-    <div class="panelHead">工单明细列表</div>
+    <div class="panelHead">工单明细</div>
     <div class="panelContent">
       <div class="panelContent2">    
         <!-- 查询面板 -->
@@ -109,20 +176,52 @@
           <div class="panelContent">
             <div class="panelContent2">
               <!-- 查询面板内容 -->
-               <table>
-                <tr>
-                 <td align="right">调度工单号：</td>
-                   <td>
-                   <%=sheetId %>
-                   </td>
-                    <td>
-                   </td>
-                   <td align="left">调度日期：</td>
-                   <td>
-                  <%=DateFunc.FormatDateTime(prepareDate )%>
-                  </td>
-                  </tr>
-              </table>
+             
+              <form action="ctrl" method="post"name="form2" onsubmit="return doSubmit(this);" >
+                   <input type="hidden" name="FUNC_ID" value="SheetPrepareAdd">
+                   <input type="hidden" name="SHEET_ID" value="<%=sheetId %>">
+                     <table border="0" cellpadding="0" cellspacing="0" width="100%" class="list">
+                     <tr>
+	                     <th nowrap>调出单位</th>
+	                     <th nowrap>设备类型</th>
+	                     <th nowrap>调度数量</th>
+	                     <th nowrap>设备状态</th>
+	                     <th nowrap>调入单位</th>
+	                     <th nowrap>操作</th>
+                     </tr>
+                     <tr class='dark'>
+		                 <td>
+		                   <input name="OUT_ORG_ID" type="hidden"  >
+		                   <input name="OUT_ORG_PARENT_ID" type="hidden">
+		                    <input name="OUT_STATION_FLAG" type="hidden"  >
+		                  <input type="text" class="date" name="OUT_ORG_NAME" readonly>
+		                   <input type="button" name="selectOutOrg" class="selButton" value="选择" onClick="doSelOutOrg()" /><span class="requiredField">*</span>
+		                 </td>
+		                  <td >
+                           <script>var type = new Tower.Widget.Selector("TypeSelector","RESOURCE_TYPE_ID","ctrl?FUNC_ID=SelectTypeTree&INPUT_TYPE=radio",{selected:[""]},{change:onChange})</script><span class="requiredField">*</span>
+		                 </td>
+		                  <td ><span id="spryAmount">
+                          <input type="text" class="date" name="AMOUNT_PREPARE" >
+                          <span class="textfieldRequiredMsg">需要提供一个值。</span><span class="textfieldInvalidFormatMsg">格式无效。</span><span class="textfieldMaxValueMsg">输入值大于所允许的最大值。</span></span><span class="requiredField">*</span>		                 
+                         </td>
+                         <td>
+	                     <select name="OUT_RESOURCE_STATUS"  style="font-size: 9pt;width: 6em;background-color: #F8F8F8;"  id="OUT_RESOURCE_STATUS" style="width:11em">
+                       		 <%for(int i=0;i<value.length;i++){ %>
+                        	<option value="<%=value[i] %>" <%if(value[i].equals(outResourceStatus)){out.print("selected");} %>><%=desc[i] %></option>
+                        	<%} %>
+                     	 </select>
+						 </td>
+                         <td>
+	                      <input name="IN_STATION_FLAG" type="hidden"  >
+	                      <input name="IN_ORG_PARENT_ID" type="hidden"  >
+		                  <input name="IN_ORG_ID" type="hidden"  >
+						  <input type="text" class="date" name="IN_ORG_NAME"  readonly> 
+						  <input type="button" name="selectInOrg" class="selButton" value="选择" onClick="doSelInOrg()" /><span class="requiredField">*</span>
+						 </td>
+						 <td ><input type="submit"  class="selButton"  value="添加"/></td>
+		               </tr>
+                      </table>
+                      </form>
               <!-- 查询面板内容结束 -->
             </div>
           </div>
@@ -138,6 +237,21 @@
           <div class="panelContent">
             <div class="panelContent2">
               <!-- 列表内容 -->
+               <table>
+                <tr>
+                 <td align="right">调度工单号：</td>
+                   <td>
+                   <%=sheetId %>
+                   </td>
+                    <td>
+                   </td>
+                   <td align="left">调度日期：</td>
+                   <td>
+                  <%=DateFunc.FormatDateTime(prepareDate )%>
+                  </td>
+                  </tr>
+              </table>
+              <br>
                 <div style="width:100%; height:350px; overflow:scroll">
               <form action="ctrl" method="post"name="form1"  >
               <input type="hidden" name="FUNC_ID" value="SheetPrepareOpen">
@@ -158,7 +272,7 @@
                   <th nowrap>调入单位</th>
                   <th nowrap>调入基站</th>
                   <th nowrap>工单状态</th>
-                  <th nowrap>[<a href=javaScript:doAdd('<%=sheetId %>');>添加</a>]</th>
+                  <th nowrap>操作</th>
                 </tr>
                
                 <%for(int i=0;i<listIds.length;i++){ 
@@ -226,7 +340,6 @@
                  </tr>
                  <%} %>
                
-           
               </table>
               <br>
               <table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -253,6 +366,11 @@
     </div>
     <div class="panelFoot"><div></div></div>
   </div>
- 
+  
+  <script type="text/javascript">
+<!--
+var sprytextfield1 = new Spry.Widget.ValidationTextField("spryAmount", "integer", {useCharacterMasking:true, maxValue:99999999, minValue:0});
+//-->
+  </script>
 </body>
 </html>

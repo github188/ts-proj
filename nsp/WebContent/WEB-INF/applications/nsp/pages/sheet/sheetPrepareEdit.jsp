@@ -94,10 +94,10 @@
     form1.TYPE_NAME.value = "";
   }
   function doSelOutOrg(){
-    selDialog("ctrl?FUNC_ID=SelectOrgOrStaJsp","OUT_ORG_ID","OUT_ORG_NAME","OUT_ORG_PARENT_ID","OUT_STATION_FLAG",650,550,false);
+    selDialog("ctrl?FUNC_ID=SelectOrgOrStaJsp","OUT_ORG_ID","OUT_ORG_NAME","OUT_ORG_PARENT_ID","OUT_STATION_FLAG",650,600,false);
   }
    function doSelInOrg(){
-    selDialog("ctrl?FUNC_ID=SelectOrgOrStaJsp","IN_ORG_ID","IN_ORG_NAME","IN_ORG_PARENT_ID","IN_STATION_FLAG",650,550,false);
+    selDialog("ctrl?FUNC_ID=SelectOrgOrStaJsp","IN_ORG_ID","IN_ORG_NAME","IN_ORG_PARENT_ID","IN_STATION_FLAG",650,600,false);
   }
   function doSelType(){
     selDialog("ctrl?FUNC_ID=SelectTypeTree","RESOURCE_TYPE_ID","RESOURCE_TYPE_NAME","RESOURCE_CLASS_ID",null,null,true);
