@@ -251,7 +251,6 @@
                   </td>
                   </tr>
               </table>
-              <br>
                 <div style="width:100%; height:350px; overflow:scroll">
               <form action="ctrl" method="post"name="form1"  >
               <input type="hidden" name="FUNC_ID" value="SheetPrepareOpen">
@@ -335,11 +334,9 @@
                          }
                     }
                    %>
-                   
                    </td>
                  </tr>
                  <%} %>
-               
               </table>
               <br>
               <table width="100%" border="0" cellpadding="0" cellspacing="0">
