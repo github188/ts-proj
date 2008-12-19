@@ -35,15 +35,15 @@
   function doEveryList(list){
     var list = list;
     var s = list.split(",");
-    var count = s[3];
+    var count = s[2];
     if(count == 0){
     }else{
       var values = s[0];
       form1.ORG_ID.value = values;
       values = s[1];
       form1.TYPE_ID.value = values;
-      values = s[2];
-      form1.AMOUNT_FLAG.value = values;
+      alert("org"+form1.ORG_ID.value);
+      alert("type"+form1.TYPE_ID.value)
       form1.FUNC_ID.value = "AmountStatEveryList";
       form1.submit();
       form1.FUNC_ID.value = "AmountStatList";
@@ -132,14 +132,14 @@
                       for(int k = 0 ; k < typeList.size() ; k ++){
                         if(k == 0){
                    %>
-                      <td nowrap rowspan="<%=classList.size() %>"><%=typeList.get(k) %></td>
+                      <td nowrap rowspan="<%=classList.size() %>" align="center"><%=typeList.get(k) %></td>
                    <% }else{
                         if(k <= 4){
                    %>
-                      <td><%=typeList.get(k) %></td>
+                      <td align="center"><%=typeList.get(k) %></td>
                    <%     }else{
                    %>
-                      <td><a href="JavaScript:doEveryList('<%=typeList.get(k) %>')"><%=typeList.get(k).toString().split(",")[2] %></td>
+                      <td align="center"><a href="JavaScript:doEveryList('<%=typeList.get(k) %>')"><%=typeList.get(k).toString().split(",")[2] %></td>
                    <% 
                           }
                         }
@@ -154,10 +154,10 @@
                       for(int k = 1 ; k < typeList.size() ; k ++){
                         if(k <= 4){
                    %>
-                      <td><%=typeList.get(k) %></td>
+                      <td align="center"><%=typeList.get(k) %></td>
                    <% }else{
                    %>
-                      <td><a href="JavaScript:doEveryList('<%=typeList.get(k) %>')"><%=typeList.get(k).toString().split(",")[2] %></td>
+                      <td align="center"><a href="JavaScript:doEveryList('<%=typeList.get(k) %>')"><%=typeList.get(k).toString().split(",")[2] %></td>
                    <% 
                         }
                      }
