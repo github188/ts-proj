@@ -110,7 +110,7 @@ public class BoAmountStatList implements RootBo {
 						classFor.add(enResourceClass.getClassId());
 					}
 					
-					//根据机构的类别进行统计1、总公司（网游）2、分公司
+					//根据机构的类别进行统计1、总公司（网优中心）2、分公司
 					if(enSysOrg.getParentId() != null && enSysOrg.getParentId().length() > 0){
 						//分公司
 						for(int i = 0 ; i < rsClass.size() ; i ++){
@@ -135,7 +135,8 @@ public class BoAmountStatList implements RootBo {
 								(s.org_id = '000001' or s.parent_id = '000001') and r.resource_type_id='000001';
 								 */
 								String currentAmountSql = "select (ifnull(sum(stock_amount),0) + ifnull(sum(bad_amount),0) + ifnull(sum(incons_amount),0)) amount ," +
-									" ifnull(sum(online_amount),0) onlice from resource_org_amount where r.org_id = s.org_id and resource_type_id = '"
+									" ifnull(sum(online_amount),0) onlice from resource_org_amount r" +
+									" ,sys_org s  where r.org_id = s.org_id and resource_type_id = '"
 									+ typeId + "' and (s.org_id ='" +enSysOrg.getOrgId()
 									+ "' or s.parent_id = '" + enSysOrg.getOrgId()+"')";
 								rsAmount = transaction.doQuery(null,currentAmountSql);
@@ -302,7 +303,7 @@ public class BoAmountStatList implements RootBo {
 								//获取所有分公司的库存数量
 								long allAmount = 0;
 								for(int j = 0 ; j < orgs.size() ; j ++){
-									enSysOrg = (EnSysOrg) orgs.get(i);
+									enSysOrg = (EnSysOrg) orgs.get(j);
 									org.add(enSysOrg.getOrgName());
 									/*
 									 * SELECT sum(stock_amount) FROM 
