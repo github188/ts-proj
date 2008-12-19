@@ -162,7 +162,7 @@ public class BoAmountStatList implements RootBo {
 								//获取上个月的在线数量
 								String outAmountSql="SELECT ifnull(sum(amount_prepare),0) outAmount FROM resource_prepare_list r " +
 									"where OUT_RESOURCE_STATUS='1' and OUT_OPER_DATETIME >= '" +
-									bgnDateBefor + "'OUT_OPER_DATETIME <= '" +
+									bgnDateBefor + "' and OUT_OPER_DATETIME <= '" +
 									endDateBefor +"'and LIST_STATUS >= '3'" +
 									" and OUT_ORG_ID ='"+enSysOrg.getOrgId()+"'";
 								rsAmount = transaction.doQuery(null,outAmountSql);
@@ -174,7 +174,7 @@ public class BoAmountStatList implements RootBo {
 								}
 								String onAmountSql="SELECT ifnull(sum(amount_prepare),0) outAmount FROM resource_prepare_list r " +
 									"where OUT_OPER_DATETIME >= '" +
-									bgnDateBefor + "'OUT_OPER_DATETIME <= '"+
+									bgnDateBefor + "' and OUT_OPER_DATETIME <= '"+
 									endDateBefor +"'and LIST_STATUS = '6'" +
 									" and OUT_ORG_ID = '" + enSysOrg.getOrgId()+"'";
 								rsAmount = transaction.doQuery(null,onAmountSql);
@@ -266,7 +266,7 @@ public class BoAmountStatList implements RootBo {
 								 */
 								String outAmountSql="SELECT ifnull(sum(amount_prepare),0) outAmount FROM resource_prepare_list r " +
 										"where OUT_RESOURCE_STATUS='1' and OUT_OPER_DATETIME >= '" +
-										bgnDateBefor + "'OUT_OPER_DATETIME <= '"+
+										bgnDateBefor + "' and OUT_OPER_DATETIME <= '"+
 										endDateBefor +"'and LIST_STATUS >= '3'";
 								rsAmount = transaction.doQuery(null,outAmountSql);
 								if(rsAmount != null){
@@ -277,7 +277,7 @@ public class BoAmountStatList implements RootBo {
 								}
 								String onAmountSql="SELECT ifnull(sum(amount_prepare),0) onAmount FROM resource_prepare_list r " +
 								"where OUT_OPER_DATETIME >= '" +
-								bgnDateBefor + "'OUT_OPER_DATETIME <= '"+
+								bgnDateBefor + "' and OUT_OPER_DATETIME <= '"+
 								endDateBefor +"'and LIST_STATUS = '6'";
 								rsAmount = transaction.doQuery(null,onAmountSql);
 								if(rsAmount != null){
@@ -310,8 +310,8 @@ public class BoAmountStatList implements RootBo {
 									 * (s.org_id = '000001' or s.parent_id ='000001');
 									 */
 									String subAmount = "0";
-									String subAmountSql = "SELECT ifnull(sum(stock_amount)) subAmount FROM " +
-											"resource_org_amount r,sys_org s where r.org_id = s.org_id and"+
+									String subAmountSql = "SELECT ifnull(sum(stock_amount),0) subAmount FROM " +
+											"resource_org_amount r,sys_org s where r.org_id = s.org_id and "+
 											"(s.org_id = '" + enSysOrg.getOrgId()+"' or  s.parent_id ='"+
 											enSysOrg.getOrgId()+"')";
 									rsAmount = transaction.doQuery(null,subAmountSql);
