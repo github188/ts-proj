@@ -24,7 +24,7 @@ import tower.tmvc.XMLWrap;
 /**
  * 
  * 功能概述：库存统计
- * @author 黄云敬 2008-12-19 上午09:36:15
+ * @author 黄云敬 2008-12-19 上午09:00:15
  */
 public class BoAmountStatList implements RootBo {
 
