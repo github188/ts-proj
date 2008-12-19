@@ -110,7 +110,10 @@
                   <th>所属机构</th>
                   <th>类别</th>
                   <th>型号</th>
-                  <th><%=name %></th>
+                  <th>库存数</th>
+                  <th>施工占用数</th>
+                  <th>坏件数</th>
+                  <th>合计</th>
                 </tr>
                 <%
                 String trClass = "";
@@ -124,6 +127,9 @@
                  <tr class="<%=trClass %>" onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
                   <td align="center"><%=orgs[i] %></td>
                   <td align="center"><%=parentOrgs[i] %></td>
+                  <td align="center"><%=className%></td>
+                  <td align="center"><%=typeName %></td>
+                  <td align="center"><%=amounts[i] %></td>
                   <td align="center"><%=className%></td>
                   <td align="center"><%=typeName %></td>
                   <td align="center"><%=amounts[i] %></td>
