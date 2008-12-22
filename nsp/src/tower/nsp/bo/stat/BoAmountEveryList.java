@@ -74,7 +74,8 @@ public class BoAmountEveryList implements RootBo {
 			System.out.println(className+typeName);
 			requestXml.setItemValue("STAT_LIST_EVERY", 1, "CLASS_NAME", className);
 			requestXml.setItemValue("STAT_LIST_EVERY", 1, "TYPE_NAME", typeName);
-			
+			System.out.println("STAT_ORG_ID"+requestXml.getItemValue("STAT_LIST_EVERY", 1, "STAT_ORG_ID"));
+			System.out.println("STAT_TYPE_ID"+requestXml.getItemValue("STAT_LIST_EVERY", 1, "STAT_TYPE_ID"));
 			System.out.println("className"+requestXml.getItemValue("STAT_LIST_EVERY", 1, "CLASS_NAME"));
 			System.out.println("typeName"+requestXml.getItemValue("STAT_LIST_EVERY", 1, "TYPE_NAME"));
 			
