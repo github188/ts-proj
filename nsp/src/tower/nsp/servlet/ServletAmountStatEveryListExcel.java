@@ -56,8 +56,8 @@ public class ServletAmountStatEveryListExcel extends HttpServlet implements Serv
 		typeName = xml.getItemValue("STAT_LIST_EVERY",1,"TYPE_NAME");
 		className = xml.getItemValue("STAT_LIST_EVERY",1,"CLASS_NAME");
 		
-		orgNames = xml.getItemValues("STAT_LIST_EVERY","SYS_ORG_NAME");
-		parentOrgs = xml.getItemValues("STAT_LIST_EVERY","SYS_PARENTORG_NAME");
+		orgNames = xml.getItemValues("AMOUNT_STAT_LIST","SYS_ORG_NAME");
+		parentOrgs = xml.getItemValues("AMOUNT_STAT_LIST","SYS_PARENTORG_NAME");
 		amounts = xml.getItemValues("AMOUNT_STAT_LIST","STOCK_AMOUNT");
 	    inconsAmounts = xml.getItemValues("AMOUNT_STAT_LIST","INCONS_AMOUNT");
 	    badAmounts = xml.getItemValues("AMOUNT_STAT_LIST","BAD_AMOUNT");
