@@ -38,24 +38,30 @@ public class ServletAmountStatEveryListExcel extends HttpServlet implements Serv
 	
 	XMLWrap xml ;
 	
-	String name;		//字段列表显示名
 	String typeName;
 	String className;
-	String tdName;		//字段名
+	
 	String[] orgNames;
-	String[] amounts;	//对应字段显示值
+	String[] parentOrgs;	
+	String[] amounts;
+	String[] inconsAmounts;
+	String[] badAmounts;
+	String[] allAmounts;
 	
 	protected void service(HttpServletRequest req, HttpServletResponse res)
 	throws ServletException, IOException {
 
 		xml = (XMLWrap) req.getAttribute("XML");
 		
-		typeName = xml.getItemValue("LIST_EVERY_NAME",1,"TYPE_NAME");
-		className = xml.getItemValue("LIST_EVERY_NAME",1,"CLASS_NAME");
-		name = xml.getItemValue("LIST_EVERY_NAME",1,"HR_TITLE");
-		tdName = xml.getItemValue("LIST_EVERY_NAME",1,"HD_TITLE");
+		typeName = xml.getItemValue("AMOUNT_STAT_LIST",1,"TYPE_NAME");
+		className = xml.getItemValue("AMOUNT_STAT_LIST",1,"CLASS_NAME");
+		
 		orgNames = xml.getItemValues("RESOURCE_ORG_AMOUNT","ORG_NAME");
-		amounts = xml.getItemValues("RESOURCE_ORG_AMOUNT",tdName);
+		parentOrgs = xml.getItemValues("AMOUNT_STAT_LIST","SYS_PARENTORG_NAME");
+		amounts = xml.getItemValues("AMOUNT_STAT_LIST","STOCK_AMOUNT");
+	    inconsAmounts = xml.getItemValues("AMOUNT_STAT_LIST","INCONS_AMOUNT");
+	    badAmounts = xml.getItemValues("AMOUNT_STAT_LIST","BAD_AMOUNT");
+	    allAmounts = xml.getItemValues("AMOUNT_STAT_LIST","ALL_AMOUNT");
 		
 		byte[] data;
 		try {
@@ -91,15 +97,23 @@ public class ServletAmountStatEveryListExcel extends HttpServlet implements Serv
 			sheet = wb.createSheet("资源库存统计详细", 0);
 			
 			createTitleCell(0,0,"机构名称");
-			createTitleCell(1,0,"类别");
-			createTitleCell(2,0,"型号");
-			createTitleCell(3,0,name);
+			createTitleCell(1,0,"所属机构");
+			createTitleCell(2,0,"类别");
+			createTitleCell(3,0,"型号");
+			createTitleCell(4,0,"库存数量");
+			createTitleCell(4,0,"施工占用");
+			createTitleCell(4,0,"坏件数量");
+			createTitleCell(4,0,"合计");
 	
 			for(int i = 0 ; i < orgNames.length ; i ++){
 				createCell(0,i+1,orgNames[i]);
-				createCell(1,i+1,className);
-				createCell(2,i+1,typeName);
-				createCell(3,i+1,amounts[i]);
+				createCell(1,i+1,parentOrgs[i]);
+				createCell(2,i+1,className);
+				createCell(3,i+1,typeName);
+				createCell(4,i+1,amounts[i]);
+				createCell(5,i+1,inconsAmounts[i]);
+				createCell(6,i+1,badAmounts[i]);
+				createCell(7,i+1,allAmounts[i]);
 			}
 			wb.write();
 			wb.close();
