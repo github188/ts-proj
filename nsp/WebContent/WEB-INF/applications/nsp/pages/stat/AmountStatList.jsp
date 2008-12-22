@@ -42,8 +42,6 @@
       form1.ORG_ID.value = values;
       values = s[1];
       form1.TYPE_ID.value = values;
-      alert("org"+form1.ORG_ID.value);
-      alert("type"+form1.TYPE_ID.value)
       form1.FUNC_ID.value = "AmountStatEveryList";
       form1.submit();
       form1.FUNC_ID.value = "AmountStatList";
