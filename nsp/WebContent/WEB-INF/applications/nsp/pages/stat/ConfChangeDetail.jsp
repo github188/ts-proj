@@ -92,10 +92,7 @@
   	  	window.history.back();
     }
     function doSubmit(form){
-        var result = Spry.Widget.Form.validate(form);
-       if (result == false){
-        return result;
-       }
+       
     	var flag = form.FLAG.value;
   	  	var stockAmount = form.STOCK_AMOUNT.value;
   	  	var badAmount = form.BAD_AMOUNT.value;
@@ -103,28 +100,39 @@
   	  	if(flag == "GoodToBad"){
   	  		if(changeAmount == null|| changeAmount.length <=0){
   	  			alert("坏件数量不能为空，请输入转为坏件数量。");
+  	  			form.CHANGE_AMOUNT.focus();
   	  			return false;
   	  		}else if(changeAmount < 0){
   	  			alert("转为坏件数量必须大于0，请重新输入！");
+  	  			form.CHANGE_AMOUNT.focus();
   	  			return false;
   	  		}
   	  		if(changeAmount- stockAmount >0){
   	  			alert("转换的坏件数量必须小于当前库存数量，请重新输入！");
+  	  			form.CHANGE_AMOUNT.focus();
   	  			return false;
   	  		}
   	  	}else if(flag == "BadToGood"){
   	  		if(changeAmount == null || changeAmount.length <=0){
   	  			alert("好件数量不能为空，请输入转为好件数量。");
+  	  			form.CHANGE_AMOUNT.focus();
   	  			return false;
   	  		}else if(changeAmount < 0){
   	  			alert("转为好件数量必须大于0，请重新输入！");
+  	  			form.CHANGE_AMOUNT.focus();
   	  			return false;
   	  		}
   	  		if(changeAmount-badAmount >0){
   	  			alert("转换的好件数量必须小于当前坏件数量，请重新输入！");
+  	  			form.CHANGE_AMOUNT.focus();
   	  			return false;
   	  		}
   	  	}
+  	  	
+  	  	 var result = Spry.Widget.Form.validate(form);
+       	if (result == false){
+       		 return result;
+      	 }
   	  	
     }
 	function TDoChangePage(curPage){
