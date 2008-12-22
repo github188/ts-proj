@@ -53,7 +53,7 @@ public class BoAmountEveryList implements RootBo {
 		 ****************************************************************************************************/
 		if(orgId != null && orgId.length() > 0 && typeId != null && typeId.length() > 0){
 			//保存参数
-			if(requestXml.getRowCount("") == 0 ){
+			if(requestXml.getRowCount("STAT_LIST_EVERY") == 0 ){
 				requestXml.addRow("STAT_LIST_EVERY");
 			}
 			requestXml.setItemValue("STAT_LIST_EVERY", 1, "STAT_ORG_ID", orgId);
@@ -71,8 +71,12 @@ public class BoAmountEveryList implements RootBo {
 					typeName = rowAmount.getString("type_name");
 				}
 			}
+			System.out.println(className+typeName);
 			requestXml.setItemValue("STAT_LIST_EVERY", 1, "CLASS_NAME", className);
 			requestXml.setItemValue("STAT_LIST_EVERY", 1, "TYPE_NAME", typeName);
+			
+			System.out.println("className"+requestXml.getItemValue("STAT_LIST_EVERY", 1, "CLASS_NAME"));
+			System.out.println("typeName"+requestXml.getItemValue("STAT_LIST_EVERY", 1, "TYPE_NAME"));
 			
 			enSysOrg = dbSysOrg.findByKey(orgId);
 			//根据公司的父节点判断该公司是分公司还是总公司
