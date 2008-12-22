@@ -46,8 +46,6 @@
     window.location="ctrl?FUNC_ID=AmountStatList";
   }
   function doExcel(){
-    alert(form1.TYPE_ID.value);
-    alert(form1.ORG_ID.value);
     form1.FUNC_ID.value = "AmountStatEveryListExcel";
     form1.submit();   
     form1.FUNC_ID.value = "AmountStatList"; 
