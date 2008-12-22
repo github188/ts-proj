@@ -42,6 +42,9 @@
       form1.ORG_ID.value = values;
       values = s[1];
       form1.TYPE_ID.value = values;
+      alert(form1.ORG_ID.value);
+      alert(form1.TYPE_ID.value);
+      alert(form1.FUNC_ID.value);
       form1.FUNC_ID.value = "AmountStatEveryList";
       form1.submit();
       form1.FUNC_ID.value = "AmountStatList";
@@ -62,7 +65,7 @@
           <div class="panelContent">
             <div class="panelContent2">
               <!-- 查询面板内容 -->
-             <form name="form1" action="ctrl" method="get" >
+             <form name="form1" action="ctrl" method="post" >
               <input type="hidden" name="FUNC_ID" value="AmountStatList">
               <input type="hidden" name="TYPE_ID" value="">
               <input type="hidden" name="ORG_ID" value="">
