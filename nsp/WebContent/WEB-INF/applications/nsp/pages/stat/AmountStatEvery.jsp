@@ -20,10 +20,12 @@
 %>
 <%
   xml = XMLWrap.getRequestXml(request, session, application);
-  typeName = xml.getItemValue("AMOUNT_STAT_LIST",1,"TYPE_NAME");
-  className = xml.getItemValue("AMOUNT_STAT_LIST",1,"CLASS_NAME");
-  typeId = xml.getItemValue("AMOUNT_STAT_LIST",1,"STAT_TYPE_ID");
-  orgId = xml.getItemValue("AMOUNT_STAT_LIST",1,"STAT_ORG_ID");
+  typeName = xml.getItemValue("STAT_LIST_EVERY", 1, "TYPE_NAME");
+  className = xml.getItemValue("STAT_LIST_EVERY", 1, "CLASS_NAME");
+  typeId = xml.getItemValue("STAT_LIST_EVERY",1,"STAT_TYPE_ID");
+  orgId = xml.getItemValue("STAT_LIST_EVERY",1,"STAT_ORG_ID");
+  System.out.println("typeNameJSp"+typeName);
+  System.out.println("classNameJSp"+className);
   
   orgs = xml.getItemValues("AMOUNT_STAT_LIST","SYS_ORG_NAME");
   parentOrgs = xml.getItemValues("AMOUNT_STAT_LIST","SYS_PARENTORG_NAME");
