@@ -24,8 +24,6 @@
   className = xml.getItemValue("STAT_LIST_EVERY", 1, "CLASS_NAME");
   typeId = xml.getItemValue("STAT_LIST_EVERY",1,"STAT_TYPE_ID");
   orgId = xml.getItemValue("STAT_LIST_EVERY",1,"STAT_ORG_ID");
-  System.out.println("typeNameJSp"+typeName);
-  System.out.println("classNameJSp"+className);
   
   orgs = xml.getItemValues("AMOUNT_STAT_LIST","SYS_ORG_NAME");
   parentOrgs = xml.getItemValues("AMOUNT_STAT_LIST","SYS_PARENTORG_NAME");
@@ -48,6 +46,8 @@
     window.location="ctrl?FUNC_ID=AmountStatList";
   }
   function doExcel(){
+    alert(form1.TYPE_ID.value);
+    alert(form1.ORG_ID.value);
     form1.FUNC_ID.value = "AmountStatEveryListExcel";
     form1.submit();   
     form1.FUNC_ID.value = "AmountStatList"; 
@@ -103,8 +103,8 @@
               <form name="formQuery" action="ctrl" method="get"  onSubmit="return doSubmit(this)">
               <input type = "hidden" name="FUNC_ID" value="AmountStatEveryList">
               <input type = "hidden" name="AMOUNT_FLAG" value="">
-              <input type = "hidden" name="TYPE_ID" value="">
-              <input type = "hidden" name="ORG_ID" value="">
+              <input type = "hidden" name="TYPE_ID" value="<%=typeId %>">
+              <input type = "hidden" name="ORG_ID" value="<%=orgId %>">
               <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
               <tr>
                   <th>机构名称</th>
