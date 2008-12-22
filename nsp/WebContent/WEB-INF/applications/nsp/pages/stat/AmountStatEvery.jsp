@@ -8,29 +8,29 @@
   String[] orgs;
   String[] amounts;
   String[] parentOrgs;
+  String[] inconsAmounts;
+  String[] badAmounts;
+  String[] allAmounts;
+  
   String typeName;
   String className;
-  String name;
-  String tdName;
-  
-  String amountFlag;
   String typeId;
   String orgId;
   
 %>
 <%
   xml = XMLWrap.getRequestXml(request, session, application);
-  typeName = xml.getItemValue("LIST_EVERY_NAME",1,"TYPE_NAME");
-  className = xml.getItemValue("LIST_EVERY_NAME",1,"CLASS_NAME");
-  name = xml.getItemValue("LIST_EVERY_NAME",1,"HR_TITLE");
-  tdName = xml.getItemValue("LIST_EVERY_NAME",1,"HD_TITLE");
-  orgs = xml.getItemValues("RESOURCE_ORG_AMOUNT","ORG_NAME");
-  parentOrgs = xml.getItemValues("RESOURCE_ORG_AMOUNT","ORG_PARENT_NAME");
-  amounts = xml.getItemValues("RESOURCE_ORG_AMOUNT",tdName);
+  typeName = xml.getItemValue("AMOUNT_STAT_LIST",1,"TYPE_NAME");
+  className = xml.getItemValue("AMOUNT_STAT_LIST",1,"CLASS_NAME");
+  typeId = xml.getItemValue("AMOUNT_STAT_LIST",1,"STAT_TYPE_ID");
+  orgId = xml.getItemValue("AMOUNT_STAT_LIST",1,"STAT_ORG_ID");
   
-  amountFlag = xml.getInputValue("AMOUNT_FLAG");
-  typeId = xml.getInputValue("TYPE_ID");
-  orgId = xml.getInputValue("ORG_ID");
+  orgs = xml.getItemValues("AMOUNT_STAT_LIST","SYS_ORG_NAME");
+  parentOrgs = xml.getItemValues("AMOUNT_STAT_LIST","SYS_PARENTORG_NAME");
+  amounts = xml.getItemValues("AMOUNT_STAT_LIST","STOCK_AMOUNT");
+  inconsAmounts = xml.getItemValues("AMOUNT_STAT_LIST","INCONS_AMOUNT");
+  badAmounts = xml.getItemValues("AMOUNT_STAT_LIST","BAD_AMOUNT");
+  allAmounts = xml.getItemValues("AMOUNT_STAT_LIST","ALL_AMOUNT");
   
 %>
 <html>
@@ -72,7 +72,6 @@
               <form name="form1" action="ctrl" method="get"  onSubmit="return doList(this)">
               <input type="hidden" name="FUNC_ID" value="AmountStatEveryList">
               <input type="hidden" name="CUR_PAGE" value="">
-              <input type = "hidden" name="AMOUNT_FLAG" value="<%=amountFlag %>">
               <input type = "hidden" name="TYPE_ID" value="<%=typeId %>">
               <input type = "hidden" name="ORG_ID" value="<%=orgId %>">
               <table width="100%">
@@ -130,9 +129,9 @@
                   <td align="center"><%=className%></td>
                   <td align="center"><%=typeName %></td>
                   <td align="center"><%=amounts[i] %></td>
-                  <td align="center"><%=className%></td>
-                  <td align="center"><%=typeName %></td>
-                  <td align="center"><%=amounts[i] %></td>
+                  <td align="center"><%=inconsAmounts[i]%></td>
+                  <td align="center"><%=badAmounts[i] %></td>
+                  <td align="center"><%=allAmounts[i] %></td>
                  </tr>
                  <%} %>
               </table>
