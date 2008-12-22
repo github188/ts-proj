@@ -129,11 +129,6 @@ public class BoAmountStatList implements RootBo {
 								String onAmount="0";//上线数量
 								
 								//获取每个型号的本月在线数、库存数
-								/*
-								 * select (ifnull(sum(stock_amount),0) + ifnull(sum(bad_amount),0) + ifnull(sum(incons_amount),0)) amount ,
-								ifnull(sum(online_amount),0) onlice from resource_org_amount r,sys_org s where r.org_id = s.org_id and
-								(s.org_id = '000001' or s.parent_id = '000001') and r.resource_type_id='000001';
-								 */
 								String currentAmountSql = "select (ifnull(sum(stock_amount),0) + ifnull(sum(bad_amount),0) + ifnull(sum(incons_amount),0)) amount ," +
 									" ifnull(sum(online_amount),0) onlice from resource_org_amount r" +
 									" ,sys_org s  where r.org_id = s.org_id and resource_type_id = '"
@@ -213,10 +208,6 @@ public class BoAmountStatList implements RootBo {
 						}
 					}else{
 						//总库存
-						/*
-						 * SELECT (sum(stock_amount) +sum(bad_amount)+sum(incons_amount)) amount , sum(online_amount)
-						 *  online FROM resource_org_amount r where resource_type_id = "000000";
-						 */
 						for(int i = 0 ; i < rsClass.size() ; i ++){
 							//定义每个类别的所有类型
 							List<String> typeList = new ArrayList<String>();
@@ -246,10 +237,6 @@ public class BoAmountStatList implements RootBo {
 								}
 								
 								//获取每个类型的本月新到数量
-								/*
-								 * SELECT sum(in_amount) FROM resource_buyin_list r where 
-								 * in_out_flag="I" and in_oper_datetime >20080101000000;
-								 */
 								String newAmountSql = "SELECT ifnull(sum(in_amount),0) allAmount FROM resource_buyin_list r" +
 										" where in_out_flag='I' and in_oper_datetime >= '"+
 										bgnDate +"' and in_oper_datetime <= '"+
@@ -262,9 +249,6 @@ public class BoAmountStatList implements RootBo {
 									}
 								}
 								//获取上个月的在线数量
-								/*
-								 * SELECT ifnull(sum(amount_prepare),0) FROM resource_prepare_list r where OUT_RESOURCE_STATUS="0";
-								 */
 								String outAmountSql="SELECT ifnull(sum(amount_prepare),0) outAmount FROM resource_prepare_list r " +
 										"where OUT_RESOURCE_STATUS='1' and OUT_OPER_DATETIME >= '" +
 										bgnDateBefor + "' and OUT_OPER_DATETIME <= '"+
@@ -305,14 +289,9 @@ public class BoAmountStatList implements RootBo {
 								for(int j = 0 ; j < orgs.size() ; j ++){
 									enSysOrg = (EnSysOrg) orgs.get(j);
 									org.add(enSysOrg.getOrgName());
-									/*
-									 * SELECT sum(stock_amount) FROM 
-									 * resource_org_amount r,sys_org s where r.org_id = s.org_id and 
-									 * (s.org_id = '000001' or s.parent_id ='000001');
-									 */
 									String subAmount = "0";
-									String subAmountSql = "SELECT ifnull(sum(stock_amount),0) subAmount FROM " +
-											"resource_org_amount r,sys_org s where r.org_id = s.org_id and "+
+									String subAmountSql = "SELECT (ifnull(sum(stock_amount),0) + ifnull(sum(bad_amount),0) + ifnull(sum(incons_amount),0)) subAmount" +
+											"  FROM resource_org_amount r,sys_org s where r.org_id = s.org_id and "+
 											"(s.org_id = '" + enSysOrg.getOrgId()+"' or  s.parent_id ='"+
 											enSysOrg.getOrgId()+"')";
 									rsAmount = transaction.doQuery(null,subAmountSql);
