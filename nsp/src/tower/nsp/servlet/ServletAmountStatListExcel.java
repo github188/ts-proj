@@ -3,6 +3,7 @@ package tower.nsp.servlet;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import tower.common.util.DateFunc;
 import tower.tmvc.XMLWrap;
 
 import jxl.Workbook;
@@ -94,48 +96,40 @@ public class ServletAmountStatListExcel extends HttpServlet implements Servlet {
 			wb = Workbook.createWorkbook(baos, wbs);
 			sheet = wb.createSheet("资源库存统计", 0);
 			
-			createTitleCell(0,0,"类别");
-			createTitleCell(1,0,"型号");
-			if(org != null){
-				if(org.size() >1){
-					//合并类型单元格
-					sheet.mergeCells(0, 0, 0, 1);
-					sheet.mergeCells(1, 0, 1, 1);
+			String date = DateFunc.GenDate(new Date());
+			String month = date.substring(4,6);
+			month = month.replace("0", "");
+			createTitleCell(0,0,month+"月无线资源审阅表");
+			sheet.mergeCells(0, 0, 5+org.size(), 0);
+			
+			createTitleCell(0,1,"类别");
+			createTitleCell(1,1,"型号");
+			if(org != null && org.size() >0){
+				//合并类型单元格
+				sheet.mergeCells(0, 1, 0, 2);
+				sheet.mergeCells(1, 1, 1, 2);
 					
-					createTitleCell(2,0,"在线数量");
-					createTitleCell(3,0,"库存数量");
-					createTitleCell(4,0,"施工占用");
-					createTitleCell(5,0,"坏件数量");
-					sheet.mergeCells(2, 0, 2, 1);
-					sheet.mergeCells(3, 0, 3, 1);
-					sheet.mergeCells(4, 0, 4, 1);
-					sheet.mergeCells(5, 0, 5, 1);
-					int i = 0 ;
-					if(org.size() == 2 && org.get(0).toString().length() == 0){
-						 i = 1;
-					}
-					int n = 0;
-					for( ; i < org.size() ; i++){
-						String orgName = (String) org.get(i);
-						if(orgName != null && orgName.length() > 0){
-							sheet.mergeCells(2+(n+1)*4, 0, 2+(n+1)*4+3, 0);
-							createTitleCell(2+(n+1)*4,0,org.get(i).toString());
-							createTitleCell(2+(n+1)*4,1,"在线");
-							createTitleCell(2+(n+1)*4+1,1,"库存");
-							createTitleCell(2+(n+1)*4+2,1,"施工");
-							createTitleCell(2+(n+1)*4+3,1,"坏件");
-						}
-						n++;
-					}
-				}else{
-					createTitleCell(2,0,"在线数量");
-					createTitleCell(3,0,"库存数量");
-					createTitleCell(4,0,"施工占用");
-					createTitleCell(5,0,"坏件数量");
+				createTitleCell(2,1,"上月在网数量");
+				createTitleCell(3,1,"本月在网数量");
+				createTitleCell(4,1,"本月新到数量");
+				createTitleCell(5,1,"库存数量");
+				sheet.mergeCells(2, 1, 2, 2);
+				sheet.mergeCells(3, 1, 3, 2);
+				sheet.mergeCells(4, 1, 4, 2);
+				sheet.mergeCells(5, 1, 5, 2);
+					
+				createTitleCell(6,1,"存放地点");
+				sheet.mergeCells(6, 1, 5+org.size(), 1);
+				for(int i = 0 ; i < org.size() ; i++){
+					createTitleCell(6+i,2,org.get(i).toString());
 				}
+			}else{
+				createTitleCell(2,1,"上月在网数量");
+				createTitleCell(3,1,"本月在网数量");
+				createTitleCell(4,1,"本月新到数量");
+				createTitleCell(5,1,"库存数量");
 			}
-			int n;
-			if(org != null){
+			/*int n;
 				if(org.size() > 1){
 					n = 2;
 				}else{
@@ -160,7 +154,32 @@ public class ServletAmountStatListExcel extends HttpServlet implements Servlet {
 						n ++ ;
 					}
 				}
+			}*/
+			int n = 0 ;
+			if(org != null && org.size() > 0){
+				n = 3;
+			}else{
+				n = 2;
 			}
+			for(int i = 0 ; i  < classFor.size() ; i++){
+				classList = (List) classMap.get(classFor.get(i));
+				if(classList != null && classList.size() > 0){
+					sheet.mergeCells(0, n, 0, n+classList.size()-1);
+					for(int j = 0 ; j < classList.size() ; j ++){
+						typeList = (List) classList.get(j);
+						if( j == 0 ){
+							createCell(0,n,typeList.get(0).toString());
+						}
+						for(int k = 1 ; k < typeList.size() ; k ++){
+							if(k <= 4){
+								createCell(k,n,typeList.get(k).toString());
+							}else{
+								createCell(k,n,typeList.get(k).toString().split(",")[2]);
+							}
+						}
+						n ++ ;
+					}
+				}
 			}
 			wb.write();
 			wb.close();
