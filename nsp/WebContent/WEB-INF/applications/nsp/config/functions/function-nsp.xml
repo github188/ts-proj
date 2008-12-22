@@ -385,7 +385,7 @@
 		forward="InAmountStatList" />
 		
 	<function id="AmountStatListExcel" description="资源库存统计表存为EXCEL" type="bo"
-		className="tower.nsp.bo.stat.AmountStatList"
+		className="tower.nsp.bo.stat.BoAmountStatList"
 		forward="ServletAmountStatListExcel" />
 		
 	<!-- 资源库存统计详细 -->
@@ -395,11 +395,11 @@
 		jspPath="/../../servlet/ServletAmountStatEveryListExcel" />
 		
 	<function id="AmountStatEveryList" description="资源库存统计" type="bo"
-		className="tower.nsp.bo.stat.AmountStatEveryList"
+		className="tower.nsp.bo.stat.BoAmountEveryList"
 		forward="InAmountStatEveryList" />
 		
 	<function id="AmountStatEveryListExcel" description="资源库存统计表存为EXCEL" type="bo"
-		className="tower.nsp.bo.stat.AmountStatEveryList"
+		className="tower.nsp.bo.stat.BoAmountEveryList"
 		forward="ServletAmountStatEveryListExcel" />	
 		
 		
