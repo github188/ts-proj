@@ -53,15 +53,15 @@ public class ServletAmountStatEveryListExcel extends HttpServlet implements Serv
 
 		xml = (XMLWrap) req.getAttribute("XML");
 		
-		typeName = xml.getItemValue("AMOUNT_STAT_LIST",1,"TYPE_NAME");
-		className = xml.getItemValue("AMOUNT_STAT_LIST",1,"CLASS_NAME");
+		typeName = xml.getItemValue("STAT_LIST_EVERY",1,"TYPE_NAME");
+		className = xml.getItemValue("STAT_LIST_EVERY",1,"CLASS_NAME");
 		
-		orgNames = xml.getItemValues("RESOURCE_ORG_AMOUNT","ORG_NAME");
-		parentOrgs = xml.getItemValues("AMOUNT_STAT_LIST","SYS_PARENTORG_NAME");
-		amounts = xml.getItemValues("AMOUNT_STAT_LIST","STOCK_AMOUNT");
-	    inconsAmounts = xml.getItemValues("AMOUNT_STAT_LIST","INCONS_AMOUNT");
-	    badAmounts = xml.getItemValues("AMOUNT_STAT_LIST","BAD_AMOUNT");
-	    allAmounts = xml.getItemValues("AMOUNT_STAT_LIST","ALL_AMOUNT");
+		orgNames = xml.getItemValues("STAT_LIST_EVERY","SYS_ORG_NAME");
+		parentOrgs = xml.getItemValues("STAT_LIST_EVERY","SYS_PARENTORG_NAME");
+		amounts = xml.getItemValues("STAT_LIST_EVERY","STOCK_AMOUNT");
+	    inconsAmounts = xml.getItemValues("STAT_LIST_EVERY","INCONS_AMOUNT");
+	    badAmounts = xml.getItemValues("STAT_LIST_EVERY","BAD_AMOUNT");
+	    allAmounts = xml.getItemValues("STAT_LIST_EVERY","ALL_AMOUNT");
 		
 		byte[] data;
 		try {
@@ -101,9 +101,9 @@ public class ServletAmountStatEveryListExcel extends HttpServlet implements Serv
 			createTitleCell(2,0,"类别");
 			createTitleCell(3,0,"型号");
 			createTitleCell(4,0,"库存数量");
-			createTitleCell(4,0,"施工占用");
-			createTitleCell(4,0,"坏件数量");
-			createTitleCell(4,0,"合计");
+			createTitleCell(5,0,"施工占用");
+			createTitleCell(6,0,"坏件数量");
+			createTitleCell(7,0,"合计");
 	
 			for(int i = 0 ; i < orgNames.length ; i ++){
 				createCell(0,i+1,orgNames[i]);
