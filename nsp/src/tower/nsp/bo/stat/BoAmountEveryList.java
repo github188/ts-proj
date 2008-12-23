@@ -2,6 +2,8 @@ package tower.nsp.bo.stat;
 
 import org.apache.log4j.Logger;
 
+import tower.common.util.Page;
+import tower.common.util.PubFunc;
 import tower.nsp.db.DbSysOrg;
 import tower.nsp.en.EnSysOrg;
 import tower.tmvc.ErrorException;
@@ -34,6 +36,7 @@ public class BoAmountEveryList implements RootBo {
 		
 		String className="";
 		String typeName="";
+		String funcId="";
 
 		/*****************************************************************************************************
 		 * 创建数据库连接、实例化DB、EN
@@ -47,7 +50,7 @@ public class BoAmountEveryList implements RootBo {
 
 		orgId = requestXml.getInputValue("ORG_ID");
 		typeId = requestXml.getInputValue("TYPE_ID");
-
+		funcId = requestXml.getInputValue("FUNC_ID");
 		/*****************************************************************************************************
 		 * 执行业务逻辑、输出
 		 ****************************************************************************************************/
@@ -78,10 +81,25 @@ public class BoAmountEveryList implements RootBo {
 			//根据公司的父节点判断该公司是分公司还是总公司
 			if(enSysOrg.getParentId() != null && enSysOrg.getParentId().length() > 0){
 				//获取摸个型号的库存、在线、坏件数量
-				String sql = "SELECT * FROM resource_org_amount r,sys_org s  where r.org_id = s.org_id and " +
+				String sql = "SELECT r.*,s.org_name ,s.PARENT_ID FROM resource_org_amount r,sys_org s  where r.org_id = s.org_id and " +
 						"( s.org_id = '" + orgId +"' or s.parent_id = '"+
 						orgId + "') and RESOURCE_TYPE_ID = '" + typeId + "'";
-				rsAmount = transaction.doQuery(null,sql);
+				/*
+				 * int page = Page.SetPageInfo(transaction, null, requestXml,
+					PubFunc.LEN_PAGE_COUNT, sql.toString());
+					rs = transaction.doQuery(null, sql.toString(), page,
+					PubFunc.LEN_PAGE_COUNT);
+				 */
+				if(funcId != null && funcId.length() > 0){
+					if(funcId.equals("AmountStatEveryList")){
+						int page = Page.SetPageInfo(transaction, null, requestXml, 
+								PubFunc.LEN_PAGE_COUNT, sql.toString());
+						rsAmount = transaction.doQuery(null, sql.toString(), page,
+								PubFunc.LEN_PAGE_COUNT);
+					}else{
+						rsAmount = transaction.doQuery(null,sql);
+					}
+				}
 				if(rsAmount != null){
 					for(int i = 0 ; i < rsAmount.size() ; i++){
 						rowAmount = rsAmount.get(i);
@@ -102,9 +120,18 @@ public class BoAmountEveryList implements RootBo {
 				}
 			}else{
 				//获取摸个型号的库存、在线、坏件数量
-				String sql = "SELECT * FROM resource_org_amount r,sys_org s  where r.org_id = s.org_id " +
+				String sql = "SELECT r.*,s.org_name , s.PARENT_ID FROM resource_org_amount r,sys_org s  where r.org_id = s.org_id " +
 						"and RESOURCE_TYPE_ID = '" + typeId + "'";
-				rsAmount = transaction.doQuery(null,sql);
+				if(funcId != null && funcId.length() > 0){
+					if(funcId.equals("AmountStatEveryList")){
+						int page = Page.SetPageInfo(transaction, null, requestXml,
+								PubFunc.LEN_PAGE_COUNT, sql.toString());
+						rsAmount = transaction.doQuery(null, sql.toString(), page,
+								PubFunc.LEN_PAGE_COUNT);
+					}else{
+						rsAmount = transaction.doQuery(null,sql);
+					}
+				}
 				if(rsAmount != null){
 					for(int i = 0 ; i < rsAmount.size() ; i++){
 						rowAmount = rsAmount.get(i);
