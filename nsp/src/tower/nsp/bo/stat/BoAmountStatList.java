@@ -185,7 +185,6 @@ public class BoAmountStatList implements RootBo {
 								}
 								long beforAmount = Long.parseLong(onlice) - Long.parseLong(onAmount) + Long.parseLong(outAmount);
 								
-								
 								//添加上个月的在线数量
 								typeList.add(String.valueOf(beforAmount));
 								//添加本月在线数量
