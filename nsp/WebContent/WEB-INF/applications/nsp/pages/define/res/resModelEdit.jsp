@@ -66,7 +66,7 @@
 <body id="mainArea">
   <div id="mainPanel" class="panel">
     <%if(typeId !=null && typeId.length() != 0){ %>
-    <div class="panelHead">设备资源型号管理 - 资源型号添编辑</div>
+    <div class="panelHead">设备资源型号管理 - 资源型号编辑</div>
     <%}else{ %>
     <div class="panelHead">设备资源型号管理 - 资源型号添加</div>
     <%} %>
@@ -152,6 +152,7 @@
 	                         	<span class="textfieldInvalidFormatMsg">格式无效。</span>   </span>
 		                 </td>
                        </tr>
+                         <tr height="15"></tr>
                         <tr>
                           <td colspan="4" align="center" nowrap="nowrap">
                             <input type="submit" class="submit"  value="保存">
