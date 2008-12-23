@@ -147,7 +147,7 @@ public class BoAmountStatList implements RootBo {
 									" where r.org_id=s.org_id and in_out_flag='I' and in_oper_datetime >= '"+
 									bgnDate +"' and in_oper_datetime <= '"+
 									endDate + "' and (s.org_id = '" + enSysOrg.getOrgId()+
-									"' or s.parent_id ='" + enSysOrg.getOrgId()+"')";
+									"' or s.parent_id ='" + enSysOrg.getOrgId()+"') and resource_type_id = '" + typeId+"'";
 								rsAmount = transaction.doQuery(null,newAmountSql);
 								if(rsAmount != null){
 									rowAmount = rsAmount.get(0);
@@ -160,7 +160,7 @@ public class BoAmountStatList implements RootBo {
 									"where OUT_RESOURCE_STATUS='1' and OUT_OPER_DATETIME >= '" +
 									bgnDateBefor + "' and OUT_OPER_DATETIME <= '" +
 									endDateBefor +"'and LIST_STATUS >= '3'" +
-									" and OUT_ORG_ID ='"+enSysOrg.getOrgId()+"'";
+									" and OUT_ORG_ID ='"+enSysOrg.getOrgId()+"' and resource_type_id = '" + typeId+"'";
 								rsAmount = transaction.doQuery(null,outAmountSql);
 								if(rsAmount != null){
 									rowAmount = rsAmount.get(0);
@@ -172,7 +172,7 @@ public class BoAmountStatList implements RootBo {
 									"where OUT_OPER_DATETIME >= '" +
 									bgnDateBefor + "' and OUT_OPER_DATETIME <= '"+
 									endDateBefor +"'and LIST_STATUS = '6'" +
-									" and OUT_ORG_ID = '" + enSysOrg.getOrgId()+"'";
+									" and OUT_ORG_ID = '" + enSysOrg.getOrgId()+"' and resource_type_id = '" + typeId +"'";
 								rsAmount = transaction.doQuery(null,onAmountSql);
 								if(rsAmount != null){
 									rowAmount = rsAmount.get(0);
