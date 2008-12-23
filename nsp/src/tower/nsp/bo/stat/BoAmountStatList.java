@@ -169,7 +169,7 @@ public class BoAmountStatList implements RootBo {
 										outAmount = rowAmount.getString("outAmount");
 									}
 								}
-								String onAmountSql="SELECT ifnull(sum(amount_prepare),0) outAmount FROM resource_prepare_list r " +
+								String onAmountSql="SELECT ifnull(sum(AMOUNT_FEED_BACK),0) outAmount FROM resource_prepare_list r " +
 									"where CONS_FIN_OPER_DATETIME >= '" +
 									bgnDate + "' and CONS_FIN_OPER_DATETIME <= '"+
 									endDate +"'and LIST_STATUS = '6'" +
@@ -264,7 +264,7 @@ public class BoAmountStatList implements RootBo {
 										outAmount = rowAmount.getString("outAmount");
 									}
 								}
-								String onAmountSql="SELECT ifnull(sum(amount_prepare),0) onAmount FROM resource_prepare_list r " +
+								String onAmountSql="SELECT ifnull(sum(AMOUNT_FEED_BACK),0) onAmount FROM resource_prepare_list r " +
 								"where OUT_OPER_DATETIME >= '" +
 								bgnDate + "' and OUT_OPER_DATETIME <= '"+
 								endDate +"'and LIST_STATUS = '6' and resource_type_id = '" + typeId+"'";
