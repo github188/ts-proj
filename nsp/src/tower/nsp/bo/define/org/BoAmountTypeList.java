@@ -20,6 +20,7 @@ import tower.tmvc.XMLWrap;
  * 
  * @author fanlj 2008-10-17 上午11:27:40
  */
+
 public class BoAmountTypeList implements RootBo {
 
 	public void doBusiness(Transaction transaction, XMLWrap requestXml,
