@@ -208,6 +208,9 @@ public class BoAmountStatList implements RootBo {
 						}
 					}else{
 						//总库存
+						
+						//获取所有的分公司
+						Vector orgs = dbSysOrg.findAllWhere("PARENT_ID = "+ Transaction.formatString(enSysOrg.getOrgId()));
 						for(int i = 0 ; i < rsClass.size() ; i ++){
 							//定义每个类别的所有类型
 							List<String> typeList = new ArrayList<String>();
@@ -226,7 +229,7 @@ public class BoAmountStatList implements RootBo {
 								//获取每个类型的本月在线数量、库存数量
 								String currentAmount = "select (ifnull(sum(stock_amount),0) + ifnull(sum(bad_amount),0) + ifnull(sum(incons_amount),0)) amount ," +
 										" ifnull(sum(online_amount),0) onlice from resource_org_amount where resource_type_id = '"
-										+ typeId + "'";
+										+ typeId + "' and resource_type_id = '" + typeId+"'";
 								rsAmount = transaction.doQuery(null,currentAmount);
 								if(rsAmount != null){
 									rowAmount = rsAmount.get(0);
@@ -240,7 +243,7 @@ public class BoAmountStatList implements RootBo {
 								String newAmountSql = "SELECT ifnull(sum(in_amount),0) allAmount FROM resource_buyin_list r" +
 										" where in_out_flag='I' and in_oper_datetime >= '"+
 										bgnDate +"' and in_oper_datetime <= '"+
-										endDate + "'";
+										endDate + "' and resource_type_id = '" + typeId+"'";
 								rsAmount = transaction.doQuery(null,newAmountSql);
 								if(rsAmount != null){
 									rowAmount = rsAmount.get(0);
@@ -252,7 +255,7 @@ public class BoAmountStatList implements RootBo {
 								String outAmountSql="SELECT ifnull(sum(amount_prepare),0) outAmount FROM resource_prepare_list r " +
 										"where OUT_RESOURCE_STATUS='1' and OUT_OPER_DATETIME >= '" +
 										bgnDateBefor + "' and OUT_OPER_DATETIME <= '"+
-										endDateBefor +"'and LIST_STATUS >= '3'";
+										endDateBefor +"'and LIST_STATUS >= '3' and resource_type_id = '" + typeId+"'";
 								rsAmount = transaction.doQuery(null,outAmountSql);
 								if(rsAmount != null){
 									rowAmount = rsAmount.get(0);
@@ -263,7 +266,7 @@ public class BoAmountStatList implements RootBo {
 								String onAmountSql="SELECT ifnull(sum(amount_prepare),0) onAmount FROM resource_prepare_list r " +
 								"where OUT_OPER_DATETIME >= '" +
 								bgnDateBefor + "' and OUT_OPER_DATETIME <= '"+
-								endDateBefor +"'and LIST_STATUS = '6'";
+								endDateBefor +"'and LIST_STATUS = '6' and resource_type_id = '" + typeId+"'";
 								rsAmount = transaction.doQuery(null,onAmountSql);
 								if(rsAmount != null){
 									rowAmount = rsAmount.get(0);
@@ -281,19 +284,18 @@ public class BoAmountStatList implements RootBo {
 								//添加库存数量
 								typeList.add(amount);
 								
-								//获取所有的分公司
-								Vector orgs = dbSysOrg.findAllWhere("PARENT_ID = "+ Transaction.formatString(enSysOrg.getOrgId()));
-								
 								//获取所有分公司的库存数量
 								long allAmount = 0;
-								for(int j = 0 ; j < orgs.size() ; j ++){
+								for(int j = 0 ; j < orgs.size() ; j++){
 									enSysOrg = (EnSysOrg) orgs.get(j);
-									org.add(enSysOrg.getOrgName());
+									if(i == 0){
+										org.add(enSysOrg.getOrgName());
+									}
 									String subAmount = "0";
 									String subAmountSql = "SELECT (ifnull(sum(stock_amount),0) + ifnull(sum(bad_amount),0) + ifnull(sum(incons_amount),0)) subAmount" +
 											"  FROM resource_org_amount r,sys_org s where r.org_id = s.org_id and "+
 											"(s.org_id = '" + enSysOrg.getOrgId()+"' or  s.parent_id ='"+
-											enSysOrg.getOrgId()+"')";
+											enSysOrg.getOrgId()+"') and resource_type_id = '" + typeId+"'";
 									rsAmount = transaction.doQuery(null,subAmountSql);
 									if(rsAmount != null){
 										rowAmount = rsAmount.get(0);
