@@ -80,7 +80,7 @@ public class BoAmountEveryList implements RootBo {
 				//获取摸个型号的库存、在线、坏件数量
 				String sql = "SELECT * FROM resource_org_amount r,sys_org s  where r.org_id = s.org_id and " +
 						"( s.org_id = '" + orgId +"' or s.parent_id = '"+
-						orgId + "')";
+						orgId + "') and RESOURCE_TYPE_ID = '" + typeId + "'";
 				rsAmount = transaction.doQuery(null,sql);
 				if(rsAmount != null){
 					for(int i = 0 ; i < rsAmount.size() ; i++){
@@ -102,7 +102,8 @@ public class BoAmountEveryList implements RootBo {
 				}
 			}else{
 				//获取摸个型号的库存、在线、坏件数量
-				String sql = "SELECT * FROM resource_org_amount r,sys_org s  where r.org_id = s.org_id ";
+				String sql = "SELECT * FROM resource_org_amount r,sys_org s  where r.org_id = s.org_id " +
+						"and RESOURCE_TYPE_ID = '" + typeId + "'";
 				rsAmount = transaction.doQuery(null,sql);
 				if(rsAmount != null){
 					for(int i = 0 ; i < rsAmount.size() ; i++){
