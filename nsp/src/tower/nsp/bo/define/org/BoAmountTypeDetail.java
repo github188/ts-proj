@@ -38,6 +38,7 @@ public class BoAmountTypeDetail implements RootBo {
 		DbResourceClass dbResourceClass;
 		EnResourceClass enResourceClass;
 		
+		
 		//获取参数：
 		String orgId;
 		String resourceTypeId;
