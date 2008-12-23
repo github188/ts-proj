@@ -39,6 +39,7 @@
 	String[] preInAmount; 
 	String[] onlineAmount;
 	String[] outResourceStatus;
+	String[] newStationFlags;
 %>
 <% 
     xml = (XMLWrap) XMLWrap.getRequestXml(request,session,application);
@@ -60,11 +61,14 @@
 	preInAmount = xml.getItemValues("SHEET_PREPARE_LIST","PRE_IN_AMOUNT");
 	onlineAmount = xml.getItemValues("SHEET_PREPARE_LIST","ONLINE_AMOUNT");
 	outResourceStatus = xml.getItemValues("SHEET_PREPARE_LIST","OUT_RESOURCE_STATUS");
+	newStationFlags = xml.getItemValues("SHEET_PREPARE_LIST","NEW_STATION_FLAG");
 	
 	 String[] desc = {"库存设备","在线设备"};
 	 String[] value = {"0","1"};
 	String[] staValue= {"0","1","2","3","4","5","6"};
 	String[] staDes = {"未下发","已下发","已接收","已出库","已入库","施工完成","确认完成"};
+	String[] newStationDesc = {"否","是"};
+	String[] newStationValue = {"0","1"};
 	int count=0;
 %>
 <script type="text/javascript">
@@ -187,6 +191,7 @@
 	                     <th nowrap>调度数量</th>
 	                     <th nowrap>设备状态</th>
 	                     <th nowrap>调入单位</th>
+	                     <th nowrap>新基站</th>
 	                     <th nowrap>操作</th>
                      </tr>
                      <tr class='dark'>
@@ -206,9 +211,8 @@
                          </td>
                          <td>
 	                     <select name="OUT_RESOURCE_STATUS"  style="font-size: 9pt;width: 6em;background-color: #F8F8F8;"  id="OUT_RESOURCE_STATUS" style="width:11em">
-                       		 <%for(int i=0;i<value.length;i++){ %>
-                        	<option value="<%=value[i] %>" <%if(value[i].equals(outResourceStatus)){out.print("selected");} %>><%=desc[i] %></option>
-                        	<%} %>
+                        	<option value="0" >库存设备</option>
+                        	<option value="1" >在线设备</option>
                      	 </select>
 						 </td>
                          <td>
@@ -217,6 +221,12 @@
 		                  <input name="IN_ORG_ID" type="hidden"  >
 						  <input type="text" class="date" name="IN_ORG_NAME"  readonly> 
 						  <input type="button" name="selectInOrg" class="selButton" value="选择" onClick="doSelInOrg()" /><span class="requiredField">*</span>
+						 </td>
+						 <td>
+						 	 <select name="NEW_STATION_FLAG"  style="font-size: 9pt;width: 4em;background-color: #F8F8F8;"   style="width:11em">
+                        		<option value="0" >否</option>
+                        		<option value="1" >是</option>
+                     	 	</select>
 						 </td>
 						 <td ><input type="submit"  class="selButton"  value="添加"/></td>
 		               </tr>
@@ -270,6 +280,7 @@
                   <th nowrap>设备状态</th>
                   <th nowrap>调入单位</th>
                   <th nowrap>调入基站</th>
+                  <th nowrap>新基站</th>
                   <th nowrap>工单状态</th>
                   <th nowrap>操作</th>
                 </tr>
@@ -305,8 +316,17 @@
                   <td align="center" nowrap><%=inOrgNames[i]%></td>
                   <td align="center" nowrap><%=inStationNames[i]%></td>
                   <td align="center" nowrap>
+                   <%
+                  	for( int j=0;j<newStationDesc.length;j++){
+                  		if(newStationFlags[i].equals(newStationValue[j])){
+                  %>
+                   		<%=newStationFlags[i]%>
+                  <%		
+                  	}}
+                  %>
+                  </td>
+                  <td align="center" nowrap>
                   <%
-              	
                   	for( int j=0;j<staDes.length;j++){
                   		if(listStatus[i].equals(staValue[j])){
                   %>

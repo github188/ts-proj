@@ -123,6 +123,7 @@
 	String inStationFlag;
 	String listStatus;
 	String outResourceStatus;
+	String newStationFlag;
 %>
 
 <% 
@@ -142,9 +143,13 @@
 	inStationFlag = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"IN_STATION_FLAG");
 	listStatus = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"LIST_STATUS");
 	outResourceStatus = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"OUT_RESOURCE_STATUS");
+	outResourceStatus = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"OUT_RESOURCE_STATUS");
+	newStationFlag = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"NEW_STATION_FLAG");
 	
 	 String[] desc = {"库存设备","在线设备"};
 	 String[] value = {"0","1"};
+	 String[] newStationDesc = {"否","是"};
+	 String[] newStationValue = {"0","1"};
 %>
 
 </head>
@@ -179,7 +184,7 @@
 		                  <td width="219">
 		                   <input name="OUT_ORG_ID" type="hidden" value="<%=outStationId %>" >
 		                   <input name="OUT_ORG_PARENT_ID" type="hidden" value="<%=outOrgId %>" >
-		                    <input name="OUT_STATION_FLAG" type="hidden" value="<%=outStationFlag %>" >
+		                   <input name="OUT_STATION_FLAG" type="hidden" value="<%=outStationFlag %>" >
 		                  <input type="text" class="text" name="OUT_ORG_NAME" value="<%=outOrgName %>">
 		                   <input type="button" name="selectOutOrg" class="selButton" value="选择" onClick="doSelOutOrg()" /><span class="requiredField">*</span>
 		                 </td>
@@ -199,7 +204,7 @@
                         <td width="300">
                          <span id="spryOutResourceStatus">
 	                     <select name="OUT_RESOURCE_STATUS" class="select" id="OUT_RESOURCE_STATUS" style="width:11em">
-                        <%for(int i=0;i<value.length;i++){ %>
+                         <%for(int i=0;i<value.length;i++){ %>
                         <option value="<%=value[i] %>" <%if(value[i].equals(outResourceStatus)){out.print("selected");} %>><%=desc[i] %></option>
                         <%} %>
                       </select>
@@ -216,8 +221,14 @@
 						  <input type="text" class="text" name="IN_ORG_NAME" value=<%=inOrgName %>> 
 						  <input type="button" name="selectInOrg" class="selButton" value="选择" onClick="doSelInOrg()" /><span class="requiredField">*</span>
 						 </td>
-						 <td></td>
-						 <td></td>
+						  <td>新基站</td>
+						 <td>
+						  <select name="NEW_STATION_FLAG" class="select" id="NEW_STATION_FLAG" style="width:11em">
+						  <%for(int i=0;i<newStationValue.length;i++){ %>
+                        	<option value="<%=newStationValue[i] %>" <%if(newStationValue[i].equals(newStationFlag)){out.print("selected");} %>><%=newStationDesc[i] %></option>
+                       	 <%} %>
+                      </select>
+						 </td>
 		               </tr>
 		              	<tr>
                           <td colspan="4" align="center" nowrap="nowrap">&nbsp;</td>

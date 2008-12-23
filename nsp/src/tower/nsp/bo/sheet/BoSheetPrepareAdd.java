@@ -48,7 +48,7 @@ public class BoSheetPrepareAdd implements RootBo {
 		// 获取参数：工单Id、调度工单明细ID(LIST_ID)、调出单位(OUT_ORG_ID)、
 		// 调出基站(OUT_STATION_ID)、调出设备类型(RESOURCE_CLASS_ID)、
 		// 调出设备型号(RESOURCE_TYPE_ID)、调出数量(AMOUNT_PREPARE)、调出设备状态(OUT_RESOURCE_STATUS)
-		// 调入单位(IN_ORG_ID)、调入基站(IN_STATION_ID)；
+		// 调入单位(IN_ORG_ID)、调入基站(IN_STATION_ID)、调入单位是否为新的基站(NEW_STATION_FLAG)。
 		String sheetId;
 		String listId;
 
@@ -57,29 +57,24 @@ public class BoSheetPrepareAdd implements RootBo {
 		String outStationId = "";
 		String outOrgParentId;
 		String outResourceStatus;
-
+		String outOrgName;
+		
 		String resourceClassId;
 		String resourceTypeId;
 
 		String amountPrepare;
-//		String oldAmountPrepare;
 
 		String inOrgId;
 		String inStationFlag;
 		String inStationId = "";
 		String inOrgParentId;
-
-		//String listStatus;
-		String outOrgName;
-		// String resourceTypeName;
+		String newStationFlag;
+		
 
 		String userId;
 		String now;
 
 		long amountPrepare1;
-		//long oldAmountPrepare1;
-		// 其他
-//		StringBuffer sql = new StringBuffer();
 		/*****************************************************************************************************
 		 * 获取输入
 		 ****************************************************************************************************/
@@ -95,35 +90,26 @@ public class BoSheetPrepareAdd implements RootBo {
 		outStationFlag = requestXml.getInputValue("OUT_STATION_FLAG");
 		outOrgParentId = requestXml.getInputValue("OUT_ORG_PARENT_ID");
 		outResourceStatus = requestXml.getInputValue("OUT_RESOURCE_STATUS");
-
-		// resourceClassId = requestXml.getInputValue("RESOURCE_CLASS_ID");
+		outOrgName = requestXml.getInputValue("OUT_ORG_NAME");
+		
 		resourceTypeId = requestXml.getInputValue("RESOURCE_TYPE_ID");
 		amountPrepare = requestXml.getInputValue("AMOUNT_PREPARE");
-//		oldAmountPrepare = requestXml.getInputValue("OLD_AMOUNT_PREPARE");
 
 		inOrgId = requestXml.getInputValue("IN_ORG_ID");
 		inOrgParentId = requestXml.getInputValue("IN_ORG_PARENT_ID");
 		inStationFlag = requestXml.getInputValue("IN_STATION_FLAG");
-
-		//listStatus = requestXml.getInputValue("LIST_STATUS");
-		outOrgName = requestXml.getInputValue("OUT_ORG_NAME");
-		// resourceTypeName = requestXml.getInputValue("RESOURCE_TYPE_NAME");
+		newStationFlag = requestXml.getInputValue("NEW_STATION_FLAG");
+		
 
 		if (amountPrepare != null && amountPrepare.length() != 0) {
 			amountPrepare1 = Long.parseLong(amountPrepare);
 		} else {
 			amountPrepare1 = 0;
 		}
-//		if (oldAmountPrepare != null && oldAmountPrepare.length() != 0) {
-//			oldAmountPrepare1 = Long.parseLong(oldAmountPrepare);
-//		} else {
-//			oldAmountPrepare1 = 0;
-//		}
 
 		/*****************************************************************************************************
 		 * 创建数据库连接、实例化DB、EN
 		 ****************************************************************************************************/
-
 		transaction.createDefaultConnection(null, true);
 		dbResourcePrepareList = new DbResourcePrepareList(transaction, null);
 		enResourcePrepareList = new EnResourcePrepareList();
@@ -212,6 +198,7 @@ public class BoSheetPrepareAdd implements RootBo {
 			enResourcePrepareList.setInOrgId(inOrgId);
 			enResourcePrepareList.setSheetId(enResourcePrepareSheet.getSheetId());
 			enResourcePrepareList.setInStationId(inStationId);
+			enResourcePrepareList.setNewStationFlag(newStationFlag);
 			enResourcePrepareList.setListStatus("0");
 			if (listId == null || listId.length() == 0) {
 				listId = SysIdCreator.GenNextId(transaction, null, IdCreatorDefine.ID_TYPE_LIST_ID,
@@ -221,10 +208,9 @@ public class BoSheetPrepareAdd implements RootBo {
 				dbResourcePrepareList.insert(enResourcePrepareList);
 			} else {
 				dbResourcePrepareList.updateByKey(listId, enResourcePrepareList);
-
 			}
 
-			// 修改或编辑工单信息，如果工单明天添加失败则工单明细添加不成功！
+			// 修改或编辑工单信息，如果工单明细添加失败则工单明细添加不成功！
 			if (sheetId == null || sheetId.length() == 0) {
 				dbResourcePrepareSheet.insert(enResourcePrepareSheet);
 			} else {

@@ -101,6 +101,7 @@ public class BoSheetPrepareList implements RootBo {
 				requestXml.setItemValue("SHEET_PREPARE_LIST", row, "IN_ORG_NAME", rsRow.getString("IN_ORG_NAME"));
 				requestXml.setItemValue("SHEET_PREPARE_LIST", row, "IN_STATION_NAME", rsRow.getString("IN_STATION_NAME"));
 				requestXml.setItemValue("SHEET_PREPARE_LIST", row, "OUT_RESOURCE_STATUS", rsRow.getString("OUT_RESOURCE_STATUS"));
+				requestXml.setItemValue("SHEET_PREPARE_LIST", row, "NEW_STATION_FLAG", rsRow.getString("NEW_STATION_FLAG"));
 				if(rsRow.getString("OUT_STATION_ID") != null && rsRow.getString("OUT_STATION_ID").length() >0 ){
 					enResourceOrgAmount = dbResourceOrgAmount.findByKey(rsRow.getString("OUT_STATION_ID"), rsRow.getString("RESOURCE_TYPE_ID"));
 				}else{
