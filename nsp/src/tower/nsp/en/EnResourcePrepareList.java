@@ -160,6 +160,11 @@ public class EnResourcePrepareList implements java.io.Serializable {
     private String outResourceStatus;
 
     /**
+     * Type : char(1) Name : NEW_STATION_FLAG
+     */
+    private String newStationFlag;
+
+    /**
      * Type : char(10) Name : LIST_ID modify flag
      */
     private boolean _flagListId;
@@ -308,6 +313,11 @@ public class EnResourcePrepareList implements java.io.Serializable {
      * Type : char(1) Name : OUT_RESOURCE_STATUS modify flag
      */
     private boolean _flagOutResourceStatus;
+
+    /**
+     * Type : char(1) Name : NEW_STATION_FLAG modify flag
+     */
+    private boolean _flagNewStationFlag;
 
     /**
      * Sets the value for listId
@@ -967,6 +977,28 @@ public class EnResourcePrepareList implements java.io.Serializable {
      */
     public boolean hasChangeOutResourceStatus() {
         return _flagOutResourceStatus;
+    }
+
+    /**
+     * Sets the value for newStationFlag
+     */
+    public void setNewStationFlag(String newStationFlag) {
+        this.newStationFlag = newStationFlag;
+        this._flagNewStationFlag = true;
+    }
+
+    /**
+     * Gets the value for newStationFlag
+     */
+    public String getNewStationFlag() {
+        return newStationFlag;
+    }
+
+    /**
+     * has the value for newStationFlag changed?
+     */
+    public boolean hasChangeNewStationFlag() {
+        return _flagNewStationFlag;
     }
 
 }
