@@ -157,6 +157,7 @@ public class BoAmountStatList implements RootBo {
 									}
 								}
 								//获取上个月的在线数量
+								//1.统计当月在线调出的数量
 								String outAmountSql="SELECT ifnull(sum(amount_prepare),0) outAmount FROM resource_prepare_list r " +
 									"where OUT_RESOURCE_STATUS='1' and OUT_OPER_DATETIME >= '" +
 									bgnDate + "' and OUT_OPER_DATETIME <= '" +
@@ -169,6 +170,7 @@ public class BoAmountStatList implements RootBo {
 										outAmount = rowAmount.getString("outAmount");
 									}
 								}
+								//2、统计施工上线的数量
 								String onAmountSql="SELECT ifnull(sum(AMOUNT_FEED_BACK),0) outAmount FROM resource_prepare_list r " +
 									"where CONS_FIN_OPER_DATETIME >= '" +
 									bgnDate + "' and CONS_FIN_OPER_DATETIME <= '"+
