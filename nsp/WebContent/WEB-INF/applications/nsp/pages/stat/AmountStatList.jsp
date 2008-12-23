@@ -90,7 +90,12 @@
           <div class="panelContent">
             <div class="panelContent2">
               <!-- 列表内容 -->
+               <%if(orgName != null && orgName.size() > 0) {
+               %>
               <div style="width:100%; height:350px; overflow:scroll">
+              <%
+                    } 
+                  %>
               <table width="100%" border="1" cellpadding="0" cellspacing="0" class="list">
                 <tr>
                   <th nowrap rowspan="2" align="center">类别</th>
@@ -170,7 +175,12 @@
                 
                 <%} %>
               </table>
+               <%if(orgName != null && orgName.size() > 0) {
+                  %>
               </div>
+              <%
+                    } 
+                  %>
               <!-- 列表内容结束 -->
             </div>
           </div>
