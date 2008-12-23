@@ -66,10 +66,11 @@ public class BoAmountStatList implements RootBo {
 		rd.genTerm(date, RepDate.MONTH, 0);
 		String bgnDate = rd.getBgnDate()+"000000";
 		String endDate = rd.getEndDate()+"999999";
-		//上个月
+		/*//上个月
 		rd.genTerm(date, RepDate.MONTH, -1);
 		String bgnDateBefor = rd.getBgnDate()+"000000";
 		String endDateBefor = rd.getEndDate()+"999999";
+		*/
 		
 		/***********************************************************************
 		 * 获取输入
@@ -158,8 +159,8 @@ public class BoAmountStatList implements RootBo {
 								//获取上个月的在线数量
 								String outAmountSql="SELECT ifnull(sum(amount_prepare),0) outAmount FROM resource_prepare_list r " +
 									"where OUT_RESOURCE_STATUS='1' and OUT_OPER_DATETIME >= '" +
-									bgnDateBefor + "' and OUT_OPER_DATETIME <= '" +
-									endDateBefor +"'and LIST_STATUS >= '3'" +
+									bgnDate + "' and OUT_OPER_DATETIME <= '" +
+									endDate +"'and LIST_STATUS >= '3'" +
 									" and OUT_ORG_ID ='"+enSysOrg.getOrgId()+"' and resource_type_id = '" + typeId+"'";
 								rsAmount = transaction.doQuery(null,outAmountSql);
 								if(rsAmount != null){
@@ -170,8 +171,8 @@ public class BoAmountStatList implements RootBo {
 								}
 								String onAmountSql="SELECT ifnull(sum(amount_prepare),0) outAmount FROM resource_prepare_list r " +
 									"where OUT_OPER_DATETIME >= '" +
-									bgnDateBefor + "' and OUT_OPER_DATETIME <= '"+
-									endDateBefor +"'and LIST_STATUS = '6'" +
+									bgnDate + "' and OUT_OPER_DATETIME <= '"+
+									endDate +"'and LIST_STATUS = '6'" +
 									" and OUT_ORG_ID = '" + enSysOrg.getOrgId()+"' and resource_type_id = '" + typeId +"'";
 								rsAmount = transaction.doQuery(null,onAmountSql);
 								if(rsAmount != null){
@@ -254,8 +255,8 @@ public class BoAmountStatList implements RootBo {
 								//获取上个月的在线数量
 								String outAmountSql="SELECT ifnull(sum(amount_prepare),0) outAmount FROM resource_prepare_list r " +
 										"where OUT_RESOURCE_STATUS='1' and OUT_OPER_DATETIME >= '" +
-										bgnDateBefor + "' and OUT_OPER_DATETIME <= '"+
-										endDateBefor +"'and LIST_STATUS >= '3' and resource_type_id = '" + typeId+"'";
+										bgnDate + "' and OUT_OPER_DATETIME <= '"+
+										endDate +"'and LIST_STATUS >= '3' and resource_type_id = '" + typeId+"'";
 								rsAmount = transaction.doQuery(null,outAmountSql);
 								if(rsAmount != null){
 									rowAmount = rsAmount.get(0);
@@ -265,8 +266,8 @@ public class BoAmountStatList implements RootBo {
 								}
 								String onAmountSql="SELECT ifnull(sum(amount_prepare),0) onAmount FROM resource_prepare_list r " +
 								"where OUT_OPER_DATETIME >= '" +
-								bgnDateBefor + "' and OUT_OPER_DATETIME <= '"+
-								endDateBefor +"'and LIST_STATUS = '6' and resource_type_id = '" + typeId+"'";
+								bgnDate + "' and OUT_OPER_DATETIME <= '"+
+								endDate +"'and LIST_STATUS = '6' and resource_type_id = '" + typeId+"'";
 								rsAmount = transaction.doQuery(null,onAmountSql);
 								if(rsAmount != null){
 									rowAmount = rsAmount.get(0);
