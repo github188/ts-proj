@@ -31,7 +31,7 @@ public class DbResourcePrepareList extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
 
-        query.append("insert into resource_prepare_list ( LIST_ID,LIST_STATUS,SHEET_ID,OUT_ORG_ID,OUT_STATION_ID,RESOURCE_CLASS_ID,RESOURCE_TYPE_ID,AMOUNT_PREPARE,IN_ORG_ID,IN_STATION_ID,TAKE_USER_NAME,TAKE_DATE,OUT_OPER_USERID,OUT_OPER_DATETIME,IN_OPER_USERID,IN_OPER_DATETIME,AMOUNT_BEFORE_CONS,AMOUNT_FEED_BACK,AMOUNT_AFTER_CONS,CONF_AMOUNT_AFTER_CONS,AMOUNT_DIFF,DIFF_IN_ORG_ID,DIFF_IN_STATION_ID,CONS_USER_NAME,CONS_FIN_DATE,CONS_FIN_OPER_USERID,CONS_FIN_OPER_DATETIME,CONS_ACK_USERID,CONS_ACK_DATETIME,OUT_RESOURCE_STATUS ) values ( ");
+        query.append("insert into resource_prepare_list ( LIST_ID,LIST_STATUS,SHEET_ID,OUT_ORG_ID,OUT_STATION_ID,RESOURCE_CLASS_ID,RESOURCE_TYPE_ID,AMOUNT_PREPARE,IN_ORG_ID,IN_STATION_ID,TAKE_USER_NAME,TAKE_DATE,OUT_OPER_USERID,OUT_OPER_DATETIME,IN_OPER_USERID,IN_OPER_DATETIME,AMOUNT_BEFORE_CONS,AMOUNT_FEED_BACK,AMOUNT_AFTER_CONS,CONF_AMOUNT_AFTER_CONS,AMOUNT_DIFF,DIFF_IN_ORG_ID,DIFF_IN_STATION_ID,CONS_USER_NAME,CONS_FIN_DATE,CONS_FIN_OPER_USERID,CONS_FIN_OPER_DATETIME,CONS_ACK_USERID,CONS_ACK_DATETIME,OUT_RESOURCE_STATUS,NEW_STATION_FLAG ) values ( ");
         query.append(formatString(en.getListId()));
         query.append(",");
         query.append(formatString(en.getListStatus()));
@@ -91,6 +91,8 @@ public class DbResourcePrepareList extends RootDB{
         query.append(formatString(en.getConsAckDatetime()));
         query.append(",");
         query.append(formatString(en.getOutResourceStatus()));
+        query.append(",");
+        query.append(formatString(en.getNewStationFlag()));
         query.append(")");
 
         res = trans.doUpdate(connId,query.toString());
@@ -362,6 +364,14 @@ public class DbResourcePrepareList extends RootDB{
             query.append(formatString(en.getOutResourceStatus()));
             bChanged = true;
         }
+        if(en.hasChangeNewStationFlag()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("NEW_STATION_FLAG=");
+            query.append(formatString(en.getNewStationFlag()));
+            bChanged = true;
+        }
 
         query.append(" where ");
         query.append("LIST_ID=");
@@ -377,7 +387,7 @@ public class DbResourcePrepareList extends RootDB{
         EnResourcePrepareList res = null;
 
         StringBuffer query;
-        query = new StringBuffer("select LIST_ID,LIST_STATUS,SHEET_ID,OUT_ORG_ID,OUT_STATION_ID,RESOURCE_CLASS_ID,RESOURCE_TYPE_ID,AMOUNT_PREPARE,IN_ORG_ID,IN_STATION_ID,TAKE_USER_NAME,TAKE_DATE,OUT_OPER_USERID,OUT_OPER_DATETIME,IN_OPER_USERID,IN_OPER_DATETIME,AMOUNT_BEFORE_CONS,AMOUNT_FEED_BACK,AMOUNT_AFTER_CONS,CONF_AMOUNT_AFTER_CONS,AMOUNT_DIFF,DIFF_IN_ORG_ID,DIFF_IN_STATION_ID,CONS_USER_NAME,CONS_FIN_DATE,CONS_FIN_OPER_USERID,CONS_FIN_OPER_DATETIME,CONS_ACK_USERID,CONS_ACK_DATETIME,OUT_RESOURCE_STATUS from resource_prepare_list");
+        query = new StringBuffer("select LIST_ID,LIST_STATUS,SHEET_ID,OUT_ORG_ID,OUT_STATION_ID,RESOURCE_CLASS_ID,RESOURCE_TYPE_ID,AMOUNT_PREPARE,IN_ORG_ID,IN_STATION_ID,TAKE_USER_NAME,TAKE_DATE,OUT_OPER_USERID,OUT_OPER_DATETIME,IN_OPER_USERID,IN_OPER_DATETIME,AMOUNT_BEFORE_CONS,AMOUNT_FEED_BACK,AMOUNT_AFTER_CONS,CONF_AMOUNT_AFTER_CONS,AMOUNT_DIFF,DIFF_IN_ORG_ID,DIFF_IN_STATION_ID,CONS_USER_NAME,CONS_FIN_DATE,CONS_FIN_OPER_USERID,CONS_FIN_OPER_DATETIME,CONS_ACK_USERID,CONS_ACK_DATETIME,OUT_RESOURCE_STATUS,NEW_STATION_FLAG from resource_prepare_list");
 
         query.append(" where ");
         query.append("LIST_ID=");
@@ -666,6 +676,14 @@ public class DbResourcePrepareList extends RootDB{
             query.append(formatString(en.getOutResourceStatus()));
             bChanged = true;
         }
+        if(en.hasChangeNewStationFlag()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("NEW_STATION_FLAG=");
+            query.append(formatString(en.getNewStationFlag()));
+            bChanged = true;
+        }
 
         query.append(" where ");
         query.append("LIST_ID like ");
@@ -681,7 +699,7 @@ public class DbResourcePrepareList extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select LIST_ID,LIST_STATUS,SHEET_ID,OUT_ORG_ID,OUT_STATION_ID,RESOURCE_CLASS_ID,RESOURCE_TYPE_ID,AMOUNT_PREPARE,IN_ORG_ID,IN_STATION_ID,TAKE_USER_NAME,TAKE_DATE,OUT_OPER_USERID,OUT_OPER_DATETIME,IN_OPER_USERID,IN_OPER_DATETIME,AMOUNT_BEFORE_CONS,AMOUNT_FEED_BACK,AMOUNT_AFTER_CONS,CONF_AMOUNT_AFTER_CONS,AMOUNT_DIFF,DIFF_IN_ORG_ID,DIFF_IN_STATION_ID,CONS_USER_NAME,CONS_FIN_DATE,CONS_FIN_OPER_USERID,CONS_FIN_OPER_DATETIME,CONS_ACK_USERID,CONS_ACK_DATETIME,OUT_RESOURCE_STATUS from resource_prepare_list");
+        query.append("select LIST_ID,LIST_STATUS,SHEET_ID,OUT_ORG_ID,OUT_STATION_ID,RESOURCE_CLASS_ID,RESOURCE_TYPE_ID,AMOUNT_PREPARE,IN_ORG_ID,IN_STATION_ID,TAKE_USER_NAME,TAKE_DATE,OUT_OPER_USERID,OUT_OPER_DATETIME,IN_OPER_USERID,IN_OPER_DATETIME,AMOUNT_BEFORE_CONS,AMOUNT_FEED_BACK,AMOUNT_AFTER_CONS,CONF_AMOUNT_AFTER_CONS,AMOUNT_DIFF,DIFF_IN_ORG_ID,DIFF_IN_STATION_ID,CONS_USER_NAME,CONS_FIN_DATE,CONS_FIN_OPER_USERID,CONS_FIN_OPER_DATETIME,CONS_ACK_USERID,CONS_ACK_DATETIME,OUT_RESOURCE_STATUS,NEW_STATION_FLAG from resource_prepare_list");
 
         query.append(" where ");
         query.append("LIST_ID like ");
@@ -719,7 +737,7 @@ public class DbResourcePrepareList extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select LIST_ID,LIST_STATUS,SHEET_ID,OUT_ORG_ID,OUT_STATION_ID,RESOURCE_CLASS_ID,RESOURCE_TYPE_ID,AMOUNT_PREPARE,IN_ORG_ID,IN_STATION_ID,TAKE_USER_NAME,TAKE_DATE,OUT_OPER_USERID,OUT_OPER_DATETIME,IN_OPER_USERID,IN_OPER_DATETIME,AMOUNT_BEFORE_CONS,AMOUNT_FEED_BACK,AMOUNT_AFTER_CONS,CONF_AMOUNT_AFTER_CONS,AMOUNT_DIFF,DIFF_IN_ORG_ID,DIFF_IN_STATION_ID,CONS_USER_NAME,CONS_FIN_DATE,CONS_FIN_OPER_USERID,CONS_FIN_OPER_DATETIME,CONS_ACK_USERID,CONS_ACK_DATETIME,OUT_RESOURCE_STATUS from resource_prepare_list where ");
+        query.append("select LIST_ID,LIST_STATUS,SHEET_ID,OUT_ORG_ID,OUT_STATION_ID,RESOURCE_CLASS_ID,RESOURCE_TYPE_ID,AMOUNT_PREPARE,IN_ORG_ID,IN_STATION_ID,TAKE_USER_NAME,TAKE_DATE,OUT_OPER_USERID,OUT_OPER_DATETIME,IN_OPER_USERID,IN_OPER_DATETIME,AMOUNT_BEFORE_CONS,AMOUNT_FEED_BACK,AMOUNT_AFTER_CONS,CONF_AMOUNT_AFTER_CONS,AMOUNT_DIFF,DIFF_IN_ORG_ID,DIFF_IN_STATION_ID,CONS_USER_NAME,CONS_FIN_DATE,CONS_FIN_OPER_USERID,CONS_FIN_OPER_DATETIME,CONS_ACK_USERID,CONS_ACK_DATETIME,OUT_RESOURCE_STATUS,NEW_STATION_FLAG from resource_prepare_list where ");
         query.append(where);
         if(orderBy != null) {
             query.append(orderBy);
@@ -736,7 +754,7 @@ public class DbResourcePrepareList extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select LIST_ID,LIST_STATUS,SHEET_ID,OUT_ORG_ID,OUT_STATION_ID,RESOURCE_CLASS_ID,RESOURCE_TYPE_ID,AMOUNT_PREPARE,IN_ORG_ID,IN_STATION_ID,TAKE_USER_NAME,TAKE_DATE,OUT_OPER_USERID,OUT_OPER_DATETIME,IN_OPER_USERID,IN_OPER_DATETIME,AMOUNT_BEFORE_CONS,AMOUNT_FEED_BACK,AMOUNT_AFTER_CONS,CONF_AMOUNT_AFTER_CONS,AMOUNT_DIFF,DIFF_IN_ORG_ID,DIFF_IN_STATION_ID,CONS_USER_NAME,CONS_FIN_DATE,CONS_FIN_OPER_USERID,CONS_FIN_OPER_DATETIME,CONS_ACK_USERID,CONS_ACK_DATETIME,OUT_RESOURCE_STATUS from resource_prepare_list");
+        query.append("select LIST_ID,LIST_STATUS,SHEET_ID,OUT_ORG_ID,OUT_STATION_ID,RESOURCE_CLASS_ID,RESOURCE_TYPE_ID,AMOUNT_PREPARE,IN_ORG_ID,IN_STATION_ID,TAKE_USER_NAME,TAKE_DATE,OUT_OPER_USERID,OUT_OPER_DATETIME,IN_OPER_USERID,IN_OPER_DATETIME,AMOUNT_BEFORE_CONS,AMOUNT_FEED_BACK,AMOUNT_AFTER_CONS,CONF_AMOUNT_AFTER_CONS,AMOUNT_DIFF,DIFF_IN_ORG_ID,DIFF_IN_STATION_ID,CONS_USER_NAME,CONS_FIN_DATE,CONS_FIN_OPER_USERID,CONS_FIN_OPER_DATETIME,CONS_ACK_USERID,CONS_ACK_DATETIME,OUT_RESOURCE_STATUS,NEW_STATION_FLAG from resource_prepare_list");
 
         if(orderBy != null) {
             query.append(orderBy);
@@ -995,10 +1013,18 @@ public class DbResourcePrepareList extends RootDB{
             query.append(formatString(en.getOutResourceStatus()));
             bChanged = true;
         }
+        if(en.hasChangeNewStationFlag()) {
+            if(bChanged){
+                query.append(" and ");
+            }
+            query.append("NEW_STATION_FLAG=");
+            query.append(formatString(en.getNewStationFlag()));
+            bChanged = true;
+        }
         if(bChanged) {
-            query.insert(0,"select LIST_ID,LIST_STATUS,SHEET_ID,OUT_ORG_ID,OUT_STATION_ID,RESOURCE_CLASS_ID,RESOURCE_TYPE_ID,AMOUNT_PREPARE,IN_ORG_ID,IN_STATION_ID,TAKE_USER_NAME,TAKE_DATE,OUT_OPER_USERID,OUT_OPER_DATETIME,IN_OPER_USERID,IN_OPER_DATETIME,AMOUNT_BEFORE_CONS,AMOUNT_FEED_BACK,AMOUNT_AFTER_CONS,CONF_AMOUNT_AFTER_CONS,AMOUNT_DIFF,DIFF_IN_ORG_ID,DIFF_IN_STATION_ID,CONS_USER_NAME,CONS_FIN_DATE,CONS_FIN_OPER_USERID,CONS_FIN_OPER_DATETIME,CONS_ACK_USERID,CONS_ACK_DATETIME,OUT_RESOURCE_STATUS from resource_prepare_list where ");
+            query.insert(0,"select LIST_ID,LIST_STATUS,SHEET_ID,OUT_ORG_ID,OUT_STATION_ID,RESOURCE_CLASS_ID,RESOURCE_TYPE_ID,AMOUNT_PREPARE,IN_ORG_ID,IN_STATION_ID,TAKE_USER_NAME,TAKE_DATE,OUT_OPER_USERID,OUT_OPER_DATETIME,IN_OPER_USERID,IN_OPER_DATETIME,AMOUNT_BEFORE_CONS,AMOUNT_FEED_BACK,AMOUNT_AFTER_CONS,CONF_AMOUNT_AFTER_CONS,AMOUNT_DIFF,DIFF_IN_ORG_ID,DIFF_IN_STATION_ID,CONS_USER_NAME,CONS_FIN_DATE,CONS_FIN_OPER_USERID,CONS_FIN_OPER_DATETIME,CONS_ACK_USERID,CONS_ACK_DATETIME,OUT_RESOURCE_STATUS,NEW_STATION_FLAG from resource_prepare_list where ");
         } else {
-            query.append("select LIST_ID,LIST_STATUS,SHEET_ID,OUT_ORG_ID,OUT_STATION_ID,RESOURCE_CLASS_ID,RESOURCE_TYPE_ID,AMOUNT_PREPARE,IN_ORG_ID,IN_STATION_ID,TAKE_USER_NAME,TAKE_DATE,OUT_OPER_USERID,OUT_OPER_DATETIME,IN_OPER_USERID,IN_OPER_DATETIME,AMOUNT_BEFORE_CONS,AMOUNT_FEED_BACK,AMOUNT_AFTER_CONS,CONF_AMOUNT_AFTER_CONS,AMOUNT_DIFF,DIFF_IN_ORG_ID,DIFF_IN_STATION_ID,CONS_USER_NAME,CONS_FIN_DATE,CONS_FIN_OPER_USERID,CONS_FIN_OPER_DATETIME,CONS_ACK_USERID,CONS_ACK_DATETIME,OUT_RESOURCE_STATUS from resource_prepare_list");
+            query.append("select LIST_ID,LIST_STATUS,SHEET_ID,OUT_ORG_ID,OUT_STATION_ID,RESOURCE_CLASS_ID,RESOURCE_TYPE_ID,AMOUNT_PREPARE,IN_ORG_ID,IN_STATION_ID,TAKE_USER_NAME,TAKE_DATE,OUT_OPER_USERID,OUT_OPER_DATETIME,IN_OPER_USERID,IN_OPER_DATETIME,AMOUNT_BEFORE_CONS,AMOUNT_FEED_BACK,AMOUNT_AFTER_CONS,CONF_AMOUNT_AFTER_CONS,AMOUNT_DIFF,DIFF_IN_ORG_ID,DIFF_IN_STATION_ID,CONS_USER_NAME,CONS_FIN_DATE,CONS_FIN_OPER_USERID,CONS_FIN_OPER_DATETIME,CONS_ACK_USERID,CONS_ACK_DATETIME,OUT_RESOURCE_STATUS,NEW_STATION_FLAG from resource_prepare_list");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -1257,10 +1283,18 @@ public class DbResourcePrepareList extends RootDB{
             query.append(formatString(en.getOutResourceStatus()));
             bChanged = true;
         }
+        if(en.hasChangeNewStationFlag()) {
+            if(bChanged){
+                query.append(" and ");
+            }
+            query.append("NEW_STATION_FLAG like ");
+            query.append(formatString(en.getNewStationFlag()));
+            bChanged = true;
+        }
         if(bChanged) {
-            query.insert(0,"select LIST_ID,LIST_STATUS,SHEET_ID,OUT_ORG_ID,OUT_STATION_ID,RESOURCE_CLASS_ID,RESOURCE_TYPE_ID,AMOUNT_PREPARE,IN_ORG_ID,IN_STATION_ID,TAKE_USER_NAME,TAKE_DATE,OUT_OPER_USERID,OUT_OPER_DATETIME,IN_OPER_USERID,IN_OPER_DATETIME,AMOUNT_BEFORE_CONS,AMOUNT_FEED_BACK,AMOUNT_AFTER_CONS,CONF_AMOUNT_AFTER_CONS,AMOUNT_DIFF,DIFF_IN_ORG_ID,DIFF_IN_STATION_ID,CONS_USER_NAME,CONS_FIN_DATE,CONS_FIN_OPER_USERID,CONS_FIN_OPER_DATETIME,CONS_ACK_USERID,CONS_ACK_DATETIME,OUT_RESOURCE_STATUS from resource_prepare_list where ");
+            query.insert(0,"select LIST_ID,LIST_STATUS,SHEET_ID,OUT_ORG_ID,OUT_STATION_ID,RESOURCE_CLASS_ID,RESOURCE_TYPE_ID,AMOUNT_PREPARE,IN_ORG_ID,IN_STATION_ID,TAKE_USER_NAME,TAKE_DATE,OUT_OPER_USERID,OUT_OPER_DATETIME,IN_OPER_USERID,IN_OPER_DATETIME,AMOUNT_BEFORE_CONS,AMOUNT_FEED_BACK,AMOUNT_AFTER_CONS,CONF_AMOUNT_AFTER_CONS,AMOUNT_DIFF,DIFF_IN_ORG_ID,DIFF_IN_STATION_ID,CONS_USER_NAME,CONS_FIN_DATE,CONS_FIN_OPER_USERID,CONS_FIN_OPER_DATETIME,CONS_ACK_USERID,CONS_ACK_DATETIME,OUT_RESOURCE_STATUS,NEW_STATION_FLAG from resource_prepare_list where ");
         } else {
-            query.append("select LIST_ID,LIST_STATUS,SHEET_ID,OUT_ORG_ID,OUT_STATION_ID,RESOURCE_CLASS_ID,RESOURCE_TYPE_ID,AMOUNT_PREPARE,IN_ORG_ID,IN_STATION_ID,TAKE_USER_NAME,TAKE_DATE,OUT_OPER_USERID,OUT_OPER_DATETIME,IN_OPER_USERID,IN_OPER_DATETIME,AMOUNT_BEFORE_CONS,AMOUNT_FEED_BACK,AMOUNT_AFTER_CONS,CONF_AMOUNT_AFTER_CONS,AMOUNT_DIFF,DIFF_IN_ORG_ID,DIFF_IN_STATION_ID,CONS_USER_NAME,CONS_FIN_DATE,CONS_FIN_OPER_USERID,CONS_FIN_OPER_DATETIME,CONS_ACK_USERID,CONS_ACK_DATETIME,OUT_RESOURCE_STATUS from resource_prepare_list");
+            query.append("select LIST_ID,LIST_STATUS,SHEET_ID,OUT_ORG_ID,OUT_STATION_ID,RESOURCE_CLASS_ID,RESOURCE_TYPE_ID,AMOUNT_PREPARE,IN_ORG_ID,IN_STATION_ID,TAKE_USER_NAME,TAKE_DATE,OUT_OPER_USERID,OUT_OPER_DATETIME,IN_OPER_USERID,IN_OPER_DATETIME,AMOUNT_BEFORE_CONS,AMOUNT_FEED_BACK,AMOUNT_AFTER_CONS,CONF_AMOUNT_AFTER_CONS,AMOUNT_DIFF,DIFF_IN_ORG_ID,DIFF_IN_STATION_ID,CONS_USER_NAME,CONS_FIN_DATE,CONS_FIN_OPER_USERID,CONS_FIN_OPER_DATETIME,CONS_ACK_USERID,CONS_ACK_DATETIME,OUT_RESOURCE_STATUS,NEW_STATION_FLAG from resource_prepare_list");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -1564,6 +1598,14 @@ public class DbResourcePrepareList extends RootDB{
             query.append(formatString(en.getOutResourceStatus()));
             bChanged = true;
         }
+        if(en.hasChangeNewStationFlag()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("NEW_STATION_FLAG=");
+            query.append(formatString(en.getNewStationFlag()));
+            bChanged = true;
+        }
         query.append(" where ");
         query.append(where);
         res = trans.doUpdate(connId,query.toString());
@@ -1606,6 +1648,7 @@ public class DbResourcePrepareList extends RootDB{
         en.setConsAckUserid(r.getString("CONS_ACK_USERID"));
         en.setConsAckDatetime(r.getString("CONS_ACK_DATETIME"));
         en.setOutResourceStatus(r.getString("OUT_RESOURCE_STATUS"));
+        en.setNewStationFlag(r.getString("NEW_STATION_FLAG"));
 
         return en;
     }
@@ -1760,6 +1803,10 @@ public class DbResourcePrepareList extends RootDB{
         stmp = (String)otmp;
         en.setOutResourceStatus(stmp);
 
+        otmp = xml.getInputObject("NEW_STATION_FLAG");
+        stmp = (String)otmp;
+        en.setNewStationFlag(stmp);
+
         return en;
     }
 
@@ -1800,6 +1847,7 @@ public class DbResourcePrepareList extends RootDB{
         Object[] oConsAckUserid;
         Object[] oConsAckDatetime;
         Object[] oOutResourceStatus;
+        Object[] oNewStationFlag;
         int count = 0;
 
         oListId = xml.getInputObjects("LIST_ID");
@@ -1921,6 +1969,10 @@ public class DbResourcePrepareList extends RootDB{
         oOutResourceStatus = xml.getInputObjects("OUT_RESOURCE_STATUS");
         if (count == 0 && oOutResourceStatus.length > 0) {
             count = oOutResourceStatus.length;
+        }
+        oNewStationFlag = xml.getInputObjects("NEW_STATION_FLAG");
+        if (count == 0 && oNewStationFlag.length > 0) {
+            count = oNewStationFlag.length;
         }
         for (int i = 0; i < count; i ++) {
             en = new EnResourcePrepareList();
@@ -2087,6 +2139,11 @@ public class DbResourcePrepareList extends RootDB{
                 en.setOutResourceStatus(stmp);
             }
 
+            if (oNewStationFlag.length == count) {
+                stmp = (String)oNewStationFlag[i];
+                en.setNewStationFlag(stmp);
+            }
+
             res.addElement(en);
         }
         return res;
@@ -2127,6 +2184,7 @@ public class DbResourcePrepareList extends RootDB{
         xml.setItemValue("RESOURCE_PREPARE_LIST",row,"CONS_ACK_USERID",en.getConsAckUserid());
         xml.setItemValue("RESOURCE_PREPARE_LIST",row,"CONS_ACK_DATETIME",en.getConsAckDatetime());
         xml.setItemValue("RESOURCE_PREPARE_LIST",row,"OUT_RESOURCE_STATUS",en.getOutResourceStatus());
+        xml.setItemValue("RESOURCE_PREPARE_LIST",row,"NEW_STATION_FLAG",en.getNewStationFlag());
         return row;
     }
     /**
@@ -2169,6 +2227,7 @@ public class DbResourcePrepareList extends RootDB{
             xml.setItemValue("RESOURCE_PREPARE_LIST",row,"CONS_ACK_USERID",en.getConsAckUserid());
             xml.setItemValue("RESOURCE_PREPARE_LIST",row,"CONS_ACK_DATETIME",en.getConsAckDatetime());
             xml.setItemValue("RESOURCE_PREPARE_LIST",row,"OUT_RESOURCE_STATUS",en.getOutResourceStatus());
+            xml.setItemValue("RESOURCE_PREPARE_LIST",row,"NEW_STATION_FLAG",en.getNewStationFlag());
         }
     }
 }
