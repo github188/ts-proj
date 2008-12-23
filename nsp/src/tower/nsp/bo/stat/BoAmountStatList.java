@@ -170,10 +170,10 @@ public class BoAmountStatList implements RootBo {
 									}
 								}
 								String onAmountSql="SELECT ifnull(sum(amount_prepare),0) outAmount FROM resource_prepare_list r " +
-									"where OUT_OPER_DATETIME >= '" +
-									bgnDate + "' and OUT_OPER_DATETIME <= '"+
+									"where CONS_FIN_OPER_DATETIME >= '" +
+									bgnDate + "' and CONS_FIN_OPER_DATETIME <= '"+
 									endDate +"'and LIST_STATUS = '6'" +
-									" and OUT_ORG_ID = '" + enSysOrg.getOrgId()+"' and resource_type_id = '" + typeId +"'";
+									" and IN_ORG_ID = '" + enSysOrg.getOrgId()+"' and resource_type_id = '" + typeId +"'";
 								rsAmount = transaction.doQuery(null,onAmountSql);
 								if(rsAmount != null){
 									rowAmount = rsAmount.get(0);
