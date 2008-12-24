@@ -95,7 +95,7 @@ public class BoRecvSheetListToExcel implements RootBo {
 						requestXml.setItemValue("SHEET_PREPARE_LIST", row, "RESOURCE_CLASS_NAME", rsRow.getString("class_name"));
 						requestXml.setItemValue("SHEET_PREPARE_LIST", row, "RESOURCE_TYPE_NAME", rsRow.getString("type_name"));
 						requestXml.setItemValue("SHEET_PREPARE_LIST", row, "AMOUNT_PREPARE", rsRow.getString("AMOUNT_PREPARE"));
-						requestXml.setItemValue("SHEET_PREPARE_LIST", row, "OUT_RESOURCE_STATUS", rsRow.getString("OUT_RESOURCE_STATUS"));
+						requestXml.setItemValue("SHEET_PREPARE_LIST", row, "NEW_STATION_FLAG", rsRow.getString("NEW_STATION_FLAG"));
 							
 				 }
 		 }
