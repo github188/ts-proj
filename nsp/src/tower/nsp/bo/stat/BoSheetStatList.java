@@ -71,6 +71,7 @@ public class BoSheetStatList implements RootBo {
 		String classFlag;
 		String takeUserName;
 		String consUserName;
+		String newStationFlag;
 		
 		String orgId;
 		
@@ -86,6 +87,8 @@ public class BoSheetStatList implements RootBo {
 		classFlag = requestXml.getInputValue("QRESOURCE_CLASS_FLAG");
 		takeUserName = requestXml.getInputValue("QTAKE_USER_NAME");
 		consUserName = requestXml.getInputValue("QCONS_USER_NAME");
+		newStationFlag = requestXml.getInputValue("QNEW_STATION_FLAG");
+		
 		
 //		orgId = sessionXml.getInputValue("ORG_ID");
 		orgId = sessionXml.getItemValue("SYS_USER", 1, "USER_ORG_ID");
@@ -104,7 +107,7 @@ public class BoSheetStatList implements RootBo {
 		QueryResult rs = null;
 		QueryResult rs1 = null;
 		StringBuffer sql = new StringBuffer();
-		sql.append("select a.SHEET_ID,b.PREPARE_DATE,a.LIST_STATUS,c.ORG_NAME '调出单位',d.ORG_NAME '调出基站',e.CLASS_NAME,f.TYPE_NAME,a.AMOUNT_PREPARE,g.ORG_NAME '调入单位',h.ORG_NAME '调入基站',a.TAKE_USER_NAME,a.TAKE_DATE,a.CONS_USER_NAME,a.CONS_FIN_DATE,a.CONS_ACK_DATETIME,a.LIST_ID,e.CLASS_ID,f.TYPE_ID,g.ORG_ID"
+		sql.append("select a.SHEET_ID,b.PREPARE_DATE,a.LIST_STATUS,c.ORG_NAME '调出单位',d.ORG_NAME '调出基站',e.CLASS_NAME,f.TYPE_NAME,a.AMOUNT_PREPARE,g.ORG_NAME '调入单位',h.ORG_NAME '调入基站',a.TAKE_USER_NAME,a.TAKE_DATE,a.CONS_USER_NAME,a.CONS_FIN_DATE,a.CONS_ACK_DATETIME,a.LIST_ID,e.CLASS_ID,f.TYPE_ID,g.ORG_ID,a.NEW_STATION_FLAG"
 				+ " from  RESOURCE_PREPARE_LIST a inner join RESOURCE_PREPARE_SHEET  b on a.SHEET_ID =b.SHEET_ID"
 				+ " left join SYS_ORG c  on  a.OUT_ORG_ID = c.ORG_ID"
 				+ " left join SYS_ORG d  on  a.OUT_STATION_ID = d.ORG_ID"
@@ -129,6 +132,14 @@ public class BoSheetStatList implements RootBo {
 			sql.append(sheetId);
 			sql.append("%'");
 		}
+		/////////////
+		if(newStationFlag != null && newStationFlag.length() != 0){
+			sql.append(" and ");
+			sql.append(" a.NEW_STATION_FLAG ='");
+			sql.append(newStationFlag);
+			sql.append("%'");
+		}
+		
 		if(listStatus != null && listStatus.length() != 0){
 			sql.append(" and ");
 			sql.append(" a.LIST_STATUS = ");
@@ -201,6 +212,7 @@ public class BoSheetStatList implements RootBo {
 				requestXml.setItemValue("DRESOURCE_PREPARE_LIST", row, "CONS_FIN_DATE", rsRow.getString(14));
 				requestXml.setItemValue("DRESOURCE_PREPARE_LIST", row, "CONS_ACK_DATETIME", rsRow.getString(15));
 				requestXml.setItemValue("DRESOURCE_PREPARE_LIST", row, "LIST_ID", rsRow.getString(16));
+				requestXml.setItemValue("DRESOURCE_PREPARE_LIST", row, "NEW_STATION_FLAG", rsRow.getString(17));
 				
 			}
 		}
@@ -226,7 +238,7 @@ public class BoSheetStatList implements RootBo {
 				requestXml.setItemValue("QRESOURCE_PREPARE_LIST", row, "CONS_FIN_DATE", rsRow.getString(14));
 				requestXml.setItemValue("QRESOURCE_PREPARE_LIST", row, "CONS_ACK_DATETIME", rsRow.getString(15));
 				requestXml.setItemValue("QRESOURCE_PREPARE_LIST", row, "LIST_ID", rsRow.getString(16));
-				
+				requestXml.setItemValue("QRESOURCE_PREPARE_LIST", row, "NEW_STATION_FLAG", rsRow.getString(17));
 			}
 		}
 		
