@@ -62,7 +62,6 @@
 	onlineAmount = xml.getItemValues("SHEET_PREPARE_LIST","ONLINE_AMOUNT");
 	outResourceStatus = xml.getItemValues("SHEET_PREPARE_LIST","OUT_RESOURCE_STATUS");
 	newStationFlags = xml.getItemValues("SHEET_PREPARE_LIST","NEW_STATION_FLAG");
-	
 	 String[] desc = {"库存设备","在线设备"};
 	 String[] value = {"0","1"};
 	String[] staValue= {"0","1","2","3","4","5","6"};
@@ -317,10 +316,10 @@
                   <td align="center" nowrap><%=inStationNames[i]%></td>
                   <td align="center" nowrap>
                    <%
-                  	for( int j=0;j<newStationDesc.length;j++){
+                  	for( int j=0;j<newStationValue.length;j++){
                   		if(newStationFlags[i].equals(newStationValue[j])){
                   %>
-                   		<%=newStationFlags[i]%>
+                   		<%=newStationDesc[j]%>
                   <%		
                   	}}
                   %>

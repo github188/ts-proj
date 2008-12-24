@@ -64,8 +64,8 @@
 	amountPrepare = xml.getItemValues("SHEET_PREPARE_LIST","AMOUNT_PREPARE");
 	newStationFlags = xml.getItemValues("SHEET_PREPARE_LIST","NEW_STATION_FLAG");
 	
-	 String[] desc = {"否","是"};
-	 String[] value = {"0","1"};
+	String[] newStationDesc = {"否","是"};
+	String[] newStationValue = {"0","1"};
 	String[] statuDesc={"下发","已接收"};
 	String[] statuVal={"1","2"};
 %>
@@ -222,11 +222,14 @@
                   <td align="center"><%=inOrgNames[i]%></td>
                   <td align="center"><%=inStationNames[i]%></td>
                   <td align="center">
-                   <%for(int j=0;j<value.length;j++){ 
-                	   if(value[j].equals(newStationFlags[i])){
-                   %>
-                   <%=desc[j]%>
-                   <%} }%>
+                  <%
+                  	for( int j=0;j<newStationValue.length;j++){
+                  		if(newStationFlags[i].equals(newStationValue[j])){
+                  %>
+                   		<%=newStationDesc[j]%>
+                  <%		
+                  	}}
+                  %>
                    </td>
                   
                   <td align="center">

@@ -173,8 +173,8 @@
                   <th>调度日期</th>
                   <th>调出单位</th>
                   <th>调出基站</th>
-                  <th>资源类型</th>
-                  <th>资源型号</th>
+                  <th>设备类型</th>
+                  <th>设备型号</th>
                   <th>调入单位</th>
                   <th>调入基站</th>
                   <th>调出数量</th>
@@ -192,12 +192,12 @@
                  <tr class="<%=trClass %>" onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
                   <td align="center"><%=sheetIds[i] %></td>
                   <td align="center"><%=prepareDates[i]%></td>
-                  <td align="center" width = "12%"><%=outOrgs[i] %></td>
-                  <td align="center" width = "12%"><%=outStations[i] %></td>
+                  <td align="center" ><%=outOrgs[i] %></td>
+                  <td align="center" ><%=outStations[i] %></td>
                   <td align="center"><%=classNames[i] %></td>
                   <td align="center"><%=typeNames[i] %></td>
-                  <td align="center" width = "12%"><%=inOrgs[i] %></td>
-                  <td align="center" width = "12%"><%=inStations[i] %></td>
+                  <td align="center" ><%=inOrgs[i] %></td>
+                  <td align="center" ><%=inStations[i] %></td>
                   <td align="center"><%=amountPrepares[i] %></td>
                   <td align="center" nowrap>[ <a href="JavaScript:doResourceOut('<%=listIds[i] %>')">出库登记</a> ]</td>
                  </tr>

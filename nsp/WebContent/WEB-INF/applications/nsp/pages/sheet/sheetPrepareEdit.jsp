@@ -221,8 +221,8 @@
 						  <input type="text" class="text" name="IN_ORG_NAME" value=<%=inOrgName %>> 
 						  <input type="button" name="selectInOrg" class="selButton" value="选择" onClick="doSelInOrg()" /><span class="requiredField">*</span>
 						 </td>
-						  <td>新基站</td>
-						 <td>
+						 <td width="120" align="right">新基站：</td>
+						 <td width="300">
 						  <select name="NEW_STATION_FLAG" class="select" id="NEW_STATION_FLAG" style="width:11em">
 						  <%for(int i=0;i<newStationValue.length;i++){ %>
                         	<option value="<%=newStationValue[i] %>" <%if(newStationValue[i].equals(newStationFlag)){out.print("selected");} %>><%=newStationDesc[i] %></option>
