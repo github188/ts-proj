@@ -137,7 +137,7 @@ public class BoSheetStatList implements RootBo {
 			sql.append(" and ");
 			sql.append(" a.NEW_STATION_FLAG ='");
 			sql.append(newStationFlag);
-			sql.append("%'");
+			sql.append("'");
 		}
 		
 		if(listStatus != null && listStatus.length() != 0){
@@ -212,7 +212,7 @@ public class BoSheetStatList implements RootBo {
 				requestXml.setItemValue("DRESOURCE_PREPARE_LIST", row, "CONS_FIN_DATE", rsRow.getString(14));
 				requestXml.setItemValue("DRESOURCE_PREPARE_LIST", row, "CONS_ACK_DATETIME", rsRow.getString(15));
 				requestXml.setItemValue("DRESOURCE_PREPARE_LIST", row, "LIST_ID", rsRow.getString(16));
-				requestXml.setItemValue("DRESOURCE_PREPARE_LIST", row, "NEW_STATION_FLAG", rsRow.getString(17));
+				requestXml.setItemValue("DRESOURCE_PREPARE_LIST", row, "NEW_STATION_FLAG", rsRow.getString(20));
 				
 			}
 		}
@@ -238,7 +238,7 @@ public class BoSheetStatList implements RootBo {
 				requestXml.setItemValue("QRESOURCE_PREPARE_LIST", row, "CONS_FIN_DATE", rsRow.getString(14));
 				requestXml.setItemValue("QRESOURCE_PREPARE_LIST", row, "CONS_ACK_DATETIME", rsRow.getString(15));
 				requestXml.setItemValue("QRESOURCE_PREPARE_LIST", row, "LIST_ID", rsRow.getString(16));
-				requestXml.setItemValue("QRESOURCE_PREPARE_LIST", row, "NEW_STATION_FLAG", rsRow.getString(17));
+				requestXml.setItemValue("QRESOURCE_PREPARE_LIST", row, "NEW_STATION_FLAG", rsRow.getString(20));
 			}
 		}
 		
