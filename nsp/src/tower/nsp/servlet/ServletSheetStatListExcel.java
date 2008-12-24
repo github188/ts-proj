@@ -64,6 +64,8 @@ public class ServletSheetStatListExcel extends javax.servlet.http.HttpServlet im
 	String[] takeUserName;
 
 	String[] consUserName;
+	
+	String[] newStationFlag;
 
 	// String[] consFinDate ;
 	// String[] conAckDateTime ;
@@ -72,6 +74,9 @@ public class ServletSheetStatListExcel extends javax.servlet.http.HttpServlet im
 	String[] statusIds = { "1", "2", "3", "4", "5", "6" };
 
 	String[] statusDescs = { "下发", "已接受", "已出库", "已入库", "施工完毕", "确认完成" };
+	
+	String[] newStationFlagIds = {"0","1"};
+	String[] newStationFlagDescs = {"否","是"};
 
 	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException,
 			IOException {
@@ -89,9 +94,8 @@ public class ServletSheetStatListExcel extends javax.servlet.http.HttpServlet im
 		inStationName = xml.getItemValues("QRESOURCE_PREPARE_LIST", "IN_STATION_NAME");
 		takeUserName = xml.getItemValues("QRESOURCE_PREPARE_LIST", "TAKE_USER_NAME");
 		consUserName = xml.getItemValues("QRESOURCE_PREPARE_LIST", "CONS_USER_NAME");
-		// consFinDate = xml.getItemValues("QRESOURCE_PREPARE_LIST", "CONS_FIN_DATE");
-		// conAckDateTime = xml.getItemValues("QRESOURCE_PREPARE_LIST", "CONS_ACK_DATETIME");
 		listIds = xml.getItemValues("QRESOURCE_PREPARE_LIST", "LIST_ID");
+		newStationFlag = xml.getItemValues("QRESOURCE_PREPARE_LIST", "NEW_STATION_FLAG");
 
 		byte[] data;
 		try {
@@ -129,13 +133,14 @@ public class ServletSheetStatListExcel extends javax.servlet.http.HttpServlet im
 		createHead(0, 2, "处理状态");
 		createHead(0, 3, "调出单位");
 		createHead(0, 4, "调出基站");
-		createHead(0, 5, "设备类别");
-		createHead(0, 6, "设备型号");
-		createHead(0, 7, "数量");
-		createHead(0, 8, "调入单位");
-		createHead(0, 9, "调入基站");
-		createHead(0, 10, "领取人");
-		createHead(0, 11, "施工人");
+		createHead(0, 5, "新建基站");
+		createHead(0, 6, "设备类别");
+		createHead(0, 7, "设备型号");
+		createHead(0, 8, "数量");
+		createHead(0, 9, "调入单位");
+		createHead(0, 10, "调入基站");
+		createHead(0, 11, "领取人");
+		createHead(0, 12, "施工人");
 
 		for (int i = 0; i < listIds.length; i++) {
 			createCell(i + 1, 0, sheetIds[i]);
@@ -148,13 +153,18 @@ public class ServletSheetStatListExcel extends javax.servlet.http.HttpServlet im
 			}
 			createCell(i + 1, 3, outOrgNames[i]);
 			createCell(i + 1, 4, outStationNames[i]);
-			createCell(i + 1, 5, classNames[i]);
-			createCell(i + 1, 6, typeNames[i]);
-			createCell(i + 1, 7, amountPrepares[i]);
-			createCell(i + 1, 8, inOrgName[i]);
-			createCell(i + 1, 9, inStationName[i]);
-			createCell(i + 1, 10, takeUserName[i]);
-			createCell(i + 1, 11, consUserName[i]);
+			for (int j = 0; j < newStationFlagIds.length; j++) {
+				if (newStationFlagIds[j].equals(newStationFlag[i])) {
+					createCell(i + 1, 5, newStationFlagDescs[j]);
+				}
+			}
+			createCell(i + 1, 6, classNames[i]);
+			createCell(i + 1, 7, typeNames[i]);
+			createCell(i + 1, 8, amountPrepares[i]);
+			createCell(i + 1, 9, inOrgName[i]);
+			createCell(i + 1, 10, inStationName[i]);
+			createCell(i + 1, 11, takeUserName[i]);
+			createCell(i + 1, 12, consUserName[i]);
 			// createCell(i+1,12,DateFunc.FormatDateTime(consFinDate[i]));
 			// createCell(i+1,13,DateFunc.FormatDateTime(conAckDateTime[i]));
 		}
