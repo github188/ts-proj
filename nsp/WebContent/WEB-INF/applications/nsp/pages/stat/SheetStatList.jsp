@@ -14,6 +14,7 @@
 	String listStatus;
 	String takeUserName;
 	String consUserName;
+	String newStationFlag;
 	
 	String typeId = xml.getInputValue("QRESOURCE_CLASS_ID");
 	String typeFlag = xml.getInputValue("QRESOURCE_CLASS_FLAG");
@@ -32,9 +33,14 @@
 	String[]  takeUserNames;
 	String[]  consUserNames;
 	String[]  listIds;
+	String[]  newStationFlags;
 	
 	String[] statusIds = {"","1","2","3","4","5","6"};
 	String[] statusDescs ={"全部","下发","已接收","已出库","已入库","施工完毕","确认完成"};
+	
+	String[] newStationFlagIds = {"","0","1"};
+	String[] newStationFlagDescs ={"全部","否","是"};
+	
 %>
 <%
 	sheetIds = xml.getItemValues("DRESOURCE_PREPARE_LIST","SHEET_ID");
@@ -50,6 +56,7 @@
 	takeUserNames = xml.getItemValues("DRESOURCE_PREPARE_LIST","TAKE_USER_NAME");
 	consUserNames = xml.getItemValues("DRESOURCE_PREPARE_LIST","CONS_USER_NAME");
 	listIds = xml.getItemValues("DRESOURCE_PREPARE_LIST","LIST_ID");
+	newStationFlags = xml.getItemValues("DRESOURCE_PREPARE_LIST","NEW_STATION_FLAG");
 	
 	prepareDate_start = xml.getInputValue("QPREPAREDATE_START");
 	prepareDate_end = xml.getInputValue("QPREPAREDATE_END");
@@ -57,6 +64,7 @@
 	listStatus = xml.getInputValue("QLIST_STATUS");
 	takeUserName = xml.getInputValue("QTAKE_USER_NAME");
 	consUserName = xml.getInputValue("QCONS_USER_NAME");
+	newStationFlag = xml.getInputValue("QNEW_STATION_FLAG");
 	
 %>
 <head>
@@ -179,7 +187,6 @@ function doSubmit(form) {
 						<%} %>
                   		</select>
                   </td>
-                 
                  <td align="right">资源类型：</td>
      			<td>
                         <input name="QRESOURCE_CLASS_FLAG" type="hidden" value="<%=typeFlag %>" >
@@ -193,6 +200,18 @@ function doSubmit(form) {
                   <td align="right">施工人姓名：</td>
                   <td><input type="text" class="text" size="30" name="QCONS_USER_NAME" value="<%=consUserName %>"></td>
                   <td></td>
+                </tr>
+                <tr>
+                  <td align="right">新建基站：</td>
+                  <td><select name="QNEW_STATION_FLAG" style="width:100%" class="select">
+                  		<option value="">全部</option>
+                  		<option value="0">否</option>
+                  		<option value="1">是</option>
+                  	  </select>
+                  </td>
+                  <td>&nbsp;&nbsp;</td>
+                  <td>&nbsp;&nbsp;</td>
+                  <td>&nbsp;&nbsp;&nbsp;</td>
                   <td align="right" nowrap="nowrap">
                   <input type="submit" class="submit"  onClick="doList()" value="查询">
                    <input type="button" class="reset" onClick="doClear()"value="重置">
@@ -226,6 +245,7 @@ function doSubmit(form) {
                   <th nowrap>处理状态</th>
                   <th nowrap>调出单位</th>
                   <th nowrap>调出基站</th>
+                  <th nowrap>新建基站</th>
                   <th nowrap>设备类别</th>
                   <th nowrap>设备型号</th>
                   <th nowrap>数量</th>
@@ -249,6 +269,11 @@ function doSubmit(form) {
                   <%} %>
                   <td align="center" cols="2" nowrap><%=outOrgNames[i]%></td>
                   <td align="center" cols="2" nowrap><%=outStationNames[i]%></td>
+					<%for(int j=0; j< newStationFlagIds.length;j++){ %>
+                  	<%if(newStationFlagIds[j].equals(newStationFlags[i])){%>
+                  			<td align="center" cols="2" nowrap><%=newStationFlagDescs[j]%></td>
+                  		<%} %> 
+                  <%} %>
                   <td align="center" cols="2" nowrap><%=resourceClassNames[i]%></td>
                   <td align="center" cols="2" nowrap><%=resourceTypeNames[i]%></td>
                   <td align="center" cols="2" nowrap><%=amountPrepares[i]%></td>
@@ -269,6 +294,11 @@ function doSubmit(form) {
                   <%} %>
                   <td align="center" cols="2" nowrap><%=outOrgNames[i]%></td>
                   <td align="center" cols="2" nowrap><%=outStationNames[i]%></td>
+                  <%for(int j=0; j< newStationFlagIds.length;j++){ %>
+                  	<%if(newStationFlagIds[j].equals(newStationFlags[i])){%>
+                  			<td align="center" cols="2" nowrap><%=newStationFlagDescs[j]%></td>
+                  		<%} %> 
+                  <%} %>
                   <td align="center" cols="2" nowrap><%=resourceClassNames[i]%></td>
                   <td align="center" cols="2" nowrap><%=resourceTypeNames[i]%></td>
                   <td align="center" cols="2" nowrap><%=amountPrepares[i]%></td>
