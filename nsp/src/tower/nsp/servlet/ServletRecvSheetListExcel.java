@@ -63,15 +63,15 @@ public class ServletRecvSheetListExcel extends javax.servlet.http.HttpServlet im
 
 	String[] amountPrepare;
 
-	String[] outResourceStatus;
+	String[] newStationFlags;
 
 	String[] statuDesc = { "下发", "已接收" };
 
 	String[] statuVal = { "1", "2" };
 	
-	 String[] desc = {"库存设备","在线设备"};
-	 
-	 String[] value = {"0","1"};
+	String[] newStationDesc = {"否","是"};
+	
+	String[] newStationValue = {"0","1"};
 
 	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException,
 			IOException {
@@ -88,7 +88,7 @@ public class ServletRecvSheetListExcel extends javax.servlet.http.HttpServlet im
 		resourceClassNames = xml.getItemValues("SHEET_PREPARE_LIST", "RESOURCE_CLASS_NAME");
 		resourceTypeNames = xml.getItemValues("SHEET_PREPARE_LIST", "RESOURCE_TYPE_NAME");
 		amountPrepare = xml.getItemValues("SHEET_PREPARE_LIST", "AMOUNT_PREPARE");
-		outResourceStatus = xml.getItemValues("SHEET_PREPARE_LIST", "OUT_RESOURCE_STATUS");
+		newStationFlags = xml.getItemValues("SHEET_PREPARE_LIST","NEW_STATION_FLAG");
 
 		byte[] data;
 		try {
@@ -127,10 +127,10 @@ public class ServletRecvSheetListExcel extends javax.servlet.http.HttpServlet im
 		createHead(0, 3, "调出基站");
 		createHead(0, 4, "设备类别");
 		createHead(0, 5, "设备型号");
-		createHead(0, 6, "设备状态");
-		createHead(0, 7, "调度数量");
-		createHead(0, 8, "调入单位");
-		createHead(0, 9, "调入基站");
+		createHead(0, 6, "调度数量");
+		createHead(0, 7, "调入单位");
+		createHead(0, 8, "调入基站");
+		createHead(0, 9, "新基站");
 		createHead(0, 10, "状态");
 		for (int i = 0; i < listIds.length; i++) {
 			createCell(i + 1, 0, sheetIds[i]);
@@ -139,14 +139,14 @@ public class ServletRecvSheetListExcel extends javax.servlet.http.HttpServlet im
 			createCell(i + 1, 3, outStationNames[i]);
 			createCell(i + 1, 4, resourceClassNames[i]);
 			createCell(i + 1, 5, resourceTypeNames[i]);
-			for (int j = 0; j < desc.length; j++) {
-				if (outResourceStatus[i].equals(value[j])) {
-					createCell(i + 1,6, desc[j]);
+			createCell(i + 1, 6, amountPrepare[i]);
+			createCell(i + 1, 7, inOrgNames[i]);
+			createCell(i + 1, 8, inStationNames[i]);
+			for (int j = 0; j < newStationValue.length; j++) {
+				if(newStationFlags[i].equals(newStationValue[j])){
+					createCell(i + 1,9, newStationDesc[j]);
 				}
 			}
-			createCell(i + 1, 7, amountPrepare[i]);
-			createCell(i + 1, 8, inOrgNames[i]);
-			createCell(i + 1, 9, inStationNames[i]);
 			for (int j = 0; j < statuDesc.length; j++) {
 				if (listStatus[i].equals(statuVal[j])) {
 					createCell(i + 1, 10, statuDesc[j]);
