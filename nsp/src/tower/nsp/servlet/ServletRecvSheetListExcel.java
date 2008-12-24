@@ -130,7 +130,7 @@ public class ServletRecvSheetListExcel extends javax.servlet.http.HttpServlet im
 		createHead(0, 6, "调度数量");
 		createHead(0, 7, "调入单位");
 		createHead(0, 8, "调入基站");
-		createHead(0, 9, "新基站");
+		createHead(0, 9, "新建基站");
 		createHead(0, 10, "状态");
 		for (int i = 0; i < listIds.length; i++) {
 			createCell(i + 1, 0, sheetIds[i]);

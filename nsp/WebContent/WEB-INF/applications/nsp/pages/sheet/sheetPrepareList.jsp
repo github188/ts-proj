@@ -190,7 +190,7 @@
 	                     <th nowrap>调度数量</th>
 	                     <th nowrap>设备状态</th>
 	                     <th nowrap>调入单位</th>
-	                     <th nowrap>新基站</th>
+	                     <th nowrap>新建基站</th>
 	                     <th nowrap>操作</th>
                      </tr>
                      <tr class='dark'>

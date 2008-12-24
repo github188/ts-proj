@@ -38,8 +38,8 @@
 	String[] statusIds = {"","1","2","3","4","5","6"};
 	String[] statusDescs ={"全部","下发","已接收","已出库","已入库","施工完毕","确认完成"};
 	
-	String[] newStationFlagIds = {"","0","1"};
-	String[] newStationFlagDescs ={"全部","否","是"};
+	String[] newStationFlagIds = {"0","1"};
+	String[] newStationFlagDescs ={"否","是"};
 	
 %>
 <%
@@ -204,9 +204,10 @@ function doSubmit(form) {
                 <tr>
                   <td align="right">新建基站：</td>
                   <td><select name="QNEW_STATION_FLAG" style="width:100%" class="select">
-                  		<option value="">全部</option>
-                  		<option value="0">否</option>
-                  		<option value="1">是</option>
+                  <option value="">全部</option>
+                  <%for(int i=0; i< newStationFlagIds.length;i++){ %>
+	                  		<option value=<%=newStationFlagIds[i] %> <%if(newStationFlagIds[i].equals(newStationFlag )){out.print("selected");} %> ><%=newStationFlagDescs[i] %></option>
+                  <%} %>
                   	  </select>
                   </td>
                   <td>&nbsp;&nbsp;</td>

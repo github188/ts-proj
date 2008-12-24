@@ -212,18 +212,18 @@
               <input type="hidden" name="FUNC_ID" value="ResourceInCheck">
               <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
               <tr>
-                  <th>工单编号</th>
-                  <th>调度日期</th>
-                  <th>调出单位</th>
-                  <th>调出基站</th>
-                  <th>设备类型</th>
-                  <th>设备型号</th>
-                  <th>调入单位</th>
-                  <th>调入基站</th>
-                  <th>调出数量</th>
-                  <th>领取人</th>
-                  <th>领取日期</th>
-                  <th>操作</th>
+                  <th nowrap>工单编号</th>
+                  <th nowrap>调度日期</th>
+                  <th nowrap>调出单位</th>
+                  <th nowrap>调出基站</th>
+                  <th nowrap>设备类型</th>
+                  <th nowrap>设备型号</th>
+                  <th nowrap>调入单位</th>
+                  <th nowrap>调入基站</th>
+                  <th nowrap>调出数量</th>
+                  <th nowrap>领取人</th>
+                  <th nowrap>领取日期</th>
+                  <th nowrap>操作</th>
                 </tr>
                 <%for (int i = 0 ; i < listIds.length ; i ++){
                     String trClass = "";
