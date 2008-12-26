@@ -99,8 +99,8 @@
     String linkEmail = xml.getItemValue("SYS_USER",1,"LINK_EMAIL");
     String userDesc = xml.getItemValue("SYS_USER",1,"USER_DESC");
     String USER_BIRTH =xml.getItemValue("SYS_USER",1,"USER_BIRTH");
-    String userOrgName = xml.getItemValue("SYS_USER",1,"USER_ORG_NAME");
-    String userStatName = xml.getItemValue("SYS_USER",1,"USER_STAT_NAME");
+    //String userOrgName = xml.getItemValue("SYS_USER",1,"USER_ORG_NAME");
+    //String userStatName = xml.getItemValue("SYS_USER",1,"USER_STAT_NAME");
     
     String[] statusIds = { "N", "L" };
     String[] statusDescs = {  "正常", "锁定" };
