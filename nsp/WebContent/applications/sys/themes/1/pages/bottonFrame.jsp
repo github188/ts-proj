@@ -30,7 +30,7 @@
     <div class="panelContent2">
       <div>
       <div id="statusLeft"></div>
-      <div id="statusCenter">中国移动通讯集团山东有限公司青岛分公司</div>
+      <div id="statusCenter">中国移动通信集团山东有限公司青岛分公司</div>
       <div id="statusRight">
       <a href="#" onclick="doBack()"><img height="16" alt="后退" src="../img/status/back.gif" width="16" border="0"></a>
       <a href="#" onclick="doForward()"><img height="16" alt="前进" src="../img/status/forward.gif" width="16" border="0"></a></div>
