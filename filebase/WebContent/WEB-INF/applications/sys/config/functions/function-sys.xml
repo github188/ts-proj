@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<functions>
+
+	<!-- 下载通用页 -->
+	<function id="Download" description="下载上传的文件" type="bo"
+		className="tower.tmvc.sys.bo.common.BoDownloadUploadedFile"
+		forward="ServletFileDisplay" />
+	<function id="ServletFileDisplay" description="下载上传的文件输出" type="jsp"
+		jspPath="/sys/servlets/ServletFileDisplay" />
+	<!-- end 下载通用页 -->
+
+	
+		
+	<!-- 应用消息（滚动部分） -->
+	<function id="AppMsg" description="应用消息" type="jsp"
+		jspPath="/sys/pages/common/page/appMsg.jsp" />
+	<!-- end 主框架 -->
+
+	<!-- AJAX 通用页 -->
+	<function id="AjaxJson" description="招标信息查询" type="jsp"
+		jspPath="/sys/pages/common/ajax/json.jsp" />
+	<!-- end AJAX 通用页 -->
+	
+	<!-- 验证图片 -->
+	<function id="VertifyImage" description="验证图片" type="bo"
+		className="tower.tmvc.sys.bo.common.BoVertifyImage"
+		forward="ServletFileDisplay" />
+	<!-- end 验证图片 -->
+
+	<function id="AdminMain" description="管理端主页面" type="jsp"
+		jspPath="/sys/adminIndex.jsp" />
+
+	<function id="Main" description="主页面" type="jsp"
+		jspPath="/sys/index.jsp" />
+	<function id="InLogin" description="登录页面" type="jsp"
+		jspPath="/sys/pages/sys/log/login.jsp" />
+	<function id="Login" description="用户登录" type="bo"
+		className="tower.tmvc.sys.bo.user.BoUserLogin" forward="Main" />
+	<function id="Logout" description="用户注销" type="bo"
+		className="tower.tmvc.sys.bo.user.BoUserLogout" forward="InLogin" />
+	
+	<!--  部门管理 -->
+	<function id="OrgFatherInfor" description="部门编辑" type="bo"
+		className="tower.tmvc.sys.bo.org.BoOrgDetail"
+		forward="OrgTreeList" />
+	<function id="OrgList" description="部门查询" type="bo"
+		className="tower.tmvc.sys.bo.org.BoOrgList"
+		forward="OrgTreeList" />
+	<function id="OrgTreeList" description="部门树查询" type="bo"
+		className="tower.tmvc.sys.bo.org.BoOrgTreeList"
+		forward="InOrgList" />
+	<function id="InOrgList" description="部门查询页面" type="jsp"
+		jspPath="/sys/pages/sys/orgDef/orgList.jsp" />
+	<function id="OrgAdd" description="部门树查询" type="bo"
+		className="tower.tmvc.sys.bo.org.BoOrgTreeList"
+		forward="OrgAddTo" />
+	<function id="OrgAddTo" description="部门添加" type="jsp"
+		jspPath="/sys/pages/sys/orgDef/orgEdit.jsp" />
+	<function id="OrgEdit" description="部门编辑" type="bo"
+		className="tower.tmvc.sys.bo.org.BoOrgDetail"
+		forward="InOrgEdit" />
+	<function id="InOrgEdit" description="部门树查询" type="bo"
+		className="tower.tmvc.sys.bo.org.BoOrgTreeList"
+		forward="InOrgEditTo" />
+	<function id="InOrgEditTo" description="部门编辑页面" type="jsp"
+		jspPath="/sys/pages/sys/orgDef/orgEdit.jsp" />
+	<function id="OrgSubmit" description="部门添加/编辑提交" type="bo"
+		className="tower.tmvc.sys.bo.org.BoOrgSubmit" forward="StatBack" />
+	<function id="OrgDelete" description="部门删除" type="bo"
+		className="tower.tmvc.sys.bo.org.BoOrgDelete" forward="OrgList" />
+
+	<function id="SelectOrgList" description="部门管理选择查询" type="bo"
+		className="tower.tmvc.sys.bo.org.BoOrgList"
+		forward="OrgTreeList2" />
+	<function id="OrgTreeList2" description="部门树查询" type="bo"
+		className="tower.tmvc.sys.bo.org.BoOrgTreeList"
+		forward="InOrgSelect" />
+	<function id="InOrgSelect" description="部门管理选择页面" type="jsp"
+		jspPath="/sys/pages/sys/orgDef/SelectOrgList.jsp" />
+
+	<!--  岗位管理 -->
+	<function id="StatList" description="岗位管理查询" type="bo"
+		className="tower.tmvc.sys.bo.stat.BoStatList"
+		forward="StatListJsp" />
+	<function id="StatEdit" description="岗位管理编辑" type="bo"
+		className="tower.tmvc.sys.bo.stat.BoStatDetail"
+		forward="StatView" />
+	<function id="StatDelete" description="岗位管理删除" type="bo"
+		className="tower.tmvc.sys.bo.stat.BoStatDelete"
+		forward="StatList" />
+	<function id="StatAdd" description="岗位管理添加" type="bo"
+		className="tower.tmvc.sys.bo.stat.BoStatSubmit"
+		forward="StatBack" />
+
+	<function id="StatBack" description="岗位管理查询页面" type="jsp"
+		jspPath="/sys/pages/sys/statDef/loadStat.jsp" />
+
+	<function id="SelectStatList" description="岗位管理选择查询" type="bo"
+		className="tower.tmvc.sys.bo.stat.BoStatList"
+		forward="InStatSelect" />
+	<function id="InStatSelect" description="岗位管理选择页面" type="jsp"
+		jspPath="/sys/pages/sys/statDef/SelectstatList.jsp" />
+
+
+	<function id="StatListJsp" description="岗位管理查询页面" type="jsp"
+		jspPath="/sys/pages/sys/statDef/statList.jsp" />
+	<function id="StatView" description="人员添加初始化:读取菜单" type="bo"
+		className="tower.tmvc.sys.bo.menu.BoMenuList"
+		forward="InStatView" />
+	<function id="InStatView" description="岗位管理编辑页面" type="jsp"
+		jspPath="/sys/pages/sys/statDef/statEdit.jsp" />
+
+	<!--  人员管理 -->
+	<function id="UserList" description="人员查询" type="bo"
+		className="tower.tmvc.sys.bo.user.BoUserList"
+		forward="UserListTo" />
+	<function id="UserListTo" description="人员查询" type="jsp"
+		jspPath="/sys/pages/sys/userDef/userList.jsp" />
+	<function id="UserDelete" description="人员删除" type="bo"
+		className="tower.tmvc.sys.bo.user.BoUserDelete"
+		forward="UserList" />
+	<function id="UserAdd" description="人员添加初始化:读取菜单" type="bo"
+		className="tower.tmvc.sys.bo.menu.BoMenuList"
+		forward="InUserAdd" />
+	<function id="InUserAdd" description="人员增加" type="jsp"
+		jspPath="/sys/pages/sys/userDef/userEdit.jsp" />
+	<function id="UserSubmit" description="人员增加提交" type="bo"
+		className="tower.tmvc.sys.bo.user.BoUserSubmit"
+		forward="StatBack" />
+	<function id="UserEdit" description="人员编辑" type="bo"
+		className="tower.tmvc.sys.bo.user.BoUserDetail"
+		forward="UserAdd" />
+	<function id="UserPassWord" description="人员密码修改页面" type="jsp"
+		jspPath="/sys/pages/sys/userDef/userPassWord.jsp" />
+	<function id="UserPassWordSubmit" description="人员密码提交" type="bo"
+		className="tower.tmvc.sys.bo.user.BoUserPassWordSubmit"
+		forward="UserPassWordSubmitTo" />
+	<function id="UserPassWordSubmitTo" description="人员增加" type="jsp"
+		jspPath="/sys/pages/sys/userDef/userPassWordSucc.jsp" />
+
+	<!-- 选择框页面 -->
+	<!-- 选择人员 -->
+	<function id="SelectUser" description="选择人员" type="bo"
+		className="tower.tmvc.sys.bo.user.BoSelectUser"
+		forward="InSelectUser" />
+	<function id="InSelectUser" description="选择人员页面" type="jsp"
+		jspPath="/sys/pages/common/select/selectUser.jsp" />
+	<!-- end 选择人员 -->
+	
+	<!-- 选择部门 -->
+	<function id="SelectOrg" description="部门管理选择查询" type="bo"
+		className="tower.tmvc.sys.bo.org.BoSelectOrg"
+		forward="InOrgSelect" />
+	<function id="InOrgSelect" description="部门管理选择页面" type="jsp"
+		jspPath="/sys/pages/common/select/selectOrg.jsp" />
+	<!-- end 选择部门 -->
+	
+	<!-- 选择岗位 -->
+	<function id="SelectStat" description="岗位管理选择查询" type="bo"
+		className="tower.tmvc.sys.bo.stat.BoSelectStat"
+		forward="InStatSelect" />
+	<function id="InStatSelect" description="岗位管理选择页面" type="jsp"
+		jspPath="/sys/pages/common/select/selectStat.jsp" />
+	<!-- end 选择岗位 -->
+	
+	<!-- 示例：信息主表 -->
+	<!-- 初始化 -->
+	<function id="BInfoInit" description="信息初始页面" type="jsp"
+		jspPath="/sys/pages/example/widget/bInfoList.jsp" />
+	<!-- 查询 -->
+	<function id="BInfoList" description="信息查询" type="bo"
+		className="tower.example.widget.bo.BoBInfoList"
+		forward="InBInfoList" />
+	<function id="InBInfoList" description="信息查询结果页面" type="jsp"
+		jspPath="/sys/pages/example/widget/bInfoList.jsp" />
+	<!-- 添加 -->
+	<function id="BInfoAdd" description="信息添加页面" type="jsp"
+		jspPath="/sys/pages/example/widget/bInfoEdit.jsp" />
+	<!-- 编辑 -->
+	<function id="BInfoEdit" description="信息编辑" type="bo"
+		className="tower.example.widget.bo.BoBInfoDetail"
+		forward="InBInfoEdit" />
+	<function id="InBInfoEdit" description="信息编辑页面" type="jsp"
+		jspPath="/sys/pages/example/widget/bInfoEdit.jsp" />
+	<!-- 提交 -->
+	<function id="BInfoSubmit" description="信息提交" type="bo"
+		className="tower.example.widget.bo.BoBInfoSubmit"
+		forward="InBInfoUpdateResult" />
+	<!-- 删除 -->
+	<function id="BInfoDelete" description="信息删除" type="bo"
+		className="tower.example.widget.bo.BoBInfoDelete"
+		forward="InBInfoUpdateResult" />
+	<!-- 提交或删除结果页面 -->
+	<function id="InBInfoUpdateResult" description="信息更新结果页面" type="jsp"
+		jspPath="/sys/pages/example/widget/bInfoUpdateResult.jsp" />
+	<!-- end 示例：信息主表 -->
+</functions>
