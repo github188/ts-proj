@@ -207,8 +207,7 @@
                          <%for(int i=0;i<value.length;i++){ %>
                         <option value="<%=value[i] %>" <%if(value[i].equals(outResourceStatus)){out.print("selected");} %>><%=desc[i] %></option>
                         <%} %>
-                      </select>
-                      <span class="requiredField">*</span>
+                        </select>
                       <span class="selectRequiredMsg">请选择一个项目。</span></span>
 						 </td>
 		               </tr>
