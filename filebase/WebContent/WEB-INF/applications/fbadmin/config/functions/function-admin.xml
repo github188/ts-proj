@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<functions>
+	
+	<!-- 客户信息管理 -->
+	<function id="AdminUserPassWord" description="人员密码修改页面" type="jsp"
+		jspPath="/fbadmin/pages/sys/user/userPassWord.jsp" />
+		<function id="AdminUserPassWordSubmit" desciption="用户人员密码修改的提交" type="bo"
+	    className="tower.filebase.bo.sys.user.BoPasswordSubmit" forward="InfoInit" />
+    <!-- 角色管理 -->
+	<function id="RoleQuery" description="角色查询" type="bo"
+		className="tower.filebase.bo.sys.role.BoRoleList" forward="InRoleList" />
+	<function id="InRoleList" description="角色查询页面" type="jsp"
+		jspPath="/fbadmin/pages/sys/role/roleList.jsp" />
+	<function id="RoleAdd" description="角色增加" type="bo"
+		className="tower.filebase.bo.sys.role.BoRoleDetail" forward="InRoleDetail" />
+	<function id="InRoleDetail" description="角色详细信息页面" type="jsp"
+		jspPath="/fbadmin/pages/sys/role/roleEdit.jsp" />
+	<function id="RoleEdit" description="角色编辑" type="bo"
+		className="tower.filebase.bo.sys.role.BoRoleDetail" forward="InRoleDetail" />
+	<function id="RoleSubmit" description="角色提交" type="bo"
+		className="tower.filebase.bo.sys.role.BoRoleSubmit" forward="RoleQuery" />	
+	<function id="RoleDelete" description="角色删除" type="bo"
+		className="tower.filebase.bo.sys.role.BoRoleDelete" forward="RoleQuery" />
+	<function id="RolePerm" description="角色权限分配" type="bo"
+		className="tower.filebase.bo.sys.role.BoRolePerm" forward="InRolePerm" />
+	<function id="InRolePerm" description="角色权限分配页面" type="jsp"
+		jspPath="/fbadmin/pages/sys/role/rolePerm.jsp" />	
+	<function id="RolePermSubmit" description="角色权限分配提交" type="bo"
+		className="tower.filebase.bo.sys.role.BoRolePermSbumit" forward="RolePerm" />	
+	<function id="RolePermDelete" description="角色权限分配删除" type="bo"
+		className="tower.filebase.bo.sys.role.BoRolePermDelete" forward="RolePerm" />
+	
+	<!--  机构管理 -->
+	<function id="OrgFatherInfor" description="机构编辑" type="bo"
+		className="tower.filebase.bo.sys.org.BoOrgDetail"
+		forward="OrgTreeList" />
+	<function id="OrgList" description="机构查询" type="bo"
+		className="tower.filebase.bo.sys.org.BoOrgList"
+		forward="OrgTreeList" />
+	<function id="OrgTreeList" description="机构树查询" type="bo"
+		className="tower.filebase.bo.sys.org.BoOrgTreeList"
+		forward="InOrgList" />
+	<function id="InOrgList" description="机构查询页面" type="jsp"
+		jspPath="/fbadmin/pages/sys/org/orgList.jsp" />  ///
+	<function id="OrgAdd" description="机构树查询" type="bo"
+		className="tower.filebase.bo.sys.org.BoOrgTreeList"
+		forward="OrgAddTo" />
+	<function id="OrgAddTo" description="机构添加" type="jsp"
+		jspPath="/fbadmin/pages/sys/org/orgEdit.jsp" />
+	<function id="OrgEdit" description="机构编辑" type="bo"
+		className="tower.filebase.bo.sys.org.BoOrgDetail"
+		forward="InOrgEdit" />
+	<function id="InOrgEdit" description="机构树查询" type="bo"
+		className="tower.filebase.bo.sys.org.BoOrgTreeList"
+		forward="InOrgEditTo" />
+	<function id="InOrgEditTo" description="机构编辑页面" type="jsp"
+		jspPath="/fbadmin/pages/sys/org/orgEdit.jsp" />
+	<function id="OrgSubmit" description="机构添加/编辑提交" type="bo"
+		className="tower.filebase.bo.sys.org.BoOrgSubmit" forward="StatBack" />
+	<function id="OrgDelete" description="机构删除" type="bo"
+		className="tower.filebase.bo.sys.org.BoOrgDelete" forward="OrgList" />
+	<!-- 机构管理 -->	
+
+	
+	<!-- 选择机构 -->
+	<function id="SelectOrg" description="机构管理选择查询" type="bo"
+		className="tower.filebase.bo.sys.org.BoSelectOrg"
+		forward="InOrgSelect" />
+	<function id="InOrgSelect" description="机构管理选择页面" type="jsp"
+		jspPath="/fbadmin/pages/sys/org/selectOrg.jsp" />
+	<function id="SelectRole" description="角色选择查询" type="bo"
+		className="tower.filebase.bo.sys.role.BoSelectRole"
+		forward="InSelectRole" />
+	<function id="InSelectRole" description="角色选择页面" type="jsp"
+		jspPath="/fbadmin/pages/sys/role/selectRole.jsp" />
+	<!-- 选择部门 -->	
+		
+	<!-- 系统参数设置 -->
+	<function id="SysParamQuery" description="系统参数定义" type="bo"
+		className="tower.filebase.bo.sys.sysParam.BoSysParamDetail"
+			forward="SysParamList" />
+	<function id="SysParamList" description="系统参数显示" type="jsp"
+		jspPath="/fbadmin/pages/sys/sysParam/sysParamList.jsp" />
+	<function id="SysParamSubmit" description="系统参数提交" type="bo"
+		className="tower.filebase.bo.sys.sysParam.BoSysParamSubmit"
+		forward="InfoInit"/>
+		
+		<!--  人员管理 -->
+	<function id="UserQuery" description="人员查询" type="bo"
+		className="tower.filebase.bo.sys.user.BoUserList"
+		forward="UserListTo" />
+	<function id="UserListTo" description="人员查询" type="jsp"
+		jspPath="/fbadmin/pages/sys/user/userList.jsp" />
+	<function id="UserDelete" description="人员删除" type="bo"
+		className="tower.filebase.bo.sys.user.BoUserDelete"
+		forward="UserQuery" />
+	
+	<function id="UserAdd" description="人员增加" type="jsp"
+		jspPath="/fbadmin/pages/sys/user/userEdit.jsp" />
+	<function id="UserSubmit" description="人员增加提交" type="bo"
+		className="tower.filebase.bo.sys.user.BoUserSubmit"
+		forward="UserQuery" />
+	<function id="UserEdit" description="人员编辑" type="bo"
+		className="tower.filebase.bo.sys.user.BoUserDetail"
+		forward="UserAdd" />
+	
+    <function id="UserRole" description="人员角色分配" type="bo"
+		className="tower.filebase.bo.sys.user.BoUserRoleDetail"
+		forward="InUserRole" />
+	<function id="InUserRole" description="人员角色分配页面" type="jsp"
+		jspPath="/fbadmin/pages/sys/user/userRole.jsp" />
+	<function id="UserRoleSubmit" description="人员角色分配提交" type="bo"
+		className="tower.filebase.bo.sys.user.BoUserRoleSubmit"
+		forward="UserRole" />
+	<!-- 选择框页面 -->
+
+</functions>
