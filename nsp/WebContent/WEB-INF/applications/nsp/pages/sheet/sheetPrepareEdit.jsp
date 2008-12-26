@@ -156,7 +156,7 @@
 
 <body id="mainArea">
   <div id="mainPanel" class="panel">
-    <div class="panelHead">下发调度工单 - 工单明细信息添加/编辑</div>
+    <div class="panelHead">下发调度工单 - 工单明细信息编辑</div>
     <div class="panelContent">
       <div class="panelContent2">
         
