@@ -142,7 +142,7 @@
                       <td align="center"><%=typeList.get(k) %></td>
                    <%     }else{
                    %>
-                      <td align="center"><a href="JavaScript:doEveryList('<%=typeList.get(k) %>')"><%=typeList.get(k).toString().split(",")[2] %></td>
+                      <td align="center"><a href="JavaScript:doEveryList('<%=typeList.get(k) %>')"><%=typeList.get(k).toString().split(",")[2] %></a></td>
                    <% 
                           }
                         }
@@ -160,7 +160,7 @@
                       <td align="center"><%=typeList.get(k) %></td>
                    <% }else{
                    %>
-                      <td align="center"><a href="JavaScript:doEveryList('<%=typeList.get(k) %>')"><%=typeList.get(k).toString().split(",")[2] %></td>
+                      <td align="center"><a href="JavaScript:doEveryList('<%=typeList.get(k) %>')"><%=typeList.get(k).toString().split(",")[2] %></a></td>
                    <% 
                         }
                      }
