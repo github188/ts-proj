@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<functions>
+	<!-- 目录树 -->
+	
+	<function id="CataLogTree" description="目录数获取" type="bo"
+		className="tower.filebase.bo.catalogDef.BoCatalogQuery" forward="ToCataLogTree" />
+	<function id="ToCataLogTree" description="目录树" type="jsp"
+		jspPath="/fbclient/pages/common/page/menuBody.jsp" />
+		
+	<!-- 目录添加 -->
+	<function id="CatalogDetail" description="目录编辑" type="bo"
+		className="tower.filebase.bo.catalogDef.BoCatalogDetail" forward="CatalogEdit" />
+		
+	<function id="CatalogEdit" description="目录编辑页面" type="jsp"
+		jspPath="/fbclient/pages/catalog/catalogDef/catalogEdit.jsp" />
+		
+	<function id="CatalogSubmit" description="目录提交" type="bo"
+		className="tower.filebase.bo.catalogDef.BoCatalogSubmit" forward="CatalogFresh" />
+		
+	<function id="CatalogDelete" description="目录删除" type="bo"
+		className="tower.filebase.bo.catalogDef.BoCatalogDelete" forward="CatalogFresh" />
+		
+	<function id="CatalogFresh" description="目录编辑页面" type="jsp"
+		jspPath="/fbclient/pages/common/page/freshPage.jsp" />
+</functions>

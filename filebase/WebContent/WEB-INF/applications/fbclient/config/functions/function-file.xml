@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<functions>
+
+	<function id="DownLoadFile" description="文件下载" type="jsp"
+		jspPath="/fbclient/servlet/DownLoadFileServlet" />
+	<function id="FileOperateList" description="文件操作列表" type="bo"
+		className="tower.filebase.bo.fileDef.BoFileOperateList" forward="ToInfoInit" />
+	<function id="ToInfoInit" description="文件操作列表" type="jsp"
+		jspPath="/fbclient/pages/file/fileDef/fileOperateList.jsp" />
+	<function id="RollBackFileVersion" description="文件版本回滚" type="bo"
+		className="tower.filebase.bo.fileDef.BoRollBackFileVersion" forward="FileVersionHistory" />
+	<function id="GetFileVersion" description="获取历史版本" type="bo"
+		className="tower.filebase.bo.fileDef.BoGetFileHistoryVersion" forward="DownLoadFile" />
+	<function id="DestroyFileVersion" description="销毁文件历史版本" type="bo"
+		className="tower.filebase.bo.fileDef.BoDestroyFileVersion" forward="FileVersionHistory" />
+	<function id="FileVersionHistory" description="管理历史版本管理" type="bo"
+		className="tower.filebase.bo.fileDef.BoFileVersionHistory" forward="ToFileVersionHistory" />
+	<function id="ToFileVersionHistory" description="文件历史版本列表页面" type="jsp"
+		jspPath="/fbclient/pages/file/fileDef/fileHistoryVersion.jsp" />
+	<function id="UpLoadFile" description="上传文件" type="bo"
+		className="tower.filebase.bo.fileDef.BoFileUpLoad" forward="ToLoadJSP" />
+	<function id="ToLoadJSP" description="文件历史版本列表页面" type="jsp"
+		jspPath="/fbclient/pages/file/fileDef/Load.jsp" />
+	<function id="ToUpLoadFile" description="文件上传页面" type="jsp"
+		jspPath="/fbclient/pages/file/fileDef/fileEdit.jsp" />
+	<function id="DownLoadEditFile" description="下载编辑" type="bo"
+		className="tower.filebase.bo.fileDef.BoFileEditDownLoad" forward="DownLoadFile" />
+	<function id="ToDownLoadFile" description="文件下载" type="bo"
+		className="tower.filebase.bo.fileDef.BoFileDownLoad" forward="DownLoadFile" />
+	<function id="EditUpLoadFile" description="编辑上传" type="bo"
+		className="tower.filebase.bo.fileDef.BoFileDetail" forward="ToUpLoadFile" />
+	<function id="FileQuery" description="文件查询" type="bo"
+		className="tower.filebase.bo.fileDef.BoFileQuery" forward="ToFileQuery" />
+	<function id="ToFileQuery" description="文件查询" type="jsp"
+		jspPath="/fbclient/pages/file/fileDef/fileList.jsp" />
+	<function id="FileSearch" description="全文检索" type="bo"
+		className="tower.filebase.bo.fileDef.BoFileQuery" forward="ToFileSearch" />
+	<function id="ToFileSearch" description="文件查询" type="jsp"
+		jspPath="/fbclient/pages/file/fileDef/fileSearch.jsp" />
+	<function id="DeleteFileList" description="已删除文件查询" type="bo"
+		className="tower.filebase.bo.fileDef.BoFileDeleteList" forward="ToDelFileList" />
+	<function id="ToDelFileList" description="已删除文件页面" type="jsp"
+		jspPath="/fbclient/pages/file/fileDef/fileDeleteList.jsp" />
+	<function id="UnDel" description="已删除文件恢复" type="bo"
+		className="tower.filebase.bo.fileDef.BoFileUnDelete" forward="DeleteFileList" />
+	<function id="deletedFileDestory" description="已删除文件销毁" type="bo"
+		className="tower.filebase.bo.fileDef.BoFileDestory" forward="DeleteFileList" />
+	
+		
+		
+<!-- 文件移动、复制、删除、销毁 -->
+	<function id="FileMoveInit" description="文件移动" type="bo"
+		className="tower.filebase.bo.fileDef.BoFileMove" forward="FileMoveSelect" />
+	<function id="FileMoveSelect" description="文件移动目标选择页面" type="jsp"
+		jspPath="/fbclient/pages/catalog/catalogDef/catalogMoveSelect.jsp" />
+	<function id="FileMoveSubmit" description="文件移动提交" type="bo"
+		className="tower.filebase.bo.fileDef.BoFileMoveSubmit" forward="FileOperateList" />
+	
+	<function id="FileCopyInit" description="文件拷贝" type="bo"
+		className="tower.filebase.bo.fileDef.BoFileCopy" forward="FileCopySelect" />
+	<function id="FileCopySelect" description="文件拷贝目标选择页面" type="jsp"
+		jspPath="/fbclient/pages/catalog/catalogDef/catalogCopySelect.jsp" />
+	<function id="FileCopySubmit" description="文件拷贝提交" type="bo"
+		className="tower.filebase.bo.fileDef.BoFileCopySubmit" forward="FileOperateList" />
+	
+	<function id="FileDelete" description="文件删除" type="bo"
+		className="tower.filebase.bo.fileDef.BoFileDelete" forward="FileOperateList" />
+	
+	<function id="FileDestory" description="文件销毁" type="bo"
+		className="tower.filebase.bo.fileDef.BoFileDestory" forward="FileOperateList" />
+		
+			
+<!-- 文件移动、复制、删除、销毁  -->
+
+</functions>
+
+

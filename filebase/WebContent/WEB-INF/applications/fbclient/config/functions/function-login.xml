@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<functions>
+
+    <!-- 主框架 -->
+	<!-- 应用信息 -->
+	<function id="AppInfo" description="应用信息" type="jsp"
+		jspPath="/fbclient/pages/common/page/appInfo.jsp" />
+	<!-- 登录信息 -->
+	<function id="LoginInfo" description="登录信息" type="jsp"
+		jspPath="/sys/pages/common/page/loginInfo.jsp" />
+	<!-- 主菜单 -->
+	<function id="MenuBody" description="主菜单" type="jsp"
+		jspPath="/sys/pages/common/page/menuBody.jsp" />
+		
+    <function id="InLogin" description="登录页面" type="jsp"
+        jspPath="/fbclient/pages/sys/log/login.jsp" />
+        
+	<function id="UserLogin" description="用户登录" type="bo"
+		className="tower.common.log.BoClientUserLogin" forward="Main" />
+		
+	<function id="CatalogButton" description="目录按钮显示" type="bo"
+		className="tower.filebase.bo.catalogDef.BoButtonShow" forward="CatalogButtonShow" />
+	<function id="CatalogButtonShow" description="目录按钮显示页面" type="jsp"
+        jspPath="/fbclient/pages/common/page/menuTop.jsp" />
+</functions>

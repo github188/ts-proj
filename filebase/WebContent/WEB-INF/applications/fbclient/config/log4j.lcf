@@ -1,0 +1,16 @@
+# 默认日志级别ERROR。其他可供选择的级别包括INFO和DEBUG
+log4j.rootLogger=DEBUG,ROOT,stdout
+log4j.appender.ROOT=org.apache.log4j.RollingFileAppender
+log4j.appender.ROOT.File={APP-PATH}/logs/app.log
+log4j.appender.ROOT.MaxFileSize=1000KB
+# 保留5个旧的日志文件
+log4j.appender.ROOT.MaxBackupIndex=5
+log4j.appender.ROOT.layout=org.apache.log4j.PatternLayout
+# 日志格式：按照WebSphere通用日志格式相似的方式记录
+log4j.appender.ROOT.layout.ConversionPattern=[%d] %-5p (%c.java:%L) - %m%n
+
+log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+
+# Pattern to output the caller's file name and line number.
+log4j.appender.stdout.layout.ConversionPattern=[%d] %-5p (%c.java:%L) - %m%n
