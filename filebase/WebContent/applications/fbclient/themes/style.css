@@ -1,0 +1,934 @@
+@charset "utf-8";
+
+/*******************************************************************************
+* html
+*******************************************************************************/
+body {
+	margin: 0;
+	padding: 0;
+	font-family: "Tahoma", "Arial";
+	font-size: 9pt;
+}
+
+a {
+	color: #4E81BB;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #D43A14;
+}
+
+a.nav {
+	color: green;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+a.nav:hover {
+	text-decoration: underline;
+}
+a.nav:active {
+	color: blue;
+}
+a.select{
+	color: blue;
+	font-weight: bold;
+	text-decoration: none;
+}
+form {
+	font-size: 9pt;
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+}
+
+input select textarea {
+	font-size: 9pt;
+}
+
+input.text {
+	font-size: 9pt;
+	border: 1px solid #000066;
+	background-color: #F8F8F8;
+}
+input.password {
+	width:10.6em;
+	font-size: 9pt;
+	border: 1px solid #000066;
+	background-color: #F8F8F8;
+}
+
+input.file {
+	font-size: 9pt;
+	margin: 0px;
+	padding: 0px;
+	border: 1px solid #000066;
+	background-color: #F8F8F8;
+}
+
+input.date {
+	font-size: 9pt;
+	border: 1px solid #000066;
+	background-color: #F8F8F8;
+	width: 80px;
+}
+
+input.submit {
+	font-size: 9pt;
+	margin: 0px;
+	background: transparent url("img/btnBg.gif");
+	height: 20px;
+	width:60px;
+	border: 1px solid #000066;
+}
+
+input.reset {
+	font-size: 9pt;
+	margin: 0px;
+	padding: 0px;
+	background: transparent url("img/btnBg.gif");
+	height: 20px;
+	width:60px;
+	border: 1px solid #000066;
+}
+
+input.button {
+	font-size: 9pt;
+	margin: 0px;
+	background: transparent url("img/btnBg.gif");
+	height: 20px;
+	width:60px;
+	border: 1px solid #000066;
+}
+
+input.bigButton {
+	font-size: 9pt;
+	margin: 0px;
+	background: transparent url("img/btnBg.gif");
+	height: 20px;
+	padding: 0px 0px;
+	border: 1px solid #000066;
+}
+
+select.select {
+	font-size: 9pt;
+	width: 11em;
+	background-color: #F8F8F8;
+}
+
+textarea.textarea {
+	font-size: 9pt;
+	background-color: #F8F8F8;
+	margin: 0;
+	padding: 0;
+}
+
+textarea.full {
+	width: 100%;
+}
+
+option {
+	font-size: 9pt;
+	background-color: #F8F8F8;
+}
+
+/*******************************************************************************
+* pageBar
+*******************************************************************************/
+.pageBar {
+	margin-top: 5px;
+	text-align: right;
+	font-size: 9pt;
+}
+
+.pageBar a {
+	font-size: 9pt;
+	margin-left: 3px;
+	margin-right: 3px;
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
+/*******************************************************************************
+* menu
+*******************************************************************************/
+#menuBody {
+	margin: 0px 0px 0px 5px;
+	width: 155px;
+}
+
+#menuRight {
+	background: #fff url("img/panelBlue/border.gif") no-repeat left top;
+}
+
+#menuLeft {
+	background: #fff url("img/panelBlue/border.gif") no-repeat right top;
+}
+
+#menuTop {
+	margin-left: 5px;
+	margin-right: 5px;
+	padding-left: 14px;
+	background: #fff url("img/panelBlue/head.gif") no-repeat left top;
+	height: 39px;
+}
+
+#menuTop div.right {
+	background: #fff url("img/panelBlue/head.gif") no-repeat right top;
+	height: 100%;
+	color: #fff;
+	font-size: 10pt;
+	font-weight: bold;
+	line-height: 30px;;
+	font-size: 10pt;
+}
+
+#menuBottom {
+	margin-left: 5px;
+	margin-right: 5px;
+	padding-left: 14px;
+	background: #fff url("img/panelBlue/foot.gif") no-repeat left top;
+	height: 14px;
+}
+
+#menuBottom div.right {
+	background: #fff url("img/panelBlue/foot.gif") no-repeat right top;
+	height: 100%;
+}
+
+/*******************************************************************************
+* info
+*******************************************************************************/
+#info {
+	margin: 5px 5px 0px 5px;
+}
+
+#info .panelContent2 {
+	height: 47px;
+}
+
+#info .panelContent2 .infoContent {
+	margin-top: auto;
+	margin-bottom: auto;
+	font-weight: bold;
+}
+
+/*******************************************************************************
+* msg
+*******************************************************************************/
+#msg {
+	margin: 5px 5px 0px 5px;
+}
+
+#msg .panelContent2 {
+	height: 94px;
+}
+
+#msg .panelContent2 .vertMiddle {
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+#adv {
+	width: 100%;
+	height: 94px;
+	color: #000;
+	margin: 0px;
+}
+
+.advItem {
+	font-weight: bold;
+	font-size: 12px;
+	padding: 3px;
+	margin: 0px;
+}
+
+/*******************************************************************************
+* topFrame
+*******************************************************************************/
+#topFrame .panelContent2 {
+	height: 17px;
+}
+
+#appName {
+	float: left;
+}
+
+#sysFuncBar {
+	float: right;
+	font-size: 9pt;
+	font-weight: bold;
+	padding-top: 5px;
+}
+
+#sysFuncBar a {
+	float:left;
+	margin-left: 10px;
+	text-decoration: none;
+	line-height:100%;
+	position: relative;
+}
+#sysFuncBar a:hover {
+	text-decoration: underline;
+}
+#sysFuncBar a label {
+	position: absolute;
+	right:10000px;
+}
+#sysFuncBar a.logout{
+	display:block;
+	height:16px;
+	width:47px;
+	background: url("img/sysFuncBar/exit.gif");
+}
+#sysFuncBar a.desktop{
+	display:block;
+	height:16px;
+	width:47px;
+	background: url("img/sysFuncBar/desktop.gif");
+}
+#sysFuncBar a.password{
+	display:block;
+	height:16px;
+	width:47px;
+	background: url("img/sysFuncBar/key.gif");
+}
+
+#appInfo {
+	float: left;
+}
+
+#timeAreaContainer {
+	float: right;
+	text-align: right;
+}
+
+#timeArea {
+	font-weight: bold;
+}
+
+/*******************************************************************************
+* hoviSlider
+*******************************************************************************/
+.hoviSlider {
+	height: 100%;
+	width: 8px;
+	background: transparent url("img/hoviSlider/bg.gif");
+}
+
+.hoviSlider .show {
+	margin: auto auto;
+	height: 100%;
+	width: 8px;
+	cursor: pointer;
+	background: transparent url("img/hoviSlider/arrowLeft.gif") no-repeat
+		center center;
+}
+
+.hoviSlider .hidden {
+	margin: auto auto;
+	height: 100%;
+	width: 8px;
+	cursor: pointer;
+	background: transparent url("img/hoviSlider/arrowRight.gif") no-repeat
+		center center;
+	cursor: pointer;
+}
+
+/*******************************************************************************
+* bottomFrame
+*******************************************************************************/
+#status {
+	height: 30px;
+	line-height: 20px;
+}
+
+#status .panelContent2 {
+	height: 30px;
+}
+
+#statusLeft {
+	float: left;
+	width: 20%;
+}
+
+#statusCenter {
+	float: left;
+	margin-left: 0px;
+	margin-right: 0px;
+	width: 60%;
+	text-align: center;
+	clear: none;
+	color: #fff;
+	font-weight: bold;
+}
+
+#statusRight {
+	float: right;
+	width: 20%;
+	text-align: right;
+}
+
+#statusRight a {
+	margin-left: 10px;
+}
+
+/*******************************************************************************
+* mainPanel
+*******************************************************************************/
+#mainArea {
+	min-width: 790px;
+}
+
+#mainPanel {
+	margin: 5px 5px 5px 5px;
+}
+
+#mainPanelList {
+	margin: 5px 0px 0px 0px;
+}
+
+/*******************************************************************************
+* panel
+*******************************************************************************/
+.panel {
+	clear: both;
+	background: url("img/panelBlue/head.gif") no-repeat left top;
+	margin: 0;
+	padding: 0;
+}
+
+.panel .panelHead {
+	background: url("img/panelBlue/head.gif") no-repeat right top;
+	color: #fff;
+	margin: 0;
+	margin-left: 13px;
+	padding-right: 13px;
+	height: 39px;
+	line-height: 33px;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.panel .panelContent {
+	margin: 0;
+	padding: 0;
+	background: #fff url("img/panelBlue/border.gif") no-repeat left top;
+}
+
+.panel .panelContent2 {
+	margin: 0;
+	padding: 0px 15px 0px 10px;
+	background: #fff url("img/panelBlue/border.gif") no-repeat right top;
+	margin-left: 5px;
+}
+
+.panel .panelFoot {
+	background: url("img/panelBlue/foot.gif") no-repeat left top;
+	margin: 0;
+	padding: 0;
+	height: 14px;
+	padding-left: 14px;
+}
+
+.panel .panelFoot div {
+	background: url("img/panelBlue/foot.gif") no-repeat right top;
+	margin: 0;
+	padding: 0;
+	height: 14px;
+}
+
+/*******************************************************************************
+* panelSimple
+*******************************************************************************/
+.panelSimple {
+	clear: both;
+	background: url("img/panelGray/head.gif") no-repeat left top;
+	margin: 0;
+	padding: 0;
+}
+
+.panelSimple .panelHead {
+	background: url("img/panelGray/head.gif") no-repeat right top;
+	color: #fff;
+	margin: 0;
+	margin-left: 13px;
+	height: 8px;
+	font-size: 0px;
+	line-height: 0px;
+	color: #E2E7EA;
+}
+
+.panelSimple .panelContent {
+	margin: 0;
+	padding: 0;
+	background: url("img/panelGray/border.gif");
+}
+
+.panelSimple .panelContent2 {
+	margin: 0;
+	padding: 0px 15px 0px 10px;
+	margin-left: 5px;
+	background: url("img/panelGray/border.gif");
+}
+
+.panelSimple .panelFoot {
+	background: url("img/panelGray/foot.gif") no-repeat left top;
+	margin: 0;
+	padding: 0;
+	padding-left: 14px;
+	height: 8px;
+}
+
+.panelSimple .panelFoot div {
+	background: url("img/panelGray/foot.gif") no-repeat right top;
+	margin: 0;
+	padding: 0;
+	height: 8px;
+}
+
+/*******************************************************************************
+* panelList
+*******************************************************************************/
+.panelList {
+	clear: both;
+	background: url("img/panelWhite/head.gif") no-repeat left top;
+	margin: 0;
+	padding: 0;
+}
+
+.panelList .panelHead {
+	background: url("img/panelWhite/head.gif") no-repeat right top;
+	color: #fff;
+	margin: 0;
+	height: 8px;
+	font-size: 0px;
+	line-height: 0px;
+	color: #fff;
+}
+
+.panelList .panelContent {
+	margin: 0;
+	padding: 0;
+	background: url("img/panelWhite/border.gif");
+}
+
+.panelList .panelContent2 {
+	margin: 0;
+	padding: 0;
+	background: url("img/panelWhite/border.gif");
+}
+
+.panelList .panelFoot {
+	background: url("img/panelWhite/foot.gif") no-repeat left top;
+	margin: 0;
+	padding: 0;
+	height: 8px;
+}
+
+.panelList .panelFoot div {
+	background: url("img/panelWhite/foot.gif") no-repeat right top;
+	margin: 0;
+	padding: 0;
+	height: 8px;
+}
+
+/*******************************************************************************
+* panelQuery
+*******************************************************************************/
+.panelQuery {
+	clear: both;
+	background: url("img/panelWhite/head.gif") no-repeat left top;
+	margin: 0;
+	padding: 0;
+}
+
+.panelQuery .panelHead {
+	background: url("img/panelWhite/head.gif") no-repeat right top;
+	color: #fff;
+	margin: 0;
+	height: 8px;
+	font-size: 0px;
+	line-height: 0px;
+	color: #fff;
+}
+
+.panelQuery .panelContent {
+	margin: 0;
+	padding: 0;
+	background: url("img/panelWhite/border.gif");
+}
+
+.panelQuery .panelContent2 {
+	margin: 0;
+	padding: 0;
+	background: url("img/panelWhite/border.gif");
+}
+
+.panelQuery .panelFoot {
+	background: url("img/panelWhite/foot.gif") no-repeat left top;
+	margin: 0;
+	padding: 0;
+	height: 8px;
+}
+
+.panelQuery .panelFoot div {
+	background: url("img/panelWhite/foot.gif") no-repeat right top;
+	margin: 0;
+	padding: 0;
+	height: 8px;
+}
+
+/*******************************************************************************
+* panelStatus
+*******************************************************************************/
+.panelStatus {
+	clear: both;
+	background: url("img/panelLightBlue/head.gif") no-repeat left top;
+	margin: 0;
+	padding: 0;
+}
+
+.panelStatus .panelHead {
+	background: url("img/panelLightBlue/head.gif") no-repeat right top;
+	color: #fff;
+	margin: 0;
+	margin-left: 13px;
+	height: 8px;
+	font-size: 0px;
+	line-height: 0px;
+	color: #E2E7EA;
+}
+
+.panelStatus .panelContent {
+	margin: 0;
+	padding: 0;
+	background: url("img/panelLightBlue/border.gif");
+}
+
+.panelStatus .panelContent2 {
+	margin: 0;
+	padding: 0px 15px 0px 10px;
+	margin-left: 5px;
+	background: url("img/panelLightBlue/border.gif");
+}
+
+.panelStatus .panelFoot {
+	background: url("img/panelLightBlue/foot.gif") no-repeat left top;
+	margin: 0;
+	padding: 0;
+	padding-left: 14px;
+}
+
+.panelStatus .panelFoot div {
+	background: url("img/panelLightBlue/foot.gif") no-repeat right top;
+	margin: 0;
+	padding: 0;
+	height: 14px;
+}
+
+/*******************************************************************************
+* panelInnerHead
+*******************************************************************************/
+.panelInnerHead {
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+/*******************************************************************************
+* table.list
+* 列表型表格:list
+Usage:
+<table width="100%" border="0" cellpadding="3" cellspacing="1" class="list">
+  <tr>
+	<th align="right">标题A</th>
+	<th>标题B</th>
+  </tr>
+  <tr onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
+	<td>鼠标移上高亮1</td>
+	<td>鼠标移上高亮2</td>
+  </tr>
+</table>
+*******************************************************************************/
+table.list {
+	font-size: 9pt;
+	line-height: 180%;
+	border: 1px solid #65A8F3;
+}
+
+table.list tr {
+	background-color: #fff;
+}
+
+table.list th {
+	font-weight: bold;
+	background-color: #E2E7EA;
+	padding: 0px 3px 0px 3px;
+	border-right: 1px solid #fff;
+	border-bottom: 1px solid #fff;
+}
+
+table.list td {
+	background-color: #fff;
+	padding: 0px 3px 0px 3px;
+}
+
+table.list tr.header {
+	font-weight: bold;
+	background-color: #E2E7EA;
+	padding: 0px 3px 0px 3px;
+	border-right: 1px solid #fff;
+	border-bottom: 1px solid #fff;
+}
+
+table.list tr.header td {
+	font-weight: bold;
+	background-color: #E2E7EA;
+	padding: 0px 3px 0px 3px;
+	border-right: 1px solid #fff;
+	border-bottom: 1px solid #fff;
+}
+
+table.list td.header {
+	font-weight: bold;
+	background-color: #E2E7EA;
+	padding: 0px 3px 0px 3px;
+	border-right: 1px solid #fff;
+	border-bottom: 1px solid #fff;
+}
+
+table.list tr.hover {
+	background-color: #F2F7dd;
+}
+
+table.list tr.hover td {
+	background-color: #F2F7dd;
+}
+
+table.list tr.dark {
+	background-color: #F2F7FA;
+}
+
+table.list tr.dark td {
+	background-color: #F2F7FA;
+}
+
+/*******************************************************************************
+* tree
+*******************************************************************************/
+
+/* ---------- 树 ---------- */
+.tree {
+	clear: both;
+	float: none;
+}
+
+.treeHidden{
+	display: none;
+}
+
+.tree .treeNode {
+	clear: both;
+	float:none;
+	line-height: 18px;
+	height:18px;
+}
+
+.tree .treeNode a {
+	color: #000;
+	text-decoration: none;
+}
+
+.tree .treeNode a:hover {
+	text-decoration: underline;
+}
+
+.tree .treeNode a {
+	float: left;
+	display: block;
+}
+.tree .treeNode span {
+	float: left;
+	display: block;
+}
+
+/* ---------- 节点开 ---------- */
+.tree .treeNode .treeIcon {
+	padding-left: 20px;
+	height: 18px;
+	background: transparent url("img/tree/tree_dir.gif") no-repeat left
+		center;
+	cursor: pointer;
+}
+
+/* ---------- 节点合 ---------- */
+.tree .treeNodeOpen .treeIcon {
+	padding-left: 20px;
+	height: 18px;
+	background: transparent url("img/tree/tree_diropen.gif") no-repeat left
+		center;
+	cursor: pointer;
+}
+
+.tree .treeLeafNode .treeIcon{
+	padding-left: 20px;
+	height: 18px;
+	background: transparent url("img/tree/tree_dir.gif") no-repeat left
+		center;
+}
+
+.tree .treeNode .treeNodeBody {
+	
+}
+.treeNodeSelected a.treeNodeTitle{
+	color: red;
+	text-decoration: underline;
+	/*font-weight: bold;
+	font-size: 18px;
+	font-family: "宋体", "Arial";*/
+}
+
+/* ---------- 显示/折叠 全部节点 ---------- */
+.tree .treeNode .treeShowHideAll {
+	float: right;
+	text-decoration: underline;
+}
+
+.tree .treeNode .treeBlank {
+	width: 16px;
+	height: 18px;
+	background: transparent url("img/tree/tree_blank.gif") no-repeat center
+		center;
+}
+
+.tree .treeNode .treeBlankL {
+	width: 16px;
+	height: 18px;
+	background: transparent url("img/tree/tree_blankl.gif") no-repeat center
+		center;
+}
+
+.tree .treeNode .treeLine {
+	width: 16px;
+	height: 18px;
+	background: transparent url("img/tree/tree_line.gif") no-repeat center
+		center;
+}
+
+.tree .treeNode .treeCross {
+	width: 16px;
+	height: 18px;
+	background: transparent url("img/tree/tree_plus.gif") no-repeat center
+		center;
+}
+
+.tree .treeNode .treeCrossL {
+	width: 16px;
+	height: 18px;
+	background: transparent url("img/tree/tree_plusl.gif") no-repeat center
+		center;
+}
+
+.tree .treeNodeOpen .treeCross {
+	width: 16px;
+	height: 18px;
+	background: transparent url("img/tree/tree_minus.gif") no-repeat center
+		center;
+}
+
+.tree .treeNodeOpen .treeCrossL {
+	width: 16px;
+	height: 18px;
+	background: transparent url("img/tree/tree_minusl.gif") no-repeat center
+		center;
+}
+
+.tree .treeNode .treeTransp {
+	width: 16px;
+	height: 18px;
+	background: transparent url("img/tree/tree_transp.gif") no-repeat center
+		center;
+}
+
+
+/***********view**************/
+
+.plainText {
+	font-size: 9pt;
+	background-color: #F8F8F8;
+	height: 13pt;
+	width: 100pt;
+	border:1px   solid   #000000;
+	
+}
+.plainImage {
+	background-color: #F8F8F8;
+	height: 50pt;
+	width: 90px;
+	border:1px   solid   #000000;
+	
+}
+
+.plainTextArea {
+	font-size: 9pt;
+	background-color: #F8F8F8;
+	height: 50pt;
+	width: 260pt;
+	border-left:2px   solid   #999999;
+	border-top:2px   solid   #999999;
+	border-right:2px   solid   #CCCCCC;
+	border-bottom:2px   solid   #CCCCCC;
+	word-break:break-all
+	
+	
+}
+
+/***********view**************/
+
+.requiredField{
+	color: red;
+}
+
+/*********other***********/
+.menuIconOpen { 
+	padding-left:16px;
+	height:24px;
+	background: transparent url("images/menu_open.gif") no-repeat left center;
+	cursor: pointer;
+	line-height:24px;
+	float: left;
+	display:block;
+}
+/* ---------- 节点合 ---------- */
+.menuIconClose { 
+	padding-left:16px;
+	height:24px;
+	background: transparent url("images/menu_close.gif") no-repeat left center;
+	cursor: pointer;
+	line-height:24px;
+	float: left;
+	display:block;
+}
+/* ---------- 子节点列表容器 ---------- */
+.subMenuContainer{
+	padding-left:24px;
+	padding-bottom:8px;
+}
+/* ---------- 显示/折叠 全部节点 ---------- */
+.menuShowHideAll{
+	line-height:24px;
+	text-decoration: underline;
+}
+
+
+
+/*******************************************************************************
+* 错误信息页面
+*******************************************************************************/
+#errorPanel{
+  margin-left:15%;
+  margin-right:15%;
+  margin-top:15%;
+  overflow: visible;
+}
