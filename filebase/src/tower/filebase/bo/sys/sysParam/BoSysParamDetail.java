@@ -46,7 +46,7 @@ public class BoSysParamDetail implements RootBo {
 		 **********************************************************************/
 		enMutexParam =dbParam.findByKey("OP_MUTES");
 		enSaveParam = dbParam.findByKey("OP_SAVE");
-		if( enMutexParam.getParamId().length()==0){
+		if( enMutexParam == null || enMutexParam.getParamId().length()==0){
 			throw new ErrorException("PARAM01",null);
 		}
 		if(enSaveParam.getParamId() == null || enSaveParam.getParamId().length()==0){
