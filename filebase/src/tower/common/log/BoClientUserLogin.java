@@ -137,14 +137,20 @@ public class BoClientUserLogin implements RootBo {
 		if (sessionXml.getInputRowCount("OP_MUTES")<=0) {
 			sessionXml.addInputRow("OP_MUTES");
 		}
-		sessionXml.setInputValue("OP_MUTES", 1, enSysParam.getParamFlag());
+		if (enSysParam!=null) {
+			sessionXml.setInputValue("OP_MUTES", 1, enSysParam.getParamFlag());
+		}
+		
 		
 		//1、是否保存历史版本
 		enSysParam = dbSysParam.findByKey("OP_SAVE");
 		if (sessionXml.getInputRowCount("OP_SAVE") <= 0) {
 			sessionXml.addInputRow("OP_SAVE");
 		}
-		sessionXml.setInputValue("OP_SAVE", 1, enSysParam.getParamFlag());
+		if (enSysParam!=null) {
+			sessionXml.setInputValue("OP_SAVE", 1, enSysParam.getParamFlag());
+		}
+		
 	}
 
 }
