@@ -3,17 +3,17 @@
 	<classname>tmvc.common.Transaction</classname>
 	<databases>
 		<database>
-			
+			<!--
 			<id>default</id>
 			<description>Oracle Connection</description>
 			<driver>oracle.jdbc.driver.OracleDriver</driver>
 			<url>jdbc:oracle:thin:@192.168.0.1/bydb</url>
-			<!--
-			 <id>default</id>
+			-->
+			<id>default</id>
 			<description>MySQL Connection</description>
 			<driver>com.mysql.jdbc.Driver</driver>
 			<url>jdbc:mysql://localhost/filebase?characterEncoding=utf8&amp;autocommit=false&amp;autoReconnect=true</url>
-			-->
+			
 			<user>filebase</user>
 			<password>filebase</password>
 			<autocommit></autocommit>
