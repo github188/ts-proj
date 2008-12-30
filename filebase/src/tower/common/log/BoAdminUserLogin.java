@@ -147,8 +147,8 @@ public class BoAdminUserLogin implements RootBo {
 		sql.append("    SYS_MENU M ");
 		sql.append("WHERE");
 		sql.append(" SHOW_FLAG='1'  ");
-		sql.append(" and (MENU_TYPE='M' )");
-		sql.append("    OR MENU_TYPE='D'  ");
+		sql.append(" and (MENU_TYPE='M' ");
+		sql.append("    OR MENU_TYPE='D' ) ");
 		sql.append("ORDER BY ");
 		sql.append("    MENU_LVL,");
 		sql.append("    SORT_NO");
