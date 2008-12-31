@@ -2,7 +2,6 @@ package tower.filebase.bo.catalogDef;
 
 import org.apache.log4j.Logger;
 
-import tower.common.util.DateFunc;
 import tower.filebase.db.DbTCatalog;
 import tower.filebase.en.EnTCatalog;
 import tower.tmvc.ErrorException;
@@ -33,14 +32,12 @@ public class BoCatalogDetail implements RootBo {
 		DbTCatalog dbTCatalog;
 		EnTCatalog enTCatalog;
 		String catalogId ;
-		String userId;
 		
 		/***********************************************************************
 		 * 获取输入
 		 **********************************************************************/
 
 		catalogId = requestXml.getInputValue("CATALOG_ID");
-		userId = sessionXml.getItemValue("SYS_USER", 1, "USER_ID");
 		
 		/***********************************************************************
 		 * 创建数据库连接、实例化DB、EN
