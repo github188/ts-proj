@@ -1,15 +1,11 @@
 package tower.filebase.bo.catalogDef;
 
-import java.io.File;
-import java.util.Vector;
-
 import org.apache.log4j.Logger;
 
 import tower.common.util.DateFunc;
 import tower.filebase.bo.perm.CheckParam;
 import tower.filebase.db.DbTCatalog;
 import tower.filebase.en.EnTCatalog;
-import tower.filebase.util.PathByCatalog;
 import tower.tmvc.ErrorException;
 import tower.tmvc.RootBo;
 import tower.tmvc.Transaction;
@@ -52,6 +48,7 @@ public class BoCatalogDelete implements RootBo {
 		userId = sessionXml.getItemValue("SYS_USER", 1, "USER_ID");
 		dateTime = DateFunc.GenNowTime();
 		
+		//操作标志
 		operaStatue = requestXml.getInputValue("OPERATION_STATUE");
 
 		//System.out.println("CATALOG_ID" +catalogId);
@@ -61,9 +58,11 @@ public class BoCatalogDelete implements RootBo {
 
 		transaction.createDefaultConnection(null, false);
 		dbTCatalog = new DbTCatalog(transaction, null);
+		
 		/***********************************************************************
 		 * 执行业务逻辑、输出
 		 **********************************************************************/
+		
 		if (catalogId != null && catalogId.length() > 0) {
 			if(operaStatue != null && operaStatue.length() > 0){
 				enTCatalog = dbTCatalog.findByKey(catalogId);
@@ -72,8 +71,10 @@ public class BoCatalogDelete implements RootBo {
 					 * 判断权限是否能够删除 Boolean deleteFlag = class(catalogId,userId,4); 
 					 * if(deleteFlag){ 删除数据 }
 					 */
+					//获得当前用户所选择的目录是否具有删除的标志，如果具有删除标志为true，否则为false
 					boolean flag = CheckParam.checkContent(transaction, catalogId,userId,"CONTENT_DELETE");
 					if(flag){
+						//具有删除权限，并不是彻底删除数据，只是做删除标志
 						enTCatalog.setDeleteFlag("0");
 						enTCatalog.setDeleteDatetime(dateTime);
 						enTCatalog.setDeletePerson(userId);
