@@ -7,11 +7,9 @@ import org.apache.log4j.Logger;
 
 import tower.common.auto.BoAddAuto;
 import tower.common.util.DateFunc;
-import tower.common.util.SysIdCreator;
 import tower.filebase.bo.perm.CheckParam;
 import tower.filebase.db.DbTCatalog;
 import tower.filebase.en.EnTCatalog;
-import tower.filebase.util.IdCreatorDefine;
 import tower.filebase.util.PathByCatalog;
 import tower.tmvc.ErrorException;
 import tower.tmvc.RootBo;
@@ -142,8 +140,7 @@ public class BoCatalogSubmit implements RootBo {
 						}
 					} else {
 						//组装添加对象
-						BoAddAuto boAddAuto = new BoAddAuto();
-						catalogId = boAddAuto.GetBuildMode(transaction, "CATALOG_ID");
+						catalogId = BoAddAuto.GetBuildMode(transaction, "CATALOG_ID");
 						enTCatalog.setCatalogId(catalogId);
 						enTCatalog.setParentId(cataPraId);
 						enTCatalog.setDeleteFlag("1");

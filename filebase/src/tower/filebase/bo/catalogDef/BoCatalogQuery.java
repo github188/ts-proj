@@ -1,21 +1,15 @@
 package tower.filebase.bo.catalogDef;
 
-import java.io.File;
 import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Vector;
 
 import org.apache.log4j.Logger;
 
-import tower.common.util.DateFunc;
-import tower.common.util.SysIdCreator;
 import tower.filebase.bo.perm.ContentShow;
 import tower.filebase.db.DbTCatalog;
 import tower.filebase.en.EnTCatalog;
 import tower.filebase.util.GetRootCatalog;
-import tower.filebase.util.IdCreatorDefine;
-import tower.filebase.util.PathByCatalog;
 import tower.tmvc.ErrorException;
 import tower.tmvc.RootBo;
 import tower.tmvc.Transaction;
@@ -44,7 +38,6 @@ public class BoCatalogQuery implements RootBo{
 		EnTCatalog enTCatalog;
 		
 		//其他
-		String userId;
 		String selectCatalogId;
 		String catalogId;
 		Vector<EnTCatalog> childrenList = new Vector<EnTCatalog>();
@@ -52,7 +45,6 @@ public class BoCatalogQuery implements RootBo{
 		/***********************************************************************
 		 * 获取输入
 		 **********************************************************************/
-		userId = sessionXml.getItemValue("SYS_USER", 1, "USER_ID");
 		catalogId = GetRootCatalog.getRootId(transaction);
 		selectCatalogId = requestXml.getInputValue("SELECT_CATALOG_ID");
 
