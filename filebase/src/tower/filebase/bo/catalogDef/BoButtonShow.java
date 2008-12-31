@@ -35,11 +35,14 @@ public class BoButtonShow implements RootBo {
 		/***********************************************************************
 		 * 声明变量
 		 **********************************************************************/
-		String catalogId;
+		//目录ID
+		String catalogId;	
+		//目录
 		DbTCatalog dbTCatalog;
-		EnTCatalog enTCatalog = new EnTCatalog();
+		EnTCatalog enTCatalog;
+		//目录权限
 		DbSContentPerm dbSContentPrem;
-		EnSContentPerm enSContentPre;
+		
 		Vector catalogs;
 		Vector perms;
 		Hashtable<String, EnSContentPerm> buttonValues;
@@ -54,13 +57,16 @@ public class BoButtonShow implements RootBo {
 		transaction.createDefaultConnection(null, false);
 		dbTCatalog = new DbTCatalog(transaction, null);
 		dbSContentPrem = new DbSContentPerm(transaction,null);
+		enTCatalog = new EnTCatalog();
 		
 		/***********************************************************************
 		 * 获取输入
 		 **********************************************************************/
+		
 		catalogId = requestXml.getInputValue("CATALOG_ID");
 		userId = sessionXml.getItemValue("SYS_USER", 1, "USER_ID");
 		catalogs = dbTCatalog.findAllWhere(sql);
+		
 		if( catalogs!= null && catalogs.size() > 0){
 			enTCatalog = (EnTCatalog) catalogs.get(0);
 		}
