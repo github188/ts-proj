@@ -28,7 +28,7 @@ VersionId,Version_ID,Copyright,Global_User_ID,Row_Time_Stamp
 
 Diagram
 DiagramId,Version_ID,VersionId,LastUpdate,CreateDate,ActiveModel,ActiveSubmodel,VSplitterPosition,X,Y,Width,Height,DiagramNameId,AuthorId,CompanyId,VersionNoId,CopyrightStringId,DefinitionId,UnificationOptionId,FileNameId,CopyrightYearStringId,DiagramName,CodePage,SignatureGUID,ReleaseName,Flags,Global_User_ID,Row_Time_Stamp
-1,1,601,08/26/2008 18:18:59,08/07/2008 18:28:42,1,1,180,0,0,0,0,73,74,75,76,75,0,77,91,0,FileBase.DM1,936,NULL,NULL,0,1,0
+1,1,601,12/31/2008 17:13:18,08/07/2008 18:28:42,5,1,180,0,0,0,0,73,74,75,76,75,0,77,91,0,FileBase.DM1,936,NULL,NULL,0,1,0
 
 Model
 DiagramId,ModelId,Model_ID,ModelType,PlatformId,NamePrefix,SpaceHandling,CaseHandling,GenPrimaryKey,GenAlternateKey,GenInversionEntry,GenForeignKey,Notation,ModelNameId,Global_User_ID,Row_Time_Stamp
@@ -74,7 +74,7 @@ SubmodelLink_ID,Model_ID,Parent_ID,Child_ID,UltimateParent_ID,NodeLevel,IsBottom
 DiagramDisplay
 DiagramId,ModelId,SubmodelId,DiagramDisplay_ID,Submodel_ID,PlatformId,Animate,ZoomFactor,HviewSize,VviewSize,HorizontalScrollPosition,VerticalScrollPosition,PageOrientation,PageSize,DisplayFormat,EntityDisplayInfo,ViewDisplayFormat,ViewDisplayInfo,Shadow,CompleteRoleName,ShowVerbs,ShowCardinality,MethodologyId,StraightRelLine,PageBoundary,ShowViewRelationship,ShowView,HideTrigger,Global_User_ID,Row_Time_Stamp,ShowSchemaObjEdge,ShowSchemaObj,SchemaObjDisplayFormat
 1,5,1,5,5,0,0,10000,0,0,0,-50,1,1,9,0,1,0,1,0,1,1,0,0,0,0,0,1,546,0,1,0,7
-1,1,1,1,1,0,0,10000,0,0,0,-50,1,1,8,0,1,0,1,0,1,1,0,0,0,0,0,1,18,0,1,0,7
+1,1,1,1,1,0,0,10000,0,0,0,0,1,1,8,0,1,0,1,0,1,1,0,0,0,0,0,1,18,0,1,0,7
 
 GridDisplay
 DiagramId,ModelId,SubmodelId,GridDisplay_ID,Submodel_ID,Show,Snap,HorizontalSpacing,VerticalSpacing,HorizontalGridsPerLine,VericalGridsPerLine,Units,Global_User_ID,Row_Time_Stamp
@@ -123,13 +123,13 @@ Tree_Layout_ID,Submodel_ID,RouteNonTreeEdgesWithinLevels,RouteNonTreeEdgesBetwee
 
 FontProperty
 PropertyId,FontProperty_ID,Description,Global_User_ID,Row_Time_Stamp
-1750,5,Foreign Keys,0,0
 0,0,"",0,0
+1750,5,Foreign Keys,0,0
 1751,6,Foreign Non-Keys,0,0
 5359,1,Individual Attribute Font,0,0
 5360,8,Individual View Field Font,0,0
-1665,2,Entity Name,0,0
 1765,7,View Name,0,0
+1665,2,Entity Name,0,0
 1666,3,Primary Keys,0,0
 1667,4,Attributes,0,0
 1668,0,Verbs,0,0
@@ -175,29 +175,29 @@ PropertyId,ColorProperty_ID,Description,Global_User_ID,Row_Time_Stamp
 5371,29,Schema Object Foreground,0,0
 5372,30,Schema Object Background,0,0
 5373,0,Schema Object Title,0,0
-1775,0,Title Block Background,0,0
 5375,31,Schema Object Relationship,0,0
-1676,0,Diagram Background,0,0
+1775,0,Title Block Background,0,0
 1776,0,Title Block Border,0,0
+1676,0,Diagram Background,0,0
 1777,0,Title Block Text Color,0,0
 1682,0,Shadow,0,0
 1683,0,Text Background,0,0
 1684,0,Text Foreground,0,0
 5335,12,Entity Foreground,0,0
-5336,13,Entity Background,0,0
 1786,22,View Field Text,0,0
+5336,13,Entity Background,0,0
 5337,11,Entity Title,0,0
 5338,17,Inherited Primary Keys,0,0
 5339,15,Non-Inherited Primary Keys,0,0
 5340,18,Inherited Non-Keys,0,0
-1741,0,Page Foreground,0,0
 5341,16,Non-Inherited Non-Keys,0,0
-1742,0,Page Number,0,0
+1741,0,Page Foreground,0,0
 5342,24,Relationships,0,0
-1743,0,Off Page Foreground,0,0
+1742,0,Page Number,0,0
 5343,19,View Foreground,0,0
-1744,0,Off Page Background,0,0
+1743,0,Off Page Foreground,0,0
 5344,20,View Background,0,0
+1744,0,Off Page Background,0,0
 5345,23,View Title,0,0
 5347,26,View Relationships,0,0
 1748,0,Verb Text,0,0
@@ -469,9 +469,9 @@ String_Id,Data,Overflow,ConstantString,Row_Time_Stamp
 105,FLAG,0,0,0
 1,Main,0,0,0
 106,DELETE_FLAG,0,0,0
+2,Diagram specific data dictionary.,0,0,0
 107,"0：无效
 1：正常",0,0,0
-2,Diagram specific data dictionary.,0,0,0
 3,Logical,0,0,0
 4,Main Model,0,0,0
 6,Y,0,0,0
