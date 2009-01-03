@@ -62,12 +62,14 @@ CREATE TABLE `m_auto` (
 
 /*!40000 ALTER TABLE `m_auto` DISABLE KEYS */;
 INSERT INTO `m_auto` (`AUTO_ID`,`BUILD_MODE`,`MEMO`,`NOW_VALUE`) VALUES 
- ('FILE_ID','[seq*6]','','34'),
+ ('CATALOG_ID','[seq*6]',NULL,'4'),
+ ('FILE_ID','[seq*6]','','36'),
  ('LOG_ID','[seq*6]',NULL,'0'),
  ('ORG_ID','[seq*6]',NULL,'1'),
- ('ROLE_ID','[seq*6]',NULL,'3'),
+ ('ROLE_ID','[seq*6]',NULL,'4'),
  ('SET_ID','[seq*6]',NULL,'0'),
  ('USER_ID','[seq*6]',NULL,'2');
+
 /*!40000 ALTER TABLE `m_auto` ENABLE KEYS */;
 
 
