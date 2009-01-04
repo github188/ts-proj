@@ -60,6 +60,7 @@ public class BoCatalogSubmit implements RootBo {
 		userId = sessionXml.getItemValue("SYS_USER", 1, "USER_ID");
 		dateTime = DateFunc.GenNowTime();
 
+		//获得权限码
 		operaStatue = requestXml.getInputValue("OPERATION_STATUE");
 		//System.out.println("operaStatue"+operaStatue);
 		/***********************************************************************
@@ -73,6 +74,7 @@ public class BoCatalogSubmit implements RootBo {
 		 **********************************************************************/
 		enTCatalog = new EnTCatalog();
 
+		//查看父目录下是否存在同名的目录
 		StringBuffer sqlWhere = new StringBuffer();
 		sqlWhere.append("CATALOG_NAME = '");
 		sqlWhere.append(cataName  );
@@ -101,10 +103,13 @@ public class BoCatalogSubmit implements RootBo {
 					/*
 					 * 在服务器端修改目录
 					 */
+						//判断该用户对目录catalogId是否具有修改的权限
 						Boolean modeFlag = CheckParam.checkContent(transaction, catalogId, userId, operaStatue);
 						if(modeFlag){
+							//获得根目录的绝对路径
 							String winPath = applicationXml
 									.getInputValue("UPLOAD_CATALOG");
+							//获取目录的相对路径
 							String filePart = PathByCatalog.pathByCatalogId(enTCatalog
 									.getParentId(), transaction);
 							StringBuffer filePathNew = new StringBuffer();
@@ -124,6 +129,7 @@ public class BoCatalogSubmit implements RootBo {
 								//System.out.println("filePart"+filePathOld.toString());
 								File myFilePathOld = new File(filePathOld.toString());
 								dbTCatalog.updateByKey(catalogId, enTCatalog);
+								//判断旧目录是否存在，如果存在把旧目录从新命名，如果旧目录不存在则重新创建
 								if (myFilePathOld.exists()) {
 									//myFilePathOld.delete();
 									//myFilePathNew.mkdirs();
