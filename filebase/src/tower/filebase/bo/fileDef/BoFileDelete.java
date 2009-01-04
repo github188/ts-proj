@@ -4,9 +4,7 @@ import org.apache.log4j.Logger;
 
 import tower.common.util.DateFunc;
 import tower.filebase.bo.perm.CheckParam;
-import tower.filebase.db.DbTCatalog;
 import tower.filebase.db.DbTFile;
-import tower.filebase.en.EnTCatalog;
 import tower.filebase.en.EnTFile;
 import tower.tmvc.ErrorException;
 import tower.tmvc.RootBo;

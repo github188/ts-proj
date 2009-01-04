@@ -41,7 +41,6 @@ public class BoFileCopy implements RootBo {
 		Hashtable tableAdd = new Hashtable();
 		Vector files;
 		StringBuffer fileSql = new StringBuffer();
-		Vector<EnTCatalog> childrenList = new Vector<EnTCatalog>();
 
 		Vector catalogs;
 		String catalogId;
@@ -130,7 +129,6 @@ public class BoFileCopy implements RootBo {
 						//没有权限拷贝
 						enTCatalog = dbTCatalog.findByKey(enTFile.getCatalogId());
 						if(enTCatalog != null){
-							String[] message = {enTCatalog.getCatalogName()};
 							throw new ErrorException("FileCC0004",null);
 						}else{
 							throw new ErrorException("FileCC0004",null);

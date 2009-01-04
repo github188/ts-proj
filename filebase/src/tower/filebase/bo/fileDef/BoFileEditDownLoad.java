@@ -52,7 +52,7 @@ public class BoFileEditDownLoad implements RootBo{
 		String opMutes;
 		
 		//其他
-		Vector vEnTFiles;
+		Vector<EnTFile> vEnTFiles;
 		String userId;
 		String fileOperateState;
 		String filePath;
@@ -101,7 +101,7 @@ public class BoFileEditDownLoad implements RootBo{
 			}
 		}
 		//根据系统参数判断是否互斥：如果互斥，如果选中的文件状态处于编辑状态则抛出异常.
-		vEnTFiles = new Vector();
+		vEnTFiles = new Vector<EnTFile>();
 		if(opMutes.equals("1")){
 			for(int i=0;i<fileIds.length;i++){
 				enTFile = dbTFile.findByKey(fileIds[i]);

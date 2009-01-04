@@ -3,9 +3,7 @@ package tower.filebase.bo.fileDef;
 import org.apache.log4j.Logger;
 
 import tower.filebase.db.DbTFile;
-import tower.filebase.db.DbTFileVersion;
 import tower.filebase.en.EnTFile;
-import tower.filebase.en.EnTFileVersion;
 import tower.tmvc.ErrorException;
 import tower.tmvc.RootBo;
 import tower.tmvc.Transaction;

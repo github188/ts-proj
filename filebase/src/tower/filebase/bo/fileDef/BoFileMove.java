@@ -42,7 +42,6 @@ public class BoFileMove implements RootBo {
 		Hashtable tableAdd = new Hashtable();
 		Vector files;
 		StringBuffer fileSql= new StringBuffer();
-		Vector<EnTCatalog> childrenList = new Vector<EnTCatalog>();
 
 		Vector catalogs;
 		String catalogId;

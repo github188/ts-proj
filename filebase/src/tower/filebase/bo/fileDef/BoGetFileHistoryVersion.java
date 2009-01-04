@@ -47,8 +47,6 @@ public class BoGetFileHistoryVersion implements RootBo{
 		String fileId;
 		String[] versionNos;
 		
-		//其他
-		Vector vEnTFiles;
 		String catalogId;
 		String userId;
 		String fileOperateState;
@@ -101,7 +99,7 @@ public class BoGetFileHistoryVersion implements RootBo{
 		str.append(")");
 		
 		sql.append("  FILE_ID=");
-		sql.append(transaction.formatString(fileId));
+		sql.append(Transaction.formatString(fileId));
 		sql.append(" AND VERSION_NO IN");
 		sql.append(str.toString());
 		vEnTFileVersion = dbTFileVersion.findAllWhere(sql.toString());

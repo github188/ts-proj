@@ -8,7 +8,6 @@ import tower.filebase.bo.perm.CheckParam;
 import tower.filebase.db.DbTFile;
 import tower.filebase.db.DbTFileVersion;
 import tower.filebase.en.EnTFile;
-import tower.filebase.en.EnTFileVersion;
 import tower.filebase.util.PathByCatalog;
 import tower.tmvc.ErrorException;
 import tower.tmvc.QueryResult;
@@ -42,7 +41,6 @@ public class BoDestroyFileVersion implements RootBo{
 		 **********************************************************************/
 		//文件版本db en
 		DbTFileVersion dbTFileVersion;
-		EnTFileVersion enTFileVersion;
 		
 		//文件db en
 		DbTFile dbTFile;
@@ -99,7 +97,7 @@ public class BoDestroyFileVersion implements RootBo{
 			//销毁历史版本记录
 			sql = new StringBuffer();
 			sql.append(" FILE_ID=");
-			sql.append(transaction.formatString(fileId));
+			sql.append(Transaction.formatString(fileId));
 			sql.append(" AND VERSION_NO IN ");
 			sql.append(str.toString());
 			dbTFileVersion.deleteWhere(sql.toString());
@@ -118,7 +116,7 @@ public class BoDestroyFileVersion implements RootBo{
 			//更新文件表为当前最新版本
 			sql = new StringBuffer();
 			sql.append("SELECT MAX(VERSION_NO)AS MAX_VERSION_NO FROM T_FILE_VERSION WHERE FILE_ID=");
-			sql.append(transaction.formatString(fileId));
+			sql.append(Transaction.formatString(fileId));
 			qr = transaction.doQuery(null, sql.toString());
 			QueryResultRow r = qr.get(0);
 			String versionNo = r.getString("MAX_VERSION_NO");

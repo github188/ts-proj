@@ -3,9 +3,7 @@ package tower.filebase.bo.fileDef;
 import org.apache.log4j.Logger;
 
 import tower.filebase.db.DbTFile;
-import tower.filebase.db.DbTFileVersion;
 import tower.filebase.en.EnTFile;
-import tower.filebase.en.EnTFileVersion;
 import tower.tmvc.ErrorException;
 import tower.tmvc.RootBo;
 import tower.tmvc.Transaction;
@@ -32,8 +30,6 @@ public class BoFileDetail implements RootBo{
 		EnTFile enTFile;
 		
 		//文件版本db en
-		DbTFileVersion dbTFileVersion;
-		EnTFileVersion enTFileVersion;
 		
 		//其他
 		String fileId;
@@ -46,7 +42,6 @@ public class BoFileDetail implements RootBo{
 		 **********************************************************************/
 		transaction.createDefaultConnection(null, false);
 		dbTFile = new DbTFile(transaction,null);
-		dbTFileVersion = new  DbTFileVersion(transaction,null);
 		/***********************************************************************
 		 * 执行业务逻辑、输出
 		 **********************************************************************/

@@ -10,10 +10,7 @@ import tower.common.util.Page;
 import tower.common.util.PubFunc;
 import tower.filebase.bo.perm.CheckParam;
 import tower.filebase.bo.perm.ContentShow;
-import tower.filebase.db.DbSFilePerm;
-import tower.filebase.db.DbTCatalog;
 import tower.filebase.db.DbTFile;
-import tower.filebase.en.EnSFilePerm;
 import tower.filebase.en.EnTCatalog;
 import tower.filebase.en.EnTFile;
 import tower.filebase.util.GetRootCatalog;
@@ -52,7 +49,6 @@ public class BoFileDeleteList implements RootBo{
 		
 		
 		//目录db en
-		DbTCatalog dbTCatalog;
 		EnTCatalog enTCatalog;
 		
 		//其他

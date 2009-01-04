@@ -14,7 +14,6 @@ import org.apache.log4j.Logger;
 
 import tower.common.auto.BoAddAuto;
 import tower.common.util.DateFunc;
-import tower.common.util.SysIdCreator;
 import tower.filebase.bo.perm.CheckParam;
 import tower.filebase.db.DbTCatalog;
 import tower.filebase.db.DbTFile;
@@ -22,7 +21,6 @@ import tower.filebase.db.DbTFileVersion;
 import tower.filebase.en.EnTCatalog;
 import tower.filebase.en.EnTFile;
 import tower.filebase.en.EnTFileVersion;
-import tower.filebase.util.IdCreatorDefine;
 import tower.filebase.util.PathByCatalog;
 import tower.tmvc.ErrorException;
 import tower.tmvc.RootBo;

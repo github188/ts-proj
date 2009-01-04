@@ -5,7 +5,6 @@ import java.util.Vector;
 
 import org.apache.log4j.Logger;
 
-import tower.common.util.DateFunc;
 import tower.filebase.bo.perm.CheckParam;
 import tower.filebase.db.DbTFile;
 import tower.filebase.db.DbTFileVersion;
@@ -44,7 +43,6 @@ public class BoFileDestory implements RootBo {
 		Vector fileVersions;
 		String[] fileIds;
 		String userId;
-		String date;
 
 		String filePart;
 		String path;
@@ -58,7 +56,6 @@ public class BoFileDestory implements RootBo {
 
 		fileIds = requestXml.getInputValues("FILE_ID");
 		userId = sessionXml.getItemValue("SYS_USER", 1, "USER_ID");
-		date = DateFunc.GenNowTime();
 		fileOperateState = requestXml.getInputValue("FILE_OPERATE_STATUE");
 
 		/***********************************************************************

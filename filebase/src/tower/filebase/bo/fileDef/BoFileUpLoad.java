@@ -8,22 +8,18 @@ import org.apache.log4j.Logger;
 
 import tower.common.auto.BoAddAuto;
 import tower.common.util.DateFunc;
-import tower.common.util.SysIdCreator;
 import tower.filebase.bo.perm.CheckParam;
 import tower.filebase.db.DbTFile;
 import tower.filebase.db.DbTFileVersion;
-import tower.filebase.en.EnTCatalog;
 import tower.filebase.en.EnTFile;
 import tower.filebase.en.EnTFileVersion;
 import tower.filebase.util.GetRootCatalog;
-import tower.filebase.util.IdCreatorDefine;
 import tower.filebase.util.PathByCatalog;
 import tower.tmvc.ErrorException;
 import tower.tmvc.RootBo;
 import tower.tmvc.Transaction;
 import tower.tmvc.XMLWrap;
 import tower.tmvc.util.UploadFile;
-import tower.tmvc.util.UploadFileFactory;
 
 /**
  * 
@@ -160,9 +156,9 @@ public class BoFileUpLoad implements RootBo{
 					//检查上传的文件名在该目录下是否存在同名文件
 					sql = new StringBuffer();
 					sql.append("  FILE_NAME=");
-					sql.append(transaction.formatString(uploadFile.getFileName()));
+					sql.append(Transaction.formatString(uploadFile.getFileName()));
 					sql.append(" AND CATALOG_ID=");
-					sql.append(transaction.formatString(catalogId));
+					sql.append(Transaction.formatString(catalogId));
 					sql.append(" AND FLAG=1");
 					vEnTFile = dbTFile.findAllWhere(sql.toString());
 					if(vEnTFile.size() > 0){
@@ -172,9 +168,9 @@ public class BoFileUpLoad implements RootBo{
 					//检查上传的文件名在回收站是否存在同名文件
 					sql = new StringBuffer();
 					sql.append("  FILE_NAME=");
-					sql.append(transaction.formatString(uploadFile.getFileName()));
+					sql.append(Transaction.formatString(uploadFile.getFileName()));
 					sql.append(" AND CATALOG_ID=");
-					sql.append(transaction.formatString(catalogId));
+					sql.append(Transaction.formatString(catalogId));
 					sql.append(" AND FLAG=0");
 					vEnTFile = dbTFile.findAllWhere(sql.toString());
 					if(vEnTFile.size() > 0){

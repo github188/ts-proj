@@ -44,7 +44,6 @@ public class BoRollBackFileVersion implements RootBo{
 		 **********************************************************************/
 		//文件版本db en
 		DbTFileVersion dbTFileVersion;
-		EnTFileVersion enTFileVersion;
 		
 		//文件db en
 		DbTFile dbTFile;
@@ -61,7 +60,6 @@ public class BoRollBackFileVersion implements RootBo{
 		String rootPath;
 		String filePath;
 		String path;
-		Vector fileVersions;
 		StringBuffer sql;
 		QueryResult qr;
 		/***********************************************************************
@@ -85,9 +83,9 @@ public class BoRollBackFileVersion implements RootBo{
 		enTFile = new EnTFile();
 		sql = new StringBuffer();
 		sql.append("  FILE_ID=");
-		sql.append(transaction.formatString(fileId));
+		sql.append(Transaction.formatString(fileId));
 		sql.append(" AND VERSION_NO >");
-		sql.append(transaction.formatString(versionNo));
+		sql.append(Transaction.formatString(versionNo));
 		
 		//判断该用户是否有执行该功能的权限: 如果有执行该功能；没有则抛出异常
 		if(CheckParam.checkFile(transaction, catalogId, userId, fileOperateState)){
@@ -105,7 +103,7 @@ public class BoRollBackFileVersion implements RootBo{
 			//从服务器端删除版本文件
 			sql = new StringBuffer();
 			sql.append(" SELECT VERSION_NO FROM T_FILE_VERSION WHERE VERSION_NO > ");
-			sql.append(transaction.formatString(versionNo));
+			sql.append(Transaction.formatString(versionNo));
 			qr = transaction.doQuery(null, sql.toString());
 			enTFile = dbTFile.findByKey(fileId);
 			filePath = PathByCatalog.pathByCatalogId(catalogId,transaction);

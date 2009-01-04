@@ -80,19 +80,19 @@ public class BoFileOperateList implements RootBo{
 		//查该目录下的所有文件
 		if(hashTable.containsKey("FILE_DESTORY")){
 			sql.append("  CATALOG_ID=");
-			sql.append(transaction.formatString(catalogId));
+			sql.append(Transaction.formatString(catalogId));
 			
 			if(fileId != null && fileId.length() !=0){
 				sql.append(" AND FILE_ID=");
-				sql.append(transaction.formatString(fileId));
+				sql.append(Transaction.formatString(fileId));
 			}
 		}else{
 			sql.append("  CATALOG_ID=");
-			sql.append(transaction.formatString(catalogId));
+			sql.append(Transaction.formatString(catalogId));
 			
 			if(fileId != null && fileId.length() !=0){
 				sql.append(" AND FILE_ID=");
-				sql.append(transaction.formatString(fileId));
+				sql.append(Transaction.formatString(fileId));
 			}
 			sql.append(" AND FLAG !='0'");
 		}

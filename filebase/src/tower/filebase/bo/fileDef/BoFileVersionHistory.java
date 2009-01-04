@@ -43,12 +43,8 @@ public class BoFileVersionHistory implements RootBo{
 		 * 声明变量
 		 **********************************************************************/
 		//文件db en
-		DbTFile dbTFile;
-		EnTFile enTFile;
 		
 		//目录db en
-		DbTCatalog dbTCatalog;
-		EnTCatalog enTCatalog;
 		
 		//文件版本db en
 		DbTFileVersion dbTFileVersion;
@@ -80,10 +76,8 @@ public class BoFileVersionHistory implements RootBo{
 		 * 创建数据库连接、实例化DB、EN
 		 **********************************************************************/
 		transaction.createDefaultConnection(null, false);
-		dbTFile = new DbTFile(transaction,null);
 		dbTFileVersion = new  DbTFileVersion(transaction,null);
 		dbUser = new DbSysUser(transaction,null);
-		dbTCatalog = new DbTCatalog(transaction,null);
 		/***********************************************************************
 		 * 执行业务逻辑、输出
 		 **********************************************************************/
@@ -93,7 +87,7 @@ public class BoFileVersionHistory implements RootBo{
 		//System.out.println("catalogId后" + catalogId);
 		sql = new StringBuffer();
 		sql.append("  FILE_ID=");
-		sql.append(transaction.formatString(fileId));
+		sql.append(Transaction.formatString(fileId));
 		
 		//获取该目录下文件的权限
 		hashTable=CheckParam.getFilePerm(transaction,catalogId, userId);

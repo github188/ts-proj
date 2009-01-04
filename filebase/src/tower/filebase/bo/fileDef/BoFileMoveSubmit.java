@@ -46,7 +46,6 @@ public class BoFileMoveSubmit implements RootBo {
 		Vector files;
 		DbTFile dbTFile;
 		EnTFile enTFile;
-		String catalogOldId;
 		String catalogNewId;
 		String[] fileIds;
 		String userId;
@@ -64,7 +63,6 @@ public class BoFileMoveSubmit implements RootBo {
 		 * 获取输入
 		 **********************************************************************/
 
-		catalogOldId = requestXml.getInputValue("MOVE_FROM_CATALOG_ID");
 		catalogNewId = requestXml.getInputValue("MOVE_TO_CATALOG_ID");
 		fileIds = requestXml.getInputValues("FILE_MOVE_ID");
 		userId = sessionXml.getItemValue("SYS_USER", 1, "USER_ID");

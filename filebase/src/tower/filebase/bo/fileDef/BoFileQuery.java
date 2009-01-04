@@ -1,6 +1,5 @@
 package tower.filebase.bo.fileDef;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Vector;
@@ -10,16 +9,11 @@ import org.apache.log4j.Logger;
 import tower.common.util.DateFunc;
 import tower.common.util.Page;
 import tower.common.util.PubFunc;
-import tower.filebase.bo.perm.CheckParam;
 import tower.filebase.bo.perm.ContentShow;
-import tower.filebase.db.DbSFilePerm;
-import tower.filebase.db.DbTCatalog;
 import tower.filebase.db.DbTFile;
-import tower.filebase.en.EnSFilePerm;
 import tower.filebase.en.EnTCatalog;
 import tower.filebase.en.EnTFile;
 import tower.filebase.util.GetRootCatalog;
-import tower.filebase.util.PathByCatalog;
 import tower.tmvc.ErrorException;
 import tower.tmvc.RootBo;
 import tower.tmvc.Transaction;
@@ -50,7 +44,6 @@ public class BoFileQuery implements RootBo{
 		EnTFile enTFile;
 		
 		//目录db en
-		DbTCatalog dbTCatalog;
 		EnTCatalog enTCatalog;
 		
 		//用户信息db en
@@ -58,8 +51,6 @@ public class BoFileQuery implements RootBo{
 		EnSysUser enUser;
 		
 		//文件权限的db en
-		DbSFilePerm dbSFilePerm;
-		EnSFilePerm enSFilePerm;
 		
 		//查询条件
 		String fileName;
@@ -165,11 +156,11 @@ public class BoFileQuery implements RootBo{
 			
 			if(createDateTimeBgn != null && createDateTimeBgn.length() !=0){
 				sql.append(" AND CREATE_DATETIME >=");
-				sql.append(transaction.formatString(DateFunc.ParseDateTime(createDateTimeBgn)));
+				sql.append(Transaction.formatString(DateFunc.ParseDateTime(createDateTimeBgn)));
 			}
 			if(createDateTimeEnd != null && createDateTimeEnd.length() !=0){
 				sql.append(" AND CREATE_DATETIME <=");
-				sql.append(transaction.formatString(DateFunc.ParseDateTime(createDateTimeEnd)));
+				sql.append(Transaction.formatString(DateFunc.ParseDateTime(createDateTimeEnd)));
 			}
 			Page.SetPageInfo(transaction, null, requestXml, dbTFile,
 					PubFunc.LEN_PAGE_COUNT, "T_FILE", sql.toString());
@@ -187,7 +178,7 @@ public class BoFileQuery implements RootBo{
 						enTFile.setCurrEditPerson(enUser.getUserName());
 					}
 				}
-				int row = dbTFile.setToXml(requestXml, enTFile);
+				dbTFile.setToXml(requestXml, enTFile);
 			}
 		}
 	}
