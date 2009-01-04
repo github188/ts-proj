@@ -15,7 +15,7 @@ public class BoFileUnDelete implements RootBo {
 	 * <strong>输入：</strong><br>
 	 * <br>文件代号：FILE_ID
 	 * <strong>业务逻辑：</strong><br>
-	 * <br>根据文件文件代号（FILE_ID）从文件表（IT_FILE）中修改有效标志为空
+	 * <br>根据文件文件代号（FILE_ID）从文件表（IT_FILE）中修改有效标志为0
 	 * <strong>输出：</strong><br>
 	 * <br>无
 	 * <br>
@@ -25,25 +25,33 @@ public class BoFileUnDelete implements RootBo {
 		/***********************************************************************
 		 * 声明变量
 		 **********************************************************************/
+		
 		//文件db en
 		DbTFile dbTFile;
 		EnTFile enTFile;
 		
 		//其他
 		String[] fileIds;
+		
 		StringBuffer str = new StringBuffer();
+		
 		/***********************************************************************
 		 * 获取输入
 		 **********************************************************************/
+		
 		fileIds = requestXml.getInputValues("FILE_ID");
+		
 		/***********************************************************************
 		 * 创建数据库连接、实例化DB、EN
 		 **********************************************************************/
+		
 		transaction.createDefaultConnection(null, false);
 		dbTFile = new DbTFile(transaction,null);
+		
 		/***********************************************************************
 		 * 执行业务逻辑、输出
 		 **********************************************************************/
+		
 		str.append("(");
 		for(int i=0;i<fileIds.length;i++){
 			if(i==0){

@@ -31,10 +31,13 @@ public class BoFileEditDownLoad implements RootBo{
 	 * 无<br>
 	 * <br>
 	 */
-	public void doBusiness(Transaction transaction, XMLWrap requestXml, XMLWrap sessionXml, XMLWrap applicationXml, Logger logger) throws ErrorException {
+	public void doBusiness(Transaction transaction, XMLWrap requestXml, 
+			XMLWrap sessionXml, XMLWrap applicationXml, Logger logger) 
+			throws ErrorException {
 		/***********************************************************************
 		 * 声明变量
 		 **********************************************************************/
+		
 		//文件db en
 		DbTFile dbTFile;
 		EnTFile enTFile;
@@ -43,6 +46,7 @@ public class BoFileEditDownLoad implements RootBo{
 		String[] fileIds;
 		String[] catalogIds;
 		String catalogId;
+		
 		//文件编辑信息
 		String currEditPerson;
 		String editDateTime;
@@ -53,15 +57,18 @@ public class BoFileEditDownLoad implements RootBo{
 		
 		//其他
 		Vector<EnTFile> vEnTFiles;
+		
 		String userId;
 		String fileOperateState;
 		String filePath;
 		String path;
 		String rootPath;
+		
 		File file;
 		/***********************************************************************
 		 * 获取输入
 		 **********************************************************************/
+		
 		fileIds = requestXml.getInputValues("FILE_ID");
 		catalogIds = requestXml.getInputValues("CATALOG_ID");
 		catalogId = requestXml.getInputValue("CATALOG_ID");
@@ -73,6 +80,7 @@ public class BoFileEditDownLoad implements RootBo{
 		userId = sessionXml.getItemValue("SYS_USER", 1, "USER_ID");
 		fileOperateState = requestXml.getInputValue("FILE_OPERATE_STATUE");
 		rootPath =applicationXml.getInputValue("UPLOAD_CATALOG");
+		
 		/************************************************************
 		/***********************************************************************
 		 * 创建数据库连接、实例化DB、EN
@@ -96,6 +104,7 @@ public class BoFileEditDownLoad implements RootBo{
 				}
 			}
 		}
+		
 		//根据系统参数判断是否互斥：如果互斥，如果选中的文件状态处于编辑状态则抛出异常.
 		vEnTFiles = new Vector<EnTFile>();
 		if(opMutes.equals("1")){

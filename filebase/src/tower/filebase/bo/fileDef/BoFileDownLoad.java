@@ -30,6 +30,7 @@ public class BoFileDownLoad implements RootBo{
 		/***********************************************************************
 		 * 声明变量
 		 **********************************************************************/
+		
 		//文件db en
 		DbTFile dbTFile;
 		EnTFile enTFile;
@@ -40,17 +41,22 @@ public class BoFileDownLoad implements RootBo{
 		
 		//其他
 		File file;
+		
 		String filePath;
 		String rootPath;
 		String path;
+		
 		Vector vEnTFiles;
+		
 		String catalogId;
 		String userId;
 		String fileOperateState;
+		
 		StringBuffer sql = new StringBuffer();
 		/***********************************************************************
 		 * 获取输入
 		 **********************************************************************/
+		
 		fileIds = requestXml.getInputValues("FILE_ID");
 		catalogIds = requestXml.getInputValues("CATALOG_ID");
 		catalogId = requestXml.getInputValue("CATALOG_ID");
@@ -58,14 +64,18 @@ public class BoFileDownLoad implements RootBo{
 		fileOperateState = requestXml.getInputValue("FILE_OPERATE_STATUE");
 		
 		rootPath =applicationXml.getInputValue("UPLOAD_CATALOG");
+		
 		/***********************************************************************
 		 * 创建数据库连接、实例化DB、EN
 		 **********************************************************************/
+		
 		transaction.createDefaultConnection(null, false);
 		dbTFile = new DbTFile(transaction,null);
+		
 		/***********************************************************************
 		 * 执行业务逻辑、输出
 		 **********************************************************************/
+		
 		//根据所属目录代号判断是否有下载权限
 		if(catalogIds == null && catalogIds.length ==0){
 			if(!CheckParam.checkFile(transaction, catalogId, userId, fileOperateState)){
@@ -78,6 +88,7 @@ public class BoFileDownLoad implements RootBo{
 				}
 			}
 		}
+		
 		StringBuffer strBuf = new StringBuffer();
 		strBuf.append("(");
 		for(int i=0;i<fileIds.length;i++){

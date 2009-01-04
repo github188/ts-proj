@@ -63,11 +63,10 @@ public class BoFileQuery implements RootBo{
 		//其他
 		Vector vEnUsers;
 		String userId;
-		Vector<EnTFile> vEnFiles = new Vector<EnTFile>();
+		Vector vEnFiles;
 		Hashtable table = new Hashtable();
 		StringBuffer sql = new StringBuffer();
 		StringBuffer str;
-		String funcId;
 		String catalogId;
 		/***********************************************************************
 		 * 获取输入
@@ -79,18 +78,20 @@ public class BoFileQuery implements RootBo{
 		createDateTimeBgn = requestXml.getInputValue("CREATE_DATETIME_BGN");
 		createDateTimeEnd = requestXml.getInputValue("CREATE_DATETIME_END");
 		
-		funcId = requestXml.getInputValue("FUNC_ID");
 		userId = sessionXml.getItemValue("SYS_USER", 1, "USER_ID");
 		/***********************************************************************
 		 * 创建数据库连接、实例化DB、EN
 		 **********************************************************************/
+		
 		transaction.createDefaultConnection(null, false);
 		dbTFile = new DbTFile(transaction,null);
 		dbUser = new DbSysUser(transaction,null);
 		dbTFile.setOrderBy(" ORDER BY FILE_STATE DESC");
+		
 		/***********************************************************************
 		 * 执行业务逻辑、输出
 		 **********************************************************************/
+		
 		//保存查询条件
 		sessionXml.setInputValue("FILE_NAME", 1, fileName);
 		sessionXml.setInputValue("CREATOR", 1, creator);
@@ -98,11 +99,14 @@ public class BoFileQuery implements RootBo{
 		sessionXml.setInputValue("CREATE_DATETIME_END", 1, createDateTimeEnd);
 		
 		//获取当前操作用户拥有操作权限的所有目录
-		 str = new StringBuffer();
+		str = new StringBuffer();
 		int j=0;
 		
+		//获取根目录的Id
 		catalogId=GetRootCatalog.getRootId(transaction);
+		//获取当前用户所有具有权限的目录列表
 		table = ContentShow.GetAllTreeDown(catalogId,userId,transaction);
+		
 		for(Iterator   i   =   table.values().iterator();   i.hasNext();){
 			enTCatalog = (EnTCatalog)i.next();
 			if(j==0){
@@ -154,20 +158,20 @@ public class BoFileQuery implements RootBo{
 				sql.append(str.toString());
 			}
 			
-			if(createDateTimeBgn != null && createDateTimeBgn.length() !=0){
+			if(createDateTimeBgn != null && createDateTimeBgn.length() > 0){
 				sql.append(" AND CREATE_DATETIME >=");
 				sql.append(Transaction.formatString(DateFunc.ParseDateTime(createDateTimeBgn)));
 			}
-			if(createDateTimeEnd != null && createDateTimeEnd.length() !=0){
+			if(createDateTimeEnd != null && createDateTimeEnd.length() > 0){
 				sql.append(" AND CREATE_DATETIME <=");
 				sql.append(Transaction.formatString(DateFunc.ParseDateTime(createDateTimeEnd)));
 			}
 			Page.SetPageInfo(transaction, null, requestXml, dbTFile,
 					PubFunc.LEN_PAGE_COUNT, "T_FILE", sql.toString());
 			
-			vEnFiles = dbTFile.findAllWhere(sql.toString());
+			vEnFiles = dbTFile.findAllWhere(sql.toString()); 
 			for(int i=0;i<vEnFiles.size();i++){
-				enTFile = vEnFiles.get(i);
+				enTFile = (EnTFile) vEnFiles.get(i);
 				if(enTFile != null){
 					enUser = dbUser.findByKey(enTFile.getCreator());
 					if(enUser != null){

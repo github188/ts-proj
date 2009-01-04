@@ -29,8 +29,6 @@ public class BoFileDetail implements RootBo{
 		DbTFile dbTFile;
 		EnTFile enTFile;
 		
-		//文件版本db en
-		
 		//其他
 		String fileId;
 		/***********************************************************************
@@ -45,6 +43,8 @@ public class BoFileDetail implements RootBo{
 		/***********************************************************************
 		 * 执行业务逻辑、输出
 		 **********************************************************************/
+		
+		//根据文件Id获得文件的基本信息
 		enTFile = dbTFile.findByKey(fileId);
 		if(enTFile != null){
 			dbTFile.setToXml(requestXml, enTFile);

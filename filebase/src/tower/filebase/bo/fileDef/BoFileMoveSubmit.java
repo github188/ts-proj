@@ -40,17 +40,23 @@ public class BoFileMoveSubmit implements RootBo {
 		DbTCatalog dbTCatalog;
 		EnTCatalog enTCatalogFrom;
 		EnTCatalog enTCatalogTo;
+		
 		DbTFileVersion dbTFileVersion;
 		EnTFileVersion enTFileVersion = null;
+		
 		Vector fileVersions;
 		Vector files;
+		
 		DbTFile dbTFile;
 		EnTFile enTFile;
+		
+		//要移动的目标目录Id
 		String catalogNewId;
 		String[] fileIds;
 		String userId;
 		StringBuffer filePath = new StringBuffer();
 		String path;
+		
 		File fileFrom;
 		File fileTo;
 		File file;
@@ -77,21 +83,31 @@ public class BoFileMoveSubmit implements RootBo {
 		dbTCatalog = new DbTCatalog(transaction, null);
 		dbTFile = new DbTFile(transaction, null);
 		dbTFileVersion = new DbTFileVersion(transaction,null);
+		
 		/***********************************************************************
 		 * 执行业务逻辑、输出
 		 * 
 		 **********************************************************************/
 		//获得系统路径
 		String winPath = applicationXml.getInputValue("UPLOAD_CATALOG");
+		
 		//检查所有的文件
 		if (fileIds != null && fileIds.length > 0) {
+			//判断是否选择要移动的目标目录
 			if(catalogNewId != null && catalogNewId.length() > 0 ){
+				
+				//获得文件移动的目标目录
 				enTCatalogTo = dbTCatalog.findByKey(catalogNewId);
+				
 				enTFile = dbTFile.findByKey(fileIds[0]);
 				if(enTFile != null){
+					//获取要移动文件所在的目录
 					enTCatalogFrom = dbTCatalog.findByKey(enTFile.getCatalogId());
 					if(enTCatalogFrom != null){
+						//判断移动文件的目标目录是否存在
 						if(enTCatalogTo != null){
+							
+							//判断文件的权限码是否获取到
 							if( fileOperateState != null && fileOperateState.length() > 0){
 								//判断对此目录是存在添加权限
 								boolean moveFlag = CheckParam.checkFile(transaction, catalogNewId, userId, fileOperateState);
@@ -104,6 +120,7 @@ public class BoFileMoveSubmit implements RootBo {
 											sqlWhere.append(" and CATALOG_ID = '");
 											sqlWhere.append(catalogNewId+"'");
 											files = dbTFile.findAllWhere(sqlWhere.toString());
+											//判断要移动的文件是否在目标目录中存在
 											if(files != null && files.size() > 0){
 												//文件在目录中已经存在不能移动
 												String[] mes = {enTFile.getFileName(),enTCatalogTo.getCatalogName()};
@@ -168,6 +185,7 @@ public class BoFileMoveSubmit implements RootBo {
 			for(int i = 0 ; i < fileIds.length ; i++){
 				enTFile = dbTFile.findByKey(fileIds[i]);
 				if (enTFile != null) {
+					//获取文件的所有版本
 					fileVersions = dbTFileVersion.findAllWhere("FILE_ID = '" + fileIds[i] + "'");
 					if(catalogNewId != null && catalogNewId.length() > 0 ){
 						enTCatalogTo = dbTCatalog.findByKey(catalogNewId);
@@ -203,6 +221,7 @@ public class BoFileMoveSubmit implements RootBo {
 									filePath = new StringBuffer();
 									filePath.append(winPath);
 									filePath.append(path);
+									//判断目标目录是否存在，如果不存在则进行创建
 									if(j == 0){
 										file = new File(filePath.toString());
 										if(!file.exists() ){

@@ -50,13 +50,16 @@ public class BoGetFileHistoryVersion implements RootBo{
 		String catalogId;
 		String userId;
 		String fileOperateState;
+		
 		StringBuffer sql = new StringBuffer();
 		String rootPath;
 		Vector vEnTFileVersion;
 		String filePath;
+		
 		/***********************************************************************
 		 * 获取输入
 		 **********************************************************************/
+		
 		fileId = requestXml.getInputValue("FILE_ID");
 		versionNos = requestXml.getInputValues("VERSION_NO");
 		catalogId = requestXml.getInputValue("CATALOG_ID");
@@ -64,16 +67,20 @@ public class BoGetFileHistoryVersion implements RootBo{
 		fileOperateState = requestXml.getInputValue("FILE_OPERATE_STATUE");
 		
 		rootPath =applicationXml.getInputValue("UPLOAD_CATALOG");
+		
 		/***********************************************************************
 		 * 创建数据库连接、实例化DB、EN
 		 **********************************************************************/
+		
 		transaction.createDefaultConnection(null, false);
 		dbTFileVersion = new  DbTFileVersion(transaction,null);
 		dbTFile = new DbTFile(transaction,null);
+		
 		/***********************************************************************
 		 * 执行业务逻辑、输出
 		 **********************************************************************/
-		//根据该路径下载文件
+		
+		//根据该路径下载文件，获取下载文件的绝对路径
 		filePath =rootPath+"/"+ PathByCatalog.pathByCatalogId(catalogId,transaction);
 		if (requestXml.getInputRowCount("PATH") <= 0) {
 			requestXml.addInputRow("PATH");

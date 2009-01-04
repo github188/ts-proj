@@ -21,7 +21,7 @@ public class BoFileDestory implements RootBo {
 	/**
 	 * <strong>输入：文件Id</strong><br>
 	 * <br>
-	 * <strong>业务逻辑：刪除文件信息并且删除历史版本</strong><br>
+	 * <strong>业务逻辑：刪除文件信息并且删除历史版本文件的版本：文件新建就存在该文件的一个版本</strong><br>
 	 * <br>
 	 * <strong>输出：</strong><br>
 	 * 无<br>
@@ -40,6 +40,7 @@ public class BoFileDestory implements RootBo {
 		EnTFile enTFile;
 		DbTFileVersion dbTFileVersion;
 		EnTFileVersion enTFileVersion = null;
+		
 		Vector fileVersions;
 		String[] fileIds;
 		String userId;

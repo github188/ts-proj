@@ -33,6 +33,8 @@ public class BoFileDelete implements RootBo {
 		//目录db en
 		DbTFile dbTFile;
 		EnTFile enTFile;
+		
+		//所要删除文件的Id
 		String[] fileIds ;
 		String userId;
 		String date;
@@ -57,8 +59,10 @@ public class BoFileDelete implements RootBo {
 		 * 执行业务逻辑、输出
 		 **********************************************************************/
 		if(fileIds != null && fileIds.length > 0){
+			//判断每个文件是否存在删除的权限
 			for(int i = 0 ; i < fileIds.length ; i++){
 				enTFile = dbTFile.findByKey(fileIds[i]);
+				//判断文件是否存在
 				if(enTFile != null){
 					/*
 					 * 判断权限是否能够删除

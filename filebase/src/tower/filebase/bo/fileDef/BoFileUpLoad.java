@@ -68,8 +68,6 @@ public class BoFileUpLoad implements RootBo{
 		String creator;
 		String createDateTime;
 		String newVersionNo;
-		String fileState;
-		String currEditPerson;
 		
 		//上传文件
 		UploadFile uploadFile;
@@ -103,8 +101,6 @@ public class BoFileUpLoad implements RootBo{
 		fileRemark = requestXml.getInputValue("FILE_REMARK");
 		catalogId = requestXml.getInputValue("CATALOG_ID");
 		newVersionNo = requestXml.getInputValue("NEW_VERSION_NO");
-		fileState = requestXml.getInputValue("FILE_STATE");
-		currEditPerson = requestXml.getInputValue("CURR_EDIT_PERSON");
 		creator = sessionXml.getItemValue("SYS_USER", 1, "USER_ID");
 		createDateTime = DateFunc.GenNowTime();
 		
@@ -128,18 +124,26 @@ public class BoFileUpLoad implements RootBo{
 		/***********************************************************************
 		 * 创建数据库连接、实例化DB、EN
 		 **********************************************************************/
+		
 		transaction.createDefaultConnection(null, false);
 		dbTFile = new DbTFile(transaction,null);
 		dbTFileVersion = new  DbTFileVersion(transaction,null);
+		
 		/***********************************************************************
 		 * 执行业务逻辑、输出
 		 **********************************************************************/
+		
 		//如果当前的目录代号为空，则默认在根目录下添加
 		if(catalogId == null || catalogId.length() == 0){
 			catalogId=GetRootCatalog.getRootId(transaction);
 		}
 			
 		//判断当前用户是否有执行该功能的权限
+		/*
+		 * 应该检查文件的验证权限码是否获取到
+		 * if(fileOperateState != null && fileOperateState.length > 0){
+		 * }
+		 */
 		if(!CheckParam.checkFile(transaction, catalogId, userId, fileOperateState)){
 			//F0002:您的权限不足，请向管理员申请此权限
 			throw new ErrorException("F0002",null);
@@ -148,8 +152,8 @@ public class BoFileUpLoad implements RootBo{
 		//获取上传的文件
 		uploadFile = (UploadFile)requestXml.getInputObject("UPLOAD_FILE");
 		
-		//根据文件代号：FILE_ID判断是"新建"还是"编辑上传"
 		enTFile = new EnTFile();
+		//根据文件代号：FILE_ID判断是"新建"还是"编辑上传"
 		if(fileId == null || fileId.length() ==0){
 			newVersionNo="1";
 			if(uploadFile != null){

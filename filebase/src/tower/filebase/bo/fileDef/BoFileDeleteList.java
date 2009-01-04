@@ -55,31 +55,42 @@ public class BoFileDeleteList implements RootBo{
 		
 		String catalogId;
 		String userId;
+		
 		Vector vEnTFiles;
+		
 		String path = new String();
 		String fullPath = new String();
+		
 		StringBuffer catalogIds = new StringBuffer();
 		StringBuffer sql = new StringBuffer();
+		
 		Hashtable hashEnTCatalog = new Hashtable();
 		Hashtable hashPerms= new Hashtable();
+		
 		/***********************************************************************
 		 * 获取输入
 		 **********************************************************************/
+		
 		userId = sessionXml.getItemValue("SYS_USER", 1, "USER_ID");
+		
 		/***********************************************************************
 		 * 创建数据库连接、实例化DB、EN
 		 **********************************************************************/
+		
 		transaction.createDefaultConnection(null, false);
 		dbTFile = new DbTFile(transaction,null);
 		dbUser = new DbSysUser(transaction,null);
+		
 		/***********************************************************************
 		 * 执行业务逻辑、输出
 		 **********************************************************************/
+		
 		//获取根目录
 		catalogId=GetRootCatalog.getRootId(transaction);
 		
 		//获取该登录用户有权向操作的所有目录
 		hashEnTCatalog=ContentShow.GetAllTreeDown(catalogId, userId,transaction);
+		
 		for(Iterator   i   =   hashEnTCatalog.values().iterator();   i.hasNext();){
 			enTCatalog = (EnTCatalog)i.next();
 			if(enTCatalog != null){
@@ -108,6 +119,7 @@ public class BoFileDeleteList implements RootBo{
 				PubFunc.LEN_PAGE_COUNT, "T_FILE", sql.toString());
 		
 		vEnTFiles = dbTFile.findAllWhere(sql.toString());
+		
 		for(int i=0;i<vEnTFiles.size();i++){
 			enTFile = (EnTFile)vEnTFiles.get(i);
 			if(enTFile != null){

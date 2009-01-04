@@ -8,12 +8,8 @@ import org.apache.log4j.Logger;
 import tower.common.util.Page;
 import tower.common.util.PubFunc;
 import tower.filebase.bo.perm.CheckParam;
-import tower.filebase.db.DbTCatalog;
-import tower.filebase.db.DbTFile;
 import tower.filebase.db.DbTFileVersion;
 import tower.filebase.en.EnSFilePerm;
-import tower.filebase.en.EnTCatalog;
-import tower.filebase.en.EnTFile;
 import tower.filebase.en.EnTFileVersion;
 import tower.filebase.util.GetRootCatalog;
 import tower.tmvc.ErrorException;
@@ -42,9 +38,6 @@ public class BoFileVersionHistory implements RootBo{
 		/***********************************************************************
 		 * 声明变量
 		 **********************************************************************/
-		//文件db en
-		
-		//目录db en
 		
 		//文件版本db en
 		DbTFileVersion dbTFileVersion;
@@ -64,23 +57,29 @@ public class BoFileVersionHistory implements RootBo{
 		Vector fileVersions;
 		StringBuffer sql;
 		Hashtable<String,EnSFilePerm> hashTable =new Hashtable<String,EnSFilePerm>();
+		
 		/***********************************************************************
 		 * 获取输入
 		 **********************************************************************/
+		
 		fileId = requestXml.getInputValue("FILE_ID");
 		catalogId = requestXml.getInputValue("CATALOG_ID");
 		//System.out.println("catalogId" + catalogId);
 		fileOperateState = requestXml.getInputValue("FILE_OPERATE_STATUE");
 		userId = sessionXml.getItemValue("SYS_USER", 1, "USER_ID");
+		
 		/***********************************************************************
 		 * 创建数据库连接、实例化DB、EN
 		 **********************************************************************/
+		
 		transaction.createDefaultConnection(null, false);
 		dbTFileVersion = new  DbTFileVersion(transaction,null);
 		dbUser = new DbSysUser(transaction,null);
+		
 		/***********************************************************************
 		 * 执行业务逻辑、输出
 		 **********************************************************************/
+		
 		if(catalogId == null || catalogId.length() == 0){
 			catalogId=GetRootCatalog.getRootId(transaction);
 		}
@@ -95,7 +94,7 @@ public class BoFileVersionHistory implements RootBo{
 			requestXml.addInputRow("FILE_PERM");
 			requestXml.setInputValue("FILE_PERM", 1, hashTable);
 		}
-		//判断该用户是否有执行该功能的权限: 如果有执行该功能；没有则抛出异常
+		//判断该用户是否有执行该功能(查看历史版本)的权限: 如果有执行该功能；没有则抛出异常
 		if(CheckParam.checkFile(transaction, catalogId, userId, fileOperateState)){
 			Page.SetPageInfo(transaction, null, requestXml, dbTFileVersion,
 					PubFunc.LEN_PAGE_COUNT, "T_FILE_VERSION", sql.toString());

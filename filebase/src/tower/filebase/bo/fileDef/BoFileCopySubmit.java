@@ -32,7 +32,7 @@ public class BoFileCopySubmit implements RootBo {
 	/**
 	 * <strong>输入：目录Id</strong><br>
 	 * <br>
-	 * <strong>业务逻辑：从原始目录删除并且从目标目录添加</strong><br>
+	 * <strong>业务逻辑：保留原始目录的文件并且从目标目录添加</strong><br>
 	 * <br>
 	 * <strong>输出：</strong><br>
 	 * 无<br>
@@ -49,21 +49,28 @@ public class BoFileCopySubmit implements RootBo {
 		// 目录db en
 		DbTCatalog dbTCatalog;
 		EnTCatalog enTCatalog;
+		
 		DbTFileVersion dbTFileVersion;
 		EnTFileVersion enTFileVersion;
+		
 		DbTFile dbTFile;
 		EnTFile enTFile;
+		
+		//copy到的目录Id
 		String[] catalogNewIds;
 		String[] fileIds;
 		String userId;
 		String dateTime;
 
+		//文件的相对路径
 		String path;
+		//文件路径
 		StringBuffer filePath;
 		File fileFrom;
 		File fileTo;
 		File file;
 		
+		//文件的操作权限码
 		String fileOperateState;
 		
 		StringBuffer sqlWhere = new StringBuffer();
@@ -83,6 +90,7 @@ public class BoFileCopySubmit implements RootBo {
 		dateTime = DateFunc.GenNowTime();
 		
 		fileOperateState = requestXml.getInputValue("FILE_OPERATE_STATUE");
+		//获取系统路径也就是根目录的绝对路径
 		filePart = applicationXml.getInputValue("UPLOAD_CATALOG");
 		
 		/***********************************************************************
@@ -101,12 +109,15 @@ public class BoFileCopySubmit implements RootBo {
 			if (fileIds != null && fileIds.length > 0) {
 				enTFile = dbTFile.findByKey(fileIds[0]);
 				if(enTFile != null){
+					//获取文件所在的目录
 					enTCatalog = dbTCatalog.findByKey(enTFile.getCatalogId());
 					if(enTCatalog != null){
+						//判断是否选择了目标目录
 						if(catalogNewIds != null && catalogNewIds.length > 0 ){
 							for(int i = 0 ; i < fileIds.length ; i ++){
 								enTFile = dbTFile.findByKey(fileIds[i]);
 								if(enTFile != null){
+									//获取文件所在目录的相对路径
 									path = PathByCatalog.pathByCatalogId(enTFile.getCatalogId(),
 											transaction);
 									filePath = new StringBuffer();
@@ -120,10 +131,12 @@ public class BoFileCopySubmit implements RootBo {
 									filePath.append(enTFile.getFileName() );
 									fileFrom = new File(filePath.toString());
 									//System.out.println(filePath.toString());
+									//判断文件是否存在
 									if(fileFrom.exists()){
 										for (int j = 0; j < catalogNewIds.length; j++) {
 											enTCatalog = dbTCatalog.findByKey(catalogNewIds[j]);
 											if(enTCatalog != null){
+												//判断copy的目标目录是否具有添加的权限，如果没有权限则不能进行添加
 												boolean moveFlag = CheckParam.checkFile(transaction, catalogNewIds[j], userId, fileOperateState);
 												if(moveFlag){
 													sqlWhere = new StringBuffer();
@@ -131,6 +144,7 @@ public class BoFileCopySubmit implements RootBo {
 													sqlWhere.append(" and CATALOG_ID = '");
 													sqlWhere.append(catalogNewIds[j]+"'");
 													files = dbTFile.findAllWhere(sqlWhere.toString());
+													//判断文件复制到的目标目录是否具有同名的文件
 													if(files != null && files.size() > 0){
 														//copy到的目录下已经有此文件
 														String[] mes = {enTFile.getFileName(),enTCatalog.getCatalogName()};
@@ -201,6 +215,7 @@ public class BoFileCopySubmit implements RootBo {
 								filePath.append(path);
 								
 								enTFile.setCatalogId(catalogNewIds[j]);
+								//添加一个文件记录
 								// 从新生成主键Id
 								//BoAddAuto boAddAuto = new BoAddAuto();
 								String newFileId = BoAddAuto.GetBuildMode(transaction, "FILE_ID");
@@ -230,6 +245,7 @@ public class BoFileCopySubmit implements RootBo {
 								dbTFileVersion.insert(enTFileVersion);
 								
 								file = new File(filePath.toString());
+								//判断文件所在的目录是否存在，如果不存在则创建目录
 								if (!file.exists()) {
 									file.mkdirs();
 								}
@@ -242,6 +258,7 @@ public class BoFileCopySubmit implements RootBo {
 								//System.out.println("copy到的"+filePath.toString());
 								//filePath.append("."+ enTFile.getFileExtName());
 								fileTo = new File(filePath.toString());
+								//判断文件是否存在，如果不存在则创建文件
 								if (!fileTo.exists()) {
 									try {
 										fileTo.createNewFile();
@@ -256,6 +273,7 @@ public class BoFileCopySubmit implements RootBo {
 											fileTo);
 									if (inputStream != null) {
 										try {
+											//将源文件copy的到目标文件
 											IOUtils.copy(inputStream, outputStream);
 										} catch (IOException e) {
 											// TODO Auto-generated catch block
@@ -267,6 +285,7 @@ public class BoFileCopySubmit implements RootBo {
 									e.printStackTrace();
 								}finally{
 									try {
+										//关闭输入输出流
 										inputStream.close();
 										outputStream.close();
 									} catch (IOException e) {

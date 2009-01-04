@@ -1,7 +1,6 @@
 package tower.filebase.bo.fileDef;
 
 import java.io.File;
-import java.util.Vector;
 
 import org.apache.log4j.Logger;
 
@@ -9,7 +8,6 @@ import tower.filebase.bo.perm.CheckParam;
 import tower.filebase.db.DbTFile;
 import tower.filebase.db.DbTFileVersion;
 import tower.filebase.en.EnTFile;
-import tower.filebase.en.EnTFileVersion;
 import tower.filebase.util.PathByCatalog;
 import tower.tmvc.ErrorException;
 import tower.tmvc.QueryResult;
@@ -33,7 +31,7 @@ public class BoRollBackFileVersion implements RootBo{
 	 * <strong>业务逻辑：</strong><br>
 	 * <br> 1、根据文件的所属目录ID(CATALOG_ID)获取该文件的权限，判断是否有回滚版本的权限：如果有则回滚，如果没有这抛出异常 . 
 	 * <br> 2、根据文件代号（FILE_ID）和文件版本号（VERSON_NO）更新文件表（IT_FILE）为最新版本文件记录。
-	 * <br> 3、根据文件代号（FILE_ID）删除所回滚版本号之前的所有版本记录 .
+	 * <br> 3、根据文件代号（FILE_ID）删除所回滚版本号之后的所有版本记录 .
 	 * <strong>输出：</strong><br>
 	 * <br>无
 	 * <br>
@@ -57,29 +55,37 @@ public class BoRollBackFileVersion implements RootBo{
 		
 		//其他
 		File file;
+		
 		String rootPath;
 		String filePath;
 		String path;
+		
 		StringBuffer sql;
 		QueryResult qr;
+		
 		/***********************************************************************
 		 * 获取输入
 		 **********************************************************************/
+		
 		fileId = requestXml.getInputValue("FILE_ID");
 		catalogId = requestXml.getInputValue("CATALOG_ID");
 		fileOperateState = requestXml.getInputValue("FILE_OPERATE_STATUE");
 		userId = sessionXml.getItemValue("SYS_USER", 1, "USER_ID");
 		versionNo = requestXml.getInputValue("VERSION_NO");
 		rootPath = applicationXml.getInputValue("UPLOAD_CATALOG");
+		
 		/***********************************************************************
 		 * 创建数据库连接、实例化DB、EN
 		 **********************************************************************/
+		
 		transaction.createDefaultConnection(null, false);
 		dbTFileVersion = new  DbTFileVersion(transaction,null);
 		dbTFile = new DbTFile(transaction,null);
+		
 		/***********************************************************************
 		 * 执行业务逻辑、输出
 		 **********************************************************************/
+		
 		enTFile = new EnTFile();
 		sql = new StringBuffer();
 		sql.append("  FILE_ID=");
@@ -87,7 +93,7 @@ public class BoRollBackFileVersion implements RootBo{
 		sql.append(" AND VERSION_NO >");
 		sql.append(Transaction.formatString(versionNo));
 		
-		//判断该用户是否有执行该功能的权限: 如果有执行该功能；没有则抛出异常
+		//判断该用户是否有执行该功能(回滚历史版本)的权限: 如果有执行该功能；没有则抛出异常
 		if(CheckParam.checkFile(transaction, catalogId, userId, fileOperateState)){
 			//从文件版本表中删除该版本之前的所有版本记录
 			dbTFileVersion.deleteWhere(sql.toString());

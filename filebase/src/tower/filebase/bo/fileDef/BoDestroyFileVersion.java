@@ -55,15 +55,20 @@ public class BoDestroyFileVersion implements RootBo{
 		String filePath;
 		String path;
 		File file;
+		
 		String catalogId;
 		String userId;
 		String fileOperateState;
-		 QueryResult qr;
-		 StringBuffer sql;
-		 StringBuffer str = new StringBuffer();
+		
+		QueryResult qr;
+		
+		StringBuffer sql;
+		StringBuffer str = new StringBuffer();
 		/***********************************************************************
 		 * 获取输入
 		 **********************************************************************/
+		
+		//获得文件Id和版本号
 		fileId = requestXml.getInputValue("FILE_ID");
 		versionNos = requestXml.getInputValues("VERSION_NO");
 		
@@ -72,6 +77,7 @@ public class BoDestroyFileVersion implements RootBo{
 		fileOperateState = requestXml.getInputValue("FILE_OPERATE_STATUE");
 		
 		rootPath = applicationXml.getInputValue("UPLOAD_CATALOG");
+		
 		/***********************************************************************
 		 * 创建数据库连接、实例化DB、EN
 		 **********************************************************************/

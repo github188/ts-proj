@@ -56,16 +56,20 @@ public class BoFileOperateList implements RootBo{
 		/***********************************************************************
 		 * 获取输入
 		 **********************************************************************/
+		
 		catalogId = requestXml.getInputValue("CATALOG_ID");
 		fileId = requestXml.getInputValue("QFILE_ID");
 		userId = sessionXml.getItemValue("SYS_USER", 1, "USER_ID");
+		
 		/***********************************************************************
 		 * 创建数据库连接、实例化DB、EN
 		 **********************************************************************/
+		
 		transaction.createDefaultConnection(null, false);
 		dbTFile = new DbTFile(transaction,null);
 		dbUser = new DbSysUser(transaction,null);
 		dbTFile.setOrderBy(" ORDER BY FLAG DESC");
+		
 		/***********************************************************************
 		 * 执行业务逻辑、输出
 		 **********************************************************************/
@@ -78,6 +82,7 @@ public class BoFileOperateList implements RootBo{
 		hashTable=CheckParam.getFilePerm(transaction,catalogId, userId);
 		
 		//查该目录下的所有文件
+		//判断该目录是否具有销毁的权限，如果具有销毁的权限则查找已经删除的文件，如果不具有销毁权限则查找正常的文件
 		if(hashTable.containsKey("FILE_DESTORY")){
 			sql.append("  CATALOG_ID=");
 			sql.append(Transaction.formatString(catalogId));
@@ -104,10 +109,12 @@ public class BoFileOperateList implements RootBo{
 		for(int i=0;i<vEnTFiles.size();i++){
 			enTFile = (EnTFile)vEnTFiles.get(i);
 			if(enTFile != null){
+				//设置文件的创建者姓名
 				enUser = dbUser.findByKey(enTFile.getCreator());
 				if(enUser != null){
 					enTFile.setCreator(enUser.getUserName());
 				}
+				//获得当前文件的编辑者姓名
 				enUser = dbUser.findByKey(enTFile.getCurrEditPerson());
 				int row = dbTFile.setToXml(requestXml, enTFile);
 				
@@ -119,6 +126,7 @@ public class BoFileOperateList implements RootBo{
 			
 		}
 		
+		//传递目录的权限值也就是文件的权限值，决定在页面上的现在按钮
 		if (requestXml.getInputRowCount("FILE_PERM") <=0) {
 			requestXml.addInputRow("FILE_PERM");
 			requestXml.setInputValue("FILE_PERM", 1, hashTable);

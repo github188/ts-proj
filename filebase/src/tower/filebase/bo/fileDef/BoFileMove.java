@@ -21,6 +21,15 @@ import tower.tmvc.XMLWrap;
 
 public class BoFileMove implements RootBo {
 
+	/**
+	 * <strong>输入：文件Id：FILE_ID、文件所在目录的操作权限：FILE_OPERATE_STATUE</strong><br>
+	 * <br>
+	 * <strong>业务逻辑：列出所有的目录，并且具有添加权限的目录可以进行选择</strong><br>
+	 * <br>
+	 * <strong>输出：</strong><br>
+	 * 文件要移动的目录列表<br>
+	 * <br>
+	 */
 	public void doBusiness(Transaction transaction, XMLWrap requestXml,
 			XMLWrap sessionXml, XMLWrap applicationXml, Logger logger)
 			throws ErrorException {
@@ -67,9 +76,11 @@ public class BoFileMove implements RootBo {
 		dbTFile = new DbTFile(transaction, null);
 		dbTCatalog = new DbTCatalog(transaction, null);
 		dbSFilePerm = new DbSFilePerm(transaction,null);
+		
 		/***********************************************************************
 		 * 执行业务逻辑、输出
 		 **********************************************************************/
+		
 		if(fileOperateState != null && fileOperateState.length() > 0){
 			enSFilePerm = dbSFilePerm.findByKey(fileOperateState);
 			if(enSFilePerm != null){
@@ -87,13 +98,16 @@ public class BoFileMove implements RootBo {
 		} else {
 			catalogId = "";
 		}
+		
 		if (fileIds != null && fileIds.length > 0) {
 			enTFile = dbTFile.findByKey(fileIds[0]);
 			if(enTFile != null){
 				enTCatalog = dbTCatalog.findByKey(enTFile.getCatalogId());
 				if(enTCatalog != null){
+					//判断给目录是否具有操作（移动）的权限
 					Boolean copyFlag = CheckParam.checkFile(transaction, enTCatalog.getCatalogId(), userId, fileOperateState);
 					if(copyFlag){
+						//查找需要移动的所有文件
 						fileSql.append("FILE_ID in (''");
 						for(int i = 0 ; i < fileIds.length ; i++){
 							fileSql.append(",'");
@@ -120,6 +134,7 @@ public class BoFileMove implements RootBo {
 						//System.out.println("catalogId" + catalogId);
 						tableTree = ContentShow
 								.GetAllTreeDown(catalogId, null, transaction);
+						//获得具有添加权限的目录
 						tableAdd = ContentShow.GetTreeDown(userId, "2", null, transaction);
 						// for (Iterator i = tableTree.values().iterator();
 						// i.hasNext();){
@@ -143,6 +158,7 @@ public class BoFileMove implements RootBo {
 								//System.out.println(enTCatalog.getCatalogName() + flag);
 								int row = dbTCatalog.setToXml(requestXml, enTCatalog);
 								//System.out.println(enTCatalog.getCatalogName()+flag);
+								//根据是否具有添加权限设置显示标志
 								if(flag.equals("0")){
 									requestXml.setItemValue("T_CATALOG", row, "SHOW_FLAG", enTCatalog.getCatalogId());
 								}else{

@@ -21,6 +21,15 @@ import tower.tmvc.XMLWrap;
 
 public class BoFileCopy implements RootBo {
 
+	/**
+	 * <strong>输入：文件Id：FILE_ID、文件所在目录的操作权限：FILE_OPERATE_STATUE 、目标目录所具有的权限：FILE_OPERATE_STATUE_TO</strong><br>
+	 * <br>
+	 * <strong>业务逻辑：列出所有的目录，并且具有添加权限的目录可以进行选择</strong><br>
+	 * <br>
+	 * <strong>输出：</strong><br>
+	 * 文件要copy的目录列表<br>
+	 * <br>
+	 */
 	public void doBusiness(Transaction transaction, XMLWrap requestXml,
 			XMLWrap sessionXml, XMLWrap applicationXml, Logger logger)
 			throws ErrorException {
@@ -31,10 +40,13 @@ public class BoFileCopy implements RootBo {
 		// 目录db en
 		DbTFile dbTFile;
 		EnTFile enTFile;
+		
 		DbTCatalog dbTCatalog;
 		EnTCatalog enTCatalog;
+		
 		DbSFilePerm dbSFilePerm;
 		EnSFilePerm enSFilePerm;
+		
 		String[] fileIds;
 		String userId;
 		Hashtable tableTree;
@@ -72,6 +84,8 @@ public class BoFileCopy implements RootBo {
 		/***********************************************************************
 		 * 执行业务逻辑、输出
 		 **********************************************************************/
+		
+		//获取目录操作权限的验证操作权限码
 		if(fileOperateState != null && fileOperateState.length() > 0){
 			if(fileOperateStateTo != null && fileOperateStateTo.length() > 0){
 				enSFilePerm = dbSFilePerm.findByKey(fileOperateStateTo);
@@ -87,8 +101,10 @@ public class BoFileCopy implements RootBo {
 			enTFile = dbTFile.findByKey(fileIds[0]);
 			if(enTFile != null){
 				if(fileOperateState != null && fileOperateState.length() > 0){
+					//判断文件所在的目录是否具有copy的权限
 					Boolean copyFlag = CheckParam.checkFile(transaction, enTFile.getCatalogId(), userId, fileOperateState);
 					if(copyFlag){
+						//获得要copy的文件
 						fileSql.append("FILE_ID in (''");
 						for (int i = 0; i < fileIds.length; i++) {
 							fileSql.append(",'");
@@ -111,20 +127,21 @@ public class BoFileCopy implements RootBo {
 							catalogId = "";
 						}
 						// 获取所有目录
-							tableTree = ContentShow
-									.GetAllTreeDown(catalogId, null, transaction);
-							tableAdd = ContentShow.GetTreeDown(userId, state, null, transaction);
-							for (Iterator i = tableTree.values().iterator(); i.hasNext();) {
-								enTCatalog = (EnTCatalog) i.next();
-								String flag = (String) tableAdd.get(enTCatalog.getCatalogId());
-								//System.out.println(enTCatalog.getCatalogName() + flag);
-								int row = dbTCatalog.setToXml(requestXml, enTCatalog);
-								if(flag.equals("0")){
-									requestXml.setItemValue("T_CATALOG", row, "SHOW_FLAG", enTCatalog.getCatalogId());
-								}else{
-									requestXml.setItemValue("T_CATALOG", row, "SHOW_FLAG", null);
-								}
+						tableTree = ContentShow.GetAllTreeDown(catalogId, null, transaction);
+						//获取具有添加权限的目录
+						tableAdd = ContentShow.GetTreeDown(userId, state, null, transaction);
+						for (Iterator i = tableTree.values().iterator(); i.hasNext();) {
+							enTCatalog = (EnTCatalog) i.next();
+							String flag = (String) tableAdd.get(enTCatalog.getCatalogId());
+							//System.out.println(enTCatalog.getCatalogName() + flag);
+							int row = dbTCatalog.setToXml(requestXml, enTCatalog);
+							//根据目录的权限判断copy页面的复选框是否可选
+							if(flag.equals("0")){
+								requestXml.setItemValue("T_CATALOG", row, "SHOW_FLAG", enTCatalog.getCatalogId());
+							}else{
+								requestXml.setItemValue("T_CATALOG", row, "SHOW_FLAG", null);
 							}
+						}
 					}else{
 						//没有权限拷贝
 						enTCatalog = dbTCatalog.findByKey(enTFile.getCatalogId());
