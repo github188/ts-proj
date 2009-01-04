@@ -63,6 +63,7 @@ public class BoButtonShow implements RootBo {
 		 * 获取输入
 		 **********************************************************************/
 		
+		//获取目录Id如果目录Id不存在则获取根目录的Id
 		catalogId = requestXml.getInputValue("CATALOG_ID");
 		userId = sessionXml.getItemValue("SYS_USER", 1, "USER_ID");
 		catalogs = dbTCatalog.findAllWhere(sql);
@@ -80,9 +81,12 @@ public class BoButtonShow implements RootBo {
 		/***********************************************************************
 		 * 执行业务逻辑、输出
 		 **********************************************************************/
+		//判断目录Id是否存在
 		if(catalogId != null && catalogId.length() > 0){
+			//获取对应目录对应用户的权限
 			buttonValues = CheckParam.getContentPerm(transaction,catalogId,userId);
 			if(buttonValues != null){
+				//获得目录权限的显示值，如果是根目录则只显示添加，否则根据权限显示所有
 				perms = dbSContentPrem.findAllWhere("SHOW_FLAG = '1' and CONTENT_OPERATION_STATUS = 'CONTENT_ADD'");
 				if(enTCatalog != null){
 					if(!enTCatalog.getCatalogId().equals(catalogId)){
@@ -93,12 +97,14 @@ public class BoButtonShow implements RootBo {
 					//System.out.println("perms.size()"+perms.size());
 					dbSContentPrem.setAllToXml(requestXml, perms);
 				}
+				//设置用户显示的权限按钮
 				if(!buttonValues.isEmpty() && buttonValues.size() > 0){
 					if(requestXml.getInputRowCount("CATALOG_PERM")==0){
 						requestXml.addInputRow("CATALOG_PERM");
 					}
 					requestXml.setInputValue("CATALOG_PERM", 1, buttonValues);
 				}
+				//获取目录的基本信息
 				enTCatalog = dbTCatalog.findByKey(catalogId);
 				if(enTCatalog != null){
 					dbTCatalog.setToXml(requestXml, enTCatalog);
