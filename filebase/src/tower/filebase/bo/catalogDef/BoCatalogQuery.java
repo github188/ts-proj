@@ -45,6 +45,8 @@ public class BoCatalogQuery implements RootBo{
 		/***********************************************************************
 		 * 获取输入
 		 **********************************************************************/
+		
+		//获取根节点目录Id
 		catalogId = GetRootCatalog.getRootId(transaction);
 		selectCatalogId = requestXml.getInputValue("SELECT_CATALOG_ID");
 
@@ -65,6 +67,7 @@ public class BoCatalogQuery implements RootBo{
 		}else{
 			requestXml.setInputValue("SELECT_CATALOG_ID", 1, catalogId);
 		}
+		//根据权限获取根目录下的所有目录
 		table = ContentShow.GetAllTreeDown(catalogId,null,transaction);
 		for   (Iterator   i   =   table.values().iterator();   i.hasNext();){
 			enTCatalog = (EnTCatalog)i.next();
