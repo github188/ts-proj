@@ -50,7 +50,8 @@ public class DownLoadFileServlet extends javax.servlet.http.HttpServlet
 		fileIds = xml.getItemValues("T_FILE", "FILE_ID");
 		fileNames = xml.getItemValues("T_FILE", "FILE_NAME");
 		fileExtNames = xml.getItemValues("T_FILE", "FILE_EXT_NAME");
-		filePath = xml.getItemValues("T_FILE", "FILE_PATH");
+		//filePath = xml.getItemValues("T_FILE", "FILE_PATH");
+		filePath = xml.getInputValues("FULL_PATH");
 		fileVersions = xml.getItemValues("T_FILE", "NEW_VERSION_NO");
 		path = xml.getInputValue("PATH");
 
