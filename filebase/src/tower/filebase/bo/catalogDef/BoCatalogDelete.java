@@ -33,6 +33,7 @@ public class BoCatalogDelete implements RootBo {
 		// 目录db en
 		DbTCatalog dbTCatalog;
 		EnTCatalog enTCatalog;
+		
 		String catalogId;
 		String userId;
 		String dateTime;
