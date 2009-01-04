@@ -123,6 +123,7 @@ INSERT INTO `s_file_perm` (`FILE_OPERATION_STATUS`,`FILE_PERM_NAME`,`CONTENT_PER
  ('FILE_DELETE','文件删除','2','1'),
  ('FILE_DESTROY','文件销毁','1','1'),
  ('FILE_DOWN','下载','4','1'),
+ ('FILE_HISTORY_VIEW','查看历史','3','1'),
  ('FILE_HISTROY_BACK','恢复文件历史版本','1','2'),
  ('FILE_HISTROY_DESTROY','销毁历史版本','1','2'),
  ('FILE_HISTROY_GET','获取文件版本','3','2'),
