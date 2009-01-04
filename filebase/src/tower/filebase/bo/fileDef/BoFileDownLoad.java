@@ -42,6 +42,7 @@ public class BoFileDownLoad implements RootBo{
 		File file;
 		String filePath;
 		String rootPath;
+		String path;
 		Vector vEnTFiles;
 		String catalogId;
 		String userId;
@@ -92,23 +93,26 @@ public class BoFileDownLoad implements RootBo{
 		sql.append(" FILE_ID IN ");
 		sql.append(strBuf.toString());
 		vEnTFiles = dbTFile.findAllWhere(sql.toString());
-		dbTFile.setAllToXml(requestXml, vEnTFiles);
-		filePath =rootPath+"/"+ PathByCatalog.pathByCatalogId(catalogId,transaction);
-		if (requestXml.getInputRowCount("PATH") <= 0) {
-			requestXml.addInputRow("PATH");
-			requestXml.setInputValue("PATH", 1,filePath);
-		}
 		
-		//判断要下载的文件是否存在！
+		//判断要下载的文件是否存在，如果不存在着抛出异常：F00010：要下载的文件不存在；否则保存文件完整路径。
 		for(int i=0;i<vEnTFiles.size();i++){
 			enTFile = (EnTFile)vEnTFiles.get(i);
 			String localFileName = enTFile.getFileId()+"_"+enTFile.getNewVersionNo()+"_"+enTFile.getFileName();
-			String path =rootPath+"/"+ PathByCatalog.pathByCatalogId(catalogId,transaction)+"/"+localFileName;
-			file = new File(path);
+			filePath =rootPath+"/"+ PathByCatalog.pathByCatalogId(catalogId,transaction)+"/"+localFileName;
+			file = new File(filePath);
 			if(!file.exists()){
 				throw new ErrorException("F00010",new Object[]{enTFile.getFileName()});
+			}else{
+				int row = requestXml.addInputRow("FULL_PATH");
+				requestXml.setInputValue("FULL_PATH", row,filePath);
 			}
 		}
+		
+		dbTFile.setAllToXml(requestXml, vEnTFiles);
+		path =rootPath+"/"+ PathByCatalog.pathByCatalogId(catalogId,transaction);
+		if (requestXml.getInputRowCount("PATH") <= 0) {
+			requestXml.addInputRow("PATH");
+			requestXml.setInputValue("PATH", 1,path);
+		}
 	}
-
 }
