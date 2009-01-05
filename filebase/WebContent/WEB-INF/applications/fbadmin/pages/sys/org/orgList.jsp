@@ -256,7 +256,7 @@ try{
 </td>
 <td width="70%" valign="top">
 <table width="100%">
-<%if(orgId != null && orgId.length() > 0){ %>
+<%if(orgId != null && orgId.length() != 0){ %>
 	<tr>
 		<td>
 			<!--父级列表bgn-->
