@@ -88,7 +88,7 @@
   }
   treeHtmlBuilder = new TreeHtmlBuilder()
   .setRootId("")
-  .setRootName("")
+  .setRootName("根")
   .setDisplayAll(true)
   .setInputType("radio") 
   .setInputName("ORG_ID")
@@ -255,6 +255,7 @@ try{
 </td>
 <td width="70%" valign="top">
 <table width="100%">
+<%if(orgId != null && orgId.length() != 0){ %>
 	<tr>
 		<td>
 			<!--父级列表bgn-->
@@ -294,7 +295,7 @@ try{
 
 		</td>
 	</tr>
-
+<%} %>
 	<tr>
 		<td>
 			<!--子级列表bgn-->
