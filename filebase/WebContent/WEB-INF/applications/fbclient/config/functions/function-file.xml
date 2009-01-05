@@ -3,10 +3,14 @@
 
 	<function id="DownLoadFile" description="文件下载" type="jsp"
 		jspPath="/fbclient/servlet/DownLoadFileServlet" />
+		
+	<!-- 文件列表bgn -->	
 	<function id="FileOperateList" description="文件操作列表" type="bo"
 		className="tower.filebase.bo.fileDef.BoFileOperateList" forward="ToInfoInit" />
 	<function id="ToInfoInit" description="文件操作列表" type="jsp"
 		jspPath="/fbclient/pages/file/fileDef/fileOperateList.jsp" />
+	<!-- 文件列表end -->	
+	
 	<function id="RollBackFileVersion" description="文件版本回滚" type="bo"
 		className="tower.filebase.bo.fileDef.BoRollBackFileVersion" forward="FileVersionHistory" />
 	<function id="GetFileVersion" description="获取历史版本" type="bo"
@@ -17,6 +21,7 @@
 		className="tower.filebase.bo.fileDef.BoFileVersionHistory" forward="ToFileVersionHistory" />
 	<function id="ToFileVersionHistory" description="文件历史版本列表页面" type="jsp"
 		jspPath="/fbclient/pages/file/fileDef/fileHistoryVersion.jsp" />
+		
 	<function id="UpLoadFile" description="上传文件" type="bo"
 		className="tower.filebase.bo.fileDef.BoFileUpLoad" forward="ToLoadJSP" />
 	<function id="ToLoadJSP" description="文件历史版本列表页面" type="jsp"
@@ -29,14 +34,21 @@
 		className="tower.filebase.bo.fileDef.BoFileDownLoad" forward="DownLoadFile" />
 	<function id="EditUpLoadFile" description="编辑上传" type="bo"
 		className="tower.filebase.bo.fileDef.BoFileDetail" forward="ToUpLoadFile" />
-	<function id="FileQuery" description="文件查询" type="bo"
-		className="tower.filebase.bo.fileDef.BoFileQuery" forward="ToFileQuery" />
+	
+		
+	<!-- 文件检索bgn -->
 	<function id="ToFileQuery" description="文件查询" type="jsp"
 		jspPath="/fbclient/pages/file/fileDef/fileList.jsp" />
+	<function id="FileQuery" description="文件查询" type="bo"
+		className="tower.filebase.bo.fileDef.BoFileQuery" forward="ToFileQuery" />
+	<!-- 不用 -->	
 	<function id="FileSearch" description="全文检索" type="bo"
 		className="tower.filebase.bo.fileDef.BoFileQuery" forward="ToFileSearch" />
 	<function id="ToFileSearch" description="文件查询" type="jsp"
 		jspPath="/fbclient/pages/file/fileDef/fileSearch.jsp" />
+	<!-- 不用 -->
+	<!-- 文件检索end -->	
+		
 	<function id="DeleteFileList" description="已删除文件查询" type="bo"
 		className="tower.filebase.bo.fileDef.BoFileDeleteList" forward="ToDelFileList" />
 	<function id="ToDelFileList" description="已删除文件页面" type="jsp"
