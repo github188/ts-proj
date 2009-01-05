@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--  
 <checkers>
 	<checker id="LoginAndPermChecker" description="检查是否登录以及执行功能的权限"
 		className="tower.tmvc.sys.checker.LoginAndPermChecker" forward="InLogin" />
 </checkers>
+-->

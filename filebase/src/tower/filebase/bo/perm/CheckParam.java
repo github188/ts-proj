@@ -347,36 +347,34 @@ public class CheckParam {
 			throws ErrorException {
 		// boolean autoCommit = false;
 		//String connId = null;
+		
 		DbSContentPerm dbSContentPerm;
 		EnSContentPerm enSContentPerm;
+		
 		Vector vSContentPerm;
-		DbSRolePerm dbSRolePerm;
-		EnSRolePerm enSRolePerm;
-		Vector vSRolePerm;
 		Hashtable<String, EnSContentPerm> table = new Hashtable<String, EnSContentPerm>();
+		
 		//connId = transaction.createConnection(null, false);
 		// Connection conn = transaction.getConnById(connId);
 		// autoCommit = conn.getAutoCommit();
 		// transaction.setAutoCommit(connId, false);
-		dbSRolePerm = new DbSRolePerm(transaction, null);
+		
 		dbSContentPerm = new DbSContentPerm(transaction, null);
+		
 		// 查询目录和用户所属角色对应的目录权限码集合
-		 String catalogPermStatus=getCatalogPermStatus(contentId,userId,transaction);							
-			Vector<String> vPerm = getPermStatus(catalogPermStatus);
-			for (int j = 0; j < vPerm.size(); j++) {
-				vSContentPerm = dbSContentPerm
-						.findAllWhere(" CONTENT_PERM_STATUS='" + vPerm.get(j)
-								+ "'");
-				for (int k = 0; k < vSContentPerm.size(); k++) {
-					enSContentPerm = (EnSContentPerm) vSContentPerm.get(k);
-					if (!table.containsKey(enSContentPerm
-							.getContentOperationStatus())) {
-						table.put(enSContentPerm.getContentOperationStatus(),
+		 String catalogPermStatus=getCatalogPermStatus(contentId,userId,transaction);	
+		 
+		Vector<String> vPerm = getPermStatus(catalogPermStatus);
+		for (int j = 0; j < vPerm.size(); j++) {
+			vSContentPerm = dbSContentPerm.findAllWhere(" CONTENT_PERM_STATUS='" + vPerm.get(j)+ "'");
+			for (int k = 0; k < vSContentPerm.size(); k++) {
+				enSContentPerm = (EnSContentPerm) vSContentPerm.get(k);
+				if (!table.containsKey(enSContentPerm.getContentOperationStatus())) {
+					table.put(enSContentPerm.getContentOperationStatus(),
 								enSContentPerm);
-					}
 				}
 			}
-		
+		}
 		return table;
 	}
 

@@ -15,7 +15,7 @@ import tower.tmvc.Transaction;
 
 public class ContentShow {
 	/**
-	 * 
+	 * 获得该目录及该目录的下属目录
 	 * @param contentId
 	 *            目录ID
 	 * @param connId
@@ -26,34 +26,55 @@ public class ContentShow {
 	public synchronized static Hashtable<String, EnTCatalog> GetAllTreeDown(
 			String contentId, String connId, Transaction transaction)
 			throws ErrorException {
+		
+		/***********************************************************************
+		 * 声明变量
+		 **********************************************************************/
+		
 		QueryResult qrWater;
 		QueryResultRow rWater;
+		
 		DbTCatalog dbTCatalog;
 		EnTCatalog enTCatalog;
 		Vector vTCatalog;
+		
 		// boolean autoCommit = false;
 		Hashtable<String, EnTCatalog> returnVal = new Hashtable<String, EnTCatalog>();
 		Hashtable<String, EnTCatalog> tableCatalog = new Hashtable<String, EnTCatalog>();
 
+		/***********************************************************************
+		 * 创建数据库连接、实例化DB、EN
+		 **********************************************************************/
+		
 		connId = transaction.createDefaultConnection(null, false);
 		// Connection conn = transaction.getConnById(connId);
 		// autoCommit = conn.getAutoCommit();
 		// transaction.setAutoCommit(connId, false);
 		// transaction.setAutoCommit(connId, false);
 		dbTCatalog = new DbTCatalog(transaction, null);
+		
+		/***********************************************************************
+		 * 执行业务逻辑、输出
+		 **********************************************************************/
+		
 		// 查询所有目录信息
 		vTCatalog = dbTCatalog.findAll();
 		for (int i = 0; i < vTCatalog.size(); i++) {
 			enTCatalog = (EnTCatalog) vTCatalog.get(i);
 			tableCatalog.put(enTCatalog.getCatalogId(), enTCatalog);
 		}
-		// 若目录信息中有此目录信息，
+		
+		// 若目录信息中有此目录信息，存放此目录
 		if (tableCatalog.containsKey(contentId)) {
 			returnVal.put(contentId, tableCatalog.get(contentId));
 		}
+		
+		//查找目录Id为contentId的并且有效标志为1的目录
 		qrWater = transaction.doQuery(null,
 				"select  CATALOG_ID from T_CATALOG where CATALOG_ID='"
 						+ contentId + "' and DELETE_FLAG='1' ");
+		
+		//查找此目录下属目录
 		while (qrWater != null && qrWater.size() > 0) {
 			String res = "";
 			String sql = "select  CATALOG_ID,DELETE_FLAG from T_CATALOG where PARENT_ID in ('"
@@ -276,25 +297,30 @@ public class ContentShow {
 	 */
 	public synchronized static String GetContentFullName(String contentId,
 			String connId, Transaction transaction) throws ErrorException {
+		
 		DbTCatalog dbTCatalog;
 		EnTCatalog enTCatalog;
 		Vector vTCatalog;
+		
 		// 所有目录信息
 		Hashtable<String, EnTCatalog> allContent = new Hashtable<String, EnTCatalog>();
 		//connId = transaction.createConnection(null, false);
 		// transaction.setAutoCommit(connId, false);
+		
+		
 		dbTCatalog = new DbTCatalog(transaction, null);
+		
+		
+		//获得所有目录的信息
 		vTCatalog = dbTCatalog.findAll();
 		for (int i = 0; i < vTCatalog.size(); i++) {
 			enTCatalog = (EnTCatalog) vTCatalog.get(i);
 			allContent.put(enTCatalog.getCatalogId(), enTCatalog);
 		}
+		
+		//记录目录contentId及该目录下的目录名称
 		String fullContentName = "";
-		// System.out.println("");
-		// for(int i=0;i<allContent.size();i++){
-		// System.out.println(allContent.get(i));
-		// }
-		// System.out.println(allContent.containsKey(contentId));
+		
 		while (allContent.containsKey(contentId)) {
 			enTCatalog = allContent.get(contentId);
 			if (fullContentName != null && fullContentName.length() > 0) {
