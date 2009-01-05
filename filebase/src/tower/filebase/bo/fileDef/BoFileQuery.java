@@ -14,6 +14,7 @@ import tower.filebase.db.DbTFile;
 import tower.filebase.en.EnTCatalog;
 import tower.filebase.en.EnTFile;
 import tower.filebase.util.GetRootCatalog;
+import tower.filebase.util.PathByCatalog;
 import tower.tmvc.ErrorException;
 import tower.tmvc.RootBo;
 import tower.tmvc.Transaction;
@@ -106,7 +107,6 @@ public class BoFileQuery implements RootBo{
 		catalogId=GetRootCatalog.getRootId(transaction);
 		//获取当前用户所有具有权限的目录列表
 		table = ContentShow.GetAllTreeDown(catalogId,userId,transaction);
-		
 		for(Iterator   i   =   table.values().iterator();   i.hasNext();){
 			enTCatalog = (EnTCatalog)i.next();
 			if(j==0){
@@ -172,6 +172,8 @@ public class BoFileQuery implements RootBo{
 			vEnFiles = dbTFile.findAllWhere(sql.toString()); 
 			for(int i=0;i<vEnFiles.size();i++){
 				enTFile = (EnTFile) vEnFiles.get(i);
+				
+				//获取当前操作人员名称和当前编辑人员名称
 				if(enTFile != null){
 					enUser = dbUser.findByKey(enTFile.getCreator());
 					if(enUser != null){
@@ -182,7 +184,11 @@ public class BoFileQuery implements RootBo{
 						enTFile.setCurrEditPerson(enUser.getUserName());
 					}
 				}
-				dbTFile.setToXml(requestXml, enTFile);
+				
+				//获取文件相对路径
+				String filePath = "/"+PathByCatalog.pathByCatalogId(enTFile.getCatalogId(),transaction)+"/";
+				int row = dbTFile.setToXml(requestXml, enTFile);
+				requestXml.setItemValue("T_FILE", row, "FILE_CATALOG_PATH", filePath);
 			}
 		}
 	}

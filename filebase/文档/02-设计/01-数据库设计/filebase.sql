@@ -62,13 +62,13 @@ CREATE TABLE `m_auto` (
 
 /*!40000 ALTER TABLE `m_auto` DISABLE KEYS */;
 INSERT INTO `m_auto` (`AUTO_ID`,`BUILD_MODE`,`MEMO`,`NOW_VALUE`) VALUES 
- ('CATALOG_ID','[seq*6]',NULL,'4'),
- ('FILE_ID','[seq*6]','','36'),
+ ('CATALOG_ID','[seq*6]',NULL,'1'),
+ ('FILE_ID','[seq*6]','','0'),
  ('LOG_ID','[seq*6]',NULL,'0'),
- ('ORG_ID','[seq*6]',NULL,'1'),
- ('ROLE_ID','[seq*6]',NULL,'4'),
+ ('ORG_ID','[seq*6]',NULL,'0'),
+ ('ROLE_ID','[seq*6]',NULL,'1'),
  ('SET_ID','[seq*6]',NULL,'0'),
- ('USER_ID','[seq*6]',NULL,'2');
+ ('USER_ID','[seq*6]',NULL,'1');
 
 /*!40000 ALTER TABLE `m_auto` ENABLE KEYS */;
 
@@ -383,7 +383,7 @@ CREATE TABLE `sys_user` (
 
 /*!40000 ALTER TABLE `sys_user` DISABLE KEYS */;
 INSERT INTO `sys_user` (`USER_ID`,`USER_NAME`,`LOGIN_NAME`,`PASSWORD`,`STATUS`,`USER_ORG_ID`,`USER_STAT_ID`,`USER_DESC`,`LINK_TELE`,`LINK_EMAIL`,`USER_SEX`,`USER_BIRTH`,`MAN_FLAG`) VALUES 
- ('000002','管理员','admin','21232f297a57a5a743894a0e4a801fc3','N','000088','000000','','','','1','','M');
+ ('000000','管理员','admin','21232f297a57a5a743894a0e4a801fc3','N','000088','000000','','','','1','','M');
 /*!40000 ALTER TABLE `sys_user` ENABLE KEYS */;
 
 
@@ -404,7 +404,7 @@ CREATE TABLE `sys_user_role` (
 
 /*!40000 ALTER TABLE `sys_user_role` DISABLE KEYS */;
 INSERT INTO `sys_user_role` (`ROLE_ID`,`USER_ID`) VALUES 
- ('000000','000002');
+ ('000000','000000');
 /*!40000 ALTER TABLE `sys_user_role` ENABLE KEYS */;
 
 
@@ -432,7 +432,7 @@ CREATE TABLE `t_catalog` (
 
 /*!40000 ALTER TABLE `t_catalog` DISABLE KEYS */;
 INSERT INTO `t_catalog` (`CATALOG_ID`,`CATALOG_NAME`,`PARENT_ID`,`CREATE_DATETIME`,`CREATOR`,`CATALOG_REMARK`,`DELETE_FLAG`,`DELETE_PERSON`,`DELETE_DATETIME`) VALUES 
- ('000000','文档中心',NULL,'20090103','000002',NULL,'1',NULL,NULL);
+ ('000000','文档中心',NULL,'20090103','000000',NULL,'1',NULL,NULL);
 /*!40000 ALTER TABLE `t_catalog` ENABLE KEYS */;
 
 

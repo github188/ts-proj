@@ -10,7 +10,6 @@
 %>
 <%
   xml = (XMLWrap) request.getAttribute("XML");
-  //System.out.println("xml"+xml);
   opMutex = xml.getItemValue("SYS_FLAG",1,"OP_MUTEX");
   opSave = xml.getItemValue("SYS_FLAG",1,"OP_SAVE");
 %>
@@ -22,8 +21,7 @@
 <jsp:include flush="true" page="../../common/include/js.jsp"></jsp:include>
 <script type="text/javascript" src="../../common/scripts/tower.js"></script>
 <script type="text/javascript">
-	function doSubmit(){
-	}
+
 </script>
 </head>
 
@@ -40,7 +38,7 @@
               <!-- 查询面板内容 -->
              <form name="form1" action="ctrl" method="get" onSubmit="return doSubmit(this)">
                       <input type="hidden" name="FUNC_ID" value="SysParamSubmit">
-                      
+                      <input type="hidden" name="old_opSave" value="<%=opSave %>">
                        <table width="50%" border="0" cellpadding="0" cellspacing="0">
                          <tr>
                           <td width="50%" align="left">

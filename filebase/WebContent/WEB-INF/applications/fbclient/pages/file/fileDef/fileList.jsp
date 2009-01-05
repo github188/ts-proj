@@ -19,7 +19,7 @@
   String[] filePaths;
   String[] catalogIds;
   String[] createDateTimes;
-  
+  String[] fileCatalogPaths;
   String fileName;
   String creator;
   String fileExtName;
@@ -42,6 +42,7 @@
 	filePaths = xml.getItemValues("T_FILE","PATH");
 	catalogIds = xml.getItemValues("T_FILE","CATALOG_ID");
 	createDateTimes = xml.getItemValues("T_FILE","CREATE_DATETIME");
+	fileCatalogPaths = xml.getItemValues("T_FILE","FILE_CATALOG_PATH");
 	
    fileName = xml.getInputValue("FILE_NAME");
    creator = xml.getInputValue("CREATOR");
@@ -77,21 +78,7 @@
 <jsp:include flush="true" page="../../common/include/js.jsp"></jsp:include>
 <script type="text/javascript">
 <!--
-  
-  function doSubmit(){
-  	//var createDateTimeBgn = form1.CREATE_DATETIME_BGN.value;
-  	//var createDateTimeEnd = form1.CREATE_DATETIME_END.value;
-  	//if(createDateTimeBgn.length != 0 && createDateTimeEnd.length != 0){
-	//  	if(createDateTimeBgn > createDateTimeEnd){
-	//  		alert("开始日期必须小于结束日期！");
-	//  		return false;
-	//  	}
-  	//	}
-  }
-  
   function doClear(){
-  	//form1.CREATE_DATETIME_BGN.value="";
-  	//form1.CREATE_DATETIME_END.value="";
   	form1.FILE_NAME.value="";
   	form1.CREATOR.value="";
   	form1.FILE_EXT_NAME.value="";
@@ -119,7 +106,7 @@
 </div>
 <div class="panelContent" >
 <div class="panelContent2" >
-		 <form action="ctrl" method="post" name="form1" onsubmit="return doSubmit(this)">
+		 <form action="ctrl" method="post" name="form1" >
 		    <input type="hidden" name="FUNC_ID" value="FileQuery">
 		     <input type="hidden" name="CUR_PAGE" value=""/>
 			<table>
@@ -130,14 +117,16 @@
                    <td><input type="text" class="text" name="CREATOR" value="<%=creator %>"></td>
                    <td align="right"></td>
                  </tr>
-                  <tr>
+                 <tr>
                   <td align="right">扩展名：</td>
                   <td><input type="text" class="text" name="FILE_EXT_NAME" value="<%=fileExtName %>"></td>
                   <td align="right">关键字：</td>
-                   <td><input type="text" class="text" name="KEY_WORD" value="<%=keyWord %>"></td>
-                   <td align="right"></td>
-                    <td align="right" nowrap="nowrap"><input type="submit" class="submit"  value="查询">
-                    <input type="button" class="button" onClick="doClear();" value="重置"></td>
+                  <td><input type="text" class="text" name="KEY_WORD" value="<%=keyWord %>"></td>
+                  <td align="right"></td>
+                  <td align="right" nowrap="nowrap">
+                  <input type="submit" class="submit"  value="查询">
+                  <input type="button" class="button" onClick="doClear();" value="重置">
+                  </td>
                  </tr>
                  <!-- 
                 <tr>
@@ -147,7 +136,6 @@
                   -
                   <input type="text" class="date" name="CREATE_DATETIME_END" value="<%=createDateTimeEnd %>"><input type="button" class="calendarBtn" onclick="return showCalendar('CREATE_DATETIME_END', 'y-mm-dd');">
                   </td>
-                 
                 </tr>
                  -->
               </table>
@@ -155,12 +143,13 @@
             <br>
             <table width="100%"  border="0" cellpadding="1" cellspacing="0" class="list"  >
 		                <tr>
-		                 	<th width="20%">文件名</th>
-		                 	<th width="5%">大小</th>
-		                    <th width="5%">创建人</th>
-		                     <th width="18%">创建时间</th>
-		                    <th width="10%">当前编辑人</th>
-		                    <th width="6%">状态</th>
+		                 	<th nowrap>文件名</th>
+		                 	<th nowrap>大小</th>
+		                 	<th nowrap>路径</th>
+		                    <th nowrap>创建人</th>
+		                    <th nowrap>创建时间</th>
+		                    <th nowrap>当前编辑人</th>
+		                    <th nowrap>状态</th>
 		                 </tr>
 			                <%for(int i=0;i<fileIds.length;i++){
 			                	String style  = "";
@@ -177,10 +166,10 @@
 			             	<a <%=style %> href="#" onclick="javascript:doFileOperate('<%=fileIds[i] %>','<%=catalogIds[i] %>');"><%=fileNames[i] %></a>
 			             	</td>
 			                <td><%=fileSizes[i] %></td>
+			                <td><%=fileCatalogPaths[i] %></td>
 			                <td><%=creators[i] %></td>
-			                 <td><%=DateFunc.FormatDate(createDateTimes[i]) %></td>
+			                <td><%=DateFunc.FormatDateTime(createDateTimes[i]) %></td>
 			                <td><%=currEditPersons[i] %></td>
-			               
 			                <td>
 			                 <%for(int j=0;j<stateDes.length;j++){ 
 			                	if(states[i].equals(stateValue[j])){                                                                                                                                                                          
@@ -191,7 +180,6 @@
 		                </tr>
                       	<%} %>	 
                        </table>
-                     
 				 <div class="pageBar"><%=Page.BuildPageTextByMethod(xml,"TDoChangePage") %></div>
 </div>
 </div>
