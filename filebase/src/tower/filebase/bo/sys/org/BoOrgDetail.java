@@ -84,8 +84,8 @@ public class BoOrgDetail implements RootBo {
 					}
 			}
 		 } else { //orgId为空时
-//			enOrgs = dbOrg.findAllWhere("PARENT_ID is null ");
-			enOrgs = dbOrg.findAll();
+			enOrgs = dbOrg.findAllWhere(" PARENT_ID is null ");
+//			enOrgs = dbOrg.findAll();
 			if (enOrgs != null) {
 //				if(requestXml.getRowCount("SYS_ORG")>0){
 //				}else{
