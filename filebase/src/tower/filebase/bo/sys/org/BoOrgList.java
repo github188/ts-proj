@@ -70,7 +70,7 @@ public class BoOrgList implements RootBo {
 		// 查找所有部门
 		
 		// 根据parentId查找子级信息
-		if(parentId!=null&&parentId.length()>0){
+		if( parentId!=null && parentId.length()>0){
 			enOrgs = dbOrg.findAllWhere("PARENT_ID='" + parentId + "'");
 			for (int i = 0; i < enOrgs.size(); i++) {
 				row = requestXml.addRow("SYS_CHLID_ORG");
@@ -108,6 +108,33 @@ public class BoOrgList implements RootBo {
 						.getLinkEmail());
 				requestXml.setItemValue("SYS_ORG", row, "PARENT_ID", enOrg
 						.getParentId());
+			}
+		}else{
+//			enOrgs = dbOrg.findAllWhere(" PARENT_ID is null ");
+			enOrgs = dbOrg.findAll();
+			if (enOrgs != null) {
+//				if(requestXml.getRowCount("SYS_ORG")>0){
+//				}else{
+//					requestXml.addRow("SYS_ORG");
+//				}
+//				requestXml.setItemValue("SYS_ORG", 1, "ORG_NAME", "根");
+				for (int i = 0; i < enOrgs.size(); i++) {
+					row = requestXml.addRow("SYS_CHLID_ORG");
+					enOrg = (EnSysOrg) enOrgs.get(i);
+					requestXml.setItemValue("SYS_CHLID_ORG", row, "CORG_ID",
+							enOrg.getOrgId());
+					requestXml.setItemValue("SYS_CHLID_ORG", row, "CORG_NAME",
+							enOrg.getOrgName());
+					requestXml.setItemValue("SYS_CHLID_ORG", row, "CORG_DESC",
+							enOrg.getOrgDesc());
+					requestXml.setItemValue("SYS_CHLID_ORG", row, "CLINK_MAN",
+							enOrg.getLinkMan());
+					requestXml.setItemValue("SYS_CHLID_ORG", row, "CLINK_TELE",
+							enOrg.getLinkTele());
+					requestXml.setItemValue("SYS_CHLID_ORG", row, "CLINK_EMAIL", 
+							enOrg.getLinkEmail());
+				}
+
 			}
 		}
 	
