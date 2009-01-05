@@ -50,7 +50,8 @@
   String treeHtml = null;
 %>
 <%
-  xml = (XMLWrap) request.getAttribute("XML");
+	xml = (XMLWrap) request.getAttribute("XML");
+//xml = XMLWrap.getRequestXml(request,session,application);
   //System.out.println("xml"+xml);
   //父机构信息
   orgId = xml.getItemValue("SYS_ORG",1,"ORG_ID" );
@@ -255,7 +256,7 @@ try{
 </td>
 <td width="70%" valign="top">
 <table width="100%">
-<%if(orgId != null && orgId.length() != 0){ %>
+<%if(orgId != null && orgId.length() > 0){ %>
 	<tr>
 		<td>
 			<!--父级列表bgn-->
