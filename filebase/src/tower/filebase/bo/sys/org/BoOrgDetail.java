@@ -57,8 +57,7 @@ public class BoOrgDetail implements RootBo {
 						&& enOrg.getParentId().length() > 0) {
 					enParentOrg = dbOrg.findByKey(enOrg.getParentId());
 					if (enParentOrg != null) {
-						requestXml.setItemValue("SYS_ORG", row, "PARENT_NAME",
-								enParentOrg.getOrgName());
+						requestXml.setItemValue("SYS_ORG", row, "PARENT_NAME", enParentOrg.getOrgName());
 					}
 				}
 			}
@@ -84,13 +83,14 @@ public class BoOrgDetail implements RootBo {
 							enOrg.getLinkEmail());
 					}
 			}
-		 } else {
-			enOrgs = dbOrg.findAllWhere("PARENT_ID is null ");
+		 } else { //orgId为空时
+//			enOrgs = dbOrg.findAllWhere("PARENT_ID is null ");
+			enOrgs = dbOrg.findAll();
 			if (enOrgs != null) {
-				if(requestXml.getRowCount("SYS_ORG")>0){
-				}else{
-					requestXml.addRow("SYS_ORG");
-				}
+//				if(requestXml.getRowCount("SYS_ORG")>0){
+//				}else{
+//					requestXml.addRow("SYS_ORG");
+//				}
 //				requestXml.setItemValue("SYS_ORG", 1, "ORG_NAME", "根");
 				for (int i = 0; i < enOrgs.size(); i++) {
 					row = requestXml.addRow("SYS_CHLID_ORG");
@@ -105,8 +105,8 @@ public class BoOrgDetail implements RootBo {
 							enOrg.getLinkMan());
 					requestXml.setItemValue("SYS_CHLID_ORG", row, "CLINK_TELE",
 							enOrg.getLinkTele());
-					requestXml.setItemValue("SYS_CHLID_ORG", row,
-							"CLINK_EMAIL", enOrg.getLinkEmail());
+					requestXml.setItemValue("SYS_CHLID_ORG", row, "CLINK_EMAIL", 
+							enOrg.getLinkEmail());
 				}
 
 			}
