@@ -53,13 +53,23 @@ public class BoSysParamSubmit implements RootBo {
 		 * 业务处理
 		 **********************************************************************/
 		//修改系统参数
-		enMutexParam.setParamFlag(mutexValue);
-		enSaveParam.setParamFlag(saveValue);
+		enMutexParam = dbParam.findByKey("OP_MUTES");
+		enSaveParam  = dbParam.findByKey("OP_SAVE");
+		if(mutexValue.equals("1")){
+			enMutexParam.setParamFlag("1");
+		}else{
+			enMutexParam.setParamFlag("0");
+		}
+		if(saveValue.equals("1")){
+			enSaveParam.setParamFlag("1");
+		}else{
+			enSaveParam.setParamFlag("0");
+		}
 		dbParam.updateByKey("OP_MUTES", enMutexParam);
 		dbParam.updateByKey("OP_SAVE", enSaveParam);
 		
 		//如果由"保留历史版本" 改为 "不保留历史版本"时清除所有文件的版本记录。
-		if(oldSavaValue != null && oldSavaValue.length()>0){
+		if(oldSavaValue != null && oldSavaValue.length()!=0){
 			if(oldSavaValue.equals("1")&& saveValue.equals("0")){
 				dbTFileVersion.deleteWhere(" 1=1 ");
 			}

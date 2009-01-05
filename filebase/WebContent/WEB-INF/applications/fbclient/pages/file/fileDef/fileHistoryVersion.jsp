@@ -113,7 +113,7 @@
 			                <tr class="dark"  onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
 			                <td align="center"><input type="radio" name="VERSION_NO" id="VERSION_NO" value="<%=versionNos[i] %>" /></td>
 			                <td><%=versionNos[i] %></td>
-			                <td><%=DateFunc.FormatDate(updateDateTimes[i]) %></td>
+			                <td><%=DateFunc.FormatDateTime(updateDateTimes[i]) %></td>
 			                <td><%=updatePersons[i] %></td>
 			                <td><%=updateRemarks[i] %></td>
 			               	</tr>
