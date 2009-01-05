@@ -130,7 +130,8 @@
          alert("请选择一个权限！");
          return false;
      }
-     window.location.href = "ctrl?FUNC_ID=RolePermSubmit&ROLE_ID=<%=roleId%>&CATALOG_ID="+catalogId+"&ROLE_PERM_ID="+rolePermId;
+     window.location.href = "ctrl?FUNC_ID=RolePermSubmit&ROLE_ID=<%=roleId%>&CATALOG_ID="
+     							+catalogId+"&ROLE_PERM_ID="+rolePermId;
   }
   function doDelete(catalogId,roleId){
     if(confirm("确定删除数据吗?")){
@@ -250,20 +251,24 @@ try{
         <!-- Tab面板 -->
         <div id="TabbedPanels1" class="TabbedPanels">
         <ul class="TabbedPanelsTabGroup">
-           <li class="TabbedPanelsTab"><a onclick="doEdit('<%=roleId %>')">角色基本信息</a></li>      
-           <li class="TabbedPanelsTab TabbedPanelsTabSelected"><a onclick="doRolePerm('<%=roleId %>')">角色权限分配</a></li>
-          </ul>   
+           <li class="TabbedPanelsTab">
+           		<a onclick="doEdit('<%=roleId %>')">角色基本信息</a>
+           </li>      
+           <li class="TabbedPanelsTab TabbedPanelsTabSelected">
+           		<a onclick="doRolePerm('<%=roleId %>')">角色权限分配</a>
+           </li>
+        </ul>   
           <div class="TabbedPanelsContentGroup">
             <div class="TabbedPanelsContent">
+            
               <!-- Tab内容 -->
                 <!-- 查询面板 -->
                 
-                       <form action="ctrl" method="post" name="form1" id="form1">
-                        <input type="hidden" name="FUNC_ID" value="RolePerm">
-                        <input type="hidden" name="ROLE_ID" value="<%=roleId %>">
-                        <input type="hidden" name="CUR_PAGE" value=""/>
-                      <!-- 查询面板内容 -->
-                      <div class="panelInnerHead"> 角色信息管理 -  角色权限分配</div>
+                    <form action="ctrl" method="post" name="form1" id="form1">
+                      <input type="hidden" name="FUNC_ID" value="RolePerm">
+                      <input type="hidden" name="ROLE_ID" value="<%=roleId %>">
+                      <input type="hidden" name="CUR_PAGE" value=""/>
+                      
                        <table width="100%" border="0" cellpadding="0" cellspacing="0">
                          <tr>
                            <td valign="top" width="60">目录：</td>
@@ -284,7 +289,8 @@ try{
   								  <div class="tree">
     								<%for(int j=0;j<rolePermIds.length;j++){ %>
     									<div class="treeNode treeLeafNode"><a class="treeBlank"></a>
-       										<span class="treeInput"><input type="checkbox" name="<%=rolePermIds[j] %>" value="<%=rolePermIds[j] %>" nameValue="目录选择" onclick="doPermClick(this)" ></span>
+       										<span class="treeInput"><input type="checkbox" name="<%=rolePermIds[j] %>" 
+       											value="<%=rolePermIds[j] %>" nameValue="目录选择" onclick="doPermClick(this)" ></span>
       											<%=rolePermNames[j] %>
     									</div>
     								<%} %>
@@ -342,9 +348,7 @@ try{
 							</td>                                             
                         </tr>         
                      </table>
-                     <p>
-                        <!-- 查询面板内容结束 -->
-                 	 </p>
+                     <p></p>
                  	</form>   
   			
                 <!-- 查询面板结束 -->
