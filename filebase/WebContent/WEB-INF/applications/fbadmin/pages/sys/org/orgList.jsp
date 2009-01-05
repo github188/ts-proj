@@ -163,9 +163,9 @@ try{
 		treeHtml = treeHtml+"\n";
 		treeHtml = treeHtml+" <a class=\"treeIcon\" onclick=\"doTreeIconClick(this)\"></a>";
 		treeHtml = treeHtml+"\n";
-		treeHtml = treeHtml+"<span class=\"treeInput\"><input type=\"radio\" nameValue=文件管理系统 value=\"\"  onclick=\"radioSelected(this)\" /></span>";
+		treeHtml = treeHtml+"<span class=\"treeInput\"><input type=\"radio\" nameValue=根 value=\"\"  onclick=\"radioSelected(this)\" /></span>";
 		treeHtml = treeHtml+"\n";
-		treeHtml = treeHtml+"<a href='#'onclick=\"doTreeNodeTitleClick(this)\">"+"文件管理系统"+"</a>";
+		treeHtml = treeHtml+"<a href='#'onclick=\"doTreeNodeTitleClick(this)\">"+"根"+"</a>";
 		treeHtml = treeHtml+"\n";
 		treeHtml = treeHtml+"<a href=\"#\" class=\"treeShowHideAll\" onclick=\"showHideAll(this,this.parentNode.parentNode)\">收缩</a>";
 		treeHtml = treeHtml+"\n";

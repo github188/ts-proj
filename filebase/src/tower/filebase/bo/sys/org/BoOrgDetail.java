@@ -80,21 +80,18 @@ public class BoOrgDetail implements RootBo {
 							enOrg.getLinkMan());
 					requestXml.setItemValue("SYS_CHLID_ORG", row, "CLINK_TELE",
 							enOrg.getLinkTele());
-					requestXml.setItemValue("SYS_CHLID_ORG", row,
-							"CLINK_EMAIL", enOrg.getLinkEmail());
-
-					// 判断是否有子部门
-				}
-
+					requestXml.setItemValue("SYS_CHLID_ORG", row, "CLINK_EMAIL", 
+							enOrg.getLinkEmail());
+					}
 			}
-		} else {
+		 } else {
 			enOrgs = dbOrg.findAllWhere("PARENT_ID is null ");
 			if (enOrgs != null) {
 				if(requestXml.getRowCount("SYS_ORG")>0){
 				}else{
 					requestXml.addRow("SYS_ORG");
 				}
-				requestXml.setItemValue("SYS_ORG", 1, "ORG_NAME", "中国银行香港路支行");
+//				requestXml.setItemValue("SYS_ORG", 1, "ORG_NAME", "根");
 				for (int i = 0; i < enOrgs.size(); i++) {
 					row = requestXml.addRow("SYS_CHLID_ORG");
 					enOrg = (EnSysOrg) enOrgs.get(i);
