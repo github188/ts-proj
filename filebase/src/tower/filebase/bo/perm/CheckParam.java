@@ -130,9 +130,6 @@ public class CheckParam {
 			String contentId, String userId, String contentOperationStatus)
 			throws ErrorException {
 		// boolean autoCommit = false;
-		DbSRolePerm dbSRolePerm;
-		EnSRolePerm enSRolePerm;
-		Vector vSRolePerm;
 		DbSContentPerm dbSContentPerm;
 		EnSContentPerm enSContentPerm;
 		boolean returnValue = false;
@@ -140,7 +137,6 @@ public class CheckParam {
 		// Connection conn = transaction.getConnById(connId);
 		// autoCommit = conn.getAutoCommit();
 		// transaction.setAutoCommit(connId, false);
-		dbSRolePerm = new DbSRolePerm(transaction, null);
 		dbSContentPerm = new DbSContentPerm(transaction, null);
 		// 查询目录和用户所属角色对应的目录权限码集合
 //		vSRolePerm = dbSRolePerm
@@ -184,15 +180,12 @@ public class CheckParam {
 		DbSRolePerm dbSRolePerm;
 		EnSRolePerm enSRolePerm;
 		Vector vSRolePerm;
-		DbSFilePerm dbSFilePerm;
-		EnSFilePerm enSFilePerm;
 		DbTCatalog dbTCatalog;
 		EnTCatalog enTCatalog;
 		Vector vTCatalog;
 		Hashtable<String, String> allCatalog = new Hashtable<String, String>();
 		Hashtable<String, String> oneCatalog = new Hashtable<String, String>();
 		dbSRolePerm = new DbSRolePerm(transaction, null);
-		dbSFilePerm = new DbSFilePerm(transaction, null);
 		dbTCatalog=new DbTCatalog(transaction,null);
 		vTCatalog=dbTCatalog.findAll();
 		for(int i=0;i<vTCatalog.size();i++){
@@ -234,7 +227,7 @@ public class CheckParam {
 		//如果目录不在该用户所有目录内。则查询其上级目录，直到查询到为止，若没有则返回“”
 	Enumeration<String> i = oneCatalog.keys();
 		while(i.hasMoreElements()){
-			String xx=i.nextElement();
+			i.nextElement();
 			//System.out.println("目录"+xx+"["+oneCatalog.get(xx)+"]");
 		}
 //		 i = oneCatalog.keys();
@@ -282,9 +275,6 @@ public class CheckParam {
 		// boolean autoCommit = false;
 		//String connId = null;
 		//System.out.println("fileOperationStatus:"+fileOperationStatus);
-		DbSRolePerm dbSRolePerm;
-		EnSRolePerm enSRolePerm;
-		Vector vSRolePerm;
 		DbSFilePerm dbSFilePerm;
 		EnSFilePerm enSFilePerm;
 		boolean returnValue = false;
@@ -296,7 +286,6 @@ public class CheckParam {
 		// Connection conn = transaction.getConnById(connId);
 		// autoCommit = conn.getAutoCommit();
 		//transaction.setAutoCommit(connId, false);
-		dbSRolePerm = new DbSRolePerm(transaction, null);
 		dbSFilePerm = new DbSFilePerm(transaction, null);
 		dbTCatalog=new DbTCatalog(transaction,null);
 		vTCatalog=dbTCatalog.findAll();
@@ -398,15 +387,11 @@ public class CheckParam {
 		DbSFilePerm dbSFilePerm;
 		EnSFilePerm enSFilePerm;
 		Vector vSFilePerm;
-		DbSRolePerm dbSRolePerm;
-		EnSRolePerm enSRolePerm;
-		Vector vSRolePerm;
 		Hashtable<String, EnSFilePerm> table = new Hashtable<String, EnSFilePerm>();
 		connId = transaction.createConnection(null, false);
 		// Connection conn = transaction.getConnById(connId);
 		// autoCommit = conn.getAutoCommit();
 		transaction.setAutoCommit(connId, false);
-		dbSRolePerm = new DbSRolePerm(transaction, connId);
 		dbSFilePerm = new DbSFilePerm(transaction, connId);
 		// 查询目录和用户所属角色对应的目录权限码集合
         String catalogPermStatus=getCatalogPermStatus(contentId,userId,transaction);							

@@ -243,8 +243,10 @@ public class ContentShow {
 	public synchronized static Hashtable<String, String> getCatalogPerm(
 			Hashtable<String, String> catalogPerm,
 			Hashtable<String, String> catalog_parentId) {
+		
 		Hashtable<String, String>returnValue=new Hashtable<String, String>();
 		Enumeration<String> catalogEnum = catalogPerm.keys();
+		
 		while(catalogEnum.hasMoreElements()){
 			String tmp=catalogEnum.nextElement();
 			String sForNext=tmp;
@@ -256,7 +258,7 @@ public class ContentShow {
 //				for(int i=0;i<downCatalog.size();i++){
 //					System.out.println(downCatalog.get(i));
 //				}
-//				找寻parentId为downCatalog的第一个元素的结点
+				//找寻parentId为downCatalog的第一个元素的结点
 				if(catalog_parentId.contains(downCatalog.peek())){
 					//记录此值
 					sForNext=downCatalog.peek();
@@ -287,7 +289,7 @@ public class ContentShow {
 	}
     
 	/**
-	 * 功能 获取目录全称
+	 * 功能 获取目录全称(获得目录contentId及此目录下的所有目录名称，并且每个名称之间以“/”分隔)
 	 * @param contentId
 	 *            目录ID
 	 * @param connId
