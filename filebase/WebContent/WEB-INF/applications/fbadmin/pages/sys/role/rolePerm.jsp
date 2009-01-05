@@ -257,10 +257,7 @@ try{
             <div class="TabbedPanelsContent">
               <!-- Tab内容 -->
                 <!-- 查询面板 -->
-                <div class="panelQuery">
-                  <div class="panelHead"></div>
-                  <div class="panelContent">
-                    <div class="panelContent2">
+                
                        <form action="ctrl" method="post" name="form1" id="form1">
                         <input type="hidden" name="FUNC_ID" value="RolePerm">
                         <input type="hidden" name="ROLE_ID" value="<%=roleId %>">
@@ -269,83 +266,87 @@ try{
                       <div class="panelInnerHead"> 角色信息管理 -  角色权限分配</div>
                        <table width="100%" border="0" cellpadding="0" cellspacing="0">
                          <tr>
-                           <td valign="top" width="100">目录：</td>
-                           <td valign="top" width="300"><!-- 菜单树 -->  
-                          <div id="userPerm">
-							<%=treeHtml %>
-                          </div>
-<!-- 菜单树 -->	</td>
-  <td valign="top" width="60">&nbsp;&nbsp;权限：</td>
- <td valign="top" width="400"><!-- 菜单树 -->  
- <div class="permTree">
- <!-- 一级菜单：文档安全管理 -->
-  <!-- 二级菜单集：目录管理 -->
-  <div class="tree">
-    <%for(int j=0;j<rolePermIds.length;j++){ %>
-    <div class="treeNode treeLeafNode">
-      <a class="treeBlank"></a>
-       <span class="treeInput"><input type="checkbox" name="<%=rolePermIds[j] %>" value="<%=rolePermIds[j] %>" nameValue="目录选择" onclick="doPermClick(this)" ></span>
-      <%=rolePermNames[j] %>
-    </div>
-    <%} %>
-  </div>
-  
-</div>
+                           <td valign="top" width="60">目录：</td>
+                           <td valign="top" width="300">
+                           		<!-- 菜单树 -->  
+                          		<div id="userPerm">
+									<%=treeHtml %>
+                         		</div>
+                         		<!-- 菜单树 --> 
+                         	</td>
+                         	
+  							<td valign="top" width="60">&nbsp;&nbsp;权限：</td>
+ 							<td valign="top" width="400">
+ 								<!-- 菜单树 -->  
+ 								<div class="permTree">
+ 									<!-- 一级菜单：文档安全管理 -->
+  									<!-- 二级菜单集：目录管理 -->
+  								  <div class="tree">
+    								<%for(int j=0;j<rolePermIds.length;j++){ %>
+    									<div class="treeNode treeLeafNode"><a class="treeBlank"></a>
+       										<span class="treeInput"><input type="checkbox" name="<%=rolePermIds[j] %>" value="<%=rolePermIds[j] %>" nameValue="目录选择" onclick="doPermClick(this)" ></span>
+      											<%=rolePermNames[j] %>
+    									</div>
+    								<%} %>
+  								  </div>
+					  			</div>
+								<!-- 菜单树 -->	
+							</td>
 
-<!-- 菜单树 -->	</td>
-
-
-</tr>
- <tr>
-      <td colspan="4" align="center" >
-        <input type="button" class="submit"onClick="doSave()" value="增加权限">
-        <input type="reset" class="reset" onClick="doNotSave()" value="关闭">                           
-     </td>                     
- </tr>
-  <tr>
-                        <td width="100%" colspan="4">
-                         <div id="noticePanel" class="panelSimple">
-                        <div class="panelHead"></div>
-                      <div class="panelContent">
-                          <div class="panelContent2">
-                            <!-- 工作任务面板内容 -->
-                            <div class="panelInnerHead">职位权限列表<a name="notice"></a></div>
-                           <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list" >
-                <tr>
-                  <th width="45%">目录名称</th>
-                  <th width="35%" colspan="2">授予权限</th>                
-                  <th width="20%">操作</th>
-                </tr>    
-                <%for(int k=0;k<contentIds.length;k++){ %>        
-                <tr onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
-                  <td align="left"><%=catalogFullNames[k] %></td>         
-                  <td align="left" colspan="2"><%=rolePerms[k] %></td>              
-                  <td align="center">              
-                  [<a href="JavaScript:doDelete('<%=contentIds[k] %>','<%=roleId %>')">删除 </a>]         
-                  </td>
-                </tr>                                           
-               <%} %>             
-            </table>
-               <div class="pageBar"><%=Page.BuildPageTextByMethod(xml,"TDoChangePage") %></div>
-                            <!-- 工作任务面板内容结束 -->
-                          </div>
-                      </div>
-                      <div class="panelFoot">
-                          <div></div>
-                      </div>
-                    </div>
-</td>                                             
-                         </tr>         
-                        
-                       </table>
-                       <p>
+						</tr>
+						<tr>	
+							<td>&nbsp;&nbsp;</td>
+						</tr>
+ 						
+ 						<tr>
+      						<td colspan="4" align="center" >
+        						<input type="button" class="submit"onClick="doSave()" value="增加权限">
+        						<input type="reset" class="reset" onClick="doNotSave()" value="关闭">                           
+     						</td>                     
+ 						</tr>
+ 						
+ 						<tr>
+                        	<td width="100%" colspan="4">
+                         	 <div id="noticePanel" class="panelSimple">
+                        		<div class="panelHead"></div>
+                      				<div class="panelContent">
+                          				<div class="panelContent2">
+                          				
+                            			<!-- 工作任务面板内容 -->
+                            			<div class="panelInnerHead">职位权限列表<a name="notice"></a></div>
+                           				<table width="100%" border="0" cellpadding="0" cellspacing="0" class="list" >
+	                						<tr>
+							                  <th width="45%">目录名称</th>
+							                  <th width="35%" colspan="2">授予权限</th>                
+							                  <th width="20%">操作</th>
+	               							</tr>  
+	               							  
+							                <%for(int k=0;k<contentIds.length;k++){ %>        
+							                <tr onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
+							                  <td align="left"><%=catalogFullNames[k] %></td>         
+							                  <td align="left" colspan="2"><%=rolePerms[k] %></td>              
+							                  <td align="center">              
+							                  [<a href="JavaScript:doDelete('<%=contentIds[k] %>','<%=roleId %>')">删除 </a>]         
+							                  </td>
+							                </tr>                                           
+							               <%} %>             
+            							</table>
+               							<div class="pageBar"><%=Page.BuildPageTextByMethod(xml,"TDoChangePage") %></div>
+                            			<!-- 工作任务面板内容结束 -->
+		                          </div>
+		                      </div>
+		                      <div class="panelFoot">
+		                          <div></div>
+		                      </div>
+		                    </div>
+							</td>                                             
+                        </tr>         
+                     </table>
+                     <p>
                         <!-- 查询面板内容结束 -->
-                   
-                 </p>
-                 </form>   
-  			 </div>
-          </div>
-       </div>
+                 	 </p>
+                 	</form>   
+  			
                 <!-- 查询面板结束 -->
               <!-- Tab内容结束 -->
             </div>
