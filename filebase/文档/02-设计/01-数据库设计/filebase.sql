@@ -262,6 +262,8 @@ INSERT INTO `sys_menu` (`MENU_ID`,`MENU_NAME`,`MENU_TYPE`,`MENU_LVL`,`PARENT_ID`
  ('RoleQuery','角色查询','F',2,'InRoleList',0,NULL,NULL,''),
  ('RoleSubmit','角色提交','F',3,'RoleAdd',2,NULL,NULL,'');
 INSERT INTO `sys_menu` (`MENU_ID`,`MENU_NAME`,`MENU_TYPE`,`MENU_LVL`,`PARENT_ID`,`SORT_NO`,`MENU_URL`,`MENU_DESC`,`SHOW_FLAG`) VALUES 
+('SelectOrg','机构选择','L',1,NULL,6,NULL,NULL,'2'),
+ ('SelectRole','角色选择','L',1,NULL,5,NULL,NULL,''),
  ('SysParamQuery','系统参数定义','M',1,'MainListBase',3,NULL,NULL,'1'),
  ('SysParamSubmit','系统参数提交','F',2,'SysParamQuery',0,NULL,NULL,''),
  ('ToCataLogTree','目录树页面','I',1,NULL,7,NULL,NULL,'2'),
