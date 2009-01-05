@@ -65,7 +65,7 @@
 
   treeHtmlBuilder = new TreeHtmlBuilder()
   .setRootId("")
-  .setRootName("")
+  .setRootName("根")
   .setDisplayAll(true)
   .setInputType("radio") 
   .setInputName("ORG_ID")
@@ -140,9 +140,9 @@ try{
 		treeHtml = treeHtml+"\n";
 		treeHtml = treeHtml+" <a class=\"treeIcon\" onclick=\"doTreeIconClick(this)\"></a>";
 		treeHtml = treeHtml+"\n";
-		treeHtml = treeHtml+"<span class=\"treeInput\"><input type=\"radio\" nameValue=中国银行香港路支行  onclick=\"radioSelected(this)\" /></span>";
+		treeHtml = treeHtml+"<span class=\"treeInput\"><input type=\"radio\" nameValue=根  onclick=\"radioSelected(this)\" /></span>";
 		treeHtml = treeHtml+"\n";
-		treeHtml = treeHtml+"<a href='#'onclick=\"doTreeNodeTitleClick(this)\">"+"中国银行香港路支行"+"</a>";
+		treeHtml = treeHtml+"<a href='#'onclick=\"doTreeNodeTitleClick(this)\">"+"根"+"</a>";
 		treeHtml = treeHtml+"\n";
 		treeHtml = treeHtml+"<a href=\"#\" class=\"treeShowHideAll\" onclick=\"showHideAll(this,this.parentNode.parentNode)\">收缩</a>";
 		treeHtml = treeHtml+"\n";
