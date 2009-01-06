@@ -30,17 +30,20 @@ public class BoRolePerm implements RootBo {
 		/***********************************************************************
 		 * 声明变量
 		 **********************************************************************/
+		//db、en
 		DbTCatalog dbTCatalog;
 		EnTCatalog enTCatalog;		
-		Vector<EnTCatalog> vEnTCatalog;
 		DbSPerm dbSPerm;
 		EnSPerm enSPerm;
-		Vector vSPerm;
 		DbSRolePerm dbSRolePerm;
 		EnSRolePerm enSRolePerm;
-		Vector vSRolePerm;
 		DbSysRole dbSysRole;
 		EnSysRole enSysRole;
+		
+		Vector<EnTCatalog> vEnTCatalog;
+		Vector vSPerm;
+		Vector vSRolePerm;
+		//参数声明
 		String roleId;
 		//String userId;
 		/***********************************************************************
@@ -61,12 +64,14 @@ public class BoRolePerm implements RootBo {
 		 **********************************************************************/
 		enSysRole=dbSysRole.findByKey(roleId);
 		dbSysRole.setToXml(requestXml, enSysRole);
-		//查询根目录Id
+		
+		//查询根目录Id、并放在request中
 		vEnTCatalog=dbTCatalog.findAllWhere(" PARENT_ID is null ");
 		if(vEnTCatalog!=null&&vEnTCatalog.size()>0){
 			enTCatalog=(EnTCatalog) vEnTCatalog.get(0);
 			int iRow=requestXml.addRow("DISABLED_NODES");
 			requestXml.setItemValue("DISABLED_NODES", iRow, "DISABLED_CATALOG_ID", enTCatalog.getCatalogId());
+		
 			vEnTCatalog=new Vector();
 			Hashtable<String,EnTCatalog> allCatalog=new Hashtable<String, EnTCatalog>();
 			allCatalog = ContentShow.GetAllTreeDown(enTCatalog.getCatalogId(),null,transaction);
