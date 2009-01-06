@@ -21,6 +21,7 @@
 <%
 	xml = XMLWrap.getRequestXml(request,session,application);
     //System.out.println(xml);
+    
 	roleId = xml.getInputValue("ROLE_ID");
 	roleName = xml.getItemValue("SYS_ROLE",1, "ROLE_NAME");
 	rolePermIds = xml.getItemValues("S_PERM","ROLE_PERM");
@@ -119,7 +120,7 @@
   	    return res;
   	  }
   	}
-  	return res;
+  	return res;  
   }
   function doSave() {
 	 if(catalogId==""){
@@ -158,7 +159,7 @@
 
   treeHtmlBuilder = new TreeHtmlBuilder()
   .setRootId("")
-  .setRootName("")
+  .setRootName("根")
   .setDisplayAll(true)
   .setInputType("radio")
   .setInputName("CATALOG_ID")
@@ -288,11 +289,11 @@ try{
   									<!-- 二级菜单集：目录管理 -->
   								  <div class="tree">
     								<%for(int j=0;j<rolePermIds.length;j++){ %>
-    									<div class="treeNode treeLeafNode"><a class="treeBlank"></a>
-       										<span class="treeInput"><input type="checkbox" name="<%=rolePermIds[j] %>" 
-       											value="<%=rolePermIds[j] %>" nameValue="目录选择" onclick="doPermClick(this)" ></span>
-      											<%=rolePermNames[j] %>
-    									</div>
+    								<div class="treeNode treeLeafNode"><a class="treeBlank"></a>
+       								  <span class="treeInput"><input type="checkbox" name="<%=rolePermIds[j] %>" 
+       									 value="<%=rolePermIds[j] %>" nameValue="目录选择" onclick="doPermClick(this)" ></span>
+      										<%=rolePermNames[j] %>
+    								</div>
     								<%} %>
   								  </div>
 					  			</div>
@@ -329,16 +330,17 @@ try{
 	               							  
 							                <%for(int k=0;k<contentIds.length;k++){ %>        
 							                <tr onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
-							                  <td align="left"><%=catalogFullNames[k] %></td>         
-							                  <td align="left" colspan="2"><%=rolePerms[k] %></td>              
+							                  <td align="center"><%=catalogFullNames[k] %></td>         
+							                  <td align="center" colspan="2"><%=rolePerms[k] %></td>              
 							                  <td align="center">              
-							                  [<a href="JavaScript:doDelete('<%=contentIds[k] %>','<%=roleId %>')">删除 </a>]         
+							                  	[<a href="JavaScript:doDelete('<%=contentIds[k] %>','<%=roleId %>')">删除 </a>]         
 							                  </td>
 							                </tr>                                           
 							               <%} %>             
             							</table>
                							<div class="pageBar"><%=Page.BuildPageTextByMethod(xml,"TDoChangePage") %></div>
                             			<!-- 工作任务面板内容结束 -->
+                            			
 		                          </div>
 		                      </div>
 		                      <div class="panelFoot">
