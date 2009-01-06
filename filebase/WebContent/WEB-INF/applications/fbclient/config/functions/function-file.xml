@@ -53,8 +53,10 @@
 		className="tower.filebase.bo.fileDef.BoFileDeleteList" forward="ToDelFileList" />
 	<function id="ToDelFileList" description="已删除文件页面" type="jsp"
 		jspPath="/fbclient/pages/file/fileDef/fileDeleteList.jsp" />
+		
 	<function id="UnDel" description="已删除文件恢复" type="bo"
 		className="tower.filebase.bo.fileDef.BoFileUnDelete" forward="DeleteFileList" />
+		
 	<function id="deletedFileDestory" description="已删除文件销毁" type="bo"
 		className="tower.filebase.bo.fileDef.BoFileDestory" forward="DeleteFileList" />
 	
