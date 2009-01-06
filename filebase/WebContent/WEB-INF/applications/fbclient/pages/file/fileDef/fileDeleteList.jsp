@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-	<%@ page import="tower.filebase.util.*"%>
-	<%@ page import="java.util.Hashtable"%>
 	<%@ page import="tower.tmvc.XMLWrap"%>
 	<%@ page import="tower.common.util.Page"%>
 	<%@ page import="tower.common.util.DateFunc"%>
@@ -124,7 +122,7 @@
 					        	   		style=" class='dark' ";
 					        	   	}
 				        	    %>
-					             <tr<%=style %>   onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)" >
+					             <tr <%=style %> onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)" >
 					             	<td  align="center"><input type="checkbox" name="FILE_ID"  value="<%=fileIds[i] %>"  /></td>
 					                 <td><img height="16"  src="../fbclient/themes/img/file/<%=fileExtNames[i].toLowerCase() %>.gif" width="15" border="0">
 					                 <%=fileNames[i] %>
