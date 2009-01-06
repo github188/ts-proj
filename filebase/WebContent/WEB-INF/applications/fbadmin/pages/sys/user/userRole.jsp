@@ -43,7 +43,7 @@
   
             oListboxTo.appendChild(options[i]); //???   
   
-            i -= 1;  //???每删除一个选项后，每个选项的index会被重置   
+            i -= 1;  //??  
   
         }   
   
@@ -117,8 +117,10 @@
         <!-- Tab面板 -->
         <div id="TabbedPanels1" class="TabbedPanels">
          <ul class="TabbedPanelsTabGroup">
-           <li class="TabbedPanelsTab"><a onclick="doEdit('<%=userId %>')">用户基本信息</a></li>      
-           <li class="TabbedPanelsTab TabbedPanelsTabSelected"><a onclick="doDistribute('<%=userId %>')">用户角色分配</a></li>
+           <li class="TabbedPanelsTab">
+           	<a onclick="doEdit('<%=userId %>')">用户基本信息</a></li>      
+           <li class="TabbedPanelsTab TabbedPanelsTabSelected">
+           	<a onclick="doDistribute('<%=userId %>')">用户角色分配</a></li>
           </ul>   
           <div class="TabbedPanelsContentGroup">
             <div class="TabbedPanelsContent">
@@ -129,20 +131,25 @@
                   <div class="panelHead"></div>
                   <div class="panelContent">
                     <div class="panelContent2">
+                    
                      <form name="form1" action="ctrl" method="get">
 		              <input type="hidden" name="FUNC_ID" value="UserRoleSubmit">
 		               <input type="hidden" name="USER_ID" value="<%=userId %>">
                       <!-- 查询面板内容 -->
-                       <div class="panelInnerHead"> 用户角色分配</div>
+                     <div class="panelInnerHead"> 用户角色分配</div>
                      <table width="70%" border="0" cellpadding="0" cellspacing="0">
+                     
                         <tr>
                            <td width="45%" align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;未分配角色:</td>
                            <td width="10%" align=center">&nbsp;&nbsp;</td>
                            <td width="45%" align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;已分配角色:</td>
                         </tr>
+                        
                         <tr>
                           <td align="left">
-                           <select name="UNUSE_USER" id="UNUSE_USER" multiple style="width:80%;height:200px;margin-left:20px;float:left" onChange="doCheck(UNUSE_USER, USE_USER)">
+                           <select name="UNUSE_USER" id="UNUSE_USER" multiple 
+                           		style="width:80%;height:200px;margin-left:20px;float:left" 
+                           							onChange="doCheck(UNUSE_USER, USE_USER)">
                              <%for(int i=0;i<unUseRoleIds.length;i++){ 
                                  String tmpUse="";
                                  if(i==0){
@@ -154,21 +161,24 @@
                             </select> 
                            
                           </td>
-		                   <td>
-		                      <input type="button" class="button" value=">>"  onclick="ListUtil.moveMuti(UNUSE_USER, USE_USER);"><br><br>	
-		                      <input type="button" class="button" value="<<"  onclick="ListUtil.moveMuti(USE_USER,UNUSE_USER);"><br><br>	
-		                      <input type="button" class="button" value=">>>"  onclick="ListUtil.moveAll(UNUSE_USER, USE_USER);"><br><br>	
-		                      <input type="button" class="button" value="<<<"  onclick="ListUtil.moveAll(USE_USER,UNUSE_USER);">	                      	                      
+		                  <td>
+		                      <input type="button" class="button" value=">>"  
+		                      				onclick="ListUtil.moveMuti(UNUSE_USER, USE_USER);"><br><br>	
+		                      <input type="button" class="button" value="<<"  
+		                      				onclick="ListUtil.moveMuti(USE_USER,UNUSE_USER);"><br><br>	
+		                      <input type="button" class="button" value=">>>"  
+		                      				onclick="ListUtil.moveAll(UNUSE_USER, USE_USER);"><br><br>	
+		                      <input type="button" class="button" value="<<<"  
+		                      				onclick="ListUtil.moveAll(USE_USER,UNUSE_USER);">	                      	                      
 		                  </td>
 		                  <td>
-		                       <select name="USE_USER" id="USE_USER" multiple style="width:80%;height:200px;margin-left:20px;float:left" onChange="doCheck(USE_USER,UNUSE_USER)">
-                              <%for(int k=0;k<useRoleIds.length;k++){ 
-                            	 
-                              %>
-                               <option value="<%=useRoleIds[k] %>"><%=useRoleNames[k]%></option>
-                             <%} %>
-                            
-                            </select> 
+		                      <select name="USE_USER" id="USE_USER" multiple 
+		                       			style="width:80%;height:200px;margin-left:20px;float:left" 
+		                       									onChange="doCheck(USE_USER,UNUSE_USER)">
+                              <%for(int k=0;k<useRoleIds.length;k++){%>
+                               		<option value="<%=useRoleIds[k] %>"><%=useRoleNames[k]%></option>
+                              <%} %>
+                              </select> 
 		                  </td>		        
                         </tr>
                         
