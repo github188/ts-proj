@@ -1,6 +1,5 @@
 package tower.filebase.bo.perm;
 
-import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Vector;
 
@@ -16,23 +15,25 @@ import tower.tmvc.ErrorException;
 import tower.tmvc.Transaction;
 
 public class CheckParam {
+	
 	/**
 	 * 
+	 * 功能：根据目录/文件权限码和权限标志位，检查标志位上的权限码是否具有权限
 	 * @param permStatus
 	 *            目录/文件标志位
 	 * @param operationStatus
 	 *            目录权限码
 	 * @return boolean 根据标志位检查目录权限码中对应位是否满足条件，1：有权限，0：无权限
 	 */
+	
 	public synchronized static boolean getContentPermStatus(String permStatus,
 			String operationStatus) {
-		//System.out.println("operationStatus:"+operationStatus);
-		//System.out.println("permStatus:"+permStatus);
+		
 		boolean returnValue = false;
+		
 		int perm = Integer.parseInt(permStatus);
 		char s = operationStatus.charAt((perm - 1));
-		// System.out.println("perm:"+perm);
-		// System.out.println("s:"+s);
+		
 		if (s == Constants.CONTENT_PERM_STATUS_YES) {
 			returnValue = true;
 		} else if (s == Constants.CONTENT_PERM_STATUS_NO) {
@@ -43,11 +44,12 @@ public class CheckParam {
 	}
 
 	/**
-	 * 
+	 * 功能：根据目录权限码返回目录权限的标志1为最高权限也就是1111
 	 * @param contentPermStatus
 	 *            目录权限码
 	 * @return Vector<String> 标志位集合
 	 */
+	
 	public synchronized static Vector<String> getPermStatus(
 			String contentPermStatus) {
 		Vector<String> returnValue = new Vector<String>();
@@ -59,8 +61,9 @@ public class CheckParam {
 		}
 		return returnValue;
 	}
+	
 	/**
-	 * 
+	 * 功能：获取权限的最高标志位
 	 * @param contentPermStatus
 	 *            目录权限码
 	 * @return String  返回权限最高的标志位
@@ -77,8 +80,10 @@ public class CheckParam {
 		}
 		return returnValue;
 	}
+	
+	
 	/**
-	 * 
+	 * 功能：比较两个权限的大小
 	 * @param contentPermStatus_First  
 	 * @param contentPermStatus_Second  
 	 *            目录权限码
@@ -89,10 +94,11 @@ public class CheckParam {
 	 */
 	public synchronized static boolean getComparePermStatus(
 			String contentPermStatus_First,String contentPermStatus_Second) {
+		
 		boolean returnValue = false;
 		int first=0;
 		int second=0;
-		//System.out.println("contentPermStatus_First:"+contentPermStatus_First+"contentPermStatus_Second");
+
 		for (int i = 0; i < contentPermStatus_First.length(); i++) {
 			char tmp = contentPermStatus_First.charAt(i);
 			if (tmp == Constants.CONTENT_PERM_STATUS_YES) {
@@ -100,6 +106,7 @@ public class CheckParam {
 				break;
 			}
 		}
+		
 		for (int i = 0; i < contentPermStatus_Second.length(); i++) {
 			char tmp = contentPermStatus_Second.charAt(i);
 			if (tmp == Constants.CONTENT_PERM_STATUS_YES) {
@@ -107,14 +114,17 @@ public class CheckParam {
 				break;
 			}
 		}
-		//System.out.println("["+first+"]["+second+"]");
+		
 		if(first<second){
 			returnValue=true;
 		}
+		
 		return returnValue;
 	}
+	
 	/**
 	 * 
+	 * 功能：检查用户userId是否对目录contentId具有contentOperationStatus的权限
 	 * @param transaction
 	 *            事务
 	 * @param contentId
@@ -129,33 +139,16 @@ public class CheckParam {
 	public synchronized static boolean checkContent(Transaction transaction,
 			String contentId, String userId, String contentOperationStatus)
 			throws ErrorException {
-		// boolean autoCommit = false;
+		
 		DbSContentPerm dbSContentPerm;
 		EnSContentPerm enSContentPerm;
 		boolean returnValue = false;
+		
 		transaction.createDefaultConnection(null, false);
-		// Connection conn = transaction.getConnById(connId);
-		// autoCommit = conn.getAutoCommit();
-		// transaction.setAutoCommit(connId, false);
+		
 		dbSContentPerm = new DbSContentPerm(transaction, null);
+		
 		// 查询目录和用户所属角色对应的目录权限码集合
-//		vSRolePerm = dbSRolePerm
-//				.findAllWhere(" CONTENT_ID='"
-//						+ contentId
-//						+ "' and ROLE_ID in( select ROLE_ID from SYS_USER_ROLE where USER_ID='"
-//						+ userId + "')");
-//
-//		// 获取此操作的操作码
-//		
-//		// 检查此操作码的标志位是否在目录操作权限码对应的标志位集合中
-//		for (int i = 0; i < vSRolePerm.size(); i++) {
-//			enSRolePerm = (EnSRolePerm) vSRolePerm.get(i);
-//			returnValue = getContentPermStatus(enSContentPerm
-//					.getContentPermStatus(), enSRolePerm.getContentPermStatus());
-//			if (returnValue) {
-//				break;
-//			}
-//		}
         String catalogPermStatus=getCatalogPermStatus(contentId,userId,transaction);
 		
         enSContentPerm = dbSContentPerm.findByKey(contentOperationStatus);
@@ -169,24 +162,41 @@ public class CheckParam {
 
 	}
 	/**
-	 * 
+	 * 功能：根据目录当前用户获取目录contentId的权限码
 	 * @param contentId
 	 * @param userId
 	 * @param transaction
 	 * @return
 	 * @throws ErrorException
 	 */
-	public synchronized static String getCatalogPermStatus(String contentId,String userId,Transaction transaction) throws ErrorException{
+	public synchronized static String getCatalogPermStatus(String contentId,
+			String userId,Transaction transaction) 
+			throws ErrorException{
+		
+		/*
+		 * 定义变量
+		 */
 		DbSRolePerm dbSRolePerm;
 		EnSRolePerm enSRolePerm;
 		Vector vSRolePerm;
+		
 		DbTCatalog dbTCatalog;
 		EnTCatalog enTCatalog;
 		Vector vTCatalog;
+		
+		//所有目录Id，及父目录Id（目录Id，父目录Id）
 		Hashtable<String, String> allCatalog = new Hashtable<String, String>();
+		
+		//具有权限目录（目录Id，权限码）
 		Hashtable<String, String> oneCatalog = new Hashtable<String, String>();
+		
 		dbSRolePerm = new DbSRolePerm(transaction, null);
 		dbTCatalog=new DbTCatalog(transaction,null);
+		
+		/*
+		 * 执行逻辑
+		 */
+		//获得所有的目录
 		vTCatalog=dbTCatalog.findAll();
 		for(int i=0;i<vTCatalog.size();i++){
 			enTCatalog=(EnTCatalog) vTCatalog.get(i);
@@ -198,15 +208,14 @@ public class CheckParam {
 				}		
 			}
 		}
-//		 查询用户所属角色对应的目录权限码集合
+		//查询用户所属角色对应的目录权限码集合
 		vSRolePerm = dbSRolePerm
 				.findAllWhere(" ROLE_ID in( select ROLE_ID from SYS_USER_ROLE where USER_ID='"
 						+ userId + "')");
 		
-		//保证每个目录ID只出现一次
+		//获取具有权限的目录，保证每个目录ID只出现一次
 		for(int i=0;i<vSRolePerm.size();i++){
 			enSRolePerm=(EnSRolePerm) vSRolePerm.get(i);
-			//System.out.println("enSRolePerm"+i+":"+enSRolePerm.getContentId());
 			if(!oneCatalog.containsKey(enSRolePerm.getContentId())){
 				oneCatalog.put(enSRolePerm.getContentId(),enSRolePerm.getContentPermStatus());
 			}
@@ -225,21 +234,11 @@ public class CheckParam {
 		}
 		
 		//如果目录不在该用户所有目录内。则查询其上级目录，直到查询到为止，若没有则返回“”
-	Enumeration<String> i = oneCatalog.keys();
-		while(i.hasMoreElements()){
-			i.nextElement();
-			//System.out.println("目录"+xx+"["+oneCatalog.get(xx)+"]");
-		}
-//		 i = oneCatalog.keys();
-//			while(i.hasMoreElements()){
-//				System.out.println("["+i.nextElement()+"]");
-//			}
 		String catalogId=contentId;
-		//System.out.println("catalogId"+catalogId);
-		//System.out.println("!oneCatalog.contains(catalogId):"+(!oneCatalog.containsKey(catalogId)));
 		while(!oneCatalog.containsKey(catalogId)){
 			if(allCatalog.containsKey(catalogId)){
 				if(allCatalog.get(catalogId)!=null&&allCatalog.get(catalogId).length()>0){
+					//获取本级节点的父节点
 					catalogId=allCatalog.get(catalogId);
 					//System.out.println("catalogId=allCatalog.get(catalogId):"+catalogId);
 				}else{
@@ -257,7 +256,7 @@ public class CheckParam {
 		
 	}
 	/**
-	 * 
+	 * 功能：检查用户userId在目录contentId中是否具有文件操作权限fileOperationStatus
 	 * @param transaction
 	 *            事务
 	 * @param contentId
@@ -272,22 +271,36 @@ public class CheckParam {
 	public synchronized static boolean checkFile(Transaction transaction,
 			String contentId, String userId, String fileOperationStatus)
 			throws ErrorException {
-		// boolean autoCommit = false;
-		//String connId = null;
-		//System.out.println("fileOperationStatus:"+fileOperationStatus);
+		
+		/*
+		 * 定义参数
+		 */
 		DbSFilePerm dbSFilePerm;
 		EnSFilePerm enSFilePerm;
+		
 		boolean returnValue = false;
+		
 		DbTCatalog dbTCatalog;
 		EnTCatalog enTCatalog;
 		Vector vTCatalog;
+		
 		Hashtable<String, EnTCatalog> table = new Hashtable<String, EnTCatalog>();
+		
+		/*
+		 * 实例化数据
+		 */
 		transaction.createDefaultConnection(null, false);
 		// Connection conn = transaction.getConnById(connId);
 		// autoCommit = conn.getAutoCommit();
 		//transaction.setAutoCommit(connId, false);
 		dbSFilePerm = new DbSFilePerm(transaction, null);
 		dbTCatalog=new DbTCatalog(transaction,null);
+		
+		/*
+		 * 逻辑操作
+		 */
+		
+		//获取所有目录
 		vTCatalog=dbTCatalog.findAll();
 		for(int i=0;i<vTCatalog.size();i++){
 			enTCatalog=(EnTCatalog) vTCatalog.get(i);
@@ -296,22 +309,26 @@ public class CheckParam {
 			}
 		}
 		// 查询目录和用户所属角色对应的目录权限码集合
-//		vSRolePerm = dbSRolePerm
-//				.findAllWhere(" CONTENT_ID='"
-//						+ contentId
-//						+ "' and ROLE_ID in( select ROLE_ID from SYS_USER_ROLE where USER_ID='"
-//						+ userId + "')");
-//		// 获取此操作的操作码
-//		System.out.println(" CONTENT_ID='"
-//						+ contentId
-//						+ "' and ROLE_ID in( select ROLE_ID from SYS_USER_ROLE where USER_ID='"
-//						+ userId + "')");
+		//		vSRolePerm = dbSRolePerm
+		//				.findAllWhere(" CONTENT_ID='"
+		//						+ contentId
+		//						+ "' and ROLE_ID in( select ROLE_ID from SYS_USER_ROLE where USER_ID='"
+		//						+ userId + "')");
+		//		// 获取此操作的操作码
+		//		System.out.println(" CONTENT_ID='"
+		//						+ contentId
+		//						+ "' and ROLE_ID in( select ROLE_ID from SYS_USER_ROLE where USER_ID='"
+		//						+ userId + "')");
+		
+		//获取目录contentId的权限码，如：1111
 		String catalogPermStatus=getCatalogPermStatus(contentId,userId,transaction);
 		
+		//获取权限fileOperationStatus基本信息（标志位）
 		enSFilePerm = dbSFilePerm.findByKey(fileOperationStatus);
 		// 检查此操作码的标志位是否在目录操作权限码对应的标志位集合中
 			if(enSFilePerm!=null&&catalogPermStatus!=null&&catalogPermStatus.length()>0){
 				
+				//根据标志为判断是否就有权限fileOperationStatus
 				returnValue = getContentPermStatus(enSFilePerm
 						.getContentPermStatus(), catalogPermStatus);
 			}
@@ -321,7 +338,7 @@ public class CheckParam {
 	}
 
 	/**
-	 * 
+	 * 功能：根据用户和目录Id获取目录的操作码集合
 	 * @param transaction
 	 *            事务
 	 * @param contentId
@@ -352,9 +369,11 @@ public class CheckParam {
 		
 		// 查询目录和用户所属角色对应的目录权限码集合
 		 String catalogPermStatus=getCatalogPermStatus(contentId,userId,transaction);	
-		 
+		
+		//返回操作目录的权限标志位
 		Vector<String> vPerm = getPermStatus(catalogPermStatus);
 		for (int j = 0; j < vPerm.size(); j++) {
+			//根据权限标志位获取操作权限
 			vSContentPerm = dbSContentPerm.findAllWhere(" CONTENT_PERM_STATUS='" + vPerm.get(j)+ "'");
 			for (int k = 0; k < vSContentPerm.size(); k++) {
 				enSContentPerm = (EnSContentPerm) vSContentPerm.get(k);
@@ -369,6 +388,7 @@ public class CheckParam {
 
 	/**
 	 * 
+	 * 功能：根据用户和目录Id获取文件的操作码集合
 	 * @param transaction
 	 *            事务
 	 * @param contentId
@@ -382,22 +402,29 @@ public class CheckParam {
 			Transaction transaction, String contentId, String userId)
 			throws ErrorException {
 
-		// boolean autoCommit = false;
 		String connId = null;
+		
 		DbSFilePerm dbSFilePerm;
 		EnSFilePerm enSFilePerm;
 		Vector vSFilePerm;
+		
 		Hashtable<String, EnSFilePerm> table = new Hashtable<String, EnSFilePerm>();
+		
 		connId = transaction.createConnection(null, false);
 		// Connection conn = transaction.getConnById(connId);
 		// autoCommit = conn.getAutoCommit();
 		transaction.setAutoCommit(connId, false);
 		dbSFilePerm = new DbSFilePerm(transaction, connId);
+		
+		
 		// 查询目录和用户所属角色对应的目录权限码集合
-        String catalogPermStatus=getCatalogPermStatus(contentId,userId,transaction);							
+        String catalogPermStatus=getCatalogPermStatus(contentId,userId,transaction);	
+        
+        //返回操作文件的权限标志位
 		Vector<String> vPerm = getPermStatus(catalogPermStatus);
 		for (int j = 0; j < vPerm.size(); j++) {
-			// System.out.println("vPerm:"+vPerm.get(i));
+			
+			//根据权限标志位获取操作权限
 			vSFilePerm = dbSFilePerm.findAllWhere(" CONTENT_PERM_STATUS='"
 					+ vPerm.get(j) + "'");
 			for (int k = 0; k < vSFilePerm.size(); k++) {

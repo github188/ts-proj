@@ -114,67 +114,100 @@ public class ContentShow {
 	 * @return Hashtable<String, String>所有下级目录ID和是否有权限（1：有权限，0：无权限）
 	 * @throws ErrorException
 	 */
+	
 	public synchronized static Hashtable<String, String> GetTreeDown(
 			String userId, String contentPermStatus, String connId,
 			Transaction transaction) throws ErrorException {
+		
+		
 		DbTCatalog dbTCatalog;
 		EnTCatalog enTCatalog;
 		Vector vTCatalog;
+		
 		DbSRolePerm dbSRolePerm;
 		EnSRolePerm enSRolePerm;
 		Vector vSRolePerm;
-		// 返回hashtable
+		
+		// 返回hashtable(目录Id，是否有权限有为：1、无为：0)
 		Hashtable<String, String> returnVal = new Hashtable<String, String>();
-		// 所有目录信息
+		
+		// 所有目录信息(目录Id,目录En)
 		Hashtable<String, EnTCatalog> allCatalog = new Hashtable<String, EnTCatalog>();
-		// 所有目录ID及其parentId
+		
+		// 所有目录ID及其parentId(目录ID,parentId)
 		Hashtable<String, String> catalog_parentId = new Hashtable<String, String>();
-		// 所有目录ID
+		
+		// 所有目录ID(目录Id,0)
 		Hashtable<String, String> catalogId = new Hashtable<String, String>();
+		
 		// 已写入返回目录信息的hashtable
 		Hashtable<String, String> catalogPerm = new Hashtable<String, String>();
 		Hashtable<String, String> oneCatalog = new Hashtable<String, String>();
+		
+		
 		connId = transaction.createDefaultConnection(null, false);
-		// transaction.setAutoCommit(connId, false);
 		dbTCatalog = new DbTCatalog(transaction, connId);
 		dbSRolePerm = new DbSRolePerm(transaction, connId);
-		// 查询所有目录信息
+		
+		// 查询所有没有删除的目录信息
 		vTCatalog = dbTCatalog.findAllWhere(" DELETE_FLAG='1'");
+		
 		for (int i = 0; i < vTCatalog.size(); i++) {
+			
 			enTCatalog = (EnTCatalog) vTCatalog.get(i);
-			allCatalog.put(enTCatalog.getCatalogId(), enTCatalog);
-			if (enTCatalog.getParentId() != null
-					&& enTCatalog.getParentId().length() > 0) {
-				catalog_parentId.put(enTCatalog.getCatalogId(), enTCatalog
-						.getParentId());
-			} else {
-				catalog_parentId.put(enTCatalog.getCatalogId(), "");
+			
+			if(enTCatalog != null){
+				
+				//将所有的目录信息保存到Hashtable（目录Id，目录En）中
+				allCatalog.put(enTCatalog.getCatalogId(), enTCatalog);
+				
+				//将目录的Id及目录父目录Id存放到hashtable（目录Id，父目录Id）中
+				if (enTCatalog.getParentId() != null
+						&& enTCatalog.getParentId().length() > 0) {
+					catalog_parentId.put(enTCatalog.getCatalogId(), enTCatalog
+							.getParentId());
+				} else {
+					catalog_parentId.put(enTCatalog.getCatalogId(), "");
+				}
+				catalogId.put(enTCatalog.getCatalogId(), "0");
 			}
-			catalogId.put(enTCatalog.getCatalogId(), "0");
 		}
 
 		// 查询目录
+		
+		//查询当前用户所有的角色
 		vSRolePerm = dbSRolePerm
 				.findAllWhere(" ROLE_ID in( select ROLE_ID from SYS_USER_ROLE where USER_ID='"
 						+ userId + "')");
-		// 保证每个目录ID只出现一次
+		
+		/*
+		 * 保证每个目录ID只出现一次(一个用户对每一个目录的操作权限只能设置一个)，查找目录权限码，让目录权限码一一对应
+		 */
 		for (int i = 0; i < vSRolePerm.size(); i++) {
+			
 			enSRolePerm = (EnSRolePerm) vSRolePerm.get(i);
-			//System.out.println("enSRolePerm" + i + ":"
-			//		+ enSRolePerm.getContentId());
 			if (!oneCatalog.containsKey(enSRolePerm.getContentId())) {
 				oneCatalog.put(enSRolePerm.getContentId(), enSRolePerm
 						.getContentPermStatus());
 			}
 
 		}
-		// 使该用户下每个目录Id有最大的目录权限码
+		
+		/*
+		 *  使该用户下每个目录Id有最大的目录权限码
+		 */
 		for (int i = 0; i < vSRolePerm.size(); i++) {
+			
 			enSRolePerm = (EnSRolePerm) vSRolePerm.get(i);
+			
 			if (oneCatalog.containsKey(enSRolePerm.getContentId())) {
+				
 				//System.out.println("目录"+enSRolePerm.getContentId()+"角色权限["+enSRolePerm
 					//	.getContentPermStatus()+"]"+"已有权限["+oneCatalog.get(enSRolePerm
 							//	.getContentId())+"]");
+				
+				//比较两者的权限，如果后者权限大于前者权限返回true，否则返回false
+				
 				if (CheckParam.getComparePermStatus(enSRolePerm
 						.getContentPermStatus(), oneCatalog.get(enSRolePerm
 						.getContentId()))) {
@@ -186,13 +219,21 @@ public class ContentShow {
 
 		}
 	     
-		// 首先放入SROLE_PERM中的目录,有操作权限的放1，否则放0，同时从所有目录中移除这些目录
+		/*
+		 * 首先放入SROLE_PERM中的目录,有操作权限的放1，否则放0，同时从所有目录中移除这些目录
+		 */ 
+		
+		//获取具有权限的目录Id
 		Enumeration<String> catalogEnum = oneCatalog.keys();
+		
 		//System.out.println(oneCatalog.size());
 		while (catalogEnum.hasMoreElements()) {
+			
 			String tmpCatalog = catalogEnum.nextElement();
 			//System.out.println("目录：" + tmpCatalog + "["
 				//	+ oneCatalog.get(tmpCatalog) + "]");
+			
+			//判断目录Id是否具有（contentPermStatus）标志位上的权限
 			if (CheckParam.getContentPermStatus(contentPermStatus, oneCatalog
 					.get(tmpCatalog))) {
 				// System.out.println("allCatalog.containsKey("+enSRolePerm.getContentId()+")"+allCatalog.containsKey(enSRolePerm.getContentId()));
@@ -209,10 +250,15 @@ public class ContentShow {
 				}
 			}
 		}
-		//获取所有catalogPerm的下级目录
+		/*
+		 * 获取所有catalogPerm的下级目录
+		 */
 		Hashtable<String, String> def=getCatalogPerm(catalogPerm,catalog_parentId);
-		// 将剩余无操作权限的放入returnVal
 		returnVal.putAll(def);
+		
+		/*
+		 * 将剩余无操作权限的放入returnVal
+		 */
 		Enumeration<String>all=catalogId.keys();
 		while(all.hasMoreElements()){
 			String test=all.nextElement();
@@ -230,9 +276,9 @@ public class ContentShow {
 	}
 
 	/**
-	 * 函数功能：将catalogPerm的目录的所有下级目录Id从catalogId检索出来，并返回
-	 *         找寻catalog_parentId中以catalogPerm的主键为根的所有目录ID
-	 *         若其下级目录ID在catalogPerm的主键中，则结束该级及其下级目录查找
+	 * 函数功能：将catalogPerm的目录的所有下级目录Id从catalogId检索出来，
+	 * 		并返回找寻catalog_parentId中以catalogPerm的主键为根的所有目录ID
+	 *      若其下级目录ID在catalogPerm的主键中，则结束该级及其下级目录查找
 	 * @param catalogPerm
 	 * 
 	 * @param catalog_parentId
@@ -245,27 +291,38 @@ public class ContentShow {
 			Hashtable<String, String> catalog_parentId) {
 		
 		Hashtable<String, String>returnValue=new Hashtable<String, String>();
+		
+		//获取目录权限的目录Id
 		Enumeration<String> catalogEnum = catalogPerm.keys();
 		
+		//遍历获取目录权限的目录Id
 		while(catalogEnum.hasMoreElements()){
+			//获取目录Id
 			String tmp=catalogEnum.nextElement();
 			String sForNext=tmp;
 			Stack<String> downCatalog=new Stack<String>();
 			downCatalog.add(sForNext);
 			//从catalogPerm的一个结点寻找
 			while(!downCatalog.isEmpty()){
+				
 				//System.out.println(catalog_parentId.contains(downCatalog.firstElement()));
-//				for(int i=0;i<downCatalog.size();i++){
-//					System.out.println(downCatalog.get(i));
-//				}
-				//找寻parentId为downCatalog的第一个元素的结点
+				//for(int i=0;i<downCatalog.size();i++){
+				//System.out.println(downCatalog.get(i));
+				//}
+				
+				//找寻父节点(parentId)为downCatalog的第一个元素的结点
 				if(catalog_parentId.contains(downCatalog.peek())){
+					
 					//记录此值
 					sForNext=downCatalog.peek();
+					
 					//在查找之前，首先移除此结点，（避免被再次使用，陷入死循环）
 					downCatalog.pop();
+					
 					Enumeration<String> catalog=catalog_parentId.keys();
+					
 					while(catalog.hasMoreElements()){
+						
 						String content=catalog.nextElement();
 						//如果catalog_parentId的结点parentId为downCatalog被移除结点
 						if(catalog_parentId.get(content).equals(sForNext)){
