@@ -20,8 +20,11 @@ public class BoUserRoleSubmit implements RootBo {
 		/***********************************************************************
 		 * 声明变量
 		 **********************************************************************/
-		String []useRoles;
+		//参数声明
+		String[] useRoles;
 		String userId;
+		
+		//db、en声明
 		DbSysUser dbSysUser;
 		EnSysUser enSysUser;
 		DbSysUserRole dbSysUserRole;
@@ -42,6 +45,7 @@ public class BoUserRoleSubmit implements RootBo {
 		 **********************************************************************/
 		enSysUser = dbSysUser.findByKey(userId);
 		if (enSysUser != null) {
+			//清除以前旧关系，建立新关系
 			dbSysUserRole.deleteWhere(" USER_ID='"+enSysUser.getUserId()+"'");
 			for(int i=0;i<useRoles.length;i++){
 				enSysUserRole=new EnSysUserRole();
