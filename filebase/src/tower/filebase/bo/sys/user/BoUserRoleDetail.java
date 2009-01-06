@@ -28,12 +28,13 @@ public class BoUserRoleDetail implements RootBo {
 		EnSysUser enSysUser;
 		DbSysRole dbSysRole;
 		EnSysRole enSysRole;
-		Vector vSysRole;
 		DbSysOrg  dbSysOrg;
 		EnSysOrg  enSysOrg;
+		
+		Vector vSysRole;
 		//Vector vSysOrg;
 		String userId;
-		 int iRow;
+		int iRow;
 		// String inputType;
 		/***********************************************************************
 		 * 获取参数
@@ -53,10 +54,12 @@ public class BoUserRoleDetail implements RootBo {
 		enSysUser = dbSysUser.findByKey(userId);
 		if (enSysUser != null) {
 			 int row=dbSysUser.setToXml(requestXml, enSysUser);
+			 //获取用户所属的机构名称、并存放在request中
 			 enSysOrg=dbSysOrg.findByKey(enSysUser.getUserOrgId());
 			 if(enSysOrg!=null){
 				 requestXml.setItemValue("SYS_USER", row, "ORG_NAME",enSysOrg.getOrgName() );
 			 }
+			 //获得该用户所属的角色(一个用户可以绑定多种角色)，存放在request中
              vSysRole=dbSysRole.findAllWhere(" ROLE_ID in(select ROLE_ID from SYS_USER_ROLE where USER_ID='"+userId+"')");
              for(int i=0;i<vSysRole.size();i++){
             	 enSysRole=(EnSysRole) vSysRole.get(i);
@@ -66,6 +69,7 @@ public class BoUserRoleDetail implements RootBo {
                 	 requestXml.setItemValue("USE_ROLE", iRow, "ROLE_NAME",enSysRole.getRoleName());
             	 }         	 
              }
+             //获取不是用户所属的角色、存放在request中
              vSysRole=new Vector();
              vSysRole=dbSysRole.findAllWhere(" ROLE_ID not in(select ROLE_ID from SYS_USER_ROLE where USER_ID='"+userId+"')");
              for(int i=0;i<vSysRole.size();i++){
