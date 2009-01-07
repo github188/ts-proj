@@ -374,7 +374,6 @@ public class ContentShow {
 		EnTCatalog enTCatalog;
 		Vector vTCatalog;
 		
-		// 所有目录信息
 		Hashtable<String, EnTCatalog> allContent = new Hashtable<String, EnTCatalog>();
 		//connId = transaction.createConnection(null, false);
 		// transaction.setAutoCommit(connId, false);
@@ -390,7 +389,7 @@ public class ContentShow {
 			allContent.put(enTCatalog.getCatalogId(), enTCatalog);
 		}
 		
-		//记录目录contentId及该目录下的目录名称
+		//记录目录contentId及该目录的父目录名称（往上找）
 		String fullContentName = "";
 		
 		while (allContent.containsKey(contentId)) {
