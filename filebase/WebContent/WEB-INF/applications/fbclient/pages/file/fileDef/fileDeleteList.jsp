@@ -82,7 +82,12 @@
 	  	form1.submit();
 	  }
   }
-
+  function doContent(){
+    window.location.href = "ctrl?FUNC_ID=DeleteContentList";
+  }
+  function doFile(){
+    window.location="ctrl?FUNC_ID=DeleteFileList";
+  }
  
 -->
 </script>
@@ -94,51 +99,65 @@
 <div class="panelHead" >回收站</div>
 <div class="panelContent" >
 <div class="panelContent2" >
-<form action="ctrl" method="post" name="form1" onsubmit="return doSubmit(this)">
-        <input type="hidden" name="FUNC_ID" value="DeleteFileList">
-        <input type="hidden" name="FILE_OPERATE_STATUE" value="">   
-        <input type="hidden" name="CUR_PAGE" value=""/>
-					<div class="panelSimple">
-                  		<div class="panelHead"></div>
-                 		 <div class="panelContent">
-                   		 <div class="panelContent2">
-                            <div class="panelInnerHead">
-                           	<div align="right">
-                           		<input type="button" class="button" id="FILE_DESTROY" name="FILE_DESTROY" value="销毁" onclick="doDestroy('FILE_ID','destroy');">
-                           		<input type="button"  class="button" name="FILE_Undel" value="恢复" onclick="doUnDel('FILE_ID','unDel');">
-                           	</div>
-                          	</div>
-	 							<table width="100%"  border="0"  cellspacing="0" class="list"  >
-				                <tr>
-				                  <th width="6%" ><input type="checkbox" name="ALL_FILE_ID" onclick="SelectAll('ALL_FILE_ID','FILE_ID');"/></th>
-				                 <th width="15%">文件名</th>
-				                  <th width="20%">原始路径</th>
-				                   <th width="10%">删除人</th>
-				                   <th width="18%">删除时间</th>
-				                 </tr>
-				                 <%for(int i=0;i<fileIds.length;i++){
-				                	String style  = "";
-					        	   	if(i%2==0){
-					        	   		style=" class='dark' ";
-					        	   	}
-				        	    %>
-					             <tr <%=style %> onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)" >
-					             	<td  align="center"><input type="checkbox" name="FILE_ID"  value="<%=fileIds[i] %>"  /></td>
-					                 <td><img height="16"  src="../fbclient/themes/img/file/<%=fileExtNames[i].toLowerCase() %>.gif" width="15" border="0">
-					                 <%=fileNames[i] %>
-					                 </td>
-					                <td title=<%=fullPahts[i] %>><%=paths[i]%></td>
-					                <td><%=deletePersons[i] %></td>
-					                <td><%=DateFunc.FormatDate(deleteDateTimes[i]) %></td>
-					             </tr>
-		                       	<%} %>	 
-	                       </table>
-                  </div>
-                </div>
-                 <div class="panelFoot"><div></div></div>
-                </div>
-                 <div class="pageBar"><%=Page.BuildPageTextByMethod(xml,"TDoChangePage") %></div>
-           </form>
+ <div id="TabbedPanels1" class="TabbedPanels">
+        <ul class="TabbedPanelsTabGroup">
+           <li class="TabbedPanelsTab">
+              <a onclick="doContent()">目录列表</a>
+           </li>      
+           <li class="TabbedPanelsTab TabbedPanelsTabSelected">
+              <a onclick="doFile()">文件列表</a>
+           </li>
+        </ul>   
+         <div class="TabbedPanelsContentGroup">
+            <div class="TabbedPanelsContent">
+              <form action="ctrl" method="post" name="form1" onsubmit="return doSubmit(this)">
+                    <input type="hidden" name="FUNC_ID" value="DeleteFileList">
+                    <input type="hidden" name="FILE_OPERATE_STATUE" value="">   
+                    <input type="hidden" name="CUR_PAGE" value=""/>
+      					<div class="panelSimple">
+                        		<div class="panelHead"></div>
+                       		 <div class="panelContent">
+                         		 <div class="panelContent2">
+                                  <div class="panelInnerHead">
+                                 	<div align="right">
+                                 		<input type="button" class="button" id="FILE_DESTROY" name="FILE_DESTROY" value="销毁" onclick="doDestroy('FILE_ID','destroy');">
+                                 		<input type="button"  class="button" name="FILE_Undel" value="恢复" onclick="doUnDel('FILE_ID','unDel');">
+                                 	</div>
+                                	</div>
+      	 							<table width="100%"  border="0"  cellspacing="0" class="list"  >
+      				                <tr>
+      				                  <th width="6%" ><input type="checkbox" name="ALL_FILE_ID" onclick="SelectAll('ALL_FILE_ID','FILE_ID');"/></th>
+      				                 <th width="15%">文件名</th>
+      				                  <th width="20%">原始路径</th>
+      				                   <th width="10%">删除人</th>
+      				                   <th width="18%">删除时间</th>
+      				                 </tr>
+      				                 <%for(int i=0;i<fileIds.length;i++){
+      				                	String style  = "";
+      					        	   	if(i%2==0){
+      					        	   		style=" class='dark' ";
+      					        	   	}
+      				        	    %>
+      					             <tr <%=style %> onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)" >
+      					             	<td  align="center"><input type="checkbox" name="FILE_ID"  value="<%=fileIds[i] %>"  /></td>
+      					                 <td><img height="16"  src="../fbclient/themes/img/file/<%=fileExtNames[i].toLowerCase() %>.gif" width="15" border="0">
+      					                 <%=fileNames[i] %>
+      					                 </td>
+      					                <td title=<%=fullPahts[i] %>><%=paths[i]%></td>
+      					                <td><%=deletePersons[i] %></td>
+      					                <td><%=DateFunc.FormatDate(deleteDateTimes[i]) %></td>
+      					             </tr>
+      		                       	<%} %>	 
+      	                       </table>
+                        </div>
+                      </div>
+                       <div class="panelFoot"><div></div></div>
+                      </div>
+                       <div class="pageBar"><%=Page.BuildPageTextByMethod(xml,"TDoChangePage") %></div>
+                 </form>
+           </div>
+          </div>
+        </div>
 </div>
 </div>
 <div class="panelFoot"><div></div></div>
