@@ -15,10 +15,13 @@
 		jspPath="/fbclient/pages/catalog/catalogDef/catalogDeleteList.jsp" />
 		
 	<function id="ContentDestory" description="目录销毁" type="bo"
-		className="tower.filebase.bo.catalogDef.BoCatalogDestory" forward="DeleteContentList" />
+		className="tower.filebase.bo.catalogDef.BoCatalogDestory" forward="CatalogFresh" />
 		
 	<function id="ContentBack" description="目录恢复" type="bo"
-		className="tower.filebase.bo.catalogDef.BoCatalogBack" forward="DeleteContentList" />
+		className="tower.filebase.bo.catalogDef.BoCatalogBack" forward="CatalogFresh" />
+		
+	<function id="CatalogFresh" description="目录刷新页面" type="jsp"
+		jspPath="/fbclient/pages/catalog/catalogDef/fresh.jsp" />
 		
 	<!-- 目录删除销毁 -->
 	<!-- 目录添加 -->
