@@ -41,6 +41,8 @@
         form1.FILE_OPERATE_STATUE.value="CONTENT_DESTORY";
 	  	form1.FUNC_ID.value="ContentBack";
 	  	form1.submit();
+      //window.parent.frames['menuTop'].location = "ctrl?FUNC_ID=CatalogButton";
+      //window.parent.frames['cataLogTree'].location = "ctrl?FUNC_ID=CataLogTree";
   	}
   }
   function doDestroy(inputStr,flag){
