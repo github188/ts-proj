@@ -72,7 +72,9 @@ public class BoUserSubmit implements RootBo {
 		    //设置en除了id外
 		    enUser.setUserName(userName);
 		    enUser.setLoginName(loginName);
-//		    enUser.setPassword(password);
+		    if(password.length() >0 && password != null){
+		    	enUser.setPassword(password);
+		    }
 		    enUser.setUserSex(userSex);
 		    enUser.setUserBirth(DateFunc.ParseDateTime(userBirth));
 		    enUser.setUserDesc(userDesc);
@@ -84,7 +86,7 @@ public class BoUserSubmit implements RootBo {
 		    //判断是添加还是编辑
 		    if(userId == null || 0 == userId.length()){
 		    	
-		    	enUser.setPassword(password);
+//		    	enUser.setPassword(password);
 		    	//生成ID
 				userId = BoAddAuto.GetBuildMode(transaction, "USER_ID");
 				//设置en
@@ -113,10 +115,10 @@ public class BoUserSubmit implements RootBo {
 				if(vEnUser != null && vEnUser.size()>0){
 					throw new ErrorException("US0106",null);
 				}
-		    	if(password == null || password.length() ==0){
-		    		password = dbUser.findByKey(userId).getPassword();
-		    		enUser.setPassword(password);
-		    	}
+//		    	if(password == null || password.length() ==0){
+//		    		password = dbUser.findByKey(userId).getPassword();
+//		    		enUser.setPassword(password);
+//		    	}
 		    	dbUser.updateByKey(userId, enUser);
 		    }
 	}
