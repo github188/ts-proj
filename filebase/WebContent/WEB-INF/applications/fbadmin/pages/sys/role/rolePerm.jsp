@@ -36,7 +36,6 @@
 	String [] catalogNames = xml.getItemValues("T_CATALOG","CATALOG_NAME");
 	
 	String [] parentIds = xml.getItemValues("T_CATALOG","PARENT_ID");
-	String [] disabledCatalogIds=xml.getItemValues("DISABLED_NODES","DISABLED_CATALOG_ID");
 	//String [] checkedIds = xml.getItemValues("T_CATALOG","CATALOG_ID");
 %>
 <html>
