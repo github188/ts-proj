@@ -75,7 +75,7 @@ public class BoRolePerm implements RootBo {
 			vEnTCatalog=new Vector();
 			Hashtable<String,EnTCatalog> allCatalog=new Hashtable<String, EnTCatalog>();
 			allCatalog = ContentShow.GetAllTreeDown(enTCatalog.getCatalogId(),null,transaction);
-			for   (Iterator<EnTCatalog>  iterator  =   allCatalog.values().iterator();  iterator.hasNext();){
+			for(Iterator<EnTCatalog>  iterator  =   allCatalog.values().iterator();  iterator.hasNext();){
 				enTCatalog = iterator.next();
 				vEnTCatalog.add(enTCatalog);
 			}
