@@ -15,7 +15,7 @@ import tower.tmvc.Transaction;
 
 public class ContentShow {
 	/**
-	 * 获得该目录及该目录的下属目录
+	 * 获得该目录的下属目录
 	 * @param contentId
 	 *            目录ID
 	 * @param connId
@@ -104,7 +104,7 @@ public class ContentShow {
 	}
 
 	/**
-	 * 
+	 * 功能：获取当前用户下所有目录的是否就有权限标志位contentPermStatus上的权限
 	 * @param userId
 	 *            用户ID
 	 * @param contentPermStatus
@@ -137,11 +137,13 @@ public class ContentShow {
 		// 所有目录ID及其parentId(目录ID,parentId)
 		Hashtable<String, String> catalog_parentId = new Hashtable<String, String>();
 		
-		// 所有目录ID(目录Id,0)
+		// 所有目录ID及是否有权限(目录Id,0)
 		Hashtable<String, String> catalogId = new Hashtable<String, String>();
 		
 		// 已写入返回目录信息的hashtable
 		Hashtable<String, String> catalogPerm = new Hashtable<String, String>();
+		//获取权限定义的目录及目录是否有权限
+		
 		Hashtable<String, String> oneCatalog = new Hashtable<String, String>();
 		
 		
@@ -173,7 +175,9 @@ public class ContentShow {
 			}
 		}
 
-		// 查询目录
+		/* 
+		 * 查询目录
+		*/
 		
 		//查询当前用户所有的角色
 		vSRolePerm = dbSRolePerm
@@ -182,6 +186,7 @@ public class ContentShow {
 		
 		/*
 		 * 保证每个目录ID只出现一次(一个用户对每一个目录的操作权限只能设置一个)，查找目录权限码，让目录权限码一一对应
+		 * 获取权限定义的目录，如果没有权限定义的目录则是根据父目录进行判断
 		 */
 		for (int i = 0; i < vSRolePerm.size(); i++) {
 			
@@ -276,6 +281,13 @@ public class ContentShow {
 	}
 
 	/**
+	 * 
+	 * 功能：获取所有catalogPerm的下级目录
+	 * catalogPerm：当前用户定义角色关联的目录，及目录是否有权限
+	 * catalog_parentId：所有目录及目录的父目录
+	 * 
+	 * 功能详细：因为如果没有定义目录权限则集成上级目录的权限所以查找没有定义权限的目录是否继承了父目录的权限
+	 * 
 	 * 函数功能：将catalogPerm的目录的所有下级目录Id从catalogId检索出来，
 	 * 		并返回找寻catalog_parentId中以catalogPerm的主键为根的所有目录ID
 	 *      若其下级目录ID在catalogPerm的主键中，则结束该级及其下级目录查找
@@ -290,6 +302,7 @@ public class ContentShow {
 			Hashtable<String, String> catalogPerm,
 			Hashtable<String, String> catalog_parentId) {
 		
+		//返回值：
 		Hashtable<String, String>returnValue=new Hashtable<String, String>();
 		
 		//获取目录权限的目录Id
