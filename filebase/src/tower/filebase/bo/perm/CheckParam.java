@@ -18,7 +18,7 @@ public class CheckParam {
 	
 	/**
 	 * 
-	 * 功能：根据目录/文件权限码和权限标志位，检查标志位上的权限码是否具有权限
+	 * 功能：根据目录/文件权限码和权限标志位，检查标志位permStatus上的权限码operationStatus是否具有权限
 	 * @param permStatus
 	 *            目录/文件标志位
 	 * @param operationStatus
@@ -44,7 +44,7 @@ public class CheckParam {
 	}
 
 	/**
-	 * 功能：根据目录权限码返回目录权限的标志1为最高权限也就是1111
+	 * 功能：根据目录权限码返回目录权限的标志1,2,3,4为最高权限也就是1111
 	 * @param contentPermStatus
 	 *            目录权限码
 	 * @return Vector<String> 标志位集合
