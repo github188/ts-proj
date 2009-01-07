@@ -135,7 +135,7 @@ public class BoFileMove implements RootBo {
 						tableTree = ContentShow
 								.GetAllTreeDown(catalogId, null, transaction);
 						//获得具有添加权限的目录
-						tableAdd = ContentShow.GetTreeDown(userId, "2", null, transaction);
+						tableAdd = ContentShow.GetTreeDown(userId, "2", null, transaction,"1");
 						// for (Iterator i = tableTree.values().iterator();
 						// i.hasNext();){
 						// enTCatalog = (EnTCatalog)i.next();

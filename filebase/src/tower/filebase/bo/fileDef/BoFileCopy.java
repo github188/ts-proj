@@ -129,7 +129,7 @@ public class BoFileCopy implements RootBo {
 						// 获取所有目录
 						tableTree = ContentShow.GetAllTreeDown(catalogId, null, transaction);
 						//获取具有添加权限的目录
-						tableAdd = ContentShow.GetTreeDown(userId, state, null, transaction);
+						tableAdd = ContentShow.GetTreeDown(userId, state, null, transaction,"1");
 						for (Iterator i = tableTree.values().iterator(); i.hasNext();) {
 							enTCatalog = (EnTCatalog) i.next();
 							String flag = (String) tableAdd.get(enTCatalog.getCatalogId());
