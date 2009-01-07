@@ -19,6 +19,7 @@ public class BoRolePermSbumit implements RootBo {
 		String roleId;
 		String catalogId;
 		String rolePermId;
+		
 		DbSRolePerm dbSRolePerm;
 		EnSRolePerm enSRolePerm;
 		/***********************************************************************
