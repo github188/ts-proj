@@ -302,7 +302,7 @@ public class ContentShow {
 			String sForNext=tmp;
 			Stack<String> downCatalog=new Stack<String>();
 			downCatalog.add(sForNext);
-			//从catalogPerm的一个结点寻找
+			////查找出它的所有子目录
 			while(!downCatalog.isEmpty()){
 				
 				//System.out.println(catalog_parentId.contains(downCatalog.firstElement()));
@@ -320,7 +320,7 @@ public class ContentShow {
 					downCatalog.pop();
 					
 					Enumeration<String> catalog=catalog_parentId.keys();
-					
+					////查找该目录的子目录，并属于父目录的权限，
 					while(catalog.hasMoreElements()){
 						
 						String content=catalog.nextElement();
