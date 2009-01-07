@@ -88,8 +88,8 @@
                      		 <div class="panelContent2">
                               <div class="panelInnerHead">
                              	<div align="right">
-                             		<input type="button" class="button" id="FILE_DESTROY" name="FILE_DESTROY" value="销毁" onclick="doDestroy('FILE_ID','destroy');">
-                             		<input type="button"  class="button" name="FILE_Undel" value="恢复" onclick="doUnDel('FILE_ID','unDel');">
+                             		<input type="button" class="button" id="FILE_DESTROY" name="FILE_DESTROY" value="销毁" onclick="doDestroy('CONTENT_ID','destroy');">
+                             		<input type="button"  class="button" name="FILE_Undel" value="恢复" onclick="doUnDel('CONTENT_ID','unDel');">
                              	</div>
                             	</div>
   	 							<table width="100%"  border="0"  cellspacing="0" class="list"  >
@@ -107,8 +107,8 @@
   					        	   	}
   				        	    %>
   					             <tr <%=style %> onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)" >
-  					             	<td  align="center"><input type="checkbox" name="FILE_ID"  value="<%=contentIds[i] %>"  /></td>
-  					                 <td><%=contentNames[i] %></td>
+  					             	<td  align="center"><input type="checkbox" name="CONTENT_ID"  value="<%=contentIds[i] %>"  /></td>
+  					                <td><%=contentNames[i] %></td>
   					                <td title=<%=paths[i] %>><%=paths[i]%></td>
   					                <td><%=deletePersons[i] %></td>
   					                <td><%=DateFunc.FormatDate(deleteDateTimes[i]) %></td>
