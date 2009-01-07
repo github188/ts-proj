@@ -252,6 +252,7 @@ public class CheckParam {
 		if(oneCatalog.containsKey(catalogId)){
 			catalogPermStatus=oneCatalog.get(catalogId);
 		}
+		//System.out.println("目录权限码"+catalogPermStatus);
 		return catalogPermStatus;
 		
 	}
@@ -417,10 +418,12 @@ public class CheckParam {
 		dbSFilePerm = new DbSFilePerm(transaction, connId);
 		
 		
-		// 查询目录和用户所属角色对应的目录权限码集合
+		// 查询目录和用户所属角色对应的目录权限码集合1111
+		//System.out.println("获取目录权限码之前");
         String catalogPermStatus=getCatalogPermStatus(contentId,userId,transaction);	
         
-        //返回操作文件的权限标志位
+        //System.out.println("contentId"+contentId+catalogPermStatus);
+        //返回操作文件的权限标志位1
 		Vector<String> vPerm = getPermStatus(catalogPermStatus);
 		for (int j = 0; j < vPerm.size(); j++) {
 			

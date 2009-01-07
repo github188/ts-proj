@@ -91,11 +91,20 @@ public class BoFileDeleteList implements RootBo{
 		//获取该登录用户有权向操作的所有目录
 		hashEnTCatalog=ContentShow.GetAllTreeDown(catalogId, userId,transaction);
 		
+		//System.out.println(hashEnTCatalog.size());
+		
+		hashEnTCatalog.values().iterator();
+		
+		int j = 0 ;
 		for(Iterator   i   =   hashEnTCatalog.values().iterator();   i.hasNext();){
+			//for(int i = 0 ; i < hashEnTCatalog.size() ; i++)
 			enTCatalog = (EnTCatalog)i.next();
+			//System.out.println(++j+"循环"+enTCatalog.getCatalogId());
 			if(enTCatalog != null){
+				//System.out.println("en不为空");
 				hashPerms = CheckParam.getFilePerm(transaction,enTCatalog.getCatalogId(), userId);
 				if(hashPerms.containsKey("FILE_DESTROY")){
+					//System.out.println("yes");
 					if(catalogIds.toString().length() == 0){
 						catalogIds.append(enTCatalog.getCatalogId());
 					}else{
