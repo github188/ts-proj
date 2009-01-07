@@ -10,14 +10,14 @@
 	<!-- 目录删除销毁 -->
 	
 	<function id="DeleteContentList" description="目录删除列表" type="bo"
-		className="tower.filebase.bo.catalogDef.BoCatalogDetail" forward="CatalogDeleteTo" />
+		className="tower.filebase.bo.catalogDef.BoCatalogDeleteList" forward="CatalogDeleteTo" />
 	<function id="CatalogDeleteTo" description="目录删除列表页面" type="jsp"
 		jspPath="/fbclient/pages/catalog/catalogDef/catalogDeleteList.jsp" />
 		
 	<function id="ContentDestory" description="目录销毁" type="bo"
 		className="tower.filebase.bo.catalogDef.BoCatalogDestory" forward="DeleteContentList" />
 		
-	<function id="BackContent" description="目录恢复" type="bo"
+	<function id="ContentBack" description="目录恢复" type="bo"
 		className="tower.filebase.bo.catalogDef.BoCatalogBack" forward="DeleteContentList" />
 		
 	<!-- 目录删除销毁 -->
