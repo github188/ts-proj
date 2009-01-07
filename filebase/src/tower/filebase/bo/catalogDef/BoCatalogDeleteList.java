@@ -66,25 +66,22 @@ public class BoCatalogDeleteList implements RootBo {
 		tableAdd = ContentShow.GetTreeDown(userId, "4", null, transaction,"0");
 
 		Enumeration<String>contentIds = tableAdd.keys();
-		System.out.println("tableAdd.size()删除数列表"+tableAdd.size());
+		//System.out.println("tableAdd.size()删除数列表"+tableAdd.size());
 		sql.append(" CATALOG_ID in ('");
 		while(contentIds.hasMoreElements()){
 			String contentId = contentIds.nextElement();
-			//String flag = tableAdd.get(contentId);
-			System.out.println("contentId"+contentId);
 			//if(flag.equals("1")){
 				sql.append("','");
 				sql.append(contentId);
-				sql.append("'");
 			//}
 		}
-		sql.append(")");
+		sql.append("')");
 		
 		Page.SetPageInfo(transaction, null, requestXml, dbTCatalog,
 				PubFunc.LEN_PAGE_COUNT, "T_CATALOG", sql.toString());
 		
 		catalogs = dbTCatalog.findAllWhere(sql.toString());
-		System.out.println("查询结果"+catalogs.size());
+		//System.out.println("查询结果"+catalogs.size());
 		for(int i = 0 ; i < catalogs.size() ; i ++){
 			enTCatalog = (EnTCatalog) catalogs.get(i);
 			int row = dbTCatalog.setToXml(requestXml, enTCatalog);
