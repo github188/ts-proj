@@ -52,7 +52,7 @@
     <div id="appName">文档管理系统客户端管理</div>
     <div id="sysFuncBar">
       <a href="ctrl?FUNC_ID=ToFileQuery" target="mainFrame"><img height="20"  src="../fbclient/themes/img/operate/searcher2.gif" width="20" border="0"  title="文件查询"></a>
-      <a href="ctrl?FUNC_ID=DeleteFileList" target="mainFrame"><img height="20"  src="../fbclient/themes/img/operate/del.gif" width="20" border="0"  title="回收站"></a>
+      <a href="ctrl?FUNC_ID=DeleteContentList" target="mainFrame"><img height="20"  src="../fbclient/themes/img/operate/del.gif" width="20" border="0"  title="回收站"></a>
       <a href="ctrl?FUNC_ID=UserPassWord" " target="mainFrame" class="password"><label>密码</label></a>
       <!-- 
       <a href="ctrl?FUNC_ID=ReportItemList" target="mainFrame" class="desktop"><label>桌面</label></a>
