@@ -117,7 +117,7 @@ public class ContentShow {
 	
 	public synchronized static Hashtable<String, String> GetTreeDown(
 			String userId, String contentPermStatus, String connId,
-			Transaction transaction) throws ErrorException {
+			Transaction transaction,String flag) throws ErrorException {
 		
 		
 		DbTCatalog dbTCatalog;
@@ -152,7 +152,7 @@ public class ContentShow {
 		dbSRolePerm = new DbSRolePerm(transaction, connId);
 		
 		// 查询所有没有删除的目录信息
-		vTCatalog = dbTCatalog.findAllWhere(" DELETE_FLAG='1'");
+		vTCatalog = dbTCatalog.findAllWhere(" DELETE_FLAG='" + flag + "'");
 		
 		for (int i = 0; i < vTCatalog.size(); i++) {
 			
