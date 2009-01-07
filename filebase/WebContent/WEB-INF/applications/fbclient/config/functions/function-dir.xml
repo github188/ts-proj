@@ -7,6 +7,20 @@
 	<function id="ToCataLogTree" description="目录树" type="jsp"
 		jspPath="/fbclient/pages/common/page/menuBody.jsp" />
 		
+	<!-- 目录删除销毁 -->
+	
+	<function id="DeleteContentList" description="目录删除列表" type="bo"
+		className="tower.filebase.bo.catalogDef.BoCatalogDetail" forward="CatalogDeleteTo" />
+	<function id="CatalogDeleteTo" description="目录删除列表页面" type="jsp"
+		jspPath="/fbclient/pages/catalog/catalogDef/catalogDeleteList.jsp" />
+		
+	<function id="ContentDestory" description="目录销毁" type="bo"
+		className="tower.filebase.bo.catalogDef.BoCatalogDestory" forward="DeleteContentList" />
+		
+	<function id="BackContent" description="目录恢复" type="bo"
+		className="tower.filebase.bo.catalogDef.BoCatalogBack" forward="DeleteContentList" />
+		
+	<!-- 目录删除销毁 -->
 	<!-- 目录添加 -->
 	<function id="CatalogDetail" description="目录编辑" type="bo"
 		className="tower.filebase.bo.catalogDef.BoCatalogDetail" forward="CatalogEdit" />
