@@ -4,7 +4,6 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page import="tower.tmvc.XMLWrap"%>
 <%@page import="tower.common.tree.TreeHtmlBuilder"%>
-<%@page import="java.util.Hashtable"%>
 <%@page import="tower.common.tree.CommonTreeNodeBuilder"%>
 <%@page import="tower.common.tree.TreeConstant"%>
 <%!XMLWrap xml;
