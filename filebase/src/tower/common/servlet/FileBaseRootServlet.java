@@ -14,10 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import tower.common.util.TransactionHolder;
 import tower.tmvc.ErrorException;
 import tower.tmvc.RootServlet;
-import tower.tmvc.Transaction;
 import tower.tmvc.XMLWrap;
 import tower.tmvc.util.ContentFactory;
 
@@ -81,7 +79,7 @@ public class FileBaseRootServlet extends RootServlet {
 			throws ErrorException {
 		request.setAttribute("_TMVC_MODULE", this.configHolder.getModule());
 		XMLWrap res = new XMLWrap();
-		Map params = new HashMap();
+		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("encoding", "utf8");
 		params.put("maxLength", new Integer((int) this.configHolder
 				.getCommonConfig().getUploadMaxSize()));

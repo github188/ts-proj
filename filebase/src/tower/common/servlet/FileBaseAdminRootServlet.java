@@ -71,7 +71,7 @@ public class FileBaseAdminRootServlet extends RootServlet {
 			throws ErrorException {
 		request.setAttribute("_TMVC_MODULE", this.configHolder.getModule());
 		XMLWrap res = new XMLWrap();
-		Map params = new HashMap();
+		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("encoding", "utf8");
 		params.put("maxLength", new Integer((int) this.configHolder
 				.getCommonConfig().getUploadMaxSize()));
