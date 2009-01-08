@@ -63,20 +63,20 @@ public class BoCatalogDeleteList implements RootBo {
 		 **********************************************************************/
 		
 		//获取具有销毁权限的目录
-		tableAdd = ContentShow.GetTreeDown(userId, "4", null, transaction,"0");
+		tableAdd = ContentShow.GetTreeDown(userId, "1", null, transaction,"");
 
 		Enumeration<String>contentIds = tableAdd.keys();
 		//System.out.println("tableAdd.size()删除数列表"+tableAdd.size());
 		sql.append(" CATALOG_ID in ('");
 		while(contentIds.hasMoreElements()){
 			String contentId = contentIds.nextElement();
-			//if(flag.equals("1")){
+			String flag = tableAdd.get(contentId);
+			if(flag.equals("1")){
 				sql.append("','");
 				sql.append(contentId);
-			//}
+			}
 		}
-		sql.append("')");
-		
+		sql.append("') and delete_flag = '0'");
 		Page.SetPageInfo(transaction, null, requestXml, dbTCatalog,
 				PubFunc.LEN_PAGE_COUNT, "T_CATALOG", sql.toString());
 		
