@@ -1,6 +1,5 @@
 package tower.common.auto;
 
-import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
