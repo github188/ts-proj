@@ -39,7 +39,7 @@
 	</error>
 	<error>
 		<id>CATALOG012</id>
-		<message>用户对此目录没有销毁权限，不能就行销毁</message>
+		<message>用户对此目录没有销毁或恢复权限，不能就行操作</message>
 		<hint></hint>
 	</error>
 	
