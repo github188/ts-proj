@@ -107,10 +107,13 @@ public class BoFileDeleteList implements RootBo{
 		sql.append(" CATALOG_ID in ('");
 		while(contentIds.hasMoreElements()){
 			String contentId = contentIds.nextElement();
-			sql.append("','");
-			sql.append(contentId);
+			String flag = destoryCatalogs.get(contentId);
+			if(flag.equals("1")){
+				sql.append("','");
+				sql.append(contentId);
+			}
 		}
-		sql.append("') and FLAG='0'");
+		sql.append("') and FLAG = '0'");
 		
 		//System.out.println(sql.toString());
 		/*//获取该登录用户有权向操作的所有目录
