@@ -64,7 +64,7 @@ public class BoCatalogBack implements RootBo {
 				enTCatalog.setDeleteFlag("1");
 				dbTCatalog.updateByKey(catalogIds[i], enTCatalog);
 			}else{
-				throw new ErrorException("",null);
+				throw new ErrorException("CATALOG012",null);
 			}
 		}
 	
