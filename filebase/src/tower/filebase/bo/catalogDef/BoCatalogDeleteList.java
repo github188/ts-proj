@@ -62,7 +62,7 @@ public class BoCatalogDeleteList implements RootBo {
 		 * 执行业务逻辑、输出
 		 **********************************************************************/
 		
-		//获取具有添加权限的目录
+		//获取具有销毁权限的目录
 		tableAdd = ContentShow.GetTreeDown(userId, "4", null, transaction,"0");
 
 		Enumeration<String>contentIds = tableAdd.keys();
