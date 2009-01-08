@@ -1,20 +1,11 @@
 package tower.common.log;
 
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Stack;
 import java.util.Vector;
 
 import org.apache.log4j.Logger;
 
-import tower.filebase.bo.perm.ContentShow;
 import tower.filebase.db.DbSysParam;
-import tower.filebase.db.DbTCatalog;
 import tower.filebase.en.EnSysParam;
-import tower.filebase.en.EnTCatalog;
 import tower.tmvc.ErrorException;
 import tower.tmvc.RootBo;
 import tower.tmvc.Transaction;
@@ -61,9 +52,6 @@ public class BoClientUserLogin implements RootBo {
 		DbSysOrg dbOrg;
 		EnSysOrg enOrg;
 		
-		//目录db en
-		DbTCatalog dbTCatalog;
-		EnTCatalog enTCatalog;
 		
 		//系统参数db en
 		DbSysParam dbSysParam;
@@ -71,9 +59,7 @@ public class BoClientUserLogin implements RootBo {
 		
 		//其他
 		Vector enUsers;
-		Map permMap;
 		
-		StringBuffer sql;
 
 		/***********************************************************************
 		 * 获取输入
@@ -88,7 +74,6 @@ public class BoClientUserLogin implements RootBo {
 		transaction.createDefaultConnection(null, true);
 		dbUser = new DbSysUser(transaction, null);
 		dbOrg = new DbSysOrg(transaction,null);
-		dbTCatalog = new DbTCatalog(transaction,null);
 		dbSysParam = new DbSysParam(transaction,null);
 		/***********************************************************************
 		 * 执行业务逻辑、输出
