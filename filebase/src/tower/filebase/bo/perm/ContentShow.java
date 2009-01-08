@@ -152,7 +152,12 @@ public class ContentShow {
 		dbSRolePerm = new DbSRolePerm(transaction, connId);
 		
 		// 查询所有没有删除的目录信息
-		vTCatalog = dbTCatalog.findAllWhere(" DELETE_FLAG='" + flag + "'");
+		
+		if(flag != null && flag.length() > 0){
+			vTCatalog = dbTCatalog.findAllWhere(" DELETE_FLAG='" + flag + "'");
+		}else{
+			vTCatalog = dbTCatalog.findAll();
+		}
 		
 		for (int i = 0; i < vTCatalog.size(); i++) {
 			
