@@ -137,16 +137,12 @@ public class BoCatalogDestory implements RootBo {
 				//获得目录的相对路径
 				String partPath = PathByCatalog.pathByCatalogId(contentId, transaction);
 				
-				System.out.println("目录contentId"+contentId);
 				path = new StringBuffer();
 				path.append(filePath);
 				path.append(partPath);
-				System.out.println("partPath"+partPath);
-				System.out.println("相对路径");
 				File file = new File(path.toString());
 				
 				if(file.exists()){
-					System.out.println(path.toString()+"存在删除");
 					file.delete();
 				}
 				
@@ -190,7 +186,6 @@ public class BoCatalogDestory implements RootBo {
 				
 				//删除文件表信息
 				dbTFile.deleteWhere(" CATALOG_ID = '" + contentId + "'");
-				System.out.println("contentId文件"+contentId);
 				for(int i = 0 ; i < files.size() ; i++){
 					enTFile = (EnTFile) files.get(i);
 					
@@ -218,7 +213,6 @@ public class BoCatalogDestory implements RootBo {
 							path.append(enTFile.getFileName());
 							file = new File(path.toString());
 							if (file.exists()) {
-								System.out.println(path.toString()+"存在删除");
 								file.delete();
 							}
 						}
