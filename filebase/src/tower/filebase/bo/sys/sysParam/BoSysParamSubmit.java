@@ -3,8 +3,10 @@ package tower.filebase.bo.sys.sysParam;
 import org.apache.log4j.Logger;
 
 import tower.filebase.db.DbSysParam;
+import tower.filebase.db.DbTFile;
 import tower.filebase.db.DbTFileVersion;
 import tower.filebase.en.EnSysParam;
+import tower.filebase.en.EnTFile;
 import tower.tmvc.ErrorException;
 import tower.tmvc.RootBo;
 import tower.tmvc.Transaction;
@@ -29,8 +31,12 @@ public class BoSysParamSubmit implements RootBo {
 		EnSysParam enMutexParam;
 		EnSysParam	enSaveParam;			
 		
-		//文件版本db en
+		//文件版本db
 		DbTFileVersion dbTFileVersion;
+		
+		//文件db en
+		DbTFile dbTFile;
+		EnTFile enTFile;
 		
 		String mutexValue;//是否互斥编辑
 		String saveValue;//是否保留历史版本
@@ -47,8 +53,10 @@ public class BoSysParamSubmit implements RootBo {
 		transaction.createDefaultConnection(null, false);
 		dbParam = new DbSysParam(transaction,null);
 		dbTFileVersion = new  DbTFileVersion(transaction,null);
+		dbTFile = new DbTFile(transaction,null);
 		enMutexParam = new EnSysParam();
 		enSaveParam = new EnSysParam();
+		enTFile = new EnTFile();
 		/***********************************************************************
 		 * 业务处理
 		 **********************************************************************/
@@ -64,16 +72,19 @@ public class BoSysParamSubmit implements RootBo {
 			enSaveParam.setParamFlag("1");
 		}else{
 			enSaveParam.setParamFlag("0");
+			saveValue = "0";
 		}
 		dbParam.updateByKey("OP_MUTES", enMutexParam);
 		dbParam.updateByKey("OP_SAVE", enSaveParam);
 		
 		//如果由"保留历史版本" 改为 "不保留历史版本"时清除所有文件的版本记录。
+		// 修改文件表(T_FILE)里的文件最新版本(NEW_VERSION_NO)为1
 		if(oldSavaValue != null && oldSavaValue.length()!=0){
 			if(oldSavaValue.equals("1")&& saveValue.equals("0")){
 				dbTFileVersion.deleteWhere(" 1=1 ");
 			}
 		}
+		
 	}
 
 }

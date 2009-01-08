@@ -104,6 +104,8 @@
 	 }
   }
   function doCopy(inputStr,flag){
+  	alert(inputStr);
+  	alert(flag);
     if(SelectCheck(inputStr,flag)){
 	  	form1.FUNC_ID.value="FileCopyInit";
 	  	form1.FILE_OPERATE_STATUE_TO.value="FILE_ADD";
