@@ -1,7 +1,6 @@
 package tower.common.auto;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -309,11 +308,11 @@ public class BoAddAuto {
 		String buildMode;
 		String keyId = null;
 		int nowValue;
-		 boolean autoCommit = false;
+		 //boolean autoCommit = false;
 		 String connId=null;
 		// String a = "[char*d][org*5][date*YYYYMMDD][cust*8][seq*4]";
 		// int count;
-		 Connection conn=null ;
+		 //Connection conn=null ;
 		try {
 			connId = transaction1.createConnection(null, false);
 //			conn = transaction1.getConnById(connId);
