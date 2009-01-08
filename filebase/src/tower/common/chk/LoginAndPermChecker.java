@@ -1,7 +1,6 @@
 package tower.common.chk;
 
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
@@ -19,7 +18,7 @@ import tower.tmvc.sys.en.EnSysMenu;
 
 public class LoginAndPermChecker implements RootChecker{
 
-	private Set ignoreFuncs;
+	private Set<String> ignoreFuncs;
 	/*static {
 		ignoreFuncs.add("Login");// 登录
 		ignoreFuncs.add("Logout");// 注销
@@ -29,9 +28,10 @@ public class LoginAndPermChecker implements RootChecker{
 
 	private String funcId;
 
-	private Map funcMap;
+	//private Map funcMap;
 	
 
+	@SuppressWarnings("unchecked")
 	public boolean doCheck(HttpServletRequest request,
 			HttpServletResponse response, Transaction transaction,
 			XMLWrap requestXml, XMLWrap sessionXml, XMLWrap applicationXml,
@@ -47,13 +47,13 @@ public class LoginAndPermChecker implements RootChecker{
 		}
 
 		// 查找忽略的功能
-		ignoreFuncs = (Set) applicationXml.getInputObject("_IGNORE_FUNC_SET");
+		ignoreFuncs =  (Set<String>) applicationXml.getInputObject("_IGNORE_FUNC_SET");
 		if (ignoreFuncs == null) {
 			DbSysMenu dbMenu = new DbSysMenu(transaction, null);
 			Vector ignoreMenus;
 			ignoreMenus = dbMenu.findAllWhere(" MENU_TYPE='L'");
 
-			ignoreFuncs = new HashSet();
+			ignoreFuncs = new HashSet<String>();
 			for (int i = 0; i < ignoreMenus.size(); i++) {
 				ignoreFuncs.add(((EnSysMenu) ignoreMenus.get(i)).getMenuId());
 			}
