@@ -156,7 +156,7 @@
                                 	 tmpUse="selected"; 
                                  }
                              %>
-                               <option value="<%=unUseRoleIds[i] %>" <%=tmpUse %>><%=unUseRoleNames[i]%></option>
+                               <option value="<%=unUseRoleIds[i] %>" <%=tmpUse %> ><%=unUseRoleNames[i]%></option>
                              <%} %>  
                             </select> 
                            

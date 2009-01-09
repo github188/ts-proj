@@ -222,10 +222,11 @@
                         <tr>
                           <td align="right">联系电话：</td>
                           <td><span id="linkTele">
-                          <input type="text" class="text"name="LINK_TELE" value="<%=linkTele %>">
+                            <input type="text" class="text"name="LINK_TELE" value="<%=linkTele %>">
                             <span class="textfieldMaxCharsMsg">已超过最大字符数。</span>
-                            <span class="textfieldInvalidFormatMsg">格式无效。</span></td>
-                        
+                            <span class="textfieldInvalidFormatMsg">格式无效。</span>
+                            </span>
+                          </td>
                            <td align="right">电子邮件：</td>
                           <td><span id="linkEmail">
                           <input type="text" class="text"name="LINK_EMAIL"value="<%=linkEmail %>">
