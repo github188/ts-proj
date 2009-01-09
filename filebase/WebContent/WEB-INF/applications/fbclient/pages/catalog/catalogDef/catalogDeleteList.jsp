@@ -105,12 +105,12 @@
   				                 <%for(int i=0;i<contentIds.length;i++){
   				                	String style  = "";
   					        	   	if(i%2==0){
-  					        	   		style=" class='dark' ";
+  					        	   		style="dark";
   					        	   	}
   				        	    %>
-  					             <tr <%=style %> onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)" >
+  					             <tr class="<%=style %>" onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)" >
   					             	<td  align="center"><input type="checkbox" name="CONTENT_ID"  value="<%=contentIds[i] %>"  /></td>
-  					                <td><%=contentNames[i] %></td>
+  					                <td><img height="16"  src="../fbclient/themes/img/tree/tree_dir.gif" width="15" border="0"><%=contentNames[i] %></td>
   					                <td title=<%=paths[i] %>><%=paths[i]%></td>
   					                <td><%=deletePersons[i] %></td>
   					                <td><%=DateFunc.FormatDate(deleteDateTimes[i]) %></td>
