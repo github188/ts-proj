@@ -280,12 +280,18 @@ try{
                 <tr>
                   <td align="right">联系电话：</td>
                   <td><span id="spryLinkTele">
-                  <input type="text" class="text" name="LINK_TELE" value="<%=linkTele %>">
-                  <span class="textfieldMaxCharsMsg">已超过最大字符数12。</span> <span class="textfieldInvalidFormatMsg">格式无效。</span></td>
+                    <input type="text" class="text" name="LINK_TELE" value="<%=linkTele %>">
+                    <span class="textfieldMaxCharsMsg">已超过最大字符数12。</span> 
+                    <span class="textfieldInvalidFormatMsg">格式无效。</span>
+                    </span>
+                  </td>
                   <td align="right">电子邮件：</td>
                   <td><span id="spryLinkEmail">
-                  <input type="text" class="text" name="LINK_EMAIL" value="<%=linkEmail %>">
-                  <span class="textfieldMaxCharsMsg">已超过最大字符数50。</span> <span class="textfieldInvalidFormatMsg">格式无效。</span></td>
+                    <input type="text" class="text" name="LINK_EMAIL" value="<%=linkEmail %>">
+                    <span class="textfieldMaxCharsMsg">已超过最大字符数50。</span> 
+                    <span class="textfieldInvalidFormatMsg">格式无效。</span>
+                    </span>
+                  </td>
                 </tr>
                 <tr>
                   <td align="right" valign="top">部门描述：</td>
