@@ -25,14 +25,14 @@
 </head>
 
 <body onLoad="javascript:JsCheck();">
-<div id="topFrame" class="panel">
-  <div class="panelHead"> </div>
-  <div class="panelContent">
-    <div class="panelContent2">
-      <div id="appInfo">欢迎进入文档管理系统</div>
-    </div>
+  <div id="topFrame" class="panel">
+    <div class="panelHead"> </div>
+      <div class="panelContent">
+        <div class="panelContent2">
+          <div id="appInfo">欢迎进入文档管理系统</div>
+        </div>
+      </div>
+    <div class="panelFoot"><div>
   </div>
-  <div class="panelFoot"><div>
-</div>
 </body>
 </html>
