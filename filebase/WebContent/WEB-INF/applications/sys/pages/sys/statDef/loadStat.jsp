@@ -24,6 +24,6 @@
 -->
 </script>
 </head>
-<body onload=doForward("<%=funcId %>")>
+<body onload = doForward("<%=funcId %>")>
 </body >
 </html>
