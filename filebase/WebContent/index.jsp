@@ -1,5 +1,5 @@
 <%
-String jsp ="applications/filebase/ctrl?FUNC_ID=InLogin";
+//String jsp ="applications/filebase/ctrl?FUNC_ID=InLogin";
 //response.sendRedirect(jsp);
 %>
 <a href="applications/fbadmin/ctrl?FUNC_ID=InLogin">Admin</a>
