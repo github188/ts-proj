@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	String theme = "1";
 %>
 <script type="text/javascript" src="../fbclient/scripts/tower.js"></script>
 <script language="javascript" src="../fbclient/scripts/mdf.js"></script>
