@@ -179,7 +179,7 @@ function TDoChangePage(curPage){
 							        	   		style1=" class='dark' ";
 							        	   	}
 						        	   %>
-					                <tr <%=style1 %>  <%=style %>  class="dark"  onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)" >
+					                <tr <%=style1 %><%=style %>  class="dark"  onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)" >
 						             	<td><img height="16"  src="../fbclient/themes/img/file/<%=fileExtNames[i] %>.gif" width="15" border="0">
 						             	<a <%=style %> href="#" onclick="javascript:doFileOperate('<%=fileIds[i] %>','<%=catalogIds[i] %>');"><%=fileNames[i] %></a>
 						             	</td>

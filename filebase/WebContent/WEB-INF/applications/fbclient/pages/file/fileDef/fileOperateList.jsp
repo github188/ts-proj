@@ -217,7 +217,7 @@
 				        	   		style3=" class='dark' ";
 				        	   	}
 				        	   %>
-				             <tr <%=style1 %>  <%=style2 %> <%=style3 %>  onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)" >
+				             <tr <%=style1 %> <%=style2 %> <%=style3 %> onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)" >
 				                <td  align="center"><input type="checkbox" name="FILE_ID"  value="<%=fileIds[i] %>" <%if(opMutes.equals("1")){ %>onclick="doCheck(this,'<%=states[i] %>','<%=currEditPersons[i] %>','<%=user %>');"<%} %>/></td>
 				             	<td><img height="16"  src="../fbclient/themes/img/file/<%=fileExtNames[i].toLowerCase() %>.gif" width="15" border="0"><%=fileNames[i] %></td>
 				                <td><%=fileSizes[i] %></td>
