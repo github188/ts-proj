@@ -10,21 +10,21 @@
     System.out.println(ex);
 	//ex.printStackTrace();
 %>
+<html>
+<head>
 <script type="text/javascript">
 
   function doClick(){
      
-  	 if(window.history.length==0){
-  	     window.close();
-  	 }else{
-  	     history.back(); 
-  	 }
-  	 
+     if(window.history.length==0){
+         window.close();
+     }else{
+         history.back(); 
+     }
+     
   }
   
 </script>
-<html>
-<head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>拓华软件   文档管理系统 - 错误提示</title>
 <jsp:include flush="true" page="../../common/include/css.jsp"></jsp:include>
