@@ -96,11 +96,14 @@
 	}
   }
   function doDown(inputStr,flag){
+  	var catalogId = '<%=catalogId%>';
+  	var fileId = '<%=fileId%>';
    if(SelectCheck(inputStr,flag)){
+   		form1.target="_new";
 	  	form1.FUNC_ID.value="ToDownLoadFile";
 	  	form1.FILE_OPERATE_STATUE.value="FILE_DOWN";
 	  	form1.submit();
-	    form1.FUNC_ID.value="FileOperateList";
+	    window.location="ctrl?FUNC_ID=FileOperateList&CATALOG_ID="+catalogId+"&QFILE_ID="+fileId;
 	 }
   }
   function doCopy(inputStr,flag){
