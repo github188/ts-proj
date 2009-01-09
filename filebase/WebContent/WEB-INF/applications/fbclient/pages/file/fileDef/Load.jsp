@@ -18,6 +18,6 @@
 -->
 </script>
 </head>
-<body onload=doForward('<%=catalogId%>')>
+<body onload=doForward("<%=catalogId%>")>
 </body >
 </html>
