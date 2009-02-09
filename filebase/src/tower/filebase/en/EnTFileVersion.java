@@ -10,52 +10,52 @@ package tower.filebase.en;
 
 public class EnTFileVersion implements java.io.Serializable {
     /**
-     * Type : VARCHAR2(30) Name : FILE_ID
+     * Type : char(10) Name : FILE_ID
      */
     private String fileId;
 
     /**
-     * Type : NUMBER Name : VERSION_NO
+     * Type : int Name : VERSION_NO
      */
-    private long versionNo;
+    private int versionNo;
 
     /**
-     * Type : VARCHAR2(14) Name : UPDATE_DATETIME
+     * Type : varchar(14) Name : UPDATE_DATETIME
      */
     private String updateDatetime;
 
     /**
-     * Type : VARCHAR2(50) Name : UPDATE_PERSON
+     * Type : varchar(50) Name : UPDATE_PERSON
      */
     private String updatePerson;
 
     /**
-     * Type : VARCHAR2(200) Name : UPDATE_REMARK
+     * Type : varchar(200) Name : UPDATE_REMARK
      */
     private String updateRemark;
 
     /**
-     * Type : VARCHAR2(30) Name : FILE_ID modify flag
+     * Type : char(10) Name : FILE_ID modify flag
      */
     private boolean _flagFileId;
 
     /**
-     * Type : NUMBER Name : VERSION_NO modify flag
+     * Type : int Name : VERSION_NO modify flag
      */
     private boolean _flagVersionNo;
 
     /**
-     * Type : VARCHAR2(14) Name : UPDATE_DATETIME modify flag
+     * Type : varchar(14) Name : UPDATE_DATETIME modify flag
      */
     private boolean _flagUpdateDatetime;
 
     /**
-     * Type : VARCHAR2(50) Name : UPDATE_PERSON modify flag
+     * Type : varchar(50) Name : UPDATE_PERSON modify flag
      */
     private boolean _flagUpdatePerson;
 
     /**
-     * Type : VARCHAR2(200) Name : UPDATE_REMARK modify flag
+     * Type : varchar(200) Name : UPDATE_REMARK modify flag
      */
     private boolean _flagUpdateRemark;
 
@@ -84,7 +84,7 @@ public class EnTFileVersion implements java.io.Serializable {
     /**
      * Sets the value for versionNo
      */
-    public void setVersionNo(long versionNo) {
+    public void setVersionNo(int versionNo) {
         this.versionNo = versionNo;
         this._flagVersionNo = true;
     }
@@ -92,7 +92,7 @@ public class EnTFileVersion implements java.io.Serializable {
     /**
      * Gets the value for versionNo
      */
-    public long getVersionNo() {
+    public int getVersionNo() {
         return versionNo;
     }
 

@@ -10,92 +10,92 @@ package tower.filebase.en;
 
 public class EnTCatalog implements java.io.Serializable {
     /**
-     * Type : VARCHAR2(30) Name : CATALOG_ID
+     * Type : char(10) Name : CATALOG_ID
      */
     private String catalogId;
 
     /**
-     * Type : VARCHAR2(100) Name : CATALOG_NAME
+     * Type : varchar(50) Name : CATALOG_NAME
      */
     private String catalogName;
 
     /**
-     * Type : VARCHAR2(30) Name : PARENT_ID
+     * Type : char(10) Name : PARENT_ID
      */
     private String parentId;
 
     /**
-     * Type : VARCHAR2(16) Name : CREATE_DATETIME
+     * Type : varchar(16) Name : CREATE_DATETIME
      */
     private String createDatetime;
 
     /**
-     * Type : VARCHAR2(50) Name : CREATOR
+     * Type : varchar(50) Name : CREATOR
      */
     private String creator;
 
     /**
-     * Type : VARCHAR2(200) Name : CATALOG_REMARK
+     * Type : varchar(200) Name : CATALOG_REMARK
      */
     private String catalogRemark;
 
     /**
-     * Type : CHAR(1) Name : DELETE_FLAG
+     * Type : char(1) Name : DELETE_FLAG
      */
     private String deleteFlag;
 
     /**
-     * Type : VARCHAR2(10) Name : DELETE_PERSON
+     * Type : varchar(10) Name : DELETE_PERSON
      */
     private String deletePerson;
 
     /**
-     * Type : VARCHAR2(14) Name : DELETE_DATETIME
+     * Type : varchar(14) Name : DELETE_DATETIME
      */
     private String deleteDatetime;
 
     /**
-     * Type : VARCHAR2(30) Name : CATALOG_ID modify flag
+     * Type : char(10) Name : CATALOG_ID modify flag
      */
     private boolean _flagCatalogId;
 
     /**
-     * Type : VARCHAR2(100) Name : CATALOG_NAME modify flag
+     * Type : varchar(50) Name : CATALOG_NAME modify flag
      */
     private boolean _flagCatalogName;
 
     /**
-     * Type : VARCHAR2(30) Name : PARENT_ID modify flag
+     * Type : char(10) Name : PARENT_ID modify flag
      */
     private boolean _flagParentId;
 
     /**
-     * Type : VARCHAR2(16) Name : CREATE_DATETIME modify flag
+     * Type : varchar(16) Name : CREATE_DATETIME modify flag
      */
     private boolean _flagCreateDatetime;
 
     /**
-     * Type : VARCHAR2(50) Name : CREATOR modify flag
+     * Type : varchar(50) Name : CREATOR modify flag
      */
     private boolean _flagCreator;
 
     /**
-     * Type : VARCHAR2(200) Name : CATALOG_REMARK modify flag
+     * Type : varchar(200) Name : CATALOG_REMARK modify flag
      */
     private boolean _flagCatalogRemark;
 
     /**
-     * Type : CHAR(1) Name : DELETE_FLAG modify flag
+     * Type : char(1) Name : DELETE_FLAG modify flag
      */
     private boolean _flagDeleteFlag;
 
     /**
-     * Type : VARCHAR2(10) Name : DELETE_PERSON modify flag
+     * Type : varchar(10) Name : DELETE_PERSON modify flag
      */
     private boolean _flagDeletePerson;
 
     /**
-     * Type : VARCHAR2(14) Name : DELETE_DATETIME modify flag
+     * Type : varchar(14) Name : DELETE_DATETIME modify flag
      */
     private boolean _flagDeleteDatetime;
 

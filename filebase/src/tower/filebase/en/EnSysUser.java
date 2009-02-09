@@ -10,132 +10,132 @@ package tower.filebase.en;
 
 public class EnSysUser implements java.io.Serializable {
     /**
-     * Type : VARCHAR2(30) Name : USER_ID
+     * Type : char(6) Name : USER_ID
      */
     private String userId;
 
     /**
-     * Type : VARCHAR2(50) Name : USER_NAME
+     * Type : varchar(50) Name : USER_NAME
      */
     private String userName;
 
     /**
-     * Type : VARCHAR2(50) Name : LOGIN_NAME
+     * Type : varchar(50) Name : LOGIN_NAME
      */
     private String loginName;
 
     /**
-     * Type : VARCHAR2(32) Name : PASSWORD
+     * Type : varchar(32) Name : PASSWORD
      */
     private String password;
 
     /**
-     * Type : VARCHAR2(1) Name : STATUS
+     * Type : char(1) Name : STATUS
      */
     private String status;
 
     /**
-     * Type : VARCHAR2(30) Name : USER_ORG_ID
+     * Type : char(6) Name : USER_ORG_ID
      */
     private String userOrgId;
 
     /**
-     * Type : CHAR(6) Name : USER_STAT_ID
+     * Type : char(6) Name : USER_STAT_ID
      */
     private String userStatId;
 
     /**
-     * Type : VARCHAR2(200) Name : USER_DESC
+     * Type : varchar(200) Name : USER_DESC
      */
     private String userDesc;
 
     /**
-     * Type : VARCHAR2(50) Name : LINK_TELE
+     * Type : varchar(50) Name : LINK_TELE
      */
     private String linkTele;
 
     /**
-     * Type : VARCHAR2(50) Name : LINK_EMAIL
+     * Type : varchar(50) Name : LINK_EMAIL
      */
     private String linkEmail;
 
     /**
-     * Type : VARCHAR2(1) Name : USER_SEX
+     * Type : char(1) Name : USER_SEX
      */
     private String userSex;
 
     /**
-     * Type : VARCHAR2(8) Name : USER_BIRTH
+     * Type : varchar(8) Name : USER_BIRTH
      */
     private String userBirth;
 
     /**
-     * Type : VARCHAR2(1) Name : MAN_FLAG
+     * Type : char(1) Name : MAN_FLAG
      */
     private String manFlag;
 
     /**
-     * Type : VARCHAR2(30) Name : USER_ID modify flag
+     * Type : char(6) Name : USER_ID modify flag
      */
     private boolean _flagUserId;
 
     /**
-     * Type : VARCHAR2(50) Name : USER_NAME modify flag
+     * Type : varchar(50) Name : USER_NAME modify flag
      */
     private boolean _flagUserName;
 
     /**
-     * Type : VARCHAR2(50) Name : LOGIN_NAME modify flag
+     * Type : varchar(50) Name : LOGIN_NAME modify flag
      */
     private boolean _flagLoginName;
 
     /**
-     * Type : VARCHAR2(32) Name : PASSWORD modify flag
+     * Type : varchar(32) Name : PASSWORD modify flag
      */
     private boolean _flagPassword;
 
     /**
-     * Type : VARCHAR2(1) Name : STATUS modify flag
+     * Type : char(1) Name : STATUS modify flag
      */
     private boolean _flagStatus;
 
     /**
-     * Type : VARCHAR2(30) Name : USER_ORG_ID modify flag
+     * Type : char(6) Name : USER_ORG_ID modify flag
      */
     private boolean _flagUserOrgId;
 
     /**
-     * Type : CHAR(6) Name : USER_STAT_ID modify flag
+     * Type : char(6) Name : USER_STAT_ID modify flag
      */
     private boolean _flagUserStatId;
 
     /**
-     * Type : VARCHAR2(200) Name : USER_DESC modify flag
+     * Type : varchar(200) Name : USER_DESC modify flag
      */
     private boolean _flagUserDesc;
 
     /**
-     * Type : VARCHAR2(50) Name : LINK_TELE modify flag
+     * Type : varchar(50) Name : LINK_TELE modify flag
      */
     private boolean _flagLinkTele;
 
     /**
-     * Type : VARCHAR2(50) Name : LINK_EMAIL modify flag
+     * Type : varchar(50) Name : LINK_EMAIL modify flag
      */
     private boolean _flagLinkEmail;
 
     /**
-     * Type : VARCHAR2(1) Name : USER_SEX modify flag
+     * Type : char(1) Name : USER_SEX modify flag
      */
     private boolean _flagUserSex;
 
     /**
-     * Type : VARCHAR2(8) Name : USER_BIRTH modify flag
+     * Type : varchar(8) Name : USER_BIRTH modify flag
      */
     private boolean _flagUserBirth;
 
     /**
-     * Type : VARCHAR2(1) Name : MAN_FLAG modify flag
+     * Type : char(1) Name : MAN_FLAG modify flag
      */
     private boolean _flagManFlag;
 

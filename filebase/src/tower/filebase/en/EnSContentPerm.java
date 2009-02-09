@@ -10,42 +10,42 @@ package tower.filebase.en;
 
 public class EnSContentPerm implements java.io.Serializable {
     /**
-     * Type : VARCHAR2(30) Name : CONTENT_OPERATION_STATUS
+     * Type : varchar(30) Name : CONTENT_OPERATION_STATUS
      */
     private String contentOperationStatus;
 
     /**
-     * Type : VARCHAR2(50) Name : CONTENT_OPERATION_NAME
+     * Type : varchar(50) Name : CONTENT_OPERATION_NAME
      */
     private String contentOperationName;
 
     /**
-     * Type : VARCHAR2(8) Name : CONTENT_PERM_STATUS
+     * Type : varchar(8) Name : CONTENT_PERM_STATUS
      */
     private String contentPermStatus;
 
     /**
-     * Type : VARCHAR2(1) Name : SHOW_FLAG
+     * Type : char(1) Name : SHOW_FLAG
      */
     private String showFlag;
 
     /**
-     * Type : VARCHAR2(30) Name : CONTENT_OPERATION_STATUS modify flag
+     * Type : varchar(30) Name : CONTENT_OPERATION_STATUS modify flag
      */
     private boolean _flagContentOperationStatus;
 
     /**
-     * Type : VARCHAR2(50) Name : CONTENT_OPERATION_NAME modify flag
+     * Type : varchar(50) Name : CONTENT_OPERATION_NAME modify flag
      */
     private boolean _flagContentOperationName;
 
     /**
-     * Type : VARCHAR2(8) Name : CONTENT_PERM_STATUS modify flag
+     * Type : varchar(8) Name : CONTENT_PERM_STATUS modify flag
      */
     private boolean _flagContentPermStatus;
 
     /**
-     * Type : VARCHAR2(1) Name : SHOW_FLAG modify flag
+     * Type : char(1) Name : SHOW_FLAG modify flag
      */
     private boolean _flagShowFlag;
 

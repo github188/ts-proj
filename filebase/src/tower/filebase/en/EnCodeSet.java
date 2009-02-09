@@ -10,52 +10,52 @@ package tower.filebase.en;
 
 public class EnCodeSet implements java.io.Serializable {
     /**
-     * Type : VARCHAR2(5) Name : SET_ID
+     * Type : varchar(5) Name : SET_ID
      */
     private String setId;
 
     /**
-     * Type : VARCHAR2(50) Name : SET_DESC
+     * Type : varchar(50) Name : SET_DESC
      */
     private String setDesc;
 
     /**
-     * Type : VARCHAR2(1) Name : STATUS
+     * Type : char(1) Name : STATUS
      */
     private String status;
 
     /**
-     * Type : CHAR(1) Name : SET_TYPE
+     * Type : char(1) Name : SET_TYPE
      */
     private String setType;
 
     /**
-     * Type : CHAR(1) Name : CODE_TYPE
+     * Type : char(1) Name : CODE_TYPE
      */
     private String codeType;
 
     /**
-     * Type : VARCHAR2(5) Name : SET_ID modify flag
+     * Type : varchar(5) Name : SET_ID modify flag
      */
     private boolean _flagSetId;
 
     /**
-     * Type : VARCHAR2(50) Name : SET_DESC modify flag
+     * Type : varchar(50) Name : SET_DESC modify flag
      */
     private boolean _flagSetDesc;
 
     /**
-     * Type : VARCHAR2(1) Name : STATUS modify flag
+     * Type : char(1) Name : STATUS modify flag
      */
     private boolean _flagStatus;
 
     /**
-     * Type : CHAR(1) Name : SET_TYPE modify flag
+     * Type : char(1) Name : SET_TYPE modify flag
      */
     private boolean _flagSetType;
 
     /**
-     * Type : CHAR(1) Name : CODE_TYPE modify flag
+     * Type : char(1) Name : CODE_TYPE modify flag
      */
     private boolean _flagCodeType;
 

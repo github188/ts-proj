@@ -10,22 +10,22 @@ package tower.filebase.en;
 
 public class EnSysUserRole implements java.io.Serializable {
     /**
-     * Type : VARCHAR2(30) Name : ROLE_ID
+     * Type : varchar(30) Name : ROLE_ID
      */
     private String roleId;
 
     /**
-     * Type : VARCHAR2(30) Name : USER_ID
+     * Type : varchar(30) Name : USER_ID
      */
     private String userId;
 
     /**
-     * Type : VARCHAR2(30) Name : ROLE_ID modify flag
+     * Type : varchar(30) Name : ROLE_ID modify flag
      */
     private boolean _flagRoleId;
 
     /**
-     * Type : VARCHAR2(30) Name : USER_ID modify flag
+     * Type : varchar(30) Name : USER_ID modify flag
      */
     private boolean _flagUserId;
 

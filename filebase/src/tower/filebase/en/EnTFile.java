@@ -10,172 +10,172 @@ package tower.filebase.en;
 
 public class EnTFile implements java.io.Serializable {
     /**
-     * Type : VARCHAR2(30) Name : FILE_ID
+     * Type : char(10) Name : FILE_ID
      */
     private String fileId;
 
     /**
-     * Type : VARCHAR2(10) Name : NEW_VERSION_NO
+     * Type : char(10) Name : NEW_VERSION_NO
      */
     private String newVersionNo;
 
     /**
-     * Type : VARCHAR2(100) Name : FILE_NAME
+     * Type : varchar(100) Name : FILE_NAME
      */
     private String fileName;
 
     /**
-     * Type : VARCHAR2(100) Name : FILE_SIZE
+     * Type : varchar(100) Name : FILE_SIZE
      */
     private String fileSize;
 
     /**
-     * Type : VARCHAR2(200) Name : FILE_REMARK
+     * Type : varchar(200) Name : FILE_REMARK
      */
     private String fileRemark;
 
     /**
-     * Type : VARCHAR2(10) Name : FILE_EXT_NAME
+     * Type : varchar(10) Name : FILE_EXT_NAME
      */
     private String fileExtName;
 
     /**
-     * Type : VARCHAR2(200) Name : KEY_WORD
+     * Type : varchar(200) Name : KEY_WORD
      */
     private String keyWord;
 
     /**
-     * Type : VARCHAR2(10) Name : CATALOG_ID
+     * Type : char(10) Name : CATALOG_ID
      */
     private String catalogId;
 
     /**
-     * Type : VARCHAR2(50) Name : CREATOR
+     * Type : varchar(50) Name : CREATOR
      */
     private String creator;
 
     /**
-     * Type : VARCHAR2(14) Name : CREATE_DATETIME
+     * Type : varchar(14) Name : CREATE_DATETIME
      */
     private String createDatetime;
 
     /**
-     * Type : CHAR(1) Name : FLAG
+     * Type : char(1) Name : FLAG
      */
     private String flag;
 
     /**
-     * Type : VARCHAR2(50) Name : DELETE_PERSON
+     * Type : varchar(50) Name : DELETE_PERSON
      */
     private String deletePerson;
 
     /**
-     * Type : VARCHAR2(14) Name : DELETE_DATETIME
+     * Type : varchar(14) Name : DELETE_DATETIME
      */
     private String deleteDatetime;
 
     /**
-     * Type : CHAR(1) Name : FILE_STATE
+     * Type : char(1) Name : FILE_STATE
      */
     private String fileState;
 
     /**
-     * Type : VARCHAR2(50) Name : CURR_EDIT_PERSON
+     * Type : varchar(50) Name : CURR_EDIT_PERSON
      */
     private String currEditPerson;
 
     /**
-     * Type : VARCHAR2(14) Name : EDIT_DATETIME
+     * Type : varchar(14) Name : EDIT_DATETIME
      */
     private String editDatetime;
 
     /**
-     * Type : VARCHAR2(1000) Name : FILE_PATH
+     * Type : varchar(1000) Name : FILE_PATH
      */
     private String filePath;
 
     /**
-     * Type : VARCHAR2(30) Name : FILE_ID modify flag
+     * Type : char(10) Name : FILE_ID modify flag
      */
     private boolean _flagFileId;
 
     /**
-     * Type : VARCHAR2(10) Name : NEW_VERSION_NO modify flag
+     * Type : char(10) Name : NEW_VERSION_NO modify flag
      */
     private boolean _flagNewVersionNo;
 
     /**
-     * Type : VARCHAR2(100) Name : FILE_NAME modify flag
+     * Type : varchar(100) Name : FILE_NAME modify flag
      */
     private boolean _flagFileName;
 
     /**
-     * Type : VARCHAR2(100) Name : FILE_SIZE modify flag
+     * Type : varchar(100) Name : FILE_SIZE modify flag
      */
     private boolean _flagFileSize;
 
     /**
-     * Type : VARCHAR2(200) Name : FILE_REMARK modify flag
+     * Type : varchar(200) Name : FILE_REMARK modify flag
      */
     private boolean _flagFileRemark;
 
     /**
-     * Type : VARCHAR2(10) Name : FILE_EXT_NAME modify flag
+     * Type : varchar(10) Name : FILE_EXT_NAME modify flag
      */
     private boolean _flagFileExtName;
 
     /**
-     * Type : VARCHAR2(200) Name : KEY_WORD modify flag
+     * Type : varchar(200) Name : KEY_WORD modify flag
      */
     private boolean _flagKeyWord;
 
     /**
-     * Type : VARCHAR2(10) Name : CATALOG_ID modify flag
+     * Type : char(10) Name : CATALOG_ID modify flag
      */
     private boolean _flagCatalogId;
 
     /**
-     * Type : VARCHAR2(50) Name : CREATOR modify flag
+     * Type : varchar(50) Name : CREATOR modify flag
      */
     private boolean _flagCreator;
 
     /**
-     * Type : VARCHAR2(14) Name : CREATE_DATETIME modify flag
+     * Type : varchar(14) Name : CREATE_DATETIME modify flag
      */
     private boolean _flagCreateDatetime;
 
     /**
-     * Type : CHAR(1) Name : FLAG modify flag
+     * Type : char(1) Name : FLAG modify flag
      */
     private boolean _flagFlag;
 
     /**
-     * Type : VARCHAR2(50) Name : DELETE_PERSON modify flag
+     * Type : varchar(50) Name : DELETE_PERSON modify flag
      */
     private boolean _flagDeletePerson;
 
     /**
-     * Type : VARCHAR2(14) Name : DELETE_DATETIME modify flag
+     * Type : varchar(14) Name : DELETE_DATETIME modify flag
      */
     private boolean _flagDeleteDatetime;
 
     /**
-     * Type : CHAR(1) Name : FILE_STATE modify flag
+     * Type : char(1) Name : FILE_STATE modify flag
      */
     private boolean _flagFileState;
 
     /**
-     * Type : VARCHAR2(50) Name : CURR_EDIT_PERSON modify flag
+     * Type : varchar(50) Name : CURR_EDIT_PERSON modify flag
      */
     private boolean _flagCurrEditPerson;
 
     /**
-     * Type : VARCHAR2(14) Name : EDIT_DATETIME modify flag
+     * Type : varchar(14) Name : EDIT_DATETIME modify flag
      */
     private boolean _flagEditDatetime;
 
     /**
-     * Type : VARCHAR2(1000) Name : FILE_PATH modify flag
+     * Type : varchar(1000) Name : FILE_PATH modify flag
      */
     private boolean _flagFilePath;
 

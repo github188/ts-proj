@@ -10,72 +10,72 @@ package tower.filebase.en;
 
 public class EnSysOrg implements java.io.Serializable {
     /**
-     * Type : VARCHAR2(30) Name : ORG_ID
+     * Type : char(6) Name : ORG_ID
      */
     private String orgId;
 
     /**
-     * Type : VARCHAR2(50) Name : ORG_NAME
+     * Type : varchar(50) Name : ORG_NAME
      */
     private String orgName;
 
     /**
-     * Type : VARCHAR2(5) Name : PARENT_ID
+     * Type : char(6) Name : PARENT_ID
      */
     private String parentId;
 
     /**
-     * Type : VARCHAR2(200) Name : ORG_DESC
+     * Type : varchar(200) Name : ORG_DESC
      */
     private String orgDesc;
 
     /**
-     * Type : VARCHAR2(50) Name : LINK_MAN
+     * Type : varchar(50) Name : LINK_MAN
      */
     private String linkMan;
 
     /**
-     * Type : VARCHAR2(50) Name : LINK_TELE
+     * Type : varchar(50) Name : LINK_TELE
      */
     private String linkTele;
 
     /**
-     * Type : VARCHAR2(50) Name : LINK_EMAIL
+     * Type : varchar(50) Name : LINK_EMAIL
      */
     private String linkEmail;
 
     /**
-     * Type : VARCHAR2(30) Name : ORG_ID modify flag
+     * Type : char(6) Name : ORG_ID modify flag
      */
     private boolean _flagOrgId;
 
     /**
-     * Type : VARCHAR2(50) Name : ORG_NAME modify flag
+     * Type : varchar(50) Name : ORG_NAME modify flag
      */
     private boolean _flagOrgName;
 
     /**
-     * Type : VARCHAR2(5) Name : PARENT_ID modify flag
+     * Type : char(6) Name : PARENT_ID modify flag
      */
     private boolean _flagParentId;
 
     /**
-     * Type : VARCHAR2(200) Name : ORG_DESC modify flag
+     * Type : varchar(200) Name : ORG_DESC modify flag
      */
     private boolean _flagOrgDesc;
 
     /**
-     * Type : VARCHAR2(50) Name : LINK_MAN modify flag
+     * Type : varchar(50) Name : LINK_MAN modify flag
      */
     private boolean _flagLinkMan;
 
     /**
-     * Type : VARCHAR2(50) Name : LINK_TELE modify flag
+     * Type : varchar(50) Name : LINK_TELE modify flag
      */
     private boolean _flagLinkTele;
 
     /**
-     * Type : VARCHAR2(50) Name : LINK_EMAIL modify flag
+     * Type : varchar(50) Name : LINK_EMAIL modify flag
      */
     private boolean _flagLinkEmail;
 

@@ -10,32 +10,32 @@ package tower.filebase.en;
 
 public class EnSRolePerm implements java.io.Serializable {
     /**
-     * Type : VARCHAR2(30) Name : CONTENT_ID
+     * Type : varchar(30) Name : CONTENT_ID
      */
     private String contentId;
 
     /**
-     * Type : VARCHAR2(30) Name : ROLE_ID
+     * Type : varchar(30) Name : ROLE_ID
      */
     private String roleId;
 
     /**
-     * Type : VARCHAR2(8) Name : CONTENT_PERM_STATUS
+     * Type : varchar(8) Name : CONTENT_PERM_STATUS
      */
     private String contentPermStatus;
 
     /**
-     * Type : VARCHAR2(30) Name : CONTENT_ID modify flag
+     * Type : varchar(30) Name : CONTENT_ID modify flag
      */
     private boolean _flagContentId;
 
     /**
-     * Type : VARCHAR2(30) Name : ROLE_ID modify flag
+     * Type : varchar(30) Name : ROLE_ID modify flag
      */
     private boolean _flagRoleId;
 
     /**
-     * Type : VARCHAR2(8) Name : CONTENT_PERM_STATUS modify flag
+     * Type : varchar(8) Name : CONTENT_PERM_STATUS modify flag
      */
     private boolean _flagContentPermStatus;
 

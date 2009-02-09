@@ -10,84 +10,74 @@ package tower.filebase.en;
 
 public class EnSysLog implements java.io.Serializable {
     /**
-     * Type : VARCHAR2(30) Name : LOG_ID
+     * Type : varchar(30) Name : LOG_ID
      */
     private String logId;
 
     /**
-     * Type : VARCHAR2(30) Name : USER_ID
+     * Type : varchar(30) Name : USER_ID
      */
     private String userId;
 
     /**
-     * Type : VARCHAR2(30) Name : IP_ADDR
+     * Type : varchar(30) Name : IP_ADDR
      */
     private String ipAddr;
 
     /**
-     * Type : VARCHAR2(19) Name : LOG_DATE
+     * Type : varchar(19) Name : LOG_DATE
      */
     private String logDate;
 
     /**
-     * Type : VARCHAR2(1) Name : STATUS
+     * Type : char(1) Name : STATUS
      */
     private String status;
 
     /**
-     * Type : VARCHAR2(100) Name : FUN_ID
+     * Type : varchar(100) Name : FUN_ID
      */
     private String funId;
 
     /**
-     * Type : VARCHAR2(4000) Name : LOG_MSG
+     * Type : text Name : LOG_MSG
      */
     private String logMsg;
 
     /**
-     * Type : VARCHAR2(400) Name : LOG_TARGET
-     */
-    private String logTarget;
-
-    /**
-     * Type : VARCHAR2(30) Name : LOG_ID modify flag
+     * Type : varchar(30) Name : LOG_ID modify flag
      */
     private boolean _flagLogId;
 
     /**
-     * Type : VARCHAR2(30) Name : USER_ID modify flag
+     * Type : varchar(30) Name : USER_ID modify flag
      */
     private boolean _flagUserId;
 
     /**
-     * Type : VARCHAR2(30) Name : IP_ADDR modify flag
+     * Type : varchar(30) Name : IP_ADDR modify flag
      */
     private boolean _flagIpAddr;
 
     /**
-     * Type : VARCHAR2(19) Name : LOG_DATE modify flag
+     * Type : varchar(19) Name : LOG_DATE modify flag
      */
     private boolean _flagLogDate;
 
     /**
-     * Type : VARCHAR2(1) Name : STATUS modify flag
+     * Type : char(1) Name : STATUS modify flag
      */
     private boolean _flagStatus;
 
     /**
-     * Type : VARCHAR2(100) Name : FUN_ID modify flag
+     * Type : varchar(100) Name : FUN_ID modify flag
      */
     private boolean _flagFunId;
 
     /**
-     * Type : VARCHAR2(4000) Name : LOG_MSG modify flag
+     * Type : text Name : LOG_MSG modify flag
      */
     private boolean _flagLogMsg;
-
-    /**
-     * Type : VARCHAR2(400) Name : LOG_TARGET modify flag
-     */
-    private boolean _flagLogTarget;
 
     /**
      * Sets the value for logId
@@ -241,28 +231,6 @@ public class EnSysLog implements java.io.Serializable {
      */
     public boolean hasChangeLogMsg() {
         return _flagLogMsg;
-    }
-
-    /**
-     * Sets the value for logTarget
-     */
-    public void setLogTarget(String logTarget) {
-        this.logTarget = logTarget;
-        this._flagLogTarget = true;
-    }
-
-    /**
-     * Gets the value for logTarget
-     */
-    public String getLogTarget() {
-        return logTarget;
-    }
-
-    /**
-     * has the value for logTarget changed?
-     */
-    public boolean hasChangeLogTarget() {
-        return _flagLogTarget;
     }
 
 }

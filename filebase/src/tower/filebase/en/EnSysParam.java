@@ -10,34 +10,44 @@ package tower.filebase.en;
 
 public class EnSysParam implements java.io.Serializable {
     /**
-     * Type : VARCHAR2(30) Name : PARAM_ID
+     * Type : varchar(30) Name : PARAM_ID
      */
     private String paramId;
 
     /**
-     * Type : VARCHAR2(50) Name : PARAM_NAME
+     * Type : varchar(50) Name : PARAM_NAME
      */
     private String paramName;
 
     /**
-     * Type : VARCHAR2(1) Name : PARAM_FLAG
+     * Type : char(1) Name : PARAM_FLAG
      */
     private String paramFlag;
 
     /**
-     * Type : VARCHAR2(30) Name : PARAM_ID modify flag
+     * Type : varchar(1000) Name : PARAM_VALUE
+     */
+    private String paramValue;
+
+    /**
+     * Type : varchar(30) Name : PARAM_ID modify flag
      */
     private boolean _flagParamId;
 
     /**
-     * Type : VARCHAR2(50) Name : PARAM_NAME modify flag
+     * Type : varchar(50) Name : PARAM_NAME modify flag
      */
     private boolean _flagParamName;
 
     /**
-     * Type : VARCHAR2(1) Name : PARAM_FLAG modify flag
+     * Type : char(1) Name : PARAM_FLAG modify flag
      */
     private boolean _flagParamFlag;
+
+    /**
+     * Type : varchar(1000) Name : PARAM_VALUE modify flag
+     */
+    private boolean _flagParamValue;
 
     /**
      * Sets the value for paramId
@@ -103,6 +113,28 @@ public class EnSysParam implements java.io.Serializable {
      */
     public boolean hasChangeParamFlag() {
         return _flagParamFlag;
+    }
+
+    /**
+     * Sets the value for paramValue
+     */
+    public void setParamValue(String paramValue) {
+        this.paramValue = paramValue;
+        this._flagParamValue = true;
+    }
+
+    /**
+     * Gets the value for paramValue
+     */
+    public String getParamValue() {
+        return paramValue;
+    }
+
+    /**
+     * has the value for paramValue changed?
+     */
+    public boolean hasChangeParamValue() {
+        return _flagParamValue;
     }
 
 }

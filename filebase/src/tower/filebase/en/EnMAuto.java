@@ -10,42 +10,42 @@ package tower.filebase.en;
 
 public class EnMAuto implements java.io.Serializable {
     /**
-     * Type : VARCHAR2(30) Name : AUTO_ID
+     * Type : varchar(30) Name : AUTO_ID
      */
     private String autoId;
 
     /**
-     * Type : VARCHAR2(100) Name : BUILD_MODE
+     * Type : varchar(100) Name : BUILD_MODE
      */
     private String buildMode;
 
     /**
-     * Type : VARCHAR2(100) Name : MEMO
+     * Type : varchar(100) Name : MEMO
      */
     private String memo;
 
     /**
-     * Type : VARCHAR2(20) Name : NOW_VALUE
+     * Type : varchar(20) Name : NOW_VALUE
      */
     private String nowValue;
 
     /**
-     * Type : VARCHAR2(30) Name : AUTO_ID modify flag
+     * Type : varchar(30) Name : AUTO_ID modify flag
      */
     private boolean _flagAutoId;
 
     /**
-     * Type : VARCHAR2(100) Name : BUILD_MODE modify flag
+     * Type : varchar(100) Name : BUILD_MODE modify flag
      */
     private boolean _flagBuildMode;
 
     /**
-     * Type : VARCHAR2(100) Name : MEMO modify flag
+     * Type : varchar(100) Name : MEMO modify flag
      */
     private boolean _flagMemo;
 
     /**
-     * Type : VARCHAR2(20) Name : NOW_VALUE modify flag
+     * Type : varchar(20) Name : NOW_VALUE modify flag
      */
     private boolean _flagNowValue;
 

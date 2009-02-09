@@ -10,42 +10,42 @@ package tower.filebase.en;
 
 public class EnSFilePerm implements java.io.Serializable {
     /**
-     * Type : VARCHAR2(30) Name : FILE_OPERATION_STATUS
+     * Type : varchar(30) Name : FILE_OPERATION_STATUS
      */
     private String fileOperationStatus;
 
     /**
-     * Type : VARCHAR2(50) Name : FILE_PERM_NAME
+     * Type : varchar(50) Name : FILE_PERM_NAME
      */
     private String filePermName;
 
     /**
-     * Type : VARCHAR2(8) Name : CONTENT_PERM_STATUS
+     * Type : varchar(8) Name : CONTENT_PERM_STATUS
      */
     private String contentPermStatus;
 
     /**
-     * Type : VARCHAR2(1) Name : SHOW_FLAG
+     * Type : char(1) Name : SHOW_FLAG
      */
     private String showFlag;
 
     /**
-     * Type : VARCHAR2(30) Name : FILE_OPERATION_STATUS modify flag
+     * Type : varchar(30) Name : FILE_OPERATION_STATUS modify flag
      */
     private boolean _flagFileOperationStatus;
 
     /**
-     * Type : VARCHAR2(50) Name : FILE_PERM_NAME modify flag
+     * Type : varchar(50) Name : FILE_PERM_NAME modify flag
      */
     private boolean _flagFilePermName;
 
     /**
-     * Type : VARCHAR2(8) Name : CONTENT_PERM_STATUS modify flag
+     * Type : varchar(8) Name : CONTENT_PERM_STATUS modify flag
      */
     private boolean _flagContentPermStatus;
 
     /**
-     * Type : VARCHAR2(1) Name : SHOW_FLAG modify flag
+     * Type : char(1) Name : SHOW_FLAG modify flag
      */
     private boolean _flagShowFlag;
 

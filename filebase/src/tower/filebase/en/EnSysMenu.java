@@ -10,92 +10,92 @@ package tower.filebase.en;
 
 public class EnSysMenu implements java.io.Serializable {
     /**
-     * Type : VARCHAR2(30) Name : MENU_ID
+     * Type : varchar(50) Name : MENU_ID
      */
     private String menuId;
 
     /**
-     * Type : VARCHAR2(50) Name : MENU_NAME
+     * Type : varchar(50) Name : MENU_NAME
      */
     private String menuName;
 
     /**
-     * Type : VARCHAR2(1) Name : MENU_TYPE
+     * Type : char(1) Name : MENU_TYPE
      */
     private String menuType;
 
     /**
-     * Type : NUMBER Name : MENU_LVL
+     * Type : int Name : MENU_LVL
      */
-    private long menuLvl;
+    private int menuLvl;
 
     /**
-     * Type : VARCHAR2(30) Name : PARENT_ID
+     * Type : varchar(50) Name : PARENT_ID
      */
     private String parentId;
 
     /**
-     * Type : NUMBER Name : SORT_NO
+     * Type : int Name : SORT_NO
      */
-    private long sortNo;
+    private int sortNo;
 
     /**
-     * Type : VARCHAR2(200) Name : MENU_URL
+     * Type : varchar(200) Name : MENU_URL
      */
     private String menuUrl;
 
     /**
-     * Type : VARCHAR2(200) Name : MENU_DESC
+     * Type : varchar(200) Name : MENU_DESC
      */
     private String menuDesc;
 
     /**
-     * Type : VARCHAR2(1) Name : SHOW_FLAG
+     * Type : char(1) Name : SHOW_FLAG
      */
     private String showFlag;
 
     /**
-     * Type : VARCHAR2(30) Name : MENU_ID modify flag
+     * Type : varchar(50) Name : MENU_ID modify flag
      */
     private boolean _flagMenuId;
 
     /**
-     * Type : VARCHAR2(50) Name : MENU_NAME modify flag
+     * Type : varchar(50) Name : MENU_NAME modify flag
      */
     private boolean _flagMenuName;
 
     /**
-     * Type : VARCHAR2(1) Name : MENU_TYPE modify flag
+     * Type : char(1) Name : MENU_TYPE modify flag
      */
     private boolean _flagMenuType;
 
     /**
-     * Type : NUMBER Name : MENU_LVL modify flag
+     * Type : int Name : MENU_LVL modify flag
      */
     private boolean _flagMenuLvl;
 
     /**
-     * Type : VARCHAR2(30) Name : PARENT_ID modify flag
+     * Type : varchar(50) Name : PARENT_ID modify flag
      */
     private boolean _flagParentId;
 
     /**
-     * Type : NUMBER Name : SORT_NO modify flag
+     * Type : int Name : SORT_NO modify flag
      */
     private boolean _flagSortNo;
 
     /**
-     * Type : VARCHAR2(200) Name : MENU_URL modify flag
+     * Type : varchar(200) Name : MENU_URL modify flag
      */
     private boolean _flagMenuUrl;
 
     /**
-     * Type : VARCHAR2(200) Name : MENU_DESC modify flag
+     * Type : varchar(200) Name : MENU_DESC modify flag
      */
     private boolean _flagMenuDesc;
 
     /**
-     * Type : VARCHAR2(1) Name : SHOW_FLAG modify flag
+     * Type : char(1) Name : SHOW_FLAG modify flag
      */
     private boolean _flagShowFlag;
 
@@ -168,7 +168,7 @@ public class EnSysMenu implements java.io.Serializable {
     /**
      * Sets the value for menuLvl
      */
-    public void setMenuLvl(long menuLvl) {
+    public void setMenuLvl(int menuLvl) {
         this.menuLvl = menuLvl;
         this._flagMenuLvl = true;
     }
@@ -176,7 +176,7 @@ public class EnSysMenu implements java.io.Serializable {
     /**
      * Gets the value for menuLvl
      */
-    public long getMenuLvl() {
+    public int getMenuLvl() {
         return menuLvl;
     }
 
@@ -212,7 +212,7 @@ public class EnSysMenu implements java.io.Serializable {
     /**
      * Sets the value for sortNo
      */
-    public void setSortNo(long sortNo) {
+    public void setSortNo(int sortNo) {
         this.sortNo = sortNo;
         this._flagSortNo = true;
     }
@@ -220,7 +220,7 @@ public class EnSysMenu implements java.io.Serializable {
     /**
      * Gets the value for sortNo
      */
-    public long getSortNo() {
+    public int getSortNo() {
         return sortNo;
     }
 
