@@ -22,7 +22,7 @@ public class DbSysMenu extends RootDB{
 
     public DbSysMenu(Transaction trans, String connId) {
         super(trans,connId);
-        orderBy = " order by SYS_MENU.MENU_ID";
+        orderBy = " order by sys_menu.MENU_ID";
     }
     /**
      * Inserts the current object values into the database.
@@ -31,7 +31,7 @@ public class DbSysMenu extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
 
-        query.append("insert into SYS_MENU ( MENU_ID,MENU_NAME,MENU_TYPE,MENU_LVL,PARENT_ID,SORT_NO,MENU_URL,MENU_DESC,SHOW_FLAG ) values ( ");
+        query.append("insert into sys_menu ( MENU_ID,MENU_NAME,MENU_TYPE,MENU_LVL,PARENT_ID,SORT_NO,MENU_URL,MENU_DESC,SHOW_FLAG ) values ( ");
         query.append(formatString(en.getMenuId()));
         query.append(",");
         query.append(formatString(en.getMenuName()));
@@ -56,13 +56,13 @@ public class DbSysMenu extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "SYS_MENU"
+     * Deletes from the database for table "sys_menu"
      */
     public int deleteByKey(String menuId) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from SYS_MENU");
+        query.append("delete from sys_menu");
 
         query.append(" where ");
         query.append("MENU_ID=");
@@ -78,7 +78,7 @@ public class DbSysMenu extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update SYS_MENU set ");
+        query.append("update sys_menu set ");
 
         if(en.hasChangeMenuId()) {
             if(bChanged){
@@ -161,13 +161,13 @@ public class DbSysMenu extends RootDB{
     }
 
     /**
-     * Retrieve from the database for table "SYS_MENU"
+     * Retrieve from the database for table "sys_menu"
     */
     public EnSysMenu findByKey(String menuId) throws ErrorException {
         EnSysMenu res = null;
 
         StringBuffer query;
-        query = new StringBuffer("select MENU_ID,MENU_NAME,MENU_TYPE,MENU_LVL,PARENT_ID,SORT_NO,MENU_URL,MENU_DESC,SHOW_FLAG from SYS_MENU");
+        query = new StringBuffer("select MENU_ID,MENU_NAME,MENU_TYPE,MENU_LVL,PARENT_ID,SORT_NO,MENU_URL,MENU_DESC,SHOW_FLAG from sys_menu");
 
         query.append(" where ");
         query.append("MENU_ID=");
@@ -187,7 +187,7 @@ public class DbSysMenu extends RootDB{
     public int countByKey(String menuId) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from SYS_MENU");
+        query.append("select count(1) as num from sys_menu");
 
         query.append(" where ");
         query.append("MENU_ID=");
@@ -200,13 +200,13 @@ public class DbSysMenu extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "SYS_MENU"
+     * Deletes from the database for table "sys_menu"
      */
     public int deleteLikeKey(String menuId) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from SYS_MENU");
+        query.append("delete from sys_menu");
 
         query.append(" where ");
         query.append("MENU_ID like ");
@@ -222,7 +222,7 @@ public class DbSysMenu extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update SYS_MENU set ");
+        query.append("update sys_menu set ");
 
         if(en.hasChangeMenuName()) {
             if(bChanged){
@@ -303,7 +303,7 @@ public class DbSysMenu extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select MENU_ID,MENU_NAME,MENU_TYPE,MENU_LVL,PARENT_ID,SORT_NO,MENU_URL,MENU_DESC,SHOW_FLAG from SYS_MENU");
+        query.append("select MENU_ID,MENU_NAME,MENU_TYPE,MENU_LVL,PARENT_ID,SORT_NO,MENU_URL,MENU_DESC,SHOW_FLAG from sys_menu");
 
         query.append(" where ");
         query.append("MENU_ID like ");
@@ -322,11 +322,567 @@ public class DbSysMenu extends RootDB{
     public int countLikeKey(String menuId) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from SYS_MENU");
+        query.append("select count(1) as num from sys_menu");
 
         query.append(" where ");
         query.append("MENU_ID like ");
         query.append(formatString(menuId));
+        QueryResult qr = trans.doQuery(connId,query.toString());
+        if (qr.size() == 1) {
+            count = qr.get(0).getInteger("num").intValue();
+        }
+        return count;
+    }
+
+    /**
+     * Deletes from the database for table "sys_menu"
+     */
+    public int deleteByIndexIdxMenuParentId(String parentId) throws ErrorException {
+        int res=-1;
+
+        StringBuffer query = new StringBuffer();
+        query.append("delete from sys_menu");
+
+        query.append(" where ");
+        query.append("PARENT_ID=");
+        query.append(formatString(parentId));
+        res = trans.doUpdate(connId,query.toString());
+        return res;
+    }
+
+    /**
+     * Updates the current object values into the database.
+     */
+    public int updateByIndexIdxMenuParentId(String parentId,EnSysMenu en) throws ErrorException {
+        int res = -1;
+        StringBuffer query = new StringBuffer();
+        boolean bChanged = false;
+        query.append("update sys_menu set ");
+
+        if(en.hasChangeMenuId()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("MENU_ID=");
+            query.append(formatString(en.getMenuId()));
+            bChanged = true;
+        }
+        if(en.hasChangeMenuName()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("MENU_NAME=");
+            query.append(formatString(en.getMenuName()));
+            bChanged = true;
+        }
+        if(en.hasChangeMenuType()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("MENU_TYPE=");
+            query.append(formatString(en.getMenuType()));
+            bChanged = true;
+        }
+        if(en.hasChangeMenuLvl()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("MENU_LVL=");
+            query.append(en.getMenuLvl());
+            bChanged = true;
+        }
+        if(en.hasChangeParentId()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("PARENT_ID=");
+            query.append(formatString(en.getParentId()));
+            bChanged = true;
+        }
+        if(en.hasChangeSortNo()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("SORT_NO=");
+            query.append(en.getSortNo());
+            bChanged = true;
+        }
+        if(en.hasChangeMenuUrl()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("MENU_URL=");
+            query.append(formatString(en.getMenuUrl()));
+            bChanged = true;
+        }
+        if(en.hasChangeMenuDesc()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("MENU_DESC=");
+            query.append(formatString(en.getMenuDesc()));
+            bChanged = true;
+        }
+        if(en.hasChangeShowFlag()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("SHOW_FLAG=");
+            query.append(formatString(en.getShowFlag()));
+            bChanged = true;
+        }
+
+        query.append(" where ");
+        query.append("PARENT_ID=");
+        query.append(formatString(parentId));
+        res = trans.doUpdate(connId,query.toString());
+        return res;
+    }
+
+    /**
+     * Retrieve from the database for table "SysMenu"
+     */
+    public Vector findAllByIndexIdxMenuParentId(String parentId) throws ErrorException {
+        Vector retRows = new Vector();
+
+        StringBuffer query = new StringBuffer();
+        query.append("select MENU_ID,MENU_NAME,MENU_TYPE,MENU_LVL,PARENT_ID,SORT_NO,MENU_URL,MENU_DESC,SHOW_FLAG from sys_menu");
+
+        query.append(" where ");
+        query.append("PARENT_ID=");
+        query.append(formatString(parentId));
+        if(orderBy != null) {
+            query.append(orderBy);
+        }
+        QueryResult qr = trans.doQuery(connId,query.toString(),page,rowsPerPage);
+        retRows = getAllFromResultSet(qr);
+        return retRows;
+    }
+
+    /**
+     * Counts the number of entries for this table in the database.
+     */
+    public int countByIndexIdxMenuParentId(String parentId) throws ErrorException {
+        int count = -1;
+        StringBuffer query = new StringBuffer();
+        query.append("select count(1) as num from sys_menu");
+
+        query.append(" where ");
+        query.append("PARENT_ID=");
+        query.append(formatString(parentId));
+        QueryResult qr = trans.doQuery(connId,query.toString());
+        if (qr.size() == 1) {
+            count = qr.get(0).getInteger("num").intValue();
+        }
+        return count;
+    }
+
+    /**
+     * Deletes from the database for table "sys_menu"
+     */
+    public int deleteLikeIndexIdxMenuParentId(String parentId) throws ErrorException {
+        int res=-1;
+
+        StringBuffer query = new StringBuffer();
+        query.append("delete from sys_menu");
+
+        query.append(" where ");
+        query.append("PARENT_ID like ");
+        query.append(formatString(parentId));
+        res = trans.doUpdate(connId,query.toString());
+        return res;
+    }
+
+    /**
+     * Updates the current object values into the database.
+     */
+    public int updateLikeIndexIdxMenuParentId(String parentId,EnSysMenu en) throws ErrorException {
+        int res = -1;
+        StringBuffer query = new StringBuffer();
+        boolean bChanged = false;
+        query.append("update sys_menu set ");
+
+        if(en.hasChangeMenuName()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("MENU_NAME=");
+            query.append(formatString(en.getMenuName()));
+            bChanged = true;
+        }
+        if(en.hasChangeMenuType()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("MENU_TYPE=");
+            query.append(formatString(en.getMenuType()));
+            bChanged = true;
+        }
+        if(en.hasChangeMenuLvl()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("MENU_LVL=");
+            query.append(en.getMenuLvl());
+            bChanged = true;
+        }
+        if(en.hasChangeParentId()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("PARENT_ID=");
+            query.append(formatString(en.getParentId()));
+            bChanged = true;
+        }
+        if(en.hasChangeSortNo()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("SORT_NO=");
+            query.append(en.getSortNo());
+            bChanged = true;
+        }
+        if(en.hasChangeMenuUrl()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("MENU_URL=");
+            query.append(formatString(en.getMenuUrl()));
+            bChanged = true;
+        }
+        if(en.hasChangeMenuDesc()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("MENU_DESC=");
+            query.append(formatString(en.getMenuDesc()));
+            bChanged = true;
+        }
+        if(en.hasChangeShowFlag()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("SHOW_FLAG=");
+            query.append(formatString(en.getShowFlag()));
+            bChanged = true;
+        }
+
+        query.append(" where ");
+        query.append("PARENT_ID like ");
+        query.append(formatString(parentId));
+        res = trans.doUpdate(connId,query.toString());
+        return res;
+    }
+
+    /**
+     * Retrieve from the database for table "SysMenu"
+     */
+    public Vector findAllLikeIndexIdxMenuParentId(String parentId) throws ErrorException {
+        Vector retRows = new Vector();
+
+        StringBuffer query = new StringBuffer();
+        query.append("select MENU_ID,MENU_NAME,MENU_TYPE,MENU_LVL,PARENT_ID,SORT_NO,MENU_URL,MENU_DESC,SHOW_FLAG from sys_menu");
+
+        query.append(" where ");
+        query.append("PARENT_ID like ");
+        query.append(formatString(parentId));
+        if(orderBy != null) {
+            query.append(orderBy);
+        }
+        QueryResult qr = trans.doQuery(connId,query.toString(),page,rowsPerPage);
+        retRows = getAllFromResultSet(qr);
+        return retRows;
+    }
+
+    /**
+     * Counts the number of entries for this table in the database.
+     */
+    public int countLikeIndexIdxMenuParentId(String parentId) throws ErrorException {
+        int count = -1;
+        StringBuffer query = new StringBuffer();
+        query.append("select count(1) as num from sys_menu");
+
+        query.append(" where ");
+        query.append("PARENT_ID like ");
+        query.append(formatString(parentId));
+        QueryResult qr = trans.doQuery(connId,query.toString());
+        if (qr.size() == 1) {
+            count = qr.get(0).getInteger("num").intValue();
+        }
+        return count;
+    }
+
+    /**
+     * Deletes from the database for table "sys_menu"
+     */
+    public int deleteByIndexIdxMenuType(String menuType) throws ErrorException {
+        int res=-1;
+
+        StringBuffer query = new StringBuffer();
+        query.append("delete from sys_menu");
+
+        query.append(" where ");
+        query.append("MENU_TYPE=");
+        query.append(formatString(menuType));
+        res = trans.doUpdate(connId,query.toString());
+        return res;
+    }
+
+    /**
+     * Updates the current object values into the database.
+     */
+    public int updateByIndexIdxMenuType(String menuType,EnSysMenu en) throws ErrorException {
+        int res = -1;
+        StringBuffer query = new StringBuffer();
+        boolean bChanged = false;
+        query.append("update sys_menu set ");
+
+        if(en.hasChangeMenuId()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("MENU_ID=");
+            query.append(formatString(en.getMenuId()));
+            bChanged = true;
+        }
+        if(en.hasChangeMenuName()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("MENU_NAME=");
+            query.append(formatString(en.getMenuName()));
+            bChanged = true;
+        }
+        if(en.hasChangeMenuType()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("MENU_TYPE=");
+            query.append(formatString(en.getMenuType()));
+            bChanged = true;
+        }
+        if(en.hasChangeMenuLvl()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("MENU_LVL=");
+            query.append(en.getMenuLvl());
+            bChanged = true;
+        }
+        if(en.hasChangeParentId()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("PARENT_ID=");
+            query.append(formatString(en.getParentId()));
+            bChanged = true;
+        }
+        if(en.hasChangeSortNo()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("SORT_NO=");
+            query.append(en.getSortNo());
+            bChanged = true;
+        }
+        if(en.hasChangeMenuUrl()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("MENU_URL=");
+            query.append(formatString(en.getMenuUrl()));
+            bChanged = true;
+        }
+        if(en.hasChangeMenuDesc()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("MENU_DESC=");
+            query.append(formatString(en.getMenuDesc()));
+            bChanged = true;
+        }
+        if(en.hasChangeShowFlag()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("SHOW_FLAG=");
+            query.append(formatString(en.getShowFlag()));
+            bChanged = true;
+        }
+
+        query.append(" where ");
+        query.append("MENU_TYPE=");
+        query.append(formatString(menuType));
+        res = trans.doUpdate(connId,query.toString());
+        return res;
+    }
+
+    /**
+     * Retrieve from the database for table "SysMenu"
+     */
+    public Vector findAllByIndexIdxMenuType(String menuType) throws ErrorException {
+        Vector retRows = new Vector();
+
+        StringBuffer query = new StringBuffer();
+        query.append("select MENU_ID,MENU_NAME,MENU_TYPE,MENU_LVL,PARENT_ID,SORT_NO,MENU_URL,MENU_DESC,SHOW_FLAG from sys_menu");
+
+        query.append(" where ");
+        query.append("MENU_TYPE=");
+        query.append(formatString(menuType));
+        if(orderBy != null) {
+            query.append(orderBy);
+        }
+        QueryResult qr = trans.doQuery(connId,query.toString(),page,rowsPerPage);
+        retRows = getAllFromResultSet(qr);
+        return retRows;
+    }
+
+    /**
+     * Counts the number of entries for this table in the database.
+     */
+    public int countByIndexIdxMenuType(String menuType) throws ErrorException {
+        int count = -1;
+        StringBuffer query = new StringBuffer();
+        query.append("select count(1) as num from sys_menu");
+
+        query.append(" where ");
+        query.append("MENU_TYPE=");
+        query.append(formatString(menuType));
+        QueryResult qr = trans.doQuery(connId,query.toString());
+        if (qr.size() == 1) {
+            count = qr.get(0).getInteger("num").intValue();
+        }
+        return count;
+    }
+
+    /**
+     * Deletes from the database for table "sys_menu"
+     */
+    public int deleteLikeIndexIdxMenuType(String menuType) throws ErrorException {
+        int res=-1;
+
+        StringBuffer query = new StringBuffer();
+        query.append("delete from sys_menu");
+
+        query.append(" where ");
+        query.append("MENU_TYPE like ");
+        query.append(formatString(menuType));
+        res = trans.doUpdate(connId,query.toString());
+        return res;
+    }
+
+    /**
+     * Updates the current object values into the database.
+     */
+    public int updateLikeIndexIdxMenuType(String menuType,EnSysMenu en) throws ErrorException {
+        int res = -1;
+        StringBuffer query = new StringBuffer();
+        boolean bChanged = false;
+        query.append("update sys_menu set ");
+
+        if(en.hasChangeMenuName()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("MENU_NAME=");
+            query.append(formatString(en.getMenuName()));
+            bChanged = true;
+        }
+        if(en.hasChangeMenuType()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("MENU_TYPE=");
+            query.append(formatString(en.getMenuType()));
+            bChanged = true;
+        }
+        if(en.hasChangeMenuLvl()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("MENU_LVL=");
+            query.append(en.getMenuLvl());
+            bChanged = true;
+        }
+        if(en.hasChangeParentId()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("PARENT_ID=");
+            query.append(formatString(en.getParentId()));
+            bChanged = true;
+        }
+        if(en.hasChangeSortNo()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("SORT_NO=");
+            query.append(en.getSortNo());
+            bChanged = true;
+        }
+        if(en.hasChangeMenuUrl()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("MENU_URL=");
+            query.append(formatString(en.getMenuUrl()));
+            bChanged = true;
+        }
+        if(en.hasChangeMenuDesc()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("MENU_DESC=");
+            query.append(formatString(en.getMenuDesc()));
+            bChanged = true;
+        }
+        if(en.hasChangeShowFlag()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("SHOW_FLAG=");
+            query.append(formatString(en.getShowFlag()));
+            bChanged = true;
+        }
+
+        query.append(" where ");
+        query.append("MENU_TYPE like ");
+        query.append(formatString(menuType));
+        res = trans.doUpdate(connId,query.toString());
+        return res;
+    }
+
+    /**
+     * Retrieve from the database for table "SysMenu"
+     */
+    public Vector findAllLikeIndexIdxMenuType(String menuType) throws ErrorException {
+        Vector retRows = new Vector();
+
+        StringBuffer query = new StringBuffer();
+        query.append("select MENU_ID,MENU_NAME,MENU_TYPE,MENU_LVL,PARENT_ID,SORT_NO,MENU_URL,MENU_DESC,SHOW_FLAG from sys_menu");
+
+        query.append(" where ");
+        query.append("MENU_TYPE like ");
+        query.append(formatString(menuType));
+        if(orderBy != null) {
+            query.append(orderBy);
+        }
+        QueryResult qr = trans.doQuery(connId,query.toString(),page,rowsPerPage);
+        retRows = getAllFromResultSet(qr);
+        return retRows;
+    }
+
+    /**
+     * Counts the number of entries for this table in the database.
+     */
+    public int countLikeIndexIdxMenuType(String menuType) throws ErrorException {
+        int count = -1;
+        StringBuffer query = new StringBuffer();
+        query.append("select count(1) as num from sys_menu");
+
+        query.append(" where ");
+        query.append("MENU_TYPE like ");
+        query.append(formatString(menuType));
         QueryResult qr = trans.doQuery(connId,query.toString());
         if (qr.size() == 1) {
             count = qr.get(0).getInteger("num").intValue();
@@ -341,7 +897,7 @@ public class DbSysMenu extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select MENU_ID,MENU_NAME,MENU_TYPE,MENU_LVL,PARENT_ID,SORT_NO,MENU_URL,MENU_DESC,SHOW_FLAG from SYS_MENU where ");
+        query.append("select MENU_ID,MENU_NAME,MENU_TYPE,MENU_LVL,PARENT_ID,SORT_NO,MENU_URL,MENU_DESC,SHOW_FLAG from sys_menu where ");
         query.append(where);
         if(orderBy != null) {
             query.append(orderBy);
@@ -358,7 +914,7 @@ public class DbSysMenu extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select MENU_ID,MENU_NAME,MENU_TYPE,MENU_LVL,PARENT_ID,SORT_NO,MENU_URL,MENU_DESC,SHOW_FLAG from SYS_MENU");
+        query.append("select MENU_ID,MENU_NAME,MENU_TYPE,MENU_LVL,PARENT_ID,SORT_NO,MENU_URL,MENU_DESC,SHOW_FLAG from sys_menu");
 
         if(orderBy != null) {
             query.append(orderBy);
@@ -450,9 +1006,9 @@ public class DbSysMenu extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select MENU_ID,MENU_NAME,MENU_TYPE,MENU_LVL,PARENT_ID,SORT_NO,MENU_URL,MENU_DESC,SHOW_FLAG from SYS_MENU where ");
+            query.insert(0,"select MENU_ID,MENU_NAME,MENU_TYPE,MENU_LVL,PARENT_ID,SORT_NO,MENU_URL,MENU_DESC,SHOW_FLAG from sys_menu where ");
         } else {
-            query.append("select MENU_ID,MENU_NAME,MENU_TYPE,MENU_LVL,PARENT_ID,SORT_NO,MENU_URL,MENU_DESC,SHOW_FLAG from SYS_MENU");
+            query.append("select MENU_ID,MENU_NAME,MENU_TYPE,MENU_LVL,PARENT_ID,SORT_NO,MENU_URL,MENU_DESC,SHOW_FLAG from sys_menu");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -544,9 +1100,9 @@ public class DbSysMenu extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select MENU_ID,MENU_NAME,MENU_TYPE,MENU_LVL,PARENT_ID,SORT_NO,MENU_URL,MENU_DESC,SHOW_FLAG from SYS_MENU where ");
+            query.insert(0,"select MENU_ID,MENU_NAME,MENU_TYPE,MENU_LVL,PARENT_ID,SORT_NO,MENU_URL,MENU_DESC,SHOW_FLAG from sys_menu where ");
         } else {
-            query.append("select MENU_ID,MENU_NAME,MENU_TYPE,MENU_LVL,PARENT_ID,SORT_NO,MENU_URL,MENU_DESC,SHOW_FLAG from SYS_MENU");
+            query.append("select MENU_ID,MENU_NAME,MENU_TYPE,MENU_LVL,PARENT_ID,SORT_NO,MENU_URL,MENU_DESC,SHOW_FLAG from sys_menu");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -562,7 +1118,7 @@ public class DbSysMenu extends RootDB{
     public int count() throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from SYS_MENU");
+        query.append("select count(1) as num from sys_menu");
 
         QueryResult qr = trans.doQuery(connId,query.toString());
         if (qr.size() == 1) {
@@ -577,7 +1133,7 @@ public class DbSysMenu extends RootDB{
     public int countWhere(String where) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from SYS_MENU");
+        query.append("select count(1) as num from sys_menu");
         query.append(" where ");
         query.append(where);
         QueryResult qr = trans.doQuery(connId,query.toString());
@@ -588,13 +1144,13 @@ public class DbSysMenu extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "SYS_MENU"
+     * Deletes from the database for table "sys_menu"
      */
     public int deleteWhere(String where) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from SYS_MENU");
+        query.append("delete from sys_menu");
         query.append(" where ");
         query.append(where);
         res = trans.doUpdate(connId,query.toString());
@@ -608,7 +1164,7 @@ public class DbSysMenu extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update SYS_MENU set ");
+        query.append("update sys_menu set ");
 
         if(en.hasChangeMenuId()) {
             if(bChanged){
@@ -697,9 +1253,9 @@ public class DbSysMenu extends RootDB{
         en.setMenuId(r.getString("MENU_ID"));
         en.setMenuName(r.getString("MENU_NAME"));
         en.setMenuType(r.getString("MENU_TYPE"));
-        en.setMenuLvl(r.getLong("MENU_LVL") == null ? 0 : r.getLong("MENU_LVL").longValue());
+        en.setMenuLvl(r.getInteger("MENU_LVL") == null ? 0 : r.getInteger("MENU_LVL").intValue());
         en.setParentId(r.getString("PARENT_ID"));
-        en.setSortNo(r.getLong("SORT_NO") == null ? 0 : r.getLong("SORT_NO").longValue());
+        en.setSortNo(r.getInteger("SORT_NO") == null ? 0 : r.getInteger("SORT_NO").intValue());
         en.setMenuUrl(r.getString("MENU_URL"));
         en.setMenuDesc(r.getString("MENU_DESC"));
         en.setShowFlag(r.getString("SHOW_FLAG"));
@@ -740,7 +1296,7 @@ public class DbSysMenu extends RootDB{
         otmp = xml.getInputObject("MENU_LVL");
         stmp = (String)otmp;
         if (stmp != null && stmp.length() > 0) {
-            en.setMenuLvl(parseLong(stmp));
+            en.setMenuLvl(parseInt(stmp));
         }
 
         otmp = xml.getInputObject("PARENT_ID");
@@ -750,7 +1306,7 @@ public class DbSysMenu extends RootDB{
         otmp = xml.getInputObject("SORT_NO");
         stmp = (String)otmp;
         if (stmp != null && stmp.length() > 0) {
-            en.setSortNo(parseLong(stmp));
+            en.setSortNo(parseInt(stmp));
         }
 
         otmp = xml.getInputObject("MENU_URL");
@@ -843,7 +1399,7 @@ public class DbSysMenu extends RootDB{
             if (oMenuLvl.length == count) {
                 stmp = (String)oMenuLvl[i];
                 if (stmp != null && stmp.length() > 0) {
-                    en.setMenuLvl(parseLong(stmp));
+                    en.setMenuLvl(parseInt(stmp));
                 }
             }
 
@@ -855,7 +1411,7 @@ public class DbSysMenu extends RootDB{
             if (oSortNo.length == count) {
                 stmp = (String)oSortNo[i];
                 if (stmp != null && stmp.length() > 0) {
-                    en.setSortNo(parseLong(stmp));
+                    en.setSortNo(parseInt(stmp));
                 }
             }
 

@@ -22,7 +22,7 @@ public class DbSysLog extends RootDB{
 
     public DbSysLog(Transaction trans, String connId) {
         super(trans,connId);
-        orderBy = " order by SYS_LOG.LOG_ID";
+        orderBy = " order by sys_log.LOG_ID";
     }
     /**
      * Inserts the current object values into the database.
@@ -31,7 +31,7 @@ public class DbSysLog extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
 
-        query.append("insert into SYS_LOG ( LOG_ID,USER_ID,IP_ADDR,LOG_DATE,STATUS,FUN_ID,LOG_MSG,LOG_TARGET ) values ( ");
+        query.append("insert into sys_log ( LOG_ID,USER_ID,IP_ADDR,LOG_DATE,STATUS,FUN_ID,LOG_MSG ) values ( ");
         query.append(formatString(en.getLogId()));
         query.append(",");
         query.append(formatString(en.getUserId()));
@@ -45,8 +45,6 @@ public class DbSysLog extends RootDB{
         query.append(formatString(en.getFunId()));
         query.append(",");
         query.append(formatString(en.getLogMsg()));
-        query.append(",");
-        query.append(formatString(en.getLogTarget()));
         query.append(")");
 
         res = trans.doUpdate(connId,query.toString());
@@ -54,13 +52,13 @@ public class DbSysLog extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "SYS_LOG"
+     * Deletes from the database for table "sys_log"
      */
     public int deleteByKey(String logId) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from SYS_LOG");
+        query.append("delete from sys_log");
 
         query.append(" where ");
         query.append("LOG_ID=");
@@ -76,7 +74,7 @@ public class DbSysLog extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update SYS_LOG set ");
+        query.append("update sys_log set ");
 
         if(en.hasChangeLogId()) {
             if(bChanged){
@@ -134,14 +132,6 @@ public class DbSysLog extends RootDB{
             query.append(formatString(en.getLogMsg()));
             bChanged = true;
         }
-        if(en.hasChangeLogTarget()) {
-            if(bChanged){
-                query.append(",");
-            }
-            query.append("LOG_TARGET=");
-            query.append(formatString(en.getLogTarget()));
-            bChanged = true;
-        }
 
         query.append(" where ");
         query.append("LOG_ID=");
@@ -151,13 +141,13 @@ public class DbSysLog extends RootDB{
     }
 
     /**
-     * Retrieve from the database for table "SYS_LOG"
+     * Retrieve from the database for table "sys_log"
     */
     public EnSysLog findByKey(String logId) throws ErrorException {
         EnSysLog res = null;
 
         StringBuffer query;
-        query = new StringBuffer("select LOG_ID,USER_ID,IP_ADDR,LOG_DATE,STATUS,FUN_ID,LOG_MSG,LOG_TARGET from SYS_LOG");
+        query = new StringBuffer("select LOG_ID,USER_ID,IP_ADDR,LOG_DATE,STATUS,FUN_ID,LOG_MSG from sys_log");
 
         query.append(" where ");
         query.append("LOG_ID=");
@@ -177,7 +167,7 @@ public class DbSysLog extends RootDB{
     public int countByKey(String logId) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from SYS_LOG");
+        query.append("select count(1) as num from sys_log");
 
         query.append(" where ");
         query.append("LOG_ID=");
@@ -190,13 +180,13 @@ public class DbSysLog extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "SYS_LOG"
+     * Deletes from the database for table "sys_log"
      */
     public int deleteLikeKey(String logId) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from SYS_LOG");
+        query.append("delete from sys_log");
 
         query.append(" where ");
         query.append("LOG_ID like ");
@@ -212,7 +202,7 @@ public class DbSysLog extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update SYS_LOG set ");
+        query.append("update sys_log set ");
 
         if(en.hasChangeUserId()) {
             if(bChanged){
@@ -262,14 +252,6 @@ public class DbSysLog extends RootDB{
             query.append(formatString(en.getLogMsg()));
             bChanged = true;
         }
-        if(en.hasChangeLogTarget()) {
-            if(bChanged){
-                query.append(",");
-            }
-            query.append("LOG_TARGET=");
-            query.append(formatString(en.getLogTarget()));
-            bChanged = true;
-        }
 
         query.append(" where ");
         query.append("LOG_ID like ");
@@ -285,7 +267,7 @@ public class DbSysLog extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select LOG_ID,USER_ID,IP_ADDR,LOG_DATE,STATUS,FUN_ID,LOG_MSG,LOG_TARGET from SYS_LOG");
+        query.append("select LOG_ID,USER_ID,IP_ADDR,LOG_DATE,STATUS,FUN_ID,LOG_MSG from sys_log");
 
         query.append(" where ");
         query.append("LOG_ID like ");
@@ -304,7 +286,7 @@ public class DbSysLog extends RootDB{
     public int countLikeKey(String logId) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from SYS_LOG");
+        query.append("select count(1) as num from sys_log");
 
         query.append(" where ");
         query.append("LOG_ID like ");
@@ -323,7 +305,7 @@ public class DbSysLog extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select LOG_ID,USER_ID,IP_ADDR,LOG_DATE,STATUS,FUN_ID,LOG_MSG,LOG_TARGET from SYS_LOG where ");
+        query.append("select LOG_ID,USER_ID,IP_ADDR,LOG_DATE,STATUS,FUN_ID,LOG_MSG from sys_log where ");
         query.append(where);
         if(orderBy != null) {
             query.append(orderBy);
@@ -340,7 +322,7 @@ public class DbSysLog extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select LOG_ID,USER_ID,IP_ADDR,LOG_DATE,STATUS,FUN_ID,LOG_MSG,LOG_TARGET from SYS_LOG");
+        query.append("select LOG_ID,USER_ID,IP_ADDR,LOG_DATE,STATUS,FUN_ID,LOG_MSG from sys_log");
 
         if(orderBy != null) {
             query.append(orderBy);
@@ -415,18 +397,10 @@ public class DbSysLog extends RootDB{
             query.append(formatString(en.getLogMsg()));
             bChanged = true;
         }
-        if(en.hasChangeLogTarget()) {
-            if(bChanged){
-                query.append(" and ");
-            }
-            query.append("LOG_TARGET=");
-            query.append(formatString(en.getLogTarget()));
-            bChanged = true;
-        }
         if(bChanged) {
-            query.insert(0,"select LOG_ID,USER_ID,IP_ADDR,LOG_DATE,STATUS,FUN_ID,LOG_MSG,LOG_TARGET from SYS_LOG where ");
+            query.insert(0,"select LOG_ID,USER_ID,IP_ADDR,LOG_DATE,STATUS,FUN_ID,LOG_MSG from sys_log where ");
         } else {
-            query.append("select LOG_ID,USER_ID,IP_ADDR,LOG_DATE,STATUS,FUN_ID,LOG_MSG,LOG_TARGET from SYS_LOG");
+            query.append("select LOG_ID,USER_ID,IP_ADDR,LOG_DATE,STATUS,FUN_ID,LOG_MSG from sys_log");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -501,18 +475,10 @@ public class DbSysLog extends RootDB{
             query.append(formatString(en.getLogMsg()));
             bChanged = true;
         }
-        if(en.hasChangeLogTarget()) {
-            if(bChanged){
-                query.append(" and ");
-            }
-            query.append("LOG_TARGET like ");
-            query.append(formatString(en.getLogTarget()));
-            bChanged = true;
-        }
         if(bChanged) {
-            query.insert(0,"select LOG_ID,USER_ID,IP_ADDR,LOG_DATE,STATUS,FUN_ID,LOG_MSG,LOG_TARGET from SYS_LOG where ");
+            query.insert(0,"select LOG_ID,USER_ID,IP_ADDR,LOG_DATE,STATUS,FUN_ID,LOG_MSG from sys_log where ");
         } else {
-            query.append("select LOG_ID,USER_ID,IP_ADDR,LOG_DATE,STATUS,FUN_ID,LOG_MSG,LOG_TARGET from SYS_LOG");
+            query.append("select LOG_ID,USER_ID,IP_ADDR,LOG_DATE,STATUS,FUN_ID,LOG_MSG from sys_log");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -528,7 +494,7 @@ public class DbSysLog extends RootDB{
     public int count() throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from SYS_LOG");
+        query.append("select count(1) as num from sys_log");
 
         QueryResult qr = trans.doQuery(connId,query.toString());
         if (qr.size() == 1) {
@@ -543,7 +509,7 @@ public class DbSysLog extends RootDB{
     public int countWhere(String where) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from SYS_LOG");
+        query.append("select count(1) as num from sys_log");
         query.append(" where ");
         query.append(where);
         QueryResult qr = trans.doQuery(connId,query.toString());
@@ -554,13 +520,13 @@ public class DbSysLog extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "SYS_LOG"
+     * Deletes from the database for table "sys_log"
      */
     public int deleteWhere(String where) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from SYS_LOG");
+        query.append("delete from sys_log");
         query.append(" where ");
         query.append(where);
         res = trans.doUpdate(connId,query.toString());
@@ -574,7 +540,7 @@ public class DbSysLog extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update SYS_LOG set ");
+        query.append("update sys_log set ");
 
         if(en.hasChangeLogId()) {
             if(bChanged){
@@ -632,14 +598,6 @@ public class DbSysLog extends RootDB{
             query.append(formatString(en.getLogMsg()));
             bChanged = true;
         }
-        if(en.hasChangeLogTarget()) {
-            if(bChanged){
-                query.append(",");
-            }
-            query.append("LOG_TARGET=");
-            query.append(formatString(en.getLogTarget()));
-            bChanged = true;
-        }
         query.append(" where ");
         query.append(where);
         res = trans.doUpdate(connId,query.toString());
@@ -659,7 +617,6 @@ public class DbSysLog extends RootDB{
         en.setStatus(r.getString("STATUS"));
         en.setFunId(r.getString("FUN_ID"));
         en.setLogMsg(r.getString("LOG_MSG"));
-        en.setLogTarget(r.getString("LOG_TARGET"));
 
         return en;
     }
@@ -710,10 +667,6 @@ public class DbSysLog extends RootDB{
         stmp = (String)otmp;
         en.setLogMsg(stmp);
 
-        otmp = xml.getInputObject("LOG_TARGET");
-        stmp = (String)otmp;
-        en.setLogTarget(stmp);
-
         return en;
     }
 
@@ -731,7 +684,6 @@ public class DbSysLog extends RootDB{
         Object[] oStatus;
         Object[] oFunId;
         Object[] oLogMsg;
-        Object[] oLogTarget;
         int count = 0;
 
         oLogId = xml.getInputObjects("LOG_ID");
@@ -761,10 +713,6 @@ public class DbSysLog extends RootDB{
         oLogMsg = xml.getInputObjects("LOG_MSG");
         if (count == 0 && oLogMsg.length > 0) {
             count = oLogMsg.length;
-        }
-        oLogTarget = xml.getInputObjects("LOG_TARGET");
-        if (count == 0 && oLogTarget.length > 0) {
-            count = oLogTarget.length;
         }
         for (int i = 0; i < count; i ++) {
             en = new EnSysLog();
@@ -804,11 +752,6 @@ public class DbSysLog extends RootDB{
                 en.setLogMsg(stmp);
             }
 
-            if (oLogTarget.length == count) {
-                stmp = (String)oLogTarget[i];
-                en.setLogTarget(stmp);
-            }
-
             res.addElement(en);
         }
         return res;
@@ -826,7 +769,6 @@ public class DbSysLog extends RootDB{
         xml.setItemValue("SYS_LOG",row,"STATUS",en.getStatus());
         xml.setItemValue("SYS_LOG",row,"FUN_ID",en.getFunId());
         xml.setItemValue("SYS_LOG",row,"LOG_MSG",en.getLogMsg());
-        xml.setItemValue("SYS_LOG",row,"LOG_TARGET",en.getLogTarget());
         return row;
     }
     /**
@@ -846,7 +788,6 @@ public class DbSysLog extends RootDB{
             xml.setItemValue("SYS_LOG",row,"STATUS",en.getStatus());
             xml.setItemValue("SYS_LOG",row,"FUN_ID",en.getFunId());
             xml.setItemValue("SYS_LOG",row,"LOG_MSG",en.getLogMsg());
-            xml.setItemValue("SYS_LOG",row,"LOG_TARGET",en.getLogTarget());
         }
     }
 }

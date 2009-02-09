@@ -22,7 +22,7 @@ public class DbTFileVersion extends RootDB{
 
     public DbTFileVersion(Transaction trans, String connId) {
         super(trans,connId);
-        orderBy = " order by T_FILE_VERSION.FILE_ID,T_FILE_VERSION.VERSION_NO";
+        orderBy = " order by t_file_version.FILE_ID,t_file_version.VERSION_NO";
     }
     /**
      * Inserts the current object values into the database.
@@ -31,7 +31,7 @@ public class DbTFileVersion extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
 
-        query.append("insert into T_FILE_VERSION ( FILE_ID,VERSION_NO,UPDATE_DATETIME,UPDATE_PERSON,UPDATE_REMARK ) values ( ");
+        query.append("insert into t_file_version ( FILE_ID,VERSION_NO,UPDATE_DATETIME,UPDATE_PERSON,UPDATE_REMARK ) values ( ");
         query.append(formatString(en.getFileId()));
         query.append(",");
         query.append(en.getVersionNo());
@@ -48,13 +48,13 @@ public class DbTFileVersion extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "T_FILE_VERSION"
+     * Deletes from the database for table "t_file_version"
      */
-    public int deleteByKey(String fileId, long versionNo) throws ErrorException {
+    public int deleteByKey(String fileId, int versionNo) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from T_FILE_VERSION");
+        query.append("delete from t_file_version");
 
         query.append(" where ");
         query.append("FILE_ID=");
@@ -68,11 +68,11 @@ public class DbTFileVersion extends RootDB{
     /**
      * Updates the current object values into the database.
      */
-    public int updateByKey(String fileId, long versionNo,EnTFileVersion en) throws ErrorException {
+    public int updateByKey(String fileId, int versionNo,EnTFileVersion en) throws ErrorException {
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update T_FILE_VERSION set ");
+        query.append("update t_file_version set ");
 
         if(en.hasChangeFileId()) {
             if(bChanged){
@@ -125,13 +125,13 @@ public class DbTFileVersion extends RootDB{
     }
 
     /**
-     * Retrieve from the database for table "T_FILE_VERSION"
+     * Retrieve from the database for table "t_file_version"
     */
-    public EnTFileVersion findByKey(String fileId, long versionNo) throws ErrorException {
+    public EnTFileVersion findByKey(String fileId, int versionNo) throws ErrorException {
         EnTFileVersion res = null;
 
         StringBuffer query;
-        query = new StringBuffer("select FILE_ID,VERSION_NO,UPDATE_DATETIME,UPDATE_PERSON,UPDATE_REMARK from T_FILE_VERSION");
+        query = new StringBuffer("select FILE_ID,VERSION_NO,UPDATE_DATETIME,UPDATE_PERSON,UPDATE_REMARK from t_file_version");
 
         query.append(" where ");
         query.append("FILE_ID=");
@@ -150,10 +150,10 @@ public class DbTFileVersion extends RootDB{
     /**
      * Counts the number of entries for this table in the database.
      */
-    public int countByKey(String fileId, long versionNo) throws ErrorException {
+    public int countByKey(String fileId, int versionNo) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from T_FILE_VERSION");
+        query.append("select count(1) as num from t_file_version");
 
         query.append(" where ");
         query.append("FILE_ID=");
@@ -168,13 +168,13 @@ public class DbTFileVersion extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "T_FILE_VERSION"
+     * Deletes from the database for table "t_file_version"
      */
-    public int deleteLikeKey(String fileId, long versionNo) throws ErrorException {
+    public int deleteLikeKey(String fileId, int versionNo) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from T_FILE_VERSION");
+        query.append("delete from t_file_version");
 
         query.append(" where ");
         query.append("FILE_ID like ");
@@ -188,11 +188,11 @@ public class DbTFileVersion extends RootDB{
     /**
      * Updates the current object values into the database.
      */
-    public int updateLikeKey(String fileId, long versionNo,EnTFileVersion en) throws ErrorException {
+    public int updateLikeKey(String fileId, int versionNo,EnTFileVersion en) throws ErrorException {
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update T_FILE_VERSION set ");
+        query.append("update t_file_version set ");
 
         if(en.hasChangeUpdateDatetime()) {
             if(bChanged){
@@ -231,11 +231,11 @@ public class DbTFileVersion extends RootDB{
     /**
      * Retrieve from the database for table "TFileVersion"
      */
-    public Vector findAllLikeKey(String fileId, long versionNo) throws ErrorException {
+    public Vector findAllLikeKey(String fileId, int versionNo) throws ErrorException {
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select FILE_ID,VERSION_NO,UPDATE_DATETIME,UPDATE_PERSON,UPDATE_REMARK from T_FILE_VERSION");
+        query.append("select FILE_ID,VERSION_NO,UPDATE_DATETIME,UPDATE_PERSON,UPDATE_REMARK from t_file_version");
 
         query.append(" where ");
         query.append("FILE_ID like ");
@@ -253,10 +253,10 @@ public class DbTFileVersion extends RootDB{
     /**
      * Counts the number of entries for this table in the database.
      */
-    public int countLikeKey(String fileId, long versionNo) throws ErrorException {
+    public int countLikeKey(String fileId, int versionNo) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from T_FILE_VERSION");
+        query.append("select count(1) as num from t_file_version");
 
         query.append(" where ");
         query.append("FILE_ID like ");
@@ -277,7 +277,7 @@ public class DbTFileVersion extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select FILE_ID,VERSION_NO,UPDATE_DATETIME,UPDATE_PERSON,UPDATE_REMARK from T_FILE_VERSION where ");
+        query.append("select FILE_ID,VERSION_NO,UPDATE_DATETIME,UPDATE_PERSON,UPDATE_REMARK from t_file_version where ");
         query.append(where);
         if(orderBy != null) {
             query.append(orderBy);
@@ -294,7 +294,7 @@ public class DbTFileVersion extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select FILE_ID,VERSION_NO,UPDATE_DATETIME,UPDATE_PERSON,UPDATE_REMARK from T_FILE_VERSION");
+        query.append("select FILE_ID,VERSION_NO,UPDATE_DATETIME,UPDATE_PERSON,UPDATE_REMARK from t_file_version");
 
         if(orderBy != null) {
             query.append(orderBy);
@@ -354,9 +354,9 @@ public class DbTFileVersion extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select FILE_ID,VERSION_NO,UPDATE_DATETIME,UPDATE_PERSON,UPDATE_REMARK from T_FILE_VERSION where ");
+            query.insert(0,"select FILE_ID,VERSION_NO,UPDATE_DATETIME,UPDATE_PERSON,UPDATE_REMARK from t_file_version where ");
         } else {
-            query.append("select FILE_ID,VERSION_NO,UPDATE_DATETIME,UPDATE_PERSON,UPDATE_REMARK from T_FILE_VERSION");
+            query.append("select FILE_ID,VERSION_NO,UPDATE_DATETIME,UPDATE_PERSON,UPDATE_REMARK from t_file_version");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -416,9 +416,9 @@ public class DbTFileVersion extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select FILE_ID,VERSION_NO,UPDATE_DATETIME,UPDATE_PERSON,UPDATE_REMARK from T_FILE_VERSION where ");
+            query.insert(0,"select FILE_ID,VERSION_NO,UPDATE_DATETIME,UPDATE_PERSON,UPDATE_REMARK from t_file_version where ");
         } else {
-            query.append("select FILE_ID,VERSION_NO,UPDATE_DATETIME,UPDATE_PERSON,UPDATE_REMARK from T_FILE_VERSION");
+            query.append("select FILE_ID,VERSION_NO,UPDATE_DATETIME,UPDATE_PERSON,UPDATE_REMARK from t_file_version");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -434,7 +434,7 @@ public class DbTFileVersion extends RootDB{
     public int count() throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from T_FILE_VERSION");
+        query.append("select count(1) as num from t_file_version");
 
         QueryResult qr = trans.doQuery(connId,query.toString());
         if (qr.size() == 1) {
@@ -449,7 +449,7 @@ public class DbTFileVersion extends RootDB{
     public int countWhere(String where) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from T_FILE_VERSION");
+        query.append("select count(1) as num from t_file_version");
         query.append(" where ");
         query.append(where);
         QueryResult qr = trans.doQuery(connId,query.toString());
@@ -460,13 +460,13 @@ public class DbTFileVersion extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "T_FILE_VERSION"
+     * Deletes from the database for table "t_file_version"
      */
     public int deleteWhere(String where) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from T_FILE_VERSION");
+        query.append("delete from t_file_version");
         query.append(" where ");
         query.append(where);
         res = trans.doUpdate(connId,query.toString());
@@ -480,7 +480,7 @@ public class DbTFileVersion extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update T_FILE_VERSION set ");
+        query.append("update t_file_version set ");
 
         if(en.hasChangeFileId()) {
             if(bChanged){
@@ -535,7 +535,7 @@ public class DbTFileVersion extends RootDB{
         EnTFileVersion en = new EnTFileVersion();
 
         en.setFileId(r.getString("FILE_ID"));
-        en.setVersionNo(r.getLong("VERSION_NO") == null ? 0 : r.getLong("VERSION_NO").longValue());
+        en.setVersionNo(r.getInteger("VERSION_NO") == null ? 0 : r.getInteger("VERSION_NO").intValue());
         en.setUpdateDatetime(r.getString("UPDATE_DATETIME"));
         en.setUpdatePerson(r.getString("UPDATE_PERSON"));
         en.setUpdateRemark(r.getString("UPDATE_REMARK"));
@@ -568,7 +568,7 @@ public class DbTFileVersion extends RootDB{
         otmp = xml.getInputObject("VERSION_NO");
         stmp = (String)otmp;
         if (stmp != null && stmp.length() > 0) {
-            en.setVersionNo(parseLong(stmp));
+            en.setVersionNo(parseInt(stmp));
         }
 
         otmp = xml.getInputObject("UPDATE_DATETIME");
@@ -631,7 +631,7 @@ public class DbTFileVersion extends RootDB{
             if (oVersionNo.length == count) {
                 stmp = (String)oVersionNo[i];
                 if (stmp != null && stmp.length() > 0) {
-                    en.setVersionNo(parseLong(stmp));
+                    en.setVersionNo(parseInt(stmp));
                 }
             }
 

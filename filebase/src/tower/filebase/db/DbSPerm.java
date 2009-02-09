@@ -22,7 +22,7 @@ public class DbSPerm extends RootDB{
 
     public DbSPerm(Transaction trans, String connId) {
         super(trans,connId);
-        orderBy = " order by S_PERM.ROLE_PERM";
+        orderBy = " order by s_perm.ROLE_PERM";
     }
     /**
      * Inserts the current object values into the database.
@@ -31,7 +31,7 @@ public class DbSPerm extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
 
-        query.append("insert into S_PERM ( ROLE_PERM,PERM_NAME,ROLE_PERM_DESC ) values ( ");
+        query.append("insert into s_perm ( ROLE_PERM,PERM_NAME,ROLE_PERM_DESC ) values ( ");
         query.append(formatString(en.getRolePerm()));
         query.append(",");
         query.append(formatString(en.getPermName()));
@@ -44,13 +44,13 @@ public class DbSPerm extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "S_PERM"
+     * Deletes from the database for table "s_perm"
      */
     public int deleteByKey(String rolePerm) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from S_PERM");
+        query.append("delete from s_perm");
 
         query.append(" where ");
         query.append("ROLE_PERM=");
@@ -66,7 +66,7 @@ public class DbSPerm extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update S_PERM set ");
+        query.append("update s_perm set ");
 
         if(en.hasChangeRolePerm()) {
             if(bChanged){
@@ -101,13 +101,13 @@ public class DbSPerm extends RootDB{
     }
 
     /**
-     * Retrieve from the database for table "S_PERM"
+     * Retrieve from the database for table "s_perm"
     */
     public EnSPerm findByKey(String rolePerm) throws ErrorException {
         EnSPerm res = null;
 
         StringBuffer query;
-        query = new StringBuffer("select ROLE_PERM,PERM_NAME,ROLE_PERM_DESC from S_PERM");
+        query = new StringBuffer("select ROLE_PERM,PERM_NAME,ROLE_PERM_DESC from s_perm");
 
         query.append(" where ");
         query.append("ROLE_PERM=");
@@ -127,7 +127,7 @@ public class DbSPerm extends RootDB{
     public int countByKey(String rolePerm) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from S_PERM");
+        query.append("select count(1) as num from s_perm");
 
         query.append(" where ");
         query.append("ROLE_PERM=");
@@ -140,13 +140,13 @@ public class DbSPerm extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "S_PERM"
+     * Deletes from the database for table "s_perm"
      */
     public int deleteLikeKey(String rolePerm) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from S_PERM");
+        query.append("delete from s_perm");
 
         query.append(" where ");
         query.append("ROLE_PERM like ");
@@ -162,7 +162,7 @@ public class DbSPerm extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update S_PERM set ");
+        query.append("update s_perm set ");
 
         if(en.hasChangePermName()) {
             if(bChanged){
@@ -195,7 +195,7 @@ public class DbSPerm extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select ROLE_PERM,PERM_NAME,ROLE_PERM_DESC from S_PERM");
+        query.append("select ROLE_PERM,PERM_NAME,ROLE_PERM_DESC from s_perm");
 
         query.append(" where ");
         query.append("ROLE_PERM like ");
@@ -214,7 +214,7 @@ public class DbSPerm extends RootDB{
     public int countLikeKey(String rolePerm) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from S_PERM");
+        query.append("select count(1) as num from s_perm");
 
         query.append(" where ");
         query.append("ROLE_PERM like ");
@@ -233,7 +233,7 @@ public class DbSPerm extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select ROLE_PERM,PERM_NAME,ROLE_PERM_DESC from S_PERM where ");
+        query.append("select ROLE_PERM,PERM_NAME,ROLE_PERM_DESC from s_perm where ");
         query.append(where);
         if(orderBy != null) {
             query.append(orderBy);
@@ -250,7 +250,7 @@ public class DbSPerm extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select ROLE_PERM,PERM_NAME,ROLE_PERM_DESC from S_PERM");
+        query.append("select ROLE_PERM,PERM_NAME,ROLE_PERM_DESC from s_perm");
 
         if(orderBy != null) {
             query.append(orderBy);
@@ -294,9 +294,9 @@ public class DbSPerm extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select ROLE_PERM,PERM_NAME,ROLE_PERM_DESC from S_PERM where ");
+            query.insert(0,"select ROLE_PERM,PERM_NAME,ROLE_PERM_DESC from s_perm where ");
         } else {
-            query.append("select ROLE_PERM,PERM_NAME,ROLE_PERM_DESC from S_PERM");
+            query.append("select ROLE_PERM,PERM_NAME,ROLE_PERM_DESC from s_perm");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -340,9 +340,9 @@ public class DbSPerm extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select ROLE_PERM,PERM_NAME,ROLE_PERM_DESC from S_PERM where ");
+            query.insert(0,"select ROLE_PERM,PERM_NAME,ROLE_PERM_DESC from s_perm where ");
         } else {
-            query.append("select ROLE_PERM,PERM_NAME,ROLE_PERM_DESC from S_PERM");
+            query.append("select ROLE_PERM,PERM_NAME,ROLE_PERM_DESC from s_perm");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -358,7 +358,7 @@ public class DbSPerm extends RootDB{
     public int count() throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from S_PERM");
+        query.append("select count(1) as num from s_perm");
 
         QueryResult qr = trans.doQuery(connId,query.toString());
         if (qr.size() == 1) {
@@ -373,7 +373,7 @@ public class DbSPerm extends RootDB{
     public int countWhere(String where) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from S_PERM");
+        query.append("select count(1) as num from s_perm");
         query.append(" where ");
         query.append(where);
         QueryResult qr = trans.doQuery(connId,query.toString());
@@ -384,13 +384,13 @@ public class DbSPerm extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "S_PERM"
+     * Deletes from the database for table "s_perm"
      */
     public int deleteWhere(String where) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from S_PERM");
+        query.append("delete from s_perm");
         query.append(" where ");
         query.append(where);
         res = trans.doUpdate(connId,query.toString());
@@ -404,7 +404,7 @@ public class DbSPerm extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update S_PERM set ");
+        query.append("update s_perm set ");
 
         if(en.hasChangeRolePerm()) {
             if(bChanged){

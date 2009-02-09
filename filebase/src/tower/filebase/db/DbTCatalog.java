@@ -22,7 +22,7 @@ public class DbTCatalog extends RootDB{
 
     public DbTCatalog(Transaction trans, String connId) {
         super(trans,connId);
-        orderBy = " order by T_CATALOG.CATALOG_ID";
+        orderBy = " order by t_catalog.CATALOG_ID";
     }
     /**
      * Inserts the current object values into the database.
@@ -31,7 +31,7 @@ public class DbTCatalog extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
 
-        query.append("insert into T_CATALOG ( CATALOG_ID,CATALOG_NAME,PARENT_ID,CREATE_DATETIME,CREATOR,CATALOG_REMARK,DELETE_FLAG,DELETE_PERSON,DELETE_DATETIME ) values ( ");
+        query.append("insert into t_catalog ( CATALOG_ID,CATALOG_NAME,PARENT_ID,CREATE_DATETIME,CREATOR,CATALOG_REMARK,DELETE_FLAG,DELETE_PERSON,DELETE_DATETIME ) values ( ");
         query.append(formatString(en.getCatalogId()));
         query.append(",");
         query.append(formatString(en.getCatalogName()));
@@ -56,13 +56,13 @@ public class DbTCatalog extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "T_CATALOG"
+     * Deletes from the database for table "t_catalog"
      */
     public int deleteByKey(String catalogId) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from T_CATALOG");
+        query.append("delete from t_catalog");
 
         query.append(" where ");
         query.append("CATALOG_ID=");
@@ -78,7 +78,7 @@ public class DbTCatalog extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update T_CATALOG set ");
+        query.append("update t_catalog set ");
 
         if(en.hasChangeCatalogId()) {
             if(bChanged){
@@ -161,13 +161,13 @@ public class DbTCatalog extends RootDB{
     }
 
     /**
-     * Retrieve from the database for table "T_CATALOG"
+     * Retrieve from the database for table "t_catalog"
     */
     public EnTCatalog findByKey(String catalogId) throws ErrorException {
         EnTCatalog res = null;
 
         StringBuffer query;
-        query = new StringBuffer("select CATALOG_ID,CATALOG_NAME,PARENT_ID,CREATE_DATETIME,CREATOR,CATALOG_REMARK,DELETE_FLAG,DELETE_PERSON,DELETE_DATETIME from T_CATALOG");
+        query = new StringBuffer("select CATALOG_ID,CATALOG_NAME,PARENT_ID,CREATE_DATETIME,CREATOR,CATALOG_REMARK,DELETE_FLAG,DELETE_PERSON,DELETE_DATETIME from t_catalog");
 
         query.append(" where ");
         query.append("CATALOG_ID=");
@@ -187,7 +187,7 @@ public class DbTCatalog extends RootDB{
     public int countByKey(String catalogId) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from T_CATALOG");
+        query.append("select count(1) as num from t_catalog");
 
         query.append(" where ");
         query.append("CATALOG_ID=");
@@ -200,13 +200,13 @@ public class DbTCatalog extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "T_CATALOG"
+     * Deletes from the database for table "t_catalog"
      */
     public int deleteLikeKey(String catalogId) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from T_CATALOG");
+        query.append("delete from t_catalog");
 
         query.append(" where ");
         query.append("CATALOG_ID like ");
@@ -222,7 +222,7 @@ public class DbTCatalog extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update T_CATALOG set ");
+        query.append("update t_catalog set ");
 
         if(en.hasChangeCatalogName()) {
             if(bChanged){
@@ -303,7 +303,7 @@ public class DbTCatalog extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select CATALOG_ID,CATALOG_NAME,PARENT_ID,CREATE_DATETIME,CREATOR,CATALOG_REMARK,DELETE_FLAG,DELETE_PERSON,DELETE_DATETIME from T_CATALOG");
+        query.append("select CATALOG_ID,CATALOG_NAME,PARENT_ID,CREATE_DATETIME,CREATOR,CATALOG_REMARK,DELETE_FLAG,DELETE_PERSON,DELETE_DATETIME from t_catalog");
 
         query.append(" where ");
         query.append("CATALOG_ID like ");
@@ -322,7 +322,7 @@ public class DbTCatalog extends RootDB{
     public int countLikeKey(String catalogId) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from T_CATALOG");
+        query.append("select count(1) as num from t_catalog");
 
         query.append(" where ");
         query.append("CATALOG_ID like ");
@@ -341,7 +341,7 @@ public class DbTCatalog extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select CATALOG_ID,CATALOG_NAME,PARENT_ID,CREATE_DATETIME,CREATOR,CATALOG_REMARK,DELETE_FLAG,DELETE_PERSON,DELETE_DATETIME from T_CATALOG where ");
+        query.append("select CATALOG_ID,CATALOG_NAME,PARENT_ID,CREATE_DATETIME,CREATOR,CATALOG_REMARK,DELETE_FLAG,DELETE_PERSON,DELETE_DATETIME from t_catalog where ");
         query.append(where);
         if(orderBy != null) {
             query.append(orderBy);
@@ -358,7 +358,7 @@ public class DbTCatalog extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select CATALOG_ID,CATALOG_NAME,PARENT_ID,CREATE_DATETIME,CREATOR,CATALOG_REMARK,DELETE_FLAG,DELETE_PERSON,DELETE_DATETIME from T_CATALOG");
+        query.append("select CATALOG_ID,CATALOG_NAME,PARENT_ID,CREATE_DATETIME,CREATOR,CATALOG_REMARK,DELETE_FLAG,DELETE_PERSON,DELETE_DATETIME from t_catalog");
 
         if(orderBy != null) {
             query.append(orderBy);
@@ -450,9 +450,9 @@ public class DbTCatalog extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select CATALOG_ID,CATALOG_NAME,PARENT_ID,CREATE_DATETIME,CREATOR,CATALOG_REMARK,DELETE_FLAG,DELETE_PERSON,DELETE_DATETIME from T_CATALOG where ");
+            query.insert(0,"select CATALOG_ID,CATALOG_NAME,PARENT_ID,CREATE_DATETIME,CREATOR,CATALOG_REMARK,DELETE_FLAG,DELETE_PERSON,DELETE_DATETIME from t_catalog where ");
         } else {
-            query.append("select CATALOG_ID,CATALOG_NAME,PARENT_ID,CREATE_DATETIME,CREATOR,CATALOG_REMARK,DELETE_FLAG,DELETE_PERSON,DELETE_DATETIME from T_CATALOG");
+            query.append("select CATALOG_ID,CATALOG_NAME,PARENT_ID,CREATE_DATETIME,CREATOR,CATALOG_REMARK,DELETE_FLAG,DELETE_PERSON,DELETE_DATETIME from t_catalog");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -544,9 +544,9 @@ public class DbTCatalog extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select CATALOG_ID,CATALOG_NAME,PARENT_ID,CREATE_DATETIME,CREATOR,CATALOG_REMARK,DELETE_FLAG,DELETE_PERSON,DELETE_DATETIME from T_CATALOG where ");
+            query.insert(0,"select CATALOG_ID,CATALOG_NAME,PARENT_ID,CREATE_DATETIME,CREATOR,CATALOG_REMARK,DELETE_FLAG,DELETE_PERSON,DELETE_DATETIME from t_catalog where ");
         } else {
-            query.append("select CATALOG_ID,CATALOG_NAME,PARENT_ID,CREATE_DATETIME,CREATOR,CATALOG_REMARK,DELETE_FLAG,DELETE_PERSON,DELETE_DATETIME from T_CATALOG");
+            query.append("select CATALOG_ID,CATALOG_NAME,PARENT_ID,CREATE_DATETIME,CREATOR,CATALOG_REMARK,DELETE_FLAG,DELETE_PERSON,DELETE_DATETIME from t_catalog");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -562,7 +562,7 @@ public class DbTCatalog extends RootDB{
     public int count() throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from T_CATALOG");
+        query.append("select count(1) as num from t_catalog");
 
         QueryResult qr = trans.doQuery(connId,query.toString());
         if (qr.size() == 1) {
@@ -577,7 +577,7 @@ public class DbTCatalog extends RootDB{
     public int countWhere(String where) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from T_CATALOG");
+        query.append("select count(1) as num from t_catalog");
         query.append(" where ");
         query.append(where);
         QueryResult qr = trans.doQuery(connId,query.toString());
@@ -588,13 +588,13 @@ public class DbTCatalog extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "T_CATALOG"
+     * Deletes from the database for table "t_catalog"
      */
     public int deleteWhere(String where) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from T_CATALOG");
+        query.append("delete from t_catalog");
         query.append(" where ");
         query.append(where);
         res = trans.doUpdate(connId,query.toString());
@@ -608,7 +608,7 @@ public class DbTCatalog extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update T_CATALOG set ");
+        query.append("update t_catalog set ");
 
         if(en.hasChangeCatalogId()) {
             if(bChanged){

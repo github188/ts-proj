@@ -22,7 +22,7 @@ public class DbSysOrg extends RootDB{
 
     public DbSysOrg(Transaction trans, String connId) {
         super(trans,connId);
-        orderBy = " order by SYS_ORG.ORG_ID";
+        orderBy = " order by sys_org.ORG_ID";
     }
     /**
      * Inserts the current object values into the database.
@@ -31,7 +31,7 @@ public class DbSysOrg extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
 
-        query.append("insert into SYS_ORG ( ORG_ID,ORG_NAME,PARENT_ID,ORG_DESC,LINK_MAN,LINK_TELE,LINK_EMAIL ) values ( ");
+        query.append("insert into sys_org ( ORG_ID,ORG_NAME,PARENT_ID,ORG_DESC,LINK_MAN,LINK_TELE,LINK_EMAIL ) values ( ");
         query.append(formatString(en.getOrgId()));
         query.append(",");
         query.append(formatString(en.getOrgName()));
@@ -52,13 +52,13 @@ public class DbSysOrg extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "SYS_ORG"
+     * Deletes from the database for table "sys_org"
      */
     public int deleteByKey(String orgId) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from SYS_ORG");
+        query.append("delete from sys_org");
 
         query.append(" where ");
         query.append("ORG_ID=");
@@ -74,7 +74,7 @@ public class DbSysOrg extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update SYS_ORG set ");
+        query.append("update sys_org set ");
 
         if(en.hasChangeOrgId()) {
             if(bChanged){
@@ -141,13 +141,13 @@ public class DbSysOrg extends RootDB{
     }
 
     /**
-     * Retrieve from the database for table "SYS_ORG"
+     * Retrieve from the database for table "sys_org"
     */
     public EnSysOrg findByKey(String orgId) throws ErrorException {
         EnSysOrg res = null;
 
         StringBuffer query;
-        query = new StringBuffer("select ORG_ID,ORG_NAME,PARENT_ID,ORG_DESC,LINK_MAN,LINK_TELE,LINK_EMAIL from SYS_ORG");
+        query = new StringBuffer("select ORG_ID,ORG_NAME,PARENT_ID,ORG_DESC,LINK_MAN,LINK_TELE,LINK_EMAIL from sys_org");
 
         query.append(" where ");
         query.append("ORG_ID=");
@@ -167,7 +167,7 @@ public class DbSysOrg extends RootDB{
     public int countByKey(String orgId) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from SYS_ORG");
+        query.append("select count(1) as num from sys_org");
 
         query.append(" where ");
         query.append("ORG_ID=");
@@ -180,13 +180,13 @@ public class DbSysOrg extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "SYS_ORG"
+     * Deletes from the database for table "sys_org"
      */
     public int deleteLikeKey(String orgId) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from SYS_ORG");
+        query.append("delete from sys_org");
 
         query.append(" where ");
         query.append("ORG_ID like ");
@@ -202,7 +202,7 @@ public class DbSysOrg extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update SYS_ORG set ");
+        query.append("update sys_org set ");
 
         if(en.hasChangeOrgName()) {
             if(bChanged){
@@ -267,7 +267,7 @@ public class DbSysOrg extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select ORG_ID,ORG_NAME,PARENT_ID,ORG_DESC,LINK_MAN,LINK_TELE,LINK_EMAIL from SYS_ORG");
+        query.append("select ORG_ID,ORG_NAME,PARENT_ID,ORG_DESC,LINK_MAN,LINK_TELE,LINK_EMAIL from sys_org");
 
         query.append(" where ");
         query.append("ORG_ID like ");
@@ -286,11 +286,257 @@ public class DbSysOrg extends RootDB{
     public int countLikeKey(String orgId) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from SYS_ORG");
+        query.append("select count(1) as num from sys_org");
 
         query.append(" where ");
         query.append("ORG_ID like ");
         query.append(formatString(orgId));
+        QueryResult qr = trans.doQuery(connId,query.toString());
+        if (qr.size() == 1) {
+            count = qr.get(0).getInteger("num").intValue();
+        }
+        return count;
+    }
+
+    /**
+     * Deletes from the database for table "sys_org"
+     */
+    public int deleteByIndexIdxOrgParentId(String parentId) throws ErrorException {
+        int res=-1;
+
+        StringBuffer query = new StringBuffer();
+        query.append("delete from sys_org");
+
+        query.append(" where ");
+        query.append("PARENT_ID=");
+        query.append(formatString(parentId));
+        res = trans.doUpdate(connId,query.toString());
+        return res;
+    }
+
+    /**
+     * Updates the current object values into the database.
+     */
+    public int updateByIndexIdxOrgParentId(String parentId,EnSysOrg en) throws ErrorException {
+        int res = -1;
+        StringBuffer query = new StringBuffer();
+        boolean bChanged = false;
+        query.append("update sys_org set ");
+
+        if(en.hasChangeOrgId()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("ORG_ID=");
+            query.append(formatString(en.getOrgId()));
+            bChanged = true;
+        }
+        if(en.hasChangeOrgName()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("ORG_NAME=");
+            query.append(formatString(en.getOrgName()));
+            bChanged = true;
+        }
+        if(en.hasChangeParentId()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("PARENT_ID=");
+            query.append(formatString(en.getParentId()));
+            bChanged = true;
+        }
+        if(en.hasChangeOrgDesc()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("ORG_DESC=");
+            query.append(formatString(en.getOrgDesc()));
+            bChanged = true;
+        }
+        if(en.hasChangeLinkMan()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("LINK_MAN=");
+            query.append(formatString(en.getLinkMan()));
+            bChanged = true;
+        }
+        if(en.hasChangeLinkTele()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("LINK_TELE=");
+            query.append(formatString(en.getLinkTele()));
+            bChanged = true;
+        }
+        if(en.hasChangeLinkEmail()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("LINK_EMAIL=");
+            query.append(formatString(en.getLinkEmail()));
+            bChanged = true;
+        }
+
+        query.append(" where ");
+        query.append("PARENT_ID=");
+        query.append(formatString(parentId));
+        res = trans.doUpdate(connId,query.toString());
+        return res;
+    }
+
+    /**
+     * Retrieve from the database for table "SysOrg"
+     */
+    public Vector findAllByIndexIdxOrgParentId(String parentId) throws ErrorException {
+        Vector retRows = new Vector();
+
+        StringBuffer query = new StringBuffer();
+        query.append("select ORG_ID,ORG_NAME,PARENT_ID,ORG_DESC,LINK_MAN,LINK_TELE,LINK_EMAIL from sys_org");
+
+        query.append(" where ");
+        query.append("PARENT_ID=");
+        query.append(formatString(parentId));
+        if(orderBy != null) {
+            query.append(orderBy);
+        }
+        QueryResult qr = trans.doQuery(connId,query.toString(),page,rowsPerPage);
+        retRows = getAllFromResultSet(qr);
+        return retRows;
+    }
+
+    /**
+     * Counts the number of entries for this table in the database.
+     */
+    public int countByIndexIdxOrgParentId(String parentId) throws ErrorException {
+        int count = -1;
+        StringBuffer query = new StringBuffer();
+        query.append("select count(1) as num from sys_org");
+
+        query.append(" where ");
+        query.append("PARENT_ID=");
+        query.append(formatString(parentId));
+        QueryResult qr = trans.doQuery(connId,query.toString());
+        if (qr.size() == 1) {
+            count = qr.get(0).getInteger("num").intValue();
+        }
+        return count;
+    }
+
+    /**
+     * Deletes from the database for table "sys_org"
+     */
+    public int deleteLikeIndexIdxOrgParentId(String parentId) throws ErrorException {
+        int res=-1;
+
+        StringBuffer query = new StringBuffer();
+        query.append("delete from sys_org");
+
+        query.append(" where ");
+        query.append("PARENT_ID like ");
+        query.append(formatString(parentId));
+        res = trans.doUpdate(connId,query.toString());
+        return res;
+    }
+
+    /**
+     * Updates the current object values into the database.
+     */
+    public int updateLikeIndexIdxOrgParentId(String parentId,EnSysOrg en) throws ErrorException {
+        int res = -1;
+        StringBuffer query = new StringBuffer();
+        boolean bChanged = false;
+        query.append("update sys_org set ");
+
+        if(en.hasChangeOrgName()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("ORG_NAME=");
+            query.append(formatString(en.getOrgName()));
+            bChanged = true;
+        }
+        if(en.hasChangeParentId()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("PARENT_ID=");
+            query.append(formatString(en.getParentId()));
+            bChanged = true;
+        }
+        if(en.hasChangeOrgDesc()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("ORG_DESC=");
+            query.append(formatString(en.getOrgDesc()));
+            bChanged = true;
+        }
+        if(en.hasChangeLinkMan()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("LINK_MAN=");
+            query.append(formatString(en.getLinkMan()));
+            bChanged = true;
+        }
+        if(en.hasChangeLinkTele()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("LINK_TELE=");
+            query.append(formatString(en.getLinkTele()));
+            bChanged = true;
+        }
+        if(en.hasChangeLinkEmail()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("LINK_EMAIL=");
+            query.append(formatString(en.getLinkEmail()));
+            bChanged = true;
+        }
+
+        query.append(" where ");
+        query.append("PARENT_ID like ");
+        query.append(formatString(parentId));
+        res = trans.doUpdate(connId,query.toString());
+        return res;
+    }
+
+    /**
+     * Retrieve from the database for table "SysOrg"
+     */
+    public Vector findAllLikeIndexIdxOrgParentId(String parentId) throws ErrorException {
+        Vector retRows = new Vector();
+
+        StringBuffer query = new StringBuffer();
+        query.append("select ORG_ID,ORG_NAME,PARENT_ID,ORG_DESC,LINK_MAN,LINK_TELE,LINK_EMAIL from sys_org");
+
+        query.append(" where ");
+        query.append("PARENT_ID like ");
+        query.append(formatString(parentId));
+        if(orderBy != null) {
+            query.append(orderBy);
+        }
+        QueryResult qr = trans.doQuery(connId,query.toString(),page,rowsPerPage);
+        retRows = getAllFromResultSet(qr);
+        return retRows;
+    }
+
+    /**
+     * Counts the number of entries for this table in the database.
+     */
+    public int countLikeIndexIdxOrgParentId(String parentId) throws ErrorException {
+        int count = -1;
+        StringBuffer query = new StringBuffer();
+        query.append("select count(1) as num from sys_org");
+
+        query.append(" where ");
+        query.append("PARENT_ID like ");
+        query.append(formatString(parentId));
         QueryResult qr = trans.doQuery(connId,query.toString());
         if (qr.size() == 1) {
             count = qr.get(0).getInteger("num").intValue();
@@ -305,7 +551,7 @@ public class DbSysOrg extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select ORG_ID,ORG_NAME,PARENT_ID,ORG_DESC,LINK_MAN,LINK_TELE,LINK_EMAIL from SYS_ORG where ");
+        query.append("select ORG_ID,ORG_NAME,PARENT_ID,ORG_DESC,LINK_MAN,LINK_TELE,LINK_EMAIL from sys_org where ");
         query.append(where);
         if(orderBy != null) {
             query.append(orderBy);
@@ -322,7 +568,7 @@ public class DbSysOrg extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select ORG_ID,ORG_NAME,PARENT_ID,ORG_DESC,LINK_MAN,LINK_TELE,LINK_EMAIL from SYS_ORG");
+        query.append("select ORG_ID,ORG_NAME,PARENT_ID,ORG_DESC,LINK_MAN,LINK_TELE,LINK_EMAIL from sys_org");
 
         if(orderBy != null) {
             query.append(orderBy);
@@ -398,9 +644,9 @@ public class DbSysOrg extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select ORG_ID,ORG_NAME,PARENT_ID,ORG_DESC,LINK_MAN,LINK_TELE,LINK_EMAIL from SYS_ORG where ");
+            query.insert(0,"select ORG_ID,ORG_NAME,PARENT_ID,ORG_DESC,LINK_MAN,LINK_TELE,LINK_EMAIL from sys_org where ");
         } else {
-            query.append("select ORG_ID,ORG_NAME,PARENT_ID,ORG_DESC,LINK_MAN,LINK_TELE,LINK_EMAIL from SYS_ORG");
+            query.append("select ORG_ID,ORG_NAME,PARENT_ID,ORG_DESC,LINK_MAN,LINK_TELE,LINK_EMAIL from sys_org");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -476,9 +722,9 @@ public class DbSysOrg extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select ORG_ID,ORG_NAME,PARENT_ID,ORG_DESC,LINK_MAN,LINK_TELE,LINK_EMAIL from SYS_ORG where ");
+            query.insert(0,"select ORG_ID,ORG_NAME,PARENT_ID,ORG_DESC,LINK_MAN,LINK_TELE,LINK_EMAIL from sys_org where ");
         } else {
-            query.append("select ORG_ID,ORG_NAME,PARENT_ID,ORG_DESC,LINK_MAN,LINK_TELE,LINK_EMAIL from SYS_ORG");
+            query.append("select ORG_ID,ORG_NAME,PARENT_ID,ORG_DESC,LINK_MAN,LINK_TELE,LINK_EMAIL from sys_org");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -494,7 +740,7 @@ public class DbSysOrg extends RootDB{
     public int count() throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from SYS_ORG");
+        query.append("select count(1) as num from sys_org");
 
         QueryResult qr = trans.doQuery(connId,query.toString());
         if (qr.size() == 1) {
@@ -509,7 +755,7 @@ public class DbSysOrg extends RootDB{
     public int countWhere(String where) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from SYS_ORG");
+        query.append("select count(1) as num from sys_org");
         query.append(" where ");
         query.append(where);
         QueryResult qr = trans.doQuery(connId,query.toString());
@@ -520,13 +766,13 @@ public class DbSysOrg extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "SYS_ORG"
+     * Deletes from the database for table "sys_org"
      */
     public int deleteWhere(String where) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from SYS_ORG");
+        query.append("delete from sys_org");
         query.append(" where ");
         query.append(where);
         res = trans.doUpdate(connId,query.toString());
@@ -540,7 +786,7 @@ public class DbSysOrg extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update SYS_ORG set ");
+        query.append("update sys_org set ");
 
         if(en.hasChangeOrgId()) {
             if(bChanged){

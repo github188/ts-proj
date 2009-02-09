@@ -22,7 +22,7 @@ public class DbSFilePerm extends RootDB{
 
     public DbSFilePerm(Transaction trans, String connId) {
         super(trans,connId);
-        orderBy = " order by S_FILE_PERM.FILE_OPERATION_STATUS";
+        orderBy = " order by s_file_perm.FILE_OPERATION_STATUS";
     }
     /**
      * Inserts the current object values into the database.
@@ -31,7 +31,7 @@ public class DbSFilePerm extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
 
-        query.append("insert into S_FILE_PERM ( FILE_OPERATION_STATUS,FILE_PERM_NAME,CONTENT_PERM_STATUS,SHOW_FLAG ) values ( ");
+        query.append("insert into s_file_perm ( FILE_OPERATION_STATUS,FILE_PERM_NAME,CONTENT_PERM_STATUS,SHOW_FLAG ) values ( ");
         query.append(formatString(en.getFileOperationStatus()));
         query.append(",");
         query.append(formatString(en.getFilePermName()));
@@ -46,13 +46,13 @@ public class DbSFilePerm extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "S_FILE_PERM"
+     * Deletes from the database for table "s_file_perm"
      */
     public int deleteByKey(String fileOperationStatus) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from S_FILE_PERM");
+        query.append("delete from s_file_perm");
 
         query.append(" where ");
         query.append("FILE_OPERATION_STATUS=");
@@ -68,7 +68,7 @@ public class DbSFilePerm extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update S_FILE_PERM set ");
+        query.append("update s_file_perm set ");
 
         if(en.hasChangeFileOperationStatus()) {
             if(bChanged){
@@ -111,13 +111,13 @@ public class DbSFilePerm extends RootDB{
     }
 
     /**
-     * Retrieve from the database for table "S_FILE_PERM"
+     * Retrieve from the database for table "s_file_perm"
     */
     public EnSFilePerm findByKey(String fileOperationStatus) throws ErrorException {
         EnSFilePerm res = null;
 
         StringBuffer query;
-        query = new StringBuffer("select FILE_OPERATION_STATUS,FILE_PERM_NAME,CONTENT_PERM_STATUS,SHOW_FLAG from S_FILE_PERM");
+        query = new StringBuffer("select FILE_OPERATION_STATUS,FILE_PERM_NAME,CONTENT_PERM_STATUS,SHOW_FLAG from s_file_perm");
 
         query.append(" where ");
         query.append("FILE_OPERATION_STATUS=");
@@ -137,7 +137,7 @@ public class DbSFilePerm extends RootDB{
     public int countByKey(String fileOperationStatus) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from S_FILE_PERM");
+        query.append("select count(1) as num from s_file_perm");
 
         query.append(" where ");
         query.append("FILE_OPERATION_STATUS=");
@@ -150,13 +150,13 @@ public class DbSFilePerm extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "S_FILE_PERM"
+     * Deletes from the database for table "s_file_perm"
      */
     public int deleteLikeKey(String fileOperationStatus) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from S_FILE_PERM");
+        query.append("delete from s_file_perm");
 
         query.append(" where ");
         query.append("FILE_OPERATION_STATUS like ");
@@ -172,7 +172,7 @@ public class DbSFilePerm extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update S_FILE_PERM set ");
+        query.append("update s_file_perm set ");
 
         if(en.hasChangeFilePermName()) {
             if(bChanged){
@@ -213,7 +213,7 @@ public class DbSFilePerm extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select FILE_OPERATION_STATUS,FILE_PERM_NAME,CONTENT_PERM_STATUS,SHOW_FLAG from S_FILE_PERM");
+        query.append("select FILE_OPERATION_STATUS,FILE_PERM_NAME,CONTENT_PERM_STATUS,SHOW_FLAG from s_file_perm");
 
         query.append(" where ");
         query.append("FILE_OPERATION_STATUS like ");
@@ -232,7 +232,7 @@ public class DbSFilePerm extends RootDB{
     public int countLikeKey(String fileOperationStatus) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from S_FILE_PERM");
+        query.append("select count(1) as num from s_file_perm");
 
         query.append(" where ");
         query.append("FILE_OPERATION_STATUS like ");
@@ -251,7 +251,7 @@ public class DbSFilePerm extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select FILE_OPERATION_STATUS,FILE_PERM_NAME,CONTENT_PERM_STATUS,SHOW_FLAG from S_FILE_PERM where ");
+        query.append("select FILE_OPERATION_STATUS,FILE_PERM_NAME,CONTENT_PERM_STATUS,SHOW_FLAG from s_file_perm where ");
         query.append(where);
         if(orderBy != null) {
             query.append(orderBy);
@@ -268,7 +268,7 @@ public class DbSFilePerm extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select FILE_OPERATION_STATUS,FILE_PERM_NAME,CONTENT_PERM_STATUS,SHOW_FLAG from S_FILE_PERM");
+        query.append("select FILE_OPERATION_STATUS,FILE_PERM_NAME,CONTENT_PERM_STATUS,SHOW_FLAG from s_file_perm");
 
         if(orderBy != null) {
             query.append(orderBy);
@@ -320,9 +320,9 @@ public class DbSFilePerm extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select FILE_OPERATION_STATUS,FILE_PERM_NAME,CONTENT_PERM_STATUS,SHOW_FLAG from S_FILE_PERM where ");
+            query.insert(0,"select FILE_OPERATION_STATUS,FILE_PERM_NAME,CONTENT_PERM_STATUS,SHOW_FLAG from s_file_perm where ");
         } else {
-            query.append("select FILE_OPERATION_STATUS,FILE_PERM_NAME,CONTENT_PERM_STATUS,SHOW_FLAG from S_FILE_PERM");
+            query.append("select FILE_OPERATION_STATUS,FILE_PERM_NAME,CONTENT_PERM_STATUS,SHOW_FLAG from s_file_perm");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -374,9 +374,9 @@ public class DbSFilePerm extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select FILE_OPERATION_STATUS,FILE_PERM_NAME,CONTENT_PERM_STATUS,SHOW_FLAG from S_FILE_PERM where ");
+            query.insert(0,"select FILE_OPERATION_STATUS,FILE_PERM_NAME,CONTENT_PERM_STATUS,SHOW_FLAG from s_file_perm where ");
         } else {
-            query.append("select FILE_OPERATION_STATUS,FILE_PERM_NAME,CONTENT_PERM_STATUS,SHOW_FLAG from S_FILE_PERM");
+            query.append("select FILE_OPERATION_STATUS,FILE_PERM_NAME,CONTENT_PERM_STATUS,SHOW_FLAG from s_file_perm");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -392,7 +392,7 @@ public class DbSFilePerm extends RootDB{
     public int count() throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from S_FILE_PERM");
+        query.append("select count(1) as num from s_file_perm");
 
         QueryResult qr = trans.doQuery(connId,query.toString());
         if (qr.size() == 1) {
@@ -407,7 +407,7 @@ public class DbSFilePerm extends RootDB{
     public int countWhere(String where) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from S_FILE_PERM");
+        query.append("select count(1) as num from s_file_perm");
         query.append(" where ");
         query.append(where);
         QueryResult qr = trans.doQuery(connId,query.toString());
@@ -418,13 +418,13 @@ public class DbSFilePerm extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "S_FILE_PERM"
+     * Deletes from the database for table "s_file_perm"
      */
     public int deleteWhere(String where) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from S_FILE_PERM");
+        query.append("delete from s_file_perm");
         query.append(" where ");
         query.append(where);
         res = trans.doUpdate(connId,query.toString());
@@ -438,7 +438,7 @@ public class DbSFilePerm extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update S_FILE_PERM set ");
+        query.append("update s_file_perm set ");
 
         if(en.hasChangeFileOperationStatus()) {
             if(bChanged){

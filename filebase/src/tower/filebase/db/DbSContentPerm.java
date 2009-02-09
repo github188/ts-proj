@@ -22,7 +22,7 @@ public class DbSContentPerm extends RootDB{
 
     public DbSContentPerm(Transaction trans, String connId) {
         super(trans,connId);
-        orderBy = " order by S_CONTENT_PERM.CONTENT_OPERATION_STATUS";
+        orderBy = " order by s_content_perm.CONTENT_OPERATION_STATUS";
     }
     /**
      * Inserts the current object values into the database.
@@ -31,7 +31,7 @@ public class DbSContentPerm extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
 
-        query.append("insert into S_CONTENT_PERM ( CONTENT_OPERATION_STATUS,CONTENT_OPERATION_NAME,CONTENT_PERM_STATUS,SHOW_FLAG ) values ( ");
+        query.append("insert into s_content_perm ( CONTENT_OPERATION_STATUS,CONTENT_OPERATION_NAME,CONTENT_PERM_STATUS,SHOW_FLAG ) values ( ");
         query.append(formatString(en.getContentOperationStatus()));
         query.append(",");
         query.append(formatString(en.getContentOperationName()));
@@ -46,13 +46,13 @@ public class DbSContentPerm extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "S_CONTENT_PERM"
+     * Deletes from the database for table "s_content_perm"
      */
     public int deleteByKey(String contentOperationStatus) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from S_CONTENT_PERM");
+        query.append("delete from s_content_perm");
 
         query.append(" where ");
         query.append("CONTENT_OPERATION_STATUS=");
@@ -68,7 +68,7 @@ public class DbSContentPerm extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update S_CONTENT_PERM set ");
+        query.append("update s_content_perm set ");
 
         if(en.hasChangeContentOperationStatus()) {
             if(bChanged){
@@ -111,13 +111,13 @@ public class DbSContentPerm extends RootDB{
     }
 
     /**
-     * Retrieve from the database for table "S_CONTENT_PERM"
+     * Retrieve from the database for table "s_content_perm"
     */
     public EnSContentPerm findByKey(String contentOperationStatus) throws ErrorException {
         EnSContentPerm res = null;
 
         StringBuffer query;
-        query = new StringBuffer("select CONTENT_OPERATION_STATUS,CONTENT_OPERATION_NAME,CONTENT_PERM_STATUS,SHOW_FLAG from S_CONTENT_PERM");
+        query = new StringBuffer("select CONTENT_OPERATION_STATUS,CONTENT_OPERATION_NAME,CONTENT_PERM_STATUS,SHOW_FLAG from s_content_perm");
 
         query.append(" where ");
         query.append("CONTENT_OPERATION_STATUS=");
@@ -137,7 +137,7 @@ public class DbSContentPerm extends RootDB{
     public int countByKey(String contentOperationStatus) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from S_CONTENT_PERM");
+        query.append("select count(1) as num from s_content_perm");
 
         query.append(" where ");
         query.append("CONTENT_OPERATION_STATUS=");
@@ -150,13 +150,13 @@ public class DbSContentPerm extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "S_CONTENT_PERM"
+     * Deletes from the database for table "s_content_perm"
      */
     public int deleteLikeKey(String contentOperationStatus) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from S_CONTENT_PERM");
+        query.append("delete from s_content_perm");
 
         query.append(" where ");
         query.append("CONTENT_OPERATION_STATUS like ");
@@ -172,7 +172,7 @@ public class DbSContentPerm extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update S_CONTENT_PERM set ");
+        query.append("update s_content_perm set ");
 
         if(en.hasChangeContentOperationName()) {
             if(bChanged){
@@ -213,7 +213,7 @@ public class DbSContentPerm extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select CONTENT_OPERATION_STATUS,CONTENT_OPERATION_NAME,CONTENT_PERM_STATUS,SHOW_FLAG from S_CONTENT_PERM");
+        query.append("select CONTENT_OPERATION_STATUS,CONTENT_OPERATION_NAME,CONTENT_PERM_STATUS,SHOW_FLAG from s_content_perm");
 
         query.append(" where ");
         query.append("CONTENT_OPERATION_STATUS like ");
@@ -232,7 +232,7 @@ public class DbSContentPerm extends RootDB{
     public int countLikeKey(String contentOperationStatus) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from S_CONTENT_PERM");
+        query.append("select count(1) as num from s_content_perm");
 
         query.append(" where ");
         query.append("CONTENT_OPERATION_STATUS like ");
@@ -251,7 +251,7 @@ public class DbSContentPerm extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select CONTENT_OPERATION_STATUS,CONTENT_OPERATION_NAME,CONTENT_PERM_STATUS,SHOW_FLAG from S_CONTENT_PERM where ");
+        query.append("select CONTENT_OPERATION_STATUS,CONTENT_OPERATION_NAME,CONTENT_PERM_STATUS,SHOW_FLAG from s_content_perm where ");
         query.append(where);
         if(orderBy != null) {
             query.append(orderBy);
@@ -268,7 +268,7 @@ public class DbSContentPerm extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select CONTENT_OPERATION_STATUS,CONTENT_OPERATION_NAME,CONTENT_PERM_STATUS,SHOW_FLAG from S_CONTENT_PERM");
+        query.append("select CONTENT_OPERATION_STATUS,CONTENT_OPERATION_NAME,CONTENT_PERM_STATUS,SHOW_FLAG from s_content_perm");
 
         if(orderBy != null) {
             query.append(orderBy);
@@ -320,9 +320,9 @@ public class DbSContentPerm extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select CONTENT_OPERATION_STATUS,CONTENT_OPERATION_NAME,CONTENT_PERM_STATUS,SHOW_FLAG from S_CONTENT_PERM where ");
+            query.insert(0,"select CONTENT_OPERATION_STATUS,CONTENT_OPERATION_NAME,CONTENT_PERM_STATUS,SHOW_FLAG from s_content_perm where ");
         } else {
-            query.append("select CONTENT_OPERATION_STATUS,CONTENT_OPERATION_NAME,CONTENT_PERM_STATUS,SHOW_FLAG from S_CONTENT_PERM");
+            query.append("select CONTENT_OPERATION_STATUS,CONTENT_OPERATION_NAME,CONTENT_PERM_STATUS,SHOW_FLAG from s_content_perm");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -374,9 +374,9 @@ public class DbSContentPerm extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select CONTENT_OPERATION_STATUS,CONTENT_OPERATION_NAME,CONTENT_PERM_STATUS,SHOW_FLAG from S_CONTENT_PERM where ");
+            query.insert(0,"select CONTENT_OPERATION_STATUS,CONTENT_OPERATION_NAME,CONTENT_PERM_STATUS,SHOW_FLAG from s_content_perm where ");
         } else {
-            query.append("select CONTENT_OPERATION_STATUS,CONTENT_OPERATION_NAME,CONTENT_PERM_STATUS,SHOW_FLAG from S_CONTENT_PERM");
+            query.append("select CONTENT_OPERATION_STATUS,CONTENT_OPERATION_NAME,CONTENT_PERM_STATUS,SHOW_FLAG from s_content_perm");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -392,7 +392,7 @@ public class DbSContentPerm extends RootDB{
     public int count() throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from S_CONTENT_PERM");
+        query.append("select count(1) as num from s_content_perm");
 
         QueryResult qr = trans.doQuery(connId,query.toString());
         if (qr.size() == 1) {
@@ -407,7 +407,7 @@ public class DbSContentPerm extends RootDB{
     public int countWhere(String where) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from S_CONTENT_PERM");
+        query.append("select count(1) as num from s_content_perm");
         query.append(" where ");
         query.append(where);
         QueryResult qr = trans.doQuery(connId,query.toString());
@@ -418,13 +418,13 @@ public class DbSContentPerm extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "S_CONTENT_PERM"
+     * Deletes from the database for table "s_content_perm"
      */
     public int deleteWhere(String where) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from S_CONTENT_PERM");
+        query.append("delete from s_content_perm");
         query.append(" where ");
         query.append(where);
         res = trans.doUpdate(connId,query.toString());
@@ -438,7 +438,7 @@ public class DbSContentPerm extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update S_CONTENT_PERM set ");
+        query.append("update s_content_perm set ");
 
         if(en.hasChangeContentOperationStatus()) {
             if(bChanged){

@@ -22,7 +22,7 @@ public class DbSysRole extends RootDB{
 
     public DbSysRole(Transaction trans, String connId) {
         super(trans,connId);
-        orderBy = " order by SYS_ROLE.ROLE_ID";
+        orderBy = " order by sys_role.ROLE_ID";
     }
     /**
      * Inserts the current object values into the database.
@@ -31,7 +31,7 @@ public class DbSysRole extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
 
-        query.append("insert into SYS_ROLE ( ROLE_ID,ROLE_NAME,ROLE_DESC ) values ( ");
+        query.append("insert into sys_role ( ROLE_ID,ROLE_NAME,ROLE_DESC ) values ( ");
         query.append(formatString(en.getRoleId()));
         query.append(",");
         query.append(formatString(en.getRoleName()));
@@ -44,13 +44,13 @@ public class DbSysRole extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "SYS_ROLE"
+     * Deletes from the database for table "sys_role"
      */
     public int deleteByKey(String roleId) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from SYS_ROLE");
+        query.append("delete from sys_role");
 
         query.append(" where ");
         query.append("ROLE_ID=");
@@ -66,7 +66,7 @@ public class DbSysRole extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update SYS_ROLE set ");
+        query.append("update sys_role set ");
 
         if(en.hasChangeRoleId()) {
             if(bChanged){
@@ -101,13 +101,13 @@ public class DbSysRole extends RootDB{
     }
 
     /**
-     * Retrieve from the database for table "SYS_ROLE"
+     * Retrieve from the database for table "sys_role"
     */
     public EnSysRole findByKey(String roleId) throws ErrorException {
         EnSysRole res = null;
 
         StringBuffer query;
-        query = new StringBuffer("select ROLE_ID,ROLE_NAME,ROLE_DESC from SYS_ROLE");
+        query = new StringBuffer("select ROLE_ID,ROLE_NAME,ROLE_DESC from sys_role");
 
         query.append(" where ");
         query.append("ROLE_ID=");
@@ -127,7 +127,7 @@ public class DbSysRole extends RootDB{
     public int countByKey(String roleId) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from SYS_ROLE");
+        query.append("select count(1) as num from sys_role");
 
         query.append(" where ");
         query.append("ROLE_ID=");
@@ -140,13 +140,13 @@ public class DbSysRole extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "SYS_ROLE"
+     * Deletes from the database for table "sys_role"
      */
     public int deleteLikeKey(String roleId) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from SYS_ROLE");
+        query.append("delete from sys_role");
 
         query.append(" where ");
         query.append("ROLE_ID like ");
@@ -162,7 +162,7 @@ public class DbSysRole extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update SYS_ROLE set ");
+        query.append("update sys_role set ");
 
         if(en.hasChangeRoleName()) {
             if(bChanged){
@@ -195,7 +195,7 @@ public class DbSysRole extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select ROLE_ID,ROLE_NAME,ROLE_DESC from SYS_ROLE");
+        query.append("select ROLE_ID,ROLE_NAME,ROLE_DESC from sys_role");
 
         query.append(" where ");
         query.append("ROLE_ID like ");
@@ -214,7 +214,7 @@ public class DbSysRole extends RootDB{
     public int countLikeKey(String roleId) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from SYS_ROLE");
+        query.append("select count(1) as num from sys_role");
 
         query.append(" where ");
         query.append("ROLE_ID like ");
@@ -233,7 +233,7 @@ public class DbSysRole extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select ROLE_ID,ROLE_NAME,ROLE_DESC from SYS_ROLE where ");
+        query.append("select ROLE_ID,ROLE_NAME,ROLE_DESC from sys_role where ");
         query.append(where);
         if(orderBy != null) {
             query.append(orderBy);
@@ -250,7 +250,7 @@ public class DbSysRole extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select ROLE_ID,ROLE_NAME,ROLE_DESC from SYS_ROLE");
+        query.append("select ROLE_ID,ROLE_NAME,ROLE_DESC from sys_role");
 
         if(orderBy != null) {
             query.append(orderBy);
@@ -294,9 +294,9 @@ public class DbSysRole extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select ROLE_ID,ROLE_NAME,ROLE_DESC from SYS_ROLE where ");
+            query.insert(0,"select ROLE_ID,ROLE_NAME,ROLE_DESC from sys_role where ");
         } else {
-            query.append("select ROLE_ID,ROLE_NAME,ROLE_DESC from SYS_ROLE");
+            query.append("select ROLE_ID,ROLE_NAME,ROLE_DESC from sys_role");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -340,9 +340,9 @@ public class DbSysRole extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select ROLE_ID,ROLE_NAME,ROLE_DESC from SYS_ROLE where ");
+            query.insert(0,"select ROLE_ID,ROLE_NAME,ROLE_DESC from sys_role where ");
         } else {
-            query.append("select ROLE_ID,ROLE_NAME,ROLE_DESC from SYS_ROLE");
+            query.append("select ROLE_ID,ROLE_NAME,ROLE_DESC from sys_role");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -358,7 +358,7 @@ public class DbSysRole extends RootDB{
     public int count() throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from SYS_ROLE");
+        query.append("select count(1) as num from sys_role");
 
         QueryResult qr = trans.doQuery(connId,query.toString());
         if (qr.size() == 1) {
@@ -373,7 +373,7 @@ public class DbSysRole extends RootDB{
     public int countWhere(String where) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from SYS_ROLE");
+        query.append("select count(1) as num from sys_role");
         query.append(" where ");
         query.append(where);
         QueryResult qr = trans.doQuery(connId,query.toString());
@@ -384,13 +384,13 @@ public class DbSysRole extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "SYS_ROLE"
+     * Deletes from the database for table "sys_role"
      */
     public int deleteWhere(String where) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from SYS_ROLE");
+        query.append("delete from sys_role");
         query.append(" where ");
         query.append(where);
         res = trans.doUpdate(connId,query.toString());
@@ -404,7 +404,7 @@ public class DbSysRole extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update SYS_ROLE set ");
+        query.append("update sys_role set ");
 
         if(en.hasChangeRoleId()) {
             if(bChanged){

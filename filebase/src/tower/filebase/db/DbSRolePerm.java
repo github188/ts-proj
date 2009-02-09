@@ -22,7 +22,7 @@ public class DbSRolePerm extends RootDB{
 
     public DbSRolePerm(Transaction trans, String connId) {
         super(trans,connId);
-        orderBy = " order by S_ROLE_PERM.CONTENT_ID,S_ROLE_PERM.ROLE_ID";
+        orderBy = " order by s_role_perm.CONTENT_ID,s_role_perm.ROLE_ID";
     }
     /**
      * Inserts the current object values into the database.
@@ -31,7 +31,7 @@ public class DbSRolePerm extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
 
-        query.append("insert into S_ROLE_PERM ( CONTENT_ID,ROLE_ID,CONTENT_PERM_STATUS ) values ( ");
+        query.append("insert into s_role_perm ( CONTENT_ID,ROLE_ID,CONTENT_PERM_STATUS ) values ( ");
         query.append(formatString(en.getContentId()));
         query.append(",");
         query.append(formatString(en.getRoleId()));
@@ -44,13 +44,13 @@ public class DbSRolePerm extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "S_ROLE_PERM"
+     * Deletes from the database for table "s_role_perm"
      */
     public int deleteByKey(String contentId, String roleId) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from S_ROLE_PERM");
+        query.append("delete from s_role_perm");
 
         query.append(" where ");
         query.append("CONTENT_ID=");
@@ -68,7 +68,7 @@ public class DbSRolePerm extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update S_ROLE_PERM set ");
+        query.append("update s_role_perm set ");
 
         if(en.hasChangeContentId()) {
             if(bChanged){
@@ -105,13 +105,13 @@ public class DbSRolePerm extends RootDB{
     }
 
     /**
-     * Retrieve from the database for table "S_ROLE_PERM"
+     * Retrieve from the database for table "s_role_perm"
     */
     public EnSRolePerm findByKey(String contentId, String roleId) throws ErrorException {
         EnSRolePerm res = null;
 
         StringBuffer query;
-        query = new StringBuffer("select CONTENT_ID,ROLE_ID,CONTENT_PERM_STATUS from S_ROLE_PERM");
+        query = new StringBuffer("select CONTENT_ID,ROLE_ID,CONTENT_PERM_STATUS from s_role_perm");
 
         query.append(" where ");
         query.append("CONTENT_ID=");
@@ -133,7 +133,7 @@ public class DbSRolePerm extends RootDB{
     public int countByKey(String contentId, String roleId) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from S_ROLE_PERM");
+        query.append("select count(1) as num from s_role_perm");
 
         query.append(" where ");
         query.append("CONTENT_ID=");
@@ -148,13 +148,13 @@ public class DbSRolePerm extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "S_ROLE_PERM"
+     * Deletes from the database for table "s_role_perm"
      */
     public int deleteLikeKey(String contentId, String roleId) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from S_ROLE_PERM");
+        query.append("delete from s_role_perm");
 
         query.append(" where ");
         query.append("CONTENT_ID like ");
@@ -172,7 +172,7 @@ public class DbSRolePerm extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update S_ROLE_PERM set ");
+        query.append("update s_role_perm set ");
 
         if(en.hasChangeContentPermStatus()) {
             if(bChanged){
@@ -199,7 +199,7 @@ public class DbSRolePerm extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select CONTENT_ID,ROLE_ID,CONTENT_PERM_STATUS from S_ROLE_PERM");
+        query.append("select CONTENT_ID,ROLE_ID,CONTENT_PERM_STATUS from s_role_perm");
 
         query.append(" where ");
         query.append("CONTENT_ID like ");
@@ -220,7 +220,7 @@ public class DbSRolePerm extends RootDB{
     public int countLikeKey(String contentId, String roleId) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from S_ROLE_PERM");
+        query.append("select count(1) as num from s_role_perm");
 
         query.append(" where ");
         query.append("CONTENT_ID like ");
@@ -241,7 +241,7 @@ public class DbSRolePerm extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select CONTENT_ID,ROLE_ID,CONTENT_PERM_STATUS from S_ROLE_PERM where ");
+        query.append("select CONTENT_ID,ROLE_ID,CONTENT_PERM_STATUS from s_role_perm where ");
         query.append(where);
         if(orderBy != null) {
             query.append(orderBy);
@@ -258,7 +258,7 @@ public class DbSRolePerm extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select CONTENT_ID,ROLE_ID,CONTENT_PERM_STATUS from S_ROLE_PERM");
+        query.append("select CONTENT_ID,ROLE_ID,CONTENT_PERM_STATUS from s_role_perm");
 
         if(orderBy != null) {
             query.append(orderBy);
@@ -302,9 +302,9 @@ public class DbSRolePerm extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select CONTENT_ID,ROLE_ID,CONTENT_PERM_STATUS from S_ROLE_PERM where ");
+            query.insert(0,"select CONTENT_ID,ROLE_ID,CONTENT_PERM_STATUS from s_role_perm where ");
         } else {
-            query.append("select CONTENT_ID,ROLE_ID,CONTENT_PERM_STATUS from S_ROLE_PERM");
+            query.append("select CONTENT_ID,ROLE_ID,CONTENT_PERM_STATUS from s_role_perm");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -348,9 +348,9 @@ public class DbSRolePerm extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select CONTENT_ID,ROLE_ID,CONTENT_PERM_STATUS from S_ROLE_PERM where ");
+            query.insert(0,"select CONTENT_ID,ROLE_ID,CONTENT_PERM_STATUS from s_role_perm where ");
         } else {
-            query.append("select CONTENT_ID,ROLE_ID,CONTENT_PERM_STATUS from S_ROLE_PERM");
+            query.append("select CONTENT_ID,ROLE_ID,CONTENT_PERM_STATUS from s_role_perm");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -366,7 +366,7 @@ public class DbSRolePerm extends RootDB{
     public int count() throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from S_ROLE_PERM");
+        query.append("select count(1) as num from s_role_perm");
 
         QueryResult qr = trans.doQuery(connId,query.toString());
         if (qr.size() == 1) {
@@ -381,7 +381,7 @@ public class DbSRolePerm extends RootDB{
     public int countWhere(String where) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from S_ROLE_PERM");
+        query.append("select count(1) as num from s_role_perm");
         query.append(" where ");
         query.append(where);
         QueryResult qr = trans.doQuery(connId,query.toString());
@@ -392,13 +392,13 @@ public class DbSRolePerm extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "S_ROLE_PERM"
+     * Deletes from the database for table "s_role_perm"
      */
     public int deleteWhere(String where) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from S_ROLE_PERM");
+        query.append("delete from s_role_perm");
         query.append(" where ");
         query.append(where);
         res = trans.doUpdate(connId,query.toString());
@@ -412,7 +412,7 @@ public class DbSRolePerm extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update S_ROLE_PERM set ");
+        query.append("update s_role_perm set ");
 
         if(en.hasChangeContentId()) {
             if(bChanged){

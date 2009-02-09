@@ -22,7 +22,7 @@ public class DbCodeSet extends RootDB{
 
     public DbCodeSet(Transaction trans, String connId) {
         super(trans,connId);
-        orderBy = " order by CODE_SET.SET_ID";
+        orderBy = " order by code_set.SET_ID";
     }
     /**
      * Inserts the current object values into the database.
@@ -31,7 +31,7 @@ public class DbCodeSet extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
 
-        query.append("insert into CODE_SET ( SET_ID,SET_DESC,STATUS,SET_TYPE,CODE_TYPE ) values ( ");
+        query.append("insert into code_set ( SET_ID,SET_DESC,STATUS,SET_TYPE,CODE_TYPE ) values ( ");
         query.append(formatString(en.getSetId()));
         query.append(",");
         query.append(formatString(en.getSetDesc()));
@@ -48,13 +48,13 @@ public class DbCodeSet extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "CODE_SET"
+     * Deletes from the database for table "code_set"
      */
     public int deleteByKey(String setId) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from CODE_SET");
+        query.append("delete from code_set");
 
         query.append(" where ");
         query.append("SET_ID=");
@@ -70,7 +70,7 @@ public class DbCodeSet extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update CODE_SET set ");
+        query.append("update code_set set ");
 
         if(en.hasChangeSetId()) {
             if(bChanged){
@@ -121,13 +121,13 @@ public class DbCodeSet extends RootDB{
     }
 
     /**
-     * Retrieve from the database for table "CODE_SET"
+     * Retrieve from the database for table "code_set"
     */
     public EnCodeSet findByKey(String setId) throws ErrorException {
         EnCodeSet res = null;
 
         StringBuffer query;
-        query = new StringBuffer("select SET_ID,SET_DESC,STATUS,SET_TYPE,CODE_TYPE from CODE_SET");
+        query = new StringBuffer("select SET_ID,SET_DESC,STATUS,SET_TYPE,CODE_TYPE from code_set");
 
         query.append(" where ");
         query.append("SET_ID=");
@@ -147,7 +147,7 @@ public class DbCodeSet extends RootDB{
     public int countByKey(String setId) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from CODE_SET");
+        query.append("select count(1) as num from code_set");
 
         query.append(" where ");
         query.append("SET_ID=");
@@ -160,13 +160,13 @@ public class DbCodeSet extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "CODE_SET"
+     * Deletes from the database for table "code_set"
      */
     public int deleteLikeKey(String setId) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from CODE_SET");
+        query.append("delete from code_set");
 
         query.append(" where ");
         query.append("SET_ID like ");
@@ -182,7 +182,7 @@ public class DbCodeSet extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update CODE_SET set ");
+        query.append("update code_set set ");
 
         if(en.hasChangeSetDesc()) {
             if(bChanged){
@@ -231,7 +231,7 @@ public class DbCodeSet extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select SET_ID,SET_DESC,STATUS,SET_TYPE,CODE_TYPE from CODE_SET");
+        query.append("select SET_ID,SET_DESC,STATUS,SET_TYPE,CODE_TYPE from code_set");
 
         query.append(" where ");
         query.append("SET_ID like ");
@@ -250,7 +250,7 @@ public class DbCodeSet extends RootDB{
     public int countLikeKey(String setId) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from CODE_SET");
+        query.append("select count(1) as num from code_set");
 
         query.append(" where ");
         query.append("SET_ID like ");
@@ -269,7 +269,7 @@ public class DbCodeSet extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select SET_ID,SET_DESC,STATUS,SET_TYPE,CODE_TYPE from CODE_SET where ");
+        query.append("select SET_ID,SET_DESC,STATUS,SET_TYPE,CODE_TYPE from code_set where ");
         query.append(where);
         if(orderBy != null) {
             query.append(orderBy);
@@ -286,7 +286,7 @@ public class DbCodeSet extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select SET_ID,SET_DESC,STATUS,SET_TYPE,CODE_TYPE from CODE_SET");
+        query.append("select SET_ID,SET_DESC,STATUS,SET_TYPE,CODE_TYPE from code_set");
 
         if(orderBy != null) {
             query.append(orderBy);
@@ -346,9 +346,9 @@ public class DbCodeSet extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select SET_ID,SET_DESC,STATUS,SET_TYPE,CODE_TYPE from CODE_SET where ");
+            query.insert(0,"select SET_ID,SET_DESC,STATUS,SET_TYPE,CODE_TYPE from code_set where ");
         } else {
-            query.append("select SET_ID,SET_DESC,STATUS,SET_TYPE,CODE_TYPE from CODE_SET");
+            query.append("select SET_ID,SET_DESC,STATUS,SET_TYPE,CODE_TYPE from code_set");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -408,9 +408,9 @@ public class DbCodeSet extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select SET_ID,SET_DESC,STATUS,SET_TYPE,CODE_TYPE from CODE_SET where ");
+            query.insert(0,"select SET_ID,SET_DESC,STATUS,SET_TYPE,CODE_TYPE from code_set where ");
         } else {
-            query.append("select SET_ID,SET_DESC,STATUS,SET_TYPE,CODE_TYPE from CODE_SET");
+            query.append("select SET_ID,SET_DESC,STATUS,SET_TYPE,CODE_TYPE from code_set");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -426,7 +426,7 @@ public class DbCodeSet extends RootDB{
     public int count() throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from CODE_SET");
+        query.append("select count(1) as num from code_set");
 
         QueryResult qr = trans.doQuery(connId,query.toString());
         if (qr.size() == 1) {
@@ -441,7 +441,7 @@ public class DbCodeSet extends RootDB{
     public int countWhere(String where) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from CODE_SET");
+        query.append("select count(1) as num from code_set");
         query.append(" where ");
         query.append(where);
         QueryResult qr = trans.doQuery(connId,query.toString());
@@ -452,13 +452,13 @@ public class DbCodeSet extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "CODE_SET"
+     * Deletes from the database for table "code_set"
      */
     public int deleteWhere(String where) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from CODE_SET");
+        query.append("delete from code_set");
         query.append(" where ");
         query.append(where);
         res = trans.doUpdate(connId,query.toString());
@@ -472,7 +472,7 @@ public class DbCodeSet extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update CODE_SET set ");
+        query.append("update code_set set ");
 
         if(en.hasChangeSetId()) {
             if(bChanged){

@@ -22,7 +22,7 @@ public class DbTFile extends RootDB{
 
     public DbTFile(Transaction trans, String connId) {
         super(trans,connId);
-        orderBy = " order by T_FILE.FILE_ID";
+        orderBy = " order by t_file.FILE_ID";
     }
     /**
      * Inserts the current object values into the database.
@@ -31,7 +31,7 @@ public class DbTFile extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
 
-        query.append("insert into T_FILE ( FILE_ID,NEW_VERSION_NO,FILE_NAME,FILE_SIZE,FILE_REMARK,FILE_EXT_NAME,KEY_WORD,CATALOG_ID,CREATOR,CREATE_DATETIME,FLAG,DELETE_PERSON,DELETE_DATETIME,FILE_STATE,CURR_EDIT_PERSON,EDIT_DATETIME,FILE_PATH ) values ( ");
+        query.append("insert into t_file ( FILE_ID,NEW_VERSION_NO,FILE_NAME,FILE_SIZE,FILE_REMARK,FILE_EXT_NAME,KEY_WORD,CATALOG_ID,CREATOR,CREATE_DATETIME,FLAG,DELETE_PERSON,DELETE_DATETIME,FILE_STATE,CURR_EDIT_PERSON,EDIT_DATETIME,FILE_PATH ) values ( ");
         query.append(formatString(en.getFileId()));
         query.append(",");
         query.append(formatString(en.getNewVersionNo()));
@@ -72,13 +72,13 @@ public class DbTFile extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "T_FILE"
+     * Deletes from the database for table "t_file"
      */
     public int deleteByKey(String fileId) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from T_FILE");
+        query.append("delete from t_file");
 
         query.append(" where ");
         query.append("FILE_ID=");
@@ -94,7 +94,7 @@ public class DbTFile extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update T_FILE set ");
+        query.append("update t_file set ");
 
         if(en.hasChangeFileId()) {
             if(bChanged){
@@ -241,13 +241,13 @@ public class DbTFile extends RootDB{
     }
 
     /**
-     * Retrieve from the database for table "T_FILE"
+     * Retrieve from the database for table "t_file"
     */
     public EnTFile findByKey(String fileId) throws ErrorException {
         EnTFile res = null;
 
         StringBuffer query;
-        query = new StringBuffer("select FILE_ID,NEW_VERSION_NO,FILE_NAME,FILE_SIZE,FILE_REMARK,FILE_EXT_NAME,KEY_WORD,CATALOG_ID,CREATOR,CREATE_DATETIME,FLAG,DELETE_PERSON,DELETE_DATETIME,FILE_STATE,CURR_EDIT_PERSON,EDIT_DATETIME,FILE_PATH from T_FILE");
+        query = new StringBuffer("select FILE_ID,NEW_VERSION_NO,FILE_NAME,FILE_SIZE,FILE_REMARK,FILE_EXT_NAME,KEY_WORD,CATALOG_ID,CREATOR,CREATE_DATETIME,FLAG,DELETE_PERSON,DELETE_DATETIME,FILE_STATE,CURR_EDIT_PERSON,EDIT_DATETIME,FILE_PATH from t_file");
 
         query.append(" where ");
         query.append("FILE_ID=");
@@ -267,7 +267,7 @@ public class DbTFile extends RootDB{
     public int countByKey(String fileId) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from T_FILE");
+        query.append("select count(1) as num from t_file");
 
         query.append(" where ");
         query.append("FILE_ID=");
@@ -280,13 +280,13 @@ public class DbTFile extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "T_FILE"
+     * Deletes from the database for table "t_file"
      */
     public int deleteLikeKey(String fileId) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from T_FILE");
+        query.append("delete from t_file");
 
         query.append(" where ");
         query.append("FILE_ID like ");
@@ -302,7 +302,7 @@ public class DbTFile extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update T_FILE set ");
+        query.append("update t_file set ");
 
         if(en.hasChangeNewVersionNo()) {
             if(bChanged){
@@ -447,7 +447,7 @@ public class DbTFile extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select FILE_ID,NEW_VERSION_NO,FILE_NAME,FILE_SIZE,FILE_REMARK,FILE_EXT_NAME,KEY_WORD,CATALOG_ID,CREATOR,CREATE_DATETIME,FLAG,DELETE_PERSON,DELETE_DATETIME,FILE_STATE,CURR_EDIT_PERSON,EDIT_DATETIME,FILE_PATH from T_FILE");
+        query.append("select FILE_ID,NEW_VERSION_NO,FILE_NAME,FILE_SIZE,FILE_REMARK,FILE_EXT_NAME,KEY_WORD,CATALOG_ID,CREATOR,CREATE_DATETIME,FLAG,DELETE_PERSON,DELETE_DATETIME,FILE_STATE,CURR_EDIT_PERSON,EDIT_DATETIME,FILE_PATH from t_file");
 
         query.append(" where ");
         query.append("FILE_ID like ");
@@ -466,7 +466,7 @@ public class DbTFile extends RootDB{
     public int countLikeKey(String fileId) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from T_FILE");
+        query.append("select count(1) as num from t_file");
 
         query.append(" where ");
         query.append("FILE_ID like ");
@@ -485,7 +485,7 @@ public class DbTFile extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select FILE_ID,NEW_VERSION_NO,FILE_NAME,FILE_SIZE,FILE_REMARK,FILE_EXT_NAME,KEY_WORD,CATALOG_ID,CREATOR,CREATE_DATETIME,FLAG,DELETE_PERSON,DELETE_DATETIME,FILE_STATE,CURR_EDIT_PERSON,EDIT_DATETIME,FILE_PATH from T_FILE where ");
+        query.append("select FILE_ID,NEW_VERSION_NO,FILE_NAME,FILE_SIZE,FILE_REMARK,FILE_EXT_NAME,KEY_WORD,CATALOG_ID,CREATOR,CREATE_DATETIME,FLAG,DELETE_PERSON,DELETE_DATETIME,FILE_STATE,CURR_EDIT_PERSON,EDIT_DATETIME,FILE_PATH from t_file where ");
         query.append(where);
         if(orderBy != null) {
             query.append(orderBy);
@@ -502,7 +502,7 @@ public class DbTFile extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select FILE_ID,NEW_VERSION_NO,FILE_NAME,FILE_SIZE,FILE_REMARK,FILE_EXT_NAME,KEY_WORD,CATALOG_ID,CREATOR,CREATE_DATETIME,FLAG,DELETE_PERSON,DELETE_DATETIME,FILE_STATE,CURR_EDIT_PERSON,EDIT_DATETIME,FILE_PATH from T_FILE");
+        query.append("select FILE_ID,NEW_VERSION_NO,FILE_NAME,FILE_SIZE,FILE_REMARK,FILE_EXT_NAME,KEY_WORD,CATALOG_ID,CREATOR,CREATE_DATETIME,FLAG,DELETE_PERSON,DELETE_DATETIME,FILE_STATE,CURR_EDIT_PERSON,EDIT_DATETIME,FILE_PATH from t_file");
 
         if(orderBy != null) {
             query.append(orderBy);
@@ -658,9 +658,9 @@ public class DbTFile extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select FILE_ID,NEW_VERSION_NO,FILE_NAME,FILE_SIZE,FILE_REMARK,FILE_EXT_NAME,KEY_WORD,CATALOG_ID,CREATOR,CREATE_DATETIME,FLAG,DELETE_PERSON,DELETE_DATETIME,FILE_STATE,CURR_EDIT_PERSON,EDIT_DATETIME,FILE_PATH from T_FILE where ");
+            query.insert(0,"select FILE_ID,NEW_VERSION_NO,FILE_NAME,FILE_SIZE,FILE_REMARK,FILE_EXT_NAME,KEY_WORD,CATALOG_ID,CREATOR,CREATE_DATETIME,FLAG,DELETE_PERSON,DELETE_DATETIME,FILE_STATE,CURR_EDIT_PERSON,EDIT_DATETIME,FILE_PATH from t_file where ");
         } else {
-            query.append("select FILE_ID,NEW_VERSION_NO,FILE_NAME,FILE_SIZE,FILE_REMARK,FILE_EXT_NAME,KEY_WORD,CATALOG_ID,CREATOR,CREATE_DATETIME,FLAG,DELETE_PERSON,DELETE_DATETIME,FILE_STATE,CURR_EDIT_PERSON,EDIT_DATETIME,FILE_PATH from T_FILE");
+            query.append("select FILE_ID,NEW_VERSION_NO,FILE_NAME,FILE_SIZE,FILE_REMARK,FILE_EXT_NAME,KEY_WORD,CATALOG_ID,CREATOR,CREATE_DATETIME,FLAG,DELETE_PERSON,DELETE_DATETIME,FILE_STATE,CURR_EDIT_PERSON,EDIT_DATETIME,FILE_PATH from t_file");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -816,9 +816,9 @@ public class DbTFile extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select FILE_ID,NEW_VERSION_NO,FILE_NAME,FILE_SIZE,FILE_REMARK,FILE_EXT_NAME,KEY_WORD,CATALOG_ID,CREATOR,CREATE_DATETIME,FLAG,DELETE_PERSON,DELETE_DATETIME,FILE_STATE,CURR_EDIT_PERSON,EDIT_DATETIME,FILE_PATH from T_FILE where ");
+            query.insert(0,"select FILE_ID,NEW_VERSION_NO,FILE_NAME,FILE_SIZE,FILE_REMARK,FILE_EXT_NAME,KEY_WORD,CATALOG_ID,CREATOR,CREATE_DATETIME,FLAG,DELETE_PERSON,DELETE_DATETIME,FILE_STATE,CURR_EDIT_PERSON,EDIT_DATETIME,FILE_PATH from t_file where ");
         } else {
-            query.append("select FILE_ID,NEW_VERSION_NO,FILE_NAME,FILE_SIZE,FILE_REMARK,FILE_EXT_NAME,KEY_WORD,CATALOG_ID,CREATOR,CREATE_DATETIME,FLAG,DELETE_PERSON,DELETE_DATETIME,FILE_STATE,CURR_EDIT_PERSON,EDIT_DATETIME,FILE_PATH from T_FILE");
+            query.append("select FILE_ID,NEW_VERSION_NO,FILE_NAME,FILE_SIZE,FILE_REMARK,FILE_EXT_NAME,KEY_WORD,CATALOG_ID,CREATOR,CREATE_DATETIME,FLAG,DELETE_PERSON,DELETE_DATETIME,FILE_STATE,CURR_EDIT_PERSON,EDIT_DATETIME,FILE_PATH from t_file");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -834,7 +834,7 @@ public class DbTFile extends RootDB{
     public int count() throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from T_FILE");
+        query.append("select count(1) as num from t_file");
 
         QueryResult qr = trans.doQuery(connId,query.toString());
         if (qr.size() == 1) {
@@ -849,7 +849,7 @@ public class DbTFile extends RootDB{
     public int countWhere(String where) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from T_FILE");
+        query.append("select count(1) as num from t_file");
         query.append(" where ");
         query.append(where);
         QueryResult qr = trans.doQuery(connId,query.toString());
@@ -860,13 +860,13 @@ public class DbTFile extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "T_FILE"
+     * Deletes from the database for table "t_file"
      */
     public int deleteWhere(String where) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from T_FILE");
+        query.append("delete from t_file");
         query.append(" where ");
         query.append(where);
         res = trans.doUpdate(connId,query.toString());
@@ -880,7 +880,7 @@ public class DbTFile extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update T_FILE set ");
+        query.append("update t_file set ");
 
         if(en.hasChangeFileId()) {
             if(bChanged){

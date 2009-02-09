@@ -22,7 +22,7 @@ public class DbMAuto extends RootDB{
 
     public DbMAuto(Transaction trans, String connId) {
         super(trans,connId);
-        orderBy = " order by M_AUTO.AUTO_ID";
+        orderBy = " order by m_auto.AUTO_ID";
     }
     /**
      * Inserts the current object values into the database.
@@ -31,7 +31,7 @@ public class DbMAuto extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
 
-        query.append("insert into M_AUTO ( AUTO_ID,BUILD_MODE,MEMO,NOW_VALUE ) values ( ");
+        query.append("insert into m_auto ( AUTO_ID,BUILD_MODE,MEMO,NOW_VALUE ) values ( ");
         query.append(formatString(en.getAutoId()));
         query.append(",");
         query.append(formatString(en.getBuildMode()));
@@ -46,13 +46,13 @@ public class DbMAuto extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "M_AUTO"
+     * Deletes from the database for table "m_auto"
      */
     public int deleteByKey(String autoId) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from M_AUTO");
+        query.append("delete from m_auto");
 
         query.append(" where ");
         query.append("AUTO_ID=");
@@ -68,7 +68,7 @@ public class DbMAuto extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update M_AUTO set ");
+        query.append("update m_auto set ");
 
         if(en.hasChangeAutoId()) {
             if(bChanged){
@@ -111,13 +111,13 @@ public class DbMAuto extends RootDB{
     }
 
     /**
-     * Retrieve from the database for table "M_AUTO"
+     * Retrieve from the database for table "m_auto"
     */
     public EnMAuto findByKey(String autoId) throws ErrorException {
         EnMAuto res = null;
 
         StringBuffer query;
-        query = new StringBuffer("select AUTO_ID,BUILD_MODE,MEMO,NOW_VALUE from M_AUTO");
+        query = new StringBuffer("select AUTO_ID,BUILD_MODE,MEMO,NOW_VALUE from m_auto");
 
         query.append(" where ");
         query.append("AUTO_ID=");
@@ -137,7 +137,7 @@ public class DbMAuto extends RootDB{
     public int countByKey(String autoId) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from M_AUTO");
+        query.append("select count(1) as num from m_auto");
 
         query.append(" where ");
         query.append("AUTO_ID=");
@@ -150,13 +150,13 @@ public class DbMAuto extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "M_AUTO"
+     * Deletes from the database for table "m_auto"
      */
     public int deleteLikeKey(String autoId) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from M_AUTO");
+        query.append("delete from m_auto");
 
         query.append(" where ");
         query.append("AUTO_ID like ");
@@ -172,7 +172,7 @@ public class DbMAuto extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update M_AUTO set ");
+        query.append("update m_auto set ");
 
         if(en.hasChangeBuildMode()) {
             if(bChanged){
@@ -213,7 +213,7 @@ public class DbMAuto extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select AUTO_ID,BUILD_MODE,MEMO,NOW_VALUE from M_AUTO");
+        query.append("select AUTO_ID,BUILD_MODE,MEMO,NOW_VALUE from m_auto");
 
         query.append(" where ");
         query.append("AUTO_ID like ");
@@ -232,7 +232,7 @@ public class DbMAuto extends RootDB{
     public int countLikeKey(String autoId) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from M_AUTO");
+        query.append("select count(1) as num from m_auto");
 
         query.append(" where ");
         query.append("AUTO_ID like ");
@@ -251,7 +251,7 @@ public class DbMAuto extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select AUTO_ID,BUILD_MODE,MEMO,NOW_VALUE from M_AUTO where ");
+        query.append("select AUTO_ID,BUILD_MODE,MEMO,NOW_VALUE from m_auto where ");
         query.append(where);
         if(orderBy != null) {
             query.append(orderBy);
@@ -268,7 +268,7 @@ public class DbMAuto extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select AUTO_ID,BUILD_MODE,MEMO,NOW_VALUE from M_AUTO");
+        query.append("select AUTO_ID,BUILD_MODE,MEMO,NOW_VALUE from m_auto");
 
         if(orderBy != null) {
             query.append(orderBy);
@@ -320,9 +320,9 @@ public class DbMAuto extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select AUTO_ID,BUILD_MODE,MEMO,NOW_VALUE from M_AUTO where ");
+            query.insert(0,"select AUTO_ID,BUILD_MODE,MEMO,NOW_VALUE from m_auto where ");
         } else {
-            query.append("select AUTO_ID,BUILD_MODE,MEMO,NOW_VALUE from M_AUTO");
+            query.append("select AUTO_ID,BUILD_MODE,MEMO,NOW_VALUE from m_auto");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -374,9 +374,9 @@ public class DbMAuto extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select AUTO_ID,BUILD_MODE,MEMO,NOW_VALUE from M_AUTO where ");
+            query.insert(0,"select AUTO_ID,BUILD_MODE,MEMO,NOW_VALUE from m_auto where ");
         } else {
-            query.append("select AUTO_ID,BUILD_MODE,MEMO,NOW_VALUE from M_AUTO");
+            query.append("select AUTO_ID,BUILD_MODE,MEMO,NOW_VALUE from m_auto");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -392,7 +392,7 @@ public class DbMAuto extends RootDB{
     public int count() throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from M_AUTO");
+        query.append("select count(1) as num from m_auto");
 
         QueryResult qr = trans.doQuery(connId,query.toString());
         if (qr.size() == 1) {
@@ -407,7 +407,7 @@ public class DbMAuto extends RootDB{
     public int countWhere(String where) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from M_AUTO");
+        query.append("select count(1) as num from m_auto");
         query.append(" where ");
         query.append(where);
         QueryResult qr = trans.doQuery(connId,query.toString());
@@ -418,13 +418,13 @@ public class DbMAuto extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "M_AUTO"
+     * Deletes from the database for table "m_auto"
      */
     public int deleteWhere(String where) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from M_AUTO");
+        query.append("delete from m_auto");
         query.append(" where ");
         query.append(where);
         res = trans.doUpdate(connId,query.toString());
@@ -438,7 +438,7 @@ public class DbMAuto extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update M_AUTO set ");
+        query.append("update m_auto set ");
 
         if(en.hasChangeAutoId()) {
             if(bChanged){

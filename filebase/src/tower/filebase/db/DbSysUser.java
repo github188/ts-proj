@@ -22,7 +22,7 @@ public class DbSysUser extends RootDB{
 
     public DbSysUser(Transaction trans, String connId) {
         super(trans,connId);
-        orderBy = " order by SYS_USER.USER_ID";
+        orderBy = " order by sys_user.USER_ID";
     }
     /**
      * Inserts the current object values into the database.
@@ -31,7 +31,7 @@ public class DbSysUser extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
 
-        query.append("insert into SYS_USER ( USER_ID,USER_NAME,LOGIN_NAME,PASSWORD,STATUS,USER_ORG_ID,USER_STAT_ID,USER_DESC,LINK_TELE,LINK_EMAIL,USER_SEX,USER_BIRTH,MAN_FLAG ) values ( ");
+        query.append("insert into sys_user ( USER_ID,USER_NAME,LOGIN_NAME,PASSWORD,STATUS,USER_ORG_ID,USER_STAT_ID,USER_DESC,LINK_TELE,LINK_EMAIL,USER_SEX,USER_BIRTH,MAN_FLAG ) values ( ");
         query.append(formatString(en.getUserId()));
         query.append(",");
         query.append(formatString(en.getUserName()));
@@ -64,13 +64,13 @@ public class DbSysUser extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "SYS_USER"
+     * Deletes from the database for table "sys_user"
      */
     public int deleteByKey(String userId) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from SYS_USER");
+        query.append("delete from sys_user");
 
         query.append(" where ");
         query.append("USER_ID=");
@@ -86,7 +86,7 @@ public class DbSysUser extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update SYS_USER set ");
+        query.append("update sys_user set ");
 
         if(en.hasChangeUserId()) {
             if(bChanged){
@@ -201,13 +201,13 @@ public class DbSysUser extends RootDB{
     }
 
     /**
-     * Retrieve from the database for table "SYS_USER"
+     * Retrieve from the database for table "sys_user"
     */
     public EnSysUser findByKey(String userId) throws ErrorException {
         EnSysUser res = null;
 
         StringBuffer query;
-        query = new StringBuffer("select USER_ID,USER_NAME,LOGIN_NAME,PASSWORD,STATUS,USER_ORG_ID,USER_STAT_ID,USER_DESC,LINK_TELE,LINK_EMAIL,USER_SEX,USER_BIRTH,MAN_FLAG from SYS_USER");
+        query = new StringBuffer("select USER_ID,USER_NAME,LOGIN_NAME,PASSWORD,STATUS,USER_ORG_ID,USER_STAT_ID,USER_DESC,LINK_TELE,LINK_EMAIL,USER_SEX,USER_BIRTH,MAN_FLAG from sys_user");
 
         query.append(" where ");
         query.append("USER_ID=");
@@ -227,7 +227,7 @@ public class DbSysUser extends RootDB{
     public int countByKey(String userId) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from SYS_USER");
+        query.append("select count(1) as num from sys_user");
 
         query.append(" where ");
         query.append("USER_ID=");
@@ -240,13 +240,13 @@ public class DbSysUser extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "SYS_USER"
+     * Deletes from the database for table "sys_user"
      */
     public int deleteLikeKey(String userId) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from SYS_USER");
+        query.append("delete from sys_user");
 
         query.append(" where ");
         query.append("USER_ID like ");
@@ -262,7 +262,7 @@ public class DbSysUser extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update SYS_USER set ");
+        query.append("update sys_user set ");
 
         if(en.hasChangeUserName()) {
             if(bChanged){
@@ -375,7 +375,7 @@ public class DbSysUser extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select USER_ID,USER_NAME,LOGIN_NAME,PASSWORD,STATUS,USER_ORG_ID,USER_STAT_ID,USER_DESC,LINK_TELE,LINK_EMAIL,USER_SEX,USER_BIRTH,MAN_FLAG from SYS_USER");
+        query.append("select USER_ID,USER_NAME,LOGIN_NAME,PASSWORD,STATUS,USER_ORG_ID,USER_STAT_ID,USER_DESC,LINK_TELE,LINK_EMAIL,USER_SEX,USER_BIRTH,MAN_FLAG from sys_user");
 
         query.append(" where ");
         query.append("USER_ID like ");
@@ -394,11 +394,695 @@ public class DbSysUser extends RootDB{
     public int countLikeKey(String userId) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from SYS_USER");
+        query.append("select count(1) as num from sys_user");
 
         query.append(" where ");
         query.append("USER_ID like ");
         query.append(formatString(userId));
+        QueryResult qr = trans.doQuery(connId,query.toString());
+        if (qr.size() == 1) {
+            count = qr.get(0).getInteger("num").intValue();
+        }
+        return count;
+    }
+
+    /**
+     * Deletes from the database for table "sys_user"
+     */
+    public int deleteByIndexIdxUserOrgId(String userOrgId) throws ErrorException {
+        int res=-1;
+
+        StringBuffer query = new StringBuffer();
+        query.append("delete from sys_user");
+
+        query.append(" where ");
+        query.append("USER_ORG_ID=");
+        query.append(formatString(userOrgId));
+        res = trans.doUpdate(connId,query.toString());
+        return res;
+    }
+
+    /**
+     * Updates the current object values into the database.
+     */
+    public int updateByIndexIdxUserOrgId(String userOrgId,EnSysUser en) throws ErrorException {
+        int res = -1;
+        StringBuffer query = new StringBuffer();
+        boolean bChanged = false;
+        query.append("update sys_user set ");
+
+        if(en.hasChangeUserId()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("USER_ID=");
+            query.append(formatString(en.getUserId()));
+            bChanged = true;
+        }
+        if(en.hasChangeUserName()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("USER_NAME=");
+            query.append(formatString(en.getUserName()));
+            bChanged = true;
+        }
+        if(en.hasChangeLoginName()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("LOGIN_NAME=");
+            query.append(formatString(en.getLoginName()));
+            bChanged = true;
+        }
+        if(en.hasChangePassword()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("PASSWORD=");
+            query.append(formatString(en.getPassword()));
+            bChanged = true;
+        }
+        if(en.hasChangeStatus()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("STATUS=");
+            query.append(formatString(en.getStatus()));
+            bChanged = true;
+        }
+        if(en.hasChangeUserOrgId()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("USER_ORG_ID=");
+            query.append(formatString(en.getUserOrgId()));
+            bChanged = true;
+        }
+        if(en.hasChangeUserStatId()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("USER_STAT_ID=");
+            query.append(formatString(en.getUserStatId()));
+            bChanged = true;
+        }
+        if(en.hasChangeUserDesc()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("USER_DESC=");
+            query.append(formatString(en.getUserDesc()));
+            bChanged = true;
+        }
+        if(en.hasChangeLinkTele()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("LINK_TELE=");
+            query.append(formatString(en.getLinkTele()));
+            bChanged = true;
+        }
+        if(en.hasChangeLinkEmail()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("LINK_EMAIL=");
+            query.append(formatString(en.getLinkEmail()));
+            bChanged = true;
+        }
+        if(en.hasChangeUserSex()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("USER_SEX=");
+            query.append(formatString(en.getUserSex()));
+            bChanged = true;
+        }
+        if(en.hasChangeUserBirth()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("USER_BIRTH=");
+            query.append(formatString(en.getUserBirth()));
+            bChanged = true;
+        }
+        if(en.hasChangeManFlag()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("MAN_FLAG=");
+            query.append(formatString(en.getManFlag()));
+            bChanged = true;
+        }
+
+        query.append(" where ");
+        query.append("USER_ORG_ID=");
+        query.append(formatString(userOrgId));
+        res = trans.doUpdate(connId,query.toString());
+        return res;
+    }
+
+    /**
+     * Retrieve from the database for table "SysUser"
+     */
+    public Vector findAllByIndexIdxUserOrgId(String userOrgId) throws ErrorException {
+        Vector retRows = new Vector();
+
+        StringBuffer query = new StringBuffer();
+        query.append("select USER_ID,USER_NAME,LOGIN_NAME,PASSWORD,STATUS,USER_ORG_ID,USER_STAT_ID,USER_DESC,LINK_TELE,LINK_EMAIL,USER_SEX,USER_BIRTH,MAN_FLAG from sys_user");
+
+        query.append(" where ");
+        query.append("USER_ORG_ID=");
+        query.append(formatString(userOrgId));
+        if(orderBy != null) {
+            query.append(orderBy);
+        }
+        QueryResult qr = trans.doQuery(connId,query.toString(),page,rowsPerPage);
+        retRows = getAllFromResultSet(qr);
+        return retRows;
+    }
+
+    /**
+     * Counts the number of entries for this table in the database.
+     */
+    public int countByIndexIdxUserOrgId(String userOrgId) throws ErrorException {
+        int count = -1;
+        StringBuffer query = new StringBuffer();
+        query.append("select count(1) as num from sys_user");
+
+        query.append(" where ");
+        query.append("USER_ORG_ID=");
+        query.append(formatString(userOrgId));
+        QueryResult qr = trans.doQuery(connId,query.toString());
+        if (qr.size() == 1) {
+            count = qr.get(0).getInteger("num").intValue();
+        }
+        return count;
+    }
+
+    /**
+     * Deletes from the database for table "sys_user"
+     */
+    public int deleteLikeIndexIdxUserOrgId(String userOrgId) throws ErrorException {
+        int res=-1;
+
+        StringBuffer query = new StringBuffer();
+        query.append("delete from sys_user");
+
+        query.append(" where ");
+        query.append("USER_ORG_ID like ");
+        query.append(formatString(userOrgId));
+        res = trans.doUpdate(connId,query.toString());
+        return res;
+    }
+
+    /**
+     * Updates the current object values into the database.
+     */
+    public int updateLikeIndexIdxUserOrgId(String userOrgId,EnSysUser en) throws ErrorException {
+        int res = -1;
+        StringBuffer query = new StringBuffer();
+        boolean bChanged = false;
+        query.append("update sys_user set ");
+
+        if(en.hasChangeUserName()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("USER_NAME=");
+            query.append(formatString(en.getUserName()));
+            bChanged = true;
+        }
+        if(en.hasChangeLoginName()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("LOGIN_NAME=");
+            query.append(formatString(en.getLoginName()));
+            bChanged = true;
+        }
+        if(en.hasChangePassword()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("PASSWORD=");
+            query.append(formatString(en.getPassword()));
+            bChanged = true;
+        }
+        if(en.hasChangeStatus()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("STATUS=");
+            query.append(formatString(en.getStatus()));
+            bChanged = true;
+        }
+        if(en.hasChangeUserOrgId()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("USER_ORG_ID=");
+            query.append(formatString(en.getUserOrgId()));
+            bChanged = true;
+        }
+        if(en.hasChangeUserStatId()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("USER_STAT_ID=");
+            query.append(formatString(en.getUserStatId()));
+            bChanged = true;
+        }
+        if(en.hasChangeUserDesc()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("USER_DESC=");
+            query.append(formatString(en.getUserDesc()));
+            bChanged = true;
+        }
+        if(en.hasChangeLinkTele()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("LINK_TELE=");
+            query.append(formatString(en.getLinkTele()));
+            bChanged = true;
+        }
+        if(en.hasChangeLinkEmail()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("LINK_EMAIL=");
+            query.append(formatString(en.getLinkEmail()));
+            bChanged = true;
+        }
+        if(en.hasChangeUserSex()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("USER_SEX=");
+            query.append(formatString(en.getUserSex()));
+            bChanged = true;
+        }
+        if(en.hasChangeUserBirth()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("USER_BIRTH=");
+            query.append(formatString(en.getUserBirth()));
+            bChanged = true;
+        }
+        if(en.hasChangeManFlag()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("MAN_FLAG=");
+            query.append(formatString(en.getManFlag()));
+            bChanged = true;
+        }
+
+        query.append(" where ");
+        query.append("USER_ORG_ID like ");
+        query.append(formatString(userOrgId));
+        res = trans.doUpdate(connId,query.toString());
+        return res;
+    }
+
+    /**
+     * Retrieve from the database for table "SysUser"
+     */
+    public Vector findAllLikeIndexIdxUserOrgId(String userOrgId) throws ErrorException {
+        Vector retRows = new Vector();
+
+        StringBuffer query = new StringBuffer();
+        query.append("select USER_ID,USER_NAME,LOGIN_NAME,PASSWORD,STATUS,USER_ORG_ID,USER_STAT_ID,USER_DESC,LINK_TELE,LINK_EMAIL,USER_SEX,USER_BIRTH,MAN_FLAG from sys_user");
+
+        query.append(" where ");
+        query.append("USER_ORG_ID like ");
+        query.append(formatString(userOrgId));
+        if(orderBy != null) {
+            query.append(orderBy);
+        }
+        QueryResult qr = trans.doQuery(connId,query.toString(),page,rowsPerPage);
+        retRows = getAllFromResultSet(qr);
+        return retRows;
+    }
+
+    /**
+     * Counts the number of entries for this table in the database.
+     */
+    public int countLikeIndexIdxUserOrgId(String userOrgId) throws ErrorException {
+        int count = -1;
+        StringBuffer query = new StringBuffer();
+        query.append("select count(1) as num from sys_user");
+
+        query.append(" where ");
+        query.append("USER_ORG_ID like ");
+        query.append(formatString(userOrgId));
+        QueryResult qr = trans.doQuery(connId,query.toString());
+        if (qr.size() == 1) {
+            count = qr.get(0).getInteger("num").intValue();
+        }
+        return count;
+    }
+
+    /**
+     * Deletes from the database for table "sys_user"
+     */
+    public int deleteByIndexIdxUserStatId(String userStatId) throws ErrorException {
+        int res=-1;
+
+        StringBuffer query = new StringBuffer();
+        query.append("delete from sys_user");
+
+        query.append(" where ");
+        query.append("USER_STAT_ID=");
+        query.append(formatString(userStatId));
+        res = trans.doUpdate(connId,query.toString());
+        return res;
+    }
+
+    /**
+     * Updates the current object values into the database.
+     */
+    public int updateByIndexIdxUserStatId(String userStatId,EnSysUser en) throws ErrorException {
+        int res = -1;
+        StringBuffer query = new StringBuffer();
+        boolean bChanged = false;
+        query.append("update sys_user set ");
+
+        if(en.hasChangeUserId()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("USER_ID=");
+            query.append(formatString(en.getUserId()));
+            bChanged = true;
+        }
+        if(en.hasChangeUserName()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("USER_NAME=");
+            query.append(formatString(en.getUserName()));
+            bChanged = true;
+        }
+        if(en.hasChangeLoginName()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("LOGIN_NAME=");
+            query.append(formatString(en.getLoginName()));
+            bChanged = true;
+        }
+        if(en.hasChangePassword()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("PASSWORD=");
+            query.append(formatString(en.getPassword()));
+            bChanged = true;
+        }
+        if(en.hasChangeStatus()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("STATUS=");
+            query.append(formatString(en.getStatus()));
+            bChanged = true;
+        }
+        if(en.hasChangeUserOrgId()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("USER_ORG_ID=");
+            query.append(formatString(en.getUserOrgId()));
+            bChanged = true;
+        }
+        if(en.hasChangeUserStatId()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("USER_STAT_ID=");
+            query.append(formatString(en.getUserStatId()));
+            bChanged = true;
+        }
+        if(en.hasChangeUserDesc()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("USER_DESC=");
+            query.append(formatString(en.getUserDesc()));
+            bChanged = true;
+        }
+        if(en.hasChangeLinkTele()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("LINK_TELE=");
+            query.append(formatString(en.getLinkTele()));
+            bChanged = true;
+        }
+        if(en.hasChangeLinkEmail()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("LINK_EMAIL=");
+            query.append(formatString(en.getLinkEmail()));
+            bChanged = true;
+        }
+        if(en.hasChangeUserSex()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("USER_SEX=");
+            query.append(formatString(en.getUserSex()));
+            bChanged = true;
+        }
+        if(en.hasChangeUserBirth()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("USER_BIRTH=");
+            query.append(formatString(en.getUserBirth()));
+            bChanged = true;
+        }
+        if(en.hasChangeManFlag()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("MAN_FLAG=");
+            query.append(formatString(en.getManFlag()));
+            bChanged = true;
+        }
+
+        query.append(" where ");
+        query.append("USER_STAT_ID=");
+        query.append(formatString(userStatId));
+        res = trans.doUpdate(connId,query.toString());
+        return res;
+    }
+
+    /**
+     * Retrieve from the database for table "SysUser"
+     */
+    public Vector findAllByIndexIdxUserStatId(String userStatId) throws ErrorException {
+        Vector retRows = new Vector();
+
+        StringBuffer query = new StringBuffer();
+        query.append("select USER_ID,USER_NAME,LOGIN_NAME,PASSWORD,STATUS,USER_ORG_ID,USER_STAT_ID,USER_DESC,LINK_TELE,LINK_EMAIL,USER_SEX,USER_BIRTH,MAN_FLAG from sys_user");
+
+        query.append(" where ");
+        query.append("USER_STAT_ID=");
+        query.append(formatString(userStatId));
+        if(orderBy != null) {
+            query.append(orderBy);
+        }
+        QueryResult qr = trans.doQuery(connId,query.toString(),page,rowsPerPage);
+        retRows = getAllFromResultSet(qr);
+        return retRows;
+    }
+
+    /**
+     * Counts the number of entries for this table in the database.
+     */
+    public int countByIndexIdxUserStatId(String userStatId) throws ErrorException {
+        int count = -1;
+        StringBuffer query = new StringBuffer();
+        query.append("select count(1) as num from sys_user");
+
+        query.append(" where ");
+        query.append("USER_STAT_ID=");
+        query.append(formatString(userStatId));
+        QueryResult qr = trans.doQuery(connId,query.toString());
+        if (qr.size() == 1) {
+            count = qr.get(0).getInteger("num").intValue();
+        }
+        return count;
+    }
+
+    /**
+     * Deletes from the database for table "sys_user"
+     */
+    public int deleteLikeIndexIdxUserStatId(String userStatId) throws ErrorException {
+        int res=-1;
+
+        StringBuffer query = new StringBuffer();
+        query.append("delete from sys_user");
+
+        query.append(" where ");
+        query.append("USER_STAT_ID like ");
+        query.append(formatString(userStatId));
+        res = trans.doUpdate(connId,query.toString());
+        return res;
+    }
+
+    /**
+     * Updates the current object values into the database.
+     */
+    public int updateLikeIndexIdxUserStatId(String userStatId,EnSysUser en) throws ErrorException {
+        int res = -1;
+        StringBuffer query = new StringBuffer();
+        boolean bChanged = false;
+        query.append("update sys_user set ");
+
+        if(en.hasChangeUserName()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("USER_NAME=");
+            query.append(formatString(en.getUserName()));
+            bChanged = true;
+        }
+        if(en.hasChangeLoginName()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("LOGIN_NAME=");
+            query.append(formatString(en.getLoginName()));
+            bChanged = true;
+        }
+        if(en.hasChangePassword()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("PASSWORD=");
+            query.append(formatString(en.getPassword()));
+            bChanged = true;
+        }
+        if(en.hasChangeStatus()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("STATUS=");
+            query.append(formatString(en.getStatus()));
+            bChanged = true;
+        }
+        if(en.hasChangeUserOrgId()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("USER_ORG_ID=");
+            query.append(formatString(en.getUserOrgId()));
+            bChanged = true;
+        }
+        if(en.hasChangeUserStatId()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("USER_STAT_ID=");
+            query.append(formatString(en.getUserStatId()));
+            bChanged = true;
+        }
+        if(en.hasChangeUserDesc()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("USER_DESC=");
+            query.append(formatString(en.getUserDesc()));
+            bChanged = true;
+        }
+        if(en.hasChangeLinkTele()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("LINK_TELE=");
+            query.append(formatString(en.getLinkTele()));
+            bChanged = true;
+        }
+        if(en.hasChangeLinkEmail()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("LINK_EMAIL=");
+            query.append(formatString(en.getLinkEmail()));
+            bChanged = true;
+        }
+        if(en.hasChangeUserSex()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("USER_SEX=");
+            query.append(formatString(en.getUserSex()));
+            bChanged = true;
+        }
+        if(en.hasChangeUserBirth()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("USER_BIRTH=");
+            query.append(formatString(en.getUserBirth()));
+            bChanged = true;
+        }
+        if(en.hasChangeManFlag()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("MAN_FLAG=");
+            query.append(formatString(en.getManFlag()));
+            bChanged = true;
+        }
+
+        query.append(" where ");
+        query.append("USER_STAT_ID like ");
+        query.append(formatString(userStatId));
+        res = trans.doUpdate(connId,query.toString());
+        return res;
+    }
+
+    /**
+     * Retrieve from the database for table "SysUser"
+     */
+    public Vector findAllLikeIndexIdxUserStatId(String userStatId) throws ErrorException {
+        Vector retRows = new Vector();
+
+        StringBuffer query = new StringBuffer();
+        query.append("select USER_ID,USER_NAME,LOGIN_NAME,PASSWORD,STATUS,USER_ORG_ID,USER_STAT_ID,USER_DESC,LINK_TELE,LINK_EMAIL,USER_SEX,USER_BIRTH,MAN_FLAG from sys_user");
+
+        query.append(" where ");
+        query.append("USER_STAT_ID like ");
+        query.append(formatString(userStatId));
+        if(orderBy != null) {
+            query.append(orderBy);
+        }
+        QueryResult qr = trans.doQuery(connId,query.toString(),page,rowsPerPage);
+        retRows = getAllFromResultSet(qr);
+        return retRows;
+    }
+
+    /**
+     * Counts the number of entries for this table in the database.
+     */
+    public int countLikeIndexIdxUserStatId(String userStatId) throws ErrorException {
+        int count = -1;
+        StringBuffer query = new StringBuffer();
+        query.append("select count(1) as num from sys_user");
+
+        query.append(" where ");
+        query.append("USER_STAT_ID like ");
+        query.append(formatString(userStatId));
         QueryResult qr = trans.doQuery(connId,query.toString());
         if (qr.size() == 1) {
             count = qr.get(0).getInteger("num").intValue();
@@ -413,7 +1097,7 @@ public class DbSysUser extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select USER_ID,USER_NAME,LOGIN_NAME,PASSWORD,STATUS,USER_ORG_ID,USER_STAT_ID,USER_DESC,LINK_TELE,LINK_EMAIL,USER_SEX,USER_BIRTH,MAN_FLAG from SYS_USER where ");
+        query.append("select USER_ID,USER_NAME,LOGIN_NAME,PASSWORD,STATUS,USER_ORG_ID,USER_STAT_ID,USER_DESC,LINK_TELE,LINK_EMAIL,USER_SEX,USER_BIRTH,MAN_FLAG from sys_user where ");
         query.append(where);
         if(orderBy != null) {
             query.append(orderBy);
@@ -430,7 +1114,7 @@ public class DbSysUser extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select USER_ID,USER_NAME,LOGIN_NAME,PASSWORD,STATUS,USER_ORG_ID,USER_STAT_ID,USER_DESC,LINK_TELE,LINK_EMAIL,USER_SEX,USER_BIRTH,MAN_FLAG from SYS_USER");
+        query.append("select USER_ID,USER_NAME,LOGIN_NAME,PASSWORD,STATUS,USER_ORG_ID,USER_STAT_ID,USER_DESC,LINK_TELE,LINK_EMAIL,USER_SEX,USER_BIRTH,MAN_FLAG from sys_user");
 
         if(orderBy != null) {
             query.append(orderBy);
@@ -554,9 +1238,9 @@ public class DbSysUser extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select USER_ID,USER_NAME,LOGIN_NAME,PASSWORD,STATUS,USER_ORG_ID,USER_STAT_ID,USER_DESC,LINK_TELE,LINK_EMAIL,USER_SEX,USER_BIRTH,MAN_FLAG from SYS_USER where ");
+            query.insert(0,"select USER_ID,USER_NAME,LOGIN_NAME,PASSWORD,STATUS,USER_ORG_ID,USER_STAT_ID,USER_DESC,LINK_TELE,LINK_EMAIL,USER_SEX,USER_BIRTH,MAN_FLAG from sys_user where ");
         } else {
-            query.append("select USER_ID,USER_NAME,LOGIN_NAME,PASSWORD,STATUS,USER_ORG_ID,USER_STAT_ID,USER_DESC,LINK_TELE,LINK_EMAIL,USER_SEX,USER_BIRTH,MAN_FLAG from SYS_USER");
+            query.append("select USER_ID,USER_NAME,LOGIN_NAME,PASSWORD,STATUS,USER_ORG_ID,USER_STAT_ID,USER_DESC,LINK_TELE,LINK_EMAIL,USER_SEX,USER_BIRTH,MAN_FLAG from sys_user");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -680,9 +1364,9 @@ public class DbSysUser extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select USER_ID,USER_NAME,LOGIN_NAME,PASSWORD,STATUS,USER_ORG_ID,USER_STAT_ID,USER_DESC,LINK_TELE,LINK_EMAIL,USER_SEX,USER_BIRTH,MAN_FLAG from SYS_USER where ");
+            query.insert(0,"select USER_ID,USER_NAME,LOGIN_NAME,PASSWORD,STATUS,USER_ORG_ID,USER_STAT_ID,USER_DESC,LINK_TELE,LINK_EMAIL,USER_SEX,USER_BIRTH,MAN_FLAG from sys_user where ");
         } else {
-            query.append("select USER_ID,USER_NAME,LOGIN_NAME,PASSWORD,STATUS,USER_ORG_ID,USER_STAT_ID,USER_DESC,LINK_TELE,LINK_EMAIL,USER_SEX,USER_BIRTH,MAN_FLAG from SYS_USER");
+            query.append("select USER_ID,USER_NAME,LOGIN_NAME,PASSWORD,STATUS,USER_ORG_ID,USER_STAT_ID,USER_DESC,LINK_TELE,LINK_EMAIL,USER_SEX,USER_BIRTH,MAN_FLAG from sys_user");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -698,7 +1382,7 @@ public class DbSysUser extends RootDB{
     public int count() throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from SYS_USER");
+        query.append("select count(1) as num from sys_user");
 
         QueryResult qr = trans.doQuery(connId,query.toString());
         if (qr.size() == 1) {
@@ -713,7 +1397,7 @@ public class DbSysUser extends RootDB{
     public int countWhere(String where) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from SYS_USER");
+        query.append("select count(1) as num from sys_user");
         query.append(" where ");
         query.append(where);
         QueryResult qr = trans.doQuery(connId,query.toString());
@@ -724,13 +1408,13 @@ public class DbSysUser extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "SYS_USER"
+     * Deletes from the database for table "sys_user"
      */
     public int deleteWhere(String where) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from SYS_USER");
+        query.append("delete from sys_user");
         query.append(" where ");
         query.append(where);
         res = trans.doUpdate(connId,query.toString());
@@ -744,7 +1428,7 @@ public class DbSysUser extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update SYS_USER set ");
+        query.append("update sys_user set ");
 
         if(en.hasChangeUserId()) {
             if(bChanged){
