@@ -22,10 +22,12 @@ public class BoSysParamDetail implements RootBo {
 		//系统参数值
 		String opMutex;
 		String opSave;
+		String opFilePath;
 		
 		DbSysParam dbParam;
 		EnSysParam enMutexParam;
 		EnSysParam enSaveParam;
+		EnSysParam enFilePath;
 		
 		
 		/***********************************************************************
@@ -46,19 +48,21 @@ public class BoSysParamDetail implements RootBo {
 		 **********************************************************************/
 		enMutexParam =dbParam.findByKey("OP_MUTES");
 		enSaveParam = dbParam.findByKey("OP_SAVE");
+		enFilePath = dbParam.findByKey("OP_FILEPATH");
 		if( enMutexParam == null || enMutexParam.getParamId().length()==0){
 			throw new ErrorException("PARAM01",null);
 		}
 		if(enSaveParam.getParamId() == null || enSaveParam.getParamId().length()==0){
 			throw new ErrorException("PARAM02",null);
 		}
-//		int row = requestXml.addRow("SYS_FLAG");
-//		for(int i=0; i<2; i++){
+		if( enFilePath == null || enFilePath.getParamId().length() == 0){
+			throw new ErrorException("PARAM02",null);
+		}
+		
 		int row = requestXml.addRow("SYS_FLAG");
 		requestXml.setItemValue("SYS_FLAG", row, "OP_MUTEX",enMutexParam.getParamFlag());
-		//row = requestXml.addRow("SYS_FLAG");
 		requestXml.setItemValue("SYS_FLAG", row, "OP_SAVE", enSaveParam.getParamFlag());
-//		}
+		requestXml.setItemValue("SYS_FLAG", row, "OP_FILEPATH",enFilePath.getParamValue());
 	
 		
 	}
