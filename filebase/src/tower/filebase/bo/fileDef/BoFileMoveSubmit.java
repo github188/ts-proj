@@ -142,7 +142,8 @@ public class BoFileMoveSubmit implements RootBo {
 													fileFrom = new File(filePath.toString());
 													if(!fileFrom.exists()){
 														//实际的落地文件不存在
-														Long version = enTFileVersion.getVersionNo();
+														long version1 = enTFileVersion.getVersionNo();
+														Long version = new Long(version1);
 														String[] mes = {enTFile.getFileName(),version.toString()};
 														throw new ErrorException("FileMC009",mes);
 													}
