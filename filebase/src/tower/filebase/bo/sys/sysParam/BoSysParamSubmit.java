@@ -29,7 +29,8 @@ public class BoSysParamSubmit implements RootBo {
 		//系统参数db en
 		DbSysParam dbParam;
 		EnSysParam enMutexParam;
-		EnSysParam	enSaveParam;			
+		EnSysParam	enSaveParam;
+		EnSysParam  enFilePath;
 		
 		//文件版本db
 		DbTFileVersion dbTFileVersion;
@@ -41,12 +42,14 @@ public class BoSysParamSubmit implements RootBo {
 		String mutexValue;//是否互斥编辑
 		String saveValue;//是否保留历史版本
 		String oldSavaValue;//修改之前的是否保留历史版本
+		String filePath; //文件存放路径
 		/***********************************************************************
 		 * 获取参数
 		 **********************************************************************/
 		mutexValue = requestXml.getInputValue("opMutex");
 		saveValue = requestXml.getInputValue("opSave");
 		oldSavaValue = requestXml.getInputValue("old_opSave");
+		filePath = requestXml.getInputValue("opFilePath");
 		/***********************************************************************
 		 * 创建数据库连接，初始化DB，EN
 		 **********************************************************************/
@@ -63,6 +66,7 @@ public class BoSysParamSubmit implements RootBo {
 		//修改系统参数
 		enMutexParam = dbParam.findByKey("OP_MUTES");
 		enSaveParam  = dbParam.findByKey("OP_SAVE");
+		enFilePath = dbParam.findByKey("OP_FILEPATH");
 		if(mutexValue.equals("1")){
 			enMutexParam.setParamFlag("1");
 		}else{
@@ -74,8 +78,10 @@ public class BoSysParamSubmit implements RootBo {
 			enSaveParam.setParamFlag("0");
 			saveValue = "0";
 		}
+		enFilePath.setParamValue(filePath);
 		dbParam.updateByKey("OP_MUTES", enMutexParam);
 		dbParam.updateByKey("OP_SAVE", enSaveParam);
+		dbParam.updateByKey("OP_FILEPATH", enFilePath);
 		
 		//如果由"保留历史版本" 改为 "不保留历史版本"时清除所有文件的版本记录。
 		// 修改文件表(T_FILE)里的文件最新版本(NEW_VERSION_NO)为1
