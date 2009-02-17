@@ -7,11 +7,13 @@
   XMLWrap  xml;
   String opMutex;
   String opSave;
+  String opfilepath;
 %>
 <%
   xml = (XMLWrap) request.getAttribute("XML");
   opMutex = xml.getItemValue("SYS_FLAG",1,"OP_MUTEX");
   opSave = xml.getItemValue("SYS_FLAG",1,"OP_SAVE");
+  opfilepath = xml.getItemValue("SYS_FLAG",1,"OP_FILEPATH");
 %>
 <html>
 <head>
@@ -41,23 +43,34 @@
                       <input type="hidden" name="old_opSave" value="<%=opSave %>">
                        <table width="50%" border="0" cellpadding="0" cellspacing="0">
                          <tr>
-                          <td width="50%" align="left">
+                          <td width="50%" align="left" nowrap="yes">
                           <%if("1".equals(opMutex)){ %>
                           <input type="checkbox" name="opMutex" checked value="1">互斥编辑文件
                           <%}else{ %> 
-                           <input type="checkbox" name="opMutex" value="1">互斥编辑文件
+                           <input type="checkbox" name="opMutex" value="1" >互斥编辑文件
                           <%} %>&nbsp;
                           </td>
-                          <td width="50%" align="left">
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                          <td width="50%" align="left" nowrap="yes">
                           <%if("1".equals(opSave)){ %>     
                             <input type="checkbox" name="opSave" checked value="1">历史版本保存                   
                           <%}else{ %>
                            <input type="checkbox" name="opSave" value="1">历史版本保存
                           <%} %>&nbsp;
                           </td>
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                          <td nowrap="yes">文件存放路径：</td>
+                          <td>
+                          	<input type=text name="opFilePath" value="<%=opfilepath %>" >
+                          </td>
                          </tr>
-                             
                          <tr>
+                         	<td>&nbsp;&nbsp;</td>
+                         </tr>
+                         
+                         <tr>
+                         	<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                         	<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                            <td colspan="4" align="center" nowrap="nowrap">
                            <input type="submit" class="submit"  value="保存">
                            </td>
