@@ -62,14 +62,13 @@ CREATE TABLE `m_auto` (
 
 /*!40000 ALTER TABLE `m_auto` DISABLE KEYS */;
 INSERT INTO `m_auto` (`AUTO_ID`,`BUILD_MODE`,`MEMO`,`NOW_VALUE`) VALUES 
- ('CATALOG_ID','[seq*6]',NULL,'1'),
- ('FILE_ID','[seq*6]','','0'),
+ ('CATALOG_ID','[seq*6]',NULL,'11'),
+ ('FILE_ID','[seq*6]','','49'),
  ('LOG_ID','[seq*6]',NULL,'0'),
- ('ORG_ID','[seq*6]',NULL,'0'),
- ('ROLE_ID','[seq*6]',NULL,'1'),
+ ('ORG_ID','[seq*6]',NULL,'4'),
+ ('ROLE_ID','[seq*6]',NULL,'7'),
  ('SET_ID','[seq*6]',NULL,'0'),
- ('USER_ID','[seq*6]',NULL,'1');
-
+ ('USER_ID','[seq*6]',NULL,'11');
 /*!40000 ALTER TABLE `m_auto` ENABLE KEYS */;
 
 
@@ -94,6 +93,7 @@ CREATE TABLE `s_content_perm` (
 INSERT INTO `s_content_perm` (`CONTENT_OPERATION_STATUS`,`CONTENT_OPERATION_NAME`,`CONTENT_PERM_STATUS`,`SHOW_FLAG`) VALUES 
  ('CONTENT_ADD','增加目录','2','1'),
  ('CONTENT_DELETE','删除','2','1'),
+ ('CONTENT_DISTORY','销毁目录','1','1'),
  ('CONTENT_EDIT','修改','2','1'),
  ('CONTENT_SHOW','目录显示','4','0');
 /*!40000 ALTER TABLE `s_content_perm` ENABLE KEYS */;
@@ -122,11 +122,11 @@ INSERT INTO `s_file_perm` (`FILE_OPERATION_STATUS`,`FILE_PERM_NAME`,`CONTENT_PER
  ('FILE_COPY','文件复制','4','1'),
  ('FILE_DELETE','文件删除','2','1'),
  ('FILE_DESTROY','文件销毁','1','1'),
- ('FILE_DOWN','文件下载','4','1'),
- ('FILE_HISTORY_VIEW','查看版本','3','1'),
- ('FILE_HISTROY_BACK','恢复版本','1','2'),
- ('FILE_HISTROY_DESTROY','销毁版本','1','2'),
- ('FILE_HISTROY_GET','获取版本','3','2'),
+ ('FILE_DOWN','下载','4','1'),
+ ('FILE_HISTORY_VIEW','查看历史','3','1'),
+ ('FILE_HISTROY_BACK','恢复文件历史版本','1','2'),
+ ('FILE_HISTROY_DESTROY','销毁历史版本','1','2'),
+ ('FILE_HISTROY_GET','获取文件版本','3','2'),
  ('FILE_IN','编辑上传','2','1'),
  ('FILE_MOVE','文件移动','2','1'),
  ('FILE_OUT','下载编辑','3','1');
@@ -176,7 +176,11 @@ CREATE TABLE `s_role_perm` (
 
 /*!40000 ALTER TABLE `s_role_perm` DISABLE KEYS */;
 INSERT INTO `s_role_perm` (`CONTENT_ID`,`ROLE_ID`,`CONTENT_PERM_STATUS`) VALUES 
- ('000000','000000','1111');
+ ('000000','000000','1111'),
+ ('000004','000004','0111'),
+ ('000005','000005','0011'),
+ ('000006','000006','0001'),
+ ('000007','000006','1111');
 /*!40000 ALTER TABLE `s_role_perm` ENABLE KEYS */;
 
 
@@ -262,7 +266,7 @@ INSERT INTO `sys_menu` (`MENU_ID`,`MENU_NAME`,`MENU_TYPE`,`MENU_LVL`,`PARENT_ID`
  ('RoleQuery','角色查询','F',2,'InRoleList',0,NULL,NULL,''),
  ('RoleSubmit','角色提交','F',3,'RoleAdd',2,NULL,NULL,'');
 INSERT INTO `sys_menu` (`MENU_ID`,`MENU_NAME`,`MENU_TYPE`,`MENU_LVL`,`PARENT_ID`,`SORT_NO`,`MENU_URL`,`MENU_DESC`,`SHOW_FLAG`) VALUES 
-('SelectOrg','机构选择','L',1,NULL,6,NULL,NULL,'2'),
+ ('SelectOrg','机构选择','L',1,NULL,6,NULL,NULL,'2'),
  ('SelectRole','角色选择','L',1,NULL,5,NULL,NULL,''),
  ('SysParamQuery','系统参数定义','M',1,'MainListBase',3,NULL,NULL,'1'),
  ('SysParamSubmit','系统参数提交','F',2,'SysParamQuery',0,NULL,NULL,''),
@@ -276,9 +280,9 @@ INSERT INTO `sys_menu` (`MENU_ID`,`MENU_NAME`,`MENU_TYPE`,`MENU_LVL`,`PARENT_ID`
  ('UserLogin','客户端登录','L',1,NULL,4,NULL,NULL,'2'),
  ('UserQuery','人员查询','F',2,'UserListTo',3,NULL,NULL,'1'),
  ('UserRole','人员角色','F',2,'UserListTo',4,NULL,NULL,'1'),
- ('UserRoleSubmit','人员角色提交','F',2,'UserRole',0,NULL,NULL,'1'),
- ('UserSubmit','人员提交','F',3,'UserAdd',1,NULL,NULL,'1');
+ ('UserRoleSubmit','人员角色提交','F',2,'UserRole',0,NULL,NULL,'1');
 INSERT INTO `sys_menu` (`MENU_ID`,`MENU_NAME`,`MENU_TYPE`,`MENU_LVL`,`PARENT_ID`,`SORT_NO`,`MENU_URL`,`MENU_DESC`,`SHOW_FLAG`) VALUES 
+ ('UserSubmit','人员提交','F',3,'UserAdd',1,NULL,NULL,'1'),
  ('VertifyImage','验证信息','L',1,NULL,3,NULL,NULL,'2');
 /*!40000 ALTER TABLE `sys_menu` ENABLE KEYS */;
 
@@ -305,6 +309,10 @@ CREATE TABLE `sys_org` (
 --
 
 /*!40000 ALTER TABLE `sys_org` DISABLE KEYS */;
+INSERT INTO `sys_org` (`ORG_ID`,`ORG_NAME`,`PARENT_ID`,`ORG_DESC`,`LINK_MAN`,`LINK_TELE`,`LINK_EMAIL`) VALUES 
+ ('000001','父机构','','','','',''),
+ ('000002','机构','000001','','','',''),
+ ('000003','子机构','000002','','','','');
 /*!40000 ALTER TABLE `sys_org` ENABLE KEYS */;
 
 
@@ -317,6 +325,7 @@ CREATE TABLE `sys_param` (
   `PARAM_ID` varchar(30) NOT NULL default '',
   `PARAM_NAME` varchar(50) NOT NULL default '',
   `PARAM_FLAG` char(1) NOT NULL default '',
+  `PARAM_VALUE` varchar(1000) default NULL,
   PRIMARY KEY  (`PARAM_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -325,9 +334,10 @@ CREATE TABLE `sys_param` (
 --
 
 /*!40000 ALTER TABLE `sys_param` DISABLE KEYS */;
-INSERT INTO `sys_param` (`PARAM_ID`,`PARAM_NAME`,`PARAM_FLAG`) VALUES 
- ('OP_MUTES','互斥编辑文件','1'),
- ('OP_SAVE','历史版本保存','1');
+INSERT INTO `sys_param` (`PARAM_ID`,`PARAM_NAME`,`PARAM_FLAG`,`PARAM_VALUE`) VALUES 
+ ('OP_FILEPATH','文件存放路径','1','d://filebase'),
+ ('OP_MUTES','互斥编辑文件','1',NULL),
+ ('OP_SAVE','历史版本保存','1',NULL);
 /*!40000 ALTER TABLE `sys_param` ENABLE KEYS */;
 
 
@@ -349,8 +359,34 @@ CREATE TABLE `sys_role` (
 
 /*!40000 ALTER TABLE `sys_role` DISABLE KEYS */;
 INSERT INTO `sys_role` (`ROLE_ID`,`ROLE_NAME`,`ROLE_DESC`) VALUES 
- ('000000','admin',NULL);
+ ('000000','admin',NULL),
+ ('000004','编导1',''),
+ ('000005','编导2',''),
+ ('000006','目录操作 ','');
 /*!40000 ALTER TABLE `sys_role` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `filebase`.`sys_stat`
+--
+
+DROP TABLE IF EXISTS `sys_stat`;
+CREATE TABLE `sys_stat` (
+  `STAT_ID` char(6) NOT NULL,
+  `STAT_NAME` varchar(50) NOT NULL,
+  `STAT_DESC` varchar(200) default NULL,
+  PRIMARY KEY  (`STAT_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `filebase`.`sys_stat`
+--
+
+/*!40000 ALTER TABLE `sys_stat` DISABLE KEYS */;
+INSERT INTO `sys_stat` (`STAT_ID`,`STAT_NAME`,`STAT_DESC`) VALUES 
+ ('000000','45','45'),
+ ('000001','df','');
+/*!40000 ALTER TABLE `sys_stat` ENABLE KEYS */;
 
 
 --
@@ -383,7 +419,10 @@ CREATE TABLE `sys_user` (
 
 /*!40000 ALTER TABLE `sys_user` DISABLE KEYS */;
 INSERT INTO `sys_user` (`USER_ID`,`USER_NAME`,`LOGIN_NAME`,`PASSWORD`,`STATUS`,`USER_ORG_ID`,`USER_STAT_ID`,`USER_DESC`,`LINK_TELE`,`LINK_EMAIL`,`USER_SEX`,`USER_BIRTH`,`MAN_FLAG`) VALUES 
- ('000000','管理员','admin','21232f297a57a5a743894a0e4a801fc3','N','000088','000000','','','','1','','M');
+ ('000002','管理员','admin','21232f297a57a5a743894a0e4a801fc3','N','000088','000000','','','','1','','M'),
+ ('000008','wu','wu','d3cb757121f725fe825a1176031a1c14','N','000002',NULL,'','','','1','','M'),
+ ('000009','jing','jing','43ae0add70fd1bda16d0700282cd8d2d','N','000002',NULL,'','','','1','','M'),
+ ('000010','11','11','6512bd43d9caa6e02c990b0a82652dca','N','000003',NULL,'','','','1','','M');
 /*!40000 ALTER TABLE `sys_user` ENABLE KEYS */;
 
 
@@ -404,7 +443,10 @@ CREATE TABLE `sys_user_role` (
 
 /*!40000 ALTER TABLE `sys_user_role` DISABLE KEYS */;
 INSERT INTO `sys_user_role` (`ROLE_ID`,`USER_ID`) VALUES 
- ('000000','000000');
+ ('000000','000002'),
+ ('000004','000008'),
+ ('000005','000009'),
+ ('000006','000010');
 /*!40000 ALTER TABLE `sys_user_role` ENABLE KEYS */;
 
 
@@ -432,7 +474,11 @@ CREATE TABLE `t_catalog` (
 
 /*!40000 ALTER TABLE `t_catalog` DISABLE KEYS */;
 INSERT INTO `t_catalog` (`CATALOG_ID`,`CATALOG_NAME`,`PARENT_ID`,`CREATE_DATETIME`,`CREATOR`,`CATALOG_REMARK`,`DELETE_FLAG`,`DELETE_PERSON`,`DELETE_DATETIME`) VALUES 
- ('000000','文档中心',NULL,'20090103','000000',NULL,'1',NULL,NULL);
+ ('000000','文档中心',NULL,'20090103','000002',NULL,'1',NULL,NULL),
+ ('000004','文档1','000000','20090105154443','000002','','1',NULL,NULL),
+ ('000005','文档2','000000','20090105154449','000002','','1','000002','20090106153056'),
+ ('000006','子文档11','000004','20090105154500','000002','','0','000002','20090109095352'),
+ ('000007','子文档22','000005','20090105154509','000002','','1','000002','20090106152113');
 /*!40000 ALTER TABLE `t_catalog` ENABLE KEYS */;
 
 
@@ -467,6 +513,18 @@ CREATE TABLE `t_file` (
 --
 
 /*!40000 ALTER TABLE `t_file` DISABLE KEYS */;
+INSERT INTO `t_file` (`FILE_ID`,`NEW_VERSION_NO`,`FILE_NAME`,`FILE_SIZE`,`FILE_REMARK`,`FILE_EXT_NAME`,`KEY_WORD`,`CATALOG_ID`,`CREATOR`,`CREATE_DATETIME`,`FLAG`,`DELETE_PERSON`,`DELETE_DATETIME`,`FILE_STATE`,`CURR_EDIT_PERSON`,`EDIT_DATETIME`,`FILE_PATH`) VALUES 
+ ('000036','1','aa.html.bak','2KB','','bak','','000005','000002','20090106095034','1',NULL,NULL,'0',NULL,NULL,'D:workspace.metadata.pluginsorg.eclipse.wst.server.core	mp1webappsgfilebase/文档中心/文档2/000036_1_aa.html.bak'),
+ ('000037','1','setInteral.htm.bak','1KB','','bak','','000005','000002','20090106095050','1',NULL,NULL,'0',NULL,NULL,'D:workspace.metadata.pluginsorg.eclipse.wst.server.core	mp1webappsgfilebase/文档中心/文档2/000037_1_setInteral.htm.bak'),
+ ('000039','1','bofright.htm','1KB','','htm','','000005','000002','20090106095109','1','000005','20090106095910','0',NULL,NULL,'D:workspace.metadata.pluginsorg.eclipse.wst.server.core	mp1webappsgfilebase文档中心/文档2/000039_1_bofright.htm.htm'),
+ ('000041','1','dragDrop.htm.bak','1KB','','bak','','000005','000002','20090106095142','1',NULL,NULL,'0',NULL,NULL,'D:workspace.metadata.pluginsorg.eclipse.wst.server.core	mp1webappsgfilebase/文档中心/文档2/000041_1_dragDrop.htm.bak'),
+ ('000042','1','bofright.htm.bak','1KB','','bak','','000005','000002','20090106095211','1',NULL,NULL,'0',NULL,NULL,'D:workspace.metadata.pluginsorg.eclipse.wst.server.core	mp1webappsgfilebase/文档中心/文档2/000042_1_bofright.htm.bak');
+INSERT INTO `t_file` (`FILE_ID`,`NEW_VERSION_NO`,`FILE_NAME`,`FILE_SIZE`,`FILE_REMARK`,`FILE_EXT_NAME`,`KEY_WORD`,`CATALOG_ID`,`CREATOR`,`CREATE_DATETIME`,`FLAG`,`DELETE_PERSON`,`DELETE_DATETIME`,`FILE_STATE`,`CURR_EDIT_PERSON`,`EDIT_DATETIME`,`FILE_PATH`) VALUES 
+ ('000044','1','dragDrop.htm','1KB','','htm','','000007','000002','20090106095230','1',NULL,NULL,'0','','20090106150630','D:workspace.metadata.pluginsorg.eclipse.wst.server.core	mp1webappsgfilebase/文档中心/文档2/子文档22/000044_1_dragDrop.htm'),
+ ('000045','1','IPMSG.exe','156KB','','exe','','000000','000002','20090106095303','1',NULL,NULL,'0',NULL,NULL,'D:workspace.metadata.pluginsorg.eclipse.wst.server.core	mp1webappsgfilebase/文档中心/000045_1_IPMSG.exe'),
+ ('000046','1','aa.html','2KB','','html','','000005','000008','20090106095841','1','000005','20090106095910','0','','','D:workspace.metadata.pluginsorg.eclipse.wst.server.core	mp1webappsgfilebase文档中心/文档2/000046_1_aa.html.html'),
+ ('000047','1','svn.txt','1KB','sfssdfs','txt','','000007','000002','20090106150506','1','000002','20090106152105','0','','20090106150656','D:workspace.metadata.pluginsorg.eclipse.wst.server.core	mp1webappsgfilebase/文档中心/文档2/子文档22/000047_1_svn.txt'),
+ ('000048','1','Struts2_zh.rar','759KB','','rar','','000007','000002','20090106150608','1',NULL,NULL,'0',NULL,NULL,'D:workspace.metadata.pluginsorg.eclipse.wst.server.core	mp1webappsgfilebase/文档中心/文档2/子文档22/000048_1_Struts2_zh.rar');
 /*!40000 ALTER TABLE `t_file` ENABLE KEYS */;
 
 
@@ -489,6 +547,17 @@ CREATE TABLE `t_file_version` (
 --
 
 /*!40000 ALTER TABLE `t_file_version` DISABLE KEYS */;
+INSERT INTO `t_file_version` (`FILE_ID`,`VERSION_NO`,`UPDATE_DATETIME`,`UPDATE_PERSON`,`UPDATE_REMARK`) VALUES 
+ ('000036',1,'20090106095034','000002',''),
+ ('000037',1,'20090106095050','000002',''),
+ ('000039',1,'20090106095109','000002',''),
+ ('000041',1,'20090106095142','000002',''),
+ ('000042',1,'20090106095211','000002',''),
+ ('000044',1,'20090106095230','000002',''),
+ ('000045',1,'20090106095303','000002',''),
+ ('000046',1,'20090106095841','000005',''),
+ ('000047',1,'20090106150506','000002','sfssdfs'),
+ ('000048',1,'20090106150608','000002','');
 /*!40000 ALTER TABLE `t_file_version` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
