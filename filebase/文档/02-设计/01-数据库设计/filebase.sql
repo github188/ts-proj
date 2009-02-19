@@ -355,9 +355,9 @@ CREATE TABLE `sys_param` (
 --
 
 /*!40000 ALTER TABLE `sys_param` DISABLE KEYS */;
-INSERT INTO `sys_param` (`PARAM_ID`,`PARAM_NAME`,`PARAM_FLAG`) VALUES 
- ('OP_MUTES','互斥编辑文件','1'),
- ('OP_SAVE','历史版本保存','1');
+INSERT INTO `sys_param` (`PARAM_ID`,`PARAM_NAME`,`PARAM_FLAG`,`PARAM_VALUE`) VALUES 
+ ('OP_MUTES','互斥编辑文件','1',NULL),
+ ('OP_SAVE','历史版本保存','1',NULL);
 /*!40000 ALTER TABLE `sys_param` ENABLE KEYS */;
 
 
@@ -488,7 +488,7 @@ INSERT INTO `t_catalog` (`CATALOG_ID`,`CATALOG_NAME`,`PARENT_ID`,`CREATE_DATETIM
  ('000000','文档中心',NULL,'20090103','000000',NULL,'1',NULL,NULL),
  ('000003','434','000000','20090108152753','000000','','0','000000','20090109113742'),
  ('000004','56','000003','20090108152806','000000','56','0','000000','20090108162504'),
- ('000008','11','000000','20090218110200','000000','','1',NULL,NULL);
+ ('000008','11','000000','20090218110200','000000','','0','000000','20090219103918');
 /*!40000 ALTER TABLE `t_catalog` ENABLE KEYS */;
 
 
@@ -524,13 +524,7 @@ CREATE TABLE `t_file` (
 
 /*!40000 ALTER TABLE `t_file` DISABLE KEYS */;
 INSERT INTO `t_file` (`FILE_ID`,`NEW_VERSION_NO`,`FILE_NAME`,`FILE_SIZE`,`FILE_REMARK`,`FILE_EXT_NAME`,`KEY_WORD`,`CATALOG_ID`,`CREATOR`,`CREATE_DATETIME`,`FLAG`,`DELETE_PERSON`,`DELETE_DATETIME`,`FILE_STATE`,`CURR_EDIT_PERSON`,`EDIT_DATETIME`,`FILE_PATH`) VALUES 
- ('000002','2','任务.txt','1KB','','txt','','000003','000000','20090109094236','1',NULL,NULL,'1','000000','20090109103026','D:workspace.metadata.pluginsorg.eclipse.wst.server.core	mp0webappsfilebase-googlesvn/文档中心/434/000002_2_任务.txt'),
- ('000019','1','应用软件-测试报告模板.doc','38KB','','doc','','000000','000000','20090216190338','1',NULL,NULL,'0',NULL,NULL,'D:workspace.metadata.pluginsorg.eclipse.wst.server.core	mp0webappsfilebase-googlesvn/文档中心/000019_1_应用软件-测试报告模板.doc'),
- ('000020','1','软件验收报告模板.doc','83KB','','doc','','000000','000000','20090216190338','1',NULL,NULL,'0',NULL,NULL,'D:workspace.metadata.pluginsorg.eclipse.wst.server.core	mp0webappsfilebase-googlesvn/文档中心/000020_1_软件验收报告模板.doc'),
- ('000021','1','Linux环境下安装指南.doc','47KB','','doc','','000000','000000','20090216190338','1',NULL,NULL,'0',NULL,NULL,'D:workspace.metadata.pluginsorg.eclipse.wst.server.core	mp0webappsfilebase-googlesvn/文档中心/000021_1_Linux环境下安装指南.doc');
-INSERT INTO `t_file` (`FILE_ID`,`NEW_VERSION_NO`,`FILE_NAME`,`FILE_SIZE`,`FILE_REMARK`,`FILE_EXT_NAME`,`KEY_WORD`,`CATALOG_ID`,`CREATOR`,`CREATE_DATETIME`,`FLAG`,`DELETE_PERSON`,`DELETE_DATETIME`,`FILE_STATE`,`CURR_EDIT_PERSON`,`EDIT_DATETIME`,`FILE_PATH`) VALUES 
- ('000022','1','test.xls','14KB','','xls','','000000','000000','20090216190338','1',NULL,NULL,'0',NULL,NULL,'D:workspace.metadata.pluginsorg.eclipse.wst.server.core	mp0webappsfilebase-googlesvn/文档中心/000022_1_test.xls'),
- ('000023','1','工作会议纪要-20090110.doc','79KB','','doc','','000000','000000','20090216190338','1',NULL,NULL,'0',NULL,NULL,'D:workspace.metadata.pluginsorg.eclipse.wst.server.core	mp0webappsfilebase-googlesvn/文档中心/000023_1_工作会议纪要-20090110.doc');
+ ('000002','2','任务.txt','1KB','','txt','','000003','000000','20090109094236','1',NULL,NULL,'1','000000','20090109103026','D:workspace.metadata.pluginsorg.eclipse.wst.server.core	mp0webappsfilebase-googlesvn/文档中心/434/000002_2_任务.txt');
 /*!40000 ALTER TABLE `t_file` ENABLE KEYS */;
 
 
@@ -555,12 +549,7 @@ CREATE TABLE `t_file_version` (
 /*!40000 ALTER TABLE `t_file_version` DISABLE KEYS */;
 INSERT INTO `t_file_version` (`FILE_ID`,`VERSION_NO`,`UPDATE_DATETIME`,`UPDATE_PERSON`,`UPDATE_REMARK`) VALUES 
  ('000002',1,'20090109094236','000000',''),
- ('000002',2,'20090109103023','000000',''),
- ('000019',1,'20090216190338','000000',''),
- ('000020',1,'20090216190338','000000',''),
- ('000021',1,'20090216190338','000000',''),
- ('000022',1,'20090216190338','000000',''),
- ('000023',1,'20090216190338','000000','');
+ ('000002',2,'20090109103023','000000','');
 /*!40000 ALTER TABLE `t_file_version` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
