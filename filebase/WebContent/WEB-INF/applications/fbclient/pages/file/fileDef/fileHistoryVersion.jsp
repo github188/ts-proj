@@ -50,10 +50,13 @@
   }
  
  function getFileVersion(inputStr,flag){
+ 	var fileId = '<%=fileId%>';
  	 if(SelectCheck(inputStr,flag)){
+ 	 	form1.target="_new";
 	    form1.FILE_OPERATE_STATUE.value="FILE_HISTROY_GET";
 	 	form1.FUNC_ID.value="GetFileVersion";
 	 	form1.submit();
+	 	window.location="ctrl?FUNC_ID=FileVersionHistory&FILE_OPERATE_STATUE=FILE_HISTORY_VIEW"+"&FILE_ID="+fileId;
 	 }
  }
  

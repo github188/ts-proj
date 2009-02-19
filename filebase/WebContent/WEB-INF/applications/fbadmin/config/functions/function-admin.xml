@@ -41,7 +41,7 @@
 		className="tower.filebase.bo.sys.org.BoOrgTreeList"
 		forward="InOrgList" />
 	<function id="InOrgList" description="机构查询页面" type="jsp"
-		jspPath="/fbadmin/pages/sys/org/orgList.jsp" />  ///
+		jspPath="/fbadmin/pages/sys/org/orgList.jsp" />  
 	<function id="OrgAdd" description="机构树查询" type="bo"
 		className="tower.filebase.bo.sys.org.BoOrgTreeList"
 		forward="OrgAddTo" />
@@ -112,6 +112,34 @@
 	<function id="UserRoleSubmit" description="人员角色分配提交" type="bo"
 		className="tower.filebase.bo.sys.user.BoUserRoleSubmit"
 		forward="UserRole" />
-	<!-- 选择框页面 -->
+		
+	<!-- 目录定义 -->
+	
+	<function id="AdminCatalogTo" description="目录查询" type="bo"
+		className="tower.filebase.bo.sys.catalog.BoCatalogQuery" forward="AdminFileList" />
+	
+	<function id="AdminCatalogEdit" description="目录编辑" type="bo"
+		className="tower.filebase.bo.sys.catalog.BoCatalogQuery" forward="AdminCatalogEditJsp" />
+		
+	<function id="AdminCatalogEditJsp" description="目录编辑页面" type="jsp"
+		jspPath="/fbadmin/pages/sys/catalog/catalogEdit.jsp" />
+	
+	<function id="AdminCatalogDelete" description="目录销毁" type="bo"
+		className="tower.filebase.bo.sys.catalog.BoCatalogDestory" forward="AdminCatalogFresh" />
+		
+	<function id="AdminCatalogFresh" description="目录刷新页面" type="jsp"
+		jspPath="/fbadmin/pages/sys/catalog/freshPage.jsp" />
+	
+	<function id="AdminCatalogDetail" description="目录编辑" type="bo"
+		className="tower.filebase.bo.sys.catalog.BoCatalogDetail" forward="AdminCatalogEdit" />
+		
+	<function id="AdminCatalogSubmit" description="目录提交" type="bo"
+		className="tower.filebase.bo.sys.catalog.BoCatalogSubmit" forward="AdminCatalogFresh" />
+		
+	<function id="AdminFileList" description="目录下的文件" type="bo"
+		className="tower.filebase.bo.sys.catalog.BoFileList" forward="AdminCatalogFileJsp" />
+	
+	<function id="AdminCatalogFileJsp" description="目录文件列表页面" type="jsp"
+		jspPath="/fbadmin/pages/sys/catalog/catalogList.jsp" />
 
 </functions>
