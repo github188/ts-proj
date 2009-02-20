@@ -7,7 +7,7 @@ import tower.tmvc.Transaction;
 
 public class GetCatalogPath {
 
-	public String getCatalogPath(Transaction transaction) throws ErrorException{
+	public static String getCatalogPath(Transaction transaction) throws ErrorException{
 		
 		/***********************************************************************
 		 * 声明变量
