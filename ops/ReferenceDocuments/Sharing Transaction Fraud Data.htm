@@ -1,0 +1,2346 @@
+<html><head>
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="Generator" content="Microsoft Word 10 (filtered)">
+<title>    Internet Draft                                        David M'Raihi </title>
+
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;}
+@font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+h1
+	{margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	page-break-after:avoid;
+	font-size:16.0pt;
+	font-family:Arial;}
+h2
+	{margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	page-break-after:avoid;
+	font-size:14.0pt;
+	font-family:Arial;
+	font-style:italic;}
+h3
+	{margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	page-break-after:avoid;
+	font-size:13.0pt;
+	font-family:Arial;}
+h4
+	{margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	page-break-after:avoid;
+	font-size:14.0pt;
+	font-family:"Times New Roman";}
+p.MsoToc1, li.MsoToc1, div.MsoToc1
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Courier New";}
+p.MsoToc2, li.MsoToc2, div.MsoToc2
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Courier New";}
+p.MsoToc3, li.MsoToc3, div.MsoToc3
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Courier New";}
+p.MsoHeader, li.MsoHeader, div.MsoHeader
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+p.MsoFooter, li.MsoFooter, div.MsoFooter
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;}
+em
+	{font-weight:bold;
+	font-style:normal;}
+p.MsoPlainText, li.MsoPlainText, div.MsoPlainText
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:10.0pt;
+	font-family:"Courier New";}
+p.Appendix, li.Appendix, div.Appendix
+	{margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:.25in;
+	text-indent:-.25in;
+	page-break-after:avoid;
+	font-size:16.0pt;
+	font-family:Arial;
+	font-weight:bold;}
+p.Frontpage, li.Frontpage, div.Frontpage
+	{margin:0in;
+	margin-bottom:.0001pt;
+	text-align:center;
+	line-height:150%;
+	font-size:18.0pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+p.Schema, li.Schema, div.Schema
+	{margin:0in;
+	margin-bottom:.0001pt;
+	text-autospace:none;
+	font-size:10.0pt;
+	font-family:"Courier New";}
+p.RFCText, li.RFCText, div.RFCText
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Courier New";}
+p.RFCHeader, li.RFCHeader, div.RFCHeader
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Courier New";}
+p.RFCHeading1, li.RFCHeading1, div.RFCHeading1
+	{margin:0in;
+	margin-bottom:.0001pt;
+	text-indent:0in;
+	page-break-after:avoid;
+	font-size:12.0pt;
+	font-family:"Courier New";}
+p.RFCAppendixheading, li.RFCAppendixheading, div.RFCAppendixheading
+	{margin:0in;
+	margin-bottom:.0001pt;
+	page-break-after:avoid;
+	font-size:12.0pt;
+	font-family:"Courier New";}
+p.RFCHeading2, li.RFCHeading2, div.RFCHeading2
+	{margin:0in;
+	margin-bottom:.0001pt;
+	text-indent:0in;
+	page-break-after:avoid;
+	font-size:12.0pt;
+	font-family:"Courier New";}
+p.RFCHeading3, li.RFCHeading3, div.RFCHeading3
+	{margin:0in;
+	margin-bottom:.0001pt;
+	text-indent:0in;
+	page-break-after:avoid;
+	font-size:12.0pt;
+	font-family:"Courier New";}
+p.RFCHeading4, li.RFCHeading4, div.RFCHeading4
+	{margin:0in;
+	margin-bottom:.0001pt;
+	text-indent:0in;
+	page-break-after:avoid;
+	font-size:12.0pt;
+	font-family:"Courier New";}
+p.RFCHeading, li.RFCHeading, div.RFCHeading
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:23.75pt .75in 12.25pt .25in;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+
+</head><body vlink="purple" lang="EN-US" link="blue">
+
+<div class="Section1">
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Internet
+Draft&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;David
+M'Raihi</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Category:
+Informational&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+VeriSign</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Document: draft-mraihi-inch-thraud-07.txt
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sharon Boeyen</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Expires:
+January 2009
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Entrust</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Michael
+Grandcolas</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Grandcolas
+Consulting</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LLC</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Siddharth
+Bajaj</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VeriSign</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;July
+2008</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sharing Transaction
+Fraud Data</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Status of this Memo</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">By submitting this Internet-Draft,
+each author represents that any applicable patent or other IPR claims of which
+he or she is aware have been or will be disclosed, and any of which he or she
+becomes aware will be disclosed, in accordance with Section 6 of BCP 79.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Internet-Drafts are working documents
+of the Internet Engineering Task Force (IETF), its areas, and its working
+groups. Note that other groups may also distribute working documents as Internet-Drafts.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Internet-Drafts are draft documents
+valid for a maximum of six months and may be updated, replaced, or obsoleted by
+other documents at any time.&nbsp; It is inappropriate to use Internet-Drafts as
+reference material or to cite them other than as "work in progress."</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">The list of current Internet-Drafts
+can be accessed at </p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">http://www.ietf.org/1id-abstracts.html</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">The list of Internet-Draft Shadow
+Directories can be accessed at</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">http://www.ietf.org/shadow.html</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Abstract</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">This document describes a document format
+for exchanging transaction fraud (Thraud) information. It extends the Incident
+Handling Working Group (INCH WG) Incident Object Description Exchange Format (IODEF)
+incident reporting document format.</p>
+
+<span style="font-size: 12pt; font-family: &quot;Courier New&quot;;"><br style="page-break-before: always;" clear="all">
+</span>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Table of Contents</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="MsoToc1"><span class="MsoHyperlink"><a href="#_Toc204145257">1.
+Introduction<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">3</span></a></span></p>
+
+<p class="MsoToc1"><span class="MsoHyperlink"><a href="#_Toc204145258">2.
+Requirements Terminology<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">4</span></a></span></p>
+
+<p class="MsoToc1"><span class="MsoHyperlink"><a href="#_Toc204145259">3. Anatomy
+of a Transaction Fraud<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">4</span></a></span></p>
+
+<p class="MsoToc1"><span class="MsoHyperlink"><a href="#_Toc204145260">4.
+IODEF-Document Incident Class<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">6</span></a></span></p>
+
+<p class="MsoToc1"><span class="MsoHyperlink"><a href="#_Toc204145261">5. Thraud
+Record Class Definitions<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">7</span></a></span></p>
+
+<p class="MsoToc2"><span class="MsoHyperlink"><a href="#_Toc204145262">5.1.
+FraudEventPaymentType Class<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">8</span></a></span></p>
+
+<p class="MsoToc3"><span class="MsoHyperlink"><a href="#_Toc204145263">5.1.1.
+PayeeName<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">9</span></a></span></p>
+
+<p class="MsoToc3"><span class="MsoHyperlink"><a href="#_Toc204145264">5.1.2.
+PostalAddress<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">9</span></a></span></p>
+
+<p class="MsoToc3"><span class="MsoHyperlink"><a href="#_Toc204145265">5.1.3.
+PayeeAmount<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">9</span></a></span></p>
+
+<p class="MsoToc2"><span class="MsoHyperlink"><a href="#_Toc204145266">5.2.
+FraudEventTransferType Class<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">9</span></a></span></p>
+
+<p class="MsoToc3"><span class="MsoHyperlink"><a href="#_Toc204145267">5.2.1.
+BankID<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">10</span></a></span></p>
+
+<p class="MsoToc3"><span class="MsoHyperlink"><a href="#_Toc204145268">5.2.2.
+AccountID<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">11</span></a></span></p>
+
+<p class="MsoToc3"><span class="MsoHyperlink"><a href="#_Toc204145269">5.2.3.
+AccountType<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">11</span></a></span></p>
+
+<p class="MsoToc3"><span class="MsoHyperlink"><a href="#_Toc204145270">5.2.4.
+TransferAmount<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">12</span></a></span></p>
+
+<p class="MsoToc2"><span class="MsoHyperlink"><a href="#_Toc204145271">5.3.
+FraudEventIdentityType Class<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">12</span></a></span></p>
+
+<p class="MsoToc3"><span class="MsoHyperlink"><a href="#_Toc204145272">5.3.1.
+IdentityComponent<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">12</span></a></span></p>
+
+<p class="MsoToc2"><span class="MsoHyperlink"><a href="#_Toc204145273">5.4.
+FraudEventOtherType Class<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">13</span></a></span></p>
+
+<p class="MsoToc3"><span class="MsoHyperlink"><a href="#_Toc204145274">5.4.1.
+OtherEventType<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">13</span></a></span></p>
+
+<p class="MsoToc3"><span class="MsoHyperlink"><a href="#_Toc204145275">5.4.2.
+OtherEventDescription<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">14</span></a></span></p>
+
+<p class="MsoToc2"><span class="MsoHyperlink"><a href="#_Toc204145276">5.5.
+AmountType Class<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">14</span></a></span></p>
+
+<p class="MsoToc3"><span class="MsoHyperlink"><a href="#_Toc204145277">5.5.1. Class
+Contents<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">14</span></a></span></p>
+
+<p class="MsoToc3"><span class="MsoHyperlink"><a href="#_Toc204145278">5.5.2.
+Currency<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">14</span></a></span></p>
+
+<p class="MsoToc2"><span class="MsoHyperlink"><a href="#_Toc204145279">5.6.
+AccountTypeType Class<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">14</span></a></span></p>
+
+<p class="MsoToc1"><span class="MsoHyperlink"><a href="#_Toc204145280">6. IODEF
+Profile for an Activity Thraud Report<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">15</span></a></span></p>
+
+<p class="MsoToc2"><span class="MsoHyperlink"><a href="#_Toc204145281">6.1.
+Mandatory components<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">15</span></a></span></p>
+
+<p class="MsoToc2"><span class="MsoHyperlink"><a href="#_Toc204145282">6.2.
+Recommended Components<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">16</span></a></span></p>
+
+<p class="MsoToc2"><span class="MsoHyperlink"><a href="#_Toc204145283">6.3.
+Deprecated Components<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">16</span></a></span></p>
+
+<p class="MsoToc1"><span class="MsoHyperlink"><a href="#_Toc204145284">7. IODEF
+profile for a Signature Thraud Report<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">17</span></a></span></p>
+
+<p class="MsoToc1"><span class="MsoHyperlink"><a href="#_Toc204145285">8. IODEF
+Additional Attribute Values<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">17</span></a></span></p>
+
+<p class="MsoToc2"><span class="MsoHyperlink"><a href="#_Toc204145286">8.1. Purpose
+Attribute<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">17</span></a></span></p>
+
+<p class="MsoToc1"><span class="MsoHyperlink"><a href="#_Toc204145287">9. Security
+considerations<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">17</span></a></span></p>
+
+<p class="MsoToc1"><span class="MsoHyperlink"><a href="#_Toc204145288">10. IANA
+considerations<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">19</span></a></span></p>
+
+<p class="MsoToc2"><span class="MsoHyperlink"><a href="#_Toc204145289">10.1. Media
+sub-type<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">19</span></a></span></p>
+
+<p class="MsoToc2"><span class="MsoHyperlink"><a href="#_Toc204145290">10.2. XML
+namespace<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">20</span></a></span></p>
+
+<p class="MsoToc1"><span class="MsoHyperlink"><a href="#_Toc204145291">11.
+Conclusion<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">20</span></a></span></p>
+
+<p class="MsoToc1"><span class="MsoHyperlink"><a href="#_Toc204145292">12.
+References<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">20</span></a></span></p>
+
+<p class="MsoToc2"><span class="MsoHyperlink"><a href="#_Toc204145293">12.1.
+Normative<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">20</span></a></span></p>
+
+<p class="MsoToc2"><span class="MsoHyperlink"><a href="#_Toc204145294">12.2.
+Informative<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">21</span></a></span></p>
+
+<p class="MsoToc1"><span class="MsoHyperlink"><a href="#_Toc204145295">13. Authors'
+Addresses<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">21</span></a></span></p>
+
+<p class="MsoToc1"><span class="MsoHyperlink"><a href="#_Toc204145296">14. Full
+Copyright Statement<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">21</span></a></span></p>
+
+<p class="MsoToc1"><span class="MsoHyperlink"><a href="#_Toc204145297">15.
+Intellectual Property<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">22</span></a></span></p>
+
+<p class="MsoToc1"><span class="MsoHyperlink"><a href="#_Toc204145298">Appendix A.&nbsp;
+Thraud Record XML Schema<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">22</span></a></span></p>
+
+<p class="MsoToc1"><span class="MsoHyperlink"><a href="#_Toc204145299">Appendix B.&nbsp;
+Example of a Thraud Report<span style="color: windowtext; display: none; text-decoration: none;"> </span><span style="color: windowtext; display: none; text-decoration: none;">24</span></a></span></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<span style="font-size: 12pt; font-family: &quot;Courier New&quot;;"><br style="page-break-before: always;" clear="all">
+</span>
+
+<p class="RFCHeading1" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145257"></a><a name="_Toc197164237">1. Introduction</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Financial organizations and merchants
+that offer online access to their services frequently encounter fraud
+perpetrated against their customers' accounts. In their attempts to combat
+these frauds, the organizations and their law enforcement agencies could
+benefit greatly by sharing intelligence about fraud incidents and patterns with
+similar organizations and agencies. This specification standardizes a document format
+by which they can share such information. It is intended to facilitate
+multi-vendor interoperability between conformant components of an open fraud
+reporting framework.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Information sharing can take place
+directly between financial organizations and merchants. However, the power of
+shared intelligence is multiplied many times if the information is gathered from
+multiple sources by a shared network, consolidated and redistributed to
+participants.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">In this arrangement, incident reports
+submitted to the network are called inbound reports, and reports issued by the
+network are called outbound reports.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Inbound reports should be submitted
+using a push-style protocol (such as email or SOAP). And outbound reports may
+either be distributed using a push-style protocol or a request/response
+protocol (such as HTTP).</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Inbound reports identify the
+contributor of the report, as this information is essential in evaluating the
+quality of the information it contains and in contacting the source for the
+purpose of clarification. But, outbound reports commonly do not identify the
+original sources, as those sources may not wish to be identified to other
+subscribers. Such reports should, instead, identify the consolidator as the
+source.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">A report may describe a particular
+transaction that is known to be, or believed to be, fraudulent, or it may
+describe a pattern of behavior that is believed to be indicative of fraud.&nbsp; The
+former type of report is called an 'activity report' and the latter a 'signature
+report'.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">The schema defined herein extends the
+IODEF XML incident reporting schema [RFC5070].</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">In section 3 we introduce the actors
+in a typical transaction fraud. Fraud reporting by means of an IODEF-Document
+is described in section 4. We define the elements of a Thraud Report in section
+5. In section 6 we describe the Activity Thraud Report profile of the IODEF specification.
+And in section 7 the profile for a Signature Thraud Report is described. In
+section 8 we define new attribute values for the IODEF Incident class. Security
+considerations are described in section 9. And, Section 10 contains a request
+to IANA to register the associated media sub-type and XML namespace
+identifier.&nbsp; The Appendices contain the complete XML schema and a sample Thraud
+Report.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Data elements in this document are
+expressed in Unified Modeling Language (UML) syntax [UML].</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">XML namespace prefixes are used
+throughout this document to stand for their respective XML namespaces, as
+follows.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">iodef:&nbsp;&nbsp; urn:ietf:params:xml:ns:iodef-1.0</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">thraud:&nbsp; urn:ietf:params:xml:ns:thraud-1.0</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">xs:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; http://www.w3.org/2001/XMLSchema</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">xsi:&nbsp;&nbsp;&nbsp;&nbsp; http://www.w3.org/2001/XMLSchema-instance</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading1" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145258"></a><a name="_Toc197164238">2. Requirements Terminology</a>
+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">The key words "MUST",
+"MUST NOT", "REQUIRED", "SHALL", "SHALL
+NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED",
+"MAY", and "OPTIONAL" in this document are to be
+interpreted as described in RFC 2119 [RFC2119].</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading1" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145259"></a><a name="_Toc197164239">3. Anatomy of a Transaction
+Fraud</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">The actors in a typical transaction fraud
+are shown in Figure 1.</p>
+
+<span style="font-size: 10pt; font-family: &quot;Courier New&quot;;"><br style="page-break-before: always;" clear="all">
+</span>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">+--------------------------------------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">|
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fraudsters&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;|</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">| (collect &amp; verify victim
+credentials |</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">|&nbsp;&nbsp; via phishing, malware, etc.)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;|</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">+--------------------------------------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp; |</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp; |recruit</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp; |</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp; ----------------disburse
+profits-----------------</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;
+|&nbsp;&nbsp;
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;
+v&nbsp;&nbsp;
+v&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">+-----------+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
++--------------+ &nbsp;&nbsp;&nbsp;&nbsp;+-------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&nbsp; &nbsp;&nbsp;&nbsp;| Fraud |</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |--Open Dest Acct--&gt;| &nbsp;Financial&nbsp;
+&nbsp;|----&gt;| Dest. |</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+| Organization
+|&nbsp;&nbsp; &nbsp;&nbsp;|Account|</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">|
+&nbsp;&nbsp;Fraud&nbsp;&nbsp;
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
++--------------+&nbsp;&nbsp;&nbsp;
+&nbsp;+-------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">| Executors
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+^
+funds</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+| transfer</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
++--------------+&nbsp;&nbsp;&nbsp;&nbsp;
++-------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+| &nbsp;&nbsp;Victim’s
+&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |---Init Transfer--&gt;| &nbsp;Financial
+&nbsp;&nbsp;|&lt;-o--|Victim |</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|
+Organization |&nbsp; |&nbsp; |Account|</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">+-----------+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
++--------------+&nbsp;
+|&nbsp; +-------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
++-----------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|
+&nbsp;&nbsp;Fraud&nbsp;&nbsp; |</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|
+Detection |</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;|
+&nbsp;Sensors&nbsp; |</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|(realtime/
+|</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|
+&nbsp;offline) |</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
++-----------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;Figure 1. Transaction Fraud
+Elements</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Transaction fraud activities normally
+involve the following actors:</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp; 1. Fraudsters are individuals or
+organizations that collect victims' login credentials using a variety of means,
+including phishing and malware, and verify them (usually by attempting to login
+to the victim’s account). Then the Fraudsters may either recruit Fraud Executors
+themselves or wholesale the victims' credentials to other Fraudsters, who will,
+in turn, recruit Fraud Executors.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp; &nbsp;&nbsp;2. Fraud Executors are individuals
+who attempt the fraudulent funds transfer or payment. In the case of fraudulent
+funds transfers, an account at the same financial organization as that of the
+victim, or a different one, is opened, as the destination account for the
+fraudulent transfer. Alternatively, a fraudulent payment is made using a check
+or electronic transfer.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp; 3. Victims of both credential
+theft and transaction fraud.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp; 4. Financial Organizations that
+hold the victim's and the Fraud Executor's accounts.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp; 5. Sensors at the Financial
+Organization that detect fraudulent transaction attempts, either in real-time
+or after the fact. </p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">The intention of Thraud reporting is
+to enable any organization that has detected fraud to share this information,
+either internally or with other potential victim organizations. The receiving
+organization can use this information, for example, to institute manual review
+of transactions initiated from suspicious IP addresses. </p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading1" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145260"></a><a name="_Toc197164240">4. IODEF-Document Incident Class</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">A Thraud Report SHALL be an instance
+of the IODEF-Document class, as defined in [RFC5070]. The report SHALL contain at
+least one Incident object, as defined in [RFC5070]. Each Incident object SHOULD
+contain information about a single fraud strategy. One Incident object MAY
+contain information about multiple fraudulent transactions that are consistent
+with the same fraud strategy. Each fraudulent transaction SHALL be described in
+a separate EventData object. The data model for the Incident class is defined
+in [RFC5070] and is repeated here, as Figure 2, for the reader's convenience.</p>
+
+<span style="font-size: 12pt; font-family: &quot;Courier New&quot;;"><br style="page-break-before: always;" clear="all">
+</span>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp; +-------------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp; | Incident&nbsp;&nbsp;&nbsp; |</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp; +-------------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp; |ENUM &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&lt;&gt;----------[ IncidentID
+]</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp; | purpose &nbsp;&nbsp;&nbsp;&nbsp;|&lt;&gt;--{0..1}--[ AlternativeID
+]</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp; |STRING &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&lt;&gt;--{0..1}--[ RelatedActivity
+]</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp; | ext-purpose |&lt;&gt;--{0..1}--[ DetectTime
+]</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp; |ENUM &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&lt;&gt;--{0..1}--[ StartTime
+]</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp; | lang&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;|&lt;&gt;--{0..1}--[ EndTime
+]</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp; |ENUM&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;|&lt;&gt;----------[ ReportTime
+]</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp; | restriction |&lt;&gt;--{0..*}--[
+Description ]</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp; |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;|&lt;&gt;--{1..*}--[
+Assessment ]</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp; |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;|&lt;&gt;--{0..*}--[
+Method ]</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp; |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&lt;&gt;--{1..*}--[
+Contact ]</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp; |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;|&lt;&gt;--{1..*}--[ EventData
+]&lt;&gt;--[ AdditionalData ]</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp; |&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&lt;&gt;--{0..1}--[
+History ]</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp; |&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&lt;&gt;--{1..*}--[ AdditionalData
+]</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp; +-------------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;Figure 2. Data model of
+the Incident class</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">The AdditionalData abstract class is
+an extension point in the schema of the EventData class. Implementers SHALL
+include exactly one of the following objects in AddtionalData: FraudEventPayment,
+FraudEventTransfer, FraudEventIdentity and FraudEventOther. Collectively, these
+are known as Thraud Records. The corresponding classes are defined by this
+specification in section 5, below.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">The Thraud profile of the Incident class
+is defined in sections 6 and 7, below.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading1" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145261"></a><a name="_Toc197164241">5. Thraud Record Class
+Definitions</a> </p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Thraud Records are expressed in XML.
+Therefore, the dtype attribute of the AdditionalData element SHALL be assigned
+the value 'xml'.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">A payment Thraud Record SHALL be
+structured as shown in Figure 3. See also section 5.1.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +------------------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | AdditionalData &nbsp;&nbsp;|</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +------------------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | ENUM dtype (xml) |&lt;&gt;-----[
+FraudEventPayment ]</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +------------------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Figure 3. The FraudEventPayment
+extension</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">A funds-transfer Thraud Record SHALL be
+structured as shown in Figure 4. See also section 5.2.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +------------------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | AdditionalData&nbsp;&nbsp; |</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +------------------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | ENUM dtype (xml) |&lt;&gt;-----[
+FraudEventTransfer ]</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +------------------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Figure 4. The FraudEventTransfer
+extension</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">An identity Thraud Record SHALL be structured
+as shown in Figure 5. See also section 5.3.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +------------------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | AdditionalData &nbsp;&nbsp;|</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +------------------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | ENUM dtype (xml) |&lt;&gt;-----[
+FraudEventIdentity ]</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +------------------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Figure 5. The FraudEventIdentity
+extension</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Other Thraud Records SHALL be structured
+as shown in Figure 6. See also section 5.4. &nbsp;The FraudEventOther class has an
+open definition to act as a placeholder for event types that emerge in the
+future.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +------------------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | AdditionalData &nbsp;&nbsp;|</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +------------------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | ENUM dtype (xml) |&lt;&gt;----[
+FraudEventOther ]</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +------------------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Figure 6. The FraudEventOther
+extension</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading2" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145262">5.1. FraudEventPaymentType Class</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">The FraudEventPaymentType class is
+used to report payee instructions for a fraudulent payment or fraudulent
+payment attempt. Fraudsters sometimes use the same payee instructions
+(including the amount) for multiple fraudulent payment attempts. By reporting
+the payment instructions used in the fraud, other oragnizations may be able to detect
+similar fraudulent payment attempts to the same payee.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">The structure of the FraudEventPaymentType
+class SHALL be as shown in Figure 7.</p>
+
+<span style="font-size: 12pt; font-family: &quot;Courier New&quot;;"><br style="page-break-before: always;" clear="all">
+</span>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +-------------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | FraudEvent- |</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | PaymentType |</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +-------------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&lt;&gt;--{0..1}--[
+PayeeName ]</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&lt;&gt;--{0..1}--[
+PostalAddress ]</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&lt;&gt;--{0..1}--[
+PayeeAmount ]</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +-------------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Figure 7. The FraudEventPaymentType
+class</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">The contents of the FraudEventPaymentType
+class are described below. At least one component MUST be present.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading3" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145263">5.1.1. PayeeName</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Zero or one value of type iodef:MLString.
+The name of the payee.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading3" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145264">5.1.2. PostalAddress</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Zero or one value of type iodef:MLString.
+The format SHALL be as documented in Sections 2.23 of [RFC4519], which defines
+a postal address as a free-form multi-line string separated by the
+"$" character.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading3" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145265">5.1.3. PayeeAmount</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Zero or one value of type thraud:AmountType.
+See Section 5.5.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading2" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145266">5.2. FraudEventTransferType Class</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">The FraudEventTransferType class is
+used to report the payee instructions for a fraudulent funds transfer or
+fraudulent funds transfer attempt. Fraudsters sometimes use the same payee
+instructions (including the amount) for multiple fraudulent funds transfer
+attempts. By reporting the funds transfer instructions used in the fraud, other
+organizations may be able to detect similar fraudulent funds transfer attempts
+to the same payee.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">The structure of the FraudEventTransferType
+class SHALL be as shown in Figure 8.</p>
+
+<span style="font-size: 12pt; font-family: &quot;Courier New&quot;;"><br style="page-break-before: always;" clear="all">
+</span>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +--------------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | FraudEvent-&nbsp; |</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | TransferType |</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +--------------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;|&lt;&gt;--{0..1}--[
+BankID ]</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&lt;&gt;--{0..1}--[
+AccountID ]</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&lt;&gt;--{0..1}--[
+AccountType ]</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&lt;&gt;--{0..1}--[
+TransferAmount ]</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +--------------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Figure 8. The FraudEventTransferType
+class</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">The contents of the FraudEventTransferType
+class are described below. At least one component MUST be present.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading3" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145267">5.2.1. BankID</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Zero or one value of type thraud:BankIDType.
+The structure of the BankIDType class SHALL be as shown in Figure 9. The contents
+SHALL be of type xs:string. The namespace attribute SHALL be of type xs:anyURI and
+SHALL identify the numbering system used to identify the bank or account.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +-------------------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | BankIDType&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +-------------------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | STRING&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp; STRING namespace |</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +-------------------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Figure 9. The BankIDType class</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">A list of registered namespace
+identifiers is maintained at:</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt 74.8pt;">http://www.openauthentication.org/thraud/resources/bank-id-namespace</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">The following namespace attribute
+values and their semantics are registered.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt 74.8pt;">http://www.openauthentication.org/thraud/resources/<a href="http://www.openauthentication.org/thraud/resources/bank-id-namespace.htm#american-bankers-association" title="http://www.openauthentication.org/thraud/resources/bank-id-namespace.htm#american-bankers-association"><span style="color: windowtext; text-decoration: none;">bank-id-namespace.htm#american_bankers_association</span></a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">One of the nine-digit Routing Numbers
+registered to the financial organization that holds the account, as
+administered by The American Bankers Association.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt 74.8pt;">http://www.openauthentication.org/thraud/resources/<a href="http://www.openauthentication.org/thraud/resources/bank-id-namespace.htm#american-bankers-association" title="http://www.openauthentication.org/thraud/resources/bank-id-namespace.htm#american-bankers-association"><span style="color: windowtext; text-decoration: none;">bank-id-namespace.htm#</span></a>canadian_payments_association</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">The three digit Institution Number
+registered to the financial organization that holds the account, as
+administered by The Canadian Payments Association.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt 74.8pt;">http://www.openauthentication.org/thraud/resources/<a href="http://www.openauthentication.org/thraud/resources/bank-id-namespace.htm#american-bankers-association" title="http://www.openauthentication.org/thraud/resources/bank-id-namespace.htm#american-bankers-association"><span style="color: windowtext; text-decoration: none;">bank-id-namespace.htm#</span></a>iso13616_1_2007</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">The corresponding AccountId
+represents the ISO 13616 International Bank Account Number in the 'electronic
+form' (i.e. containing no spaces) that is assigned to the account, as
+administered by the Society for Worldwide Interbank Financial Telecommunication
+(SWIFT).&nbsp; The corresponding BankId xs:string value SHOULD be set to the null
+string.&nbsp; Receiving organizations SHOULD ignore the corresponding BankId value.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt 74.8pt;">http://www.openauthentication.org/thraud/resources/<a href="http://www.openauthentication.org/thraud/resources/bank-id-namespace.htm#american-bankers-association" title="http://www.openauthentication.org/thraud/resources/bank-id-namespace.htm#american-bankers-association"><span style="color: windowtext; text-decoration: none;">bank-id-namespace.htm#</span></a>iso9362_1994</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">The eight character Bank Identifier
+Code registered to the financial organization that holds the account, as
+administered by SWIFT.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Other namespace values MUST be agreed
+between participants.&nbsp; Requests to register new values SHOULD be made at:</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt 74.8pt;">http://www.openauthentication.org/thraud/register/bank-id-namespace</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Note that a single organization may
+be identified by more than one value for any one or more of these namespaces.
+So, receiving organizations SHOULD take this into account in their matching
+procedure.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading3" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145268">5.2.2. AccountID</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Zero or one value of type xs:string.
+The destination primary account number, as administered by the financial organization
+identified in the BankId element.&nbsp; In the case where the BankId namespace
+attribute value is 'iso13616_1_2007', this element SHALL contain the
+International Bank Account Number in the 'electronic form' (i.e. containing no
+spaces) that is assigned to the account.&nbsp; In all other cases, the element SHALL
+contain only the account number, as administered by the financial organization
+that holds the account. The reporting organization SHALL remove all prefixes
+that identify the country, bank or branch.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading3" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145269">5.2.3. AccountType</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Zero or one value of type thraud:AccountTypeType.
+See section 5.6.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading3" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145270">5.2.4. TransferAmount</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Zero or one value of type thraud:AmountType.
+See Section 5.5.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading2" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145271">5.3. FraudEventIdentityType Class</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">The FraudEventIdentityType class is
+used to report a fraudulent impersonation or fraudulent impersonation attempt. By
+reporting the impersonation event, other potential victims may be able to
+detect similar fraudulent impersonation attempts.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">The structure of the FraudEventIdentityType
+class SHALL be as shown in Figure 10.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +--------------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | FraudEvent-&nbsp; |</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | IdentityType |</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +--------------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&lt;&gt;--{1..*}--[
+IdentityComponent ]</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +--------------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Figure 10. The FraudEventIdentityType
+class</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">The contents of the FraudEventIdentityType
+class are described below.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading3" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145272">5.3.1. IdentityComponent</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">One or more values of type iodef:ExtensionType.
+This specification defines two extensions: EmailAddress and UserID.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading4" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;">5.3.1.1. EmailAddress</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">In reporting an identity fraud event,
+the reporting institution MAY include the victim's email address. This SHALL be
+achieved by placing an object of type iodef:Email in the IdentityComponent object.
+It SHALL contain the email address of the intended fraud victim.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">The IdentityComponent.dtype attribute
+SHALL be set to the value "string".</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">The IdentityComponent.meaning
+attribute SHALL be set to the value "victim email address". </p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading4" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;">5.3.1.2. UserID</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">In reporting an identity fraud event,
+the reporting institution MAY include the victim's user id. This SHALL be
+achieved by placing an object of type iodef:ExtensionType in the IdentityComponent
+object. The data type of the extension contents SHALL be xs:string. It SHALL
+contain the user id of the intended fraud victim.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">The IdentityComponent.type attribute
+SHALL be set to the value "string".</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">The IdentityComponent.meaning
+attribute SHALL be set to the value "victim user id".</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading2" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145273">5.4. FraudEventOtherType Class</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">The FraudEventOtherType class SHALL
+be used to report fraudulent events other than those detailed above, such as
+new event types that may emerge at some time in the future. This class enables
+such events to be reported, using this specification, even though the specific
+characteristics of such events have not yet been formally identified. By
+reporting the details of these unspecified event types, other institutions may
+be able to detect similar fraudulent activity.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">The structure of the FraudEventOtherType
+class SHALL be as shown in Figure 11.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +-------------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | FraudEvent- |</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | OtherType&nbsp;&nbsp; |</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +-------------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&lt;&gt;----------[
+OtherEventType ]</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&lt;&gt;--{0..1}--[
+PayeeName ]</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&lt;&gt;--{0..1}--[
+PostalAddress ]</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&lt;&gt;--{0..1}--[
+BankID ]</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&lt;&gt;--{0..1}--[
+AccountID ]</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&lt;&gt;--{0..1}--[
+AccountType ]</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&lt;&gt;--{0..1}--[
+PayeeAmount ]</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&lt;&gt;--{0..1}--[
+OtherEventDescription ]</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +-------------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Figure 11. The FraudEventOtherType
+class</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Many of the components of the FraudEventOtherType
+class are also components of the FraudEventPaymentType or FraudEventTransferType
+classes. Their use in the FraudEventOtherType class is identical to their use
+in those classes. Therefore, their descriptions are not duplicated here. Only components
+that are unique to the FraudEventOtherType class are described below.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading3" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145274">5.4.1. OtherEventType</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">One value of type xs:anyURI.&nbsp; A name
+that classifies the event.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">A list of registered other event type
+identifiers is maintained at:</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">http://www.openauthentication.org/thraud/resources/other-event-type</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Requests to register new values
+SHOULD be made at:</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">http://www.openauthentication.org/thraud/register/other-event-type</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading3" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145275">5.4.2. OtherEventDescription</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Zero or one values of type iodef:MLString.&nbsp;
+A free-form textual description of the event.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading2" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145276">5.5. AmountType Class</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">The AmountType class SHALL be as
+shown in Figure 12. It SHALL be used to report the amount of a payment or
+transfer fraud.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;+------------------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | AmountType &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +------------------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | DECIMAL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp; STRING currency |</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +------------------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Figure 12. The AmountType Class</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">The contents of the AmountType class are
+described below.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading3" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145277">5.5.1. Class Contents</a> </p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">REQUIRED DECIMAL. The amount of the
+payment or transfer.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading3" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145278">5.5.2. Currency</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">REQUIRED STRING. The three letter
+currency code [ISO4217].</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading2" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145279">5.6. AccountTypeType Class</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">The AccountTypeType class SHALL be as
+shown in Figure 13.&nbsp; It SHALL be used to report the type of the destination
+account.</p>
+
+<span style="font-size: 12pt; font-family: &quot;Courier New&quot;;"><br style="page-break-before: always;" clear="all">
+</span>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +-----------------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | AccountTypeType |</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +-----------------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | STRING&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp; STRING lang&nbsp;&nbsp;&nbsp; |</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +-----------------+</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;Figure 13. The AccountTypeType
+class</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Receiving organizations MUST be
+capable of processing contents containing spelling variations.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading1" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145280"></a><a name="_Toc197164242">6. IODEF Profile for an Activity
+Thraud Report</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">This section describes the profile of
+the IODEF Incident class for a compliant Activity Thraud Report.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading2" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145281">6.1. Mandatory components</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">A Thraud Report SHALL conform to the
+data model specified for an IODEF-Document in [RFC5070].&nbsp; The following components
+of that data model, while optional in IODEF, are REQUIRED in a conformant
+Thraud Report.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Receiving organizations MAY reject
+documents that do not contain all these components.&nbsp; Therefore, reporting
+organizations MUST populate them all.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Except where noted, these components
+SHALL be interpreted as described in [RFC5070].</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Incident.purpose</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Incident.IncidentID</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Incident.ReportTime</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Incident.Assessment</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Incident.Assessment.Impact</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Incident.Assessment.Confidence</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Incident.Contact</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Incident.Contact.Email – An email
+address at which the reporting organization may be contacted.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Incident.Contact.ContactName - The
+name of the reporting organization. In case the reporting organization acts as
+a consolidator of reports from other organizations, elements of this class SHALL
+contain the name of the consolidator. </p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Incident.EventData</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Incident.EventData.DetectTime - The
+date and time at which the fraud or fraud attempt was detected. Incident.EventData.AdditionalData
+– SHALL contain exactly one Thraud Record.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading2" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145282">6.2. Recommended Components</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Receiving organizations SHOULD be
+capable of processing the following objects.&nbsp; However, they MUST NOT reject
+documents either because they are present or absent.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">If available, reporting organizations
+SHOULD include these components in Thraud Reports.&nbsp; Except where noted, these
+elements SHALL be interpreted as described in [RFC5070].</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Incident.Contact.Contact.ContactName -
+The name of the reporting fraud analyst.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Incident.Contact.Contact.Email - The
+email address of the reporting fraud analyst. </p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Incident.Contact.Contact.Telephone -
+The telephone number of the reporting fraud analyst.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Incident.EventData</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Incident.EventData.Flow</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Incident.EventData.Flow.System</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Incident.EventData.Flow.System.Service</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Incident.EventData.Flow.System.Service.Application
+- Information about the software used by the attacker, including the type and
+version of operating system, communication and application software.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Incident.EventData.Flow.System.Node</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Incident.EventData.Flow.System.Node.Address</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Incident.EventData.Flow.System.Node.Address.category</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Incident.EventData.Flow.System.Node.Address.vlan-num
+- The IPv4 or IPv6 address or subnet mask locating the node from which the
+fraud was executed, depending upon the accompanying value of the 'category'
+attribute. Incident.EventData.Flow.System.Node.Location - The name and address
+of the owner of the DNS domain from which the fraud or fraud attempt was
+executed.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Incident.EventData.Flow.System.Node.NodeName</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading2" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145283">6.3. Deprecated Components</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">This profile provides no guidance to receiving
+organizations on the proper processing of the following components. Therefore,
+the reporting organization has no assurance that the receiving organization will
+handle them in an appropriate manner and SHOULD NOT include them in a Thraud Report.&nbsp;
+However, receiving organizations MUST NOT reject reports that do contain these components.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Incident.ext-purpose</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Incident.restriction</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Incident.AlternativeID</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Incident.RelatedActivity</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Incident.StartTime</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Incident.EndTime </p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Incident.Description</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Incident.Method</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Incident.History</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Incident.AdditionalData</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading1" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145284"></a><a name="_Toc197164243">7. IODEF profile for a Signature
+Thraud Report</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">A Signature Thraud Report SHALL convey
+information about the behavior associated with fraudulent events, rather than
+reporting the details of the specific events themselves.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Sharing Signature Thraud Reports helps
+receiving organizations to detect suspicious behavior in their own systems.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">A Signature Thraud Report SHALL conform
+to the profile described in section 6, with the exception that the following additional
+components MUST be included. Except where noted, these elements SHALL be
+interpreted as described in [RFC5070].</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Incident.Assessment.Impact.severity</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Incident.Method.Reference.ReferenceName
+- A name that identifies the Signature Thraud Report.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Incident.Method.Description - A brief
+description of the behavior covered by the signature.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading1" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145285"></a><a name="_Toc197164244">8. IODEF Additional Attribute
+Values</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Additional IODEF attribute standard
+values are defined here.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading2" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145286">8.1. Purpose Attribute</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">The following additional values are
+defined for the Incident.purpose attribute.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Add - The enclosed Thraud Record
+values SHOULD be added to the corpus by the receiving organization.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Delete - The enclosed Thraud Record
+types SHOULD be deleted from the corpus by the receiving organization.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Modify - The enclosed Thraud Record
+values SHOULD replace the corresponding values in the corpus. Where no
+corresponding types currently exist in the corpus, the enclosed values SHOULD
+be added to the corpus by the receiving organization.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading1" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145287">9. Security considerations</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">This document describes a document
+format for exchanging information about successful or attempted transaction and
+authentication fraud incidents.&nbsp; The information is intended to be used to
+improve the effectiveness of participants' fraud detection and prevention
+programs.&nbsp; The effectiveness of such programs depends critically on the
+accuracy, reliability, confidentiality and timeliness of both the information
+and the participants in its exchange. &nbsp;Threats to accuracy, reliability and
+confidentiality include (but are not limited to) those described here.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Fraudsters may attempt to introduce
+reports that delete or modify incident information in the corpus.&nbsp; Therefore,
+origin authentication MUST be employed.&nbsp; Human review SHOULD be performed prior
+to implementing modifications to the corpus.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Fraudsters may attempt to interrupt
+or redirect submissions, thereby preventing the sharing of intelligence
+concerning their fraud strategies.&nbsp; Therefore, authenticated receipts SHOULD be
+employed.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Fraudsters may attempt to impersonate
+legitimate submitters, thereby poisoning their reputations, and rendering
+ineffective their future submissions.&nbsp; Origin authentication MUST be used to
+ensure that the sources of reports are properly identified.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Fraudsters that can view incident
+reports may adapt their fraud strategies to avoid detection.&nbsp; Therefore,
+reports MUST be protected by confidentiality services including transport
+encryption and access control.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">In order to prevent inadvertent
+disclosure of incident data, incident reports SHOULD be encrypted while in
+storage.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">The submitter of an incident report
+may incorrectly identify legitimate activity as a fraud incident.&nbsp; This may
+lead to denial of service by a receiving organization that relies on the report
+or information derived from the report.&nbsp; Receiving organizations SHOULD operate
+a reputation service, in which the reliability of the information from particular
+sources is assessed and tracked and subsequent reports are weighted
+accordingly.&nbsp; The source of reports MUST be authenticated.&nbsp; Receiving
+organizations SHOULD use reports to step-up authentication assurance, rather
+than simply denying service.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">A receiving organization may misuse a
+Thraud report to deny service, resulting in a loss for a legitimate user.&nbsp; If
+such a user were to learn the identity of the source of the information that
+led to the denial of service, then that source may become implicated in any
+resulting claim for compensation.&nbsp; This, in turn, may discourage reporting
+organizations from participating in intelligence sharing.&nbsp; Therefore, original
+sources SHOULD NOT be identified in consolidated reports.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Any origin authentication and data integrity
+mechanism that is acceptable to both parties MAY be used.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Any transport confidentiality mechanism
+that is acceptable to both parties MAY be used.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">This specification does not include a
+data compression technique.&nbsp; Therefore, it does not introduce any denial of
+service vulnerabilities related to decompression.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading1" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145288">10. IANA considerations</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">This specification proposes the
+registration of two identifiers:</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;- The media sub-type name 'thraud+xml'
+in the standard registration tree.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;- The xml namespace identifier - urn:ietf:params:xml:ns:thraud-1.0.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading2" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145289">10.1. Media sub-type</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Type name: application</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Subtype name: thraud+xml</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Required parameters: none.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Optional parameters: same as the charset
+parameter of application/xml as specified in [RFC3023].</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Encoding considerations: same as
+encoding considerations of application/xml as specified in [RFC3023].</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Security considerations: this
+registration has all of the security considerations described in [RFC3023] in
+addition to those in section 9, above.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Interoperability considerations: this
+registration has all of the interoperability considerations described in [RFC3023].</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Published specification: the media
+type data format is defined in this specification.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Applications that use this media
+type: transaction and authentication fraud analysis and reporting applications
+and risk-based transaction and authentication evaluation applications.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Additional information</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp; Magic number(s): see [RFC3023]</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp; File extension: .xml</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp; Macintosh file type codes: none</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Person and email address to contact
+for further information: D M'Raihi, dmraihi@verisign.com</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Intended usage - LIMITED USAGE</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Restrictions on usage: thraud media
+are intended for no usage other than the exchange of fraud intelligence data.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Author: D M'Raihi</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Change controller: D M'Raihi</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading2" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145290">10.2. XML namespace</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">IANA is requested to register the xml
+namespace identifier: urn:ietf:params:xml:ns:thraud-1.0.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading1" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145291"></a><a name="_Toc197164247">11. Conclusion</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">This specification introduces transaction
+fraud (Thraud) reporting document structure that enable the sharing of fraud
+data. Based on the IODEF-Document format, the proposed extension facilitates
+interoperability to increase the security of online applications.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading1" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145292"></a><a name="_Toc197164248">12. References</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading2" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145293">12.1. Normative</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp; [ISO13616-1:2007]&nbsp; Financial
+services - International bank account number (IBAN) -- Part 1: Structure of the
+IBAN.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp; [ISO4217]&nbsp; International
+Organization for Standardization, "International Standard: Codes for the
+representation of currencies and funds, ISO 4217:2001", August 2001.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp; [ISO9362:1994]&nbsp; Banking - Banking
+telecommunication messages - Bank identifier codes.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp; [RFC2119]&nbsp; S. Bradner, "Key
+words for use in RFCs to Indicate Requirement Levels", BCP 14, RFC 2119,
+March 1997.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp; [RFC3023]&nbsp; M. Murata, "XML
+Media Types", RFC 3023, Jan 2001.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp; &nbsp;[RFC4519]&nbsp; Sciberras, A.,
+"Schema for User Applications", RFC 4519, June 2006.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp; [RFC5070]&nbsp; R. Danyliw, The
+Incident Object Description Exchange Format, RFC 5070, December 2007, available
+at: http://www.rfc-editor.org/rfc/rfc5070.txt</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading2" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145294">12.2. Informative</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp; [UML]&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ISO/IEC 19501:2005
+Information technology - Open Distributed Processing - Unified Modeling
+Language (UML) Version 1.4.2.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading1" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145295"></a><a name="_Toc197164249">13. Authors' Addresses</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp; Primary point of contact (for sending
+comments and question):</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp; David M'Raihi</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp; VeriSign, Inc.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp; 685 E. Middlefield Road</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp; Mountain View&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Phone: 1-650-426-3832</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp; CA 94043 USA&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email:
+dmraihi@verisign.com</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp; Other Authors' contact
+information:</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp; Sharon Boeyen</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp; Entrust Inc.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp; 1000 Innovation Drive &nbsp;Phone: 1-613-270-3181</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp; Ottawa, ON, K2K 3E7&nbsp;&nbsp;&nbsp; Email:
+sharon.boeyen@entrust.com</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp; Michael Grandcolas</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp; Grandcolas Consulting LLC.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp; 247 Ocean Park Blvd.&nbsp;&nbsp; <span lang="IT">Phone: </span><span lang="IT">1-310-399-1747</span></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;"><span lang="IT">&nbsp; &nbsp;&nbsp;Santa Monica, Ca
+90405 Email: michael.grandcolas@hotmail.com</span></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;"><span lang="IT">&nbsp;</span></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;"><span lang="IT">&nbsp;&nbsp;&nbsp; </span>Siddharth
+Bajaj</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp; VeriSign, Inc.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp; 487 E. Middlefield Road</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp; Mountain View&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;Phone: 1-650-426-3458</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp; CA 94043 USA&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email:
+sbajaj@verisign.com</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading1" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145296"></a><a name="_Toc197164250">14. Full Copyright Statement</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Copyright (C) The IETF Trust (2008).</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">This document is subject to the
+rights, licenses and restrictions contained in BCP 78, and except as set forth
+therein, the authors retain all their rights.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">This document and the information
+contained herein are provided on an "AS IS" basis and THE
+CONTRIBUTOR, THE ORGANIZATION HE/SHE REPRESENTS OR IS SPONSORED BY (IF ANY),
+THE INTERNET SOCIETY, THE IETF TRUST AND THE INTERNET ENGINEERING TASK FORCE
+DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY
+WARRANTY THAT THE USE OF THE INFORMATION HEREIN WILL NOT INFRINGE ANY RIGHTS OR
+ANY IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCHeading1" style="margin: 0in 37.4pt 0.0001pt; text-indent: 0in;"><a name="_Toc204145297"></a><a name="_Toc197164251">15. Intellectual Property</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">The IETF takes no position regarding
+the validity or scope of any Intellectual Property Rights or other rights that
+might be claimed to pertain to the implementation or use of the technology
+described in this document or the extent to which any license under such rights
+might or might not be available; nor does it represent that it has made any
+independent effort to identify any such rights. Information on the procedures with
+respect to rights in RFC documents can be found in BCP 78 and BCP 79.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">Copies of IPR disclosures made to the
+IETF Secretariat and any assurances of licenses to be made available, or the
+result of an attempt made to obtain a general license or permission for the use
+of such proprietary rights by implementers or users of this specification can
+be obtained from the IETF on-line IPR repository at http://www.ietf.org/ipr.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">The IETF invites any interested party
+to bring to its attention any copyrights, patents or patent applications, or
+other proprietary rights that may cover technology that may be required to
+implement this standard. Please address the information to the IETF at
+ietf-ipr@ietf.org.</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCAppendixheading" style="margin: 0in 37.4pt 0.0001pt;"><a name="_Toc204145298"></a><a name="_Toc197164252">Appendix A.&nbsp; Thraud Record XML
+Schema</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&lt;xs:schema targetNamespace="urn:ietf:params:xml:ns:thraud-1.0"
+xmlns:thraud="urn:ietf:params:xml:ns:thraud-1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+xmlns:iodef="urn:ietf:params:xml:ns:iodef-1.0" elementFormDefault="qualified"
+attributeFormDefault="unqualified"&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&lt;xs:import
+namespace="urn:ietf:params:xml:ns:iodef-1.0" schemaLocation=" http://www.cert.org/ietf/inch/schema/rfc5070.xsd"/&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&lt;xs:element name="FraudEventPayment"
+type="thraud:FraudEventPaymentType"/&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&lt;xs:element name="FraudEventTransfer"
+type="thraud:FraudEventTransferType"/&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&lt;xs:element name="FraudEventIdentity"
+type="thraud:FraudEventIdentityType"/&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&lt;xs:element name="FraudEventOther"
+type="thraud:FraudEventOtherType"/&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&lt;xs:complexType name="FraudEventPaymentType"&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp; &lt;xs:sequence&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp; &lt;xs:element name="PayeeName"
+type="iodef:MLStringType" minOccurs="0"/&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp; &lt;xs:element name="PostalAddress"
+type="iodef:MLStringType" minOccurs="0"/&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp; &lt;xs:element name="PayeeAmount"
+type="thraud:AmountType" minOccurs="0"/&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp; &lt;/xs:sequence&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&lt;/xs:complexType&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&lt;xs:complexType name="FraudEventTransferType"&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&lt;xs:sequence&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp; &lt;xs:element name="BankID"
+type="thraud:BankIDType" minOccurs="0"/&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp; &lt;xs:element name="AccountID"
+type="xs:string" minOccurs="0"/&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp; &lt;xs:element name="AccountType"
+type="iodef:MLStringType" minOccurs="0"/&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp; &lt;xs:element name="TransferAmount"
+type="thraud:AmountType" minOccurs="0"/&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp; &lt;/xs:sequence&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&lt;/xs:complexType&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&lt;xs:complexType name="FraudEventIdentityType"&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp; &lt;xs:sequence maxOccurs="unbounded"&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp; &lt;xs:element name="IdentityComponent"
+type="iodef:ExtensionType"/&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp; &lt;/xs:sequence&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&lt;/xs:complexType&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&lt;xs:complexType name="FraudEventOtherType"&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp; &lt;xs:sequence&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp; &lt;xs:element name="OtherEventType"
+type="xs:anyURI"/&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp; &lt;xs:element name="PayeeName"
+type="iodef:MLStringType" minOccurs="0"/&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp; &lt;xs:element name="PostalAddress"
+type="iodef:MLStringType" minOccurs="0"/&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp; &lt;xs:element name="BankID"
+type="thraud:BankIDType" minOccurs="0"/&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp; &lt;xs:element name="AccountID"
+type="xs:string" minOccurs="0"/&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp; &lt;xs:element name="AccountType"
+type="iodef:MLStringType" minOccurs="0"/&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp; &lt;xs:element name="PayeeAmount"
+type="thraud:AmountType" minOccurs="0"/&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp; &lt;xs:element name="OtherEventDescription"
+type="iodef:MLStringType" minOccurs="0"/&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp; &lt;/xs:sequence&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&lt;/xs:complexType&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&lt;xs:complexType name="AmountType"&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp; &lt;xs:simpleContent&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp; &lt;xs:extension base="xs:decimal"&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp; &lt;xs:attribute
+name="currency" type="xs:string"/&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp; &lt;/xs:extension&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp; &lt;/xs:simpleContent&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&lt;/xs:complexType&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&lt;xs:complexType name="BankIDType"&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp; &lt;xs:simpleContent&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp; &lt;xs:extension base="xs:string"&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp; &lt;xs:attribute
+name="namespace" type="xs:anyURI"
+use="required"/&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp; &lt;/xs:extension&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp; &lt;/xs:simpleContent&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&lt;/xs:complexType&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&lt;xs:element name="UserId"
+type="xs:string"/&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&lt;/xs:schema&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCAppendixheading" style="margin: 0in 37.4pt 0.0001pt;"><a name="_Toc204145299"></a><a name="_Toc197164253">Appendix B.&nbsp; Example of a
+Thraud Report</a></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&lt;?xml version="1.0"
+encoding="UTF-8"?&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&lt;IODEF-Document xmlns="urn:ietf:params:xml:ns:iodef-1.0"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:ietf:params:xml:ns:iodef-1.0</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;"><span lang="DA">http://www.cert.org/ietf/inch/schema/rfc5070.xsd"
+lang="en"&gt;</span></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;"><span lang="DA">&nbsp;</span>&lt;Incident
+purpose="reporting"&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp; &lt;IncidentID
+name="fraud.openauthentication.org"&gt;908711 </p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/IncidentID&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp; &lt;ReportTime&gt;2006-10-12T00:00:00-07:00&lt;/ReportTime&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp; &lt;Assessment&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp; &lt;Impact
+severity="high" completion="failed"/&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp; &lt;Confidence
+rating="high"/&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp; &lt;/Assessment&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp; &lt;Contact
+type="organization" role="creator"&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp; &lt;ContactName&gt;Open
+Authentication&lt;/ContactName&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp; &lt;Email&gt;contact@example.com
+&lt;/Email&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp; &lt;/Contact&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp; &lt;EventData&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp; &lt;DetectTime&gt;2006-10-12T07:42:21-08:00&lt;/DetectTime&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp; &nbsp;&lt;Flow&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp; &lt;System
+category="source"&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp; &lt;Node&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;Address
+category="ipv4-addr"&gt;192.0.2.53&lt;/Address&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp; &lt;/Node&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp; &lt;Description&gt;Source of
+numerous attacks&lt;/Description&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp; &lt;/System&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp; &lt;/Flow&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp; &lt;AdditionalData dtype="xml"&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp; &lt;FraudEventTransfer xmlns="urn:ietf:params:xml:ns:thraud-1.0"
+xmlns:iodef="urn:ietf:params:xml:ns:iodef-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="urn:ietf:params:xml:ns:thraud-1.0 </p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">http://www.openauthentication.org/thraud/Schema1-0.xsd"&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp;
+&lt;BankID
+namespace="http://www.openauthentication.org/thraud/resources/bank-id-namespace.htm#american_bankers_association"&gt;123456789&lt;/BankID&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp; &lt;AccountID&gt;3456789&lt;/AccountID&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp; &lt;AccountType lang="en"&gt;saving&lt;/AccountType&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp;&nbsp; &lt;TransferAmount currency="USD"&gt;10000&lt;/TransferAmount&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp;&nbsp; &lt;/FraudEventTransfer&gt;</p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;">&nbsp;&nbsp; <span lang="IT">&lt;/AdditionalData&gt;</span></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;"><span lang="IT">&nbsp; &lt;/EventData&gt;</span></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;"><span lang="IT">&nbsp;&lt;/Incident&gt;</span></p>
+
+<p class="RFCText" style="margin: 0in 37.4pt 0.0001pt;"><span lang="IT">&lt;/IODEF-Document&gt;</span></p>
+
+</div>
+
+</body></html>
