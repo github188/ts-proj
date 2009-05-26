@@ -51,7 +51,7 @@ public class TimebasedOnetimePassword {
     }
 
     private static final int[] DIGITS_POWER
-    // 0 1 2 3 4 5 6 7 8 9
+    // 0 1 2 3 4 5 6 7 8 9 10
     = { 1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000 };
 
     /**
@@ -120,8 +120,8 @@ public class TimebasedOnetimePassword {
 
     public static void main(String[] args) {
 
-	//String seed = "3132333435363738393031323334353637383930";
-	String seed ="4C45B409121F21463200EF094004FFFA9B5E1DAD";
+	String seed = "3132333435363738393031323334353637383930";
+	//String seed ="4C45B409121F21463200EF094004FFFA9B5E1DAD";
 	String time = "0";
 
 	Date myDate = Calendar.getInstance().getTime();
@@ -162,7 +162,7 @@ public class TimebasedOnetimePassword {
 	    System.out.println("+------------+-----------------------+------------------+--------+");
 
 	    // sample for event based OTP gen, parameter is counter.	   
-	    myDate.setTime(Long.parseLong("3"));
+	    myDate.setTime(Long.parseLong("0"));
 	    System.out.print("| " + myDate.getTime() + " |  " + df.format(myDate) + "  |");
 	    b = new BigInteger("0" + myDate.getTime());
 	    time = b.toString(16).toUpperCase();
