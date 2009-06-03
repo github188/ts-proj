@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<eapPacketElements>
+	<element>
+		<name>ADDRESS</name>					<!--报文要素名称-->
+		<description>地址</description>			<!--报文要素说明-->
+		<length>160</length> 					<!--报文要素字节长度-->
+		<fillCharacter>' '</fillCharacter>		<!--报文要素填充字符串，缺省为' '-->
+		<fillMode>right</fillMode>				<!--报文要素模式，right或left，缺省为right-->
+	</element>
+	<element>
+		<name>CARD_NUMBER</name>
+		<description>卡号</description>
+		<length>24</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>CARD_TYPE</name>
+		<description>卡类型</description>
+		<length>3</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>CHANNEL</name>
+		<description>渠道</description>
+		<length>2</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>CODE</name>
+		<description>矩阵卡密码</description>
+		<length>14</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>COORDS</name>
+		<description>矩阵卡坐标</description>
+		<length>16</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>ECODE_USER</name>
+		<description>eCode用户</description>
+		<length>24</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>EMAIL</name>
+		<description>电子邮件</description>
+		<length>50</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>EXPIRE_DATE</name>
+		<description>效期</description>
+		<length>8</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>HASH1</name>
+		<description>Hash码</description>
+		<length>8</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>HASH2</name>
+		<description>Hash码</description>
+		<length>8</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>HASH3</name>
+		<description>Hash码</description>
+		<length>8</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>HASH4</name>
+		<description>Hash码</description>
+		<length>8</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>HASH5</name>
+		<description>Hash码</description>
+		<length>8</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>USER_NAME</name>
+		<description>用户名称</description>
+		<length>50</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>NEW_OTP</name>
+		<description>新卡动态密码</description>
+		<length>14</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>NO_OF_COORD</name>
+		<description>坐标数量</description>
+		<length>1</length><!-- 3 or 4 -->
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>COORDINATES</name>
+		<description>坐标值</description>
+		<length>16</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>OLD_OTP</name>
+		<description>旧卡动态密码</description>
+		<length>14</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>OTP</name>
+		<description>动态密码</description>
+		<length>14</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>OTP1</name>
+		<description>第一个动态密码</description>
+		<length>14</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>OTP2</name>
+		<description>第二个动态密码</description>
+		<length>14</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>OTP3</name>
+		<description>第三个动态密码</description>
+		<length>14</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>PHONE</name>
+		<description>手机</description>
+		<length>20</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>PHONE2</name>
+		<description>电话</description>
+		<length>20</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>PREFIX</name>
+		<description>服务器验证码</description>
+		<length>3</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>REG_UNIT_NO</name>
+		<description>注册机构号(应用系统用户注册机构)</description>
+		<length>50</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>SEQUENCE_NUMBER</name>
+		<description>动态密码序号</description>
+		<length>5</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode></fillMode>
+	</element>
+	<element>
+		<name>SIGN_DATA</name>
+		<description>Hash码</description>
+		<length>40</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>SIGNATURE</name>
+		<description>电子签名</description>
+		<length>14</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>USER_STATUS</name>
+		<description>用户状态</description>
+		<length>1</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>CHANNEL_STATUS</name>
+		<description>渠道状态</description>
+		<length>1</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>USER_ID</name>
+		<description>用户号</description>
+		<length>24</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>ZIP_CODE</name>
+		<description>邮政编码</description>
+		<length>6</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>STATE</name>
+		<description>设备状态</description>
+		<length>1</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>ISSUER</name>
+		<description>发行机构</description>
+		<length>24</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>SUB_ISSUER</name>
+		<description>发行分支机构</description>
+		<length>24</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>CARD_DESCRIPTION</name>
+		<description>设备描述</description>
+		<length>255</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>EXPIRED</name>
+		<description>是否过期标志</description>
+		<length>1</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>CARD_LOCKED</name>
+		<description>是否挂失标志</description>
+		<length>1</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>LOCKED</name>
+		<description>是否被锁标志</description>
+		<length>1</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>LOCKS</name>
+		<description>被锁次数</description>
+		<length>8</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>LAST_LOCK</name>
+		<description>最后被锁日期</description>
+		<length>14</length><!-- eCode返回19位日期，需要转为14位 -->
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>LAST_LOCKED_BY</name>
+		<description>最后被锁操作人</description>
+		<length>24</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>UNLOCKS</name>
+		<description>解锁次数</description>
+		<length>8</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>LAST_UNLOCK</name>
+		<description>最后解锁日期</description>
+		<length>14</length><!-- eCode返回19位日期，需要转为14位 -->
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>LAST_UNLOCKEDBY</name>
+		<description>最后解锁操作人</description>
+		<length>24</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>DATE_OF_CREATION</name>
+		<description>注册日期</description>
+		<length>14</length><!-- eCode返回19位日期，需要转为14位 -->
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>CARD_CREATED_BY</name>
+		<description>注册操作人</description>
+		<length>24</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>DATE_OF_ASSOCIATION</name>
+		<description>关联日期</description>
+		<length>14</length><!-- eCode返回19位日期，需要转为14位 -->
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>CARD_ASSOCIATED_BY</name>
+		<description>关联操作人</description>
+		<length>24</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>DATE_OF_ACTIVATION</name>
+		<description>激活日期</description>
+		<length>14</length><!-- eCode返回19位日期，需要转为14位 -->
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>CARD_ACTIVATED_BY</name>
+		<description>激活操作人</description>
+		<length>24</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>DATE_OF_DELETION</name>
+		<description>注销日期</description>
+		<length>14</length><!-- eCode返回19位日期，需要转为14位 -->
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>CARD_DELETED_BY</name>
+		<description>注销操作人</description>
+		<length>24</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>ACTIVATE_CODE_LENGTH</name>
+		<description>激活码长度</description>
+		<length>5</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>ACTIVATE_CODE_TYPE</name>
+		<description>激活码内容类型</description>
+		<length>1</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>ACTIVATE_CODE</name>
+		<description>激活码</description>
+		<length>200</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>AC_EXPIRE_DATE</name>
+		<description>激活码效期</description>
+		<length>8</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>ID_NO</name>
+		<description>用户证件号码</description>
+		<length>24</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>UNIT_NO</name>
+		<description>机构号</description>
+		<length>4</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>CREATE_OPERATOR</name>
+		<description>创建操作人</description>
+		<length>6</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>CREATE_DATETIME</name>
+		<description>创建时间</description>
+		<length>14</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>MODIFY_OPERATOR</name>
+		<description>修改操作人</description>
+		<length>6</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>MODIFY_DATETIME</name>
+		<description>修改时间</description>
+		<length>14</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>DELETE_OPERATOR</name>
+		<description>注销操作人</description>
+		<length>6</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+	<element>
+		<name>DELETE_DATETIME</name>
+		<description>注销时间</description>
+		<length>14</length>
+		<fillCharacter>' '</fillCharacter>
+		<fillMode>right</fillMode>
+	</element>
+</eapPacketElements>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eapPackets funcId="0013" funcName="验证动态密码"
+	funcDesc="验证动态密码">
+	<request>
+		<elementName>USER_ID</elementName><!--报文要素名称-->
+		<elementName>OTP</elementName>
+	</request>
+	<response>
+		<elementName>OTPS_LEFT</elementName><!--报文要素名称-->
+	</response>
+</eapPackets>
