@@ -1,0 +1,972 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<functions>
+	<!-- 示例
+		<function id="BoExample" 
+		description="Bo例子" 
+		type="bo"
+		className="tmvc.test.bo.BoTest"
+		forward="JspExample">
+		<parameter/>
+		<parameter/>
+		</function>
+		<function id="JspExample" 
+		description="Jsp例子" 
+		type="jsp"
+		jspPath="/doc/tmvc/help.jsp"/>
+		<function id="SwitchExample" 
+		description="Switch例子" 
+		type="switch"
+		switchOn="[request]INPUT_ITEM.1.VALUE">
+		<case match="a" forward="AResult"/>
+		<case match="b" forward="BResult"/>
+		</function>
+		<function id="AResult" 
+		description="分支a" 
+		type="jsp"
+		jspPath="/doc/tmvc/a.jsp"/>
+		<function id="BResult" 
+		description="分支b" 
+		type="jsp"
+		jspPath="/doc/tmvc/b.jsp"/>
+	-->
+
+	<!-- EAP client API -->
+	<function id="0001" description="注册EAP用户" type="bo"
+		className="todos.eap.server.bo.BoEapCreateUser" forward="InEmpty" />
+	<function id="0002" description="注册用户信息修改" type="bo"
+		className="todos.eap.server.bo.BoEapModifyUser" forward="InEmpty" />
+	<function id="0003" description="注册设备" type="bo"
+		className="todos.eap.server.bo.BoEapAssociateCard" forward="0003_2" />
+	<function id="0004" description="注销用户" type="bo"
+		className="todos.eap.server.bo.BoEapBlockUser" forward="InEmpty" />
+	<function id="0005" description="添加渠道" type="bo"
+		className="todos.eap.server.bo.BoEapAddChannel" forward="InEmpty" />
+	<function id="0006" description="注销渠道" type="bo"
+		className="todos.eap.server.bo.BoEapBlockChannel" forward="InEmpty" />
+	<function id="0007" description="注销设备" type="bo"
+		className="todos.eap.server.bo.BoEapBlockCard" forward="BCR2" />
+	<function id="0008" description="更改用户状态" type="bo"
+		className="todos.eap.server.bo.BoEapModifyUserStatus"
+		forward="InEmpty" />
+	<function id="0011" description="挂失设备" type="bo"
+		className="todos.eap.server.bo.BoEapLockCard" forward="BCR2" />
+	<function id="0012" description="解挂失设备" type="bo"
+		className="todos.eap.server.bo.BoEapUnlockCard" forward="BCR2" />
+	<function id="0013" description="验证动态密码" type="bo"
+		className="todos.eap.server.bo.BoEapVerifyCode" forward="IAT6" />
+	<function id="0014" description="同步" type="bo"
+		className="todos.eap.server.bo.BoEapSynchronize" forward="IAT5" />
+	<function id="0015" description="解锁动态密码" type="bo"
+		className="todos.eap.server.bo.BoEapUnlockOTP" forward="IATA" />
+	<function id="0016" description="激活设备" type="bo"
+		className="todos.eap.server.bo.BoEapActivateCard" forward="BCR2" />
+	<function id="0017" description="更换设备" type="bo"
+		className="todos.eap.server.bo.BoEapReplaceCard" forward="BCR2" />
+	<function id="0018" description="获取刮刮卡序号" type="bo"
+		className="todos.eap.server.bo.BoEapGetSequenceNumber" forward="IAT3" />
+	<function id="0019" description="获取服务器验证码" type="bo"
+		className="todos.eap.server.bo.BoEapGetCodePrefix" forward="IAT1" />
+	<function id="0020" description="验证电子签名" type="bo"
+		className="todos.eap.server.bo.BoEapVerifySignature" forward="BAT8" />
+	<function id="0021" description="验证电子签名" type="bo"
+		className="todos.eap.server.bo.BoEapVerifySignatureLarge"
+		forward="IAT9" />
+	<function id="0022" description="验证矩阵卡密码" type="bo"
+		className="todos.eap.server.bo.BoEapVerifyMatrixCode" forward="IAT7" />
+	<function id="0023" description="获取矩阵卡坐标" type="bo"
+		className="todos.eap.server.bo.BoEapGetCoordinates" forward="IAT2" />
+	<function id="0024" description="获取短信动态密码/电子签名" type="bo"
+		className="todos.eap.server.bo.BoEapRetrieveOTP" forward="IAT4" />
+	<function id="0025" description="获取设备信息" type="bo"
+		className="todos.eap.server.bo.BoEapGetCardInfo" forward="InEmpty" />
+	<function id="0026" description="获取设备信息列表" type="bo"
+		className="todos.eap.server.bo.BoEapGetCardList" forward="InEmpty" />
+	<function id="0027" description="获取用户信息" type="bo"
+		className="todos.eap.server.bo.BoEapGetUser" forward="InEmpty" />
+	<function id="0028" description="获取用户渠道信息" type="bo"
+		className="todos.eap.server.bo.BoEapGetUserChannel" forward="InEmpty" />
+	<function id="0030" description="解锁矩阵卡密码" type="bo"
+		className="todos.eap.server.bo.BoEapUnlockMatrixCode" forward="IATB" />
+	<function id="0031" description="解锁数字签名" type="bo"
+		className="todos.eap.server.bo.BoEapUnlockSignature" forward="BATC" />
+	<function id="0032" description="重新产生激活码" type="bo"
+		className="todos.eap.server.bo.BoEapReGenerateActivateCode"
+		forward="InEmpty" />
+
+	<!-- 登录注销 -->
+	<function id="I001" description="登录页面" type="jsp"
+		jspPath="/eap/sys/userLogin.jsp" />
+	<function id="B001" description="登录" type="bo"
+		className="todos.eap.mag.bo.BoTellerLogin" forward="AfterLogin" /><!-- 登录成功后跳向首页面 -->
+
+	<function id="AfterLogin" description="登录跳转" type="switch"
+		switchOn="[request]JUMP.1.TO">
+		<case match="I005" forward="I005" />
+		<case match="M001" forward="M001" />
+		<case match="I006" forward="I006" />
+	</function>
+	<function id="B002" description="注销" type="bo"
+		className="todos.eap.mag.bo.BoTellerLogout" forward="I001" />
+	<function id="B003" description="重登录" type="bo"
+		className="todos.eap.mag.bo.BoTellerLogout" forward="I001" ></function>
+
+	<function id="I005" description="修改密码页面" type="jsp"
+		jspPath="/eap/sys/changePsw.jsp" />
+	<function id="B005" description="修改密码" type="bo"
+		className="todos.eap.mag.bo.BoTellerChangePsw" forward="M001" />
+		
+	<function id="I006" description="解锁登录页面" type="jsp"
+		jspPath="/eap/sys/unlockLogin.jsp" ></function>
+	<function id="B006" description="解锁登录" type="bo"
+		className="todos.eap.mag.bo.BoTellerLogin" forward="AfterLogin" />
+
+	<!-- 验证图片 -->
+	<function id="B004" description="验证图片" type="bo"
+		className="tower.common.bo.BoVertifyImage" forward="I003" />
+	<function id="I003" description="二进制显示结果页面" type="jsp"
+		jspPath="/tower/ServletFileDisplay" />
+
+	<function id="SUCC" description="操作成功页面" type="jsp"
+		jspPath="/eap/common/success.jsp" />
+
+	<!-- 首页 -->
+	<function id="M001" description="首页" type="jsp"
+		jspPath="/eap/sys/home.jsp" />
+	<!-- 平台管理 -->
+	<function id="M002" description="平台管理" type="jsp"
+		jspPath="/eap/sys/platform.jsp" />
+	<!-- 报表 -->
+	<function id="M003" description="报表" type="jsp"
+		jspPath="/eap/sys/report.jsp" />
+	<!-- 客户支持 -->
+	<function id="M004" description="客户动态口令管理" type="jsp"
+		jspPath="/eap/sys/custSupport.jsp" />
+	<function id="M101" description="客户动态口令管理" type="jsp"
+		jspPath="/eap/sys/otpmag.jsp" />
+	<function id="M102" description="电话注册管理" type="jsp"
+		jspPath="/eap/sys/otppreg.jsp" />
+	<!-- 日志管理 -->
+
+	<function id="BRL0" description="日志管理初始化" type="bo"
+		className="todos.eap.mag.bo.BoChannelListToSel" forward="IRL0" />
+	<function id="IRL0" description="日志管理" type="jsp"
+		jspPath="/eap/log/list.jsp" />
+
+	<function id="BRL1" description="日志管理查询" type="bo"
+		className="todos.eap.mag.bo.BoLogList" forward="IRL1" />
+	<function id="IRL1" description="日志管理" type="jsp"
+		jspPath="/eap/log/list.jsp" />
+
+	<function id="BRL2" description="日志管理详细信息" type="bo"
+		className="todos.eap.mag.bo.BoLogDetail" forward="IRL2" />
+	<function id="IRL2" description="日志管理" type="jsp"
+		jspPath="/eap/log/detail.jsp" />
+		
+	<function id="BRL3" description="日志管理打印" type="bo"
+		className="todos.eap.mag.bo.BoLogList" forward="IRL3" />
+	<function id="IRL3" description="日志管理" type="jsp"
+		jspPath="/eap/log/print.jsp" />
+		
+	<function id="BRL4" description="日志管理输出Excel" type="bo"
+		className="todos.eap.mag.bo.BoLogList" forward="IRL4" />
+	<function id="IRL4" description="日志管理" type="jsp"
+		jspPath="/eap/ServletLogExcelOut" />
+
+	<!-- 柜员管理 -->
+	<function id="IPT0" description="柜员管理首页" type="jsp"
+		jspPath="/eap/teller/list.jsp" />
+	<function id="BPT1" description="柜员查询" type="bo"
+		className="todos.eap.mag.bo.BoRoleList" forward="BPT1_2" />
+	<function id="BPT1_2" description="柜员查询" type="bo"
+		className="todos.eap.mag.bo.BoTellerList" forward="IPT1" />
+	<function id="IPT1" description="柜员查询结果" type="jsp"
+		jspPath="/eap/teller/list.jsp" />
+	<function id="BPT2" description="柜员详细信息" type="bo"
+		className="todos.eap.mag.bo.BoRoleList" forward="BPT2_2" />
+	<function id="BPT2_2" description="柜员详细信息" type="bo"
+		className="todos.eap.mag.bo.BoTellerDetail" forward="IPT2" />
+	<function id="IPT2" description="柜员详细信息页面" type="jsp"
+		jspPath="/eap/teller/detail.jsp" />
+	<function id="BPT3" description="柜员修改初始化" type="bo"
+		className="todos.eap.mag.bo.BoRoleList" forward="BPT3_2" />
+	<function id="BPT3_2" description="柜员修改初始化" type="bo"
+		className="todos.eap.mag.bo.BoTellerDetail" forward="IPT3" />
+	<function id="IPT3" description="柜员修改页面" type="jsp"
+		jspPath="/eap/teller/edit.jsp" />
+	<function id="BPT4" description="柜员修改提交" type="bo"
+		className="todos.eap.mag.bo.BoTellerSubmit" forward="BPT1" />
+	<function id="BPT5" description="柜员添加初始化" type="bo"
+		className="todos.eap.mag.bo.BoRoleList" forward="BPT5_2" />
+	<function id="BPT5_2" description="柜员添加初始化" type="bo"
+		className="todos.eap.mag.bo.BoTellerDetail" forward="IPT5" />
+	<function id="IPT5" description="柜员添加页面" type="jsp"
+		jspPath="/eap/teller/edit.jsp" />
+	<function id="BPT6" description="柜员添加提交" type="bo"
+		className="todos.eap.mag.bo.BoTellerSubmit" forward="BPT1" />
+	<function id="BPT7" description="柜员删除/锁定" type="bo"
+		className="todos.eap.mag.bo.BoTellerDelete" forward="BPT1" />
+
+	<!-- 选择柜员 -->
+	<function id="BPTA" description="选择柜员" type="bo"
+		className="todos.eap.mag.bo.BoTellerList" forward="IPTA" />
+	<function id="IPTA" description="柜员选择页面" type="jsp"
+		jspPath="/eap/teller/selectList.jsp" />
+
+	<!-- 柜员权限 -->
+	<function id="BPTB" description="定义柜员权限" type="bo"
+		className="todos.eap.mag.bo.BoTellerRoleMenuApiList" forward="BPTE" />
+	<function id="BPTE" description="定义柜员权限:柜员详细信息" type="bo"
+		className="todos.eap.mag.bo.BoTellerDetail" forward="IPTB" />
+	<function id="IPTB" description="定义柜员权限页面" type="jsp"
+		jspPath="/eap/teller/roleMenuApiDef.jsp" />
+	<function id="BPTH" description="定义柜员权限提交" type="bo"
+		className="todos.eap.mag.bo.BoTellerRoleMenuApiSubmit" forward="BPT3" />
+	<function id="BPTC" description="查看柜员权限" type="bo"
+		className="todos.eap.mag.bo.BoTellerRoleMenuApiList" forward="BPTF" />
+	<function id="BPTF" description="查看柜员权限:柜员详细信息" type="bo"
+		className="todos.eap.mag.bo.BoTellerDetail" forward="IPTC" />
+	<function id="IPTC" description="查看柜员权限页面" type="jsp"
+		jspPath="/eap/teller/roleMenuApiList.jsp" />
+
+	<!-- 选择菜单 -->
+	<function id="BPTD" description="选择菜单" type="bo"
+		className="todos.eap.mag.bo.BoMenuList" forward="IPTD" />
+	<function id="IPTD" description="菜单选择页面" type="jsp"
+		jspPath="/eap/menu/selectList.jsp" />
+	<!-- 选择API -->
+	<function id="BPTG" description="选择API" type="bo"
+		className="todos.eap.mag.bo.BoApiList" forward="IPTG" />
+	<function id="IPTG" description="API选择页面" type="jsp"
+		jspPath="/eap/api/selectList.jsp" />
+	<!-- 选择AUTH -->
+	<function id="BPTI" description="选择授权" type="bo"
+		className="todos.eap.mag.bo.BoAuthList" forward="IPTI" />
+	<function id="IPTI" description="授权选择页面" type="jsp"
+		jspPath="/eap/auth/selectList.jsp" />
+
+	<!-- 机构管理 -->
+	<function id="IPU0" description="机构管理首页" type="jsp"
+		jspPath="/eap/unit/list.jsp" />
+
+	<function id="BPU1" description="查询机构" type="bo"
+		className="todos.eap.mag.bo.BoUnitList" forward="IPU1" />
+	<function id="IPU1" description="机构列表页面" type="jsp"
+		jspPath="/eap/unit/list.jsp" />
+
+	<function id="BPU2" description="机构详细信息" type="bo"
+		className="todos.eap.mag.bo.BoUnitDetail" forward="IPU2" />
+	<function id="IPU2" description="机构详细信息页面" type="jsp"
+		jspPath="/eap/unit/detail.jsp" />
+
+	<function id="BPU3" description="机构修改初始化" type="bo"
+		className="todos.eap.mag.bo.BoUnitDetail" forward="IPU3" />
+	<function id="IPU3" description="机构修改页面" type="jsp"
+		jspPath="/eap/unit/edit.jsp" />
+	<function id="BPU4" description="机构修改提交" type="bo"
+		className="todos.eap.mag.bo.BoUnitSubmit" forward="BPU1" />
+
+	<function id="BPU5" description="机构添加初始化" type="bo"
+		className="todos.eap.mag.bo.BoUnitAddInit" forward="IPU5" />
+	<function id="IPU5" description="机构添加页面" type="jsp"
+		jspPath="/eap/unit/edit.jsp" />
+	<function id="BPU6" description="机构添加提交" type="bo"
+		className="todos.eap.mag.bo.BoUnitSubmit" forward="BPU1" />
+
+	<function id="BPU7" description="机构删除" type="bo"
+		className="todos.eap.mag.bo.BoUnitDelete" forward="BPU1" />
+
+	<!-- 选择机构 -->
+	<function id="BPUA" description="选择机构" type="bo"
+		className="todos.eap.mag.bo.BoUnitList" forward="IPUA" />
+	<function id="IPUA" description="机构选择页面" type="jsp"
+		jspPath="/eap/unit/selectList.jsp" />
+
+	<!-- 角色管理 -->
+	<function id="IPR0" description="角色管理首页" type="jsp"
+		jspPath="/eap/role/list.jsp" />
+
+	<function id="BPR1" description="查询角色" type="bo"
+		className="todos.eap.mag.bo.BoRoleList" forward="IPR1" />
+	<function id="IPR1" description="角色列表页面" type="jsp"
+		jspPath="/eap/role/list.jsp" />
+
+	<function id="BPR2" description="角色详细信息" type="bo"
+		className="todos.eap.mag.bo.BoRoleDetail" forward="IPR2" />
+	<function id="IPR2" description="角色详细信息页面" type="jsp"
+		jspPath="/eap/role/detail.jsp" />
+
+	<function id="BPR3" description="角色修改初始化" type="bo"
+		className="todos.eap.mag.bo.BoRoleDetail" forward="IPR3" />
+	<function id="IPR3" description="角色修改页面" type="jsp"
+		jspPath="/eap/role/edit.jsp" />
+	<function id="BPR4" description="角色修改提交" type="bo"
+		className="todos.eap.mag.bo.BoRoleSubmit" forward="BPR1" />
+
+	<function id="IPR5" description="角色添加页面" type="jsp"
+		jspPath="/eap/role/edit.jsp" />
+	<function id="BPR6" description="角色添加提交" type="bo"
+		className="todos.eap.mag.bo.BoRoleSubmit" forward="BPRB" />
+
+	<function id="BPR7" description="角色删除" type="bo"
+		className="todos.eap.mag.bo.BoRoleDelete" forward="BPR1" />
+	<!-- 角色权限 -->
+	<function id="BPRB" description="定义角色权限" type="bo"
+		className="todos.eap.mag.bo.BoRoleMenuApiList" forward="BPRB_2" />
+	<function id="BPRB_2" description="定义角色权限" type="bo"
+		className="todos.eap.mag.bo.BoMenuList" forward="BPRE" />
+	<function id="BPRE" description="定义角色权限:角色详细信息" type="bo"
+		className="todos.eap.mag.bo.BoRoleDetail" forward="IPRB" />
+	<function id="IPRB" description="定义角色权限页面" type="jsp"
+		jspPath="/eap/role/menuApiDef.jsp" />
+	<function id="BPRH" description="定义角色权限提交" type="bo"
+		className="todos.eap.mag.bo.BoRoleMenuApiSubmit" forward="BPRB" />
+	<function id="BPRC" description="查看角色权限" type="bo"
+		className="todos.eap.mag.bo.BoRoleMenuApiList" forward="BPRC_2" />
+	<function id="BPRC_2" description="查看角色权限" type="bo"
+		className="todos.eap.mag.bo.BoMenuList" forward="BPRF" />
+	<function id="BPRF" description="查看角色权限:角色详细信息" type="bo"
+		className="todos.eap.mag.bo.BoRoleDetail" forward="IPRC" />
+	<function id="IPRC" description="查看角色权限页面" type="jsp"
+		jspPath="/eap/role/menuApiList.jsp" />
+	<!-- 选择角色 -->
+	<function id="BPRA" description="选择角色" type="bo"
+		className="todos.eap.mag.bo.BoRoleList" forward="IPRA" />
+	<function id="IPRA" description="角色选择页面" type="jsp"
+		jspPath="/eap/role/selectList.jsp" />
+
+
+	<!-- 客户支持 -->
+	<function id="BCR0" description="初始化客户支持页面" type="jsp"
+		jspPath="/eap/otpmag/userList.jsp" />
+
+	<function id="BCR1" description="初始化客户查询" type="bo"
+		className="todos.eap.mag.bo.BoQueryOtpUserList" forward="ICR1" />
+	<function id="ICR1" description="初始化客户支持页面" type="jsp"
+		jspPath="/eap/otpmag/userList.jsp" />
+
+	<function id="BCR2" description="客户详细信息" type="bo"
+		className="todos.eap.mag.bo.BoEapGetUserDetail" forward="ICR2" />
+	<function id="ICR2" description="客户详细信息页面" type="jsp"
+		jspPath="/eap/otpmag/userDetailAll.jsp" />
+
+	<function id="BCRW" description="客户详细信息打印" type="bo"
+		className="todos.eap.server.bo.BoEapGetUser" forward="ICRW" />
+	<function id="ICRW" description="客户详细信息打印页面" type="jsp"
+		jspPath="/eap/otpmag/userDetailPrint.jsp" />
+
+	<function id="BCR3" description="客户信息修改/初始化" type="bo"
+		className="todos.eap.server.bo.BoEapGetUser" forward="ICR3" />
+	<function id="ICR3" description="客户信息修改页面" type="jsp"
+		jspPath="/eap/otpmag/userDetail.jsp" />
+	<function id="BCR4" description="客户信息修改/保存" type="bo"
+		className="todos.eap.server.bo.BoEapModifyUser" forward="BCR2" />
+
+	<function id="BCR5" description="客户信息增加" type="jsp"
+		jspPath="/eap/otpmag/userDetail.jsp" />
+
+	<function id="BCRU" description="客户信息输入参数检查" type="bo"
+		className="todos.eap.mag.bo.BoCreateUserAuthCheck" forward="ICRU" />
+	<function id="ICRU" description="客户信息授权输入页面" type="jsp"
+		jspPath="/eap/otpmag/userDetailAuth.jsp" />
+	<function id="BCRV" description="客户信息授权逻辑验证" type="bo"
+		className="todos.eap.mag.bo.BoAuthCheck" forward="BCR6" />
+
+	<function id="BCR6" description="客户信息增加保存" type="bo"
+		className="todos.eap.server.bo.BoEapCreateUser" forward="BCR2" />
+
+	<function id="BCRA" description="客户状态修改/用户解琐，琐定" type="bo"
+		className="todos.eap.server.bo.BoEapModifyUserStatus" forward="BCR2" />
+
+	<function id="BCRB" description="用户注销/注销" type="bo"
+		className="todos.eap.server.bo.BoEapBlockUser" forward="BCR1" />
+
+	<function id="BCRM" description="增加设备初始化" type="bo"
+		className="todos.eap.mag.bo.BoCardTypeList" forward="BCRMReadUser" />
+	<function id="BCRMReadUser" description="增加设备初始化读取客户信息" type="bo"
+		className="todos.eap.server.bo.BoEapGetUser" forward="ICRM" />
+	<function id="ICRM" description="增加设备页面" type="jsp"
+		jspPath="/eap/otpmag/addDevice.jsp" />
+	<function id="0003_2" description="增加设备提交后结果" type="bo"
+		className="todos.eap.mag.bo.BoCardTypeList" forward="0003_3" />
+	<function id="0003_3" description="增加设备提交后结果页面" type="jsp"
+		jspPath="/eap/otpmag/addDevice.jsp" />
+
+	<function id="BCRN" description="更换设备初始化" type="bo"
+		className="todos.eap.mag.bo.BoCardTypeList" forward="ICRH" />
+	<function id="ICRH" description="更换设备页面" type="jsp"
+		jspPath="/eap/otpmag/replaceCard.jsp" />
+		
+	<function id="BCRO" description="激活设备初始化" type="bo"
+		className="todos.eap.mag.bo.BoCardTypeList" forward="ICRO" />
+	<function id="ICRO" description="激活设备页面" type="jsp"
+		jspPath="/eap/otpmag/activateCard.jsp" />
+
+	<function id="BCRS" description="增加用户渠道" type="bo"
+		className="todos.eap.server.bo.BoEapAddChannel" forward="BCR2" />
+
+	<function id="ICRS" description="获取卡列表" type="bo"
+		className="todos.eap.mag.bo.BoCardTypeList" forward="ICRS2" />
+	<function id="ICRS2" description="获取渠道列表" type="bo"
+		className="todos.eap.mag.bo.BoChannelSetNormal" forward="ICRS3" />
+	<function id="ICRS3" description="获取渠道列表" type="bo"
+		className="todos.eap.mag.bo.BoChannelListToSel" forward="ICRS4" />
+	<function id="ICRS4" description="增加渠道页面" type="jsp"
+		jspPath="/eap/otpmag/addChannel.jsp" />
+
+	<function id="BCRT" description="注销用户渠道" type="bo"
+		className="todos.eap.server.bo.BoEapBlockChannel" forward="BCR2" />
+		
+		
+	<!-- 电话注册 -->
+	<function id="BCT0" description="初始化电话注册页面" type="jsp"
+		jspPath="/eap/otppreg/userList.jsp" />
+
+	<function id="BCT1" description="初始化电话注册客户查询" type="bo"
+		className="todos.eap.mag.bo.BoPreUserList" forward="ICT1" />
+	<function id="ICT1" description="初始化电话注册页面" type="jsp"
+		jspPath="/eap/otppreg/userList.jsp" />
+
+	<function id="BCT2" description="电话注册客户详细信息，读取应用系统信息" type="bo"
+		className="todos.eap.mag.bo.BoChannelSetNormal" forward="BCT2_2" />
+	<function id="BCT2_2" description="电话注册客户详细信息，读取应用系统信息"
+		type="bo" className="todos.eap.mag.bo.BoChannelListToSel" forward="BCT2_3" />
+	<function id="BCT2_3" description="电话注册客户详细信息" type="bo"
+		className="todos.eap.mag.bo.BoPreUserDetail" forward="BCT2_4" />
+	<function id="BCT2_4" description="获取卡列表" type="bo"
+		className="todos.eap.mag.bo.BoCardTypeList" forward="ICT2" />
+	<function id="ICT2" description="电话注册客户详细信息页面" type="jsp"
+		jspPath="/eap/otppreg/userDetailAll.jsp" />
+
+	<function id="BCT8" description="电话注册客户详细信息打印，读取应用系统信息" type="bo"
+		className="todos.eap.mag.bo.BoChannelSetNormal" forward="BCT8_2" />
+	<function id="BCT8_2" description="电话注册客户详细信息打印，读取应用系统信息"
+		type="bo" className="todos.eap.mag.bo.BoChannelListToSel" forward="BCT8_3" />
+	<function id="BCT8_3" description="电话注册客户详细信息打印" type="bo"
+		className="todos.eap.mag.bo.BoPreUserDetail" forward="BCT8_4" />
+	<function id="BCT8_4" description="获取卡列表" type="bo"
+		className="todos.eap.mag.bo.BoCardTypeList" forward="ICT8" />
+	<function id="ICT8" description="电话注册客户详细信息打印页面" type="jsp"
+		jspPath="/eap/otppreg/userDetailPrint.jsp" />
+
+	<function id="BCT3" description="电话注册客户信息修改/初始化，读取应用系统信息" type="bo"
+		className="todos.eap.mag.bo.BoChannelSetNormal" forward="BCT3_2" />
+	<function id="BCT3_2" description="电话注册客户信息修改/初始化，读取应用系统信息"
+		type="bo" className="todos.eap.mag.bo.BoChannelListToSel" forward="BCT3_3" />
+	<function id="BCT3_3" description="电话注册客户信息修改/初始化" type="bo"
+		className="todos.eap.mag.bo.BoPreUserDetail" forward="BCT3_4" />
+	<function id="BCT3_4" description="获取卡列表" type="bo"
+		className="todos.eap.mag.bo.BoCardTypeList" forward="ICT3" />
+	<function id="ICT3" description="电话注册客户信息修改页面" type="jsp"
+		jspPath="/eap/otppreg/userDetail.jsp" />
+	<function id="BCT4" description="电话注册客户信息修改/保存" type="bo"
+		className="todos.eap.mag.bo.BoPreUserDelete" forward="BCT2" />
+
+	<function id="BCT5" description="电话注册客户信息增加，读取应用系统信息" type="bo"
+		className="todos.eap.mag.bo.BoChannelSetNormal" forward="BCT5_2" />
+	<function id="BCT5_2" description="电话注册客户信息增加，读取应用系统信息"
+		type="bo" className="todos.eap.mag.bo.BoChannelListToSel" forward="BCT5_3" />
+	<function id="BCT5_3" description="获取卡列表" type="bo"
+		className="todos.eap.mag.bo.BoCardTypeList" forward="ICT5" />
+	<function id="ICT5" description="电话注册客户信息增加" type="jsp"
+		jspPath="/eap/otppreg/userDetail.jsp" />
+	<function id="BCT6" description="电话注册客户信息增加保存" type="bo"
+		className="todos.eap.mag.bo.BoPreUserSubmit" forward="BCT2" />
+
+	<function id="BCT7" description="电话注册客户注销/注销" type="bo"
+		className="todos.eap.mag.bo.BoPreUserDelete" forward="BCT1" />
+
+	<!-- 预注册审核 -->
+	<function id="BCC0" description="初始化预注册审核页面" type="jsp"
+		jspPath="/eap/otppcheck/userList.jsp" />
+
+	<function id="BCC1" description="初始化预注册审核客户查询" type="bo"
+		className="todos.eap.mag.bo.BoPreUserList" forward="ICC1" />
+	<function id="ICC1" description="初始化预注册审核页面" type="jsp"
+		jspPath="/eap/otppcheck/userList.jsp" />
+
+	<function id="BCC2" description="预注册审核客户详细信息，读取应用系统信息" type="bo"
+		className="todos.eap.mag.bo.BoChannelSetNormal" forward="BCC2_2" />
+	<function id="BCC2_2" description="预注册审核客户详细信息，读取应用系统信息"
+		type="bo" className="todos.eap.mag.bo.BoChannelListToSel" forward="BCC2_3" />
+	<function id="BCC2_3" description="预注册审核客户详细信息" type="bo"
+		className="todos.eap.mag.bo.BoPreUserDetail" forward="BCC2_4" />
+	<function id="BCC2_4" description="获取卡列表" type="bo"
+		className="todos.eap.mag.bo.BoCardTypeList" forward="ICC2" />
+	<function id="ICC2" description="预注册审核客户详细信息页面" type="jsp"
+		jspPath="/eap/otppcheck/userDetailAll.jsp" />
+
+	<function id="BCC3" description="预注册审核审核，读取应用系统信息" type="bo"
+		className="todos.eap.mag.bo.BoChannelSetNormal" forward="BCC3_2" />
+	<function id="BCC3_2" description="预注册审核审核，读取应用系统信息"
+		type="bo" className="todos.eap.mag.bo.BoChannelListToSel" forward="BCC3_3" />
+	<function id="BCC3_3" description="预注册审核审核" type="bo"
+		className="todos.eap.mag.bo.BoPreUserCheck" forward="BCC3_4" />
+	<function id="BCC3_4" description="获取卡列表" type="bo"
+		className="todos.eap.mag.bo.BoCardTypeList" forward="ICC3" />
+	<function id="ICC3" description="预注册审核客户信息审核页面" type="jsp"
+		jspPath="/eap/otppcheck/userDetail.jsp" />
+
+	<function id="BCC4" description="预注册审核客户审核通过" type="bo"
+		className="todos.eap.mag.bo.BoPreUserAssociateCard" forward="BCC2" />
+
+	<function id="BCC6" description="预注册审核客户审核拒绝" type="bo"
+		className="todos.eap.mag.bo.BoPreUserRefuse" forward="BCC2" />
+
+	<function id="BCC7" description="预注册审核客户注销/注销" type="bo"
+		className="todos.eap.mag.bo.BoPreUserDelete" forward="BCC1" />
+
+	<!-- 批量绑定 -->
+	<function id="BCB0" description="批量绑定文件上传页面" type="jsp"
+		jspPath="/eap/otpbatch/upload.jsp" />
+
+	<function id="BCB1" description="批量绑定文件上传" type="bo"
+		className="todos.eap.mag.bo.BoBatchUserAssCardUpload" forward="BCB1_2" />
+	<function id="BCB1_2" description="批量绑定" type="bo"
+		className="todos.eap.mag.bo.BoBatchUserAssociateCard" forward="I003" />
+		
+		
+	<!-- API测试页面 -->
+	<function id="IAT0" description="测试功能页面" type="jsp"
+		jspPath="/eap/apitest/all.jsp" />
+
+	<function id="IAT1" description="获取服务器验证码，读取应用系统信息" type="bo"
+		className="todos.eap.mag.bo.BoChannelSetNormal" forward="IAT1_2" />
+	<function id="IAT1_2" description="获取服务器验证码，读取应用系统信息"
+		type="bo" className="todos.eap.mag.bo.BoChannelListToSel" forward="IAT1_3" />
+	<function id="IAT1_3" description="获取服务器验证码" type="jsp"
+		jspPath="/eap/apitest/EapGetCodePrefix.jsp" />
+	<function id="BAT1" description="获取服务器验证码，设置应用系统到Session"
+		type="bo" className="todos.eap.mag.bo.BoChannelSetToSession"
+		forward="0019" />
+	
+	<function id="IAT2" description="获取矩阵卡坐标页面，读取应用系统信息" type="bo"
+		className="todos.eap.mag.bo.BoChannelSetNormal" forward="IAT2_2" />
+	<function id="IAT2_2" description="获取矩阵卡坐标页面，读取应用系统信息"
+		type="bo" className="todos.eap.mag.bo.BoChannelListToSel" forward="IAT2_3" />	
+	<function id="IAT2_3" description="获取矩阵卡坐标页面" type="jsp"
+		jspPath="/eap/apitest/EapGetCoordinates.jsp" />
+	<function id="BAT2" description="获取矩阵卡坐标页面，设置应用系统到Session"
+		type="bo" className="todos.eap.mag.bo.BoChannelSetToSession"
+		forward="0023" />
+		
+	<function id="IAT3" description="获取刮刮卡序号页面，读取应用系统信息" type="bo"
+		className="todos.eap.mag.bo.BoChannelSetNormal" forward="IAT3_2" />
+	<function id="IAT3_2" description="获取刮刮卡序号页面，读取应用系统信息"
+		type="bo" className="todos.eap.mag.bo.BoChannelListToSel" forward="IAT3_3" />	
+	<function id="IAT3_3" description="获取刮刮卡序号页面" type="jsp"
+		jspPath="/eap/apitest/EapGetSequenceNumber.jsp" />
+	<function id="BAT3" description="获取刮刮卡序号页面，设置应用系统到Session"
+		type="bo" className="todos.eap.mag.bo.BoChannelSetToSession"
+		forward="0018" />
+		
+	<function id="IAT4" description="获取短信动态密码/电子签名页面，读取应用系统信息" type="bo"
+		className="todos.eap.mag.bo.BoChannelSetNormal" forward="IAT4_2" />
+	<function id="IAT4_2" description="获取短信动态密码/电子签名页面，读取应用系统信息"
+		type="bo" className="todos.eap.mag.bo.BoChannelListToSel" forward="IAT4_3" />	
+	<function id="IAT4_3" description="获取短信动态密码/电子签名页面" type="jsp"
+		jspPath="/eap/apitest/EapRetrieveOTP.jsp" />
+	<function id="BAT4" description="获取短信动态密码/电子签名页面，设置应用系统到Session"
+		type="bo" className="todos.eap.mag.bo.BoChannelSetToSession"
+		forward="0024" />
+		
+	<function id="IAT5" description="同步页面，读取应用系统信息" type="bo"
+		className="todos.eap.mag.bo.BoChannelSetNormal" forward="IAT5_2" />
+	<function id="IAT5_2" description="同步页面，读取应用系统信息"
+		type="bo" className="todos.eap.mag.bo.BoChannelListToSel" forward="IAT5_3" />	
+	<function id="IAT5_3" description="同步页面" type="jsp"
+		jspPath="/eap/apitest/EapSynchronize.jsp" />
+	<function id="BAT5" description="同步页面，设置应用系统到Session"
+		type="bo" className="todos.eap.mag.bo.BoChannelSetToSession"
+		forward="0014" />
+			
+	<function id="IAT6" description="验证动态密码页面，读取应用系统信息" type="bo"
+		className="todos.eap.mag.bo.BoChannelSetNormal" forward="IAT6_2" />
+	<function id="IAT6_2" description="验证动态密码页面，读取应用系统信息"
+		type="bo" className="todos.eap.mag.bo.BoChannelListToSel" forward="IAT6_3" />	
+	<function id="IAT6_3" description="验证动态密码页面" type="jsp"
+		jspPath="/eap/apitest/EapVerifyCode.jsp" />
+	<function id="BAT6" description="验证动态密码页面，设置应用系统到Session"
+		type="bo" className="todos.eap.mag.bo.BoChannelSetToSession"
+		forward="0013" />
+				
+	<function id="IAT7" description="验证矩阵卡密码页面，读取应用系统信息" type="bo"
+		className="todos.eap.mag.bo.BoChannelSetNormal" forward="IAT7_2" />
+	<function id="IAT7_2" description="验证矩阵卡密码页面，读取应用系统信息"
+		type="bo" className="todos.eap.mag.bo.BoChannelListToSel" forward="IAT7_3" />		
+	<function id="IAT7_3" description="验证矩阵卡密码页面" type="jsp"
+		jspPath="/eap/apitest/EapVerifyMatrixCode.jsp" />
+	<function id="BAT7" description="验证矩阵卡密码页面，设置应用系统到Session"
+		type="bo" className="todos.eap.mag.bo.BoChannelSetToSession"
+		forward="0022" />
+		
+		
+	<function id="BAT8" description="验证码" type="bo"
+		className="todos.eap.mag.bo.BoGenHash" forward="IAT8_1" />
+	<function id="IAT8_1" description="验证电子签名页面，读取应用系统信息" type="bo"
+		className="todos.eap.mag.bo.BoChannelSetNormal" forward="IAT8_2" />
+	<function id="IAT8_2" description="验证电子签名页面，读取应用系统信息"
+		type="bo" className="todos.eap.mag.bo.BoChannelListToSel" forward="IAT8_3" />
+	<function id="IAT8_3" description="验证电子签名页面" type="jsp"
+		jspPath="/eap/apitest/EapVerifySignature.jsp" />
+	<function id="BATZ" description="验证电子签名页面，设置应用系统到Session"
+		type="bo" className="todos.eap.mag.bo.BoChannelSetToSession"
+		forward="0020" />
+	
+	<function id="IAT9" description="验证电子签名页面，读取应用系统信息" type="bo"
+		className="todos.eap.mag.bo.BoChannelSetNormal" forward="IAT9_2" />
+	<function id="IAT9_2" description="验证电子签名页面，读取应用系统信息"
+		type="bo" className="todos.eap.mag.bo.BoChannelListToSel" forward="IAT9_3" />	
+	<function id="IAT9_3" description="验证电子签名页面" type="jsp"
+		jspPath="/eap/apitest/EapVerifySignatureLarge.jsp" />
+	<function id="BAT9" description="验证电子签名页面，设置应用系统到Session"
+		type="bo" className="todos.eap.mag.bo.BoChannelSetToSession"
+		forward="0021" />
+	
+	<function id="IATA" description="解锁动态密码，读取应用系统信息" type="bo"
+		className="todos.eap.mag.bo.BoChannelSetNormal" forward="IATA_2" />
+	<function id="IATA_2" description="解锁动态密码，读取应用系统信息"
+		type="bo" className="todos.eap.mag.bo.BoChannelListToSel" forward="IATA_3" />		
+	<function id="IATA_3" description="解锁动态密码" type="jsp"
+		jspPath="/eap/apitest/EapUnlockOTP.jsp" />
+	<function id="BATA" description="解锁动态密码，设置应用系统到Session"
+		type="bo" className="todos.eap.mag.bo.BoChannelSetToSession"
+		forward="0015" />
+	
+	<function id="IATB" description="解锁矩阵卡密码，读取应用系统信息" type="bo"
+		className="todos.eap.mag.bo.BoChannelSetNormal" forward="IATB_2" />
+	<function id="IATB_2" description="解锁矩阵卡密码，读取应用系统信息"
+		type="bo" className="todos.eap.mag.bo.BoChannelListToSel" forward="IATB_3" />	
+	<function id="IATB_3" description="解锁矩阵卡密码" type="jsp"
+		jspPath="/eap/apitest/EapUnlockMatrixCode.jsp" />
+	<function id="BATB" description="解锁矩阵卡密码，设置应用系统到Session"
+		type="bo" className="todos.eap.mag.bo.BoChannelSetToSession"
+		forward="0030" />
+		
+	<function id="BATC" description="验证码" type="bo"
+		className="todos.eap.mag.bo.BoGenHash" forward="IATC_1" />
+	<function id="IATC_1" description="解锁电子签名，读取应用系统信息" type="bo"
+		className="todos.eap.mag.bo.BoChannelSetNormal" forward="IATC_2" />
+	<function id="IATC_2" description="解锁电子签名，读取应用系统信息"
+		type="bo" className="todos.eap.mag.bo.BoChannelListToSel" forward="IATC_3" />	
+	<function id="IATC_3" description="解锁电子签名" type="jsp"
+		jspPath="/eap/apitest/EapUnlockSignature.jsp" />
+	<function id="BATY" description="解锁电子签名，设置应用系统到Session"
+		type="bo" className="todos.eap.mag.bo.BoChannelSetToSession"
+		forward="0031" />
+		
+	<function id="IATD" description="刮刮卡自助续卡，读取应用系统信息" type="bo"
+		className="todos.eap.mag.bo.BoChannelSetNormal" forward="IATD_2" />
+	<function id="IATD_2" description="刮刮卡自助续卡，读取应用系统信息"
+		type="bo" className="todos.eap.mag.bo.BoChannelListToSel" forward="IATD_3" />	
+	<function id="IATD_3" description="刮刮卡自助续卡" type="jsp"
+		jspPath="/eap/apitest/EapReplaceCardPrinted.jsp" />
+	<function id="BATD" description="刮刮卡自助续卡，设置应用系统到Session"
+		type="bo" className="todos.eap.mag.bo.BoChannelSetToSession"
+		forward="BATD_2" />
+	<function id="BATD_2" description="刮刮卡自助续卡，获取UserChannel"
+		type="bo" className="todos.eap.server.bo.BoEapGetUserChannel"
+		forward="BATD_3" />
+	<function id="BATD_3" description="刮刮卡自助续卡，转换为ECodeUser"
+		type="bo" className="todos.eap.mag.bo.BoTestApiTransUser"
+		forward="BATD_4" />
+	<function id="BATD_4" description="刮刮卡自助续卡，提交"
+		type="bo" className="todos.eap.server.bo.BoEapReplaceCard"
+		forward="IATD" />
+	<!-- 渠道管理 -->
+	<function id="IPC0" description="渠道管理列表页面" type="jsp"
+		jspPath="/eap/channel/list.jsp" />
+
+	<function id="BPC1" description="渠道管理查询" type="bo"
+		className="todos.eap.mag.bo.BoChannelList" forward="IPC1" />
+	<function id="IPC1" description="渠道管理列表页面" type="jsp"
+		jspPath="/eap/channel/list.jsp" />
+
+	<function id="BPC2" description="渠道详细信息" type="bo"
+		className="todos.eap.mag.bo.BoChannelDetail" forward="IPC2" />
+	<function id="IPC2" description="渠道详细信息页面" type="jsp"
+		jspPath="/eap/channel/detail.jsp" />
+
+	<function id="BPC3" description="渠道修改初始" type="bo"
+		className="todos.eap.mag.bo.BoChannelDetail" forward="IPC3" />
+	<function id="IPC3" description="渠道管理编辑页面" type="jsp"
+		jspPath="/eap/channel/edit.jsp" />
+
+	<function id="BPC4" description="渠道修改提交" type="bo"
+		className="todos.eap.mag.bo.BoChannelSubmit" forward="BPC1" />
+
+	<function id="IPC5" description="渠道增加" type="jsp"
+		jspPath="/eap/channel/edit.jsp" />
+
+	<function id="BPC6" description="渠道增加提交" type="bo"
+		className="todos.eap.mag.bo.BoChannelSubmit" forward="BPC1" />
+
+	<function id="BPC7" description="渠道管理删除" type="bo"
+		className="todos.eap.mag.bo.BoChannelDelete" forward="BPC1" />
+	<!-- 设备管理 -->
+	<function id="BPD0" description="设备管理初试化" type="bo"
+		className="todos.eap.mag.bo.BoChannelSetNormal" forward="BPD0_2" />
+	<function id="BPD0_2" description="设备管理初试化" type="bo"
+		className="todos.eap.mag.bo.BoChannelList" forward="IPD0" />
+	<function id="IPD0" description="设备管理列表页面" type="jsp"
+		jspPath="/eap/device/list.jsp" />
+
+	<function id="BPD1" description="设备管理查询" type="bo"
+		className="todos.eap.mag.bo.BoChannelSetNormal" forward="BPD1_2" />
+	<function id="BPD1_2" description="设备管理查询" type="bo"
+		className="todos.eap.mag.bo.BoDeviceList" forward="BPD1SelChannel" />
+	<function id="BPD1SelChannel" description="设备管理初试化" type="bo"
+		className="todos.eap.mag.bo.BoChannelList" forward="IPD1" />
+	<function id="IPD1" description="设备管理列表页面" type="jsp"
+		jspPath="/eap/device/list.jsp" />
+
+	<function id="BPD2" description="设备详细信息" type="bo"
+		className="todos.eap.mag.bo.BoDeviceDetail" forward="IPD2" />
+	<function id="IPD2" description="设备详细信息页面" type="jsp"
+		jspPath="/eap/device/detail.jsp" />
+
+	<function id="BPD3" description="设备修改初始" type="bo"
+		className="todos.eap.mag.bo.BoDeviceDetail" forward="IPD3" />
+	<function id="IPD3" description="设备管理编辑页面" type="jsp"
+		jspPath="/eap/device/edit.jsp" />
+
+	<function id="BPD4" description="设备修改提交" type="bo"
+		className="todos.eap.mag.bo.BoDeviceSubmit" forward="BPD1" />
+
+	<function id="BPD5" description="设备管理增加初试化" type="bo"
+		className="todos.eap.mag.bo.BoChannelSetNormal" forward="BPD5_2" />
+	<function id="BPD5_2" description="设备管理增加初试化" type="bo"
+		className="todos.eap.mag.bo.BoChannelList" forward="IPD5" />
+	<function id="IPD5" description="设备增加" type="jsp"
+		jspPath="/eap/device/edit.jsp" />
+
+	<function id="BPD6" description="设备增加提交" type="bo"
+		className="todos.eap.mag.bo.BoDeviceSubmit" forward="BPDB" />
+
+	<function id="BPD7" description="设备管理删除" type="bo"
+		className="todos.eap.mag.bo.BoDeviceDelete" forward="BPD1" />
+	<!-- 设备权限 -->
+	<function id="BPDB" descriPDion="定义设备权限" type="bo"
+		className="todos.eap.mag.bo.BoApiList" forward="BPDB_2" />
+	<function id="BPDB_2" descriPDion="定义设备权限" type="bo"
+		className="todos.eap.mag.bo.BoTellerRoleMenuApiList" forward="BPDE" />
+	<function id="BPDE" descriPDion="定义设备权限:设备详细信息" type="bo"
+		className="todos.eap.mag.bo.BoDeviceDetail" forward="IPDB" />
+	<function id="IPDB" descriPDion="定义设备权限页面" type="jsp"
+		jspPath="/eap/device/apiDef.jsp" />
+	<function id="BPDH" descriPDion="定义设备权限提交" type="bo"
+		className="todos.eap.mag.bo.BoTellerRoleMenuApiSubmit" forward="BPD1" />
+	<function id="BPDC" descriPDion="查看设备权限" type="bo"
+		className="todos.eap.mag.bo.BoApiList" forward="BPDC_2" />
+	<function id="BPDC_2" descriPDion="查看设备权限" type="bo"
+		className="todos.eap.mag.bo.BoTellerRoleMenuApiList" forward="BPDF" />
+	<function id="BPDF" descriPDion="查看设备权限:设备详细信息" type="bo"
+		className="todos.eap.mag.bo.BoDeviceDetail" forward="IPDC" />
+	<function id="IPDC" descriPDion="查看设备权限页面" type="jsp"
+		jspPath="/eap/device/apiList.jsp" />
+
+	<!-- SP统计报表 -->
+	<function id="BRS0" description="SP统计报表详细信息" type="bo"
+		className="todos.eap.mag.bo.BoCardTypeList" forward="IRS0" />
+	<function id="BRS1" description="SP统计报表查询" type="bo"
+		className="todos.eap.mag.bo.BoReportChannelList" forward="BRS0" />
+	<function id="IRS0" description="SP统计报表页面" type="jsp"
+		jspPath="/eap/report/channelRept.jsp" />
+		
+	<function id="BRS2" description="SP统计报表打印" type="bo"
+		className="todos.eap.mag.bo.BoReportChannelList" forward="IRS2" />
+	<function id="IRS2" description="SP统计报表打印" type="jsp"
+		jspPath="/eap/report/channelPrint.jsp" />
+		
+	<function id="BRS3" description="SP统计报表输出Excel" type="bo"
+		className="todos.eap.mag.bo.BoReportChannelList" forward="IRS3" />
+	<function id="IRS3" description="SP统计报表Excel" type="jsp"
+		jspPath="/eap/ServletChannelReptExcelOut" />
+		
+	<!-- 平台运行报表管理 -->
+	<function id="BRP0" description="平台运行报表详细信息" type="bo"
+		className="todos.eap.mag.bo.BoCardTypeList" forward="IRP0" />
+	<function id="BRP1" description="平台运行报表查询" type="bo"
+		className="todos.eap.mag.bo.BoReportPlatList" forward="BRP0" />
+	<function id="IRP0" description="平台运行报表页面" type="jsp"
+		jspPath="/eap/report/platRept.jsp" />
+		
+	<function id="BRP2" description="SP统计报表打印" type="bo"
+		className="todos.eap.mag.bo.BoReportPlatList" forward="BRP2_2" />
+	<function id="BRP2_2" description="读取卡类型" type="bo"
+		className="todos.eap.mag.bo.BoCardTypeList" forward="IRP2" />
+	<function id="IRP2" description="SP统计报表打印" type="jsp"
+		jspPath="/eap/report/platPrint.jsp" />
+		
+	<function id="BRP3" description="SP统计报表输出Excel" type="bo"
+		className="todos.eap.mag.bo.BoReportPlatList" forward="BRP3_2" />
+	<function id="BRP3_2" description="读取卡类型" type="bo"
+		className="todos.eap.mag.bo.BoCardTypeList" forward="IRP3" />
+	<function id="IRP3" description="SP统计报表Excel" type="jsp"
+		jspPath="/eap/ServletPlatReptExcelOut" />
+	<!-- 认证设备报表管理 -->
+	<function id="BRA1" description="平台运行报表详细信息" type="bo"
+		className="todos.eap.mag.bo.BoReportDeviceList" forward="IRA0" />
+	<function id="IRA0" description="认证设备报表页面" type="jsp"
+		jspPath="/eap/report/deviceRept.jsp" />
+		
+	<function id="BRA2" description="SP统计报表打印" type="bo"
+		className="todos.eap.mag.bo.BoReportDeviceList" forward="IRA2" />
+	<function id="IRA2" description="SP统计报表打印" type="jsp"
+		jspPath="/eap/report/devicePrint.jsp" />
+		
+	<function id="BRA3" description="SP统计报表输出Excel" type="bo"
+		className="todos.eap.mag.bo.BoReportDeviceList" forward="IRA3" />
+	<function id="IRA3" description="SP统计报表Excel" type="jsp"
+		jspPath="/eap/ServletDeviceReptExcelOut" />
+
+	<!-- 文件载入 -->
+	<function id="BLF1" description="FutureCard文件载入查询文件" type="bo"
+		className="todos.eap.mag.bo.BoFutureCardFileList" forward="ILF1" />
+	<function id="ILF1" description="FutureCard文件载入文件列表页面" type="jsp"
+		jspPath="/eap/fcload/list.jsp" />
+	<function id="BLF2" description="FutureCard文件载入提交" type="bo"
+		className="todos.eap.mag.bo.BoFutureCardFileLoad" forward="SUCC" />
+
+	<!-- *******************解锁密码***************************************** -->
+	<function id="M005" description="解锁管理首页" type="jsp"
+		jspPath="/eap/sys/unlock.jsp" />
+	<!-- 令牌、SIM卡、短信 -->
+	<function id="BUA1" description="解锁口令：令牌、SIM卡、短信，读取应用系统信息" type="bo"
+		className="todos.eap.mag.bo.BoChannelSetNormal" forward="BUA1_2" />
+	<function id="BUA1_2" description="解锁口令：令牌、SIM卡、短信，读取应用系统信息"
+		type="bo" className="todos.eap.mag.bo.BoChannelListToSel" forward="IUA1" />
+	<function id="IUA1" description="解锁口令：令牌、SIM卡、短信页面1" type="jsp"
+		jspPath="/eap/otpunlock/tokenSimSmsA.jsp" />
+	<function id="BUA2" description="解锁口令：令牌、SIM卡、短信，获取应用系统名称" type="bo"
+		className="todos.eap.mag.bo.BoChannelDetail" forward="IUA2" />
+	<function id="IUA2" description="解锁口令：令牌、SIM卡、短信页面2" type="jsp"
+		jspPath="/eap/otpunlock/tokenSimSmsB.jsp" />
+	<function id="BUA3" description="解锁口令：令牌、SIM卡、短信，设置应用系统到Session"
+		type="bo" className="todos.eap.mag.bo.BoChannelSetToSession"
+		forward="BUA3_2" />
+	<function id="BUA3_2" description="解锁口令：令牌、SIM卡、短信，获取应用系统名称"
+		type="bo" className="todos.eap.mag.bo.BoChannelDetail"
+		forward="BUA3_3" />
+	<function id="BUA3_3" description="解锁口令：令牌、SIM卡、短信，解锁" type="bo"
+		className="todos.eap.server.bo.BoEapUnlockOTP" forward="IUA2" />
+
+	<!-- 电子签名 -->
+	<function id="BUB1" description="解锁口令：电子签名，读取应用系统信息" type="bo"
+		className="todos.eap.mag.bo.BoChannelSetNormal" forward="BUB1_2" />
+	<function id="BUB1_2" description="解锁口令：电子签名，读取应用系统信息" type="bo"
+		className="todos.eap.mag.bo.BoChannelListToSel" forward="IUB1" />
+	<function id="IUB1" description="解锁口令：电子签名页面1" type="jsp"
+		jspPath="/eap/otpunlock/signatureA.jsp" />
+	<function id="BUB2" description="解锁口令：电子签名，获取应用系统名称" type="bo"
+		className="todos.eap.mag.bo.BoChannelDetail" forward="BUB2_2" />
+	<function id="BUB2_2" description="解锁口令：电子签名，生成挑战数" type="bo"
+		className="todos.eap.mag.bo.BoGenHash" forward="IUB2" />
+	<function id="IUB2" description="解锁口令：电子签名页面2" type="jsp"
+		jspPath="/eap/otpunlock/signatureB.jsp" />
+	<function id="BUB3" description="解锁口令：电子签名，设置应用系统到Session" type="bo"
+		className="todos.eap.mag.bo.BoChannelSetToSession" forward="BUB3_2" />
+	<function id="BUB3_2" description="解锁口令：电子签名，获取应用系统名称" type="bo"
+		className="todos.eap.mag.bo.BoChannelDetail" forward="BUB3_3" />
+	<function id="BUB3_3" description="解锁口令：电子签名，解锁" type="bo"
+		className="todos.eap.server.bo.BoEapUnlockSignature" forward="IUB2" />
+
+	<!-- 刮刮卡 -->
+	<function id="BUC1" description="解锁口令：刮刮卡，读取应用系统信息" type="bo"
+		className="todos.eap.mag.bo.BoChannelSetNormal" forward="BUC1_2" />
+	<function id="BUC1_2" description="解锁口令：刮刮卡，读取应用系统信息" type="bo"
+		className="todos.eap.mag.bo.BoChannelListToSel" forward="IUC1" />
+	<function id="IUC1" description="解锁口令：刮刮卡页面1" type="jsp"
+		jspPath="/eap/otpunlock/printedA.jsp" />
+	<function id="BUC2" description="解锁口令：刮刮卡，获取应用系统名称" type="bo"
+		className="todos.eap.mag.bo.BoChannelDetail" forward="BUC2_2" />
+	<function id="BUC2_2" description="解锁口令：刮刮卡，设置应用系统到Session"
+		type="bo" className="todos.eap.mag.bo.BoChannelSetToSession"
+		forward="BUC2_3" />
+	<function id="BUC2_3" description="解锁口令：刮刮卡，获取刮刮卡序号" type="bo"
+		className="todos.eap.server.bo.BoEapGetSequenceNumber" forward="IUC2" />
+	<function id="IUC2" description="解锁口令：刮刮卡页面2" type="jsp"
+		jspPath="/eap/otpunlock/printedB.jsp" />
+	<function id="BUC3" description="解锁口令：刮刮卡，设置应用系统到Session" type="bo"
+		className="todos.eap.mag.bo.BoChannelSetToSession" forward="BUC3_2" />
+	<function id="BUC3_2" description="解锁口令：刮刮卡，获取应用系统名称" type="bo"
+		className="todos.eap.mag.bo.BoChannelDetail" forward="BUC3_3" />
+	<function id="BUC3_3" description="解锁口令：刮刮卡，解锁" type="bo"
+		className="todos.eap.server.bo.BoEapUnlockOTP" forward="IUC2" />
+
+	<!-- 矩阵卡 -->
+	<function id="BUD1" description="解锁口令：矩阵卡，读取应用系统信息" type="bo"
+		className="todos.eap.mag.bo.BoChannelSetNormal" forward="BUD1_2" />
+	<function id="BUD1_2" description="解锁口令：矩阵卡，读取应用系统信息" type="bo"
+		className="todos.eap.mag.bo.BoChannelListToSel" forward="IUD1" />
+	<function id="IUD1" description="解锁口令：矩阵卡页面1" type="jsp"
+		jspPath="/eap/otpunlock/matrixA.jsp" />
+	<function id="BUD2" description="解锁口令：矩阵卡，获取应用系统名称" type="bo"
+		className="todos.eap.mag.bo.BoChannelDetail" forward="BUD2_2" />
+	<function id="BUD2_2" description="解锁口令：矩阵卡，设置应用系统到Session"
+		type="bo" className="todos.eap.mag.bo.BoChannelSetToSession"
+		forward="BUD2_3" />
+	<function id="BUD2_3" description="解锁口令：矩阵卡，获取矩阵卡坐标" type="bo"
+		className="todos.eap.server.bo.BoEapGetCoordinates" forward="IUD2" />
+	<function id="IUD2" description="解锁口令：矩阵卡页面2" type="jsp"
+		jspPath="/eap/otpunlock/matrixB.jsp" />
+	<function id="BUD3" description="解锁口令：矩阵卡，设置应用系统到Session" type="bo"
+		className="todos.eap.mag.bo.BoChannelSetToSession" forward="BUD3_2" />
+	<function id="BUD3_2" description="解锁口令：矩阵卡，获取应用系统名称" type="bo"
+		className="todos.eap.mag.bo.BoChannelDetail" forward="BUD3_3" />
+	<function id="BUD3_3" description="解锁口令：矩阵卡，解锁" type="bo"
+		className="todos.eap.server.bo.BoEapUnlockMatrixCode" forward="IUD2" />
+
+	<!-- 双向认证刮刮卡 -->
+	<function id="BUE1" description="解锁口令：双向认证刮刮卡，读取应用系统信息" type="bo"
+		className="todos.eap.mag.bo.BoChannelSetNormal" forward="BUE1_2" />
+	<function id="BUE1_2" description="解锁口令：双向认证刮刮卡，读取应用系统信息" type="bo"
+		className="todos.eap.mag.bo.BoChannelListToSel" forward="IUE1" />
+	<function id="IUE1" description="解锁口令：双向认证刮刮卡页面1" type="jsp"
+		jspPath="/eap/otpunlock/daPrintedA.jsp" />
+	<function id="BUE2" description="解锁口令：双向认证刮刮卡，获取应用系统名称" type="bo"
+		className="todos.eap.mag.bo.BoChannelDetail" forward="BUE2_2" />
+	<function id="BUE2_2" description="解锁口令：双向认证刮刮卡，设置应用系统到Session"
+		type="bo" className="todos.eap.mag.bo.BoChannelSetToSession"
+		forward="BUE2_3" />
+	<function id="BUE2_3" description="解锁口令：双向认证刮刮卡，获取双向认证刮刮卡序号"
+		type="bo" className="todos.eap.server.bo.BoEapGetSequenceNumber"
+		forward="BUE2_4" />
+	<function id="BUE2_4" description="解锁口令：双向认证刮刮卡，传递双向认证刮刮卡序号"
+		type="bo" className="todos.eap.mag.bo.BoUnlockTransSeqNum"
+		forward="BUE2_5" />
+	<function id="BUE2_5" description="解锁口令：双向认证刮刮卡，获取服务器验证码" type="bo"
+		className="todos.eap.server.bo.BoEapGetCodePrefix" forward="IUE2" />
+	<function id="IUE2" description="解锁口令：双向认证刮刮卡页面2" type="jsp"
+		jspPath="/eap/otpunlock/daPrintedB.jsp" />
+	<function id="BUE3" description="解锁口令：双向认证刮刮卡，设置应用系统到Session"
+		type="bo" className="todos.eap.mag.bo.BoChannelSetToSession"
+		forward="BUE3_2" />
+	<function id="BUE3_2" description="解锁口令：双向认证刮刮卡，获取应用系统名称" type="bo"
+		className="todos.eap.mag.bo.BoChannelDetail" forward="BUE3_3" />
+	<function id="BUE3_3" description="解锁口令：双向认证刮刮卡，解锁" type="bo"
+		className="todos.eap.server.bo.BoEapUnlockOTP" forward="IUE2" />
+
+	<!-- 双向认证令牌 -->
+	<function id="BUF1" description="解锁口令：双向认证令牌，读取应用系统信息" type="bo"
+		className="todos.eap.mag.bo.BoChannelSetNormal" forward="BUF1_2" />
+	<function id="BUF1_2" description="解锁口令：双向认证令牌，读取应用系统信息" type="bo"
+		className="todos.eap.mag.bo.BoChannelListToSel" forward="IUF1" />
+	<function id="IUF1" description="解锁口令：双向认证令牌页面1" type="jsp"
+		jspPath="/eap/otpunlock/daTokenA.jsp" />
+	<function id="BUF2" description="解锁口令：双向认证令牌，获取应用系统名称" type="bo"
+		className="todos.eap.mag.bo.BoChannelDetail" forward="BUF2_2" />
+	<function id="BUF2_2" description="解锁口令：双向认证令牌，设置应用系统到Session"
+		type="bo" className="todos.eap.mag.bo.BoChannelSetToSession"
+		forward="BUF2_3" />
+	<function id="BUF2_3" description="解锁口令：双向认证令牌，获取服务器验证码" type="bo"
+		className="todos.eap.server.bo.BoEapGetCodePrefix" forward="IUF2" />
+	<function id="IUF2" description="解锁口令：双向认证令牌页面2" type="jsp"
+		jspPath="/eap/otpunlock/daTokenB.jsp" />
+	<function id="BUF3" description="解锁口令：双向认证令牌，设置应用系统到Session"
+		type="bo" className="todos.eap.mag.bo.BoChannelSetToSession"
+		forward="BUF3_2" />
+	<function id="BUF3_2" description="解锁口令：双向认证令牌，获取应用系统名称" type="bo"
+		className="todos.eap.mag.bo.BoChannelDetail" forward="BUF3_3" />
+	<function id="BUF3_3" description="解锁口令：双向认证令牌，解锁" type="bo"
+		className="todos.eap.server.bo.BoEapUnlockOTP" forward="IUF2" />
+</functions>

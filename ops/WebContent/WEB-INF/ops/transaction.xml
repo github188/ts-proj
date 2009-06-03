@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<transaction>
+	<classname>tmvc.common.Transaction</classname>
+	<databases>
+		<database>
+			<id>default</id>
+			<description>Oracle 10G Connection</description>
+			<driver>oracle.jdbc.OracleDriver</driver>
+			<url>jdbc:oracle:thin:@localhost/orcl</url>
+			<user>eap_adm</user>
+			<password>password</password>
+			<autocommit></autocommit>
+		</database>
+		<!--
+		<url>jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.1.249)(PORT = 1521)))(CONNECT_DATA=(SERVICE_NAME=dbora)))</url>
+		<url>jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS = (PROTOCOL = TCP)(HOST = 218.80.221.119)(PORT = 1521)))(CONNECT_DATA=(SERVICE_NAME=gwzf)))</url>
+		<url>jdbc:oracle:thin:@192.168.1.249/dbora</url>
+		<url>jdbc:oracle:thin:@suilaiji/dbsui</url>
+		<url>jdbc:oracle:thin:@192.168.1.251/ecode39</url>
+			<url>jdbc:oracle:thin:@192.168.1.249:1521:dbora</url>
+		-->
+		<database>
+			<id>loggerDB</id>
+			<description>Oracle 10G Connection</description>
+			<driver>oracle.jdbc.OracleDriver</driver>
+			<url>jdbc:oracle:thin:@localhost/orcl</url>
+			<user>eap_adm</user>
+			<password>password</password>
+			<autocommit></autocommit>
+		</database>
+	</databases>
+</transaction>
