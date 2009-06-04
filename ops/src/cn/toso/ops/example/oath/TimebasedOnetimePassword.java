@@ -120,8 +120,8 @@ public class TimebasedOnetimePassword {
 
     public static void main(String[] args) {
 
-	String seed = "3132333435363738393031323334353637383930";
-	//String seed ="4C45B409121F21463200EF094004FFFA9B5E1DAD";
+	//String seed = "3132333435363738393031323334353637383930";
+	String seed ="4C45B409121F21463200EF094004FFFA9B5E1DAD";
 	String time = "0";
 
 	Date myDate = Calendar.getInstance().getTime();
@@ -151,6 +151,7 @@ public class TimebasedOnetimePassword {
 	    System.out.print("| " + myDate.getTime() + " |  " + df.format(myDate) + "  |");
 	    b = new BigInteger("0" + myDate.getTime());
 	    b = b.divide(new BigInteger("30000"));
+	    System.out.print("["+b+"]");
 	    time = b.toString(16).toUpperCase();
 	    
 	    while (time.length() < 16)
