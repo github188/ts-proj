@@ -72,7 +72,8 @@ public class EapApiControl {
 	    // 读取配置错误信息
 	    this.errorConf = (ErrorMsgConfig) this.buildConfig(errorMsgXmlPath, builder, 2);
 
-	    authServerConnPara = AuthServerConnPara.createConfig(authServerConnParaFilePath);
+	    // authServerConnPara =
+                // AuthServerConnPara.createConfig(authServerConnParaFilePath);
 	} catch (FatalException e) {
 	    throw new ControlInitException(e);
 	} catch (JDOMException e) {
@@ -107,21 +108,12 @@ public class EapApiControl {
 	    transaction.beginTransaction();
 
 	    // 检查权限
-	    // System.out.println("TIME CHECK RIGHTS BGN\t"
-	    // + System.currentTimeMillis());
-	    checkRights(transaction, packetHeaderXml);
-	    // System.out.println("TIME CHECK RIGHTS END\t"
-	    // + System.currentTimeMillis());
+	    // checkRights(transaction, packetHeaderXml);
 
 	    /*--- 记录日志到数据库 ---*/
-	    // System.out.println("TIME INSERT LOG BGN\t"
-	    // + System.currentTimeMillis());
-	    logDbConnId = transaction.createConnection("loggerDB", true);
-	    // this.moveLog(transaction, logDbConnId, tradeDate);
-	    this.insertLog(packetHeaderXml, packetXml, transaction, logDbConnId, tradeDate, tradeTime, seqNo);
-	    // System.out.println("TIME INSERT LOG END\t"
-	    // + System.currentTimeMillis());
-
+	    // logDbConnId = transaction.createConnection("loggerDB", true);
+	    // this.insertLog(packetHeaderXml, packetXml, transaction,
+                // logDbConnId, tradeDate, tradeTime, seqNo);
 	    // 获取功能
 	    func = this.getFunctionInfo(funcId);
 
@@ -140,12 +132,11 @@ public class EapApiControl {
 		    throw new ErrorException("TS0008", new Object[] { func.getBoClassName() });
 		}
 		// 日志
-		boLogger = Logger.getLogger(bo.getClass());
-		// System.out.println("TIME DO BUSINESS BGN\t"
-		// + System.currentTimeMillis());
+		// boLogger = Logger.getLogger(bo.getClass());
+
+		// 执行业务逻辑
 		bo.doBusiness(transaction, packetXml, packetHeaderXml, null, boLogger);
-		// System.out.println("TIME DO BUSINESS END\t"
-		// + System.currentTimeMillis());
+
 	    }
 
 	    // 更新日志:操作成功
