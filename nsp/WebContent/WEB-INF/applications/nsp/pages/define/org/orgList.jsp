@@ -294,7 +294,7 @@ try{
  
 <!-- 机构不为空时显示bgn -->
 <div style="width:100%; height:443px; overflow:scroll">
-<table width="758" height="450" border="0" cellpadding="2" cellspacing="0" >
+<table width="980" height="330" border="0" cellpadding="2" cellspacing="0" >
 <tr>
     <td  colspan="5" valign="top" >
     <div id="noticePanel" class="panelSimple">
@@ -323,7 +323,7 @@ try{
 
 
 </td>
-<td width="539" valign="top">
+<td width="740" valign="top">
 
 <table width="100%">
 <%if(orgId!=null && orgId.length()!=0) {%>

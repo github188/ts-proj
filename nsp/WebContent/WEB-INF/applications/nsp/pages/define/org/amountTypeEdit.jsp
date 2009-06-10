@@ -253,7 +253,7 @@ try{
 <div class="panelContent">
 <div class="panelContent2" >
 <div style="width:100%; height:100%; overflow:scroll">
-<table width="758" height="450" border="0" cellpadding="2" cellspacing="0">
+<table width="975" height="330" border="0" cellpadding="2" cellspacing="0">
 <tr>
     <td  colspan="5" valign="top">
 <div id="noticePanel" class="panelSimple">
@@ -275,7 +275,7 @@ try{
                           <div></div>
                       </div>
                     </div>
-			</td><td width="533" valign="top">
+			</td><td width="740" valign="top">
 			<div id="noticePanel" class="panelSimple">
                         <div class="panelHead"></div>
                       <div class="panelContent">
@@ -286,7 +286,7 @@ try{
                 			<input type="hidden" name="FUNC_ID" value="AmountTypeSubmit">
                 			<input type="hidden" name="ORG_ID" value="<%=orgId %>"> 
                 			<input type="hidden" name="IsAddFlag" value="<%=isAddFlag %>">
-              				<table width="490" border="0" cellpadding="0" cellspacing="0" class="list">
+              				<table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
                	<tr>
                    <td width="74" align="right" nowrap>资源型号：</td>
                    <%if(isAddFlag.equals("Y")){ %>
@@ -366,8 +366,10 @@ try{
                   <%} %>
                   
                 </tr>
+               
                 <tr>
                   <td colspan="4" align="center" nowrap="nowrap">
+                  <br>
                     <input type="submit" class="submit" value="保存">
                     <input type="button" class="button" onclick="doCancle()" value="取消">               
    				  </td>

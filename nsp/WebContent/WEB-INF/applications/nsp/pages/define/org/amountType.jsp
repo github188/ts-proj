@@ -247,7 +247,7 @@ try{
 <div style="width:100%; height:100%; overflow:scroll">
 
 <!-- 机构不为空时显示bgn -->
-<table width="758" height="450" border="0" cellpadding="2" cellspacing="0" >
+<table width="900" height="330" border="0" cellpadding="2" cellspacing="0"  >
 <tr>
     <td  colspan="5" valign="top" >
     <div id="noticePanel" class="panelSimple">
@@ -276,9 +276,9 @@ try{
 
 
 </td>
-<td width="539" valign="top">
+<td width="100%" valign="top">
 
-<table width="100%">
+<table width="740">
 	<tr>
 		<td>
 		
@@ -291,18 +291,23 @@ try{
                             <div class="panelInnerHead"><%=orgName %>的库存信息<a name="notice"></a></div>
            <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
                  <tr>
-                  <th width="11%" nowrap>设备类别</th>
-                  <th width="11%" nowrap>设备型号</th>
-                  <th width="11%" nowrap>库存数量</th>
-                  <th width="11%" nowrap>在线数量</th>	
-                  <th width="11%" nowrap>施工占用</th>
-                  <th width="11%" nowrap>坏件数量</th>
-                  <th width="11%" nowrap>预出库量</th>
-                  <th width="11%" nowrap>预入库量</th>
-                  <th width="12%" nowrap>[<a href="JavaScript:doAdd('<%=orgId %>','<%='Y' %>')" >添加</a>]</th>
+                  <th width="8%" nowrap>设备类别</th>
+                  <th width="20%" nowrap>设备型号</th>
+                  <th width="10%" nowrap>库存数量</th>
+                  <th width="10%" nowrap>在线数量</th>	
+                  <th width="10%" nowrap>施工占用</th>
+                  <th width="10%" nowrap>坏件数量</th>
+                  <th width="10%" nowrap>预出库量</th>
+                  <th width="10%" nowrap>预入库量</th>
+                  <th width="8%" nowrap>[<a href="JavaScript:doAdd('<%=orgId %>','<%='Y' %>')" >添加</a>]</th>
                 </tr>
-            <%for(int i=0; i<orgIds.length; i++){ %>
-                <tr onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
+            <%for(int i=0; i<orgIds.length; i++){ 
+            	String style="";
+            	if(i%2==0){
+            		style="class='dark'";
+            	}
+            %>
+                <tr  <%=style %>onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
                   <td align="center"><%=classNames[i]%></td>
                   <td align="center"><%=typeNames[i]%></td>
                   <td align="center"><%=stockAmounts[i]%></td>
