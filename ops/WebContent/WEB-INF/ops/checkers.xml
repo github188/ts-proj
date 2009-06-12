@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkers>
+ <checker id="LoginAndRightsChecker"
+			 description="检查是否登录以及执行功能的权限"
+			 className="todos.eap.mag.check.LoginAndRightsChecker"
+			 forward="I001"
+			 />
+</checkers>
