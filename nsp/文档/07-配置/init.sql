@@ -1,4 +1,4 @@
--- MySQL Administrator dump 1.4
+﻿-- MySQL Administrator dump 1.4
 --
 -- ------------------------------------------------------
 -- Server version	5.0.13-rc-nt
@@ -59569,7 +59569,7 @@ INSERT INTO `sys_id_creator` (`CREATOR_ID`,`CREATOR_VALUE`,`CREATOR_REMARK`) VAL
  ('CLASS_ID','2','Next ID of CLASS_ID'),
  ('LIST_ID','0','Next ID of LIST_ID'),
  ('SHEET_ID','0','Next ID of SHEET_ID'),
- ('SORG_ID','6661','Next ID of TYPE_ID'),
+ ('SORG_ID','7079','Next ID of TYPE_ID'),
  ('STAT_ID','2','Next ID of TYPE_ID'),
  ('TYPE_ID','13','Next ID of TYPE_ID'),
  ('USER_ID','10','Next ID of TYPE_ID');
