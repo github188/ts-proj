@@ -6,137 +6,137 @@ import java.net.Socket;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.WritableByteChannel;
 
-import tmvc.common.XMLWrap;
+import tower.tmvc.XMLWrap;
 import EDU.oswego.cs.dl.util.concurrent.Sync;
 
 public class ExchangeInfo {
-	private Socket socket;
+    private Socket socket;
 
-	private NBChannel nbChannel;
+    private NBChannel nbChannel;
 
-	private ReadableByteChannel readChannel;
+    private ReadableByteChannel readChannel;
 
-	private WritableByteChannel writeChannel;
+    private WritableByteChannel writeChannel;
 
-	Sync readLock;
+    Sync readLock;
 
-	private ByteArrayOutputStream headerData;
+    private ByteArrayOutputStream headerData;
 
-	private ByteArrayOutputStream packetData;
+    private ByteArrayOutputStream packetData;
 
-	private boolean readingHeader;
+    private boolean readingHeader;
 
-	private int expectLength;
+    private int expectLength;
 
-	private int remainLength;
+    private int remainLength;
 
-	private boolean isFree;
+    private boolean isFree;
 
-	private long lastAccessTime;
+    private long lastAccessTime;
 
-	private XMLWrap headerXml;
+    private XMLWrap headerXml;
 
-	/**
-	 * 初始化，设置Socket，开始读取
-	 * 
-	 * @param socket
-	 * @param expectLength
-	 * @throws IOException
-	 */
-	public ExchangeInfo(Socket socket) throws IOException {
-		this.socket = socket;
-		nbChannel = new NBChannel(socket);
-		readChannel = (ReadableByteChannel) nbChannel;
-		writeChannel = (WritableByteChannel) nbChannel;
-		this.isFree = true;
+    /**
+         * 初始化，设置Socket，开始读取
+         * 
+         * @param socket
+         * @param expectLength
+         * @throws IOException
+         */
+    public ExchangeInfo(Socket socket) throws IOException {
+	this.socket = socket;
+	nbChannel = new NBChannel(socket);
+	readChannel = (ReadableByteChannel) nbChannel;
+	writeChannel = (WritableByteChannel) nbChannel;
+	this.isFree = true;
+    }
+
+    public void startHeader(int headerLength) {
+	headerData = new ByteArrayOutputStream(headerLength);
+	expectLength = headerLength;
+	remainLength = headerLength;
+	readingHeader = true;
+    }
+
+    public void startPacket(int packetLength) {
+	packetData = new ByteArrayOutputStream(packetLength);
+	expectLength = packetLength;
+	remainLength = packetLength;
+	readingHeader = false;
+    }
+
+    public void append(byte[] bArray) {
+	try {
+	    if (readingHeader) {
+		headerData.write(bArray);
+		remainLength -= bArray.length;
+	    } else {
+		packetData.write(bArray);
+		remainLength -= bArray.length;
+	    }
+	} catch (IOException e) {
+	    // do nothing
 	}
+    }
 
-	public void startHeader(int headerLength) {
-		headerData = new ByteArrayOutputStream(headerLength);
-		expectLength = headerLength;
-		remainLength = headerLength;
-		readingHeader = true;
-	}
+    public int getRemainLength() {
+	return remainLength;
+    }
 
-	public void startPacket(int packetLength) {
-		packetData = new ByteArrayOutputStream(packetLength);
-		expectLength = packetLength;
-		remainLength = packetLength;
-		readingHeader = false;
-	}
+    public void setRemainLength(int remainLength) {
+	this.remainLength = remainLength;
+    }
 
-	public void append(byte[] bArray) {
-		try {
-			if (readingHeader) {
-				headerData.write(bArray);
-				remainLength -= bArray.length;
-			} else {
-				packetData.write(bArray);
-				remainLength -= bArray.length;
-			}
-		} catch (IOException e) {
-			// do nothing
-		}
-	}
+    public int getExpectLength() {
+	return expectLength;
+    }
 
-	public int getRemainLength() {
-		return remainLength;
-	}
+    public ByteArrayOutputStream getHeaderData() {
+	return headerData;
+    }
 
-	public void setRemainLength(int remainLength) {
-		this.remainLength = remainLength;
-	}
+    public ByteArrayOutputStream getPacketData() {
+	return packetData;
+    }
 
-	public int getExpectLength() {
-		return expectLength;
-	}
+    public ReadableByteChannel getReadChannel() {
+	return readChannel;
+    }
 
-	public ByteArrayOutputStream getHeaderData() {
-		return headerData;
-	}
+    public boolean isReadingHeader() {
+	return readingHeader;
+    }
 
-	public ByteArrayOutputStream getPacketData() {
-		return packetData;
-	}
+    public Socket getSocket() {
+	return socket;
+    }
 
-	public ReadableByteChannel getReadChannel() {
-		return readChannel;
-	}
+    public WritableByteChannel getWriteChannel() {
+	return writeChannel;
+    }
 
-	public boolean isReadingHeader() {
-		return readingHeader;
-	}
+    public boolean isFree() {
+	return isFree;
+    }
 
-	public Socket getSocket() {
-		return socket;
-	}
+    public void setFree(boolean isFree) {
+	this.isFree = isFree;
+    }
 
-	public WritableByteChannel getWriteChannel() {
-		return writeChannel;
-	}
+    public long getLastAccessTime() {
+	return lastAccessTime;
+    }
 
-	public boolean isFree() {
-		return isFree;
-	}
+    public void setLastAccessTime(long lastAccesTime) {
+	this.lastAccessTime = lastAccesTime;
+    }
 
-	public void setFree(boolean isFree) {
-		this.isFree = isFree;
-	}
+    public XMLWrap getHeaderXml() {
+	return headerXml;
+    }
 
-	public long getLastAccessTime() {
-		return lastAccessTime;
-	}
-
-	public void setLastAccessTime(long lastAccesTime) {
-		this.lastAccessTime = lastAccesTime;
-	}
-
-	public XMLWrap getHeaderXml() {
-		return headerXml;
-	}
-
-	public void setHeaderXml(XMLWrap headerXml) {
-		this.headerXml = headerXml;
-	}
+    public void setHeaderXml(XMLWrap headerXml) {
+	this.headerXml = headerXml;
+    }
 
 }

@@ -21,6 +21,17 @@ import tmvc.common.config.ErrorMsgConfig;
 import tmvc.common.config.Function;
 import tmvc.common.config.FunctionConfig;
 import tmvc.common.config.TransactionConfig;
+import tower.tmvc.ErrorException;
+import tower.tmvc.FatalException;
+import tower.tmvc.QueryResult;
+import tower.tmvc.QueryResultRow;
+import tower.tmvc.RootBo;
+import tower.tmvc.Transaction;
+import tower.tmvc.XMLWrap;
+import tower.tmvc.config.ConfigHolder;
+import tower.tmvc.config.ErrorMessageConfig;
+import tower.tmvc.config.FunctionConfig;
+import tower.tmvc.config.TransactionConfig;
 import cn.toso.ops.util.AuthServerConnPara;
 
 public class EapApiControl {
@@ -36,9 +47,11 @@ public class EapApiControl {
 
     public TransactionConfig transConf;
 
-    public ErrorMsgConfig errorConf;
+    public ErrorMessageConfig errorConf;
 
     public AuthServerConnPara authServerConnPara;
+    
+    protected ConfigHolder configHolder;
 
     public static ConnectionPool POOL = new ConnectionPool();
 
@@ -98,7 +111,9 @@ public class EapApiControl {
 	String seqNo = packetHeaderXml.getInputValue("SEQ_NO");
 
 	// 创建事务
-	transaction = new Transaction(this.transConf, POOL);
+//	transaction = new Transaction(this.transConf, POOL);
+	transaction = new Transaction(this.configHolder
+		.getTransactionConfigSet());
 
 	try {
 	    // 获取功能号

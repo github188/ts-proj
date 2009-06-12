@@ -7,13 +7,14 @@ import org.jdom.Document;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 
-import tmvc.common.FatalException;
-import tmvc.common.XMLWrap;
-import tmvc.common.config.ErrorMsg;
-import tmvc.common.config.ErrorMsgConfig;
+import tower.tmvc.FatalException;
+import tower.tmvc.XMLWrap;
+import tower.tmvc.config.ErrorMessageConfig;
 import cn.toso.ops.client.entity.ResponseData;
 import cn.toso.ops.client.ssl.ClientConfig;
 import cn.toso.ops.client.ssl.ClientConnection;
+
+import com.sun.org.apache.xalan.internal.xsltc.compiler.util.ErrorMsg;
 
 public class OpsApi {
     static final int ROW_COUNT_PER_GETTING = 1;
@@ -61,7 +62,7 @@ public class OpsApi {
          * 
          * 
          */
-    ErrorMsgConfig errorMsgConfig;
+    ErrorMessageConfig errorMsgConfig;
 
     public OpsApi() {
 	clientConn = ClientConnection.createClientConnection();

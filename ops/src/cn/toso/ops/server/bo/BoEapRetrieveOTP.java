@@ -9,10 +9,10 @@ import java.util.TimeZone;
 
 import org.apache.log4j.Logger;
 
-import tmvc.common.ErrorException;
-import tmvc.common.RootBo;
-import tmvc.common.Transaction;
-import tmvc.common.XMLWrap;
+import tower.tmvc.ErrorException;
+import tower.tmvc.RootBo;
+import tower.tmvc.Transaction;
+import tower.tmvc.XMLWrap;
 import cn.toso.ops.example.oath.TimebasedOnetimePassword;
 import cn.toso.ops.util.PacketParser;
 

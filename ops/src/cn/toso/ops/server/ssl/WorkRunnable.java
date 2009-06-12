@@ -7,15 +7,14 @@ import java.nio.channels.WritableByteChannel;
 
 import org.apache.log4j.Logger;
 
+import tower.tmvc.ErrorException;
+import tower.tmvc.XMLWrap;
 import cn.toso.ops.server.control.ControlInitException;
 import cn.toso.ops.server.control.ControlPool;
 import cn.toso.ops.server.control.EapApiControl;
 import cn.toso.ops.util.PacketParser;
 import cn.toso.ops.util.PubFunc;
 import cn.toso.ops.util.SeqNoGennor;
-
-import tmvc.common.ErrorException;
-import tmvc.common.XMLWrap;
 
 public class WorkRunnable implements Runnable {
     ExchangeInfo exInfo;
@@ -45,7 +44,7 @@ public class WorkRunnable implements Runnable {
 
 	try {
 	    // System.out.println("TIME RUN
-                // BGN\t"+System.currentTimeMillis());
+	    // BGN\t"+System.currentTimeMillis());
 	    // exInfo.getReadLock().acquire();
 	    if (exInfo.isReadingHeader()) {
 		// 若是读Header
@@ -129,7 +128,7 @@ public class WorkRunnable implements Runnable {
 		// ***************************************************
 	    }
 	    // System.out.println("TIME RUN
-                // END\t"+System.currentTimeMillis());
+	    // END\t"+System.currentTimeMillis());
 	    // exInfo.getSocket().close();
 	} catch (IOException e) {
 	    logger.error("run() IO Error", e);
