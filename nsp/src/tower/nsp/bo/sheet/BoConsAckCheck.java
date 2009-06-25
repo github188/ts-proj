@@ -120,7 +120,7 @@ public class BoConsAckCheck implements RootBo {
 					enResourceOrgAmountSpare = dbResourceOrgAmount.findByKey(diffInUnitId, enResourcePrepareList.getResourceTypeId());
 					if(enResourceOrgAmountSpare != null){
 						String sqlUpdateIn="update RESOURCE_ORG_AMOUNT r set r.STOCK_AMOUNT = r.STOCK_AMOUNT + " + enResourcePrepareList.getAmountDiff()
-						+ " where r.ORG_ID = " + inUnitId + " and RESOURCE_TYPE_ID = " + enResourcePrepareList.getResourceTypeId();
+						+ " where r.ORG_ID = " + diffInUnitId + " and RESOURCE_TYPE_ID = " + enResourcePrepareList.getResourceTypeId();
 						
 						transaction.doUpdate(null, sqlUpdateIn);
 					}else{
