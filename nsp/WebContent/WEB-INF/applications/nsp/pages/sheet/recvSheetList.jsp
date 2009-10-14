@@ -160,7 +160,8 @@
 	                  <td align="right" nowrap="nowrap">
 	                   <input type="submit" class="submit" onClick="doList();" value="查询">
 	                   <input type="button" class="button" onClick="doClear();" value="重置">
-	                   <input type="button" class="button" onClick="doExcel();" value="导出excel">
+	                   <input type="button" class="bigButton" onClick="doExcel();" value="导出Excel">
+	                  
 	                  </td>
                 </tr>
               </table>
