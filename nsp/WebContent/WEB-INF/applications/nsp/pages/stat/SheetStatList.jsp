@@ -15,6 +15,15 @@
 	String takeUserName;
 	String consUserName;
 	String newStationFlag;
+	String inOrgName;
+	String inOrgId;
+	String inOrgParentId;
+	String inStationFlag;
+	String outOrgName;
+	String outOrgId;
+	String outOrgParentId;
+	String outStationFlag;
+	
 	
 	String typeId = xml.getInputValue("QRESOURCE_CLASS_ID");
 	String typeFlag = xml.getInputValue("QRESOURCE_CLASS_FLAG");
@@ -34,6 +43,7 @@
 	String[]  consUserNames;
 	String[]  listIds;
 	String[]  newStationFlags;
+	
 	
 	String[] statusIds = {"","1","2","3","4","5","6"};
 	String[] statusDescs ={"全部","下发","已接收","已出库","已入库","施工完毕","确认完成"};
@@ -65,6 +75,17 @@
 	takeUserName = xml.getInputValue("QTAKE_USER_NAME");
 	consUserName = xml.getInputValue("QCONS_USER_NAME");
 	newStationFlag = xml.getInputValue("QNEW_STATION_FLAG");
+	inOrgId = xml.getInputValue("QIN_ORG_ID");
+	inOrgName = xml.getInputValue("QIN_ORG_NAME");
+	inOrgParentId = xml.getInputValue("QIN_ORG_PARENT_ID");
+	inStationFlag = xml.getInputValue("QIN_STATION_FLAG");
+	outOrgId = xml.getInputValue("QOUT_ORG_ID");
+	outOrgName = xml.getInputValue("QOUT_ORG_NAME");
+	outOrgParentId = xml.getInputValue("QOUT_ORG_PARENT_ID");
+	outStationFlag = xml.getInputValue("QOUT_STATION_FLAG");
+	
+	
+	
 	
 %>
 <head>
@@ -104,8 +125,22 @@ function doSubmit(form) {
     form1.QRESOURCE_CLASS_ID.value = "";
     form1.QRESOURCE_CLASS_FLAG.value ="";
     form1.QLIST_STATUS.value="";
+    form1.QIN_ORG_ID.value="";
+    form1.QIN_ORG_NAME.value="";
+    form1.QIN_ORG_PARENT_ID.value="";
+    form1.QIN_STATION_FLAG.value="";
+    form1.QOUT_ORG_ID.value="";
+    form1.QOUT_ORG_NAME.value="";
+    form1.QOUT_ORG_PARENT_ID.value="";
+    form1.QOUT_STATION_FLAG.value="";
+    form1.QNEW_STATION_FLAG.value="";
+    
+    
+    
     type.setInputHolderSelected([""]) ;
     type.setDisplayerSelected([]) ;
+  
+	
   }
   function TDoChangePage(curPage){
   form1["CUR_PAGE"].value = curPage;
@@ -141,6 +176,14 @@ function doSubmit(form) {
         }
       }
     }
+    
+    
+  function doSelOutOrg(){
+    selDialog("ctrl?FUNC_ID=SelectOrgOrStaJsp","QOUT_ORG_ID","QOUT_ORG_NAME","QOUT_ORG_PARENT_ID","QOUT_STATION_FLAG",650,550,false);
+  }
+   function doSelInOrg(){
+    selDialog("ctrl?FUNC_ID=SelectOrgOrStaJsp","QIN_ORG_ID","QIN_ORG_NAME","QIN_ORG_PARENT_ID","QIN_STATION_FLAG",650,550,false);
+  }
 -->
 </script>
 
@@ -173,6 +216,28 @@ function doSubmit(form) {
                   	<span class="textfieldInvalidFormatMsg">格式无效。</span></span>
                   </td>
 				 </tr> 
+				 <tr>
+	
+				 	 <td align="right">调出单位：</td>
+                    
+                     <td>
+		                   <input name="QOUT_ORG_ID" type="hidden"  value="<%=outOrgId %>">
+		                   <input name="QOUT_ORG_PARENT_ID" type="hidden"  value="<%=outOrgParentId %>" >
+		                    <input name="QOUT_STATION_FLAG" type="hidden" value="<%=outStationFlag %>" >
+		                  <input type="text" class="date" name="QOUT_ORG_NAME"   value="<%=outOrgName %>"  readonly>
+		                   <input type="button" name="selectOutOrg" class="selButton" value="选择" onClick="doSelOutOrg()" />
+		              </td>
+		            
+                  <td align="right">调入单位：</td>
+                  <td>
+                   <input name="QIN_STATION_FLAG" type="hidden"  value="<%=inStationFlag%>">
+                   <input name="QIN_ORG_PARENT_ID" type="hidden"  value="<%=inOrgParentId %>">
+                  <input name="QIN_ORG_ID" type="hidden"  value="<%=inOrgId %>">
+				  <input type="text" class="date" name="QIN_ORG_NAME"  value="<%=inOrgName %>"  readonly> 
+				  <input type="button" name="selectInOrg" class="selButton" value="选择" onClick="doSelInOrg()" />
+				 </td>
+				 </tr>
+				 
 				 <tr>
 				  <td align="right">处理状态：</td>
                   <td><select name="QLIST_STATUS" style="width:100%" class="select">

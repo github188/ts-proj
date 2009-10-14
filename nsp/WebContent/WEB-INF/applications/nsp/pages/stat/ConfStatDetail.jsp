@@ -275,7 +275,7 @@
                <tr align="center" valign="bottom">
                  <td align="center" colspan="7">
                  <input type="button" class="button" name="OpenSheet" onclick="doBack();" value="返回"/>
-                 <input type="button" class="button" name="OpenSheet" onclick="doExcel('<%=orgId %>');" value="导出excel"/>
+                 <input type="button" class="bigButton" name="OpenSheet" onclick="doExcel('<%=orgId %>');" value="导出Excel">
                  </td>
                  </tr>
               </table>

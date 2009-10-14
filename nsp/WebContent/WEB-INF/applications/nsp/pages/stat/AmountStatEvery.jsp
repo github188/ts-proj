@@ -77,7 +77,7 @@
               <table width="100%">
               <tr>
               <td align="right">&nbsp;&nbsp;
-                  <input type="button" class="submit" onClick="doExcel()"  value="导出excel">&nbsp;&nbsp;
+                  <input type="button" class="bigButton" onClick="doExcel()"  value="导出Excel">&nbsp;&nbsp;
                   <input type="button" class="submit" onClick="doBack()"  value="返回">
               </td>
               </tr>
