@@ -37,6 +37,8 @@ public class BoSheetStatList implements RootBo {
 		如输入了设备型号，则（设备型号='设备型号'）
 		如输入了领用人姓名，则（领用人姓名 LIKE '%领用人姓名%'）
 		如输入了施工人姓名，则（施工人姓名 LIKE '%施工人姓名%'）
+		如果输入了调出单位，则（调出单位=‘调出单位’）
+		如果输入了调入单位，则（调入单位=‘调入单位’）
 	 * 5、使用构造的查询条件，自工单表和工单明细表中查询符合条件的工单明细列表，并按工单ID、工单明细ID升序排列；
 		SELECT * FROM RESOURCE_PREPARE_SHEET, RESOURCE_PREPARE_LIST 
     	WHERE RESOURCE_PREPARE_SHEET.SHEET_ID = RESOURCE_PREPARE_LIST.SHEET_ID
@@ -72,6 +74,14 @@ public class BoSheetStatList implements RootBo {
 		String takeUserName;
 		String consUserName;
 		String newStationFlag;
+		String outOrgId;
+		String outStationFlag;
+		String outStationId = "";
+		String outOrgParentId;
+		String inOrgId;
+		String inStationFlag;
+		String inStationId = "";
+		String inOrgParentId;
 		
 		String orgId;
 		
@@ -88,8 +98,22 @@ public class BoSheetStatList implements RootBo {
 		takeUserName = requestXml.getInputValue("QTAKE_USER_NAME");
 		consUserName = requestXml.getInputValue("QCONS_USER_NAME");
 		newStationFlag = requestXml.getInputValue("QNEW_STATION_FLAG");
+		outOrgId = requestXml.getInputValue("QOUT_ORG_ID");
+		outStationFlag = requestXml.getInputValue("QOUT_STATION_FLAG");
+		outOrgParentId = requestXml.getInputValue("QOUT_ORG_PARENT_ID");
+		inOrgId = requestXml.getInputValue("QIN_ORG_ID");
+		inOrgParentId = requestXml.getInputValue("QIN_ORG_PARENT_ID");
+		inStationFlag = requestXml.getInputValue("QIN_STATION_FLAG");
 		
-		
+		if (outStationFlag.equals("Y")) {
+			outStationId = outOrgId;
+			outOrgId = outOrgParentId;
+		}
+
+		if (inStationFlag.equals("Y")) {
+			inStationId = inOrgId;
+			inOrgId = inOrgParentId;
+		}
 //		orgId = sessionXml.getInputValue("ORG_ID");
 		orgId = sessionXml.getItemValue("SYS_USER", 1, "USER_ORG_ID");
 		
@@ -126,6 +150,29 @@ public class BoSheetStatList implements RootBo {
 			sql.append(" b.PREPARE_DATE <= ");
 			sql.append(Transaction.formatString(DateFunc.ParseDateTime(prepareDate_end)));
 		}
+		if(outStationId !=null && outStationId.length() !=0){
+			sql.append(" and ");
+			sql.append(" a.OUT_STATION_ID ='");
+			sql.append(outStationId);
+			sql.append("'");
+		}else if(outOrgId != null && outOrgId.length() !=0){
+			sql.append(" and ");
+			sql.append(" a.OUT_ORG_ID ='");
+			sql.append(outOrgId);
+			sql.append("'");
+		}
+		if(inStationId !=null && inStationId.length() !=0){
+			sql.append(" and ");
+			sql.append(" a.IN_STATION_ID ='");
+			sql.append(inStationId);
+			sql.append("'");
+		}else if(inOrgId != null && inOrgId.length() !=0){
+			sql.append(" and ");
+			sql.append(" a.IN_ORG_ID ='");
+			sql.append(inOrgId);
+			sql.append("'");
+		}
+		
 		if(sheetId != null && sheetId.length() != 0){
 			sql.append(" and ");
 			sql.append(" a.SHEET_ID LIKE '%");
@@ -185,7 +232,7 @@ public class BoSheetStatList implements RootBo {
 			sql.append("g.ORG_ID= ");
 			sql.append(transaction.formatString(orgId));
 		}
-		sql.append(" order by a.LIST_ID");
+		sql.append(" order by a.LIST_ID  DESC");
 		
 		int page = Page.SetPageInfo(transaction, null, requestXml,
 				PubFunc.LEN_PAGE_COUNT, sql.toString());
