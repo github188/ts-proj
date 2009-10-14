@@ -9,6 +9,7 @@ import tower.nsp.db.DbResourceOrgAmount;
 import tower.nsp.db.DbResourcePrepareList;
 import tower.nsp.db.DbResourcePrepareSheet;
 import tower.nsp.db.DbResourceType;
+import tower.nsp.en.EnResourceOrgAmount;
 import tower.nsp.en.EnResourcePrepareList;
 import tower.nsp.en.EnResourcePrepareSheet;
 import tower.nsp.en.EnResourceType;
@@ -35,7 +36,7 @@ public class BoSheetPrepareAdd implements RootBo {
 
 		// 资源库存db en
 		DbResourceOrgAmount dbResourceOrgAmount;
-//		EnResourceOrgAmount enResourceOrgAmount;
+		EnResourceOrgAmount enResourceOrgAmount;
 
 		// 调度工单db en
 		DbResourcePrepareSheet dbResourcePrepareSheet;
@@ -160,64 +161,80 @@ public class BoSheetPrepareAdd implements RootBo {
 			}
 		}
 
-		// 判断下发的工单明细中调出单位中该资源类型的库存是否存在，如果不存在抛出异常：OS0206:{0}机构下发{1}资源类的库存不存在，请增加库存！
-		int count = 0;
+		// 判断下发的工单明细中调出单位中该资源类型的库存是否存在，如果不存在则抛出异常：OS0206:{0}机构下发{1}资源类的库存不存在，请增加库存！
+		long count = 0;
 		if (outStationId != null && outStationId.length() > 0) {
 			count = dbResourceOrgAmount.countByKey(outStationId, resourceTypeId);
+			enResourceOrgAmount = dbResourceOrgAmount.findByKey(outStationId, resourceTypeId);
 		} else {
 			count = dbResourceOrgAmount.countByKey(outOrgId, resourceTypeId);
+			enResourceOrgAmount = dbResourceOrgAmount.findByKey(outOrgId, resourceTypeId);
 		}
+		
 		if (count <= 0) {
 			throw new ErrorException("OS0206", new Object[] { outOrgName, enResourceType.getTypeName() });
-		} else {
-
-			// 生成工单信息，为工单明细提供工单ID
-			if (sheetId == null || sheetId.length() == 0) {
-				enResourcePrepareSheet = new EnResourcePrepareSheet();
-				sheetId = SysIdCreator.GenNextId(transaction, null, IdCreatorDefine.ID_TYPE_SHEET_ID,
-						IdCreatorDefine.ID_LEN_SHEET_ID);
-				enResourcePrepareSheet.setSheetId(sheetId);
-				enResourcePrepareSheet.setPrepareDate(now);
-				enResourcePrepareSheet.setPrepareUserId(userId);
-				dbResourcePrepareSheet.insert(enResourcePrepareSheet);
-				requestXml.setInputValue("SHEET_ID", 1, sheetId);
-			} else {
-				enResourcePrepareSheet = dbResourcePrepareSheet.findByKey(sheetId);
-				enResourcePrepareSheet.setPrepareDate(now);
-				enResourcePrepareSheet.setPrepareUserId(userId);
-				dbResourcePrepareSheet.updateByKey(sheetId, enResourcePrepareSheet);
+		} 
+		
+		//判断调出的是在线设备还是库存设备(0:库存设备 1:在线设备)
+		if(outResourceStatus.equals("0")){
+			//如果调出数量大于库存数量，则抛出异常：OS0208:'{0}'的 '{1}'库存不足，请增加库存数量！
+			if(amountPrepare1 > enResourceOrgAmount.getStockAmount()){
+				throw new ErrorException("OS0208",new Object[] { outOrgName, enResourceType.getTypeName() });
 			}
-
-			// 根据“调度工单明细ID(LIST_ID)”判断是编辑还是添加：“调度工单明细ID(LIST_ID)”为空则为添加；不为空则为编辑
-			enResourcePrepareList.setOutOrgId(outOrgId);
-			enResourcePrepareList.setOutStationId(outStationId);
-			enResourcePrepareList.setOutResourceStatus(outResourceStatus);
-			enResourcePrepareList.setResourceClassId(resourceClassId);
-			enResourcePrepareList.setResourceTypeId(resourceTypeId);
-			enResourcePrepareList.setAmountPrepare(amountPrepare1);
-			enResourcePrepareList.setInOrgId(inOrgId);
-			enResourcePrepareList.setSheetId(enResourcePrepareSheet.getSheetId());
-			enResourcePrepareList.setInStationId(inStationId);
-			enResourcePrepareList.setNewStationFlag(newStationFlag);
-			enResourcePrepareList.setListStatus("0");
-			if (listId == null || listId.length() == 0) {
-				listId = SysIdCreator.GenNextId(transaction, null, IdCreatorDefine.ID_TYPE_LIST_ID,
-						IdCreatorDefine.ID_LEN_LIST_ID);
-
-				enResourcePrepareList.setListId(listId);
-				dbResourcePrepareList.insert(enResourcePrepareList);
-			} else {
-				dbResourcePrepareList.updateByKey(listId, enResourcePrepareList);
+		}else if(outResourceStatus.equals("1")){
+			//如果调出数量大于在线数量，则抛出异常：OS0209:'{0}'的 '{1}'在线数量不足，无法完成调度！
+			if(amountPrepare1 > enResourceOrgAmount.getOnlineAmount()){
+				throw new ErrorException("OS0209",new Object[] { outOrgName, enResourceType.getTypeName() });
 			}
-
-			// 修改或编辑工单信息，如果工单明细添加失败则工单明细添加不成功！
-			if (sheetId == null || sheetId.length() == 0) {
-				dbResourcePrepareSheet.insert(enResourcePrepareSheet);
-			} else {
-				dbResourcePrepareSheet.updateByKey(sheetId, enResourcePrepareSheet);
-			}
-
 		}
+		
+		// 生成工单信息，为工单明细提供工单ID
+		if (sheetId == null || sheetId.length() == 0) {
+			enResourcePrepareSheet = new EnResourcePrepareSheet();
+			sheetId = SysIdCreator.GenNextId(transaction, null, IdCreatorDefine.ID_TYPE_SHEET_ID,
+					IdCreatorDefine.ID_LEN_SHEET_ID);
+			enResourcePrepareSheet.setSheetId(sheetId);
+			enResourcePrepareSheet.setPrepareDate(now);
+			enResourcePrepareSheet.setPrepareUserId(userId);
+			dbResourcePrepareSheet.insert(enResourcePrepareSheet);
+			requestXml.setInputValue("SHEET_ID", 1, sheetId);
+		} else {
+			enResourcePrepareSheet = dbResourcePrepareSheet.findByKey(sheetId);
+			enResourcePrepareSheet.setPrepareDate(now);
+			enResourcePrepareSheet.setPrepareUserId(userId);
+			dbResourcePrepareSheet.updateByKey(sheetId, enResourcePrepareSheet);
+		}
+
+		// 根据“调度工单明细ID(LIST_ID)”判断是编辑还是添加：“调度工单明细ID(LIST_ID)”为空则为添加；不为空则为编辑
+		enResourcePrepareList.setOutOrgId(outOrgId);
+		enResourcePrepareList.setOutStationId(outStationId);
+		enResourcePrepareList.setOutResourceStatus(outResourceStatus);
+		enResourcePrepareList.setResourceClassId(resourceClassId);
+		enResourcePrepareList.setResourceTypeId(resourceTypeId);
+		enResourcePrepareList.setAmountPrepare(amountPrepare1);
+		enResourcePrepareList.setInOrgId(inOrgId);
+		enResourcePrepareList.setSheetId(enResourcePrepareSheet.getSheetId());
+		enResourcePrepareList.setInStationId(inStationId);
+		enResourcePrepareList.setNewStationFlag(newStationFlag);
+		enResourcePrepareList.setListStatus("0");
+		if (listId == null || listId.length() == 0) {
+			listId = SysIdCreator.GenNextId(transaction, null, IdCreatorDefine.ID_TYPE_LIST_ID,
+					IdCreatorDefine.ID_LEN_LIST_ID);
+
+			enResourcePrepareList.setListId(listId);
+			dbResourcePrepareList.insert(enResourcePrepareList);
+		} else {
+			dbResourcePrepareList.updateByKey(listId, enResourcePrepareList);
+		}
+
+		// 修改或编辑工单信息，如果工单明细添加失败则工单明细添加不成功！
+		if (sheetId == null || sheetId.length() == 0) {
+			dbResourcePrepareSheet.insert(enResourcePrepareSheet);
+		} else {
+			dbResourcePrepareSheet.updateByKey(sheetId, enResourcePrepareSheet);
+		}
+
+		
 
 	}
 
