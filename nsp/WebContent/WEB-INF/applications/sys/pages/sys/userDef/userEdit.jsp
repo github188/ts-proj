@@ -142,7 +142,7 @@
                      <table border="0" cellpadding="0" cellspacing="0">
                       <tr>
                           <td width="100" align="right">用户名：</td>
-		                  <td width="140">
+		                  <td width="150">
 		                      <span id="spryUserName">
               <input type="text" class="text" size="22" name="USER_NAME" value="<%=userName %>"><span class="requiredField">*</span>
 		                            <span class="textfieldRequiredMsg">需要提供一个值。</span>
@@ -210,11 +210,11 @@
                        </tr>
                         <tr>
                            <td align="right">所属机构：</td>
-                          <td>
+                          <td  width="200">
                             <script>var org = new Tower.Widget.Selector("OrgSelector","USER_ORG_ID","ctrl?FUNC_ID=SelectOrg&INPUT_TYPE=radio",{selected:["<%=userOrgId%>"]},{change:onChange})</script><span class="requiredField">*</span>
                           </td>
                           <td align="right">用户岗位：</td>
-                        <td>
+                        <td  width="200"> 
                             <script>new Tower.Widget.Selector("StatSelector","USER_STAT_ID","ctrl?FUNC_ID=SelectStat&INPUT_TYPE=radio",{selected:["<%=userStatId%>"]},{change:onChangeUser})</script><span class="requiredField">*</span>
                        </td>
                      </tr>
