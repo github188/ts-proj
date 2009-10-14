@@ -324,6 +324,16 @@
 		<message>未输入必输项：调出设备状态，请重新输入！</message>
 		<hint></hint>
 	</error>
+	<error>
+		<id>OS0208</id>
+		<message>{0}的{1}设备库存不足，请增加库存数量！</message>
+		<hint></hint>
+	</error>
+	<error>
+		<id>OS0209</id>
+		<message>{0}的{1}在线数量不足，无法完成调度！</message>
+		<hint></hint>
+	</error>
 	<!-- 14-DesktopList-桌面提醒-->
 	<error>
 		<id>DL0100</id>
