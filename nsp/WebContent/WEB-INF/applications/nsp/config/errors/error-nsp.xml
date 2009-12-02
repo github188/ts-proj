@@ -326,14 +326,72 @@
 	</error>
 	<error>
 		<id>OS0208</id>
-		<message>{0}的{1}设备库存不足，请增加库存数量！</message>
+		<message>{0}的{1}型号的设备的库存不足，无法完成调度，请增加库存数量！</message>
 		<hint></hint>
 	</error>
 	<error>
 		<id>OS0209</id>
-		<message>{0}的{1}在线数量不足，无法完成调度！</message>
+		<message>{0}的{1}型号的设备在线数量不足，无法完成调度！</message>
 		<hint></hint>
 	</error>
+	<error>
+		<id>OS0210</id>
+		<message>"调出单位"不能为空，请检查工单明细信息excel表中第{0}条记录的"调出单位"为是否空。</message>
+		<hint></hint>
+	</error>
+	<error>
+		<id>OS0211</id>
+		<message>"调出设备型号"不能为空，请检查工单明细信息excel表中第{0}条记录的"调出设备型号"为是否空。</message>
+		<hint></hint>
+	</error>
+	<error>
+		<id>OS0212</id>
+		<message>"调出设备状态"不能为空，请检查工单明细信息excel表中第{0}条记录的"调出设备状态"为是否空。</message>
+		<hint></hint>
+	</error>
+	<error>
+		<id>OS0213</id>
+		<message>"调出设备数量"不能为空，请检查工单明细信息excel表中第{0}条记录的"调出设备数量"为是否空。</message>
+		<hint></hint>
+	</error>
+	<error>
+		<id>OS0214</id>
+		<message>"调入单位"不能为空，请检查工单明细信息excel表中第{0}条记录的"调入单位"为是否空。</message>
+		<hint></hint>
+	</error>
+	<error>
+		<id>OS0215</id>
+		<message>"是否为新建基站"不能为空，请检查工单明细信息excel表中第{0}条记录的"是否为新建基站"为是否空。</message>
+		<hint></hint>
+	</error>
+	<error>
+		<id>OS0216</id>
+		<message>未查找到名称为'{0}'的调出单位信息，请在机构定义中查找并确认该机构信息是否录入系统。</message>
+		<hint></hint>
+	</error>
+	<error>
+		<id>OS0217</id>
+		<message>未查找到名称为'{0}'的调入单位信息，请在机构定义中查找并确认该机构信息是否录入系统。</message>
+		<hint></hint>
+	</error>
+	<error>
+		<id>OS0218</id>
+		<message>未查找到名称为'{0}'的调入单位信息，请在机构定义中查找并确认该机构信息是否录入系统。</message>
+		<hint></hint>
+	</error>
+	<error>
+		<id>OS0219</id>
+		<message>未查找到名称'{0}'表单，请查看excel表中是否存在名称为'{0}'的表单。</message>
+		<hint></hint>
+	</error>
+	<error>
+		<id>OS0220</id>
+		<message>请检查调出设备状态是否'在线'或'库存'。</message>
+		<hint></hint>
+	</error>
+	
+	
+	
 	<!-- 14-DesktopList-桌面提醒-->
 	<error>
 		<id>DL0100</id>
@@ -418,7 +476,27 @@
 		<hint></hint>
 	</error>
 	<error>
-		<id>AM0107</id>
+		<id>AM0300</id>
+		<message> '{0}' 已存在，请修改基站名称！</message>
+		<hint></hint>
+	</error>
+	<error>
+		<id>AM0301</id>
+		<message> '{0}' 已存在，请修改基站编号！</message>
+		<hint></hint>
+	</error>
+	<error>
+		<id>AM0302</id>
+		<message> "基站编号"不能为空，请检查基站信息excel表中是否存在"基站编号"为空的记录。</message>
+		<hint></hint>
+	</error>
+	<error>
+		<id>AM0303</id>
+		<message> "基站名称"不能为空，请检查基站信息excel表中是否存在"基站名称"为空的记录。</message>
+		<hint></hint>
+	</error>
+	<error>
+		<id>AM0108</id>
 		<message>已经存在相同编号的基站，请重新输入基站编号！</message>
 		<hint></hint>
 	</error>
