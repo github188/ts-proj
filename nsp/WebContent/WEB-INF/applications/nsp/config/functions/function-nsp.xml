@@ -48,6 +48,10 @@
 	<function id="SheetPrepareAddTo" description="调度工单明细录入页面" type="jsp"
 		jspPath="/nsp/pages/sheet/sheetPrepareEdit.jsp" />
 		
+	<function id="SheetPrepareBatchAddTo" description="调度工单明细批量添加页面" type="jsp"
+		jspPath="/nsp/pages/sheet/sheetPrepareBatchAdd.jsp" />
+		
+		
 	<function id="SheetPrepareDetail" description="工单明细详细信息" type="bo"
 		className="tower.nsp.bo.sheet.BoSheetPrepareDetail"
 		forward="SheetPrepareAddTo" />
@@ -59,6 +63,10 @@
 	
 	<function id="SheetPrepareAdd" description="增加工单明细" type="bo"
 		className="tower.nsp.bo.sheet.BoSheetPrepareAdd"
+		forward="OpenSheetReLoad" />
+		
+	<function id="SheetPrepareBatchAdd" description="批量增加工单明细" type="bo"
+		className="tower.nsp.bo.sheet.BoSheetPrepareBatchAdd"
 		forward="OpenSheetReLoad" />
 		
 	<function id="OpenSheetReLoad" description="重新加载页面" type="jsp"
@@ -147,6 +155,7 @@
 	<function id="SubOrgAdd" description="部门树查询" type="bo"
 		className="tower.nsp.bo.define.org.BoOrgTreeList"
 		forward="SubOrgAddTo" />
+	
 	<function id="SubOrgAddTo" description="部门添加" type="jsp"
 		jspPath="/nsp/pages/define/org/orgSubEdit.jsp" />
 	<function id="SubOrgEdit" description="部门编辑" type="bo"
@@ -159,6 +168,9 @@
 		jspPath="/nsp/pages/define/org/orgSubEdit.jsp" />
 	<function id="SubOrgSubmit" description="部门添加/编辑提交" type="bo"
 		className="tower.nsp.bo.define.org.BoSubOrgSubmit"
+		forward="OrgSubList" />
+	<function id="SubOrgBatchSubmit" description="部门批量添加提交" type="bo"
+		className="tower.nsp.bo.define.org.BoSubOrgBatchSubmit"
 		forward="OrgSubList" />
 	<function id="SubOrgDelete" description="部门删除" type="bo"
 		className="tower.nsp.bo.define.org.BoSubOrgDelete" 
