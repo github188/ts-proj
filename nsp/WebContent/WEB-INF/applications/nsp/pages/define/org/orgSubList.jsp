@@ -252,9 +252,13 @@
   	form1.QLINK_EMAIL.value="";
   	
   }
+   function doBatchAdd(parentId) {
+    window.location="ctrl?FUNC_ID=SubOrgAdd&PARENT_ID="+parentId+"&IS_BATCH_ADD_FLAG=Y";
+  }
+  
   
   function doAdd(parentId,flag) {
-    window.location="ctrl?FUNC_ID=SubOrgAdd&PARENT_ID="+parentId+"&FLAG="+flag;
+    window.location="ctrl?FUNC_ID=SubOrgAdd&PARENT_ID="+parentId+"&FLAG="+flag+"&IS_BATCH_ADD_FLAG=N";
   }
   
   function doEdit(id) {
@@ -406,7 +410,11 @@
 						<th width="12%" nowrap>联系电话</th>
 						<th width="12%" nowrap>是否基站</th>
 						<th width="12%" nowrap>外购入库</th>
-						<th width="10%" nowrap>[ <a href="JavaScript:doAdd('<%=orgId1 %>','<%=flag %>')">添加</a> ]</th>
+						<th width="10%" nowrap>
+						[ <a href="JavaScript:doAdd('<%=orgId1 %>','<%=flag %>')">添加</a> |
+						<a href="JavaScript:doBatchAdd('<%=orgId1 %>')">批量添加</a>
+						]
+						</th>
 					</tr>
 
 					<%
