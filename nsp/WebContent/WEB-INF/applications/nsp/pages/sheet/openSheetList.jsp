@@ -138,7 +138,7 @@
                   <th>工单编号</th>
                   <th>派单人</th>
                   <th>调度日期</th>
-                  <th>[<a href="ctrl?FUNC_ID=SheetAddTo">下发工单</a>]</th>
+                  <th>[<a href="ctrl?FUNC_ID=SheetAddTo">添加工单</a>|<a href="ctrl?FUNC_ID=SheetPrepareBatchAddTo">批量添加</a>]</th>
                 </tr>
                 <%for(int i=0;i<sheetIds.length;i++){
                 	String style="";
