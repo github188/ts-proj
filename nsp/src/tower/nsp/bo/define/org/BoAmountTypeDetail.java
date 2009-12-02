@@ -14,7 +14,16 @@ import tower.tmvc.ErrorException;
 import tower.tmvc.RootBo;
 import tower.tmvc.Transaction;
 import tower.tmvc.XMLWrap;
-
+/**
+ * 
+ * @author fanlj
+ * 功能概述：批量提交基站信息
+ * 1、获取页面提交的excel文件
+ * 2、读取excel文件内容
+ * 1)从提交的excel文件读取"基站编号"、"基站名称"、”联系人“和”联系方式“为空、”是否为基站“默认为”是“、
+ * ”外购入库“默认为”否“。
+ *
+ */
 public class BoAmountTypeDetail implements RootBo {
 
 	public void doBusiness(Transaction transaction, XMLWrap requestXml,
