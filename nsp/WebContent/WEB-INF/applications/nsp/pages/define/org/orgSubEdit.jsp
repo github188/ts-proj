@@ -19,9 +19,9 @@
   String stationFlag;
   String buyInFlag;
   String parentId;
-  
   String flag;
   
+  String isBatchAddFlag;
 
   //机构树信息
   String[] orgTreeIds;
@@ -37,6 +37,8 @@
 
 <%
   xml = XMLWrap.getRequestXml(request,session,application);
+
+ isBatchAddFlag = xml.getInputValue("IS_BATCH_ADD_FLAG");
 
   //编辑信息
   orgCode = xml.getItemValue("SYS_ORG",1,"ORG_CODE");
@@ -217,6 +219,28 @@ try{
   function radioSelected1(radio){
     window.location.href ="ctrl?FUNC_ID=OrgSubList&ORG_ID="+radio.value;
   }
+  
+ function doSubmit(){
+		var fullName=form1.READ_FILE.value;
+		var index=fullName.lastIndexOf(".");
+		var exetendName = fullName.substring(index);
+		//判断是否已选择文件
+		
+		if(fullName.length == 0){
+				alert("文件来源不能为空，请选择基站信息文件。");
+				form1.READ_FILE.focus();
+				return false;
+		}
+		if(exetendName != ".xls"){
+			alert("您目前选择的不是excel文件，无法提交，请选择excel文件！");
+			form1.READ_FILE.select();
+			document.selection.clear();
+			form1.READ_FILE.focus();
+			return false;
+		}
+		
+		form1.submit();
+  }
 </script>
 <style type="text/css">
 #orgTree {
@@ -244,6 +268,7 @@ try{
                         <div class="panelHead"></div>
                       <div class="panelContent">
                           <div class="panelContent2">
+                         
                             <!-- 工作任务面板内容 -->
                             <div class="panelInnerHead">机构树</div>
                             <div id="orgTree">
@@ -264,6 +289,7 @@ try{
                         <div class="panelHead"></div>
                       <div class="panelContent">
                           <div class="panelContent2">
+                           <%if(isBatchAddFlag.equals("N")){ %>
                             <!-- 工作任务面板内容 -->
                             <div class="panelInnerHead">机构添加/编辑<a name="notice"></a></div>
                             <form action="ctrl" method="post" name="form1" >
@@ -326,7 +352,7 @@ try{
                 </tr>
                 <tr>
                   <td colspan="4" align="center" nowrap="nowrap">
-                  ，<br>
+                  <br>
                     <input type="submit" class="submit" value="保存" >
                     <input type="button" class="button" onclick="doCancle1()" value="取消">               
 
@@ -334,7 +360,44 @@ try{
                 </tr>
               </table>
               </form>
-                            <!-- 工作任务面板内容结束 -->
+   <!-- 工作任务面板内容结束 -->
+   
+   <%}else if(isBatchAddFlag.equals("Y")){ %>
+   
+    <!-- 基站信息批量导入工作任务面板内容 -->
+                            <div class="panelInnerHead">基站批量导入<a name="notice"></a></div>
+                            <form action="ctrl" method="post" name="form1" enctype="multipart/form-data" >
+                			<input type="hidden" name="FUNC_ID" value="SubOrgBatchSubmit">
+                			<input type="hidden" name="PARENT_ID" value="<%=parentId %>"> 
+              				<table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
+               	<tr>
+                  <td align="right"  nowrap> <br>选择文件：</td>
+                  <td align="left"> <br>
+                  <span id="spryReadFile">
+                   <input type="file" class="text" name="READ_FILE"  size="80" ><span class="requiredField">*</span> 
+                   <span class="textfieldRequiredMsg">需要提供一个值。</span></span>
+                 </td>
+                 
+                </tr>
+                
+                <tr>
+                  <td colspan="2" align="center" nowrap="nowrap">
+                  <br>
+                    <input type="button" class="button" value="保存" onclick="doSubmit()">
+                    <input type="button" class="button" onclick="doCancle1()" value="取消">               
+ <br>
+                 </td>
+                </tr>
+              </table>
+              </form>
+   <!-- 基站信息批量导入工作任务面板内容结束 -->
+   
+  <%} %> 
+   
+   
+   
+   
+   
                           </div>
                       </div>
                       <div class="panelFoot">
@@ -355,12 +418,16 @@ try{
  <!-- 机构树 -->	 
     <script type="text/javascript">
 <!--
+ <%if(isBatchAddFlag.equals("Y")){ %>
+var sprytextfield1 = new Spry.Widget.ValidationTextField("spryReadFile", "none");
+  <%}else if(isBatchAddFlag.equals("N")){ %>
 var sprytextfield1 = new Spry.Widget.ValidationTextField("spryOrgName", "none", {maxChars:50});
 var sprytextfield5 = new Spry.Widget.ValidationTextField("spryOrgCode", "none", {maxChars:50});
 var sprytextfield2 = new Spry.Widget.ValidationTextField("spryLinkMan", "none", {isRequired:false, maxChars:50});
 var sprytextfield3 = new Spry.Widget.ValidationTextField("spryLinkTele", "none", {isRequired:false});
 var sprytextfield4 = new Spry.Widget.ValidationTextField("spryLinkEmail", "email", {isRequired:false, maxChars:50});
 var sprytextarea1 = new Spry.Widget.ValidationTextarea("sprytextarea1", {isRequired:false, maxChars:200, useCharacterMasking:false});
+<%}%>
 //-->
 </script>
 </body>
