@@ -43,7 +43,7 @@
 				return false;
 		}
 		if(exetendName != ".xls"){
-			alert("您目前选择的不是excel文件，无法提交，请选择excel文件！");
+			alert("请提交严格按照指定格式制定的excel文件。");
 			form1.READ_FILE.select();
 			document.selection.clear();
 			form1.READ_FILE.focus();
