@@ -207,12 +207,13 @@ public class BoConsReptList implements RootBo {
 				requestXml.setItemValue("RESOURCE_PREPARE_LIST", row, "OUT_ORG_NAME", enSysOrg.getOrgName());
 				requestXml.setItemValue("RESOURCE_PREPARE_LIST", row, "OUT_STATION_NAME", outStation);
 				enSysOrg = dbSysOrg.findByKey(enResourcePrepareList.getInOrgId());
-				String inStation ;
+				String inStation="" ;
 				if(enResourcePrepareList.getInStationId() != null && enResourcePrepareList.getInStationId().length() > 0){
 					enSysOrgP = dbSysOrg.findByKey(enResourcePrepareList.getInStationId());
-					inStation = enSysOrgP.getOrgName();
-				}else{
-					inStation = "";
+					if(enSysOrgP != null){
+						inStation = enSysOrgP.getOrgName();
+					}
+					
 				}
 				requestXml.setItemValue("RESOURCE_PREPARE_LIST", row, "IN_ORG_NAME", enSysOrg.getOrgName());
 				requestXml.setItemValue("RESOURCE_PREPARE_LIST", row, "IN_STATION_NAME", inStation);
