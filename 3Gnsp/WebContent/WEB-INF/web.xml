@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4"
+ xmlns="http://java.sun.com/xml/ns/j2ee" 
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+ xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>TMVC Framework</display-name>
+
+	<servlet>
+		<servlet-name>tmvcController</servlet-name>
+		<servlet-class>tower.tmvc.RootServlet</servlet-class>
+		<init-param>
+			<param-name>module</param-name>
+			<param-value>nsp</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>ServletFileDisplay</servlet-name>
+		<servlet-class>tower.common.servlet.ServletFileDisplay</servlet-class>
+	</servlet>
+	<!-- 接收调度工单列表存为EXCEL的Servlet定义 -->
+	<servlet>
+		<servlet-name>ServletRecvSheetListToExcel</servlet-name>
+		<servlet-class>tower.nsp.servlet.ServletRecvSheetListExcel</servlet-class>
+	</servlet>
+	<!-- 调度工单查询列表存为EXCEL的Servlet定义 -->
+	<servlet>
+		<servlet-name>ServletSheetStatListExcel</servlet-name>
+		<servlet-class>tower.nsp.servlet.ServletSheetStatListExcel</servlet-class>
+	</servlet>
+	
+	<!-- 资源库存统计表存为EXCEL的Servlet定义 -->
+	<servlet>
+		<servlet-name>ServletAmountStatListExcel</servlet-name>
+		<servlet-class>tower.nsp.servlet.ServletAmountStatListExcel</servlet-class>
+	</servlet>
+	<!-- 资源库存统计详细信息存为EXCEL的Servlet定义 -->
+	<servlet>
+		<servlet-name>ServletAmountStatEveryListExcel</servlet-name>
+		<servlet-class>tower.nsp.servlet.ServletAmountStatEveryListExcel</servlet-class>
+	</servlet>
+	
+	<!-- 基站配置详细信息存为EXCEL的Servlet定义 -->
+	<servlet>
+		<servlet-name>ServletConfStatDetailExcel</servlet-name>
+		<servlet-class>tower.nsp.servlet.ServletConfStatDetailExcel</servlet-class>
+	</servlet>
+
+	<!-- Standard Action Servlet Mapping -->
+	<servlet-mapping>
+		<servlet-name>tmvcController</servlet-name>
+		<url-pattern>/applications/3Gnsp/ctrl</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ServletFileDisplay</servlet-name>
+		<url-pattern>/WEB-INF/applications/sys/servlets/ServletFileDisplay</url-pattern>
+	</servlet-mapping>
+	<!-- 接收调度工单列表存为EXCEL的Servlet定义 -->
+	<servlet-mapping>
+		<servlet-name>ServletRecvSheetListToExcel</servlet-name>
+		<url-pattern>/servlet/ServletRecvSheetListToExcel</url-pattern>
+	</servlet-mapping>
+	<!-- 调度工单查询列表存为EXCEL的Servlet映射定义 -->
+	<servlet-mapping>
+		<servlet-name>ServletSheetStatListExcel</servlet-name>
+		<url-pattern>/servlet/ServletSheetStatListExcel</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 资源库存统计表存为EXCEL的Servlet映射定义 -->
+	<servlet-mapping>
+		<servlet-name>ServletAmountStatListExcel</servlet-name>
+		<url-pattern>/servlet/ServletAmountStatListExcel</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>ServletAmountStatEveryListExcel</servlet-name>
+		<url-pattern>/servlet/ServletAmountStatEveryListExcel</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 基站配置详细信息存为EXCEL的Servlet映射定义 -->
+	<servlet-mapping>
+		<servlet-name>ServletConfStatDetailExcel</servlet-name>
+		<url-pattern>/servlet/ServletConfStatDetailExcel</url-pattern>
+	</servlet-mapping>
+	
+	<session-config> 
+		<session-timeout>120</session-timeout>
+	</session-config>
+	
+	<welcome-file-list>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+	</welcome-file-list>
+</web-app>
