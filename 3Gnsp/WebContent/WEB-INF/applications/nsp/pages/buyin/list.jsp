@@ -26,6 +26,7 @@
 	String orgId;
 	String inOutFlag;
 	String typeId;
+	String typeName;
 	String inOperDateTimeBgn;
 	String inOperDateTimeEnd;
 	String inRemark;
@@ -43,6 +44,7 @@
    
    orgId = xml.getInputValue("IN_ORGID");
    typeId = xml.getInputValue("TYPE_ID");
+   typeName = xml.getInputValue("TYPE_NAME");
    inOutFlag = xml.getInputValue("IN_OUT_FLAG");
    inOperDateTimeBgn = xml.getInputValue("IN_OPER_DATETIME_BNG");
    inOperDateTimeEnd = xml.getInputValue("IN_OPER_DATETIME_END");
@@ -84,12 +86,14 @@
     function doClear(){
     	outList.setInputHolderSelected([]) ;
         outList.setDisplayerSelected([]) ;
-    	type.setInputHolderSelected([]) ;
-        type.setDisplayerSelected([]) ;
+    	//type.setInputHolderSelected([]) ;
+        //type.setDisplayerSelected([]) ;
     	form1.IN_OPER_DATETIME_BNG.value="";
     	form1.IN_OPER_DATETIME_END.value="";
     	form1.IN_REMARK.value="";
     	form1.IN_OUT_FLAG.selectedIndex=0;
+    	form1.TYPE_ID.value="";
+    	form1.TYPE_NAME.selectedIndex=0;
     }
     
    function doClearDept(){
@@ -103,10 +107,9 @@
   function doSelOrg(){
     selDialog("ctrl?FUNC_ID=SelectOrg","IN_ORG_ID","IN_ORG_NAME");
   }
-  function doSelType(){
+    function doSelRes(){
     selDialog("ctrl?FUNC_ID=SelectTypeTree","TYPE_ID","TYPE_NAME");
   }
-  
 	function TDoChangePage(curPage){
     	form1["CUR_PAGE"].value = curPage;
     	form1.submit();
@@ -150,7 +153,13 @@
                  <tr>
                    <td align="right">资源型号：</td>
                    <td>
-                      <script>var type = new Tower.Widget.Selector("TypeSelector","TYPE_ID","ctrl?FUNC_ID=SelectTypeTree&INPUT_TYPE=radio",{selected:["<%=typeId%>"]},{change:onChange})</script>
+                    <input name="TYPE_ID" type="hidden" value="<%=typeId %>" >
+                    <input type="text" class="text" name="TYPE_NAME"   value="<%=typeName %>"  readonly>
+                   <input type="button" name="selectRes" class="selButton" value="选择" onClick="doSelRes();" />
+                   <!-- 
+                    <script>var type = new Tower.Widget.Selector("TypeSelector","TYPE_ID","ctrl?FUNC_ID=SelectTypeTree&INPUT_TYPE=radio",{selected:["<%=typeId%>"]},{change:onChange})</script>
+                    -->
+                     
 		           </td>
 	              <td align="right">备注及说明：</td>
                    <td><input type="text" class="text" name="IN_REMARK" value="<%=inRemark %>"></td>

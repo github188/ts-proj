@@ -121,12 +121,17 @@
       form1.RESOURCE_CLASS_ID.value = "";
       form1.RESOURCE_CLASS_FLAG.value = "";
     }
+    
+  function doSelRes(){
+    selDialog("ctrl?FUNC_ID=SelectClassType","RESOURCE_CLASS_ID","RESOURCE_ID_SHOW","RESOURCE_CLASS_FLAG");
+  }
 	function TDoChangePage(curPage){
     	form1["CUR_PAGE"].value = curPage;
     	form1.submit();
 	}
     function onChange(selectedIds,selector){
     }
+    
 -->
 </script>
 </head>
@@ -158,7 +163,11 @@
                  	<td align="right">设备类型：</td>
 	                 <td><input name="RESOURCE_CLASS_FLAG" type="hidden" value="<%=classFlag %>" >
                         <input name="RESOURCE_CLASS_ID" type="hidden" value="<%=classId %>" >
+                        <input type="text" class="date" name="RESOURCE_ID_SHOW"   value="<%=typeIdShow %>"  readonly>
+                         <input type="button" name="selectInOrg" class="selButton" value="选择" onClick="doSelRes()" />
+                        <!--  
                         <script>var type = new Tower.Widget.Selector("TypeSelector","RESOURCE_ID_SHOW","ctrl?FUNC_ID=SelectClassType&INPUT_TYPE=radio",{selected:["<%=typeIdShow%>"]},{change:onChange})</script>
+                        -->
                       </td>
 	                 <td align="right">调度日期：</td>
 	                 <td><span id="sprybgn1">

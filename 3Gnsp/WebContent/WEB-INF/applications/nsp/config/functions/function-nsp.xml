@@ -487,13 +487,13 @@
 		forward="SelectTypeJsp" />
 	<!-- 资源类型树 -->	
 	<function id="SelectClassTypeJsp" description="型号选择页面" type="jsp"
-		jspPath="/nsp/pages/common/select/selectClassType.jsp" />	
+		jspPath="/nsp/pages/common/select/selectClassTypeList.jsp" />	
 	<function id="SelectClassType" description="选择型号" type="bo"
 		className="tower.nsp.bo.define.res.BoTypeTreeList"
 		forward="SelectClassTypeJsp" />
 	<!-- 资源型号树 -->	
 	<function id="SelectTypeTreeJsp" description="型号选择页面" type="jsp"
-		jspPath="/nsp/pages/common/select/selectTypeTree.jsp" />	
+		jspPath="/nsp/pages/common/select/selectTypeList.jsp" />	
 	<function id="SelectTypeTree" description="选择型号" type="bo"
 		className="tower.nsp.bo.define.res.BoTypeTreeList"
 		forward="SelectTypeTreeJsp" />

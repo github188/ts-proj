@@ -92,8 +92,8 @@
   function doSelOrg(){
     selDialog("ctrl?FUNC_ID=SelectOrg","QORG_ID","QORG_NAME");
   }
-  function doSelType(){
-    selDialog("ctrl?FUNC_ID=SelectClassType","QRESOURCE_CLASS_ID","QRESOURCE_CLASS_NAME","QRESOURCE_CLASS_FLAG");
+  function doSelRes(){
+    selDialog("ctrl?FUNC_ID=SelectClassType","QRESOURCE_CLASS_ID","QRESOURCE_ID_SHOW","QRESOURCE_CLASS_FLAG");
   }
   function onChange(selectedIds,selector){
   }
@@ -106,10 +106,11 @@
     form1.QIN_OPER_DATETIME_TO.value = "";
     outList.setInputHolderSelected([""]) ;
     outList.setDisplayerSelected([]) ;
-    type.setInputHolderSelected([""]) ;
-    type.setDisplayerSelected([]) ;
+    //type.setInputHolderSelected([""]) ;
+    //type.setDisplayerSelected([]) ;
     form1.QRESOURCE_CLASS_ID.value = "";
     form1.QRESOURCE_CLASS_FLAG.value = "";
+    form1.QRESOURCE_ID_SHOW.value = "";
   }
   function TDoChangePage(curPage){
       form1["CUR_PAGE"].value = curPage;
@@ -169,9 +170,16 @@
                   <script>var outList = new Tower.Widget.Selector("OrgSelector","QORG_ID","ctrl?FUNC_ID=SelectOrg&INPUT_TYPE=radio",{selected:["<%=orgId%>"]},{change:onChange})</script>
                 </td>
                 <td align="right">资源类型：</td>
-                <td><input name="QRESOURCE_CLASS_FLAG" type="hidden" value="<%=classId %>" >
-                  <input name="QRESOURCE_CLASS_ID" type="hidden" value="<%=classFlag %>" >
+                <td>
+                  
+                   <input name=""QRESOURCE_CLASS_FLAG"" type="hidden" value="<%=classFlag %>" >
+                  <input name="QRESOURCE_CLASS_ID" type="hidden" value="<%=classId %>" >
+                  <input type="text" class="text" name="QRESOURCE_ID_SHOW"   value="<%=typeIdShow %>"  readonly>
+                  <input type="button" name="selectRes" class="selButton" value="选择" onClick="doSelRes();" />
+                  
+                  <!-- 
                   <script>var type = new Tower.Widget.Selector("TypeSelector","QRESOURCE_ID_SHOW","ctrl?FUNC_ID=SelectClassType&INPUT_TYPE=radio",{selected:["<%=typeIdShow%>"]},{change:onChange})</script>
+                  -->
                 </td>
                 <td align="left">
                   <input type="submit" class="submit"  value="查询">&nbsp;&nbsp;

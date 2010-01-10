@@ -134,11 +134,15 @@ function doSubmit(form) {
     form1.QOUT_ORG_PARENT_ID.value="";
     form1.QOUT_STATION_FLAG.value="";
     form1.QNEW_STATION_FLAG.value="";
+    form1.QRESOURCE_CLASS_SHOW.value="";
+    form1.QRESOURCE_CLASS_FLAG.value="";
+    form1.QRESOURCE_CLASS_ID.value="";
     
     
     
-    type.setInputHolderSelected([""]) ;
-    type.setDisplayerSelected([]) ;
+    
+   // type.setInputHolderSelected([""]) ;
+   // type.setDisplayerSelected([]) ;
   
 	
   }
@@ -184,6 +188,10 @@ function doSubmit(form) {
    function doSelInOrg(){
     selDialog("ctrl?FUNC_ID=SelectOrgOrStaJsp","QIN_ORG_ID","QIN_ORG_NAME","QIN_ORG_PARENT_ID","QIN_STATION_FLAG",650,550,false);
   }
+    function doSelRes(){
+    selDialog("ctrl?FUNC_ID=SelectClassType","QRESOURCE_CLASS_ID","QRESOURCE_CLASS_SHOW","QRESOURCE_CLASS_FLAG");
+  }
+
 -->
 </script>
 
@@ -224,7 +232,7 @@ function doSubmit(form) {
 		                   <input name="QOUT_ORG_ID" type="hidden"  value="<%=outOrgId %>">
 		                   <input name="QOUT_ORG_PARENT_ID" type="hidden"  value="<%=outOrgParentId %>" >
 		                    <input name="QOUT_STATION_FLAG" type="hidden" value="<%=outStationFlag %>" >
-		                  <input type="text" class="date" name="QOUT_ORG_NAME"   value="<%=outOrgName %>"  readonly>
+		                  <input type="text" class="text" name="QOUT_ORG_NAME"   value="<%=outOrgName %>"  readonly>
 		                   <input type="button" name="selectOutOrg" class="selButton" value="选择" onClick="doSelOutOrg()" />
 		              </td>
 		            
@@ -233,7 +241,7 @@ function doSubmit(form) {
                    <input name="QIN_STATION_FLAG" type="hidden"  value="<%=inStationFlag%>">
                    <input name="QIN_ORG_PARENT_ID" type="hidden"  value="<%=inOrgParentId %>">
                   <input name="QIN_ORG_ID" type="hidden"  value="<%=inOrgId %>">
-				  <input type="text" class="date" name="QIN_ORG_NAME"  value="<%=inOrgName %>"  readonly> 
+				  <input type="text" class="text" name="QIN_ORG_NAME"  value="<%=inOrgName %>"  readonly> 
 				  <input type="button" name="selectInOrg" class="selButton" value="选择" onClick="doSelInOrg()" />
 				 </td>
 				 </tr>
@@ -256,7 +264,10 @@ function doSubmit(form) {
      			<td>
                         <input name="QRESOURCE_CLASS_FLAG" type="hidden" value="<%=typeFlag %>" >
                         <input name="QRESOURCE_CLASS_ID" type="hidden" value="<%=typeId %>" >
-                        <script>var type = new Tower.Widget.Selector("TypeSelector","QRESOURCE_CLASS_SHOW","ctrl?FUNC_ID=SelectClassType&INPUT_TYPE=radio",{selected:["<%=typeIdShow%>"]},{change:onChange})</script>
+                        <input type="text" class="text" name="QRESOURCE_CLASS_SHOW"   value="<%=typeIdShow %>"  readonly>
+                         <input type="button" name="selectRes" class="selButton" value="选择" onClick="doSelRes();" />
+                      <!-- <script>var type = new Tower.Widget.Selector("TypeSelector","QRESOURCE_CLASS_SHOW","ctrl?FUNC_ID=SelectClassType&INPUT_TYPE=radio",{selected:["<%=typeIdShow%>"]},{change:onChange})</script>
+                      -->
                       </td>
                 </tr> 
                 <tr>

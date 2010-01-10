@@ -94,17 +94,20 @@
     function doClear(){
       outList.setInputHolderSelected([""]) ;
       outList.setDisplayerSelected([]) ;
-      type.setInputHolderSelected([""]) ;
-      type.setDisplayerSelected([]) ;
+      //type.setInputHolderSelected([""]) ;
+      //type.setDisplayerSelected([]) ;
       form1.RESOURCE_ID.value="";
       form1.RESOURCE_FLAG.value="";
+      form1.RESOURCE_ID_SHOW.value="";
       form1.LIST_STATUS.selectedIndex=0;
     }
     
   function doSelOutOrg(){
     selDialog("ctrl?FUNC_ID=SelectOrg","OUT_ORG_ID","OUT_ORG_NAME");
   }
-  
+    function doSelRes(){
+    selDialog("ctrl?FUNC_ID=SelectClassType","RESOURCE_ID","RESOURCE_ID_SHOW","RESOURCE_FLAG");
+  }
   function doSelResource(){
     selDialog("ctrl?FUNC_ID=SelectClassType","RESOURCE_ID","RESOURCE_NAME","RESOURCE_FLAG");
   }
@@ -151,9 +154,13 @@
                 <tr>
 	                  <td align="right">调出设备类型：</td>
 	                  <td>
-                        <input name="RESOURCE_FLAG" type="hidden" value="<%=resourceFlag %>" >
-                        <input name="RESOURCE_ID" type="hidden" value="<%=resourceId %>" >
-                        <script>var type = new Tower.Widget.Selector("TypeSelector","RESOURCE_ID_SHOW","ctrl?FUNC_ID=SelectClassType&INPUT_TYPE=radio",{selected:["<%=resourceIdShow%>"]},{change:onChange})</script>
+                  <input name=""RESOURCE_FLAG"" type="hidden" value="<%=resourceFlag %>" >
+                  <input name="RESOURCE_ID" type="hidden" value="<%=resourceId %>" >
+                  <input type="text" class="text" name="RESOURCE_ID_SHOW"   value="<%=resourceIdShow %>"  readonly>
+                  <input type="button" name="selectRes" class="selButton" value="选择" onClick="doSelRes();" />
+                  <!-- 
+                    <script>var type = new Tower.Widget.Selector("TypeSelector","RESOURCE_ID_SHOW","ctrl?FUNC_ID=SelectClassType&INPUT_TYPE=radio",{selected:["<%=resourceIdShow%>"]},{change:onChange})</script>
+                   -->
                       </td>
 	                  <td align="right">&nbsp;</td>
                       <td>&nbsp;</td>

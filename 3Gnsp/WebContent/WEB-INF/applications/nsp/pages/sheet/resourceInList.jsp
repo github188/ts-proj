@@ -97,8 +97,8 @@
   function doClear() {
     outList.setInputHolderSelected([""]) ;
     outList.setDisplayerSelected([]) ;
-    type.setInputHolderSelected([""]) ;
-    type.setDisplayerSelected([]) ;
+    //type.setInputHolderSelected([""]) ;
+   // type.setDisplayerSelected([]) ;
     form1.SHEET_ID.value = "";
     form1.PREPARE_DATE_FROM.value = "";
     form1.PREPARE_DATE_TO.value = "";
@@ -107,6 +107,7 @@
     form1.TAKE_DATE_TO.value = "";
     form1.RESOURCE_CLASS_ID.value = "";
     form1.RESOURCE_CLASS_FLAG.value = "";
+     form1.RESOURCE_ID_SHOW.value = "";
   }
   function doClearDept(){
     form1.ORG_ID.value = "";
@@ -116,6 +117,10 @@
     form1.RESOURCE_CLASS_ID.value = "";
     form1.RESOURCE_CLASS_NAME.value = "";
     form1.RESOURCE_CLASS_FLAG.value = "";
+  }
+  
+   function doSelRes(){
+    selDialog("ctrl?FUNC_ID=SelectClassType","RESOURCE_CLASS_ID","RESOURCE_ID_SHOW","RESOURCE_CLASS_FLAG");
   }
   function onChange(selectedIds,selector){
   }
@@ -182,9 +187,14 @@
                   <script>var outList = new Tower.Widget.Selector("OrgSelector","ORG_ID","ctrl?FUNC_ID=SelectOrg&INPUT_TYPE=radio",{selected:["<%=orgId%>"]},{change:onChange}); </script>
                 </td>
                 <td align="right">资源类型：</td>
-                <td><input name="RESOURCE_CLASS_FLAG" type="hidden" value="<%=classFlag %>" >
+                <td>
+                   <input name=""RESOURCE_CLASS_FLAG"" type="hidden" value="<%=classFlag %>" >
                   <input name="RESOURCE_CLASS_ID" type="hidden" value="<%=classId %>" >
+                  <input type="text" class="text" name="RESOURCE_ID_SHOW"   value="<%=typeIdShow %>"  readonly>
+                  <input type="button" name="selectRes" class="selButton" value="选择" onClick="doSelRes();" />
+                  <!-- 
                   <script>var type = new Tower.Widget.Selector("TypeSelector","RESOURCE_ID_SHOW","ctrl?FUNC_ID=SelectClassType&INPUT_TYPE=radio",{selected:["<%=typeIdShow%>"]},{change:onChange})</script>
+                 -->
                 </td>
                 <td align="left">
                   <input type="submit" class="submit"  value="查询">&nbsp;&nbsp;

@@ -81,16 +81,20 @@
       }
       form1.submit();
   }
+  function doSelRes(){
+    selDialog("ctrl?FUNC_ID=SelectClassType","QRESOURCE_CLASS_ID","QRESOURCE_CLASS_SHOW","QRESOURCE_CLASS_FLAG");
+  }
   function doClear() {
     form1.QSHEET_ID.value = "";
     form1.QPREPARE_DATE_FROM.value = "";
     form1.QPREPARE_DATE_TO.value = "";
     outList.setInputHolderSelected([""]) ;
     outList.setDisplayerSelected([]) ;
-    type.setInputHolderSelected([""]) ;
-    type.setDisplayerSelected([]) ;
+    //type.setInputHolderSelected([""]) ;
+    //type.setDisplayerSelected([]) ;
     form1.QRESOURCE_CLASS_ID.value = "";
     form1.QRESOURCE_CLASS_FLAG.value = "";
+     form1.QRESOURCE_CLASS_SHOW.value = "";
   }
   function onChange(selectedIds,selector){
   }
@@ -141,9 +145,14 @@
                   <script>var outList = new Tower.Widget.Selector("OrgSelector","QIN_ORG_ID","ctrl?FUNC_ID=SelectOrg&INPUT_TYPE=radio",{selected:["<%=orgId%>"]},{change:onChange})</script>
                 </td>
                 <td align="right">资源类型：</td>
-                <td><input name="QRESOURCE_CLASS_FLAG" type="hidden" value="<%=typeFlag %>" >
+                <td>
+                  <input name="QRESOURCE_CLASS_FLAG" type="hidden" value="<%=typeFlag %>" >
                   <input name="QRESOURCE_CLASS_ID" type="hidden" value="<%=typeId %>" >
+                  <input type="text" class="text" name="QRESOURCE_CLASS_SHOW"   value="<%=typeIdShow %>"  readonly>
+                  <input type="button" name="selectRes" class="selButton" value="选择" onClick="doSelRes();" />
+                  <!-- 
                   <script>var type = new Tower.Widget.Selector("TypeSelector","QRESOURCE_ID_SHOW","ctrl?FUNC_ID=SelectClassType&INPUT_TYPE=radio",{selected:["<%=typeIdShow%>"]},{change:onChange})</script>
+                 -->
                 </td>
                 <td  align="left" nowrap="nowrap">
                     <input type="submit" class="submit" value="查询">&nbsp;&nbsp;

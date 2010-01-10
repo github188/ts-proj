@@ -157,6 +157,10 @@
      }
     }
     
+   function doSelRes(){
+    selDialog("ctrl?FUNC_ID=SelectTypeTree","RESOURCE_TYPE_ID","RESOURCE_TYPE_NAME");
+  }
+  
 	function TDoChangePage(curPage){
     	form1["CUR_PAGE"].value = curPage;
     	form1.submit();
@@ -202,7 +206,13 @@
 		                   <input type="button" name="selectOutOrg" class="selButton" value="选择" onClick="doSelOutOrg()" /><span class="requiredField">*</span>
 		                 </td>
 		                  <td >
+		                   <input name="RESOURCE_TYPE_ID" type="hidden" value="" >
+                    	  <input type="text" class="text" name="RESOURCE_TYPE_NAME"   value=""  readonly>
+                  		  <input type="button" name="selectRes" class="selButton" value="选择" onClick="doSelRes();" />
+                  		  
+                          <!--  
                            <script>var type = new Tower.Widget.Selector("TypeSelector","RESOURCE_TYPE_ID","ctrl?FUNC_ID=SelectTypeTree&INPUT_TYPE=radio",{selected:[""]},{change:onChange})</script><span class="requiredField">*</span>
+		                -->
 		                 </td>
 		                  <td ><span id="spryAmount">
                           <input type="text" class="date" name="AMOUNT_PREPARE" >
