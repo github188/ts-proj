@@ -149,7 +149,7 @@
           <div class="panelContent">
             <div class="panelContent2">
               <!-- 查询面板内容 -->
-             <form action="ctrl" method="post" name="form1" onSubmit="return doList(this)">
+             <form action="ctrl" method="post" name="form1" >
               <input type="hidden" name="FUNC_ID" value="ResourceInList">
               <input type="hidden" name="CUR_PAGE" value="">
               <input type="hidden" name="LIST_ID" value="">
@@ -188,7 +188,7 @@
                 </td>
                 <td align="right">资源类型：</td>
                 <td>
-                   <input name=""RESOURCE_CLASS_FLAG"" type="hidden" value="<%=classFlag %>" >
+                   <input name="RESOURCE_CLASS_FLAG" type="hidden" value="<%=classFlag %>" >
                   <input name="RESOURCE_CLASS_ID" type="hidden" value="<%=classId %>" >
                   <input type="text" class="text" name="RESOURCE_ID_SHOW"   value="<%=typeIdShow %>"  readonly>
                   <input type="button" name="selectRes" class="selButton" value="选择" onClick="doSelRes();" />

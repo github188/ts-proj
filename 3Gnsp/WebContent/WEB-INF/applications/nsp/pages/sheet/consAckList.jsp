@@ -147,7 +147,7 @@
           <div class="panelContent">
             <div class="panelContent2">
               <!-- 查询面板内容 -->
-             <form name="form1" action="ctrl" method="post" onSubmit="return doList(this)" >
+             <form name="form1" action="ctrl" method="post" >
               <input type="hidden" name="FUNC_ID" value="ConsAckList">
               <input type="hidden" name="CUR_PAGE" value="">
               <table>

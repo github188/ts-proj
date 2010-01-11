@@ -79,10 +79,13 @@
           form1.QRESOURCE_CLASS_ID.value = form1.QRESOURCE_ID_SHOW.value;
         }
       }
+      alert("form1.QRESOURCE_CLASS_FLAG.value:"+form1.QRESOURCE_CLASS_FLAG.value);
+      alert("form1.QRESOURCE_CLASS_ID.value:"+form1.QRESOURCE_CLASS_ID.value);
       form1.submit();
   }
+  
   function doSelRes(){
-    selDialog("ctrl?FUNC_ID=SelectClassType","QRESOURCE_CLASS_ID","QRESOURCE_CLASS_SHOW","QRESOURCE_CLASS_FLAG");
+    selDialog("ctrl?FUNC_ID=SelectClassType","QRESOURCE_CLASS_ID","QRESOURCE_ID_SHOW","QRESOURCE_CLASS_FLAG");
   }
   function doClear() {
     form1.QSHEET_ID.value = "";
@@ -94,7 +97,7 @@
     //type.setDisplayerSelected([]) ;
     form1.QRESOURCE_CLASS_ID.value = "";
     form1.QRESOURCE_CLASS_FLAG.value = "";
-     form1.QRESOURCE_CLASS_SHOW.value = "";
+     form1.QRESOURCE_ID_SHOW.value = "";
   }
   function onChange(selectedIds,selector){
   }
@@ -117,7 +120,7 @@
           <div class="panelContent">
             <div class="panelContent2">
               <!-- 查询面板内容 -->
-             <form action="ctrl" method="post" name="form1" onSubmit="return doList(this)">
+             <form action="ctrl" method="post" name="form1" >
                <input type = "hidden" name="FUNC_ID" value="ResourceOutList">
                <input type="hidden" name="CUR_PAGE" value="">
                <input type="hidden" name="LIST_ID" value="">
@@ -148,7 +151,7 @@
                 <td>
                   <input name="QRESOURCE_CLASS_FLAG" type="hidden" value="<%=typeFlag %>" >
                   <input name="QRESOURCE_CLASS_ID" type="hidden" value="<%=typeId %>" >
-                  <input type="text" class="text" name="QRESOURCE_CLASS_SHOW"   value="<%=typeIdShow %>"  readonly>
+                  <input type="text" class="text" name="QRESOURCE_ID_SHOW"   value="<%=typeIdShow %>"  readonly>
                   <input type="button" name="selectRes" class="selButton" value="选择" onClick="doSelRes();" />
                   <!-- 
                   <script>var type = new Tower.Widget.Selector("TypeSelector","QRESOURCE_ID_SHOW","ctrl?FUNC_ID=SelectClassType&INPUT_TYPE=radio",{selected:["<%=typeIdShow%>"]},{change:onChange})</script>

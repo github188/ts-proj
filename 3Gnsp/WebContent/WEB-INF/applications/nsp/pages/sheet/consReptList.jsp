@@ -131,7 +131,7 @@
           <div class="panelContent">
             <div class="panelContent2">
               <!-- 查询面板内容 -->
-             <form name="form1" action="ctrl" method="get"  onSubmit="return doList(this)">
+             <form name="form1" action="ctrl" method="get" >
               <input type="hidden" name="FUNC_ID" value="ConsReptList">
               <input type="hidden" name="CUR_PAGE" value="">
               <input type="hidden" name="LIST_ID" value="">
@@ -172,7 +172,7 @@
                 <td align="right">资源类型：</td>
                 <td>
                   
-                   <input name=""QRESOURCE_CLASS_FLAG"" type="hidden" value="<%=classFlag %>" >
+                   <input name="QRESOURCE_CLASS_FLAG" type="hidden" value="<%=classFlag %>" >
                   <input name="QRESOURCE_CLASS_ID" type="hidden" value="<%=classId %>" >
                   <input type="text" class="text" name="QRESOURCE_ID_SHOW"   value="<%=typeIdShow %>"  readonly>
                   <input type="button" name="selectRes" class="selButton" value="选择" onClick="doSelRes();" />
