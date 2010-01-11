@@ -76,13 +76,13 @@ public class BoSheetPrepareList implements RootBo {
 		 //工单下的所有工单明细并按照工单明细状态升序排序：	
 			sql = new StringBuffer();
 			sql.append(" select  r.*,c.class_name,t.type_name ,inSta.org_name IN_STATION_NAME ,outSta.org_name OUT_STATION_NAME ,inOrg.org_name IN_ORG_NAME, outOrg.org_name OUT_ORG_NAME ");
-			sql.append(" from nsp.resource_prepare_list r ");
-			sql.append("  left  join nsp.sys_org outOrg on  r.out_org_id = outOrg.org_id");
-			sql.append("  left join nsp.sys_org inOrg on inOrg.org_id = r.in_org_id ");
-			sql.append("  left join nsp.sys_org outSta on  r.out_station_id = outSta.org_id ");
-			sql.append("  left join nsp.sys_org inSta on r.in_station_id = inSta.org_id  ");
-			sql.append("  left join nsp.resource_class c on r.resource_class_id= c.class_id ");
-			sql.append("  left join nsp.resource_type t on r.resource_type_id= t.type_id ");
+			sql.append(" from 3gnsp.resource_prepare_list r ");
+			sql.append("  left  join 3gnsp.sys_org outOrg on  r.out_org_id = outOrg.org_id");
+			sql.append("  left join 3gnsp.sys_org inOrg on inOrg.org_id = r.in_org_id ");
+			sql.append("  left join 3gnsp.sys_org outSta on  r.out_station_id = outSta.org_id ");
+			sql.append("  left join 3gnsp.sys_org inSta on r.in_station_id = inSta.org_id  ");
+			sql.append("  left join 3gnsp.resource_class c on r.resource_class_id= c.class_id ");
+			sql.append("  left join 3gnsp.resource_type t on r.resource_type_id= t.type_id ");
 			sql.append("  where r.sheet_id=");
 			sql.append(transaction.formatString(sheetId));
 			sql.append("  order by r.LIST_STATUS ");

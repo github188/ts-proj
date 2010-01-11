@@ -17,8 +17,8 @@
 			<description>MySQL Connection</description>
 			<driver>com.mysql.jdbc.Driver</driver>
 			<url>jdbc:mysql://localhost/3gnsp?characterEncoding=utf8&amp;autocommit=false&amp;autoReconnect=true</url>
-			<user>root</user>
-			<password>root</password>
+			<user>3gnsp</user>
+			<password>3gnsp</password>
 			<autocommit></autocommit>
 		</database>
 	</databases>

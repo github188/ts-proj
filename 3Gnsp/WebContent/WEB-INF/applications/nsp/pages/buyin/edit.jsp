@@ -40,7 +40,10 @@
     if((typeof form.TYPE_ID) == "undefined" ){
       	alert("资源型号不能为空,请重新输入！");
       	return false;
-     }
+     }else if(form.TYPE_ID.value == null || form.TYPE_ID.value.length <=0){
+    	 alert("资源型号不能为空,请重新输入！");
+        return false;
+    }
   
      if(inAmount.length <=0){
            alert("出/入库数量不能为空，请重新输入！");

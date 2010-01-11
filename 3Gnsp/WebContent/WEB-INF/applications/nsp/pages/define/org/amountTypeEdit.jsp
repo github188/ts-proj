@@ -227,10 +227,9 @@ try{
   	
   	 window.location.href ="ctrl?FUNC_ID=OrgSubList&ORG_ID="+radio.value;
   }
-  function doSelType(){
+   function doSelRes(){
     selDialog("ctrl?FUNC_ID=SelectTypeTree","TYPE_ID","TYPE_NAME");
   }
-  
    function onChange(selectedIds,selector){
     }
 </script>
@@ -291,7 +290,16 @@ try{
                    <td width="74" align="right" nowrap>资源型号：</td>
                    <%if(isAddFlag.equals("Y")){ %>
 		            <td nowrap><span id="spryResourceType">
-                      	<script>var type = new Tower.Widget.Selector("TypeSelector","TYPE_ID","ctrl?FUNC_ID=SelectTypeTree&INPUT_TYPE=radio",{selected:["<%=typeId%>"]},{change:onChange})</script><span class="requiredField">*</span>
+		               <input name="TYPE_ID" type="hidden" value="<%=typeId %>" >
+                         <input type="text" class="text" name="TYPE_NAME"   value=""  readonly>
+                        <input type="button" name="selectRes" class="selButton" value="选择" onClick="doSelRes();" />
+		            <!-- 
+		             	<script>
+                      	var type = new Tower.Widget.Selector("TypeSelector","TYPE_ID","ctrl?FUNC_ID=SelectTypeTree&INPUT_TYPE=radio",{selected:["<%=typeId%>"]},{change:onChange})
+                      	</script>
+                      	-->
+                      
+                      	<span class="requiredField">*</span>
 		           		 <span class="textfieldMaxCharsMsg">已超过最大字符数50。</span><span class="textfieldInvalidFormatMsg">格式无效。</span></span>
 		           	</td>
 		           	<%}else{ %>

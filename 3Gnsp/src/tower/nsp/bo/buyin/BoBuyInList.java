@@ -97,10 +97,10 @@ public class BoBuyInList implements RootBo{
 		 
 		 sql = new StringBuffer();
 		 sql.append(" select  l.* ,s.org_name,t.type_name,u.user_name "); 
-		 sql.append(" from nsp.resource_buyin_list l ");
-		 sql.append(" join nsp.sys_org s on s.org_id = l.org_id ");
-		 sql.append(" left join nsp.resource_type t on t.type_id=l.resource_type_id ");
-		 sql.append(" left join nsp.sys_user u on u.user_id=l.in_oper_userId ");
+		 sql.append(" from 3gnsp.resource_buyin_list l ");
+		 sql.append(" join 3gnsp.sys_org s on s.org_id = l.org_id ");
+		 sql.append(" left join 3gnsp.resource_type t on t.type_id=l.resource_type_id ");
+		 sql.append(" left join 3gnsp.sys_user u on u.user_id=l.in_oper_userId ");
 		 
 		 //组装查询条件
 		 sqlWhere = new StringBuffer();

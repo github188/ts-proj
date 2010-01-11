@@ -73,6 +73,7 @@ public class BoBuyInAdd implements RootBo {
 		orgId = requestXml.getInputValue("IN_ORGID");
 		inOutFlag = requestXml.getInputValue("IN_OUT_FLAG");
 		resourceTypeId = requestXml.getInputValue("TYPE_ID");
+		System.out.println("resourceTypeId:'"+resourceTypeId+"'");
 		inAmount = requestXml.getInputValue("IN_AMOUNT");
 		inRemark = requestXml.getInputValue("IN_REMARK");
 		inOperDatetime = DateFunc.GenNowTime();DateFunc.GenDate(new Date());

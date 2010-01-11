@@ -62,12 +62,12 @@ public class BoConsAckCheckQuery implements RootBo {
 		if(listId != null && listId.length() > 0){
 			String sql = "select org.* , rt.type_name,rc.class_name ,pre.prepare_date from " 
 				+ "(SELECT r.*,inSta.org_name inSta ,outSta.org_name outSta ," 
-				+ "inOrg.org_name inOrg, outOrg.org_name outOrg FROM nsp.resource_prepare_list r"
-				+ " join nsp.sys_org outOrg on outOrg.org_id = r.out_org_id"
-				+ " join nsp.sys_org inOrg on inOrg.org_id = r.in_org_id"
-				+ " left join nsp.sys_org outSta on outSta.org_id = r.out_station_id"
-				+ " left join nsp.sys_org inSta on inSta.org_id = r.in_station_id) org ,"
-				+  " nsp.resource_class rc ,nsp.resource_type rt ,nsp.resource_prepare_sheet pre"
+				+ "inOrg.org_name inOrg, outOrg.org_name outOrg FROM 3gnsp.resource_prepare_list r"
+				+ " join 3gnsp.sys_org outOrg on outOrg.org_id = r.out_org_id"
+				+ " join 3gnsp.sys_org inOrg on inOrg.org_id = r.in_org_id"
+				+ " left join 3gnsp.sys_org outSta on outSta.org_id = r.out_station_id"
+				+ " left join 3gnsp.sys_org inSta on inSta.org_id = r.in_station_id) org ,"
+				+  " 3gnsp.resource_class rc ,3gnsp.resource_type rt ,3gnsp.resource_prepare_sheet pre"
 				+ " where org.resource_class_id = rc.class_id and"
 				+ " rt.type_id = org.resource_type_id and pre.sheet_id = org.sheet_id and org.list_id = " 
 				+ listId + ";";

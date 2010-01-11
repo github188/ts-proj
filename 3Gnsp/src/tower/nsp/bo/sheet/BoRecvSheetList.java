@@ -68,14 +68,14 @@ public class BoRecvSheetList implements RootBo {
 		 //组装查询语句： 
 		 sqlWhere = new StringBuffer();
 		 sqlWhere.append(" select  r.*,s.* ,c.class_name,t.type_name ,outSta.org_name OUT_STATION_NAME, outOrg.org_name OUT_ORG_NAME,inSta.org_name IN_STATION_NAME, inOrg.org_name IN_ORG_NAME ");
-		 sqlWhere.append(" from nsp.resource_prepare_list r ");
-		 sqlWhere.append("  left join nsp.sys_org outOrg on  r.out_org_id = outOrg.org_id");
-		 sqlWhere.append("  left join nsp.sys_org outSta on  r.out_station_id = outSta.org_id");
-		 sqlWhere.append("  left join nsp.sys_org inOrg on  r.in_org_id = inOrg.org_id");
-		 sqlWhere.append("  left join nsp.sys_org inSta on  r.in_station_id = inSta.org_id");
-		 sqlWhere.append("  left join nsp.resource_class c on  r.resource_class_id = c.class_id");
-		 sqlWhere.append("  left join nsp.resource_type t on r.resource_type_id = t.type_id");
-		 sqlWhere.append("  left join nsp.resource_prepare_sheet s on r.sheet_id = s.sheet_id");
+		 sqlWhere.append(" from 3gnsp.resource_prepare_list r ");
+		 sqlWhere.append("  left join 3gnsp.sys_org outOrg on  r.out_org_id = outOrg.org_id");
+		 sqlWhere.append("  left join 3gnsp.sys_org outSta on  r.out_station_id = outSta.org_id");
+		 sqlWhere.append("  left join 3gnsp.sys_org inOrg on  r.in_org_id = inOrg.org_id");
+		 sqlWhere.append("  left join 3gnsp.sys_org inSta on  r.in_station_id = inSta.org_id");
+		 sqlWhere.append("  left join 3gnsp.resource_class c on  r.resource_class_id = c.class_id");
+		 sqlWhere.append("  left join 3gnsp.resource_type t on r.resource_type_id = t.type_id");
+		 sqlWhere.append("  left join 3gnsp.resource_prepare_sheet s on r.sheet_id = s.sheet_id");
 		 sqlWhere.append(" WHERE r.IN_ORG_ID = ");
 		 sqlWhere.append(transaction.formatString(userOrgId));
 //		 sqlWhere.append(" OR r.IN_STATION_ID = ");
