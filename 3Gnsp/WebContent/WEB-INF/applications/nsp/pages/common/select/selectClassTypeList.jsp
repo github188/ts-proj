@@ -129,7 +129,7 @@
               <input type = "hidden" name="UPPER_SELECT_NAME" value="">
                <input type = "hidden" name="UPPER_SELECT_FLAG" value="">
               
-              <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
+              <table width="100%" border="1" cellpadding="0" cellspacing="0" class="list">
               	<tr>
                   <th>资源类别</th>
                   <th>资源型号</th>
@@ -138,31 +138,22 @@
                 <%
                 	for(int i=0;i<classes.size();i++){  
 							types = (List)classType.get(classes.get(i));
-							for(int k=0;k<types.size();k++){
-								enResourceType = (EnResourceType)types.get(k);
-								classId = enResourceType.getResourceClassId();
-								className = (String)classes.get(i);
-								typeId = enResourceType.getTypeId();
-								typeName = enResourceType.getTypeName();
-								produceFactory = enResourceType.getProduceFactory();
-								String trClass;
-			                  	if (i % 2 != 0) {
-			                          trClass = "dark";
-			                        } else {
-			                          trClass = "";
-			                        }
-							
+							className = (String)classes.get(i);
                 %>		
-                <tr class="<%=trClass %>" onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
-                <% if(k==0){%>
-                    <td align="left" >
+                <tr >
+                    <td align="left" rowspan="<%=types.size() %>" >
                     <input type="radio" name="CLASS_ID"  
                     value="<%=classId%>" nameValue="<%=className %>"/>
                     <%=className %>
                     </td>
-                   <%}else{ %> 
-                   <td></td>
-                   <%} %>
+                    <%
+                    for(int k=0;k<types.size();k++){
+						enResourceType = (EnResourceType)types.get(k);
+						classId = enResourceType.getResourceClassId();
+						typeId = enResourceType.getTypeId();
+						typeName = enResourceType.getTypeName();
+						produceFactory = enResourceType.getProduceFactory();
+                    %>
                     <td align="left">
                     <input type="radio" name="TYPE_ID"  
                     value="<%=typeId%>" nameValue="<%=typeName %>"/>
@@ -172,8 +163,6 @@
                     <%=produceFactory %>
                     </td>
                    </tr>
-                
-                
                 <% }}%>	
                 <%
                 if(classes.size()==0){

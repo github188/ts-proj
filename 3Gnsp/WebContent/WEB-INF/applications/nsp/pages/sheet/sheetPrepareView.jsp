@@ -99,12 +99,12 @@
               <tr>
                   <th>序号</th>
                   <th>调出单位</th>
-                  <th>调出基站</th>
+                  <th>调出小区</th>
                   <th>调出设备类型</th>
                   <th>调出设备型号</th>
                   <th>调出设备数量</th>
                   <th>调入单位</th>
-                  <th>调入基站</th>
+                  <th>调入小区</th>
                   <th>状态</th>
                 </tr>
                 <%if(listIds.length>0){ %>

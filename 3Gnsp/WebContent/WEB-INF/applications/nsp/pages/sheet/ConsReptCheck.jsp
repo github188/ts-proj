@@ -187,14 +187,14 @@
                 <tr>
                   <td align="right">调出单位：</td>
                   <td><div><%=outOrg %></div></td>
-                  <td align="right">调出基站：</td>
+                  <td align="right">调出小区：</td>
                   <td><div><%=outStation %></div></td>
                   <td>&nbsp;</td>
                 </tr>
                 <tr>
                   <td align="right">调入单位：</td>
                   <td><div><%=inOrg %></div></td>
-                  <td align="right">调入基站：</td>
+                  <td align="right">调入小区：</td>
                   <td><div><%=inStation %></div></td>
                   <td>&nbsp;</td>
                 </tr>

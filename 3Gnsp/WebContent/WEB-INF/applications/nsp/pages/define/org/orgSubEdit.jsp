@@ -20,7 +20,9 @@
   String buyInFlag;
   String parentId;
   String flag;
-  
+  String frePoint;
+  String perCode;
+  String orgType;
   String isBatchAddFlag;
 
   //机构树信息
@@ -45,9 +47,12 @@
   orgId = xml.getItemValue("SYS_ORG",1,"ORG_ID" );
   orgName = xml.getItemValue("SYS_ORG",1,"ORG_NAME" );
   orgDesc = xml.getItemValue("SYS_ORG",1,"ORG_DESC" );
-  linkMan = xml.getItemValue("SYS_ORG",1,"LINK_MAN" );
-  linkTele = xml.getItemValue("SYS_ORG",1,"LINK_TELE" );
-  linkEmail = xml.getItemValue("SYS_ORG",1,"LINK_EMAIL" );
+  frePoint = xml.getItemValue("SYS_ORG",1, "FRE_POINT");
+  perCode = xml.getItemValue("SYS_ORG",1, "PER_CODE");;
+  orgType = xml.getItemValue("SYS_ORG",1, "ORG_TYPE");
+  //linkMan = xml.getItemValue("SYS_ORG",1,"LINK_MAN" );
+  //linkTele = xml.getItemValue("SYS_ORG",1,"LINK_TELE" );
+  //linkEmail = xml.getItemValue("SYS_ORG",1,"LINK_EMAIL" );
   stationFlag = xml.getItemValue("SYS_ORG",1,"STATION_FLAG");
   buyInFlag = xml.getItemValue("SYS_ORG",1,"BUY_IN_FLAG");
   
@@ -58,6 +63,8 @@
   
   flag = xml.getItemValue("SYS_ORG_STATION",1,"ADD_FLAG");
   
+  String[] flagBOrgType ={"请选择","1","2"};
+  String[] flagOrgTypeDescs={"","室内小区","室外小区"};
   
   String[] flagBuyIns ={"N","Y"};
   String[] flagBuyInDescs={"不可以","可以"};
@@ -257,7 +264,7 @@ try{
  <!-- 机构树 -->	 
 
 <div id="mainPanel" class="panel">
-<div class="panelHead">机构信息管理 - 基站添加/编辑</div>
+<div class="panelHead">机构信息管理 - 小区添加/编辑</div>
 <div class="panelContent">
 <div class="panelContent2" >
 <div style="width:100%; height:100%; overflow:scroll">
@@ -299,29 +306,38 @@ try{
                 			<input type="hidden" name="FLAG" value="<%=flag %>">
               				<table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
                	<tr>
-                  <td width="95" align="right" nowrap>基站名称：</td>
+                  <td width="95" align="right" nowrap>小区名称：</td>
                   <td width="174"><span id="spryOrgName">
                   <input type="text" class="text" name="ORG_NAME" value="<%=orgName %>"><span class="requiredField">*</span> <span class="textfieldRequiredMsg">需要提供一个值。</span><span class="textfieldMaxCharsMsg">已超过最大字符数50。</span></span></td>
-                  <td align="right" nowrap>基站编号：</td>
+                  <td align="right" nowrap>小区标识：</td>
                   <td><span id="spryOrgCode">
                   <input type="text" class="text" name="ORG_CODE" value="<%=orgCode %>"><span class="requiredField">*</span> <span class="textfieldRequiredMsg">需要提供一个值。</span><span class="textfieldMaxCharsMsg">已超过最大字符数50。</span></span></td>
                 </tr>
                 <tr>  
-                  <td align="right" nowrap>联系人：</td>
-                  <td width="190"><span id="spryLinkMan">
-                    <input type="text" class="text" name="LINK_MAN" value="<%=linkMan %>">
+                  <td align="right" nowrap>频点：</td>
+                  <td width="190"><span id="spryFrePoint">
+                    <input type="text" class="text" name="FRE_POINT" value="<%=frePoint %>">
                     <span class="textfieldMaxCharsMsg">已超过最大字符数50。</span>                  
                     </span></td>
                
-                  <td align="right" nowrap>联系电话：</td>
-                  <td><span id="spryLinkTele">
-                  <input type="text" class="text" name="LINK_TELE" value="<%=linkTele %>">
+                  <td align="right" nowrap>扰码：</td>
+                  <td><span id="spryPerCode">
+                  <input type="text" class="text" name="PER_CODE" value="<%=perCode %>">
                   <span class="textfieldMaxCharsMsg">已超过最大字符数50。</span> </span></td>
                 </tr>
                 <tr>
-                  <td align="right" nowrap>电子邮件：</td>
-                  <td><span id="spryLinkEmail">
-                  <input type="text" class="text" name="LINK_EMAIL" value="<%=linkEmail %>">
+                  <td align="right" nowrap>小区类型：</td>
+                  <td><span id="spryOrgType">
+                   
+                  <select name="ORG_TYPE"  class="select">
+                			<%for(int i=0;i<flagBOrgType.length;i++){ %>
+                				<%if(flagBOrgType[i].equals(orgType)){ %>
+                					<option value="<%=flagBOrgType[i] %>" selected="selected"><%=flagOrgTypeDescs[i] %></option>
+                				<%}else{ %>
+                					<option value="<%=flagBOrgType[i] %>"><%=flagOrgTypeDescs[i] %></option>
+                				<%} %>
+                			<%} %>
+                		</select>
                   <span class="textfieldMaxCharsMsg">已超过最大字符数50。</span> <span class="textfieldInvalidFormatMsg">格式无效。</span></span></td>
                 
                 	<td align="right" nowrap>是否基站：</td>
@@ -423,9 +439,9 @@ var sprytextfield1 = new Spry.Widget.ValidationTextField("spryReadFile", "none")
   <%}else if(isBatchAddFlag.equals("N")){ %>
 var sprytextfield1 = new Spry.Widget.ValidationTextField("spryOrgName", "none", {maxChars:50});
 var sprytextfield5 = new Spry.Widget.ValidationTextField("spryOrgCode", "none", {maxChars:50});
-var sprytextfield2 = new Spry.Widget.ValidationTextField("spryLinkMan", "none", {isRequired:false, maxChars:50});
-var sprytextfield3 = new Spry.Widget.ValidationTextField("spryLinkTele", "none", {isRequired:false});
-var sprytextfield4 = new Spry.Widget.ValidationTextField("spryLinkEmail", "email", {isRequired:false, maxChars:50});
+var sprytextfield2 = new Spry.Widget.ValidationTextField("spryFrePoint", "none", {isRequired:false, maxChars:50});
+var sprytextfield3 = new Spry.Widget.ValidationTextField("spryPerCode", "none", {isRequired:false});
+var sprytextfield4 = new Spry.Widget.ValidationTextField("spryOrgType", "email", {isRequired:false, maxChars:50});
 var sprytextarea1 = new Spry.Widget.ValidationTextarea("sprytextarea1", {isRequired:false, maxChars:200, useCharacterMasking:false});
 <%}%>
 //-->

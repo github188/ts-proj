@@ -112,7 +112,7 @@
               <tr>	
               	<td align="right">调出单位:</td>
               	<td><div class=""><%=outOrgName %></div></td>
-              	<td align="right">调出基站:</td>
+              	<td align="right">调出小区:</td>
               	<td><div class=""><%=outStationName %></div></td>
               	<td align="right">设备类型:</td>
               	<td><div class=""><%=resourceClassName %></div></td>
@@ -122,7 +122,7 @@
               	<td><div class=""><%=resourceTypeName %></div></td>
               	<td align="right">调入单位:</td>
               	<td><div class=""><%=inOrgName %></div></td>
-              	<td align="right">调入基站:</td>
+              	<td align="right">调入小区:</td>
               	<td><div class=""><%=inStationName %></div></td>
               </tr>
               <tr>
@@ -130,7 +130,7 @@
               	<td><div class=""><%=amountPrepare %></div></td>
                 <td align="right">设备状态:</td>
                 <td><%if(outResourceStatus.equals("0")){ %>库存设备<%}else{ %>在线设备<%} %></td>
-                <td align="right">新建基站:</td>
+                <td align="right">新建小区:</td>
                 <td><%if(newStationFlag.equals("0")){ %>否<%}else{ %>是<%} %></td>
                 
               </tr>
@@ -173,7 +173,7 @@
               	<td><div class=""><%=diffInOrgName %></div></td>
               </tr>
               <tr>	
-              	<td align="right">剩余入库基站:</td>
+              	<td align="right">剩余入库小区:</td>
               	<td><div class=""><%=diffInStationName %></div></td>
               	<td align="right">施工人:</td>
               	<td><div class=""><%=consUserName %></div></td>

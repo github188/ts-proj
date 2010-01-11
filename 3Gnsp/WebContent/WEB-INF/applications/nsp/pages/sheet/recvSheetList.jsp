@@ -196,13 +196,13 @@
                   <th nowrap>工单编号</th>
                   <th nowrap>调度日期</th>
                   <th nowrap>调出单位</th>
-                  <th nowrap>调出基站</th>
+                  <th nowrap>调出小区</th>
                   <th nowrap>设备类别</th>
                   <th nowrap>设备型号</th>
                   <th nowrap>调出数量</th>
                   <th nowrap>调入单位</th>
-                  <th nowrap>调入基站</th>
-                  <th nowrap>新建基站</th>
+                  <th nowrap>调入小区</th>
+                  <th nowrap>新建小区</th>
                   <th nowrap>状态</th>
                   <th nowrap>操作</th>
                 </tr>

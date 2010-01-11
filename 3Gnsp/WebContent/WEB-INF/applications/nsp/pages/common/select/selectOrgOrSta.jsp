@@ -7,6 +7,9 @@
 <%!XMLWrap xml;
    String[] orgNames;
    String[] orgCodes;
+   String[] frePoints;
+   String[] perCodes;
+   String[] orgTypes; 
    String[] linkMans;
    String[] linkTeles;
    String[] orgIds;
@@ -23,6 +26,9 @@
   orgIds = xml.getItemValues("SYS_ORG","ORG_ID");
   orgNames = xml.getItemValues("SYS_ORG","ORG_NAME");
   orgCodes = xml.getItemValues("SYS_ORG","ORG_CODE");
+  frePoints = xml.getItemValues("SYS_ORG","FRE_POINT");
+  perCodes = xml.getItemValues("SYS_ORG","PER_CODE");
+  orgTypes = xml.getItemValues("SYS_ORG","ORG_TYPE");
   linkMans = xml.getItemValues("SYS_ORG","LINK_MAN");
   linkTeles = xml.getItemValues("SYS_ORG","LINK_TELE");
   parentIds = xml.getItemValues("SYS_ORG","PARENT_ID");
@@ -167,6 +173,60 @@
               <input type = "hidden" name="UPPER_ORG_PARENT_ID" value="">
               <input type = "hidden" name="UPPER_ORG_FLAG" value="">
               
+              <%if(flag.equals("Y")){ %>
+               <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
+              	<tr>
+                  <th>&nbsp;&nbsp;</th>
+                  <th>小区名称</th>
+                  <th>所属机构</th>
+                  <th>小区标识</th>
+                  <th>频点</th>
+                  <th>扰码</th>
+                  <th>小区类型</th>
+                </tr>
+                <%if(orgIds != null && orgIds.length > 0) {%>
+                  <% for(int i = 0 ; i < orgIds.length ; i ++){
+                  	String trClass;
+                  	if (i % 2 != 0) {
+                          trClass = "dark";
+                        } else {
+                          trClass = "";
+                        }
+                  %>
+                   <tr class="<%=trClass %>" onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
+                    <td align="center"><input type="radio" name="ORG_ID"  value="<%=orgIds[i] %>" nameValue="<%=orgNames[i] %>" parentValue="<%=parentIds[i] %>" flagValue="<%=flags[i] %>"/></td>
+                    <td align="center"><%=orgNames[i] %></td>
+                    <td align="center"><%=parentNames[i] %></td>
+                    <td align="center"><%=orgCodes[i]%></td>
+                    <td align="center"><%=frePoints[i] %></td> 
+                    <td align="center"><%=perCodes[i] %></td>
+                    <td align="center">
+                     <%
+						if ("1".equals(orgTypes[i])) {
+						%>
+						室内小区
+						<%
+						} else if ("2".equals(orgTypes[i])) {
+						%>
+						室外小区
+						<%
+						}
+						%>
+					</td>
+                   </tr>
+                <%  }
+                  }else{
+                    if(funcId != null && funcId.equals("SelectOrgOrSta")){
+               %>
+                   <tr>
+                      <td colspan="5" align="center" nowrap="nowrap">没有查询的机构，请添加相应机构</td>
+                    </tr>
+               <%   }
+                  }  
+               %>
+               </table>
+               
+              <%}else{ %>
               <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
               	<tr>
                   <th>&nbsp;&nbsp;</th>
@@ -204,6 +264,9 @@
                   }  
                %>
                </table>
+              
+              <%} %>
+            
                <div class="pageBar"><%=Page.BuildPageTextByMethod(xml,"TDoChangePage") %></div>
                <table width="100%">
                   <tr>

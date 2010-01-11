@@ -93,7 +93,7 @@
     	form1.IN_REMARK.value="";
     	form1.IN_OUT_FLAG.selectedIndex=0;
     	form1.TYPE_ID.value="";
-    	form1.TYPE_NAME.selectedIndex=0;
+    	form1.TYPE_NAME.value="";
     }
     
    function doClearDept(){

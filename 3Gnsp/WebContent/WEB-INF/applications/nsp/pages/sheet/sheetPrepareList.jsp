@@ -194,7 +194,7 @@
 	                     <th nowrap>调度数量</th>
 	                     <th nowrap>设备状态</th>
 	                     <th nowrap>调入单位</th>
-	                     <th nowrap>新建基站</th>
+	                     <th nowrap>新建小区</th>
 	                     <th nowrap>操作</th>
                      </tr>
                      <tr class='dark'>
@@ -278,7 +278,7 @@
               <tr>
                   <th><input type="checkbox" name="ALL_LIST_ID" onclick="SelectAll('ALL_LIST_ID','LIST_ID');" /></th>
                   <th nowrap>调出单位</th>
-                  <th nowrap>调出基站</th>
+                  <th nowrap>调出小区</th>
                   <th nowrap>设备类型</th>
                   <th nowrap>设备型号</th>
                   <th nowrap>库存数量</th>
@@ -288,8 +288,8 @@
                   <th nowrap>调度数量</th>
                   <th nowrap>设备状态</th>
                   <th nowrap>调入单位</th>
-                  <th nowrap>调入基站</th>
-                  <th nowrap>新基站</th>
+                  <th nowrap>调入小区</th>
+                  <th nowrap>新小区</th>
                   <th nowrap>工单状态</th>
                   <th nowrap>操作</th>
                 </tr>

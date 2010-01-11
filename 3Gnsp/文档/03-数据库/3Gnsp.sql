@@ -1,4 +1,4 @@
--- MySQL Administrator dump 1.4
+﻿-- MySQL Administrator dump 1.4
 --
 -- ------------------------------------------------------
 -- Server version	5.0.13-rc-nt
@@ -63,6 +63,11 @@ CREATE TABLE `resource_class` (
 --
 
 /*!40000 ALTER TABLE `resource_class` DISABLE KEYS */;
+INSERT INTO `resource_class` (`CLASS_ID`,`CLASS_CODE`,`CLASS_NAME`) VALUES 
+ ('000000','111111','机柜'),
+ ('000001','2222','载频'),
+ ('000002','3333','传输'),
+ ('000003','5','传输配套');
 /*!40000 ALTER TABLE `resource_class` ENABLE KEYS */;
 
 
@@ -184,6 +189,15 @@ CREATE TABLE `resource_type` (
 --
 
 /*!40000 ALTER TABLE `resource_type` DISABLE KEYS */;
+INSERT INTO `resource_type` (`TYPE_ID`,`TYPE_CODE`,`TYPE_NAME`,`PRODUCE_FACTORY`,`TYPE_CONF_AMOUNT`,`RESOURCE_CLASS_ID`,`REMARK`) VALUES 
+ ('000000','1111','B326/328载频板','中兴','1','000001',''),
+ ('000001','2222','18AE载频板','大唐','1','000001',''),
+ ('000002','111111111','B328传输板','中兴','1','000002','IIPA'),
+ ('000003','2','B8300传输板','中兴','1','000002','SE'),
+ ('000004','3','18AE传输板','大唐','1','000002','EPB'),
+ ('000005','6','B326传输配套板','中兴','1','000003','BET'),
+ ('000006','7','B328传输配套板','中兴','1','000003','BETB');
+
 /*!40000 ALTER TABLE `resource_type` ENABLE KEYS */;
 
 

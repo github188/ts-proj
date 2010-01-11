@@ -150,7 +150,7 @@
               <tr>  
                 <td align="right">调出单位：</td>
                 <td><div><%=outOrgName %></div></td>
-                <td align="right">调出基站：</td>
+                <td align="right">调出小区：</td>
                 <td><div><%=outStationName %></div></td>
                 <td align="right">资源类别：</td>
                 <td><div><%=className %></div></td>
@@ -158,7 +158,7 @@
               <tr>  
                 <td align="right">调入单位：</td>
                 <td><div><%=inOrgName %></div></td>
-                <td align="right">调入基站：</td>
+                <td align="right">调入小区：</td>
                 <td><div><%=inStationName %></div></td>
                 <td align="right">资源型号：</td>
                 <td><div><%=typeName %></div></td>
@@ -206,7 +206,7 @@
                 <td><div><%=consUserName %></div></td>
                 <td align="right">剩余入库单位：</td>
                 <td><div><%=diffInOrgName %></div></td>
-                <td align="right">剩余入库基站：</td>
+                <td align="right">剩余入库小区：</td>
                 <td><div><%=diffInStationName %></div></td>
                </tr>
                <tr> 

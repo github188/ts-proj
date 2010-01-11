@@ -27,6 +27,9 @@ public class BoSubOrgSubmit implements RootBo {
 		String linkMan;
 		String linkTele;
 		String linkEmail;
+		String frePoint;
+		String perCode;
+		String orgType;
 		@SuppressWarnings("unused")
 		String stationFlag;
 		String buyInFlag;
@@ -45,6 +48,9 @@ public class BoSubOrgSubmit implements RootBo {
 		orgName = requestXml.getInputValue("ORG_NAME");
 		parentId = requestXml.getInputValue("PARENT_ID");
 		orgDesc = requestXml.getInputValue("ORG_DESC");
+		frePoint = requestXml.getInputValue("FRE_POINT");
+		perCode = requestXml.getInputValue("PER_CODE");
+		orgType = requestXml.getInputValue("ORG_TYPE");
 		linkMan = requestXml.getInputValue("LINK_MAN");
 		linkTele = requestXml.getInputValue("LINK_TELE");
 		linkEmail = requestXml.getInputValue("LINK_EMAIL");
@@ -72,6 +78,9 @@ public class BoSubOrgSubmit implements RootBo {
 		enOrg.setOrgName(orgName);
 		enOrg.setParentId(parentId);
 		enOrg.setOrgDesc(orgDesc);
+		enOrg.setFrePoint(frePoint);
+		enOrg.setOrgType(orgType);
+		enOrg.setPerCode(perCode);
 		enOrg.setLinkMan(linkMan);
 		enOrg.setLinkTele(linkTele);
 		enOrg.setLinkEmail(linkEmail);
@@ -91,10 +100,10 @@ public class BoSubOrgSubmit implements RootBo {
 			if(count1 > 0){
 				throw new ErrorException("AM0106",null);
 			}
-			int count2 = dbOrg.countWhere(" ORG_CODE='"+orgCode+"' and STATION_FLAG='Y'");
-			if(count2 > 0){
-				throw new ErrorException("AM0107",null);
-			}
+//			int count2 = dbOrg.countWhere(" ORG_CODE='"+orgCode+"' and STATION_FLAG='Y'");
+//			if(count2 > 0){
+//				throw new ErrorException("AM0107",null);
+//			}
 			
 			// ID长度为零表示添加
 			enOrg.setStationFlag(flag);

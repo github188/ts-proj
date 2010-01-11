@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <errors>
-<!-- 10-ConfStat基站配置查询 -->
+<!-- 10-ConfStat小区配置查询 -->
 	<error>
 		<id>CF0101</id>
 		<message>要转换的坏件数量大于当前的库存数量，请重新输入。</message>
@@ -291,7 +291,7 @@
 	</error>
 	<error>
 		<id>OS0201</id>
-		<message>调出单位和调出基站至少一个不能为空，请重新输入！</message>
+		<message>调出单位和调出小区至少一个不能为空，请重新输入！</message>
 		<hint></hint>
 	</error>
 	<error>
@@ -306,7 +306,7 @@
 	</error>
 	<error>
 		<id>OS0204</id>
-		<message>调入单位和调入基站至少一个不能为空，请重新输入！</message>
+		<message>调入单位和调入小区至少一个不能为空，请重新输入！</message>
 		<hint></hint>
 	</error>
 	<error>
@@ -361,7 +361,7 @@
 	</error>
 	<error>
 		<id>OS0215</id>
-		<message>"是否为新建基站"不能为空，请检查工单明细信息excel表中第{0}条记录的"是否为新建基站"为是否空。</message>
+		<message>"是否为新建小区"不能为空，请检查工单明细信息excel表中第{0}条记录的"是否为新建小区"为是否空。</message>
 		<hint></hint>
 	</error>
 	<error>
@@ -472,32 +472,32 @@
 	</error>
 	<error>
 		<id>AM0106</id>
-		<message>已经存在相同名称的基站，请重新输入基站名称！</message>
+		<message>已经存在相同名称的小区，请重新输入小区名称！</message>
 		<hint></hint>
 	</error>
 	<error>
 		<id>AM0300</id>
-		<message> '{0}' 已存在，请修改基站名称！</message>
+		<message> '{0}' 已存在，请修改小区名称！</message>
 		<hint></hint>
 	</error>
 	<error>
 		<id>AM0301</id>
-		<message> '{0}' 已存在，请修改基站编号！</message>
+		<message> '{0}' 已存在，请修改标识！</message>
 		<hint></hint>
 	</error>
 	<error>
 		<id>AM0302</id>
-		<message> "基站编号"不能为空，请检查基站信息excel表中是否存在"基站编号"为空的记录。</message>
+		<message> "标识"不能为空，请检查小区信息excel表中是否存在"标识"为空的记录。</message>
 		<hint></hint>
 	</error>
 	<error>
 		<id>AM0303</id>
-		<message> "基站名称"不能为空，请检查基站信息excel表中是否存在"基站名称"为空的记录。</message>
+		<message> "小区名称"不能为空，请检查小区信息excel表中是否存在"小区名称"为空的记录。</message>
 		<hint></hint>
 	</error>
 	<error>
 		<id>AM0108</id>
-		<message>已经存在相同编号的基站，请重新输入基站编号！</message>
+		<message>已经存在相同编号的小区，请重新输入标识！</message>
 		<hint></hint>
 	</error>
 	<error>

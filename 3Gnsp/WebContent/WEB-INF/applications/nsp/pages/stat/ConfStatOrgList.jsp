@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>基站配置查询</title>
+<title>小区配置查询</title>
 <!-- 
   位置：/nsp/pages/sheet/ConfStatOrgList.jsp
   作者：范丽娟
@@ -81,7 +81,7 @@
 
 <body id="mainArea">
   <div id="mainPanel" class="panel">
-    <div class="panelHead">基站配置查询</div>
+    <div class="panelHead">小区配置查询</div>
     <div class="panelContent">
       <div class="panelContent2">    
         <!-- 查询面板 -->
@@ -103,7 +103,7 @@
                  <td> </td>
                 </tr>
                 <tr>
-                 <td align="right">是否为基站：</td> 
+                 <td align="right">是否为小区：</td> 
                  <td colspan="2">
                  <select name="STATION_FLAG" class="select">
                  <option value="">全部</option>
@@ -141,7 +141,7 @@
                   <th>所属机构</th>
                   <th>联系人</th>
                   <th>联系电话</th>
-                  <th>是否为基站</th>
+                  <th>是否为小区</th>
                   <th>是否允许外购入库</th>
                   <th>操作</th>
                 </tr>

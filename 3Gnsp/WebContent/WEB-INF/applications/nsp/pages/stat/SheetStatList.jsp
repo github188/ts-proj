@@ -278,7 +278,7 @@ function doSubmit(form) {
                   <td></td>
                 </tr>
                 <tr>
-                  <td align="right">新建基站：</td>
+                  <td align="right">新建小区：</td>
                   <td><select name="QNEW_STATION_FLAG" style="width:100%" class="select">
                   <option value="">全部</option>
                   <%for(int i=0; i< newStationFlagIds.length;i++){ %>
@@ -321,13 +321,13 @@ function doSubmit(form) {
                   <th nowrap>调度日期</th>
                   <th nowrap>处理状态</th>
                   <th nowrap>调出单位</th>
-                  <th nowrap>调出基站</th>
-                  <th nowrap>新建基站</th>
+                  <th nowrap>调出小区</th>
+                  <th nowrap>新建小区</th>
                   <th nowrap>设备类别</th>
                   <th nowrap>设备型号</th>
                   <th nowrap>数量</th>
                   <th nowrap>调入单位</th>
-                  <th nowrap>调入基站</th>
+                  <th nowrap>调入小区</th>
                   <th nowrap>领取人</th>
                   <th nowrap>施工人</th>
                   <th nowrap>操作</th>

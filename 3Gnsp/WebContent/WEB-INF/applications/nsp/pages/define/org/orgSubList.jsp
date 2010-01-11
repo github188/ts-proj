@@ -15,15 +15,21 @@
 
 	String[] orgDescs;
 
-	String[] linkMans;
+	//String[] linkMans;
 
-	String[] linkTeles;
+	//String[] linkTeles;
 
-	String[] linkEmails;
-
+	//String[] linkEmails;
+    String[] frePoints;
+	
+	String[] perCodes;
+	
+	String[] orgTypes;
+	
 	String[] stationFlags;
 
 	String[] buyInFlags;
+	
 	String[] orgCodes;
 
 	//机构树信息
@@ -41,14 +47,19 @@
 	String orgName;
 
 	String orgCode;
+	
+	
+	//String linkMan;
 
-	String linkMan;
+	//String linkTele;
 
-	String linkTele;
-
-	String linkEmail;
-
-
+	//String linkEmail;
+	String frePoint;
+	
+	String perCode;
+	
+	String orgType;
+   
 	String buyInFlag;
 
 	String parentId;
@@ -70,10 +81,13 @@
 
 	orgName=xml.getInputValue("QORG_NAME");
 	orgCode=xml.getInputValue("QORG_CODE");
-	linkMan=xml.getInputValue("QLINK_MAN");
+    frePoint = xml.getInputValue("QFRE_POINT");
+	perCode = xml.getInputValue("QPER_CODE");
+	orgType = xml.getInputValue("QORG_TYPE");
+	//linkMan=xml.getInputValue("QLINK_MAN");
 	buyInFlag=xml.getInputValue("QBUY_IN_FLAG");
-	linkTele=xml.getInputValue("QLINK_TELE");
-	linkEmail=xml.getInputValue("QLINK_EMAIL");
+	//linkTele=xml.getInputValue("QLINK_TELE");
+	//linkEmail=xml.getInputValue("QLINK_EMAIL");
 	
 	//父机构信息
 	String orgId1=xml.getItemValue("SYS_ORG",1,"CORG_ID");
@@ -81,17 +95,22 @@
 	//子列表信息
 	orgIds = xml.getItemValues("SYS_ORG", "ORG_ID");
 	orgNames = xml.getItemValues("SYS_ORG", "ORG_NAME");
-	linkMans = xml.getItemValues("SYS_ORG", "LINK_MAN");
-	linkTeles = xml.getItemValues("SYS_ORG", "LINK_TELE");
-	linkEmails = xml.getItemValues("SYS_ORG", "LINK_EMAIL");
+	//linkMans = xml.getItemValues("SYS_ORG", "LINK_MAN");
+	//linkTeles = xml.getItemValues("SYS_ORG", "LINK_TELE");
+	//linkEmails = xml.getItemValues("SYS_ORG", "LINK_EMAIL");
+	 frePoints = xml.getItemValues("SYS_ORG", "FRE_POINT");
+	perCodes = xml.getItemValues("SYS_ORG", "PER_CODE");;
+	orgTypes = xml.getItemValues("SYS_ORG", "ORG_TYPE");
 	stationFlags = xml.getItemValues("SYS_ORG", "STATION_FLAG");
 	buyInFlags = xml.getItemValues("SYS_ORG", "BUY_IN_FLAG");
 	String parentOrgName = xml.getItemValue("SYS_ORG", 1,"PARENT_ORG_NAME");
 	orgCodes = xml.getItemValues("SYS_ORG","ORG_CODE");
 
-
+	String[] flagBOrgType ={ "","1","2"};
+	String[] flagOrgTypeDescs={ "全部","室内小区","室外小区"};
+	  
 	String[] flagBuyIns = { "", "Y", "N" };
-	String[] flagBuyInDescs = { "", "可以", "不可以" };
+	String[] flagBuyInDescs = { "全部", "可以", "不可以" };
 
 	//机构树信息
 	orgTreeIds = xml.getItemValues("SYS_TREEITEM_ORG", "TREE_ORG_ID");
@@ -246,10 +265,13 @@
   function doClear(){
   	form1.QORG_NAME.value="";
   	form1.QORG_CODE.value="";
-  	form1.QLINK_MAN.value="";
+  	form1.QORG_TYPE.value="";
+  	form1.QFRE_POINT.value="";
+  	form1.QPER_CODE.value="";
+  	//form1.QLINK_MAN.value="";
   	form1.QBUY_IN_FLAG.value="";
-  	form1.QLINK_TELE.value="";
-  	form1.QLINK_EMAIL.value="";
+  	//form1.QLINK_TELE.value="";
+  	//form1.QLINK_EMAIL.value="";
   	
   }
    function doBatchAdd(parentId) {
@@ -344,37 +366,51 @@
 					<input type="hidden" name="ORG_ID"	value="<%=orgId1 %>">
 				<table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
 					<tr>
-						<td align="right" nowrap>基站名称：</td>
+						<td align="right" nowrap>小区名称：</td>
 						<td><input type="text" class="text" name="QORG_NAME"
 							value="<%=orgName %>"></td>
-						<td align="right" nowrap>基站编号：</td>
+						<td align="right" nowrap>小区标识：</td>
 						<td><input type="text" class="text" name="QORG_CODE"
 							value="<%=orgCode %>"></td>
 						<td>
 						</td>
 					</tr>
 					<tr>
-						<td align="right" nowrap>联系人：</td>
-						<td><input type="text" class="text" name="QLINK_MAN"
-							value="<%=linkMan %>"></td>
-						<td align="right" nowrap>外购入库：</td>
+					<td align="right" nowrap>外购入库：</td>
 						<td>
 							<select name="QBUY_IN_FLAG" class="select">
 								<%for(int i=0;i<flagBuyIns.length;i++){ %>
-									<option value="<%=flagBuyIns[i] %>"><%=flagBuyInDescs[i] %></option>
-								<%} %>
+                				<%if(flagBuyIns[i].equals(buyInFlag)){ %>
+                					<option value="<%=flagBuyIns[i] %>" selected="selected"><%=flagBuyInDescs[i] %></option>
+                				<%}else{ %>
+                					<option value="<%=flagBuyIns[i] %>"><%=flagBuyInDescs[i] %></option>
+                				<%} %>
+                			<%} %>
 							</select>
 						</td>
+						<td align="right" nowrap>频点：</td>
+						<td><input type="text" class="text" name="QFRE_POINT"
+							value="<%=frePoint %>"></td>
+						
 						<td>
 						</td>
 					</tr>
 					<tr>
-						<td align="right" nowrap>联系电话：</td>
-						<td><input type="text" class="text" name="QLINK_TELE"
-							value="<%=linkTele %>"></td>
-						<td align="right" nowrap>电子邮件：</td>
-						<td><input type="text" class="text" name="QLINK_EMAIL"
-							value="<%=linkEmail %>"></td>
+						<td align="right" nowrap>扰码：</td>
+						<td><input type="text" class="text" name="QPER_CODE"
+							value="<%=perCode %>"></td>
+						<td align="right" nowrap>小区类型：</td>
+						<td>
+						 <select name="QORG_TYPE"  class="select">
+                			<%for(int i=0;i<flagBOrgType.length;i++){ %>
+                				<%if(flagBOrgType[i].equals(orgType)){ %>
+                					<option value="<%=flagBOrgType[i] %>" selected="selected"><%=flagOrgTypeDescs[i] %></option>
+                				<%}else{ %>
+                					<option value="<%=flagBOrgType[i] %>"><%=flagOrgTypeDescs[i] %></option>
+                				<%} %>
+                			<%} %>
+                		</select>
+						</td>
 						<td align="right" nowrap="nowrap">
 						<input type="submit" class="submit"  value="查询"> 
 						<input type="button" class="reset" onClick="doClear()" value="重置"></td>
@@ -403,12 +439,13 @@
 				<div class="panelContent2"><!-- 工作任务面板内容 -->
 				<table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
 					<tr>
-						<th width="12%" nowrap>基站编号</th>
-						<th width="12%" nowrap>基站名称</th>
+						<th width="12%" nowrap>小区标识</th>
+						<th width="12%" nowrap>小区名称</th>
 						<th width="12%" nowrap>上级机构</th>
-						<th width="12%" nowrap>联系人</th>
-						<th width="12%" nowrap>联系电话</th>
-						<th width="12%" nowrap>是否基站</th>
+						<th width="12%" nowrap>频点</th>
+						<th width="12%" nowrap>扰码</th>
+						<th width="12%" nowrap>小区类型</th>
+						<th width="12%" nowrap>是否小区</th>
 						<th width="12%" nowrap>外购入库</th>
 						<th width="10%" nowrap>
 						[ <a href="JavaScript:doAdd('<%=orgId1 %>','<%=flag %>')">添加</a> |
@@ -430,8 +467,21 @@
 						<td align="center" onClick="event.cancelBubble=true" nowrap><%=orgCodes[i]%></td>
 						<td align="center" nowrap><%=orgNames[i]%></td>
 						<td align="center" nowrap><%=parentOrgName%></td>
-						<td align="center" nowrap><%=linkMans[i]%></td>
-						<td align="center" nowrap><%=linkTeles[i]%></td>
+						<td align="center" nowrap><%=frePoints[i]%></td>
+						<td align="center" nowrap><%=perCodes[i]%></td>
+						<td align="center" nowrap> 
+						   <%
+						if ("1".equals(orgTypes[i])) {
+						%>
+						室内小区
+						<%
+						} else if ("2".equals(orgTypes[i])) {
+						%>
+						室外小区
+						<%
+						}
+						%>
+						</td>
 						<td align="center" nowrap>
 						<%
 						if ("Y".equals(stationFlags[i])) {
@@ -459,13 +509,25 @@
 					<%
 					} else {
 					%>
-					<tr class="dark" onmouseover="doMouseOver(this)"
-						onmouseout="doMouseOut(this)">
+						<tr onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
 						<td align="center" onClick="event.cancelBubble=true" nowrap><%=orgCodes[i]%></td>
 						<td align="center" nowrap><%=orgNames[i]%></td>
 						<td align="center" nowrap><%=parentOrgName%></td>
-						<td align="center" nowrap><%=linkMans[i]%></td>
-						<td align="center" nowrap><%=linkTeles[i]%></td>
+						<td align="center" nowrap><%=frePoints[i]%></td>
+						<td align="center" nowrap><%=perCodes[i]%></td>
+						<td align="center" nowrap> 
+						   <%
+						if ("1".equals(orgTypes[i])) {
+						%>
+						室内小区
+						<%
+						} else if ("2".equals(orgTypes[i])) {
+						%>
+						室外小区
+						<%
+						}
+						%>
+						</td>
 						<td align="center" nowrap>
 						<%
 						if ("Y".equals(stationFlags[i])) {
@@ -487,7 +549,8 @@
 						}
 						%>
 						</td>
-						<td align="center" nowrap>[ <a href="JavaScript:doEdit('<%=orgIds[i] %>')">编辑</a> | <a href="JavaScript:doDelete('<%=orgIds[i] %>')">删除 </a>|<a href="JavaScript:doDetail('<%=orgIds[i] %>')">库存 </a>]</td>
+						<td align="center" nowrap nowrap>[ <a
+							href="JavaScript:doEdit('<%=orgIds[i] %>')">编辑</a> | <a href="JavaScript:doDelete('<%=orgIds[i] %>')">删除 </a>|<a href="JavaScript:doDetail('<%=orgIds[i] %>')">库存 </a>]</td>
 					</tr>
 					<%
 							}

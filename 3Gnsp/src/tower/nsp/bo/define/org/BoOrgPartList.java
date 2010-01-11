@@ -94,6 +94,9 @@ public class BoOrgPartList implements RootBo {
 					requestXml.setItemValue("SYS_ORG", row, "ORG_ID", rowAmount.getString("ORG_ID"));
 					requestXml.setItemValue("SYS_ORG", row, "PARENT_ID", rowAmount.getString("PARENT_ID"));
 					requestXml.setItemValue("SYS_ORG", row, "STATION_FLAG", rowAmount.getString("STATION_FLAG"));
+					requestXml.setItemValue("SYS_ORG", row, "PER_CODE", rowAmount.getString("PER_CODE"));
+					requestXml.setItemValue("SYS_ORG", row, "FRE_POINT", rowAmount.getString("FRE_POINT"));
+					requestXml.setItemValue("SYS_ORG", row, "ORG_TYPE", rowAmount.getString("ORG_TYPE"));
 				}
 			}
 		

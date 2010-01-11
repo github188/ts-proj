@@ -220,7 +220,7 @@
 						  <input type="text" class="text" name="IN_ORG_NAME" value=<%=inOrgName %>> 
 						  <input type="button" name="selectInOrg" class="selButton" value="选择" onClick="doSelInOrg()" /><span class="requiredField">*</span>
 						 </td>
-						 <td width="120" align="right">新建基站：</td>
+						 <td width="120" align="right">新建小区：</td>
 						 <td width="300">
 						  <select name="NEW_STATION_FLAG" class="select" id="NEW_STATION_FLAG" style="width:11em">
 						  <%for(int i=0;i<newStationValue.length;i++){ %>

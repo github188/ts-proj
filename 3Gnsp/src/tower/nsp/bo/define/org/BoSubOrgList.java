@@ -33,6 +33,9 @@ public class BoSubOrgList implements RootBo {
 		StringBuffer sqlWhere;
 		String orgName;
 		String orgCode;
+		String frePoint;
+		String perCode;
+		String orgType;
 		String linkMan;
 		String linkTele;
 		String linkEmail;
@@ -50,6 +53,9 @@ public class BoSubOrgList implements RootBo {
 		}
 		orgName = requestXml.getInputValue("QORG_NAME");
 		orgCode = requestXml.getInputValue("QORG_CODE");
+		frePoint = requestXml.getInputValue("QFRE_POINT");
+		perCode = requestXml.getInputValue("QPER_CODE");
+		orgType = requestXml.getInputValue("QORG_TYPE");
 		linkMan = requestXml.getInputValue("QLINK_MAN");	
 		linkTele =requestXml.getInputValue("QLINK_TELE");
 		linkEmail =requestXml.getInputValue("QLINK_EMAIL");
@@ -80,6 +86,31 @@ public class BoSubOrgList implements RootBo {
 			 sqlWhere.append("  ORG_CODE=");
 			 sqlWhere.append(transaction.formatString(orgCode));
 		 }
+	
+		 if(frePoint != null && frePoint.length() !=0){
+			 if(sqlWhere.toString().length()>0){
+				 sqlWhere.append(" AND ");
+			 }
+			 sqlWhere.append("  FRE_POINT=");
+			 sqlWhere.append(transaction.formatString(frePoint));
+		 }
+		 
+		 if(perCode != null && perCode.length() !=0){
+			 if(sqlWhere.toString().length()>0){
+				 sqlWhere.append(" AND ");
+			 }
+			 sqlWhere.append("  PER_CODE=");
+			 sqlWhere.append(transaction.formatString(perCode));
+		 }
+		 if(orgType != null && orgType.length() !=0){
+			 if(sqlWhere.toString().length()>0){
+				 sqlWhere.append(" AND ");
+			 }
+			 sqlWhere.append("  ORG_TYPE=");
+			 sqlWhere.append(transaction.formatString(orgType));
+		 }
+		 
+		 
 		 if(linkMan != null && linkMan.length() !=0){
 			 if(sqlWhere.toString().length()>0){
 				 sqlWhere.append(" AND ");

@@ -143,7 +143,7 @@
                <tr>
                   <td align="right">调入单位：</td>
                   <td><div><%=inOrgs %></div></td>
-                  <td align="right">调入基站：</td>
+                  <td align="right">调入小区：</td>
                   <td><div><%=inStations %></div></td>
                   <td>&nbsp;</td>
                </tr>

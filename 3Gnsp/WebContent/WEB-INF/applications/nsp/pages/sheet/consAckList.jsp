@@ -230,11 +230,11 @@
                     <th nowrap>工单编号</th>
                     <th nowrap>调度日期</th>
                     <th nowrap>调出单位</th>
-                    <th nowrap>调出基站</th>
+                    <th nowrap>调出小区</th>
                     <th nowrap>设备类别</th>
                     <th nowrap>设备型号</th>
                     <th nowrap>调入单位</th>
-                    <th nowrap>调入基站</th>
+                    <th nowrap>调入小区</th>
                     <th nowrap>调度数量</th>
                     <th nowrap>施工人</th>
                     <th nowrap>完工日期</th>

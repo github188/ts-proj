@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>基站配置查询</title>
+<title>小区配置查询</title>
 <!-- 
   位置：/nsp/pages/sheet/ConfStatOrgDetail.jsp
   作者：范丽娟
@@ -119,7 +119,7 @@
 
 <body id="mainArea">
   <div id="mainPanel" class="panel">
-    <div class="panelHead">基站配置查询-资源配置信息</div>
+    <div class="panelHead">小区配置查询-资源配置信息</div>
     <div class="panelContent">
       <div class="panelContent2">    
         <!-- 查询面板 -->
@@ -175,7 +175,7 @@
                  <td></td>
                 </tr>
                 <tr>
-                 <td align="right" colspan="2" nowrap>是否为基站：</td>
+                 <td align="right" colspan="2" nowrap>是否为小区：</td>
                   <td >
                   <%for(int j=0;j<value.length;j++){ 
                 	  if(value[j].equals(stationFlag)){
