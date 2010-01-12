@@ -105,11 +105,8 @@
   function doSelOutOrg(){
     selDialog("ctrl?FUNC_ID=SelectOrg","OUT_ORG_ID","OUT_ORG_NAME");
   }
-    function doSelRes(){
+  function doSelRes(){
     selDialog("ctrl?FUNC_ID=SelectClassType","RESOURCE_ID","RESOURCE_ID_SHOW","RESOURCE_FLAG");
-  }
-  function doSelResource(){
-    selDialog("ctrl?FUNC_ID=SelectClassType","RESOURCE_ID","RESOURCE_NAME","RESOURCE_FLAG");
   }
   function TDoChangePage(curPage){
     form1["CUR_PAGE"].value = curPage;
@@ -154,7 +151,7 @@
                 <tr>
 	                  <td align="right">调出设备类型：</td>
 	                  <td>
-                  <input name=""RESOURCE_FLAG"" type="hidden" value="<%=resourceFlag %>" >
+                  <input name="RESOURCE_FLAG" type="hidden" value="<%=resourceFlag %>" >
                   <input name="RESOURCE_ID" type="hidden" value="<%=resourceId %>" >
                   <input type="text" class="text" name="RESOURCE_ID_SHOW"   value="<%=resourceIdShow %>"  readonly>
                   <input type="button" name="selectRes" class="selButton" value="选择" onClick="doSelRes();" />
@@ -165,7 +162,7 @@
 	                  <td align="right">&nbsp;</td>
                       <td>&nbsp;</td>
 	                  <td align="right" nowrap="nowrap">
-	                   <input type="submit" class="submit" onClick="doList();" value="查询">
+	                   <input type="submit" class="submit" value="查询">
 	                   <input type="button" class="button" onClick="doClear();" value="重置">
 	                   <input type="button" class="bigButton" onClick="doExcel();" value="导出Excel">
 	                  

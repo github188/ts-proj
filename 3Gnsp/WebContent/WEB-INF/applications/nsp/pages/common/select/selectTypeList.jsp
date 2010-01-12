@@ -121,6 +121,11 @@
                     <td align="left" rowspan="<%=types.size() %>">
                     <%=className %>
                     </td>
+                     <%if(types.size()<=0){ %>
+                     <td align="center" colspan=2>
+                    该资源类别下无具体资源型号。
+                     </td>
+                    <%}else{ %>
                     <%
                 	for(int k=0;k<types.size();k++){
 						enResourceType = (EnResourceType)types.get(k);
@@ -143,7 +148,7 @@
                    </tr>
                 
                 
-                <% }}%>	
+                <% }}}%>	
                 <%
                 if(classes.size()==0){
                 %>	
