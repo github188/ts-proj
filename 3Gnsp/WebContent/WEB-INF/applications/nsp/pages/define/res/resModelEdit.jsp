@@ -18,8 +18,10 @@
     typeId = xml.getItemValue("RESOURCE_TYPE",1,"TYPE_ID");
     typeCode = xml.getItemValue("RESOURCE_TYPE",1,"TYPE_CODE");
    	typeName = xml.getItemValue("RESOURCE_TYPE",1,"TYPE_NAME");
+   	produceFactory = xml.getItemValue("RESOURCE_TYPE",1,"PRODUCE_FACTORY");
     typeConfAmount = xml.getItemValue("RESOURCE_TYPE",1,"TYPE_CONF_AMOUNT");
     resourceClassName = xml.getItemValue("RESOURCE_TYPE",1,"RESOURCE_CLASS_NAME");
+    remark = xml.getItemValue("RESOURCE_TYPE",1,"REMARK");
 
 	//session
 	XMLWrap xml1 = XMLWrap.getSessionXml(request,session,application);
@@ -127,7 +129,6 @@
 		                  <%
 		                  }else{
 		                  %>
-		                  
 		                  <td width="100" align="right">所属类别：</td>
 		                  <td width="150">
 		                      <span id="spryClassName">
@@ -159,7 +160,7 @@
                           <td width="100" align="right">生产厂家：</td>
 		                  <td colspan="3" width="150">
 		                      <span id="spryProduceFactory">
-             					 <input type="text" class="text" name="PRODUCE_FACTORY"value="<%=typeCode %>"><span class="requiredField">*</span>
+             					 <input type="text" class="text" name="PRODUCE_FACTORY"value="<%=produceFactory %>"><span class="requiredField">*</span>
 		                            <span class="textfieldRequiredMsg">需要提供一个值。</span>
 		                            <span class="textfieldMaxCharsMsg">已超过最大字符数50。</span>	                          
 		                            </span>
@@ -169,7 +170,7 @@
 		                <tr>
                           <td width="100" align="right">备注：</td>
 		                  <td colspan="3"><span id="spryRemark">
-      						<textarea cols="50" rows="8" class="textarea" name="REMARK"></textarea>
+      						<textarea cols="50" rows="8" class="textarea" name="REMARK"><%=remark %></textarea>
       							<span class="textareaMaxCharsMsg">已超过最大字符数。</span> </span>
       						</td>
 		               </tr>
