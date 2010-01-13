@@ -381,7 +381,7 @@
 	</error>
 	<error>
 		<id>OS0219</id>
-		<message>未查找到名称为'{0}'表单，请查看excel表中是否存在名称为'{0}'的表单。</message>
+		<message>未找到名称为'{0}'表单，请检查excel表中是否存在名称为'{0}'的表单。</message>
 		<hint></hint>
 	</error>
 	<error>
