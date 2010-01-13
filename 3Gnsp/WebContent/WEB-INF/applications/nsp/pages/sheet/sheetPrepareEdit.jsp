@@ -99,6 +99,9 @@
    function doSelInOrg(){
     selDialog("ctrl?FUNC_ID=SelectOrgOrStaJsp","IN_ORG_ID","IN_ORG_NAME","IN_ORG_PARENT_ID","IN_STATION_FLAG",650,600,false);
   }
+  function doSelRes(){
+    selDialog("ctrl?FUNC_ID=SelectTypeTree","RESOURCE_TYPE_ID","RESOURCE_TYPE_NAME");
+  }
   function doSelType(){
     selDialog("ctrl?FUNC_ID=SelectTypeTree","RESOURCE_TYPE_ID","RESOURCE_TYPE_NAME","RESOURCE_CLASS_ID",null,null,true);
   }
@@ -115,6 +118,7 @@
 	String outStationId;
 	String outOrgName;
 	String resourceTypeId;
+	String resourceTypeName;
 	String amountPrepare;
 	String inOrgId;
 	String inStationId;
@@ -135,6 +139,7 @@
 	outStationId = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"OUT_STATION_ID");
 	outOrgName = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"OUT_ORG_NAME");
 	resourceTypeId = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"RESOURCE_TYPE_ID");
+	resourceTypeName = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"RESOURCE_TYPE_NAME");
 	amountPrepare = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"AMOUNT_PREPARE");
 	inOrgName = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"IN_ORG_NAME");
 	inOrgId = xml.getItemValue("RESOURCE_PREPARE_LIST",1,"IN_ORG_ID");
@@ -198,7 +203,14 @@
 		              <tr>
 		               <td width="120" align="right">设备型号：</td>
 	                    <td width="300">
-                          <script>var type = new Tower.Widget.Selector("TypeSelector","RESOURCE_TYPE_ID","ctrl?FUNC_ID=SelectTypeTree&INPUT_TYPE=radio",{selected:["<%=resourceTypeId%>"]},{change:onChange})</script><span class="requiredField">*</span>
+	                      <input name="RESOURCE_TYPE_ID" type="hidden" value="<%=resourceTypeId %>" >
+                    	  <input type="text" class="text" name="RESOURCE_TYPE_NAME"   value="<%=resourceTypeName %>"  readonly>
+                  		  <input type="button" name="selectRes" class="selButton" value="选择" onClick="doSelRes();" />
+	                    <!-- 
+	                    <script>var type = new Tower.Widget.Selector("TypeSelector","RESOURCE_TYPE_ID","ctrl?FUNC_ID=SelectTypeTree&INPUT_TYPE=radio",{selected:["<%=resourceTypeId%>"]},{change:onChange})
+                          </script>
+                            -->
+                          <span class="requiredField">*</span>
 		                </td>
 	              	    <td width="120" align="right">设备状态：</td>
                         <td width="300">
