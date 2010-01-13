@@ -111,7 +111,9 @@
                   <th>型号</th>
                   <th>库存数</th>
                   <th>施工占用数</th>
+                  <!-- 
                   <th>坏件数</th>
+                   -->
                   <th>合计</th>
                 </tr>
                 <%
@@ -130,7 +132,9 @@
                   <td align="center"><%=typeName %></td>
                   <td align="center"><%=amounts[i] %></td>
                   <td align="center"><%=inconsAmounts[i]%></td>
+                  <!-- 
                   <td align="center"><%=badAmounts[i] %></td>
+                   -->
                   <td align="center"><%=allAmounts[i] %></td>
                  </tr>
                  <%} %>

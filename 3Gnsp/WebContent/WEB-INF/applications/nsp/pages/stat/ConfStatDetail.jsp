@@ -209,9 +209,11 @@
                       <th nowrap>预入库</th>
 	                  <th nowrap>施工占用</th>
 	                  <th nowrap>在线数量</th>
-	                  <th nowrap>在线配置</th>
-	                  <th nowrap>坏件数量</th>
+	                  <th nowrap colspan="3">在线配置</th>
+	                  <!--  
+	                  <th nowrap >坏件数量</th>
 	                  <th nowrap>操作</th>
+	                  -->
 	                </tr>
 	                <%for(int i=0;i<classNames.length;i++){
 	                	String style="";
@@ -227,47 +229,8 @@
 	                  <td align="center" nowrap><%=preInAmount[i]%></td>
                       <td align="center" nowrap><%=inConsAmount[i]%></td>
 	                  <td align="center" nowrap><%=onlineAmount[i]%></td>
-	                  <td align="center" nowrap><%=onLineConf[i]%></td>
-	                  <td align="center" nowrap><%=badAmounts[i]%></td>
-	                  <td align="center" nowrap>
-	                  <%
-	                  	if(stockAmounts[i] != null && stockAmounts[i].length()>0){
-	                  		stockAmount =Long.parseLong(stockAmounts[i]);
-	                  	}else{
-	                  		stockAmount = 0;
-	                  	}
-	                  if(badAmounts[i] != null && badAmounts[i].length()>0){
-	                	  badAmount =Long.parseLong(badAmounts[i]);
-	                  	}else{
-	                  		badAmount = 0;
-	                  	}
-	                  %>
-	                  <%if(stockAmount>0 && badAmount > 0){ %>
-	                  [
-	                  	<a href=javaScript:doResourceChange('<%=orgIds[i] %>','<%=resourceTypeIds[i] %>','GoodToBad');>转为坏件</a>|
-	                  	<a href=javaScript:doResourceChange('<%=orgIds[i] %>','<%=resourceTypeIds[i] %>','BadToGood');>转为好件</a>
-	                  ]
-	                  <%}else if(stockAmount>0 && badAmount <= 0){ %>
-	                   [
-	                  	<a href=javaScript:doResourceChange('<%=orgIds[i] %>','<%=resourceTypeIds[i] %>','GoodToBad');>转为坏件</a>|
-	                  	<a  style="color:#666666; text-decoration:none; cursor:default">转为好件</a>
-	                  ]
-	                  <%} else if (stockAmount<=0 && badAmount > 0){%>
-	                  [
-	                  	<a  style="color:#666666; text-decoration:none; cursor:default">转为坏件</a>|
-	                  	<a href=javaScript:doResourceChange('<%=orgIds[i] %>','<%=resourceTypeIds[i] %>','BadToGood');>转为好件</a>
-	                  ]
-	                  <%} else{%>
-	                   [
-	                  	<a  style="color:#666666; text-decoration:none; cursor:default">转为坏件</a>|
-	                  	<a style="color:#666666; text-decoration:none; cursor:default">转为好件</a>
-	                  ]
-	                  <%} %>
-					  </td>
-	                  
-	                 </tr>
-	                 <%} %>
-					                 
+	                  <td align="center" nowrap colspan="3"><%=onLineConf[i]%></td>
+	                    
               </table>
               
               <br>
