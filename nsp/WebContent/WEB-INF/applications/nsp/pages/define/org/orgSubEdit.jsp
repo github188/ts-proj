@@ -232,10 +232,11 @@ try{
 				return false;
 		}
 		if(exetendName != ".xls"){
-			alert("您目前选择的不是excel文件，无法提交，请选择excel文件！");
-			form1.READ_FILE.select();
-			document.selection.clear();
-			form1.READ_FILE.focus();
+			alert("请选择按照指定格式制定的excel文件。");
+			window.location="ctrl?FUNC_ID=SubOrgAdd&PARENT_ID=<%=parentId%>&IS_BATCH_ADD_FLAG=<%=isBatchAddFlag%>";
+			//form1.READ_FILE.select();
+			//document.selection.clear();
+			//form1.READ_FILE.focus();
 			return false;
 		}
 		
