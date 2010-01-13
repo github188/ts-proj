@@ -44,7 +44,7 @@
   </div>
   <div class="panelContent">
     <div class="panelContent2">
-      <div id="appInfo">资源调度管理系统</div>
+      <div id="appInfo">3G资源调度管理系统</div>
       <div id="timeAreaContainer">现在时刻：<span id="timeArea"></span></div>
     </div>
   </div>
