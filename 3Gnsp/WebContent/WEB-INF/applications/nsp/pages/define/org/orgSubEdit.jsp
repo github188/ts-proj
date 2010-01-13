@@ -63,8 +63,8 @@
   
   flag = xml.getItemValue("SYS_ORG_STATION",1,"ADD_FLAG");
   
-  String[] flagBOrgType ={"请选择","1","2"};
-  String[] flagOrgTypeDescs={"","室内小区","室外小区"};
+  String[] flagBOrgType ={"","1","2"};
+  String[] flagOrgTypeDescs={"请选择","室内小区","室外小区"};
   
   String[] flagBuyIns ={"N","Y"};
   String[] flagBuyInDescs={"不可以","可以"};
@@ -361,7 +361,7 @@ try{
                 	<td></td><td></td>
                 </tr>
                 <tr>
-                  <td align="right" valign="top" nowrap>基站描述：</td>
+                  <td align="right" valign="top" nowrap>小区描述：</td>
                   <td colspan="3"><span id="spryOrgDesc"><span id="sprytextarea1">
                     <textarea rows="5" cols="50" class="textarea" name="ORG_DESC"><%=orgDesc %></textarea>
                             <span class="textareaMaxCharsMsg">已超过最大字符数。</span>                    </span><br> <span class="textareaMaxCharsMsg">已超过最大字符数50。</span></span></td>
@@ -381,7 +381,7 @@ try{
    <%}else if(isBatchAddFlag.equals("Y")){ %>
    
     <!-- 基站信息批量导入工作任务面板内容 -->
-                            <div class="panelInnerHead">基站批量导入<a name="notice"></a></div>
+                            <div class="panelInnerHead">小区批量导入<a name="notice"></a></div>
                             <form action="ctrl" method="post" name="form1" enctype="multipart/form-data" >
                 			<input type="hidden" name="FUNC_ID" value="SubOrgBatchSubmit">
                 			<input type="hidden" name="PARENT_ID" value="<%=parentId %>"> 
