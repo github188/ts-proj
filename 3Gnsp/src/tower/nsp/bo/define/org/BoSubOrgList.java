@@ -66,6 +66,7 @@ public class BoSubOrgList implements RootBo {
 		 **********************************************************************/
 		transaction.createDefaultConnection(null, false);
 		dbSysOrg = new DbSysOrg(transaction,null);
+		dbSysOrg.setOrderBy(" ORDER BY ORG_ID DESC");
 		sqlWhere = new StringBuffer();
 		/***********************************************************************
 		 * 业务处理
