@@ -29,7 +29,7 @@
 %>
 <script type="text/javascript">
    function doCancle(){
-  	window.history.back();
+  	window.location="ctrl?FUNC_ID=InOpenSheetList";
   }
  function doSubmit(){
 		var fullName=form1.READ_FILE.value;
@@ -43,10 +43,11 @@
 				return false;
 		}
 		if(exetendName != ".xls"){
-			alert("请提交严格按照指定格式制定的excel文件。");
-			form1.READ_FILE.select();
-			document.selection.clear();
-			form1.READ_FILE.focus();
+			alert("请选择按照指定格式制定的excel文件。");
+			window.location="ctrl?FUNC_ID=SheetPrepareBatchAddTo";
+			//form1.READ_FILE.select();
+			//document.selection.clear();
+			//form1.READ_FILE.focus();
 			return false;
 		}
 		form1.submit();
