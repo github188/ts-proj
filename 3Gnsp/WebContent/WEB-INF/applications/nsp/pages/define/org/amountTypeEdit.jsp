@@ -342,27 +342,8 @@ try{
                   		<input type="text" class="text" name="ONLINE_AMOUNT" value="0"><span class="requiredField">*</span>
                   	<%} %>
                   		<span class="textfieldRequiredMsg">需要提供一个值。</span><span class="textfieldMaxCharsMsg">已超过最大字符数50。</span> <span class="textfieldInvalidFormatMsg">格式无效。</span></span></td>
-                	<td align="right" nowrap>坏件数量：</td>
-                  	<td><span id="spryBadAmount">
-                  	<%if(badAmount != null && badAmount.length() != 0){ %>
-                  		<input type="text" class="text" name="BAD_AMOUNT" value="<%=badAmount %>"><span class="requiredField">*</span>
-                 	<%}else{ %>
-                  		<input type="text" class="text" name="BAD_AMOUNT" value="0"><span class="requiredField">*</span>
-                  	<%} %>
-                  	<span class="textfieldRequiredMsg">需要提供一个值。</span><span class="textfieldMaxCharsMsg">已超过最大字符数50。</span> <span class="textfieldInvalidFormatMsg">格式无效。</span></span></td>
-                </tr>
-                <tr>  
-                    <td align="right" nowrap>预出库量：</td>
-                 	<%if(preOutAmount != null && preInAmount.length() != 0){ %>
-                  	<td>
-                  	 	<input type="text" class="text" name="PRE_OUT_AMOUNT" value="<%=preOutAmount %>" readonly>
-                  	</td>
-                  	<%}else{ %>
-                   	<td>
-                  	 	<input type="text" class="text" name="PRE_OUT_AMOUNT" value="0" readonly>
-                  	</td>
-                  <%} %>
-                  <td align="right" nowrap>预入库量：</td>
+                  	
+                  	  <td align="right" nowrap>预入库量：</td>
                   <%if(preInAmount != null && preInAmount.length() != 0){ %>
                   <td>
                   	<input type="text" class="text" name="PRE_IN_AMOUNT" value="<%=preInAmount %>" readonly>
@@ -372,6 +353,19 @@ try{
                   	<input type="text" class="text" name="PRE_IN_AMOUNT" value="0" readonly>
                   </td>
                   <%} %>
+                </tr>
+                <tr>  
+                    <td align="right" nowrap>预出库量：</td>
+                 	<%if(preOutAmount != null && preInAmount.length() != 0){ %>
+                  	<td colspan="2">
+                  	 	<input type="text" class="text" name="PRE_OUT_AMOUNT" value="<%=preOutAmount %>" readonly>
+                  	</td>
+                  	<%}else{ %>
+                   	<td colspan="2"> 
+                  	 	<input type="text" class="text" name="PRE_OUT_AMOUNT" value="0" readonly>
+                  	</td>
+                  <%} %>
+                
                   
                 </tr>
                

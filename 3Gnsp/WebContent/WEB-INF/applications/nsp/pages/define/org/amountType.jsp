@@ -296,7 +296,6 @@ try{
                   <th width="10%" nowrap>库存数量</th>
                   <th width="10%" nowrap>在线数量</th>	
                   <th width="10%" nowrap>施工占用</th>
-                  <th width="10%" nowrap>坏件数量</th>
                   <th width="10%" nowrap>预出库量</th>
                   <th width="10%" nowrap>预入库量</th>
                   <th width="8%" nowrap>[<a href="JavaScript:doAdd('<%=orgId %>','<%='Y' %>')" >添加</a>]</th>
@@ -313,7 +312,6 @@ try{
                   <td align="center"><%=stockAmounts[i]%></td>
                   <td align="center"><%=onlineAmounts[i]%></td>
                   <td align="center"><%=inconsAmounts[i]%></td>
-                  <td align="center"><%=badAmounts[i]%></td>
                   <td align="center"><%=preOutAmounts[i]%></td>
                   <td align="center"><%=preInAmounts[i]%></td>
                   <td align="center" nowrap>[ <a href="JavaScript:doEdit('<%=orgIds[i] %>','<%=resourceTypeIds[i] %>','<%="N" %>')">编辑</a>]</td>
