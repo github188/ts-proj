@@ -135,11 +135,11 @@ public class BoSubOrgBatchSubmit implements RootBo {
 			}
 			
 			//验证是否存在相同名称或相同编号的小区
-			int sameNameCount = dbOrg.countWhere(" ORG_NAME='"+orgName+"' and STATION_FLAG='Y'");
-			if(sameNameCount > 0){
+			//int sameNameCount = dbOrg.countWhere(" ORG_NAME='"+orgName+"' and STATION_FLAG='Y'");
+			//if(sameNameCount > 0){
 				//orgName已存在，请修改小区名称
-				throw new ErrorException("AM0300",new Object[] { orgName});
-			}
+			//	throw new ErrorException("AM0300",new Object[] { orgName});
+			//}
 //			int sameCodeCount = dbOrg.countWhere(" ORG_CODE='"+orgCode+"' and STATION_FLAG='Y'");
 //			if(sameCodeCount > 0){
 //				//orgCode已存在，请修改小区标识

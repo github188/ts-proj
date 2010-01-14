@@ -96,10 +96,10 @@ public class BoSubOrgSubmit implements RootBo {
 		if (orgId.length() == 0 || orgId == null) {
 			
 			//验证
-			int count1 = dbOrg.countWhere(" ORG_NAME='"+orgName+"' and STATION_FLAG='Y'");
-			if(count1 > 0){
-				throw new ErrorException("AM0106",null);
-			}
+			//int count1 = dbOrg.countWhere(" ORG_NAME='"+orgName+"' and STATION_FLAG='Y'");
+			//if(count1 > 0){
+			//	throw new ErrorException("AM0106",null);
+			//}
 //			int count2 = dbOrg.countWhere(" ORG_CODE='"+orgCode+"' and STATION_FLAG='Y'");
 //			if(count2 > 0){
 //				throw new ErrorException("AM0107",null);
