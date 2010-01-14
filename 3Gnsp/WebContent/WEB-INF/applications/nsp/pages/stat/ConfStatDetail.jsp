@@ -230,6 +230,8 @@
                       <td align="center" nowrap><%=inConsAmount[i]%></td>
 	                  <td align="center" nowrap><%=onlineAmount[i]%></td>
 	                  <td align="center" nowrap colspan="3"><%=onLineConf[i]%></td>
+	                </tr>
+	                <%} %>
 	                    
               </table>
               
