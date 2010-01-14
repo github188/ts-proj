@@ -76,7 +76,7 @@ public class BoAmountTypeSubmit implements RootBo {
 				enResourceOrgAmount.setPreInAmount(Long.parseLong(preInAmount));
 				enResourceOrgAmount.setInconsAmount(Long.parseLong(inconsAmount));
 				enResourceOrgAmount.setOnlineAmount(Long.parseLong(onlineAmount));
-				enResourceOrgAmount.setBadAmount(Long.parseLong(badAmount));
+				//enResourceOrgAmount.setBadAmount(Long.parseLong(badAmount));
 				
 				dbResourceOrgAmount.insert(enResourceOrgAmount);
 			}
@@ -86,7 +86,7 @@ public class BoAmountTypeSubmit implements RootBo {
 			enResourceOrgAmount.setPreInAmount(Long.parseLong(preInAmount));
 			enResourceOrgAmount.setInconsAmount(Long.parseLong(inconsAmount));
 			enResourceOrgAmount.setOnlineAmount(Long.parseLong(onlineAmount));
-			enResourceOrgAmount.setBadAmount(Long.parseLong(badAmount));
+			//enResourceOrgAmount.setBadAmount(Long.parseLong(badAmount));
 			
 			dbResourceOrgAmount.updateByKey(orgId, typeId, enResourceOrgAmount);
 		}
