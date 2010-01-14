@@ -132,13 +132,13 @@ public class ServletSheetStatListExcel extends javax.servlet.http.HttpServlet im
 		createHead(0, 1, "调度日期");
 		createHead(0, 2, "处理状态");
 		createHead(0, 3, "调出单位");
-		createHead(0, 4, "调出基站");
-		createHead(0, 5, "新建基站");
+		createHead(0, 4, "调出小区");
+		createHead(0, 5, "新建小区");
 		createHead(0, 6, "设备类别");
 		createHead(0, 7, "设备型号");
 		createHead(0, 8, "数量");
 		createHead(0, 9, "调入单位");
-		createHead(0, 10, "调入基站");
+		createHead(0, 10, "调入小区");
 		createHead(0, 11, "领取人");
 		createHead(0, 12, "施工人");
 

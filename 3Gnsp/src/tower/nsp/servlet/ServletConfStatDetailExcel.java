@@ -123,7 +123,7 @@ public class ServletConfStatDetailExcel extends javax.servlet.http.HttpServlet i
 		res.setHeader("Cache-Control", "no-cache");
 		res.setDateHeader("Expires", 0);
 
-		String fileName = new String("基站配置统计.xls".getBytes(), "ISO8859-1");
+		String fileName = new String("小区配置统计.xls".getBytes(), "ISO8859-1");
 		res.addHeader("Content-Disposition", "filename=\"" + fileName + "\"");
 
 		OutputStream os = res.getOutputStream();
@@ -136,7 +136,7 @@ public class ServletConfStatDetailExcel extends javax.servlet.http.HttpServlet i
 		WorkbookSettings wbs = new WorkbookSettings();
 		wbs.setEncoding("UTF-8");
 		wb = Workbook.createWorkbook(baos, wbs);
-		sheet = wb.createSheet("基站配置统计", 0);
+		sheet = wb.createSheet("小区配置统计", 0);
 		createHead(0, 0, "机构编号");
 		createCell(0, 1, orgCode);
 		createHead(0, 2, "机构名称");
@@ -151,7 +151,7 @@ public class ServletConfStatDetailExcel extends javax.servlet.http.HttpServlet i
 		createHead(1, 4, "E-Mail");
 		createCell(1, 5, linkEmail);
 
-		createHead(2, 0, "是否为基站");
+		createHead(2, 0, "是否为小区");
 		for (int j = 0; j < value.length; j++) {
 			if (value[j].equals(stationFlag)) {
 				createCell(2, 1, Desc[j]);

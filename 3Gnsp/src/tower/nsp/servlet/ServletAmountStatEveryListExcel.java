@@ -102,7 +102,7 @@ public class ServletAmountStatEveryListExcel extends HttpServlet implements Serv
 			createTitleCell(3,0,"型号");
 			createTitleCell(4,0,"库存数量");
 			createTitleCell(5,0,"施工占用");
-			createTitleCell(6,0,"坏件数量");
+			//createTitleCell(6,0,"坏件数量");
 			createTitleCell(7,0,"合计");
 	
 			for(int i = 0 ; i < orgNames.length ; i ++){
@@ -112,7 +112,7 @@ public class ServletAmountStatEveryListExcel extends HttpServlet implements Serv
 				createCell(3,i+1,typeName);
 				createCell(4,i+1,amounts[i]);
 				createCell(5,i+1,inconsAmounts[i]);
-				createCell(6,i+1,badAmounts[i]);
+				//createCell(6,i+1,badAmounts[i]);
 				createCell(7,i+1,allAmounts[i]);
 			}
 			wb.write();

@@ -124,13 +124,13 @@ public class ServletRecvSheetListExcel extends javax.servlet.http.HttpServlet im
 		createHead(0, 0, "工单编号");
 		createHead(0, 1, "调度日期");
 		createHead(0, 2, "调出单位");
-		createHead(0, 3, "调出基站");
+		createHead(0, 3, "调出小区");
 		createHead(0, 4, "设备类别");
 		createHead(0, 5, "设备型号");
 		createHead(0, 6, "调度数量");
 		createHead(0, 7, "调入单位");
-		createHead(0, 8, "调入基站");
-		createHead(0, 9, "新建基站");
+		createHead(0, 8, "调入小区");
+		createHead(0, 9, "新建小区");
 		createHead(0, 10, "状态");
 		for (int i = 0; i < listIds.length; i++) {
 			createCell(i + 1, 0, sheetIds[i]);
