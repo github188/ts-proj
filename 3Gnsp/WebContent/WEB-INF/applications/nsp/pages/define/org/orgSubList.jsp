@@ -284,7 +284,7 @@
   }
   
   function doEdit(id) {
-    window.location.href ="ctrl?FUNC_ID=SubOrgEdit&QORG_ID="+id;
+    window.location.href ="ctrl?FUNC_ID=SubOrgEdit&QORG_ID="+id+"&IS_BATCH_ADD_FLAG=N";
   }
   
   function doDelete(id) {
