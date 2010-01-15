@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>中国移动通信集团山东有限公司青岛分公司 - 资源调度管理系统</title>
+<title>中国移动通信集团山东有限公司青岛分公司 - 3G资源调度管理系统</title>
 </head>
 
 <frameset rows="70,*,28" cols="*" frameborder="NO" border="0" framespacing="0">

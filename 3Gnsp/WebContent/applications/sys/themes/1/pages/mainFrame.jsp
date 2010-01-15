@@ -14,7 +14,7 @@
 
 <body id="mainArea">
   <div id="mainPanel" class="panel">
-    <div class="panelHead">欢迎使用资源调度管理系统</div>
+    <div class="panelHead">欢迎使用3G资源调度管理系统</div>
     <div class="panelContent">
       <div class="panelContent2">
         
