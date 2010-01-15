@@ -357,11 +357,11 @@ try{
                 <tr>  
                     <td align="right" nowrap>预出库量：</td>
                  	<%if(preOutAmount != null && preInAmount.length() != 0){ %>
-                  	<td colspan="2">
+                  	<td colspan="3">
                   	 	<input type="text" class="text" name="PRE_OUT_AMOUNT" value="<%=preOutAmount %>" readonly>
                   	</td>
                   	<%}else{ %>
-                   	<td colspan="2"> 
+                   	<td colspan="3"> 
                   	 	<input type="text" class="text" name="PRE_OUT_AMOUNT" value="0" readonly>
                   	</td>
                   <%} %>
