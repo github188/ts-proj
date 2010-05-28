@@ -110,32 +110,34 @@ public class BoSubOrgBatchSubmit implements RootBo {
 			}else{
 				orgName = cell.getStringCellValue();
 			}
-			
-			//验证是否存在相同名称或相同编号的基站
-			int sameNameCount = dbOrg.countWhere(" ORG_NAME='"+orgName+"' and STATION_FLAG='Y'");
-			if(sameNameCount > 0){
-				//orgName已存在，请修改基站名称
-				throw new ErrorException("AM0300",new Object[] { orgName});
+			if(orgName != null && orgName.length() > 0){
+//				验证是否存在相同名称或相同编号的基站
+				int sameNameCount = dbOrg.countWhere(" ORG_NAME='"+orgName+"' and STATION_FLAG='Y'");
+				if(sameNameCount > 0){
+					//orgName已存在，请修改基站名称
+					throw new ErrorException("AM0300",new Object[] {orgName});
+				}
+				int sameCodeCount = dbOrg.countWhere(" ORG_CODE='"+orgCode+"' and STATION_FLAG='Y'");
+				if(sameCodeCount > 0){
+					//orgCode已存在，请修改基站编号
+					throw new ErrorException("AM0301",new Object[] {orgCode});
+				}
+				
+				//获取orgId
+				orgId = SysIdCreator.GenNextId(transaction, null,
+						IdCreatorDefine.ID_TYPE_ORG_ID,
+						IdCreatorDefine.ID_LEN_ORG_ID);
+				enOrg.setOrgId(orgId);
+				enOrg.setOrgName(orgName);
+				enOrg.setParentId(parentId);
+				enOrg.setStationFlag(statioFlag);
+				enOrg.setBuyInFlag(buyInFlag);
+				enOrg.setOrgCode(orgCode);
+				
+				// 添加至数据库
+				dbOrg.insert(enOrg);
 			}
-			int sameCodeCount = dbOrg.countWhere(" ORG_CODE='"+orgCode+"' and STATION_FLAG='Y'");
-			if(sameCodeCount > 0){
-				//orgCode已存在，请修改基站编号
-				throw new ErrorException("AM0301",new Object[] { orgCode});
-			}
 			
-			//获取orgId
-			orgId = SysIdCreator.GenNextId(transaction, null,
-					IdCreatorDefine.ID_TYPE_ORG_ID,
-					IdCreatorDefine.ID_LEN_ORG_ID);
-			enOrg.setOrgId(orgId);
-			enOrg.setOrgName(orgName);
-			enOrg.setParentId(parentId);
-			enOrg.setStationFlag(statioFlag);
-			enOrg.setBuyInFlag(buyInFlag);
-			enOrg.setOrgCode(orgCode);
-			
-			// 添加至数据库
-			dbOrg.insert(enOrg);
 		}
 	} catch (IOException e) {
 		e.printStackTrace();

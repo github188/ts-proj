@@ -1,4 +1,4 @@
--- MySQL Administrator dump 1.4
+﻿-- MySQL Administrator dump 1.4
 --
 -- ------------------------------------------------------
 -- Server version	5.0.13-rc-nt
@@ -67501,7 +67501,8 @@ CREATE TABLE `sys_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `nsp`.`sys_user`
+-- Dumping data for table `nsp`.`sys_user`inStationId	"008511"	
+
 --
 
 /*!40000 ALTER TABLE `sys_user` DISABLE KEYS */;

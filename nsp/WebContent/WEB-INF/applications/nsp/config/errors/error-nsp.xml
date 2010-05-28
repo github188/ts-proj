@@ -336,32 +336,32 @@
 	</error>
 	<error>
 		<id>OS0210</id>
-		<message>"调出单位"不能为空，请检查工单明细信息excel表中第{0}条记录的"调出单位"为是否空。</message>
+		<message>"调出单位"不能为空，请检查工单明细信息excel表中第{0}条记录的"调出单位"是否为空。如果已经到达最后一条记录，请找管理员。</message>
 		<hint></hint>
 	</error>
 	<error>
 		<id>OS0211</id>
-		<message>"调出设备型号"不能为空，请检查工单明细信息excel表中第{0}条记录的"调出设备型号"为是否空。</message>
+		<message>"调出设备型号"不能为空，请检查工单明细信息excel表中第{0}条记录的"调出设备型号"是否为空。</message>
 		<hint></hint>
 	</error>
 	<error>
 		<id>OS0212</id>
-		<message>"调出设备状态"不能为空，请检查工单明细信息excel表中第{0}条记录的"调出设备状态"为是否空。</message>
+		<message>"调出设备状态"不能为空，请检查工单明细信息excel表中第{0}条记录的"调出设备状态"是否为空。</message>
 		<hint></hint>
 	</error>
 	<error>
 		<id>OS0213</id>
-		<message>"调出设备数量"不能为空，请检查工单明细信息excel表中第{0}条记录的"调出设备数量"为是否空。</message>
+		<message>"调出设备数量"不能为空，请检查工单明细信息excel表中第{0}条记录的"调出设备数量"是否为空。</message>
 		<hint></hint>
 	</error>
 	<error>
 		<id>OS0214</id>
-		<message>"调入单位"不能为空，请检查工单明细信息excel表中第{0}条记录的"调入单位"为是否空。</message>
+		<message>"调入单位"不能为空，请检查工单明细信息excel表中第{0}条记录的"调入单位"是否为空。</message>
 		<hint></hint>
 	</error>
 	<error>
 		<id>OS0215</id>
-		<message>"是否为新建基站"不能为空，请检查工单明细信息excel表中第{0}条记录的"是否为新建基站"为是否空。</message>
+		<message>"是否为新建基站"不能为空，请检查工单明细信息excel表中第{0}条记录的"是否为新建基站"是否为空。</message>
 		<hint></hint>
 	</error>
 	<error>

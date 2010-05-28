@@ -172,20 +172,25 @@ public class BoResourceOutList implements RootBo {
 				enResourceType = dbResourceType.findByKey(enResourcePrepareList.getResourceTypeId());
 				enSysOrg = dbSysOrg.findByKey(enResourcePrepareList.getInOrgId());
 				//根据调入基站是否为空显示调入基站的机构名称
-				String inStation ;
+				String inStation ="";
 				if(enResourcePrepareList.getInStationId() != null && enResourcePrepareList.getInStationId().length() > 0){
 					enSysOrgP = dbSysOrg.findByKey(enResourcePrepareList.getInStationId());
-					inStation = enSysOrgP.getOrgName();
+					if(enSysOrgP != null){
+						inStation = enSysOrgP.getOrgName();
+					}
+					
 				}else{
 					inStation = "";
 				}
 				int row = dbResourcePrepareList.setToXml(requestXml, enResourcePrepareList);
 				requestXml.setItemValue("RESOURCE_PREPARE_LIST", row, "IN_ORG_NAME", enSysOrg.getOrgName());
 				requestXml.setItemValue("RESOURCE_PREPARE_LIST", row, "IN_STATION_NAME", inStation);
-				String outStation ;
+				String outStation="" ;
 				if(enResourcePrepareList.getOutStationId() != null && enResourcePrepareList.getOutStationId().length() > 0){
 					enSysOrgP = dbSysOrg.findByKey(enResourcePrepareList.getOutStationId());
-					outStation = enSysOrgP.getOrgName();
+					if(enSysOrgP != null){
+					 outStation = enSysOrgP.getOrgName();
+					}
 				}else{
 					outStation = "";
 				}

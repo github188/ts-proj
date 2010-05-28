@@ -4,8 +4,10 @@ package tower.nsp.bo.define.org;
 import org.apache.log4j.Logger;
 
 
+import tower.nsp.db.DbResourcePrepareList;
 import tower.nsp.db.DbSysOrg;
 import tower.nsp.db.DbSysUser;
+import tower.nsp.en.EnResourcePrepareList;
 import tower.nsp.en.EnSysOrg;
 import tower.tmvc.ErrorException;
 import tower.tmvc.QueryResult;
@@ -31,12 +33,17 @@ public class BoSubOrgDelete implements RootBo {
 		DbSysOrg dbOrg;
 		EnSysOrg enOrg;
 
+		DbResourcePrepareList dbResourcePrepareList;
+		EnResourcePrepareList enResourcePrepareList;
 		
 		DbSysUser dbUser;
 
-		// 下属用户数，下属部门数
+		// 下属用户数，下属部门数，调出工单数，调入工单数
 		int userCount;
 		int subOrgCount;
+		int outSheetCount;
+		int inSheetCount;
+		
 		
 		QueryResult qs;
 		StringBuffer sql;
@@ -52,6 +59,7 @@ public class BoSubOrgDelete implements RootBo {
 		transaction.createDefaultConnection(null, false);
 		dbOrg = new DbSysOrg(transaction, null);
 		dbUser = new DbSysUser(transaction, null);
+		dbResourcePrepareList = new DbResourcePrepareList(transaction, null);
 		sql = new StringBuffer();
 		/***********************************************************************
 		 * 业务处理
@@ -89,6 +97,20 @@ public class BoSubOrgDelete implements RootBo {
 		if (subOrgCount > 0) {
 			// 此部门下包含下级部门，不能删除。
 			throw new ErrorException("SORG02", null);
+		}
+		
+		// 根据orgId查找"调出单位"为该部门的工单信息
+		outSheetCount = dbResourcePrepareList.countWhere(" OUT_ORG_ID ='"+ orgId+ "' OR  OUT_STATION_ID='" + orgId+ "'");
+		if (outSheetCount > 0) {
+			// 存在调出单位为该机构（基站）的工单信息，不能删除。
+			throw new ErrorException("SHEET01", null);
+		}
+		
+		// 根据orgId查找"调入单位"为该部门的工单信息
+		inSheetCount = dbResourcePrepareList.countWhere(" IN_ORG_ID ='"+ orgId+ "' OR  IN_STATION_ID='" + orgId+ "'");
+		if (inSheetCount > 0) {
+			//存在调入单位为该机构（基站）的工单信息，不能删除。
+			throw new ErrorException("SHEET02", null);
 		}
 
 		// 删除部门

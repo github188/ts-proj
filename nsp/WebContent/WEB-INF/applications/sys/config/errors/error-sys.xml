@@ -280,6 +280,16 @@
 		<message>此部门下包含下级部门，不能删除。</message>
 		<hint></hint>
 	</error>
+	<error>
+		<id>SHEET01</id>
+		<message>存在调出单位为该机构（基站）的工单信息，不能删除。</message>
+		<hint></hint>
+	</error>
+	<error>
+		<id>SHEET02</id>
+		<message>存在调入单位为该机构（基站）的工单信息，不能删除。</message>
+		<hint></hint>
+	</error>
 	<!-- 密码修改-->
 	<error>
 		<id>USERPASSWORD001</id>
