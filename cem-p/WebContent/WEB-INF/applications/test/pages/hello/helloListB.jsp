@@ -20,7 +20,6 @@
 </head>
 <body>
 <table border="1">
-<h1>SwitchB</h1>
     <tr>
       <th>ID</th>
       <th>Name</th>
