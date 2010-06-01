@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tmvc>
+	<upload.factoryClass>tower.tmvc.util.DiskUploadFileFactory</upload.factoryClass>
+	<upload.tmpPath>$d:/uploadTmp</upload.tmpPath>
+	<upload.path>$d:/upload</upload.path>
+	<upload.maxSize>10000000</upload.maxSize><!-- 10M -->
+	<upload.autoRemove>true</upload.autoRemove>
+	<error.page>/sys/pages/common/page/error.jsp</error.page>
+	<parameters>
+	</parameters>
+</tmvc>
