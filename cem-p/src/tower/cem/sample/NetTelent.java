@@ -62,7 +62,7 @@ public class NetTelent {
 	    write(user);
 
 	    result = readUntil(user + "'s Password:");
-	    System.out.println(result);
+	    System.out.print(result);
 
 	    write(password);
 
@@ -150,22 +150,22 @@ public class NetTelent {
 
 	    // 命令是 ll 列出当前目录下的目录及文件
 	    result = telent.sendCommand("ll");
-	    System.out.println(result);
+	    System.out.print(result);
 
 	    // 命令是 pwd 查看当前所在目录
 	    result = telent.sendCommand("pwd");
-	    System.out.println(result);
+	    System.out.print(result);
 
 	    // 命令是 relogin 再次登录到其他机器（模拟通过堡垒机登录的情况）
 	    result = telent.FuncRelogin("192.168.1.254", "23", "oracle", "password", "$");
 	    System.out.print(result);
-
+	    
 	    // 命令是 ll 列出当前目录下的目录及文件
 	    result = telent.sendCommand("ll");
-	    System.out.println(result);
+	    System.out.print(result);
 
 	    result = telent.sendCommand("exit");
-	    System.out.println(result);
+	    System.out.print(result);
 
 	    // 最后一定要关闭
 	    telent.disconnect();
