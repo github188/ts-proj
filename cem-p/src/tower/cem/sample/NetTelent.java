@@ -2,6 +2,7 @@ package tower.cem.sample;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.net.SocketTimeoutException;
 
 import org.apache.commons.net.telnet.TelnetClient;
 
@@ -18,35 +19,39 @@ public class NetTelent {
     // 提示符。具体请telnet到路由器查看
     private String prompt = "";
 
-    public void FuncLogin(String ip, String port, String user, String password, String prom) {
+    public String FuncLogin(String ip, String port, String user, String password, String prom) {
 
+	StringBuffer returnResult = new StringBuffer();	
 	String result;
 
 	try {
 	    // 路由器IP 注：我这里模拟telnet登录linux服务器
 	    System.out.println("telnet " + ip + " " + port);
+	    telnet.setDefaultTimeout(5000);
 	    telnet.connect(ip, Integer.parseInt(port));
+
 	    in = telnet.getInputStream();
 	    out = new PrintStream(telnet.getOutputStream());
 
 	    result = readUntil("login:");
-	    System.out.println(result);
+	    returnResult.append(result);
 
 	    write(user);
 
 	    result = readUntil("Password:");
-	    System.out.println(result);
+	    returnResult.append(result);
 
 	    write(password);
 
 	    // 替换命令行提示符
 	    this.prompt = prom;
 	    result = readUntil(prompt);
-	    System.out.print(result);
+	    returnResult.append(result);
 
 	} catch (Exception e) {
 	    e.printStackTrace();
 	}
+	return returnResult.toString();
     }
 
     public String FuncRelogin(String ip, String port, String user, String password, String prom) {
@@ -77,13 +82,12 @@ public class NetTelent {
     }
 
     public String readUntil(String pattern) {
+
+	StringBuffer sb = new StringBuffer();
 	try {
 	    char lastChar = pattern.charAt(pattern.length() - 1);
-	    StringBuffer sb = new StringBuffer();
-
 	    char ch = (char) in.read();
 	    while (true) {
-
 		sb.append(ch);
 		if (ch == lastChar) {
 		    if (sb.toString().endsWith(pattern)) {
@@ -92,10 +96,13 @@ public class NetTelent {
 		}
 		ch = (char) in.read();
 	    }
-	} catch (Exception e) {
+	} catch(SocketTimeoutException eTimeout){	    
+	    System.out.println("server no response, time out!");
+	}
+	catch (Exception e) {	    
 	    e.printStackTrace();
 	}
-	return null;
+	return sb.toString();
     }
 
     /**
@@ -147,8 +154,9 @@ public class NetTelent {
 
 	    String result;
 	    NetTelent telent = new NetTelent();
-	    telent.FuncLogin("60.209.94.194", "23", "ecode315", "password", "$");
-
+	    result = telent.FuncLogin("60.209.94.194", "23", "ecode315", "password", "$");
+	    System.out.print(result);
+	    
 	    // 命令是 ll 列出当前目录下的目录及文件
 	    result = telent.sendCommand("ll");
 	    System.out.print(result);
