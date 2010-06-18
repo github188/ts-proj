@@ -41,7 +41,8 @@ public class NetTelent {
 
 	    // 替换命令行提示符
 	    this.prompt = prom;
-	    readUntil(prompt);
+	    result = readUntil(prompt);
+	    System.out.print(result);
 
 	} catch (Exception e) {
 	    e.printStackTrace();
@@ -62,7 +63,7 @@ public class NetTelent {
 	    write(user);
 
 	    result = readUntil(user + "'s Password:");
-	    System.out.print(result);
+	    System.out.println(result);
 
 	    write(password);
 
@@ -146,7 +147,7 @@ public class NetTelent {
 
 	    String result;
 	    NetTelent telent = new NetTelent();
-	    telent.FuncLogin("60.209.94.194", "23", "ecode315", "password", "-bash-3.00$");
+	    telent.FuncLogin("60.209.94.194", "23", "ecode315", "password", "$");
 
 	    // 命令是 ll 列出当前目录下的目录及文件
 	    result = telent.sendCommand("ll");
@@ -159,7 +160,7 @@ public class NetTelent {
 	    // 命令是 relogin 再次登录到其他机器（模拟通过堡垒机登录的情况）
 	    result = telent.FuncRelogin("192.168.1.254", "23", "oracle", "password", "$");
 	    System.out.print(result);
-	    
+
 	    // 命令是 ll 列出当前目录下的目录及文件
 	    result = telent.sendCommand("ll");
 	    System.out.print(result);
