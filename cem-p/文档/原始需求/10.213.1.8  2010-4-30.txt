@@ -1,0 +1,691 @@
+<SDQDA-DCN-RT03>TELNET 10.213.1.8
+Trying 10.213.1.8 ...
+Press CTRL+K to abort
+Connected to 10.213.1.8 ...
+SDQDA-PS-IMS-CE21-ERICSE800
+login: admin
+
+Password: 
+[local]SDQDA-PS-IMS-CE21-ERICSE800#terminal length 0
+[local]SDQDA-PS-IMS-CE21-ERICSE800#
+[local]SDQDA-PS-IMS-CE21-ERICSE800#show chassis power                 
+
+Power Capacity:   1920.00 Watts (40.00 A@-48V) + 10% Tolerance
+Power Allocated:  1468.32 Watts (30.59 A@-48V)
+Power Available:   643.68 Watts (13.41 A@-48V)
+
+                          Required              Allocated             Power
+Slot: Configured-type     Watts     A@-48V      Watts     A@-48V      Status
+--------------------------------------------------------------------------------
+N/A   fan_and_alarm       142.56     2.97       142.56     2.97       full
+  1 : ge-10-port          141.60     2.95       141.60     2.95       full
+  2 : none                   n/a      n/a        96.00     2.00       low
+  3 : none                   n/a      n/a        96.00     2.00       low
+  4 : none                   n/a      n/a        96.00     2.00       low
+  5 : none                   n/a      n/a        96.00     2.00       low
+  6 : ge-10-port          141.60     2.95       141.60     2.95       full
+  7 : xcrp3                41.28     0.86        41.28     0.86       full
+  8 : xcrp3                41.28     0.86        41.28     0.86       full
+  9 : none                   n/a      n/a        96.00     2.00       low
+ 10 : none                   n/a      n/a        96.00     2.00       low
+ 11 : none                   n/a      n/a        96.00     2.00       low
+ 12 : none                   n/a      n/a        96.00     2.00       low
+ 13 : none                   n/a      n/a        96.00     2.00       low
+ 14 : none                   n/a      n/a        96.00     2.00       low
+[local]SDQDA-PS-IMS-CE21-ERICSE800#
+[local]SDQDA-PS-IMS-CE21-ERICSE800#show chassis                       
+Current platform is SE800s
+ (Flags:
+    A-Active Crossconnect     B-Standby Crossconnect    C-SARC Ready
+    D-Default Traffic Card    E-EPPA Ready              G-Upgrading FPGA
+    H-Card Admin State SHUT   I-IPPA Ready              M-FPGA Upgrade Required
+    N-SONET EU Enabled        O-Card Admin State ODD    P-Coprocessor Ready
+    P1-ASP1 Ready             P2-ASP2 Ready             R-Traffic Card Ready
+    S-SPPA Ready              U-Card PPAs/ASP UP        W-Warm Reboot
+    X-XCRP mismatch)
+Slot: Configured-type           Slot: Installed-type          Initialized Flags
+-------------------------------------------------------------------------------
+  1 : ge-10-port                  1 : ge-10-port                Yes IEUR
+  2 : none                        2 : none                      No  
+  3 : none                        3 : none                      No  
+  4 : none                        4 : none                      No  
+  5 : none                        5 : none                      No  
+  6 : ge-10-port                  6 : ge-10-port                Yes IEUDR
+  7 : xcrp                        7 : xcrp                      Yes A
+  8 : xcrp                        8 : xcrp                      Yes B
+  9 : none                        9 : none                      No  
+ 10 : none                       10 : none                      No  
+ 11 : none                       11 : none                      No  
+ 12 : none                       12 : none                      No  
+ 13 : none                       13 : none                      No  
+ 14 : none                       14 : none                      No  
+[local]SDQDA-PS-IMS-CE21-ERICSE800#
+[local]SDQDA-PS-IMS-CE21-ERICSE800#show system redundancy             
+Active controller alarms:
+-------------------------
+Timestamp       Type              Source         Severity  Description
+---------------------------------------------------------------------------
+
+Hardware detail for slot 7:
+---------------------------
+
+Slot                : 7                 Type                : xcrp3 - T1/E1    
+Serial No           : 6Y71D310825520    Hardware Rev        : 71 -             
+EEPROM id/ver       : 0x5a/4            Mfg Date            : 31-JUL-2008      
+Opus2Fpga Ver       : 0x4               S3Fpga Ver          : 0x0              
+Max2Fpga Ver        : 0x0               Forte2Fpga Ver      : 0x2              
+SCC id              : 0x0               SXC id              : 0x1f             
+Voltage 1.500V      : 1.513 (+1%)       Voltage 1.800V      : 1.782 (-1%)       
+Voltage 2.100V      : 2.111 (+1%)       Voltage 2.500V      : 2.518 (+1%)       
+Voltage 3.300V      : 3.324 (+1%)       Voltage 5.000V      : 5.016 (+0%)       
+Temperature         : NORMAL (38 C)     POD Status          : Success           
+ODD Status          : Not Available     
+Fail LED            : Off               Active LED          : On               
+Standby LED         : Off               Sync LED            : Off              
+Memory              : Max               
+Chass Entitlement   : All (0x0)         
+Active Alarms       : NONE
+
+Hardware detail for slot 8:
+---------------------------
+
+Slot                : 8                 Type                : xcrp3 - T1/E1    
+Serial No           : 6Y71D310825572    Hardware Rev        : 71 -             
+EEPROM id/ver       : 0x5a/4            Mfg Date            : 31-JUL-2008      
+Opus2Fpga Ver       : 0x4               S3Fpga Ver          : 0x0              
+Max2Fpga Ver        : 0x0               Forte2Fpga Ver      : 0x2              
+SCC id              : 0x0               SXC id              : 0x1f             
+Voltage 1.500V      : 1.506 (+0%)       Voltage 1.800V      : 1.774 (-1%)       
+Voltage 2.100V      : 2.106 (+0%)       Voltage 2.500V      : 2.542 (+2%)       
+Voltage 3.300V      : 3.344 (+1%)       Voltage 5.000V      : 5.016 (+0%)       
+Temperature         : NORMAL (22 C)     POD Status          : Success           
+ODD Status          : Not Available     
+Fail LED            : Off               Active LED          : Off              
+Standby LED         : On                Sync LED            : Off              
+Memory              : Max               
+Chass Entitlement   : All (0x0)         
+Active Alarms       : NONE
+
+
+Controller switch history:
+--------------------------
+
+Controller release sync status:
+-------------------------------
+
+Server (sync version3.0) is up
+Client (sync version3.0) is connected 
+Client Mode: Service
+
+           | Active's Version            |       Standby's Version         
+___________|_____________________________|_________________________________
+Firmware   | PowerPC,1.0b1272            | PowerPC,1.0b1272            
+___________|_____________________________|_________________________________
+Software   | /p01: 6.1.4.3p3             | /p02: 6.1.4.3p3             
+___________|_____________________________|_________________________________
+Minikernel | 23                          | 23                          
+___________|_____________________________|_________________________________
+
+Firmware Sync Log:
+------------------
+Feb 5 2010 20:13:25: UNNECESSARY
+Feb 5 2010 20:13:25: SUCCESS
+
+Software Sync Log:
+------------------
+Release Sync Type: release sync unnecessary
+Feb 5 2010 20:13:28: UNNECESSARY
+Feb 5 2010 20:13:28: SUCCESS
+
+Configuration Files Sync Log:
+-----------------------------
+Apr 14 2010 02:13:11: SUCCESS
+
+Minikernel Sync Log:
+--------------------
+Feb 5 2010 20:13:28: UNNECESSARY
+Feb 5 2010 20:13:28: SUCCESS
+
+
+Controller protection internal log:
+-----------------------------------
+Tue Dec 23 08:00:18 2008 :   Use BSD time.
+Tue Dec 23 18:06:11 2008 : CPRM initialization completed: no switch to restore.
+Tue Dec 23 18:06:31 2008 : Waiting for BSD controller to reprov Vx
+Tue Dec 23 18:06:40 2008 : Mate Link DOWN on ACTIVE card. Mate is DEAD, Faults enabled: TRUE
+Tue Dec 23 18:06:40 2008 : Sw State: [Initializing]. Mate Sw State [Unknown].
+Tue Dec 23 18:07:58 2008 : Mate Link UP on ACTIVE card. 
+Tue Dec 23 18:07:58 2008 : Sw State: [Initializing]. Mate Sw State [Linkup].
+Tue Dec 23 18:09:23 2008 : Waited 170 seconds for BSD controller to reprov Vx
+Tue Dec 23 18:09:23 2008 : Sw State: [Initializing] -> [ReadyToRun]. Mate Sw State [Linkup].
+Tue Dec 23 18:09:51 2008 : Resync completion time 10 secs
+Tue Dec 23 18:09:51 2008 : Sw State: [ReadyToRun] -> [Running]. Mate Sw State [Linkup].
+Tue Dec 23 18:09:51 2008 : Controller Auto Switch on Secondary completed. Reason: Software Not Initialized
+Tue Dec 23 18:10:58 2008 : processMateInsertionStartup, received lock request from peer
+Tue Dec 23 18:10:58 2008 : Locking card for state synch
+Tue Dec 23 18:10:58 2008 : Sw State: [Running] -> [WaitForPeer]. Mate Sw State [WaitForPeer].
+Tue Dec 23 18:11:01 2008 : Exiting waitForPeerInit() Sw State: [WaitForPeer]. Mate Sw State [ReadyToRun].
+Tue Dec 23 18:11:01 2008 : Sw State: [WaitForPeer] -> [ReadyToRun]. Mate Sw State [ReadyToRun].
+Tue Dec 23 18:11:12 2008 : Sw State: [ReadyToRun] -> [Running]. Mate Sw State [ReadyToRun].
+Tue Dec 23 18:11:15 2008 : Sw State: [Running]. Mate Sw State [ReadyToRun] -> [Running].
+Tue Dec 23 18:11:15 2008 : Unlocking card after state synch
+Tue Dec 23 18:11:15 2008 : Controller Auto Switch on Secondary released.
+Wed Sep  9 08:07:46 2009 : VX_REBOOT_ON_USER_RELOAD
+Wed Sep  9 08:00:07 2009 :   STARTING Controller Selector Init.
+Wed Sep  9 08:00:07 2009 : CURRENT State: STANDBY, Mate Present YES, Mate is ALIVE, M2M link is DOWN
+Wed Sep  9 08:00:07 2009 : NEW State: STANDBY, Mate Present YES, Mate is ALIVE, M2M link is DOWN
+Wed Sep  9 08:00:08 2009 : Sw State: [Startup] -> [Linkup]. Mate Sw State [Unknown].
+Wed Sep  9 08:00:08 2009 : CURRENT State: STANDBY, Mate Present YES, Mate is ALIVE, M2M link is UP
+Wed Sep  9 08:00:08 2009 : Negotiating Startup State, CURRENT view: Local State STANDBY, Mate State STANDBY
+Wed Sep  9 08:00:08 2009 : Sw State: [Linkup] -> [Sync]. Mate Sw State [Running].
+Wed Sep  9 08:00:08 2009 : Sw State: [Sync] -> [SyncDone]. Mate Sw State [Running].
+Wed Sep  9 08:00:08 2009 : Finished Negotiating Startup State, Local State ACTIVE, Mate State STANDBY
+Wed Sep  9 08:00:08 2009 : Going ACTIVE
+Wed Sep  9 08:00:08 2009 : Sw State: [SyncDone] -> [Initializing]. Mate Sw State [Running].
+Wed Sep  9 08:00:18 2009 :   Use BSD time.
+Wed Sep  9 07:56:15 2009 : CPRM initialization completed: no switch to restore.
+Wed Sep  9 07:56:35 2009 : Waiting for BSD controller to reprov Vx
+Wed Sep  9 07:56:44 2009 : Mate Link DOWN on ACTIVE card. Mate is DEAD, Faults enabled: TRUE
+Wed Sep  9 07:56:44 2009 : Sw State: [Initializing]. Mate Sw State [Unknown].
+Wed Sep  9 07:58:02 2009 : Mate Link UP on ACTIVE card. 
+Wed Sep  9 07:58:02 2009 : Sw State: [Initializing]. Mate Sw State [Linkup].
+Wed Sep  9 07:59:30 2009 : Waited 173 seconds for BSD controller to reprov Vx
+Wed Sep  9 07:59:30 2009 : Sw State: [Initializing] -> [ReadyToRun]. Mate Sw State [Linkup].
+Wed Sep  9 07:59:59 2009 : Resync completion time 10 secs
+Wed Sep  9 07:59:59 2009 : Sw State: [ReadyToRun] -> [Running]. Mate Sw State [Linkup].
+Wed Sep  9 07:59:59 2009 : Controller Auto Switch on Secondary completed. Reason: Software Not Initialized
+Wed Sep  9 08:00:33 2009 : Mate Link DOWN on ACTIVE card. Mate is DEAD, Faults enabled: TRUE
+Wed Sep  9 08:00:33 2009 : Sw State: [Running]. Mate Sw State [Unknown].
+Wed Sep  9 08:02:29 2009 : Mate Link UP on ACTIVE card. 
+Wed Sep  9 08:02:29 2009 : Sw State: [Running]. Mate Sw State [Linkup].
+Wed Sep  9 08:04:50 2009 : processMateInsertionStartup, received lock request from peer
+Wed Sep  9 08:04:50 2009 : Locking card for state synch
+Wed Sep  9 08:04:50 2009 : Sw State: [Running] -> [WaitForPeer]. Mate Sw State [WaitForPeer].
+Wed Sep  9 08:04:53 2009 : Exiting waitForPeerInit() Sw State: [WaitForPeer]. Mate Sw State [ReadyToRun].
+Wed Sep  9 08:04:53 2009 : Sw State: [WaitForPeer] -> [ReadyToRun]. Mate Sw State [ReadyToRun].
+Wed Sep  9 08:05:03 2009 : Sw State: [ReadyToRun] -> [Running]. Mate Sw State [ReadyToRun].
+Wed Sep  9 08:05:06 2009 : Sw State: [Running]. Mate Sw State [ReadyToRun] -> [Running].
+Wed Sep  9 08:05:06 2009 : Unlocking card after state synch
+Wed Sep  9 08:05:06 2009 : Controller Auto Switch on Secondary released.
+Wed Sep  9 08:17:07 2009 : VX_REBOOT_ON_USER_RELOAD
+Wed Sep  9 08:16:27 2009 :   STARTING Controller Selector Init.
+Wed Sep  9 08:16:27 2009 : CURRENT State: STANDBY, Mate Present YES, Mate is ALIVE, M2M link is DOWN
+Wed Sep  9 08:16:27 2009 : NEW State: STANDBY, Mate Present YES, Mate is ALIVE, M2M link is DOWN
+Wed Sep  9 08:16:28 2009 : Sw State: [Startup] -> [Linkup]. Mate Sw State [Unknown].
+Wed Sep  9 08:16:28 2009 : CURRENT State: STANDBY, Mate Present YES, Mate is ALIVE, M2M link is UP
+Wed Sep  9 08:16:28 2009 : Negotiating Startup State, CURRENT view: Local State STANDBY, Mate State STANDBY
+Wed Sep  9 08:16:28 2009 : Sw State: [Linkup] -> [Sync]. Mate Sw State [Running].
+Wed Sep  9 08:16:28 2009 : Sw State: [Sync] -> [SyncDone]. Mate Sw State [Running].
+Wed Sep  9 08:16:28 2009 : Finished Negotiating Startup State, Local State ACTIVE, Mate State STANDBY
+Wed Sep  9 08:16:28 2009 : Going ACTIVE
+Wed Sep  9 08:16:28 2009 : Sw State: [SyncDone] -> [Initializing]. Mate Sw State [Running].
+Wed Sep  9 08:16:38 2009 :   Use BSD time.
+Wed Sep  9 08:18:44 2009 : CPRM initialization completed: no switch to restore.
+Wed Sep  9 08:19:06 2009 : Waiting for BSD controller to reprov Vx
+Wed Sep  9 08:19:14 2009 : Mate Link DOWN on ACTIVE card. Mate is DEAD, Faults enabled: TRUE
+Wed Sep  9 08:19:14 2009 : Sw State: [Initializing]. Mate Sw State [Unknown].
+Wed Sep  9 08:20:33 2009 : Mate Link UP on ACTIVE card. 
+Wed Sep  9 08:20:33 2009 : Sw State: [Initializing]. Mate Sw State [Linkup].
+Wed Sep  9 08:22:36 2009 : Waited 208 seconds for BSD controller to reprov Vx
+Wed Sep  9 08:22:37 2009 : Sw State: [Initializing] -> [ReadyToRun]. Mate Sw State [Linkup].
+Wed Sep  9 08:22:47 2009 : Resync completion time 10 secs
+Wed Sep  9 08:22:47 2009 : Sw State: [ReadyToRun] -> [Running]. Mate Sw State [Linkup].
+Wed Sep  9 08:22:47 2009 : Controller Auto Switch on Secondary completed. Reason: Software Not Initialized
+Wed Sep  9 08:28:37 2009 : Mate Link DOWN on ACTIVE card. Mate is DEAD, Faults enabled: TRUE
+Wed Sep  9 08:28:37 2009 : Sw State: [Running]. Mate Sw State [Unknown].
+Wed Sep  9 08:30:02 2009 : Mate Link UP on ACTIVE card. 
+Wed Sep  9 08:30:02 2009 : Sw State: [Running]. Mate Sw State [Linkup].
+Wed Sep  9 08:32:50 2009 : processMateInsertionStartup, received lock request from peer
+Wed Sep  9 08:32:50 2009 : Locking card for state synch
+Wed Sep  9 08:32:50 2009 : Sw State: [Running] -> [WaitForPeer]. Mate Sw State [WaitForPeer].
+Wed Sep  9 08:32:53 2009 : Exiting waitForPeerInit() Sw State: [WaitForPeer]. Mate Sw State [ReadyToRun].
+Wed Sep  9 08:32:53 2009 : Sw State: [WaitForPeer] -> [ReadyToRun]. Mate Sw State [ReadyToRun].
+Wed Sep  9 08:33:03 2009 : Sw State: [ReadyToRun] -> [Running]. Mate Sw State [ReadyToRun].
+Wed Sep  9 08:33:06 2009 : Sw State: [Running]. Mate Sw State [ReadyToRun] -> [Running].
+Wed Sep  9 08:33:06 2009 : Unlocking card after state synch
+Wed Sep  9 08:33:06 2009 : Controller Auto Switch on Secondary released.
+Fri Feb  5 20:15:54 2010 : VX_REBOOT_ON_USER_RELOAD
+Fri Feb  5 08:00:07 2010 :   STARTING Controller Selector Init.
+Fri Feb  5 08:00:07 2010 : CURRENT State: STANDBY, Mate Present YES, Mate is ALIVE, M2M link is DOWN
+Fri Feb  5 08:00:07 2010 : NEW State: STANDBY, Mate Present YES, Mate is ALIVE, M2M link is DOWN
+Fri Feb  5 08:00:08 2010 : Sw State: [Startup] -> [Linkup]. Mate Sw State [Unknown].
+Fri Feb  5 08:00:08 2010 : CURRENT State: STANDBY, Mate Present YES, Mate is ALIVE, M2M link is UP
+Fri Feb  5 08:00:08 2010 : Negotiating Startup State, CURRENT view: Local State STANDBY, Mate State STANDBY
+Fri Feb  5 08:00:08 2010 : Sw State: [Linkup] -> [Sync]. Mate Sw State [Running].
+Fri Feb  5 08:00:08 2010 : Sw State: [Sync] -> [SyncDone]. Mate Sw State [Running].
+Fri Feb  5 08:00:08 2010 : Finished Negotiating Startup State, Local State ACTIVE, Mate State STANDBY
+Fri Feb  5 08:00:08 2010 : Going ACTIVE
+Fri Feb  5 08:00:08 2010 : Sw State: [SyncDone] -> [Initializing]. Mate Sw State [Running].
+Fri Feb  5 08:00:18 2010 :   Use BSD time.
+Fri Feb  5 20:09:18 2010 : CPRM initialization completed: no switch to restore.
+Fri Feb  5 20:09:40 2010 : Waiting for BSD controller to reprov Vx
+Fri Feb  5 20:09:48 2010 : Mate Link DOWN on ACTIVE card. Mate is DEAD, Faults enabled: TRUE
+Fri Feb  5 20:09:48 2010 : Sw State: [Initializing]. Mate Sw State [Unknown].
+Fri Feb  5 20:11:07 2010 : Mate Link UP on ACTIVE card. 
+Fri Feb  5 20:11:07 2010 : Sw State: [Initializing]. Mate Sw State [Linkup].
+Fri Feb  5 20:12:48 2010 : Waited 186 seconds for BSD controller to reprov Vx
+Fri Feb  5 20:12:48 2010 : Sw State: [Initializing] -> [ReadyToRun]. Mate Sw State [Linkup].
+Fri Feb  5 20:13:22 2010 : Resync completion time 10 secs
+Fri Feb  5 20:13:22 2010 : Sw State: [ReadyToRun] -> [Running]. Mate Sw State [Linkup].
+Fri Feb  5 20:13:22 2010 : Controller Auto Switch on Secondary completed. Reason: Software Not Initialized
+Fri Feb  5 20:14:26 2010 : processMateInsertionStartup, received lock request from peer
+Fri Feb  5 20:14:26 2010 : Locking card for state synch
+Fri Feb  5 20:14:26 2010 : Sw State: [Running] -> [WaitForPeer]. Mate Sw State [WaitForPeer].
+Fri Feb  5 20:14:29 2010 : Exiting waitForPeerInit() Sw State: [WaitForPeer]. Mate Sw State [ReadyToRun].
+Fri Feb  5 20:14:29 2010 : Sw State: [WaitForPeer] -> [ReadyToRun]. Mate Sw State [ReadyToRun].
+Fri Feb  5 20:14:41 2010 : Sw State: [ReadyToRun] -> [Running]. Mate Sw State [ReadyToRun].
+Fri Feb  5 20:14:44 2010 : Sw State: [Running]. Mate Sw State [ReadyToRun] -> [Running].
+Fri Feb  5 20:14:44 2010 : Unlocking card after state synch
+Fri Feb  5 20:14:44 2010 : Controller Auto Switch on Secondary released.
+
+Controller error log:
+---------------------
+Sat Jun 25 11:27:35 2005 : VX_REBOOT_ON_USER_RELOAD
+Sun Jun 26 10:18:54 2005 : VX_REBOOT_ON_USER_RELOAD
+Sat Dec  6 01:12:43 2008 : linecard slot  1, port 5, Warning Unsupported SFP Detected, Vendor Name = "FINIS
+Sat Dec  6 01:12:43 2008 : AR CORP.", Vendor Part Number = "FTLF1318P2BTL"
+Tue Dec 23 17:36:43 2008 : linecard slot  1, port 5, Warning Unsupported SFP Detected, Vendor Name = "FINIS
+Tue Dec 23 17:36:43 2008 : AR CORP.", Vendor Part Number = "FTLF1318P2BTL"
+Tue Dec 23 17:57:32 2008 : linecard slot  1, port 5, Warning Unsupported SFP Detected, Vendor Name = "FINIS
+Tue Dec 23 17:57:32 2008 : AR CORP.", Vendor Part Number = "FTLF1318P2BTL"
+Tue Dec 23 18:05:33 2008 : VX_REBOOT_ON_USER_RELOAD
+Tue Dec 23 18:09:30 2008 : linecard slot  1, port 5, Warning Unsupported SFP Detected, Vendor Name = "FINIS
+Tue Dec 23 18:09:30 2008 : AR CORP.", Vendor Part Number = "FTLF1318P2BTL"
+Wed Sep  9 08:07:46 2009 : VX_REBOOT_ON_USER_RELOAD
+Wed Sep  9 07:59:36 2009 : linecard slot  1, port 5, Warning Unsupported SFP Detected, Vendor Name = "FINIS
+Wed Sep  9 07:59:36 2009 : AR CORP.", Vendor Part Number = "FTLF1318P2BTL"
+Wed Sep  9 08:17:07 2009 : VX_REBOOT_ON_USER_RELOAD
+Wed Sep  9 08:22:44 2009 : linecard slot  1, port 5, Warning Unsupported SFP Detected, Vendor Name = "FINIS
+Wed Sep  9 08:22:44 2009 : AR CORP.", Vendor Part Number = "FTLF1318P2BTL"
+Wed Sep  9 08:22:46 2009 : linecard slot  1, port 5, Warning Unsupported SFP Detected, Vendor Name = "FINIS
+Wed Sep  9 08:22:46 2009 : AR CORP.", Vendor Part Number = "FTLF1318P2BTL"
+Fri Feb  5 20:11:08 2010 : linecard slot  1, port 5, Warning Unsupported SFP Detected, Vendor Name = "FINIS
+Fri Feb  5 20:11:08 2010 : AR CORP.", Vendor Part Number = "FTLF1318P2BTL"
+Fri Feb  5 20:15:54 2010 : VX_REBOOT_ON_USER_RELOAD
+Fri Feb  5 20:12:55 2010 : linecard slot  1, port 5, Warning Unsupported SFP Detected, Vendor Name = "FINIS
+Fri Feb  5 20:12:55 2010 : AR CORP.", Vendor Part Number = "FTLF1318P2BTL"
+Fri Feb  5 20:12:57 2010 : linecard slot  1, port 5, Warning Unsupported SFP Detected, Vendor Name = "FINIS
+Fri Feb  5 20:12:57 2010 : AR CORP.", Vendor Part Number = "FTLF1318P2BTL"
+Fri Feb  5 20:41:33 2010 : linecard slot  1, port 5, Warning Unsupported SFP Detected, Vendor Name = "FINIS
+Fri Feb  5 20:41:33 2010 : AR CORP.", Vendor Part Number = "FTLF1318P2BTL"
+Sat Feb  6 08:11:55 2010 : linecard slot  1, port 5, Warning Unsupported SFP Detected, Vendor Name = "FINIS
+Sat Feb  6 08:11:55 2010 : AR CORP.", Vendor Part Number = "FTLF1318P2BTL"
+Wed Apr 14 00:39:28 2010 : linecard slot  1, port 5, Warning Unsupported SFP Detected, Vendor Name = "FINIS
+Wed Apr 14 00:39:28 2010 : AR CORP.", Vendor Part Number = "FTLF1318P2BTL"
+[local]SDQDA-PS-IMS-CE21-ERICSE800#
+[local]SDQDA-PS-IMS-CE21-ERICSE800#show process cpustats              
+
+Total system CPU % usage (5s, 1m, 5m): 14.40,  3.17,  1.07
+
+Proc/thread name:  5sec  1min  5min    Proc/thread name:  5sec  1min  5min
+-----------------------------------    -----------------------------------
+        exec_cli:  4.44  1.32  0.34         telnetd.cli:  1.17  0.05  0.00
+        exec_cli:  0.00  0.00  0.00                 lgd:  0.00  0.00  0.00
+            qosd:  0.00  0.00  0.00             bridged:  1.17  0.10  0.05
+          dot1qd:  0.00  0.00  0.00                dnsd:  0.00  0.00  0.00
+           snmpd:  0.00  0.00  0.00             staticd:  0.00  0.00  0.00
+           ospfd:  0.39  0.00  0.00               flowd:  0.00  0.00  0.00
+             ndd:  0.00  0.00  0.00              clipsd:  0.00  0.00  0.00
+           l2tpd:  0.73  0.05  0.00              pppoed:  0.00  0.00  0.00
+            aaad:  0.00  0.00  0.00                ldpd:  0.00  0.00  0.00
+            pppd:  0.00  0.00  0.00               statd:  0.00  0.00  0.00
+        dhelperd:  0.34  0.00  0.00                oddd:  0.00  0.00  0.00
+              lm:  0.00  0.00  0.00               dhcpd:  0.00  0.00  0.00
+            pemd:  0.00  0.00  0.00                dlmd:  0.00  0.00  0.00
+         tunneld:  0.00  0.00  0.00                clsd:  0.00  0.00  0.00
+        ppaslogd:  0.00  0.00  0.00             sysmond:  0.00  0.00  0.00
+            arpd:  0.00  0.00  0.00                ribd:  0.00  0.00  0.00
+            rpmd:  0.00  0.00  0.00           vxxlatsvr:  0.00  0.00  0.00
+       ped_parse:  0.00  0.00  0.00                ism2:  1.03  0.05  0.00
+             rcm:  1.12  0.05  0.00                 csm:  0.34  0.00  0.00
+           metad:  0.00  0.00  0.00                  pm:  0.10  0.00  0.00
+         syslogd:  0.00  0.00  0.00               inetd:  0.00  0.00  0.00
+      mount_udrv:  0.00  0.00  0.00               loggd:  0.10  0.00  0.00
+       mount_mfs:  0.00  0.00  0.00      ptdstat_thread:  0.00  0.00  0.00
+   reboot_thread:  0.00  0.00  0.00             evnt_th:  0.00  0.00  0.00
+  sccmem_cleanup:  0.00  0.00  0.00             ioflush:  1.42  0.10  0.00
+          reaper:  0.00  0.00  0.00          pagedaemon:  0.00  0.00  0.00
+            init:  0.00  0.00  0.00    
+[local]SDQDA-PS-IMS-CE21-ERICSE800#
+[local]SDQDA-PS-IMS-CE21-ERICSE800#show memory                        
+Memory: Total 923152k, Used 170732k, Free 719044k, Reserved 24k
+[local]SDQDA-PS-IMS-CE21-ERICSE800#
+[local]SDQDA-PS-IMS-CE21-ERICSE800#show diag pod                      
+
+Slot Type                                                 POD status (Enabled)
+---- --------------------------------                    ----------------------
+N/A  backplane                                        
+N/A  fan tray                                         
+1    ge-10-port                                                   PASS
+6    ge-10-port                                                   PASS
+7    xcrp                                                         PASS
+8    xcrp                                                         PASS
+[local]SDQDA-PS-IMS-CE21-ERICSE800#
+[local]SDQDA-PS-IMS-CE21-ERICSE800#show disk                          
+Location  512-blocks     Used    Avail Capacity  Mounted on
+Internal      968158   476714   443036    51%    /
+External      922558   180386   696044    20%    /md
+show ip interface brief all-context
+
+[local]SDQDA-PS-IMS-CE21-ERICSE800#
+[local]SDQDA-PS-IMS-CE21-ERICSE800#show hardware                      
+
+Fan Tray Status            Present
+Fan(s) Status              Normal
+Power Supply A Status      Normal
+Power Supply B Status      Normal
+Active Alarms              NONE
+
+
+Slot Type                 Serial No      Rev Ver Mfg Date    Voltage  Temp     
+---- -------------------- -------------- --- --- ----------- -------- -------
+N/A  backplane            B225E040820104  25   4 21-JAN-2008 N/A      N/A    
+N/A  fan tray             9W22E040820104  22   4 21-JAN-2008 N/A      N/A    
+1    ge-10-port           A967G4709G0DNB  67   4 27-NOV-2009 OK       NORMAL 
+6    ge-10-port           A967G3709G0AHH  67   4 16-SEP-2009 OK       NORMAL 
+7    xcrp3                6Y71D310825520  71   4 31-JUL-2008 OK       NORMAL 
+8    xcrp3                6Y71D310825572  71   4 31-JUL-2008 OK       NORMAL 
+[local]SDQDA-PS-IMS-CE21-ERICSE800#show process cpu                   
+
+Total system CPU % usage (5s, 1m, 5m): 15.23,  5.37,  1.90
+
+Proc/thread name:  5sec  1min  5min    Proc/thread name:  5sec  1min  5min
+-----------------------------------    -----------------------------------
+        exec_cli:  7.96  2.49  0.73         telnetd.cli:  1.27  0.15  0.00
+        exec_cli:  0.00  0.00  0.00                 lgd:  0.00  0.00  0.00
+            qosd:  0.00  0.00  0.00             bridged:  0.20  0.00  0.00
+          dot1qd:  0.00  0.00  0.00                dnsd:  0.00  0.00  0.00
+           snmpd:  0.00  0.00  0.00             staticd:  0.00  0.00  0.00
+           ospfd:  0.39  0.00  0.00               flowd:  0.00  0.00  0.00
+             ndd:  0.00  0.00  0.00              clipsd:  0.00  0.00  0.00
+           l2tpd:  0.15  0.00  0.00              pppoed:  0.00  0.00  0.00
+            aaad:  0.00  0.00  0.00                ldpd:  0.00  0.00  0.00
+            pppd:  0.20  0.00  0.00               statd:  0.00  0.00  0.00
+        dhelperd:  0.15  0.00  0.00                oddd:  0.00  0.00  0.00
+              lm:  0.00  0.00  0.00               dhcpd:  0.00  0.00  0.00
+            pemd:  0.49  0.05  0.00                dlmd:  0.00  0.00  0.00
+         tunneld:  0.00  0.00  0.00                clsd:  0.00  0.00  0.00
+        ppaslogd:  0.00  0.00  0.00             sysmond:  0.24  0.00  0.00
+            arpd:  0.00  0.00  0.00                ribd:  0.00  0.00  0.00
+            rpmd:  0.24  0.00  0.00           vxxlatsvr:  0.00  0.00  0.00
+       ped_parse:  0.00  0.00  0.00                ism2:  0.34  0.00  0.00
+             rcm:  0.59  0.00  0.00                 csm:  0.29  0.00  0.00
+           metad:  0.00  0.00  0.00                  pm:  0.00  0.00  0.00
+         syslogd:  0.00  0.00  0.00               inetd:  0.00  0.00  0.00
+      mount_udrv:  0.00  0.00  0.00               loggd:  0.00  0.00  0.00
+       mount_mfs:  0.00  0.00  0.00      ptdstat_thread:  0.00  0.00  0.00
+   reboot_thread:  0.00  0.00  0.00             evnt_th:  0.00  0.00  0.00
+  sccmem_cleanup:  0.00  0.00  0.00             ioflush:  0.49  0.00  0.00
+          reaper:  0.00  0.00  0.00          pagedaemon:  0.00  0.00  0.00
+            init:  0.00  0.00  0.00    
+[local]SDQDA-PS-IMS-CE21-ERICSE800#show system alarm all              
+Timestamp       Type              Source         Severity  Description
+---------------------------------------------------------------------------
+
+[local]SDQDA-PS-IMS-CE21-ERICSE800#show port                          
+Slot/Port:Ch:SubCh  Type                 State
+1/2                 ethernet             Up  
+1/4                 ethernet             Up  
+1/5                 ethernet             Up  
+1/6                 ethernet             Up  
+1/9                 ethernet             Up  
+6/2                 ethernet             Up  
+6/9                 ethernet             Up  
+7/1                 ethernet             Up  
+
+[local]SDQDA-PS-IMS-CE21-ERICSE800#
+[local]SDQDA-PS-IMS-CE21-ERICSE800#show port detail                   
+ethernet 1/2 state is Up  
+Description                : TO-[CE22-ERICSE800]-GE1/2-1G(SX)
+
+Line state                 : Up  
+Admin state                : Up
+Link Dampening             : disabled
+Undampened line state      : Up
+Dampening Count            : 0
+Encapsulation              : dot1q
+MTU size                   : 1500 Bytes
+NAS Port Type              : 
+MAC address                : 00:30:88:16:26:06
+Media type                 : 1000Base-SX
+Auto-negotiation           : on                 state: success
+   Flc negotiated set      : tx&rx-or-rx-only   state: tx&rx
+   force                   : disabled           state: inactive
+Flow control               : rx                 state: n/a
+Speed                      : 1 Gbps
+Duplex mode                : full
+Link Distance              : 300 meters
+Loopback                   : off
+SFP Transceiver Status
+ Wavelength                : 850.00 nm
+ Diag Monitor              : Yes                                     
+ Tx Fault                  : No Fault                                
+ Rx Fault                  : No Fault                                
+ Tx Pwr measured[dbm]      : -4.67                                   
+ Rx Pwr measured[dbm]      : -4.30                                   
+ Temperature               : 38 C                                    
+ Vcc Measured              : 3.29 V                                  
+Active Alarms              : NONE
+
+ethernet 1/4 state is Up  
+Description                : TO-[RNC08-ZTE]-sub1_slot5-GE-1G(LX)
+
+Line state                 : Up  
+Admin state                : Up
+Link Dampening             : disabled
+Undampened line state      : Up
+Dampening Count            : 0
+Encapsulation              : dot1q
+MTU size                   : 1500 Bytes
+NAS Port Type              : 
+MAC address                : 00:30:88:16:26:08
+Media type                 : 1000Base-LX
+Auto-negotiation           : on                 state: success
+   Flc negotiated set      : tx&rx-or-rx-only   state: rx
+   force                   : disabled           state: inactive
+Flow control               : rx                 state: n/a
+Speed                      : 1 Gbps
+Duplex mode                : full
+Link Distance              : 10000 meters
+Loopback                   : off
+SFP Transceiver Status
+ Wavelength                : 1310.00 nm
+ Diag Monitor              : Yes                                     
+ Tx Fault                  : No Fault                                
+ Rx Fault                  : No Fault                                
+ Tx Pwr measured[dbm]      : -6.01                                   
+ Rx Pwr measured[dbm]      : -6.11                                   
+ Temperature               : 44 C                                    
+ Vcc Measured              : 3.24 V                                  
+Active Alarms              : NONE
+
+ethernet 1/5 state is Up  
+Description                : TO-[RNC09-ZTE]-sub1_slot5-GE-1G(LX)
+
+Line state                 : Up  
+Admin state                : Up
+Link Dampening             : disabled
+Undampened line state      : Up
+Dampening Count            : 0
+Encapsulation              : dot1q
+MTU size                   : 1500 Bytes
+NAS Port Type              : 
+MAC address                : 00:30:88:16:26:09
+Media type                 : 1000Base-LX
+Auto-negotiation           : on                 state: success
+   Flc negotiated set      : tx&rx-or-rx-only   state: rx
+   force                   : disabled           state: inactive
+Flow control               : rx                 state: n/a
+Speed                      : 1 Gbps
+Duplex mode                : full
+Link Distance              : 10000 meters
+Loopback                   : off
+SFP Transceiver Status
+ Wavelength                : 1310.00 nm
+ Diag Monitor              : Yes                                     
+ Tx Fault                  : No Fault                                
+ Rx Fault                  : No Fault                                
+ Tx Pwr measured[dbm]      : -4.97                                   
+ Rx Pwr measured[dbm]      : -6.80                                   
+ Temperature               : 42 C                                    
+ Vcc Measured              : 3.27 V                                  
+Active Alarms              : NONE
+
+ethernet 1/6 state is Up  
+Description                : TO-[RNC10-ZTE]-sub1_slot5-GE-1G(LX)
+
+Line state                 : Up  
+Admin state                : Up
+Link Dampening             : disabled
+Undampened line state      : Up
+Dampening Count            : 0
+Encapsulation              : dot1q
+MTU size                   : 1500 Bytes
+NAS Port Type              : 
+MAC address                : 00:30:88:16:26:0a
+Media type                 : 1000Base-LX
+Auto-negotiation           : on                 state: success
+   Flc negotiated set      : tx&rx-or-rx-only   state: rx
+   force                   : disabled           state: inactive
+Flow control               : rx                 state: n/a
+Speed                      : 1 Gbps
+Duplex mode                : full
+Link Distance              : 10000 meters
+Loopback                   : off
+SFP Transceiver Status
+ Wavelength                : 1310.00 nm
+ Diag Monitor              : Yes                                     
+ Tx Fault                  : No Fault                                
+ Rx Fault                  : No Fault                                
+ Tx Pwr measured[dbm]      : -4.97                                   
+ Rx Pwr measured[dbm]      : -5.29                                   
+ Temperature               : 40 C                                    
+ Vcc Measured              : 3.28 V                                  
+Active Alarms              : NONE
+
+ethernet 1/9 state is Up  
+Description                : TO-[SDQDA-PS-IMS-CE01-ERICSE800]-GE4/8-1G
+
+Line state                 : Up  
+Admin state                : Up
+Link Dampening             : disabled
+Undampened line state      : Up
+Dampening Count            : 0
+Encapsulation              : dot1q
+MTU size                   : 1500 Bytes
+NAS Port Type              : 
+MAC address                : 00:30:88:16:26:0d
+Media type                 : 1000Base-LX
+Auto-negotiation           : off                state: off
+Flow control               : rx                 state: rx
+Speed                      : 1 Gbps
+Duplex mode                : full
+Link Distance              : 10000 meters
+Loopback                   : off
+SFP Transceiver Status
+ Wavelength                : 1310.00 nm
+ Diag Monitor              : Yes                                     
+ Tx Fault                  : No Fault                                
+ Rx Fault                  : No Fault                                
+ Tx Pwr measured[dbm]      : -4.95                                   
+ Rx Pwr measured[dbm]      : -7.58                                   
+ Temperature               : 36 C                                    
+ Vcc Measured              : 3.27 V                                  
+Active Alarms              : NONE
+
+ethernet 6/2 state is Up  
+Description                : TO-[CE22-ERICSE800]-GE6/2-1G(SX)
+
+Line state                 : Up  
+Admin state                : Up
+Link Dampening             : disabled
+Undampened line state      : Up
+Dampening Count            : 0
+Encapsulation              : dot1q
+MTU size                   : 1500 Bytes
+NAS Port Type              : 
+MAC address                : 00:30:88:14:d2:a9
+Media type                 : 1000Base-SX
+Auto-negotiation           : on                 state: success
+   Flc negotiated set      : tx&rx-or-rx-only   state: tx&rx
+   force                   : disabled           state: inactive
+Flow control               : rx                 state: n/a
+Speed                      : 1 Gbps
+Duplex mode                : full
+Link Distance              : 300 meters
+Loopback                   : off
+SFP Transceiver Status
+ Wavelength                : 850.00 nm
+ Diag Monitor              : Yes                                     
+ Tx Fault                  : No Fault                                
+ Rx Fault                  : No Fault                                
+ Tx Pwr measured[dbm]      : -4.61                                   
+ Rx Pwr measured[dbm]      : -4.93                                   
+ Temperature               : 37 C                                    
+ Vcc Measured              : 3.27 V                                  
+Active Alarms              : NONE
+
+ethernet 6/9 state is Up  
+Description                : TO-[SDQDA-PS-IMS-CE01-ERICSE800]-GE5/8-1G
+
+Line state                 : Up  
+Admin state                : Up
+Link Dampening             : disabled
+Undampened line state      : Up
+Dampening Count            : 0
+Encapsulation              : dot1q
+MTU size                   : 1500 Bytes
+NAS Port Type              : 
+MAC address                : 00:30:88:14:d2:b0
+Media type                 : 1000Base-LX
+Auto-negotiation           : off                state: off
+Flow control               : rx                 state: rx
+Speed                      : 1 Gbps
+Duplex mode                : full
+Link Distance              : 10000 meters
+Loopback                   : off
+SFP Transceiver Status
+ Wavelength                : 1310.00 nm
+ Diag Monitor              : Yes                                     
+ Tx Fault                  : No Fault                                
+ Rx Fault                  : No Fault                                
+ Tx Pwr measured[dbm]      : -4.97                                   
+ Rx Pwr measured[dbm]      : -4.76                                   
+ Temperature               : 36 C                                    
+ Vcc Measured              : 3.26 V                                  
+Active Alarms              : NONE
+
+ethernet 7/1 state is Up  
+Description                :
+Line state                 : Up  
+Admin state                : Up
+Encapsulation              : ethernet
+MTU size                   : 1500 Bytes
+MAC address                : 00:30:88:04:02:4e
+Media type                 : 100Base-Tx
+Speed                      : 100 Mbps
+Duplex mode                : full
+Active Alarms              : NONE
+
+[local]SDQDA-PS-IMS-CE21-ERICSE800#show clock                         
+Fri Apr 30 08:24:10 2010 EST
+[local]SDQDA-PS-IMS-CE21-ERICSE800#
+[local]SDQDA-PS-IMS-CE21-ERICSE800#context ChinaMobile_NGN_Media      
+Unknown context: ChinaMobile_NGN_Media
+[local]SDQDA-PS-IMS-CE21-ERICSE800#
+[local]SDQDA-PS-IMS-CE21-ERICSE800#show vrrp                          
+% VRRP process is not running
+[local]SDQDA-PS-IMS-CE21-ERICSE800#
+[local]SDQDA-PS-IMS-CE21-ERICSE800#show ospf neighbor                 
+[local]SDQDA-PS-IMS-CE21-ERICSE800#
+[local]SDQDA-PS-IMS-CE21-ERICSE800#context ChinaMobile_NGN_SG         
+Unknown context: ChinaMobile_NGN_SG
+[local]SDQDA-PS-IMS-CE21-ERICSE800#
+[local]SDQDA-PS-IMS-CE21-ERICSE800#show vrrp                          
+% VRRP process is not running
+[local]SDQDA-PS-IMS-CE21-ERICSE800#
+[local]SDQDA-PS-IMS-CE21-ERICSE800#show ospf neighbor                 
+[local]SDQDA-PS-IMS-CE21-ERICSE800#
+[local]SDQDA-PS-IMS-CE21-ERICSE800#exit
+
+The connection was closed by the remote host!
