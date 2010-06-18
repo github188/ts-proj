@@ -26,7 +26,6 @@ public class NetTelent {
 
 	try {
 	    // 路由器IP 注：我这里模拟telnet登录linux服务器
-	    System.out.println("telnet " + ip + " " + port);
 	    telnet.setDefaultTimeout(5000);
 	    telnet.connect(ip, Integer.parseInt(port));
 
@@ -57,28 +56,30 @@ public class NetTelent {
     public String FuncRelogin(String ip, String port, String user, String password, String prom) {
 
 	String result;
+	StringBuffer returnResult = new StringBuffer();
 
-	try {
-	    System.out.println("telnet " + ip + " " + port);
+	try {	    
 	    write("telnet " + ip + " " + port);
 
 	    result = readUntil("login:");
-	    System.out.print(result);
+	    returnResult.append(result);
 
 	    write(user);
 
 	    result = readUntil(user + "'s Password:");
-	    System.out.println(result);
+	    returnResult.append(result);
 
 	    write(password);
 
 	    // 替换命令行提示符
 	    this.prompt = prom;
-	    return readUntil(prompt);
+	    result=readUntil(prompt);
+	    returnResult.append(result);
+	    return returnResult.toString();
 	} catch (Exception e) {
 	    e.printStackTrace();
 	}
-	return null;
+	return returnResult.toString();
     }
 
     public String readUntil(String pattern) {
@@ -143,7 +144,6 @@ public class NetTelent {
     public void disconnect() {
 	try {
 	    telnet.disconnect();
-	    System.out.println("The connection was closed by the remote host!");
 	} catch (Exception e) {
 	    e.printStackTrace();
 	}
