@@ -29,7 +29,7 @@ public class NetTelent {
     private int timeOut = 5000;
 
     // 执行命令成功与否的标志，如服务器连接超时或没有读到指定提示符时返回false。
-    public boolean bFlag = true;
+    private boolean bFlag = true;
 
     /**
          * 建立通讯连接，通常用于登录堡垒机或可以直接登录的服务器、网络设备。
@@ -213,6 +213,14 @@ public class NetTelent {
 	    e.printStackTrace();
 	}
     }
+    
+    /**
+     * 获取读取服务器响应的标志
+     * @return 执行命令成功与否的标志，如服务器连接超时或没有读到指定提示符时返回false。
+     */
+    public boolean getBflag(){
+	return this.bFlag;
+    }
 
     public static void main(String[] args) {
 	try {
@@ -225,7 +233,7 @@ public class NetTelent {
 	    System.out.print(result);
 
 	    // 判断是否登录成功
-	    if (telent.bFlag == false) {
+	    if (telent.getBflag() == false) {
 		System.out.println("Failed to login server!");
 	    } else {
 		// 命令是 ll 列出当前目录下的目录及文件
@@ -241,7 +249,7 @@ public class NetTelent {
 		System.out.print(result);
 
 		// 判断是否登录成功
-		if (telent.bFlag == false) {
+		if (telent.getBflag() == false) {
 		    System.out.println("Failed to re-login server!");
 		} else {
 		    // 命令是 ll 列出当前目录下的目录及文件
