@@ -254,7 +254,8 @@ public class TelnetDaemon extends Thread {
 	String sResult = null;
 	try {
 	    BufferedReader in = new BufferedReader(new FileReader(
-		    "WebContent/WEB-INF/applications/sys/config/tdconfig.properties"));
+		    "applications/sys/config/tdconfig.properties"));
+	    // "WebContent/WEB-INF/applications/sys/config/tdconfig.properties"));
 	    String sLine = null;
 	    int iPos = 0;
 	    String key = null;
@@ -279,7 +280,8 @@ public class TelnetDaemon extends Thread {
 	    String dbDriver, String dbUrl, String dbUser, String dbPassword) {
 	try {
 	    BufferedWriter out = new BufferedWriter(new FileWriter(
-		    "WebContent/WEB-INF/applications/sys/config/tdconfig.properties"));
+		    "applications/sys/config/tdconfig.properties"));
+	    // "WebContent/WEB-INF/applications/sys/config/tdconfig.properties"));
 	    out.write("run_flag=" + sRunFlag + "\n");
 	    out.write("daemons_max=" + iDaemonsMax + "\n");
 	    out.write("sleep_timer=" + iSleepTimer + "\n");
