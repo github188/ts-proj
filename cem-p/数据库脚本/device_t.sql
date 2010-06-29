@@ -1,13 +1,3 @@
---
---ER/Studio 6.0 SQL Code Generation
--- Company :      todos
--- Project :      cem-p.dm1
--- Author :       Tiger
---
--- Date Created : Tuesday, June 29, 2010 16:27:39
--- Target DBMS : MySQL 4.x
---
-
 
 -- 
 -- TABLE: DEVICE_INFO 
@@ -18,7 +8,8 @@ CREATE TABLE DEVICE_INFO(
     DEVICE_NAME_EN        VARCHAR(60)     NOT NULL,
     DEVICE_ABB_NAME_EN    VARCHAR(60),
     DEVICE_NAME_CN        VARCHAR(60)     NOT NULL,
-    TYPE_ID               CHAR(6)         NOT NULL,
+    TYPE_ID               CHAR(6),
+    LOCATION_ID           CHAR(6),
     DEVICE_STATUS         CHAR(1)         NOT NULL,
     FRONT_HOST_ID         CHAR(6),
     DEVICE_IP             VARCHAR(50)     NOT NULL,
@@ -38,6 +29,7 @@ CREATE TABLE DEVICE_INFO(
 --
 
 CREATE TABLE DEVICE_MAINTAIN_LOG(
+    SEND_ID           CHAR(6),
     DEVICE_ID         CHAR(6)     NOT NULL,
     USER_ID           CHAR(6)     NOT NULL,
     MAINTAIN_BEGIN    CHAR(14),
@@ -48,8 +40,8 @@ CREATE TABLE DEVICE_MAINTAIN_LOG(
 
 
 
--- 
--- TABLE: FRONT_HOST_INFO 
+--
+-- TABLE: FRONT_HOST_INFO
 --
 
 CREATE TABLE FRONT_HOST_INFO(
@@ -57,6 +49,7 @@ CREATE TABLE FRONT_HOST_INFO(
     HOST_NAME_EN        VARCHAR(60)     NOT NULL,
     HOST_ABB_NAME_EN    VARCHAR(60),
     HOST_NAME_CN        VARCHAR(60)     NOT NULL,
+    LOCATION_ID         CHAR(6),
     HOST_STATUS         CHAR(1)         NOT NULL,
     HOST_IP             VARCHAR(50)     NOT NULL,
     HOST_PORT           VARCHAR(50)     NOT NULL,
@@ -82,7 +75,3 @@ CREATE TABLE MAINTAIN_COMMANDS_TEMPLATE(
     PRIMARY KEY (TEMP_ID)
 )
 ;
-
-
-
-
