@@ -2,8 +2,12 @@ package tower.cem.daemon;
 
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.Vector;
 
+import tower.cem.db.DbCommandsSendList;
 import tower.cem.en.EnCommandsSendList;
+import tower.tmvc.Transaction;
 
 public class TdRunnable implements Runnable {
     private EnCommandsSendList enSendList;
@@ -25,6 +29,8 @@ public class TdRunnable implements Runnable {
 	SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
 	String sTimeBegin = "";
 	String sTimeEnd = "";
+	String sSql = "";
+	List listEn = new Vector();
 
 	int iSaveFlag = 0;
 
@@ -46,9 +52,24 @@ public class TdRunnable implements Runnable {
 	    if (enSendList.getCommandsType().equals("T")) {
 		// Sample Code
 		Thread.sleep(30000);
+
+		// Runtime Code
+		// 根据设备编号获取到设备信息
+		// 当设备定义了堡垒主机时，获取堡垒主机信息
+		// 根据命令模板编号，获取命令模板内容
+		// 连接设备，并执行命令
+		// 将执行结果保存到命令模板执行日志中
+
 	    } else if (enSendList.getCommandsType().equals("I")) {
 		// Sample Code
 		Thread.sleep(30000);
+
+		// Runtime Code
+		// 根据设备获取到设备信息及所属设备分类信息，当设备空时，获取全部的设备信息及所属设备分类信息
+		// 获取到全部堡垒主机列表
+		// 连接设备，并执行巡检指令
+		// 将执行巡检的情况保存到巡检日志中
+
 	    } else {
 		System.out.println("Error Commands Type:" + enSendList.getCommandsType());
 	    }
