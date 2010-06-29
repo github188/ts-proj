@@ -30,7 +30,9 @@ public class DbDeviceMaintainLog extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
 
-        query.append("insert into device_maintain_log ( DEVICE_ID,USER_ID,MAINTAIN_BEGIN,MAINTAIN_END,LOG_CONT ) values ( ");
+        query.append("insert into device_maintain_log ( SEND_ID,DEVICE_ID,USER_ID,MAINTAIN_BEGIN,MAINTAIN_END,LOG_CONT ) values ( ");
+        query.append(formatString(en.getSendId()));
+        query.append(",");
         query.append(formatString(en.getDeviceId()));
         query.append(",");
         query.append(formatString(en.getUserId()));
@@ -53,7 +55,7 @@ public class DbDeviceMaintainLog extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select DEVICE_ID,USER_ID,MAINTAIN_BEGIN,MAINTAIN_END,LOG_CONT from device_maintain_log where ");
+        query.append("select SEND_ID,DEVICE_ID,USER_ID,MAINTAIN_BEGIN,MAINTAIN_END,LOG_CONT from device_maintain_log where ");
         query.append(where);
         if(orderBy != null) {
             query.append(orderBy);
@@ -70,7 +72,7 @@ public class DbDeviceMaintainLog extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select DEVICE_ID,USER_ID,MAINTAIN_BEGIN,MAINTAIN_END,LOG_CONT from device_maintain_log");
+        query.append("select SEND_ID,DEVICE_ID,USER_ID,MAINTAIN_BEGIN,MAINTAIN_END,LOG_CONT from device_maintain_log");
 
         if(orderBy != null) {
             query.append(orderBy);
@@ -89,6 +91,14 @@ public class DbDeviceMaintainLog extends RootDB{
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
 
+        if(en.hasChangeSendId()) {
+            if(bChanged){
+                query.append(" and ");
+            }
+            query.append("SEND_ID=");
+            query.append(formatString(en.getSendId()));
+            bChanged = true;
+        }
         if(en.hasChangeDeviceId()) {
             if(bChanged){
                 query.append(" and ");
@@ -130,9 +140,9 @@ public class DbDeviceMaintainLog extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select DEVICE_ID,USER_ID,MAINTAIN_BEGIN,MAINTAIN_END,LOG_CONT from device_maintain_log where ");
+            query.insert(0,"select SEND_ID,DEVICE_ID,USER_ID,MAINTAIN_BEGIN,MAINTAIN_END,LOG_CONT from device_maintain_log where ");
         } else {
-            query.append("select DEVICE_ID,USER_ID,MAINTAIN_BEGIN,MAINTAIN_END,LOG_CONT from device_maintain_log");
+            query.append("select SEND_ID,DEVICE_ID,USER_ID,MAINTAIN_BEGIN,MAINTAIN_END,LOG_CONT from device_maintain_log");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -151,6 +161,14 @@ public class DbDeviceMaintainLog extends RootDB{
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
 
+        if(en.hasChangeSendId()) {
+            if(bChanged){
+                query.append(" and ");
+            }
+            query.append("SEND_ID like ");
+            query.append(formatString(en.getSendId()));
+            bChanged = true;
+        }
         if(en.hasChangeDeviceId()) {
             if(bChanged){
                 query.append(" and ");
@@ -192,9 +210,9 @@ public class DbDeviceMaintainLog extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select DEVICE_ID,USER_ID,MAINTAIN_BEGIN,MAINTAIN_END,LOG_CONT from device_maintain_log where ");
+            query.insert(0,"select SEND_ID,DEVICE_ID,USER_ID,MAINTAIN_BEGIN,MAINTAIN_END,LOG_CONT from device_maintain_log where ");
         } else {
-            query.append("select DEVICE_ID,USER_ID,MAINTAIN_BEGIN,MAINTAIN_END,LOG_CONT from device_maintain_log");
+            query.append("select SEND_ID,DEVICE_ID,USER_ID,MAINTAIN_BEGIN,MAINTAIN_END,LOG_CONT from device_maintain_log");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -258,6 +276,14 @@ public class DbDeviceMaintainLog extends RootDB{
         boolean bChanged = false;
         query.append("update device_maintain_log set ");
 
+        if(en.hasChangeSendId()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("SEND_ID=");
+            query.append(formatString(en.getSendId()));
+            bChanged = true;
+        }
         if(en.hasChangeDeviceId()) {
             if(bChanged){
                 query.append(",");
@@ -310,6 +336,7 @@ public class DbDeviceMaintainLog extends RootDB{
     public EnDeviceMaintainLog getFromResultSet (QueryResultRow r) throws ErrorException {
         EnDeviceMaintainLog en = new EnDeviceMaintainLog();
 
+        en.setSendId(r.getString("SEND_ID"));
         en.setDeviceId(r.getString("DEVICE_ID"));
         en.setUserId(r.getString("USER_ID"));
         en.setMaintainBegin(r.getString("MAINTAIN_BEGIN"));
@@ -336,6 +363,10 @@ public class DbDeviceMaintainLog extends RootDB{
         Object otmp;
         String stmp;
         EnDeviceMaintainLog en = new EnDeviceMaintainLog();
+
+        otmp = xml.getInputObject("SEND_ID");
+        stmp = (String)otmp;
+        en.setSendId(stmp);
 
         otmp = xml.getInputObject("DEVICE_ID");
         stmp = (String)otmp;
@@ -367,6 +398,7 @@ public class DbDeviceMaintainLog extends RootDB{
         Vector res = new Vector();
         String stmp;
         EnDeviceMaintainLog en;
+        Object[] oSendId;
         Object[] oDeviceId;
         Object[] oUserId;
         Object[] oMaintainBegin;
@@ -374,6 +406,10 @@ public class DbDeviceMaintainLog extends RootDB{
         Object[] oLogCont;
         int count = 0;
 
+        oSendId = xml.getInputObjects("SEND_ID");
+        if (count == 0 && oSendId.length > 0) {
+            count = oSendId.length;
+        }
         oDeviceId = xml.getInputObjects("DEVICE_ID");
         if (count == 0 && oDeviceId.length > 0) {
             count = oDeviceId.length;
@@ -396,6 +432,11 @@ public class DbDeviceMaintainLog extends RootDB{
         }
         for (int i = 0; i < count; i ++) {
             en = new EnDeviceMaintainLog();
+
+            if (oSendId.length == count) {
+                stmp = (String)oSendId[i];
+                en.setSendId(stmp);
+            }
 
             if (oDeviceId.length == count) {
                 stmp = (String)oDeviceId[i];
@@ -432,6 +473,7 @@ public class DbDeviceMaintainLog extends RootDB{
       */
     public int setToXml(XMLWrap xml,EnDeviceMaintainLog en) throws ErrorException {
         int row = xml.addRow("DEVICE_MAINTAIN_LOG");
+        xml.setItemValue("DEVICE_MAINTAIN_LOG",row,"SEND_ID",en.getSendId());
         xml.setItemValue("DEVICE_MAINTAIN_LOG",row,"DEVICE_ID",en.getDeviceId());
         xml.setItemValue("DEVICE_MAINTAIN_LOG",row,"USER_ID",en.getUserId());
         xml.setItemValue("DEVICE_MAINTAIN_LOG",row,"MAINTAIN_BEGIN",en.getMaintainBegin());
@@ -449,6 +491,7 @@ public class DbDeviceMaintainLog extends RootDB{
         for (int i = 0; i < count; i ++) {
             en = (EnDeviceMaintainLog)ens.get(i);
             row = xml.addRow("DEVICE_MAINTAIN_LOG");
+            xml.setItemValue("DEVICE_MAINTAIN_LOG",row,"SEND_ID",en.getSendId());
             xml.setItemValue("DEVICE_MAINTAIN_LOG",row,"DEVICE_ID",en.getDeviceId());
             xml.setItemValue("DEVICE_MAINTAIN_LOG",row,"USER_ID",en.getUserId());
             xml.setItemValue("DEVICE_MAINTAIN_LOG",row,"MAINTAIN_BEGIN",en.getMaintainBegin());

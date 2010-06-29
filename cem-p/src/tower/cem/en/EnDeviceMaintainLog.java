@@ -10,6 +10,11 @@ package tower.cem.en;
 
 public class EnDeviceMaintainLog implements java.io.Serializable {
     /**
+     * Type : char(6) Name : SEND_ID
+     */
+    private String sendId;
+
+    /**
      * Type : char(6) Name : DEVICE_ID
      */
     private String deviceId;
@@ -35,6 +40,11 @@ public class EnDeviceMaintainLog implements java.io.Serializable {
     private String logCont;
 
     /**
+     * Type : char(6) Name : SEND_ID modify flag
+     */
+    private boolean _flagSendId;
+
+    /**
      * Type : char(6) Name : DEVICE_ID modify flag
      */
     private boolean _flagDeviceId;
@@ -58,6 +68,28 @@ public class EnDeviceMaintainLog implements java.io.Serializable {
      * Type : text Name : LOG_CONT modify flag
      */
     private boolean _flagLogCont;
+
+    /**
+     * Sets the value for sendId
+     */
+    public void setSendId(String sendId) {
+        this.sendId = sendId;
+        this._flagSendId = true;
+    }
+
+    /**
+     * Gets the value for sendId
+     */
+    public String getSendId() {
+        return sendId;
+    }
+
+    /**
+     * has the value for sendId changed?
+     */
+    public boolean hasChangeSendId() {
+        return _flagSendId;
+    }
 
     /**
      * Sets the value for deviceId

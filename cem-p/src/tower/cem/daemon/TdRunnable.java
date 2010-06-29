@@ -1,191 +1,258 @@
 package tower.cem.daemon;
 
+import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
-import java.util.List;
 import java.util.Vector;
 
-import tower.cem.db.DbCommandsSendList;
 import tower.cem.en.EnCommandsSendList;
 import tower.cem.en.EnDeviceInfo;
 import tower.cem.en.EnFrontHostInfo;
 import tower.cem.en.EnMaintainCommandsTemplate;
-import tower.tmvc.QueryResult;
-import tower.tmvc.Transaction;
+import tower.cem.util.NetTelnet;
 
 public class TdRunnable implements Runnable {
-    private EnCommandsSendList enSendList;
+	private EnCommandsSendList enSendList;
 
-    private String sThreadName = null;
+	private String sThreadName = null;
 
-    public TdRunnable(EnCommandsSendList enCommandsSendList) {
-	this.enSendList = enCommandsSendList;
-    }
-
-    // 线程执行的部分
-    public void run() {
-	if (this.sThreadName == null) {
-	    this.sThreadName = Thread.currentThread().getName();
-	}
-	DaemonDBPool dbPool = null; // 数据库连接池
-	Connection conn = null; // 数据库连接
-	String sErrCode = null;
-	SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
-	String sTimeBegin = "";
-	String sTimeEnd = "";
-
-	String sSql = "";
-	Vector enRows = new Vector();
-	ResultSet rs = null;
-
-	int iSaveFlag = 0;
-
-	TelnetDaemon.pln("rd.run()-begin", sThreadName);
-
-	try {
-	    // 建立appdb的数据连接，并开始事务
-	    dbPool = new DaemonDBPool();
-	    dbPool.beginTransction();
-	    conn = dbPool.getConn();
-
-	    // 执行命令的结果，初始为S，若出错置为F
-	    String sGenResult = "S";
-
-	    // 记录执行命令的开始时间
-	    sTimeBegin = formatter.format(new java.util.Date());
-
-	    // 根据指令类型（commands_send_list.command_type）调用命令执行程序
-	    if (enSendList.getCommandsType().equals("T")) {
-		// Sample Code
-		Thread.sleep(30000);
-
-//		// Runtime Code
-//		if (enSendList.getDeviceId() == null || enSendList.getDeviceId().trim() == "") {
-//		    sGenResult = "F";
-//		    Debug.pln("TdRunnable run()", "指令模板执行任务，未指定设备号。");
-//		}
-//
-//		// 根据设备编号获取到设备信息
-//		EnDeviceInfo enDeviceInfo = new EnDeviceInfo();
-//		if (sGenResult.equals("S")) {
-//		    sSql = "select * from device_info where device_id ='" + enSendList.getDeviceId() + "'";
-//		    rs = DaemonDBPool.doQuery(conn, sSql);
-//
-//		    if (!rs.next()) {
-//			sGenResult = "F";
-//			Debug.pln("TdRunnable run()", "指令模板执行任务，未找到设备信息。");
-//		    } else {
-//			enDeviceInfo.setDeviceId(rs.getString("DEVICE_ID"));
-//			enDeviceInfo.setDeviceStatus(rs.getString("DEVICE_STATUS"));
-//			enDeviceInfo.setFrontHostId(rs.getString("FRONT_HOST_ID"));
-//			enDeviceInfo.setDeviceIp(rs.getString("DEVICE_IP"));
-//			enDeviceInfo.setDevicePort(rs.getString("DEVICE_PORT"));
-//			enDeviceInfo.setDeviceUser(rs.getString("DEVICE_USER"));
-//			enDeviceInfo.setDevicePassword(rs.getString("DEVICE_PASSWORD"));
-//			enDeviceInfo.setDevicePrompt(rs.getString("DEVICE_PROMPT"));
-//		    }
-//		}
-//
-//		// 当设备定义了堡垒主机时，获取堡垒主机信息
-//		EnFrontHostInfo enFrontHostInfo = new EnFrontHostInfo();
-//		if (sGenResult.equals("S") && enDeviceInfo.getFrontHostId() != null) {
-//		    sSql = "select * from front_host_info where host_id ='" + enDeviceInfo.getFrontHostId()
-//			    + "'";
-//
-//		    rs = DaemonDBPool.doQuery(conn, sSql);
-//		    if (!rs.next()) {
-//			sGenResult = "F";
-//			Debug.pln("TdRunnable run()", "指令模板执行任务，未找到堡垒主机信息。");
-//		    } else {
-//			enFrontHostInfo.setHostId(rs.getString("HOST_ID"));
-//			enFrontHostInfo.setHostStatus(rs.getString("HOST_STATUS"));
-//			enFrontHostInfo.setHostIp(rs.getString("HOST_IP"));
-//			enFrontHostInfo.setHostPort(rs.getString("HOST_PORT"));
-//			enFrontHostInfo.setHostUser(rs.getString("HOST_USER"));
-//			enFrontHostInfo.setHostPassword(rs.getString("HOST_PASSWORD"));
-//			enFrontHostInfo.setHostPrompt(rs.getString("HOST_PROMPT"));
-//		    }
-//		}
-//
-//		// 根据命令模板编号，获取命令模板内容
-//		if (enSendList.getTemplateId() == null || enSendList.getTemplateId().trim() == "") {
-//		    sGenResult = "F";
-//		    Debug.pln("TdRunnable run()", "指令模板执行任务，未指定指令模板编号。");
-//		}
-//
-//		EnMaintainCommandsTemplate enTemplate = new EnMaintainCommandsTemplate();
-//		if (sGenResult.equals("S")) {
-//		    sSql = "select * from maintain_commands_template where temp_id ='"
-//			    + enSendList.getTemplateId() + "'";
-//
-//		    rs = DaemonDBPool.doQuery(conn, sSql);
-//		    if (!rs.next()) {
-//			sGenResult = "F";
-//			Debug.pln("TdRunnable run()", "指令模板执行任务，未找到指令模板。");
-//		    } else {
-//			enTemplate.setTempId(rs.getString("TEMP_ID"));
-//			enTemplate.setTempCont(rs.getString("TEMP_CONT"));
-//		    }
-//		}
-//		// 连接设备，并执行命令
-//		// 将执行结果保存到命令模板执行日志中
-
-	    } else if (enSendList.getCommandsType().equals("I")) {
-		// Sample Code
-		Thread.sleep(30000);
-
-		// Runtime Code
-		// 根据设备获取到设备信息及所属设备分类信息，当设备空时，获取全部的设备信息及所属设备分类信息
-		// 获取到全部堡垒主机列表
-		// 连接设备，并执行巡检指令
-		// 将执行巡检的情况保存到巡检日志中
-
-	    } else {
-		System.out.println("Error Commands Type:" + enSendList.getCommandsType());
-	    }
-
-	    // 记录执行命令的完成时间
-	    sTimeEnd = formatter.format(new java.util.Date());
-
-	    // 记录指令发送历史表
-	    if (enSendList.getTemplateId() == null) {
-		enSendList.setTemplateId("");
-	    }
-	    String sqlInsertHis = "insert into commands_send_his values ('" + enSendList.getSendId() + "','"
-		    + enSendList.getUserId() + "','" + enSendList.getDeviceId() + "','"
-		    + enSendList.getTaskDefineTime() + "','" + enSendList.getTaskPlanTime() + "','"
-		    + enSendList.getCommandsType() + "','" + enSendList.getTemplateId() + "','" + sGenResult
-		    + "','" + sTimeBegin + "','" + sTimeEnd + "')";
-	    iSaveFlag = DaemonDBPool.doUpdate(conn, sqlInsertHis);
-
-	    // 删除指令发送任务表
-	    String sqlDeleteList = "delete from commands_send_list where send_id ='" + enSendList.getSendId()
-		    + "'";
-	    iSaveFlag = DaemonDBPool.doUpdate(conn, sqlDeleteList);
-
-	    // 提交并关闭appdb的数据连接
-	    dbPool.endTransction(true);
-	    conn = null;
+	public TdRunnable(EnCommandsSendList enCommandsSendList) {
+		this.enSendList = enCommandsSendList;
 	}
 
-	catch (Exception ex) {
-	    sErrCode = ex.getMessage();
-	    TelnetDaemon.pln("TelnetDaemon.run():捕获到错误", "错误信息：" + ex.getMessage());
-	    TelnetDaemon.pln("RdRunnable " + sThreadName + " error:", ex.toString());
-	    ex.printStackTrace();
-	} finally {
-	    try {
-		if (conn != null) {
-		    dbPool.endTransction(false);
+	// 线程执行的部分
+	public void run() {
+		if (this.sThreadName == null) {
+			this.sThreadName = Thread.currentThread().getName();
 		}
-	    } catch (Exception ex) {
-		sErrCode = ex.getMessage();
-		TelnetDaemon.pln("CommandDaemon.run():关闭数据库连接时出错", "错误信息：" + ex.getMessage());
-		TelnetDaemon.pln("RdRunnable " + sThreadName + " error:", ex.toString());
-		ex.printStackTrace();
-	    }
+		DaemonDBPool dbPool = null; // 数据库连接池
+		Connection conn = null; // 数据库连接
+		String sErrCode = null;
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+		String sTimeBegin = "";
+		String sTimeEnd = "";
+
+		String sSql = "";
+		Vector enRows = new Vector();
+		ResultSet rs = null;
+
+		NetTelnet nt = new NetTelnet();
+		StringBuffer sbResult = new StringBuffer();
+		String sResult = "";
+
+		int iSaveFlag = 0;
+
+		TelnetDaemon.pln("rd.run()-begin", sThreadName);
+
+		try {
+			// 建立appdb的数据连接，并开始事务
+			dbPool = new DaemonDBPool();
+			dbPool.beginTransction();
+			conn = dbPool.getConn();
+
+			// 执行命令的结果，初始为S，若出错置为F
+			String sGenResult = "S";
+
+			// 记录执行命令的开始时间
+			sTimeBegin = formatter.format(new java.util.Date());
+
+			// 根据指令类型（commands_send_list.command_type）调用命令执行程序
+			if (enSendList.getCommandsType().equals("T")) {
+
+				// Runtime Code
+				if (enSendList.getDeviceId() == null || enSendList.getDeviceId().trim().length() == 0) {
+					sGenResult = "F";
+					Debug.pln("TdRunnable run()", "指令模板执行任务，未指定设备号。");
+				}
+
+				// 根据设备编号获取到设备信息
+				EnDeviceInfo enDeviceInfo = new EnDeviceInfo();
+				if (sGenResult.equals("S")) {
+					sSql = "select * from device_info where device_id ='" + enSendList.getDeviceId() + "'";
+					rs = DaemonDBPool.doQuery(conn, sSql);
+
+					if (!rs.next()) {
+						sGenResult = "F";
+						Debug.pln("TdRunnable run()", "指令模板执行任务，未找到设备信息。");
+					} else {
+						enDeviceInfo.setDeviceId(rs.getString("DEVICE_ID"));
+						enDeviceInfo.setDeviceStatus(rs.getString("DEVICE_STATUS"));
+						enDeviceInfo.setFrontHostId(rs.getString("FRONT_HOST_ID"));
+						enDeviceInfo.setDeviceIp(rs.getString("DEVICE_IP"));
+						enDeviceInfo.setDevicePort(rs.getString("DEVICE_PORT"));
+						enDeviceInfo.setDeviceUser(rs.getString("DEVICE_USER"));
+						enDeviceInfo.setDevicePassword(rs.getString("DEVICE_PASSWORD"));
+						enDeviceInfo.setDevicePrompt(rs.getString("DEVICE_PROMPT"));
+					}
+				}
+
+				// 当设备定义了堡垒主机时，获取堡垒主机信息
+				EnFrontHostInfo enFrontHostInfo = new EnFrontHostInfo();
+				if (sGenResult.equals("S")) {
+					if (!(enDeviceInfo.getFrontHostId() == null || enDeviceInfo.getFrontHostId().trim()
+							.length() == 0)) {
+						sSql = "select * from front_host_info where host_id ='"
+								+ enDeviceInfo.getFrontHostId() + "'";
+						rs = DaemonDBPool.doQuery(conn, sSql);
+						if (!rs.next()) {
+							sGenResult = "F";
+							Debug.pln("TdRunnable run()", "指令模板执行任务，未找到堡垒主机信息。");
+						} else {
+							enFrontHostInfo.setHostId(rs.getString("HOST_ID"));
+							enFrontHostInfo.setHostStatus(rs.getString("HOST_STATUS"));
+							enFrontHostInfo.setHostIp(rs.getString("HOST_IP"));
+							enFrontHostInfo.setHostPort(rs.getString("HOST_PORT"));
+							enFrontHostInfo.setHostUser(rs.getString("HOST_USER"));
+							enFrontHostInfo.setHostPassword(rs.getString("HOST_PASSWORD"));
+							enFrontHostInfo.setHostPrompt(rs.getString("HOST_PROMPT"));
+						}
+					}
+				}
+
+				// 根据命令模板编号，获取命令模板内容
+				if (enSendList.getTemplateId() == null || enSendList.getTemplateId().trim().length() == 0) {
+					sGenResult = "F";
+					Debug.pln("TdRunnable run()", "指令模板执行任务，未指定指令模板编号。");
+				}
+
+				EnMaintainCommandsTemplate enTemplate = new EnMaintainCommandsTemplate();
+				if (sGenResult.equals("S")) {
+					sSql = "select * from maintain_commands_template where temp_id ='"
+							+ enSendList.getTemplateId() + "'";
+
+					rs = DaemonDBPool.doQuery(conn, sSql);
+					if (!rs.next()) {
+						sGenResult = "F";
+						Debug.pln("TdRunnable run()", "指令模板执行任务，未找到指令模板信息。");
+					} else {
+						enTemplate.setTempId(rs.getString("TEMP_ID"));
+						enTemplate.setTempCont(rs.getString("TEMP_CONT"));
+					}
+				}
+
+				// 连接设备，并执行命令
+				sbResult = new StringBuffer();
+				if (sGenResult.equals("S")) {
+					// 进行设备登录处理
+					if (enDeviceInfo.getFrontHostId() == null
+							|| enDeviceInfo.getFrontHostId().trim().length() == 0) {
+						sResult = nt.FunLogin(enDeviceInfo.getDeviceIp(), enDeviceInfo.getDevicePort(),
+								enDeviceInfo.getDeviceUser(), enDeviceInfo.getDevicePassword(), enDeviceInfo
+										.getDevicePrompt());
+						sbResult.append(sResult);
+						if (!nt.getBflag()) {
+							sGenResult = "F";
+							Debug.pln("TdRunnable run()", "指令模板执行任务，登录设备失败。");
+						}
+					} else {
+						sResult = nt.FunLogin(enFrontHostInfo.getHostIp(), enFrontHostInfo.getHostPort(),
+								enFrontHostInfo.getHostUser(), enFrontHostInfo.getHostPassword(),
+								enFrontHostInfo.getHostPrompt());
+						sbResult.append(sResult);
+
+						if (!nt.getBflag()) {
+							sGenResult = "F";
+							Debug.pln("TdRunnable run()", "指令模板执行任务，登录堡垒主机失败。");
+						} else {
+							sResult = nt.FunRelogin(enDeviceInfo.getDeviceIp(), enDeviceInfo.getDevicePort(),
+									enDeviceInfo.getDeviceUser(), enDeviceInfo.getDevicePassword(),
+									enDeviceInfo.getDevicePrompt());
+							sbResult.append(sResult);
+							if (!nt.getBflag()) {
+								sGenResult = "F";
+								Debug.pln("TdRunnable run()", "指令模板执行任务，通过堡垒主机登录设备失败。");
+
+								// 关闭之前的连接
+								nt.disconnect();
+							}
+						}
+					}
+
+					// 执行命令
+					if (sGenResult.equals("S")) {
+						sResult = nt.sendCommand("ll");
+						sbResult.append(sResult);
+						sResult = nt.sendCommand("pwd");
+						sbResult.append(sResult);
+						// 关闭连接
+						nt.disconnect();
+					}
+				}
+
+				// 记录执行命令的完成时间
+				sTimeEnd = formatter.format(new java.util.Date());
+				// 将执行结果保存到命令模板执行日志中
+				sSql = "insert into device_maintain_log values ('" + enSendList.getSendId() + "','"
+						+ enSendList.getDeviceId() + "','" + enSendList.getUserId() + "','" + sTimeBegin
+						+ "','" + sTimeEnd + "', ?)";
+			
+				java.sql.PreparedStatement ps = null; 
+				ps = conn.prepareStatement(sSql);				
+				ps.setString(1, sbResult.toString());
+				iSaveFlag = ps.executeUpdate();
+				
+				if(iSaveFlag<1){
+					sGenResult="F";
+					Debug.pln("TdRunnable run()", "指令模板执行任务，记录日志失败。");
+				}
+
+			} else if (enSendList.getCommandsType().equals("I")) {
+				// Sample Code
+				Thread.sleep(30000);
+
+				// Runtime Code
+				// 根据设备获取到设备信息及所属设备分类信息，当设备空时，获取全部的设备信息及所属设备分类信息
+				// 获取到全部堡垒主机列表
+				// 连接设备，并执行巡检指令
+				// 将执行巡检的情况保存到巡检日志中
+
+			} else {
+				System.out.println("Error Commands Type:" + enSendList.getCommandsType());
+			}
+
+			// 记录执行命令的完成时间
+			sTimeEnd = formatter.format(new java.util.Date());
+
+			// 记录指令发送历史表
+			if (enSendList.getTemplateId() == null) {
+				enSendList.setTemplateId("");
+			}
+			String sqlInsertHis = "insert into commands_send_his values ('" + enSendList.getSendId() + "','"
+					+ enSendList.getUserId() + "','" + enSendList.getDeviceId() + "','"
+					+ enSendList.getTaskDefineTime() + "','" + enSendList.getTaskPlanTime() + "','"
+					+ enSendList.getCommandsType() + "','" + enSendList.getTemplateId() + "','" + sGenResult
+					+ "','" + sTimeBegin + "','" + sTimeEnd + "')";
+			iSaveFlag = DaemonDBPool.doUpdate(conn, sqlInsertHis);
+
+			// 删除指令发送任务表
+			String sqlDeleteList = "delete from commands_send_list where send_id ='" + enSendList.getSendId()
+					+ "'";
+			iSaveFlag = DaemonDBPool.doUpdate(conn, sqlDeleteList);
+
+			// 提交并关闭appdb的数据连接
+			dbPool.endTransction(true);
+			conn = null;
+		}
+
+		catch (Exception ex) {
+			sErrCode = ex.getMessage();
+			TelnetDaemon.pln("TelnetDaemon.run():捕获到错误", "错误信息：" + ex.getMessage());
+			TelnetDaemon.pln("RdRunnable " + sThreadName + " error:", ex.toString());
+			ex.printStackTrace();
+		} finally {
+			try {
+				if (conn != null) {
+					dbPool.endTransction(false);
+				}
+			} catch (Exception ex) {
+				sErrCode = ex.getMessage();
+				TelnetDaemon.pln("CommandDaemon.run():关闭数据库连接时出错", "错误信息：" + ex.getMessage());
+				TelnetDaemon.pln("RdRunnable " + sThreadName + " error:", ex.toString());
+				ex.printStackTrace();
+			}
+		}
+		TelnetDaemon.pln("cd.run()-end", sThreadName);
 	}
-	TelnetDaemon.pln("cd.run()-end", sThreadName);
-    }
 }

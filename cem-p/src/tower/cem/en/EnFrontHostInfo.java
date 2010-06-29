@@ -30,6 +30,11 @@ public class EnFrontHostInfo implements java.io.Serializable {
     private String hostNameCn;
 
     /**
+     * Type : char(6) Name : LOCATION_ID
+     */
+    private String locationId;
+
+    /**
      * Type : char(1) Name : HOST_STATUS
      */
     private String hostStatus;
@@ -83,6 +88,11 @@ public class EnFrontHostInfo implements java.io.Serializable {
      * Type : varchar(60) Name : HOST_NAME_CN modify flag
      */
     private boolean _flagHostNameCn;
+
+    /**
+     * Type : char(6) Name : LOCATION_ID modify flag
+     */
+    private boolean _flagLocationId;
 
     /**
      * Type : char(1) Name : HOST_STATUS modify flag
@@ -205,6 +215,28 @@ public class EnFrontHostInfo implements java.io.Serializable {
      */
     public boolean hasChangeHostNameCn() {
         return _flagHostNameCn;
+    }
+
+    /**
+     * Sets the value for locationId
+     */
+    public void setLocationId(String locationId) {
+        this.locationId = locationId;
+        this._flagLocationId = true;
+    }
+
+    /**
+     * Gets the value for locationId
+     */
+    public String getLocationId() {
+        return locationId;
+    }
+
+    /**
+     * has the value for locationId changed?
+     */
+    public boolean hasChangeLocationId() {
+        return _flagLocationId;
     }
 
     /**

@@ -47,7 +47,7 @@ public class TelnetDaemon extends Thread {
 	Thread threads[] = new Thread[Thread.activeCount()];
 	int n = Thread.enumerate(threads);
 	String sThreadName = null;
-	System.out.println("+-------------当前正在执行Telnet的任务----------------------+");
+	System.out.println("+-----------------当前正在执行的Telnet任务-----------------+");
 	for (int i = 0; i < n; i++) {
 	    sThreadName = threads[i].getName();
 	    if ("main".equals(sThreadName)) {
@@ -55,7 +55,7 @@ public class TelnetDaemon extends Thread {
 	    }
 	    System.out.println("+-[" + i + "] " + sThreadName);
 	}
-	System.out.println("+-------------------------------------------------------------+");
+	System.out.println("+----------------------------------------------------------+");
     }
 
     public static void main(String[] args) {

@@ -35,6 +35,11 @@ public class EnDeviceInfo implements java.io.Serializable {
     private String typeId;
 
     /**
+     * Type : char(6) Name : LOCATION_ID
+     */
+    private String locationId;
+
+    /**
      * Type : char(1) Name : DEVICE_STATUS
      */
     private String deviceStatus;
@@ -98,6 +103,11 @@ public class EnDeviceInfo implements java.io.Serializable {
      * Type : char(6) Name : TYPE_ID modify flag
      */
     private boolean _flagTypeId;
+
+    /**
+     * Type : char(6) Name : LOCATION_ID modify flag
+     */
+    private boolean _flagLocationId;
 
     /**
      * Type : char(1) Name : DEVICE_STATUS modify flag
@@ -247,6 +257,28 @@ public class EnDeviceInfo implements java.io.Serializable {
      */
     public boolean hasChangeTypeId() {
         return _flagTypeId;
+    }
+
+    /**
+     * Sets the value for locationId
+     */
+    public void setLocationId(String locationId) {
+        this.locationId = locationId;
+        this._flagLocationId = true;
+    }
+
+    /**
+     * Gets the value for locationId
+     */
+    public String getLocationId() {
+        return locationId;
+    }
+
+    /**
+     * has the value for locationId changed?
+     */
+    public boolean hasChangeLocationId() {
+        return _flagLocationId;
     }
 
     /**

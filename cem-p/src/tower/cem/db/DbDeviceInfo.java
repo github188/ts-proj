@@ -31,7 +31,7 @@ public class DbDeviceInfo extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
 
-        query.append("insert into device_info ( DEVICE_ID,DEVICE_NAME_EN,DEVICE_ABB_NAME_EN,DEVICE_NAME_CN,TYPE_ID,DEVICE_STATUS,FRONT_HOST_ID,DEVICE_IP,DEVICE_PORT,DEVICE_USER,DEVICE_PASSWORD,DEVICE_PROMPT,REMARK ) values ( ");
+        query.append("insert into device_info ( DEVICE_ID,DEVICE_NAME_EN,DEVICE_ABB_NAME_EN,DEVICE_NAME_CN,TYPE_ID,LOCATION_ID,DEVICE_STATUS,FRONT_HOST_ID,DEVICE_IP,DEVICE_PORT,DEVICE_USER,DEVICE_PASSWORD,DEVICE_PROMPT,REMARK ) values ( ");
         query.append(formatString(en.getDeviceId()));
         query.append(",");
         query.append(formatString(en.getDeviceNameEn()));
@@ -41,6 +41,8 @@ public class DbDeviceInfo extends RootDB{
         query.append(formatString(en.getDeviceNameCn()));
         query.append(",");
         query.append(formatString(en.getTypeId()));
+        query.append(",");
+        query.append(formatString(en.getLocationId()));
         query.append(",");
         query.append(formatString(en.getDeviceStatus()));
         query.append(",");
@@ -128,6 +130,14 @@ public class DbDeviceInfo extends RootDB{
             query.append(formatString(en.getTypeId()));
             bChanged = true;
         }
+        if(en.hasChangeLocationId()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("LOCATION_ID=");
+            query.append(formatString(en.getLocationId()));
+            bChanged = true;
+        }
         if(en.hasChangeDeviceStatus()) {
             if(bChanged){
                 query.append(",");
@@ -207,7 +217,7 @@ public class DbDeviceInfo extends RootDB{
         EnDeviceInfo res = null;
 
         StringBuffer query;
-        query = new StringBuffer("select DEVICE_ID,DEVICE_NAME_EN,DEVICE_ABB_NAME_EN,DEVICE_NAME_CN,TYPE_ID,DEVICE_STATUS,FRONT_HOST_ID,DEVICE_IP,DEVICE_PORT,DEVICE_USER,DEVICE_PASSWORD,DEVICE_PROMPT,REMARK from device_info");
+        query = new StringBuffer("select DEVICE_ID,DEVICE_NAME_EN,DEVICE_ABB_NAME_EN,DEVICE_NAME_CN,TYPE_ID,LOCATION_ID,DEVICE_STATUS,FRONT_HOST_ID,DEVICE_IP,DEVICE_PORT,DEVICE_USER,DEVICE_PASSWORD,DEVICE_PROMPT,REMARK from device_info");
 
         query.append(" where ");
         query.append("DEVICE_ID=");
@@ -296,6 +306,14 @@ public class DbDeviceInfo extends RootDB{
             query.append(formatString(en.getTypeId()));
             bChanged = true;
         }
+        if(en.hasChangeLocationId()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("LOCATION_ID=");
+            query.append(formatString(en.getLocationId()));
+            bChanged = true;
+        }
         if(en.hasChangeDeviceStatus()) {
             if(bChanged){
                 query.append(",");
@@ -375,7 +393,7 @@ public class DbDeviceInfo extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select DEVICE_ID,DEVICE_NAME_EN,DEVICE_ABB_NAME_EN,DEVICE_NAME_CN,TYPE_ID,DEVICE_STATUS,FRONT_HOST_ID,DEVICE_IP,DEVICE_PORT,DEVICE_USER,DEVICE_PASSWORD,DEVICE_PROMPT,REMARK from device_info");
+        query.append("select DEVICE_ID,DEVICE_NAME_EN,DEVICE_ABB_NAME_EN,DEVICE_NAME_CN,TYPE_ID,LOCATION_ID,DEVICE_STATUS,FRONT_HOST_ID,DEVICE_IP,DEVICE_PORT,DEVICE_USER,DEVICE_PASSWORD,DEVICE_PROMPT,REMARK from device_info");
 
         query.append(" where ");
         query.append("DEVICE_ID like ");
@@ -413,7 +431,7 @@ public class DbDeviceInfo extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select DEVICE_ID,DEVICE_NAME_EN,DEVICE_ABB_NAME_EN,DEVICE_NAME_CN,TYPE_ID,DEVICE_STATUS,FRONT_HOST_ID,DEVICE_IP,DEVICE_PORT,DEVICE_USER,DEVICE_PASSWORD,DEVICE_PROMPT,REMARK from device_info where ");
+        query.append("select DEVICE_ID,DEVICE_NAME_EN,DEVICE_ABB_NAME_EN,DEVICE_NAME_CN,TYPE_ID,LOCATION_ID,DEVICE_STATUS,FRONT_HOST_ID,DEVICE_IP,DEVICE_PORT,DEVICE_USER,DEVICE_PASSWORD,DEVICE_PROMPT,REMARK from device_info where ");
         query.append(where);
         if(orderBy != null) {
             query.append(orderBy);
@@ -430,7 +448,7 @@ public class DbDeviceInfo extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select DEVICE_ID,DEVICE_NAME_EN,DEVICE_ABB_NAME_EN,DEVICE_NAME_CN,TYPE_ID,DEVICE_STATUS,FRONT_HOST_ID,DEVICE_IP,DEVICE_PORT,DEVICE_USER,DEVICE_PASSWORD,DEVICE_PROMPT,REMARK from device_info");
+        query.append("select DEVICE_ID,DEVICE_NAME_EN,DEVICE_ABB_NAME_EN,DEVICE_NAME_CN,TYPE_ID,LOCATION_ID,DEVICE_STATUS,FRONT_HOST_ID,DEVICE_IP,DEVICE_PORT,DEVICE_USER,DEVICE_PASSWORD,DEVICE_PROMPT,REMARK from device_info");
 
         if(orderBy != null) {
             query.append(orderBy);
@@ -487,6 +505,14 @@ public class DbDeviceInfo extends RootDB{
             }
             query.append("TYPE_ID=");
             query.append(formatString(en.getTypeId()));
+            bChanged = true;
+        }
+        if(en.hasChangeLocationId()) {
+            if(bChanged){
+                query.append(" and ");
+            }
+            query.append("LOCATION_ID=");
+            query.append(formatString(en.getLocationId()));
             bChanged = true;
         }
         if(en.hasChangeDeviceStatus()) {
@@ -554,9 +580,9 @@ public class DbDeviceInfo extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select DEVICE_ID,DEVICE_NAME_EN,DEVICE_ABB_NAME_EN,DEVICE_NAME_CN,TYPE_ID,DEVICE_STATUS,FRONT_HOST_ID,DEVICE_IP,DEVICE_PORT,DEVICE_USER,DEVICE_PASSWORD,DEVICE_PROMPT,REMARK from device_info where ");
+            query.insert(0,"select DEVICE_ID,DEVICE_NAME_EN,DEVICE_ABB_NAME_EN,DEVICE_NAME_CN,TYPE_ID,LOCATION_ID,DEVICE_STATUS,FRONT_HOST_ID,DEVICE_IP,DEVICE_PORT,DEVICE_USER,DEVICE_PASSWORD,DEVICE_PROMPT,REMARK from device_info where ");
         } else {
-            query.append("select DEVICE_ID,DEVICE_NAME_EN,DEVICE_ABB_NAME_EN,DEVICE_NAME_CN,TYPE_ID,DEVICE_STATUS,FRONT_HOST_ID,DEVICE_IP,DEVICE_PORT,DEVICE_USER,DEVICE_PASSWORD,DEVICE_PROMPT,REMARK from device_info");
+            query.append("select DEVICE_ID,DEVICE_NAME_EN,DEVICE_ABB_NAME_EN,DEVICE_NAME_CN,TYPE_ID,LOCATION_ID,DEVICE_STATUS,FRONT_HOST_ID,DEVICE_IP,DEVICE_PORT,DEVICE_USER,DEVICE_PASSWORD,DEVICE_PROMPT,REMARK from device_info");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -613,6 +639,14 @@ public class DbDeviceInfo extends RootDB{
             }
             query.append("TYPE_ID like ");
             query.append(formatString(en.getTypeId()));
+            bChanged = true;
+        }
+        if(en.hasChangeLocationId()) {
+            if(bChanged){
+                query.append(" and ");
+            }
+            query.append("LOCATION_ID like ");
+            query.append(formatString(en.getLocationId()));
             bChanged = true;
         }
         if(en.hasChangeDeviceStatus()) {
@@ -680,9 +714,9 @@ public class DbDeviceInfo extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select DEVICE_ID,DEVICE_NAME_EN,DEVICE_ABB_NAME_EN,DEVICE_NAME_CN,TYPE_ID,DEVICE_STATUS,FRONT_HOST_ID,DEVICE_IP,DEVICE_PORT,DEVICE_USER,DEVICE_PASSWORD,DEVICE_PROMPT,REMARK from device_info where ");
+            query.insert(0,"select DEVICE_ID,DEVICE_NAME_EN,DEVICE_ABB_NAME_EN,DEVICE_NAME_CN,TYPE_ID,LOCATION_ID,DEVICE_STATUS,FRONT_HOST_ID,DEVICE_IP,DEVICE_PORT,DEVICE_USER,DEVICE_PASSWORD,DEVICE_PROMPT,REMARK from device_info where ");
         } else {
-            query.append("select DEVICE_ID,DEVICE_NAME_EN,DEVICE_ABB_NAME_EN,DEVICE_NAME_CN,TYPE_ID,DEVICE_STATUS,FRONT_HOST_ID,DEVICE_IP,DEVICE_PORT,DEVICE_USER,DEVICE_PASSWORD,DEVICE_PROMPT,REMARK from device_info");
+            query.append("select DEVICE_ID,DEVICE_NAME_EN,DEVICE_ABB_NAME_EN,DEVICE_NAME_CN,TYPE_ID,LOCATION_ID,DEVICE_STATUS,FRONT_HOST_ID,DEVICE_IP,DEVICE_PORT,DEVICE_USER,DEVICE_PASSWORD,DEVICE_PROMPT,REMARK from device_info");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -786,6 +820,14 @@ public class DbDeviceInfo extends RootDB{
             query.append(formatString(en.getTypeId()));
             bChanged = true;
         }
+        if(en.hasChangeLocationId()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("LOCATION_ID=");
+            query.append(formatString(en.getLocationId()));
+            bChanged = true;
+        }
         if(en.hasChangeDeviceStatus()) {
             if(bChanged){
                 query.append(",");
@@ -867,6 +909,7 @@ public class DbDeviceInfo extends RootDB{
         en.setDeviceAbbNameEn(r.getString("DEVICE_ABB_NAME_EN"));
         en.setDeviceNameCn(r.getString("DEVICE_NAME_CN"));
         en.setTypeId(r.getString("TYPE_ID"));
+        en.setLocationId(r.getString("LOCATION_ID"));
         en.setDeviceStatus(r.getString("DEVICE_STATUS"));
         en.setFrontHostId(r.getString("FRONT_HOST_ID"));
         en.setDeviceIp(r.getString("DEVICE_IP"));
@@ -917,6 +960,10 @@ public class DbDeviceInfo extends RootDB{
         stmp = (String)otmp;
         en.setTypeId(stmp);
 
+        otmp = xml.getInputObject("LOCATION_ID");
+        stmp = (String)otmp;
+        en.setLocationId(stmp);
+
         otmp = xml.getInputObject("DEVICE_STATUS");
         stmp = (String)otmp;
         en.setDeviceStatus(stmp);
@@ -964,6 +1011,7 @@ public class DbDeviceInfo extends RootDB{
         Object[] oDeviceAbbNameEn;
         Object[] oDeviceNameCn;
         Object[] oTypeId;
+        Object[] oLocationId;
         Object[] oDeviceStatus;
         Object[] oFrontHostId;
         Object[] oDeviceIp;
@@ -993,6 +1041,10 @@ public class DbDeviceInfo extends RootDB{
         oTypeId = xml.getInputObjects("TYPE_ID");
         if (count == 0 && oTypeId.length > 0) {
             count = oTypeId.length;
+        }
+        oLocationId = xml.getInputObjects("LOCATION_ID");
+        if (count == 0 && oLocationId.length > 0) {
+            count = oLocationId.length;
         }
         oDeviceStatus = xml.getInputObjects("DEVICE_STATUS");
         if (count == 0 && oDeviceStatus.length > 0) {
@@ -1054,6 +1106,11 @@ public class DbDeviceInfo extends RootDB{
                 en.setTypeId(stmp);
             }
 
+            if (oLocationId.length == count) {
+                stmp = (String)oLocationId[i];
+                en.setLocationId(stmp);
+            }
+
             if (oDeviceStatus.length == count) {
                 stmp = (String)oDeviceStatus[i];
                 en.setDeviceStatus(stmp);
@@ -1109,6 +1166,7 @@ public class DbDeviceInfo extends RootDB{
         xml.setItemValue("DEVICE_INFO",row,"DEVICE_ABB_NAME_EN",en.getDeviceAbbNameEn());
         xml.setItemValue("DEVICE_INFO",row,"DEVICE_NAME_CN",en.getDeviceNameCn());
         xml.setItemValue("DEVICE_INFO",row,"TYPE_ID",en.getTypeId());
+        xml.setItemValue("DEVICE_INFO",row,"LOCATION_ID",en.getLocationId());
         xml.setItemValue("DEVICE_INFO",row,"DEVICE_STATUS",en.getDeviceStatus());
         xml.setItemValue("DEVICE_INFO",row,"FRONT_HOST_ID",en.getFrontHostId());
         xml.setItemValue("DEVICE_INFO",row,"DEVICE_IP",en.getDeviceIp());
@@ -1134,6 +1192,7 @@ public class DbDeviceInfo extends RootDB{
             xml.setItemValue("DEVICE_INFO",row,"DEVICE_ABB_NAME_EN",en.getDeviceAbbNameEn());
             xml.setItemValue("DEVICE_INFO",row,"DEVICE_NAME_CN",en.getDeviceNameCn());
             xml.setItemValue("DEVICE_INFO",row,"TYPE_ID",en.getTypeId());
+            xml.setItemValue("DEVICE_INFO",row,"LOCATION_ID",en.getLocationId());
             xml.setItemValue("DEVICE_INFO",row,"DEVICE_STATUS",en.getDeviceStatus());
             xml.setItemValue("DEVICE_INFO",row,"FRONT_HOST_ID",en.getFrontHostId());
             xml.setItemValue("DEVICE_INFO",row,"DEVICE_IP",en.getDeviceIp());
