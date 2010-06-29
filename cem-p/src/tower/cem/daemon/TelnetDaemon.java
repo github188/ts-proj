@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.ConnectException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -58,6 +59,7 @@ public class TelnetDaemon extends Thread {
     }
 
     public static void main(String[] args) {
+	DaemonDBPool dbPool = new DaemonDBPool();
 	Connection conn = null; // 数据库连接
 	String sErrCode = null; // 错误代码
 	int iFirstFlag = 1; // 首次执行标志
@@ -130,10 +132,10 @@ public class TelnetDaemon extends Thread {
 	    // 执行标志为"T"，服务进行中 ...
 	    setTdconfigMsg("T", iDaemonsMax, iSleepTimer, sLog, dbDriver, dbUrl, dbUser, dbPassword);
 
-	    // 取得数据库连接，预备Statement
-	    conn = DaemonDBPool.getConnection();
-	    conn.setAutoCommit(true);
-	    pstmt = conn.prepareStatement(sQuerySql);
+	    // // 取得数据库连接，预备Statement
+	    // conn = DaemonDBPool.getConnection();
+	    // conn.setAutoCommit(true);
+	    // pstmt = conn.prepareStatement(sQuerySql);
 
 	    int iSendCount = 0;
 
@@ -155,6 +157,11 @@ public class TelnetDaemon extends Thread {
 		}
 
 		try {
+
+		    // 取得数据库连接，预备Statement
+		    conn = dbPool.getConn();
+		    conn.setAutoCommit(true);
+		    pstmt = conn.prepareStatement(sQuerySql);
 
 		    // 当为首次执行时,将表中为maintain_commands_send.status='B'修改为'N'
 		    if (iFirstFlag == 1) {
@@ -196,17 +203,22 @@ public class TelnetDaemon extends Thread {
 			DaemonDBPool.doUpdate(conn, sUpdateSql);
 
 		    }
+		} catch (ConnectException excon) {
+		    pln("TelnetDaemon.main():捕获到通讯错误", "错误信息：" + excon.getMessage());
+		    // StopTelnetDaemon.main(null);
+		    // excon.printStackTrace();
+
 		} catch (SQLException exsql) {
 		    sErrCode = exsql.getMessage();
 		    pln("TelnetDaemon.main():捕获到SQL错误", "错误信息：" + exsql.getMessage());
-		    StopTelnetDaemon.main(null);
-		    exsql.printStackTrace();
+		    // StopTelnetDaemon.main(null);
+		    // exsql.printStackTrace();
 
 		} catch (Exception ex) {
 		    sErrCode = ex.getMessage();
 		    pln("TelnetDaemon.main():捕获到错误", "错误信息：" + ex.getMessage());
-		    StopTelnetDaemon.main(null);
-		    ex.printStackTrace();
+		    // StopTelnetDaemon.main(null);
+		    // ex.printStackTrace();
 		}
 
 		// 程序休眠sleep_timer毫秒

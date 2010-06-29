@@ -20,7 +20,7 @@ public class DaemonDBPool {
 	    String DbUser = TelnetDaemon.getTdconfigMsg("db_user").trim();
 	    String DbPassword = TelnetDaemon.getTdconfigMsg("db_password").trim();
 
-	    Class.forName(DbDriver);
+	    Class.forName(DbDriver).newInstance();
 	    Connection conn = DriverManager.getConnection(DbUrl, DbUser, DbPassword);
 	    conn.setAutoCommit(false);// 关闭自动提交模式.
 
