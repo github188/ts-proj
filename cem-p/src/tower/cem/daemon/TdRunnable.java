@@ -1,12 +1,17 @@
 package tower.cem.daemon;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Vector;
 
 import tower.cem.db.DbCommandsSendList;
 import tower.cem.en.EnCommandsSendList;
+import tower.cem.en.EnDeviceInfo;
+import tower.cem.en.EnFrontHostInfo;
+import tower.cem.en.EnMaintainCommandsTemplate;
+import tower.tmvc.QueryResult;
 import tower.tmvc.Transaction;
 
 public class TdRunnable implements Runnable {
@@ -29,8 +34,10 @@ public class TdRunnable implements Runnable {
 	SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
 	String sTimeBegin = "";
 	String sTimeEnd = "";
+
 	String sSql = "";
-	List listEn = new Vector();
+	Vector enRows = new Vector();
+	ResultSet rs = null;
 
 	int iSaveFlag = 0;
 
@@ -53,12 +60,76 @@ public class TdRunnable implements Runnable {
 		// Sample Code
 		Thread.sleep(30000);
 
-		// Runtime Code
-		// 根据设备编号获取到设备信息
-		// 当设备定义了堡垒主机时，获取堡垒主机信息
-		// 根据命令模板编号，获取命令模板内容
-		// 连接设备，并执行命令
-		// 将执行结果保存到命令模板执行日志中
+//		// Runtime Code
+//		if (enSendList.getDeviceId() == null || enSendList.getDeviceId().trim() == "") {
+//		    sGenResult = "F";
+//		    Debug.pln("TdRunnable run()", "指令模板执行任务，未指定设备号。");
+//		}
+//
+//		// 根据设备编号获取到设备信息
+//		EnDeviceInfo enDeviceInfo = new EnDeviceInfo();
+//		if (sGenResult.equals("S")) {
+//		    sSql = "select * from device_info where device_id ='" + enSendList.getDeviceId() + "'";
+//		    rs = DaemonDBPool.doQuery(conn, sSql);
+//
+//		    if (!rs.next()) {
+//			sGenResult = "F";
+//			Debug.pln("TdRunnable run()", "指令模板执行任务，未找到设备信息。");
+//		    } else {
+//			enDeviceInfo.setDeviceId(rs.getString("DEVICE_ID"));
+//			enDeviceInfo.setDeviceStatus(rs.getString("DEVICE_STATUS"));
+//			enDeviceInfo.setFrontHostId(rs.getString("FRONT_HOST_ID"));
+//			enDeviceInfo.setDeviceIp(rs.getString("DEVICE_IP"));
+//			enDeviceInfo.setDevicePort(rs.getString("DEVICE_PORT"));
+//			enDeviceInfo.setDeviceUser(rs.getString("DEVICE_USER"));
+//			enDeviceInfo.setDevicePassword(rs.getString("DEVICE_PASSWORD"));
+//			enDeviceInfo.setDevicePrompt(rs.getString("DEVICE_PROMPT"));
+//		    }
+//		}
+//
+//		// 当设备定义了堡垒主机时，获取堡垒主机信息
+//		EnFrontHostInfo enFrontHostInfo = new EnFrontHostInfo();
+//		if (sGenResult.equals("S") && enDeviceInfo.getFrontHostId() != null) {
+//		    sSql = "select * from front_host_info where host_id ='" + enDeviceInfo.getFrontHostId()
+//			    + "'";
+//
+//		    rs = DaemonDBPool.doQuery(conn, sSql);
+//		    if (!rs.next()) {
+//			sGenResult = "F";
+//			Debug.pln("TdRunnable run()", "指令模板执行任务，未找到堡垒主机信息。");
+//		    } else {
+//			enFrontHostInfo.setHostId(rs.getString("HOST_ID"));
+//			enFrontHostInfo.setHostStatus(rs.getString("HOST_STATUS"));
+//			enFrontHostInfo.setHostIp(rs.getString("HOST_IP"));
+//			enFrontHostInfo.setHostPort(rs.getString("HOST_PORT"));
+//			enFrontHostInfo.setHostUser(rs.getString("HOST_USER"));
+//			enFrontHostInfo.setHostPassword(rs.getString("HOST_PASSWORD"));
+//			enFrontHostInfo.setHostPrompt(rs.getString("HOST_PROMPT"));
+//		    }
+//		}
+//
+//		// 根据命令模板编号，获取命令模板内容
+//		if (enSendList.getTemplateId() == null || enSendList.getTemplateId().trim() == "") {
+//		    sGenResult = "F";
+//		    Debug.pln("TdRunnable run()", "指令模板执行任务，未指定指令模板编号。");
+//		}
+//
+//		EnMaintainCommandsTemplate enTemplate = new EnMaintainCommandsTemplate();
+//		if (sGenResult.equals("S")) {
+//		    sSql = "select * from maintain_commands_template where temp_id ='"
+//			    + enSendList.getTemplateId() + "'";
+//
+//		    rs = DaemonDBPool.doQuery(conn, sSql);
+//		    if (!rs.next()) {
+//			sGenResult = "F";
+//			Debug.pln("TdRunnable run()", "指令模板执行任务，未找到指令模板。");
+//		    } else {
+//			enTemplate.setTempId(rs.getString("TEMP_ID"));
+//			enTemplate.setTempCont(rs.getString("TEMP_CONT"));
+//		    }
+//		}
+//		// 连接设备，并执行命令
+//		// 将执行结果保存到命令模板执行日志中
 
 	    } else if (enSendList.getCommandsType().equals("I")) {
 		// Sample Code
