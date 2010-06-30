@@ -1,6 +1,6 @@
 package tower.cem.en;
 /**
- * DeviceMaintainLog
+ * DeviceInspectLog
  * 
  * WARNING! Automatically generated file!
  * Do not edit!
@@ -8,7 +8,7 @@ package tower.cem.en;
  */
 
 
-public class EnDeviceMaintainLog implements java.io.Serializable {
+public class EnDeviceInspectLog implements java.io.Serializable {
     /**
      * Type : char(10) Name : SEND_ID
      */
@@ -35,14 +35,14 @@ public class EnDeviceMaintainLog implements java.io.Serializable {
     private String userId;
 
     /**
-     * Type : char(14) Name : MAINTAIN_BEGIN
+     * Type : char(14) Name : INSPECT_BEGIN
      */
-    private String maintainBegin;
+    private String inspectBegin;
 
     /**
-     * Type : char(14) Name : MAINTAIN_END
+     * Type : char(14) Name : INSPECT_END
      */
-    private String maintainEnd;
+    private String inspectEnd;
 
     /**
      * Type : char(1) Name : STATUS
@@ -80,14 +80,14 @@ public class EnDeviceMaintainLog implements java.io.Serializable {
     private boolean _flagUserId;
 
     /**
-     * Type : char(14) Name : MAINTAIN_BEGIN modify flag
+     * Type : char(14) Name : INSPECT_BEGIN modify flag
      */
-    private boolean _flagMaintainBegin;
+    private boolean _flagInspectBegin;
 
     /**
-     * Type : char(14) Name : MAINTAIN_END modify flag
+     * Type : char(14) Name : INSPECT_END modify flag
      */
-    private boolean _flagMaintainEnd;
+    private boolean _flagInspectEnd;
 
     /**
      * Type : char(1) Name : STATUS modify flag
@@ -210,47 +210,47 @@ public class EnDeviceMaintainLog implements java.io.Serializable {
     }
 
     /**
-     * Sets the value for maintainBegin
+     * Sets the value for inspectBegin
      */
-    public void setMaintainBegin(String maintainBegin) {
-        this.maintainBegin = maintainBegin;
-        this._flagMaintainBegin = true;
+    public void setInspectBegin(String inspectBegin) {
+        this.inspectBegin = inspectBegin;
+        this._flagInspectBegin = true;
     }
 
     /**
-     * Gets the value for maintainBegin
+     * Gets the value for inspectBegin
      */
-    public String getMaintainBegin() {
-        return maintainBegin;
+    public String getInspectBegin() {
+        return inspectBegin;
     }
 
     /**
-     * has the value for maintainBegin changed?
+     * has the value for inspectBegin changed?
      */
-    public boolean hasChangeMaintainBegin() {
-        return _flagMaintainBegin;
+    public boolean hasChangeInspectBegin() {
+        return _flagInspectBegin;
     }
 
     /**
-     * Sets the value for maintainEnd
+     * Sets the value for inspectEnd
      */
-    public void setMaintainEnd(String maintainEnd) {
-        this.maintainEnd = maintainEnd;
-        this._flagMaintainEnd = true;
+    public void setInspectEnd(String inspectEnd) {
+        this.inspectEnd = inspectEnd;
+        this._flagInspectEnd = true;
     }
 
     /**
-     * Gets the value for maintainEnd
+     * Gets the value for inspectEnd
      */
-    public String getMaintainEnd() {
-        return maintainEnd;
+    public String getInspectEnd() {
+        return inspectEnd;
     }
 
     /**
-     * has the value for maintainEnd changed?
+     * has the value for inspectEnd changed?
      */
-    public boolean hasChangeMaintainEnd() {
-        return _flagMaintainEnd;
+    public boolean hasChangeInspectEnd() {
+        return _flagInspectEnd;
     }
 
     /**
