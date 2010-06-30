@@ -47,7 +47,9 @@ public class TelnetDaemon extends Thread {
 	Thread threads[] = new Thread[Thread.activeCount()];
 	int n = Thread.enumerate(threads);
 	String sThreadName = null;
+
 	System.out.println("+-----------------当前正在执行的Telnet任务-----------------+");
+
 	for (int i = 0; i < n; i++) {
 	    sThreadName = threads[i].getName();
 	    if ("main".equals(sThreadName)) {
@@ -55,6 +57,7 @@ public class TelnetDaemon extends Thread {
 	    }
 	    System.out.println("+-[" + i + "] " + sThreadName);
 	}
+
 	System.out.println("+----------------------------------------------------------+");
     }
 
@@ -140,8 +143,11 @@ public class TelnetDaemon extends Thread {
 	    int iSendCount = 0;
 
 	    for (;;) {
+
+		// 在日志中列出当前正在运行的线程
+		// listThread();
+
 		// 检查运行标志run_flag，当为"F"时退出守护进程
-		listThread();
 		sRunFlag = getTdconfigMsg("run_flag").trim();
 		sLog = getTdconfigMsg("log").trim();
 
@@ -205,20 +211,14 @@ public class TelnetDaemon extends Thread {
 		    }
 		} catch (ConnectException excon) {
 		    pln("TelnetDaemon.main():捕获到通讯错误", "错误信息：" + excon.getMessage());
-		    // StopTelnetDaemon.main(null);
-		    // excon.printStackTrace();
 
 		} catch (SQLException exsql) {
 		    sErrCode = exsql.getMessage();
 		    pln("TelnetDaemon.main():捕获到SQL错误", "错误信息：" + exsql.getMessage());
-		    // StopTelnetDaemon.main(null);
-		    // exsql.printStackTrace();
 
 		} catch (Exception ex) {
 		    sErrCode = ex.getMessage();
 		    pln("TelnetDaemon.main():捕获到错误", "错误信息：" + ex.getMessage());
-		    // StopTelnetDaemon.main(null);
-		    // ex.printStackTrace();
 		}
 
 		// 程序休眠sleep_timer毫秒
