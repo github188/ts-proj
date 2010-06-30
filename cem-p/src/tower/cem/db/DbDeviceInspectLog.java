@@ -1,6 +1,6 @@
 package tower.cem.db;
 /**
- * DeviceMaintainLog
+ * DeviceInspectLog
  * 
  * WARNING! Automatically generated file!
  * Do not edit!
@@ -16,21 +16,21 @@ import tower.tmvc.QueryResult;
 import tower.tmvc.QueryResultRow;
 import tower.tmvc.XMLWrap;
 
-import tower.cem.en.EnDeviceMaintainLog;
+import tower.cem.en.EnDeviceInspectLog;
 
-public class DbDeviceMaintainLog extends RootDB{
+public class DbDeviceInspectLog extends RootDB{
 
-    public DbDeviceMaintainLog(Transaction trans, String connId) {
+    public DbDeviceInspectLog(Transaction trans, String connId) {
         super(trans,connId);
     }
     /**
      * Inserts the current object values into the database.
      */
-    public int insert (EnDeviceMaintainLog en) throws ErrorException {
+    public int insert (EnDeviceInspectLog en) throws ErrorException {
         int res = -1;
         StringBuffer query = new StringBuffer();
 
-        query.append("insert into device_maintain_log ( SEND_ID,DEVICE_ID,DEVICE_NAME,DEVICE_IP,USER_ID,MAINTAIN_BEGIN,MAINTAIN_END,STATUS,LOG_CONT ) values ( ");
+        query.append("insert into device_inspect_log ( SEND_ID,DEVICE_ID,DEVICE_NAME,DEVICE_IP,USER_ID,INSPECT_BEGIN,INSPECT_END,STATUS,LOG_CONT ) values ( ");
         query.append(formatString(en.getSendId()));
         query.append(",");
         query.append(formatString(en.getDeviceId()));
@@ -41,9 +41,9 @@ public class DbDeviceMaintainLog extends RootDB{
         query.append(",");
         query.append(formatString(en.getUserId()));
         query.append(",");
-        query.append(formatString(en.getMaintainBegin()));
+        query.append(formatString(en.getInspectBegin()));
         query.append(",");
-        query.append(formatString(en.getMaintainEnd()));
+        query.append(formatString(en.getInspectEnd()));
         query.append(",");
         query.append(formatString(en.getStatus()));
         query.append(",");
@@ -55,13 +55,13 @@ public class DbDeviceMaintainLog extends RootDB{
     }
 
     /**
-     * Retrieve from the database for table "DeviceMaintainLog"
+     * Retrieve from the database for table "DeviceInspectLog"
      */
     public Vector findAllWhere(String where) throws ErrorException {
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select SEND_ID,DEVICE_ID,DEVICE_NAME,DEVICE_IP,USER_ID,MAINTAIN_BEGIN,MAINTAIN_END,STATUS,LOG_CONT from device_maintain_log where ");
+        query.append("select SEND_ID,DEVICE_ID,DEVICE_NAME,DEVICE_IP,USER_ID,INSPECT_BEGIN,INSPECT_END,STATUS,LOG_CONT from device_inspect_log where ");
         query.append(where);
         if(orderBy != null) {
             query.append(orderBy);
@@ -72,13 +72,13 @@ public class DbDeviceMaintainLog extends RootDB{
     }
 
     /**
-     * Retrieve from the database for table "DeviceMaintainLog"
+     * Retrieve from the database for table "DeviceInspectLog"
      */
     public Vector findAll() throws ErrorException {
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select SEND_ID,DEVICE_ID,DEVICE_NAME,DEVICE_IP,USER_ID,MAINTAIN_BEGIN,MAINTAIN_END,STATUS,LOG_CONT from device_maintain_log");
+        query.append("select SEND_ID,DEVICE_ID,DEVICE_NAME,DEVICE_IP,USER_ID,INSPECT_BEGIN,INSPECT_END,STATUS,LOG_CONT from device_inspect_log");
 
         if(orderBy != null) {
             query.append(orderBy);
@@ -89,9 +89,9 @@ public class DbDeviceMaintainLog extends RootDB{
     }
 
     /**
-     * Retrieve from the database for table "DeviceMaintainLog"
+     * Retrieve from the database for table "DeviceInspectLog"
      */
-    public Vector findAllByEn(EnDeviceMaintainLog en) throws ErrorException {
+    public Vector findAllByEn(EnDeviceInspectLog en) throws ErrorException {
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
@@ -137,20 +137,20 @@ public class DbDeviceMaintainLog extends RootDB{
             query.append(formatString(en.getUserId()));
             bChanged = true;
         }
-        if(en.hasChangeMaintainBegin()) {
+        if(en.hasChangeInspectBegin()) {
             if(bChanged){
                 query.append(" and ");
             }
-            query.append("MAINTAIN_BEGIN=");
-            query.append(formatString(en.getMaintainBegin()));
+            query.append("INSPECT_BEGIN=");
+            query.append(formatString(en.getInspectBegin()));
             bChanged = true;
         }
-        if(en.hasChangeMaintainEnd()) {
+        if(en.hasChangeInspectEnd()) {
             if(bChanged){
                 query.append(" and ");
             }
-            query.append("MAINTAIN_END=");
-            query.append(formatString(en.getMaintainEnd()));
+            query.append("INSPECT_END=");
+            query.append(formatString(en.getInspectEnd()));
             bChanged = true;
         }
         if(en.hasChangeStatus()) {
@@ -170,9 +170,9 @@ public class DbDeviceMaintainLog extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select SEND_ID,DEVICE_ID,DEVICE_NAME,DEVICE_IP,USER_ID,MAINTAIN_BEGIN,MAINTAIN_END,STATUS,LOG_CONT from device_maintain_log where ");
+            query.insert(0,"select SEND_ID,DEVICE_ID,DEVICE_NAME,DEVICE_IP,USER_ID,INSPECT_BEGIN,INSPECT_END,STATUS,LOG_CONT from device_inspect_log where ");
         } else {
-            query.append("select SEND_ID,DEVICE_ID,DEVICE_NAME,DEVICE_IP,USER_ID,MAINTAIN_BEGIN,MAINTAIN_END,STATUS,LOG_CONT from device_maintain_log");
+            query.append("select SEND_ID,DEVICE_ID,DEVICE_NAME,DEVICE_IP,USER_ID,INSPECT_BEGIN,INSPECT_END,STATUS,LOG_CONT from device_inspect_log");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -183,9 +183,9 @@ public class DbDeviceMaintainLog extends RootDB{
     }
 
     /**
-     * Retrieve from the database for table "DeviceMaintainLog"
+     * Retrieve from the database for table "DeviceInspectLog"
      */
-    public Vector findAllLikeEn(EnDeviceMaintainLog en) throws ErrorException {
+    public Vector findAllLikeEn(EnDeviceInspectLog en) throws ErrorException {
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
@@ -231,20 +231,20 @@ public class DbDeviceMaintainLog extends RootDB{
             query.append(formatString(en.getUserId()));
             bChanged = true;
         }
-        if(en.hasChangeMaintainBegin()) {
+        if(en.hasChangeInspectBegin()) {
             if(bChanged){
                 query.append(" and ");
             }
-            query.append("MAINTAIN_BEGIN like ");
-            query.append(formatString(en.getMaintainBegin()));
+            query.append("INSPECT_BEGIN like ");
+            query.append(formatString(en.getInspectBegin()));
             bChanged = true;
         }
-        if(en.hasChangeMaintainEnd()) {
+        if(en.hasChangeInspectEnd()) {
             if(bChanged){
                 query.append(" and ");
             }
-            query.append("MAINTAIN_END like ");
-            query.append(formatString(en.getMaintainEnd()));
+            query.append("INSPECT_END like ");
+            query.append(formatString(en.getInspectEnd()));
             bChanged = true;
         }
         if(en.hasChangeStatus()) {
@@ -264,9 +264,9 @@ public class DbDeviceMaintainLog extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select SEND_ID,DEVICE_ID,DEVICE_NAME,DEVICE_IP,USER_ID,MAINTAIN_BEGIN,MAINTAIN_END,STATUS,LOG_CONT from device_maintain_log where ");
+            query.insert(0,"select SEND_ID,DEVICE_ID,DEVICE_NAME,DEVICE_IP,USER_ID,INSPECT_BEGIN,INSPECT_END,STATUS,LOG_CONT from device_inspect_log where ");
         } else {
-            query.append("select SEND_ID,DEVICE_ID,DEVICE_NAME,DEVICE_IP,USER_ID,MAINTAIN_BEGIN,MAINTAIN_END,STATUS,LOG_CONT from device_maintain_log");
+            query.append("select SEND_ID,DEVICE_ID,DEVICE_NAME,DEVICE_IP,USER_ID,INSPECT_BEGIN,INSPECT_END,STATUS,LOG_CONT from device_inspect_log");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -282,7 +282,7 @@ public class DbDeviceMaintainLog extends RootDB{
     public int count() throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from device_maintain_log");
+        query.append("select count(1) as num from device_inspect_log");
 
         QueryResult qr = trans.doQuery(connId,query.toString());
         if (qr.size() == 1) {
@@ -297,7 +297,7 @@ public class DbDeviceMaintainLog extends RootDB{
     public int countWhere(String where) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
-        query.append("select count(1) as num from device_maintain_log");
+        query.append("select count(1) as num from device_inspect_log");
         query.append(" where ");
         query.append(where);
         QueryResult qr = trans.doQuery(connId,query.toString());
@@ -308,13 +308,13 @@ public class DbDeviceMaintainLog extends RootDB{
     }
 
     /**
-     * Deletes from the database for table "device_maintain_log"
+     * Deletes from the database for table "device_inspect_log"
      */
     public int deleteWhere(String where) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
-        query.append("delete from device_maintain_log");
+        query.append("delete from device_inspect_log");
         query.append(" where ");
         query.append(where);
         res = trans.doUpdate(connId,query.toString());
@@ -324,11 +324,11 @@ public class DbDeviceMaintainLog extends RootDB{
     /**
      * Updates the current object values into the database.
      */
-    public int updateWhere(String where,EnDeviceMaintainLog en) throws ErrorException {
+    public int updateWhere(String where,EnDeviceInspectLog en) throws ErrorException {
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
-        query.append("update device_maintain_log set ");
+        query.append("update device_inspect_log set ");
 
         if(en.hasChangeSendId()) {
             if(bChanged){
@@ -370,20 +370,20 @@ public class DbDeviceMaintainLog extends RootDB{
             query.append(formatString(en.getUserId()));
             bChanged = true;
         }
-        if(en.hasChangeMaintainBegin()) {
+        if(en.hasChangeInspectBegin()) {
             if(bChanged){
                 query.append(",");
             }
-            query.append("MAINTAIN_BEGIN=");
-            query.append(formatString(en.getMaintainBegin()));
+            query.append("INSPECT_BEGIN=");
+            query.append(formatString(en.getInspectBegin()));
             bChanged = true;
         }
-        if(en.hasChangeMaintainEnd()) {
+        if(en.hasChangeInspectEnd()) {
             if(bChanged){
                 query.append(",");
             }
-            query.append("MAINTAIN_END=");
-            query.append(formatString(en.getMaintainEnd()));
+            query.append("INSPECT_END=");
+            query.append(formatString(en.getInspectEnd()));
             bChanged = true;
         }
         if(en.hasChangeStatus()) {
@@ -411,16 +411,16 @@ public class DbDeviceMaintainLog extends RootDB{
     /**
       * Updates the object from a retrieved ResultSet.
       */
-    public EnDeviceMaintainLog getFromResultSet (QueryResultRow r) throws ErrorException {
-        EnDeviceMaintainLog en = new EnDeviceMaintainLog();
+    public EnDeviceInspectLog getFromResultSet (QueryResultRow r) throws ErrorException {
+        EnDeviceInspectLog en = new EnDeviceInspectLog();
 
         en.setSendId(r.getString("SEND_ID"));
         en.setDeviceId(r.getString("DEVICE_ID"));
         en.setDeviceName(r.getString("DEVICE_NAME"));
         en.setDeviceIp(r.getString("DEVICE_IP"));
         en.setUserId(r.getString("USER_ID"));
-        en.setMaintainBegin(r.getString("MAINTAIN_BEGIN"));
-        en.setMaintainEnd(r.getString("MAINTAIN_END"));
+        en.setInspectBegin(r.getString("INSPECT_BEGIN"));
+        en.setInspectEnd(r.getString("INSPECT_END"));
         en.setStatus(r.getString("STATUS"));
         en.setLogCont(r.getString("LOG_CONT"));
 
@@ -440,10 +440,10 @@ public class DbDeviceMaintainLog extends RootDB{
     /**
       * Updates the object from a retrieved XmlWrap.
       */
-    public EnDeviceMaintainLog getFromInput (XMLWrap xml) throws ErrorException {
+    public EnDeviceInspectLog getFromInput (XMLWrap xml) throws ErrorException {
         Object otmp;
         String stmp;
-        EnDeviceMaintainLog en = new EnDeviceMaintainLog();
+        EnDeviceInspectLog en = new EnDeviceInspectLog();
 
         otmp = xml.getInputObject("SEND_ID");
         stmp = (String)otmp;
@@ -465,13 +465,13 @@ public class DbDeviceMaintainLog extends RootDB{
         stmp = (String)otmp;
         en.setUserId(stmp);
 
-        otmp = xml.getInputObject("MAINTAIN_BEGIN");
+        otmp = xml.getInputObject("INSPECT_BEGIN");
         stmp = (String)otmp;
-        en.setMaintainBegin(stmp);
+        en.setInspectBegin(stmp);
 
-        otmp = xml.getInputObject("MAINTAIN_END");
+        otmp = xml.getInputObject("INSPECT_END");
         stmp = (String)otmp;
-        en.setMaintainEnd(stmp);
+        en.setInspectEnd(stmp);
 
         otmp = xml.getInputObject("STATUS");
         stmp = (String)otmp;
@@ -490,14 +490,14 @@ public class DbDeviceMaintainLog extends RootDB{
     public Vector getAllFromInput(XMLWrap xml) throws ErrorException {
         Vector res = new Vector();
         String stmp;
-        EnDeviceMaintainLog en;
+        EnDeviceInspectLog en;
         Object[] oSendId;
         Object[] oDeviceId;
         Object[] oDeviceName;
         Object[] oDeviceIp;
         Object[] oUserId;
-        Object[] oMaintainBegin;
-        Object[] oMaintainEnd;
+        Object[] oInspectBegin;
+        Object[] oInspectEnd;
         Object[] oStatus;
         Object[] oLogCont;
         int count = 0;
@@ -522,13 +522,13 @@ public class DbDeviceMaintainLog extends RootDB{
         if (count == 0 && oUserId.length > 0) {
             count = oUserId.length;
         }
-        oMaintainBegin = xml.getInputObjects("MAINTAIN_BEGIN");
-        if (count == 0 && oMaintainBegin.length > 0) {
-            count = oMaintainBegin.length;
+        oInspectBegin = xml.getInputObjects("INSPECT_BEGIN");
+        if (count == 0 && oInspectBegin.length > 0) {
+            count = oInspectBegin.length;
         }
-        oMaintainEnd = xml.getInputObjects("MAINTAIN_END");
-        if (count == 0 && oMaintainEnd.length > 0) {
-            count = oMaintainEnd.length;
+        oInspectEnd = xml.getInputObjects("INSPECT_END");
+        if (count == 0 && oInspectEnd.length > 0) {
+            count = oInspectEnd.length;
         }
         oStatus = xml.getInputObjects("STATUS");
         if (count == 0 && oStatus.length > 0) {
@@ -539,7 +539,7 @@ public class DbDeviceMaintainLog extends RootDB{
             count = oLogCont.length;
         }
         for (int i = 0; i < count; i ++) {
-            en = new EnDeviceMaintainLog();
+            en = new EnDeviceInspectLog();
 
             if (oSendId.length == count) {
                 stmp = (String)oSendId[i];
@@ -566,14 +566,14 @@ public class DbDeviceMaintainLog extends RootDB{
                 en.setUserId(stmp);
             }
 
-            if (oMaintainBegin.length == count) {
-                stmp = (String)oMaintainBegin[i];
-                en.setMaintainBegin(stmp);
+            if (oInspectBegin.length == count) {
+                stmp = (String)oInspectBegin[i];
+                en.setInspectBegin(stmp);
             }
 
-            if (oMaintainEnd.length == count) {
-                stmp = (String)oMaintainEnd[i];
-                en.setMaintainEnd(stmp);
+            if (oInspectEnd.length == count) {
+                stmp = (String)oInspectEnd[i];
+                en.setInspectEnd(stmp);
             }
 
             if (oStatus.length == count) {
@@ -594,17 +594,17 @@ public class DbDeviceMaintainLog extends RootDB{
     /**
       * Store the object to a XmlWrap.
       */
-    public int setToXml(XMLWrap xml,EnDeviceMaintainLog en) throws ErrorException {
-        int row = xml.addRow("DEVICE_MAINTAIN_LOG");
-        xml.setItemValue("DEVICE_MAINTAIN_LOG",row,"SEND_ID",en.getSendId());
-        xml.setItemValue("DEVICE_MAINTAIN_LOG",row,"DEVICE_ID",en.getDeviceId());
-        xml.setItemValue("DEVICE_MAINTAIN_LOG",row,"DEVICE_NAME",en.getDeviceName());
-        xml.setItemValue("DEVICE_MAINTAIN_LOG",row,"DEVICE_IP",en.getDeviceIp());
-        xml.setItemValue("DEVICE_MAINTAIN_LOG",row,"USER_ID",en.getUserId());
-        xml.setItemValue("DEVICE_MAINTAIN_LOG",row,"MAINTAIN_BEGIN",en.getMaintainBegin());
-        xml.setItemValue("DEVICE_MAINTAIN_LOG",row,"MAINTAIN_END",en.getMaintainEnd());
-        xml.setItemValue("DEVICE_MAINTAIN_LOG",row,"STATUS",en.getStatus());
-        xml.setItemValue("DEVICE_MAINTAIN_LOG",row,"LOG_CONT",en.getLogCont());
+    public int setToXml(XMLWrap xml,EnDeviceInspectLog en) throws ErrorException {
+        int row = xml.addRow("DEVICE_INSPECT_LOG");
+        xml.setItemValue("DEVICE_INSPECT_LOG",row,"SEND_ID",en.getSendId());
+        xml.setItemValue("DEVICE_INSPECT_LOG",row,"DEVICE_ID",en.getDeviceId());
+        xml.setItemValue("DEVICE_INSPECT_LOG",row,"DEVICE_NAME",en.getDeviceName());
+        xml.setItemValue("DEVICE_INSPECT_LOG",row,"DEVICE_IP",en.getDeviceIp());
+        xml.setItemValue("DEVICE_INSPECT_LOG",row,"USER_ID",en.getUserId());
+        xml.setItemValue("DEVICE_INSPECT_LOG",row,"INSPECT_BEGIN",en.getInspectBegin());
+        xml.setItemValue("DEVICE_INSPECT_LOG",row,"INSPECT_END",en.getInspectEnd());
+        xml.setItemValue("DEVICE_INSPECT_LOG",row,"STATUS",en.getStatus());
+        xml.setItemValue("DEVICE_INSPECT_LOG",row,"LOG_CONT",en.getLogCont());
         return row;
     }
     /**
@@ -612,20 +612,20 @@ public class DbDeviceMaintainLog extends RootDB{
       */
     public void setAllToXml(XMLWrap xml,Vector ens) throws ErrorException {
         int row;
-        EnDeviceMaintainLog en;
+        EnDeviceInspectLog en;
         int count = ens.size();
         for (int i = 0; i < count; i ++) {
-            en = (EnDeviceMaintainLog)ens.get(i);
-            row = xml.addRow("DEVICE_MAINTAIN_LOG");
-            xml.setItemValue("DEVICE_MAINTAIN_LOG",row,"SEND_ID",en.getSendId());
-            xml.setItemValue("DEVICE_MAINTAIN_LOG",row,"DEVICE_ID",en.getDeviceId());
-            xml.setItemValue("DEVICE_MAINTAIN_LOG",row,"DEVICE_NAME",en.getDeviceName());
-            xml.setItemValue("DEVICE_MAINTAIN_LOG",row,"DEVICE_IP",en.getDeviceIp());
-            xml.setItemValue("DEVICE_MAINTAIN_LOG",row,"USER_ID",en.getUserId());
-            xml.setItemValue("DEVICE_MAINTAIN_LOG",row,"MAINTAIN_BEGIN",en.getMaintainBegin());
-            xml.setItemValue("DEVICE_MAINTAIN_LOG",row,"MAINTAIN_END",en.getMaintainEnd());
-            xml.setItemValue("DEVICE_MAINTAIN_LOG",row,"STATUS",en.getStatus());
-            xml.setItemValue("DEVICE_MAINTAIN_LOG",row,"LOG_CONT",en.getLogCont());
+            en = (EnDeviceInspectLog)ens.get(i);
+            row = xml.addRow("DEVICE_INSPECT_LOG");
+            xml.setItemValue("DEVICE_INSPECT_LOG",row,"SEND_ID",en.getSendId());
+            xml.setItemValue("DEVICE_INSPECT_LOG",row,"DEVICE_ID",en.getDeviceId());
+            xml.setItemValue("DEVICE_INSPECT_LOG",row,"DEVICE_NAME",en.getDeviceName());
+            xml.setItemValue("DEVICE_INSPECT_LOG",row,"DEVICE_IP",en.getDeviceIp());
+            xml.setItemValue("DEVICE_INSPECT_LOG",row,"USER_ID",en.getUserId());
+            xml.setItemValue("DEVICE_INSPECT_LOG",row,"INSPECT_BEGIN",en.getInspectBegin());
+            xml.setItemValue("DEVICE_INSPECT_LOG",row,"INSPECT_END",en.getInspectEnd());
+            xml.setItemValue("DEVICE_INSPECT_LOG",row,"STATUS",en.getStatus());
+            xml.setItemValue("DEVICE_INSPECT_LOG",row,"LOG_CONT",en.getLogCont());
         }
     }
 }
