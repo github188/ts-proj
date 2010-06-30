@@ -1,13 +1,3 @@
---
---ER/Studio 6.0 SQL Code Generation
--- Company :      todos
--- Project :      cem-p.dm1
--- Author :       Tiger
---
--- Date Created : Monday, June 28, 2010 16:20:42
--- Target DBMS : MySQL 4.x
---
-
 
 -- 
 -- TABLE: COMMANDS_SEND_HIS 
@@ -23,8 +13,7 @@ CREATE TABLE COMMANDS_SEND_HIS(
     TEMPLATE_ID         CHAR(6),
     STATUS              CHAR(1)     NOT NULL,
     EXEC_BEGIN_TIME     CHAR(14),
-    EXEC_END_TIME       CHAR(14),
-    PRIMARY KEY (SEND_ID)
+    EXEC_END_TIME       CHAR(14)
 )
 ;
 

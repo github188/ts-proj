@@ -29,15 +29,17 @@ CREATE TABLE DEVICE_INFO(
 --
 
 CREATE TABLE DEVICE_MAINTAIN_LOG(
-    SEND_ID           CHAR(6),
-    DEVICE_ID         CHAR(6)     NOT NULL,
-    USER_ID           CHAR(6)     NOT NULL,
+    SEND_ID           CHAR(10)       NOT NULL,
+    DEVICE_ID         CHAR(6)        NOT NULL,
+    DEVICE_NAME       VARCHAR(60),
+    DEVICE_IP         VARCHAR(50),
+    USER_ID           CHAR(6)        NOT NULL,
     MAINTAIN_BEGIN    CHAR(14),
     MAINTAIN_END      CHAR(14),
+    STATUS            CHAR(1),
     LOG_CONT          TEXT
 )
 ;
-
 
 
 --
