@@ -28,5 +28,5 @@ set CLASS_PATH=%CLASS_PATH%;%DAEMON_CLS_PATH%
 
 echo on
 
-%JAVA_HOME%/bin/java -server -classpath %DAEMON_CLS_PATH% tower.cem.daemon.TelnetDaemon >cem-td.log
+%JAVA_HOME%/bin/java -server -classpath %DAEMON_CLS_PATH% tower.cem.daemon.TelnetDaemon
 
