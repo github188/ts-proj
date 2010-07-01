@@ -10,14 +10,14 @@ package tower.cem.en;
 
 public class EnMaintainTeam implements java.io.Serializable {
     /**
-     * Type : char(6) Name : TERM_ID
+     * Type : char(6) Name : TEAM_ID
      */
-    private String termId;
+    private String teamId;
 
     /**
-     * Type : varchar(60) Name : TERM_NAME
+     * Type : varchar(60) Name : TEAM_NAME
      */
-    private String termName;
+    private String teamName;
 
     /**
      * Type : varchar(200) Name : REMARK
@@ -25,14 +25,14 @@ public class EnMaintainTeam implements java.io.Serializable {
     private String remark;
 
     /**
-     * Type : char(6) Name : TERM_ID modify flag
+     * Type : char(6) Name : TEAM_ID modify flag
      */
-    private boolean _flagTermId;
+    private boolean _flagTeamId;
 
     /**
-     * Type : varchar(60) Name : TERM_NAME modify flag
+     * Type : varchar(60) Name : TEAM_NAME modify flag
      */
-    private boolean _flagTermName;
+    private boolean _flagTeamName;
 
     /**
      * Type : varchar(200) Name : REMARK modify flag
@@ -40,47 +40,47 @@ public class EnMaintainTeam implements java.io.Serializable {
     private boolean _flagRemark;
 
     /**
-     * Sets the value for termId
+     * Sets the value for teamId
      */
-    public void setTermId(String termId) {
-        this.termId = termId;
-        this._flagTermId = true;
+    public void setTeamId(String teamId) {
+        this.teamId = teamId;
+        this._flagTeamId = true;
     }
 
     /**
-     * Gets the value for termId
+     * Gets the value for teamId
      */
-    public String getTermId() {
-        return termId;
+    public String getTeamId() {
+        return teamId;
     }
 
     /**
-     * has the value for termId changed?
+     * has the value for teamId changed?
      */
-    public boolean hasChangeTermId() {
-        return _flagTermId;
+    public boolean hasChangeTeamId() {
+        return _flagTeamId;
     }
 
     /**
-     * Sets the value for termName
+     * Sets the value for teamName
      */
-    public void setTermName(String termName) {
-        this.termName = termName;
-        this._flagTermName = true;
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
+        this._flagTeamName = true;
     }
 
     /**
-     * Gets the value for termName
+     * Gets the value for teamName
      */
-    public String getTermName() {
-        return termName;
+    public String getTeamName() {
+        return teamName;
     }
 
     /**
-     * has the value for termName changed?
+     * has the value for teamName changed?
      */
-    public boolean hasChangeTermName() {
-        return _flagTermName;
+    public boolean hasChangeTeamName() {
+        return _flagTeamName;
     }
 
     /**
