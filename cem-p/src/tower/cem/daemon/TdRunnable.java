@@ -60,6 +60,7 @@ public class TdRunnable implements Runnable {
 	    sTimeBegin = formatter.format(new java.util.Date());
 
 	    // 根据指令类型（commands_send_list.command_type）调用命令执行程序
+	    // command_type ="T"，处理执行指令模板的任务
 	    if (enSendList.getCommandsType().equals("T")) {
 
 		sbResult = new StringBuffer();
@@ -218,7 +219,9 @@ public class TdRunnable implements Runnable {
 		    Debug.pln("TdRunnable run()", "指令模板执行任务，记录日志失败。");
 		}
 
-	    } else if (enSendList.getCommandsType().equals("I")) {
+	    }
+	    // command_type ="I"，处理执行设备巡检的任务
+	    else if (enSendList.getCommandsType().equals("I")) {
 
 		// Runtime Code
 		// 根据设备获取到设备信息及所属设备分类信息，当设备空时，获取全部可用的设备信息及所属设备分类信息
@@ -371,9 +374,16 @@ public class TdRunnable implements Runnable {
 		    }
 		}
 
-	    } else {
+	    }
+	    // command_type ="C"，处理执行光功率采集的任务
+	    else if(enSendList.getCommandsType().equals("C")){
+		sGenResult = "S";
+		System.out.println("TdRunnable run()：光功率采集功能实现中");
+	    }
+	    // command_type 为其他值，未定义任务类型
+	    else {
 		sGenResult = "F";
-		System.out.println("Error Commands Type:" + enSendList.getCommandsType());
+		System.out.println("TdRunnable run()：未定义的任务类型-" + enSendList.getCommandsType());
 	    }
 
 	    // 记录执行命令的完成时间
