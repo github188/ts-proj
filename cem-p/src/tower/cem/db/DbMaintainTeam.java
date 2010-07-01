@@ -22,7 +22,7 @@ public class DbMaintainTeam extends RootDB{
 
     public DbMaintainTeam(Transaction trans, String connId) {
         super(trans,connId);
-        orderBy = " order by maintain_team.TERM_ID";
+        orderBy = " order by maintain_team.TEAM_ID";
     }
     /**
      * Inserts the current object values into the database.
@@ -31,10 +31,10 @@ public class DbMaintainTeam extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
 
-        query.append("insert into maintain_team ( TERM_ID,TERM_NAME,REMARK ) values ( ");
-        query.append(formatString(en.getTermId()));
+        query.append("insert into maintain_team ( TEAM_ID,TEAM_NAME,REMARK ) values ( ");
+        query.append(formatString(en.getTeamId()));
         query.append(",");
-        query.append(formatString(en.getTermName()));
+        query.append(formatString(en.getTeamName()));
         query.append(",");
         query.append(formatString(en.getRemark()));
         query.append(")");
@@ -46,15 +46,15 @@ public class DbMaintainTeam extends RootDB{
     /**
      * Deletes from the database for table "maintain_team"
      */
-    public int deleteByKey(String termId) throws ErrorException {
+    public int deleteByKey(String teamId) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
         query.append("delete from maintain_team");
 
         query.append(" where ");
-        query.append("TERM_ID=");
-        query.append(formatString(termId));
+        query.append("TEAM_ID=");
+        query.append(formatString(teamId));
         res = trans.doUpdate(connId,query.toString());
         return res;
     }
@@ -62,26 +62,26 @@ public class DbMaintainTeam extends RootDB{
     /**
      * Updates the current object values into the database.
      */
-    public int updateByKey(String termId,EnMaintainTeam en) throws ErrorException {
+    public int updateByKey(String teamId,EnMaintainTeam en) throws ErrorException {
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
         query.append("update maintain_team set ");
 
-        if(en.hasChangeTermId()) {
+        if(en.hasChangeTeamId()) {
             if(bChanged){
                 query.append(",");
             }
-            query.append("TERM_ID=");
-            query.append(formatString(en.getTermId()));
+            query.append("TEAM_ID=");
+            query.append(formatString(en.getTeamId()));
             bChanged = true;
         }
-        if(en.hasChangeTermName()) {
+        if(en.hasChangeTeamName()) {
             if(bChanged){
                 query.append(",");
             }
-            query.append("TERM_NAME=");
-            query.append(formatString(en.getTermName()));
+            query.append("TEAM_NAME=");
+            query.append(formatString(en.getTeamName()));
             bChanged = true;
         }
         if(en.hasChangeRemark()) {
@@ -94,8 +94,8 @@ public class DbMaintainTeam extends RootDB{
         }
 
         query.append(" where ");
-        query.append("TERM_ID=");
-        query.append(formatString(termId));
+        query.append("TEAM_ID=");
+        query.append(formatString(teamId));
         res = trans.doUpdate(connId,query.toString());
         return res;
     }
@@ -103,15 +103,15 @@ public class DbMaintainTeam extends RootDB{
     /**
      * Retrieve from the database for table "maintain_team"
     */
-    public EnMaintainTeam findByKey(String termId) throws ErrorException {
+    public EnMaintainTeam findByKey(String teamId) throws ErrorException {
         EnMaintainTeam res = null;
 
         StringBuffer query;
-        query = new StringBuffer("select TERM_ID,TERM_NAME,REMARK from maintain_team");
+        query = new StringBuffer("select TEAM_ID,TEAM_NAME,REMARK from maintain_team");
 
         query.append(" where ");
-        query.append("TERM_ID=");
-        query.append(formatString(termId));
+        query.append("TEAM_ID=");
+        query.append(formatString(teamId));
 
         QueryResult qr = trans.doQuery(connId,query.toString());
         if (qr.size() == 1) {
@@ -124,14 +124,14 @@ public class DbMaintainTeam extends RootDB{
     /**
      * Counts the number of entries for this table in the database.
      */
-    public int countByKey(String termId) throws ErrorException {
+    public int countByKey(String teamId) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
         query.append("select count(1) as num from maintain_team");
 
         query.append(" where ");
-        query.append("TERM_ID=");
-        query.append(formatString(termId));
+        query.append("TEAM_ID=");
+        query.append(formatString(teamId));
         QueryResult qr = trans.doQuery(connId,query.toString());
         if (qr.size() == 1) {
             count = qr.get(0).getInteger("num").intValue();
@@ -142,15 +142,15 @@ public class DbMaintainTeam extends RootDB{
     /**
      * Deletes from the database for table "maintain_team"
      */
-    public int deleteLikeKey(String termId) throws ErrorException {
+    public int deleteLikeKey(String teamId) throws ErrorException {
         int res=-1;
 
         StringBuffer query = new StringBuffer();
         query.append("delete from maintain_team");
 
         query.append(" where ");
-        query.append("TERM_ID like ");
-        query.append(formatString(termId));
+        query.append("TEAM_ID like ");
+        query.append(formatString(teamId));
         res = trans.doUpdate(connId,query.toString());
         return res;
     }
@@ -158,18 +158,18 @@ public class DbMaintainTeam extends RootDB{
     /**
      * Updates the current object values into the database.
      */
-    public int updateLikeKey(String termId,EnMaintainTeam en) throws ErrorException {
+    public int updateLikeKey(String teamId,EnMaintainTeam en) throws ErrorException {
         int res = -1;
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
         query.append("update maintain_team set ");
 
-        if(en.hasChangeTermName()) {
+        if(en.hasChangeTeamName()) {
             if(bChanged){
                 query.append(",");
             }
-            query.append("TERM_NAME=");
-            query.append(formatString(en.getTermName()));
+            query.append("TEAM_NAME=");
+            query.append(formatString(en.getTeamName()));
             bChanged = true;
         }
         if(en.hasChangeRemark()) {
@@ -182,8 +182,8 @@ public class DbMaintainTeam extends RootDB{
         }
 
         query.append(" where ");
-        query.append("TERM_ID like ");
-        query.append(formatString(termId));
+        query.append("TEAM_ID like ");
+        query.append(formatString(teamId));
         res = trans.doUpdate(connId,query.toString());
         return res;
     }
@@ -191,15 +191,15 @@ public class DbMaintainTeam extends RootDB{
     /**
      * Retrieve from the database for table "MaintainTeam"
      */
-    public Vector findAllLikeKey(String termId) throws ErrorException {
+    public Vector findAllLikeKey(String teamId) throws ErrorException {
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select TERM_ID,TERM_NAME,REMARK from maintain_team");
+        query.append("select TEAM_ID,TEAM_NAME,REMARK from maintain_team");
 
         query.append(" where ");
-        query.append("TERM_ID like ");
-        query.append(formatString(termId));
+        query.append("TEAM_ID like ");
+        query.append(formatString(teamId));
         if(orderBy != null) {
             query.append(orderBy);
         }
@@ -211,14 +211,14 @@ public class DbMaintainTeam extends RootDB{
     /**
      * Counts the number of entries for this table in the database.
      */
-    public int countLikeKey(String termId) throws ErrorException {
+    public int countLikeKey(String teamId) throws ErrorException {
         int count = -1;
         StringBuffer query = new StringBuffer();
         query.append("select count(1) as num from maintain_team");
 
         query.append(" where ");
-        query.append("TERM_ID like ");
-        query.append(formatString(termId));
+        query.append("TEAM_ID like ");
+        query.append(formatString(teamId));
         QueryResult qr = trans.doQuery(connId,query.toString());
         if (qr.size() == 1) {
             count = qr.get(0).getInteger("num").intValue();
@@ -233,7 +233,7 @@ public class DbMaintainTeam extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select TERM_ID,TERM_NAME,REMARK from maintain_team where ");
+        query.append("select TEAM_ID,TEAM_NAME,REMARK from maintain_team where ");
         query.append(where);
         if(orderBy != null) {
             query.append(orderBy);
@@ -250,7 +250,7 @@ public class DbMaintainTeam extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select TERM_ID,TERM_NAME,REMARK from maintain_team");
+        query.append("select TEAM_ID,TEAM_NAME,REMARK from maintain_team");
 
         if(orderBy != null) {
             query.append(orderBy);
@@ -269,20 +269,20 @@ public class DbMaintainTeam extends RootDB{
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
 
-        if(en.hasChangeTermId()) {
+        if(en.hasChangeTeamId()) {
             if(bChanged){
                 query.append(" and ");
             }
-            query.append("TERM_ID=");
-            query.append(formatString(en.getTermId()));
+            query.append("TEAM_ID=");
+            query.append(formatString(en.getTeamId()));
             bChanged = true;
         }
-        if(en.hasChangeTermName()) {
+        if(en.hasChangeTeamName()) {
             if(bChanged){
                 query.append(" and ");
             }
-            query.append("TERM_NAME=");
-            query.append(formatString(en.getTermName()));
+            query.append("TEAM_NAME=");
+            query.append(formatString(en.getTeamName()));
             bChanged = true;
         }
         if(en.hasChangeRemark()) {
@@ -294,9 +294,9 @@ public class DbMaintainTeam extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select TERM_ID,TERM_NAME,REMARK from maintain_team where ");
+            query.insert(0,"select TEAM_ID,TEAM_NAME,REMARK from maintain_team where ");
         } else {
-            query.append("select TERM_ID,TERM_NAME,REMARK from maintain_team");
+            query.append("select TEAM_ID,TEAM_NAME,REMARK from maintain_team");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -315,20 +315,20 @@ public class DbMaintainTeam extends RootDB{
         StringBuffer query = new StringBuffer();
         boolean bChanged = false;
 
-        if(en.hasChangeTermId()) {
+        if(en.hasChangeTeamId()) {
             if(bChanged){
                 query.append(" and ");
             }
-            query.append("TERM_ID like ");
-            query.append(formatString(en.getTermId()));
+            query.append("TEAM_ID like ");
+            query.append(formatString(en.getTeamId()));
             bChanged = true;
         }
-        if(en.hasChangeTermName()) {
+        if(en.hasChangeTeamName()) {
             if(bChanged){
                 query.append(" and ");
             }
-            query.append("TERM_NAME like ");
-            query.append(formatString(en.getTermName()));
+            query.append("TEAM_NAME like ");
+            query.append(formatString(en.getTeamName()));
             bChanged = true;
         }
         if(en.hasChangeRemark()) {
@@ -340,9 +340,9 @@ public class DbMaintainTeam extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select TERM_ID,TERM_NAME,REMARK from maintain_team where ");
+            query.insert(0,"select TEAM_ID,TEAM_NAME,REMARK from maintain_team where ");
         } else {
-            query.append("select TERM_ID,TERM_NAME,REMARK from maintain_team");
+            query.append("select TEAM_ID,TEAM_NAME,REMARK from maintain_team");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -406,20 +406,20 @@ public class DbMaintainTeam extends RootDB{
         boolean bChanged = false;
         query.append("update maintain_team set ");
 
-        if(en.hasChangeTermId()) {
+        if(en.hasChangeTeamId()) {
             if(bChanged){
                 query.append(",");
             }
-            query.append("TERM_ID=");
-            query.append(formatString(en.getTermId()));
+            query.append("TEAM_ID=");
+            query.append(formatString(en.getTeamId()));
             bChanged = true;
         }
-        if(en.hasChangeTermName()) {
+        if(en.hasChangeTeamName()) {
             if(bChanged){
                 query.append(",");
             }
-            query.append("TERM_NAME=");
-            query.append(formatString(en.getTermName()));
+            query.append("TEAM_NAME=");
+            query.append(formatString(en.getTeamName()));
             bChanged = true;
         }
         if(en.hasChangeRemark()) {
@@ -442,8 +442,8 @@ public class DbMaintainTeam extends RootDB{
     public EnMaintainTeam getFromResultSet (QueryResultRow r) throws ErrorException {
         EnMaintainTeam en = new EnMaintainTeam();
 
-        en.setTermId(r.getString("TERM_ID"));
-        en.setTermName(r.getString("TERM_NAME"));
+        en.setTeamId(r.getString("TEAM_ID"));
+        en.setTeamName(r.getString("TEAM_NAME"));
         en.setRemark(r.getString("REMARK"));
 
         return en;
@@ -467,13 +467,13 @@ public class DbMaintainTeam extends RootDB{
         String stmp;
         EnMaintainTeam en = new EnMaintainTeam();
 
-        otmp = xml.getInputObject("TERM_ID");
+        otmp = xml.getInputObject("TEAM_ID");
         stmp = (String)otmp;
-        en.setTermId(stmp);
+        en.setTeamId(stmp);
 
-        otmp = xml.getInputObject("TERM_NAME");
+        otmp = xml.getInputObject("TEAM_NAME");
         stmp = (String)otmp;
-        en.setTermName(stmp);
+        en.setTeamName(stmp);
 
         otmp = xml.getInputObject("REMARK");
         stmp = (String)otmp;
@@ -489,18 +489,18 @@ public class DbMaintainTeam extends RootDB{
         Vector res = new Vector();
         String stmp;
         EnMaintainTeam en;
-        Object[] oTermId;
-        Object[] oTermName;
+        Object[] oTeamId;
+        Object[] oTeamName;
         Object[] oRemark;
         int count = 0;
 
-        oTermId = xml.getInputObjects("TERM_ID");
-        if (count == 0 && oTermId.length > 0) {
-            count = oTermId.length;
+        oTeamId = xml.getInputObjects("TEAM_ID");
+        if (count == 0 && oTeamId.length > 0) {
+            count = oTeamId.length;
         }
-        oTermName = xml.getInputObjects("TERM_NAME");
-        if (count == 0 && oTermName.length > 0) {
-            count = oTermName.length;
+        oTeamName = xml.getInputObjects("TEAM_NAME");
+        if (count == 0 && oTeamName.length > 0) {
+            count = oTeamName.length;
         }
         oRemark = xml.getInputObjects("REMARK");
         if (count == 0 && oRemark.length > 0) {
@@ -509,14 +509,14 @@ public class DbMaintainTeam extends RootDB{
         for (int i = 0; i < count; i ++) {
             en = new EnMaintainTeam();
 
-            if (oTermId.length == count) {
-                stmp = (String)oTermId[i];
-                en.setTermId(stmp);
+            if (oTeamId.length == count) {
+                stmp = (String)oTeamId[i];
+                en.setTeamId(stmp);
             }
 
-            if (oTermName.length == count) {
-                stmp = (String)oTermName[i];
-                en.setTermName(stmp);
+            if (oTeamName.length == count) {
+                stmp = (String)oTeamName[i];
+                en.setTeamName(stmp);
             }
 
             if (oRemark.length == count) {
@@ -534,8 +534,8 @@ public class DbMaintainTeam extends RootDB{
       */
     public int setToXml(XMLWrap xml,EnMaintainTeam en) throws ErrorException {
         int row = xml.addRow("MAINTAIN_TEAM");
-        xml.setItemValue("MAINTAIN_TEAM",row,"TERM_ID",en.getTermId());
-        xml.setItemValue("MAINTAIN_TEAM",row,"TERM_NAME",en.getTermName());
+        xml.setItemValue("MAINTAIN_TEAM",row,"TEAM_ID",en.getTeamId());
+        xml.setItemValue("MAINTAIN_TEAM",row,"TEAM_NAME",en.getTeamName());
         xml.setItemValue("MAINTAIN_TEAM",row,"REMARK",en.getRemark());
         return row;
     }
@@ -549,8 +549,8 @@ public class DbMaintainTeam extends RootDB{
         for (int i = 0; i < count; i ++) {
             en = (EnMaintainTeam)ens.get(i);
             row = xml.addRow("MAINTAIN_TEAM");
-            xml.setItemValue("MAINTAIN_TEAM",row,"TERM_ID",en.getTermId());
-            xml.setItemValue("MAINTAIN_TEAM",row,"TERM_NAME",en.getTermName());
+            xml.setItemValue("MAINTAIN_TEAM",row,"TEAM_ID",en.getTeamId());
+            xml.setItemValue("MAINTAIN_TEAM",row,"TEAM_NAME",en.getTeamName());
             xml.setItemValue("MAINTAIN_TEAM",row,"REMARK",en.getRemark());
         }
     }
