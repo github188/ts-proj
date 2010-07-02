@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<functions>
+    <!-- 01-deviceType-设备类型管理 -->
+    <function id="DeviceTypeList" description="设备类型查询" type="bo"
+        className="tower.cem.bo.MAG.deviceType.BoDeviceTypeList"
+        forward="DeviceTypeListJsp" />
+    
+    <function id="DeviceTypeSubmit" description="设备类型提交" type="bo"
+        className="tower.cem.bo.MAG.deviceType.BoDeviceTypeSubmit"
+        forward="StatBack" />
+        
+    <function id="DeviceTypeEdit" description="设备类型编辑" type="bo"
+        className="tower.cem.bo.MAG.deviceType.BoDeviceTypeDetail"
+        forward="DeviceTypeAdd" />
+        
+    <function id="DeviceTypeDelete" description="设备类型删除" type="bo"
+        className="tower.cem.bo.MAG.deviceType.BoDeviceTypeDelete"
+        forward="DeviceTypeList" />
+               
+    <function id="DeviceTypeAdd" description="设备类型添加" type="jsp"
+        jspPath="/cem/pages/MAG/deviceType/deviceTypeEdit.jsp" />
+        
+    <function id="DeviceTypeListJsp" description="设备类型列表页面" type="jsp"
+        jspPath="/cem/pages/MAG/deviceType/deviceTypeList.jsp" />
+    
+    
+     <!-- 02-location-物理位置管理 -->
+    <function id="LocationList" description="物理位置查询" type="bo"
+        className="tower.cem.bo.MAG.location.BoLocationList"
+        forward="LocationListJsp" />
+    
+    <function id="LocationSubmit" description="物理位置提交" type="bo"
+        className="tower.cem.bo.MAG.location.BoLocationSubmit"
+        forward="StatBack" />
+        
+    <function id="LocationEdit" description="物理位置编辑" type="bo"
+        className="tower.cem.bo.MAG.location.BoLocationDetail"
+        forward="LocationAdd" />
+        
+    <function id="LocationDelete" description="物理位置删除" type="bo"
+        className="tower.cem.bo.MAG.location.BoLocationDelete"
+        forward="LocationList" />
+               
+    <function id="LocationAdd" description="物理位置添加" type="jsp"
+        jspPath="/cem/pages/MAG/location/locationEdit.jsp" />
+        
+    <function id="LocationListJsp" description="物理位置列表页面" type="jsp"
+        jspPath="/cem/pages/MAG/location/locationList.jsp" />
+        
+        <!-- 03-frontHost-堡垒主机管理 -->
+    <function id="FrontHostList" description="堡垒主机查询" type="bo"
+        className="tower.cem.bo.MAG.frontHost.BoFrontHostList"
+        forward="FrontHostListJsp" />
+    
+    <function id="FrontHostSubmit" description="堡垒主机提交" type="bo"
+        className="tower.cem.bo.MAG.frontHost.BoFrontHostSubmit"
+        forward="StatBack" />
+        
+    <function id="FrontHostEdit" description="堡垒主机编辑" type="bo"
+        className="tower.cem.bo.MAG.frontHost.BoFrontHostDetail"
+        forward="FrontHostAdd" />
+        
+    <function id="FrontHostDelete" description="堡垒主机删除" type="bo"
+        className="tower.cem.bo.MAG.frontHost.BoFrontHostDelete"
+        forward="FrontHostList" />
+               
+    <function id="FrontHostAdd" description="堡垒主机添加" type="jsp"
+        jspPath="/cem/pages/MAG/frontHost/frontHostEdit.jsp" />
+        
+    <function id="FrontHostListJsp" description="堡垒主机列表页面" type="jsp"
+        jspPath="/cem/pages/MAG/frontHost/frontHostList.jsp" />
+        
+    <function id="SelectFrontHostJsp" description="选择堡垒主机页面" type="jsp"
+        jspPath="/cem/pages/common/selectFrontHost.jsp" />    
+    
+        
+     <!-- 04-device-设备配置管理 -->
+    <function id="DeviceList" description="设备配置查询" type="bo"
+        className="tower.cem.bo.MAG.device.BoDeviceList"
+        forward="DeviceListJsp" />
+    
+    <function id="DeviceSubmit" description="设备配置提交" type="bo"
+        className="tower.cem.bo.MAG.device.BoDeviceSubmit"
+        forward="StatBack" />
+        
+    <function id="DeviceEdit" description="设备配置编辑" type="bo"
+        className="tower.cem.bo.MAG.device.BoDeviceDetail"
+        forward="DeviceAdd" />
+        
+    <function id="DeviceDelete" description="设备配置删除" type="bo"
+        className="tower.cem.bo.MAG.device.BoDeviceDelete"
+        forward="DeviceList" />
+               
+    <function id="DeviceAdd" description="设备配置添加" type="jsp"
+        jspPath="/cem/pages/MAG/device/deviceEdit.jsp" />
+        
+    <function id="DeviceListJsp" description="设备配置列表页面" type="jsp"
+        jspPath="/cem/pages/MAG/device/deviceList.jsp" />
+        
+       <!-- 05-device-维护团队管理 -->
+    <function id="TeamList" description="维护团队查询" type="bo"
+        className="tower.cem.bo.MAG.team.BoTeamList"
+        forward="TeamListJsp" />
+    
+    <function id="TeamSubmit" description="维护团队提交" type="bo"
+        className="tower.cem.bo.MAG.team.BoTeamSubmit"
+        forward="StatBack" />
+        
+    <function id="TeamEdit" description="维护团队编辑" type="bo"
+        className="tower.cem.bo.MAG.team.BoTeamDetail"
+        forward="teamAdd" />
+        
+    <function id="TeamDelete" description="维护团队删除" type="bo"
+        className="tower.cem.bo.MAG.team.BoTeamDelete"
+        forward="TeamList" />
+        
+      <function id="MaintainPersonList" description="维护人员查询" type="bo"
+        className="tower.cem.bo.MAG.team.BoMaintainPersonList"
+        forward="TeamEdit" />
+        
+      <function id="MaintainPersonAdd" description="维护人员添加" type="bo"
+        className="tower.tmvc.sys.bo.user.BoUserList"
+        forward="MaintainPersonList" />
+        
+       <function id="MaintainPersonView" description="维护人员查看" type="bo"
+        className="tower.cem.bo.MAG.team.BoMaintainPersonDetail"
+        forward="TeamDetail" />
+        
+        <function id="TeamDetail" description="维护人员查看-维护团队信息" type="bo"
+        className="tower.cem.bo.MAG.team.BoTeamDetail"
+        forward="MaintainPersonViewJsp" />
+        
+       <function id="MaintainPersonDelete" description="维护人员删除" type="bo"
+        className="tower.cem.bo.MAG.team.BoMaintainPersonDelete"
+        forward="MaintainPersonList" />
+       
+       <function id="MaintainDeviceList" description="维护设备查询" type="bo"
+        className="tower.cem.bo.MAG.team.BoMaintainDeviceList"
+        forward="TeamEdit" />
+        
+      <function id="MaintainDeviceAdd" description="维护设备添加" type="bo"
+        className="tower.cem.bo.MAG.device.BoDeviceList"
+        forward="MaintainDeviceList" />
+        
+       <function id="MaintainDeviceView" description="维护设备查看" type="bo"
+        className="tower.cem.bo.MAG.team.BoMaintainDeviceDetail"
+        forward="TeamDetail" />
+        
+        <function id="TeamDetail" description="维护设备查看-维护团队信息" type="bo"
+        className="tower.cem.bo.MAG.team.BoTeamDetail"
+        forward="MaintainDeviceViewJsp" />
+        
+       <function id="MaintainDeviceDelete" description="维护设备删除" type="bo"
+        className="tower.cem.bo.MAG.team.BoMaintainDeviceDelete"
+        forward="MaintainDeviceList" />
+        
+        
+        <function id="MaintainPersonViewJsp" description="维护人员查看界面" type="jsp"
+        jspPath="/cem/pages/MAG/team/maintainPersonView.jsp" />
+        
+         <function id="MaintainDeviceViewJsp" description="维护设备查看界面" type="jsp"
+        jspPath="/cem/pages/MAG/team/maintainDeviceView.jsp" />
+        
+        <function id="TeamAdd" description="维护团队添加" type="jsp"
+        jspPath="/cem/pages/MAG/team/teamEdit.jsp" />
+        
+         <function id="TeamListJsp" description="维护团队列表页面" type="jsp"
+        jspPath="/cem/pages/MAG/team/teamList.jsp" />
+</functions>
