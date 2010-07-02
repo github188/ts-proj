@@ -10,7 +10,7 @@
 		<servlet-class>tower.tmvc.RootServlet</servlet-class>
 		<init-param>
 			<param-name>module</param-name>
-			<param-value>test</param-value>
+			<param-value>cem</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
@@ -23,7 +23,7 @@
 	<!-- Standard Action Servlet Mapping -->
 	<servlet-mapping>
 		<servlet-name>tmvcController</servlet-name>
-		<url-pattern>/applications/test/ctrl</url-pattern>
+		<url-pattern>/applications/cem/ctrl</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>ServletFileDisplay</servlet-name>
