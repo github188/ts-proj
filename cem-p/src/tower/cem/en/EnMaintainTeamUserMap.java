@@ -15,9 +15,9 @@ public class EnMaintainTeamUserMap implements java.io.Serializable {
     private String mapId;
 
     /**
-     * Type : char(6) Name : TERM_ID
+     * Type : char(6) Name : TEAM_ID
      */
-    private String termId;
+    private String teamId;
 
     /**
      * Type : char(6) Name : USER_ID
@@ -30,9 +30,9 @@ public class EnMaintainTeamUserMap implements java.io.Serializable {
     private boolean _flagMapId;
 
     /**
-     * Type : char(6) Name : TERM_ID modify flag
+     * Type : char(6) Name : TEAM_ID modify flag
      */
-    private boolean _flagTermId;
+    private boolean _flagTeamId;
 
     /**
      * Type : char(6) Name : USER_ID modify flag
@@ -62,25 +62,25 @@ public class EnMaintainTeamUserMap implements java.io.Serializable {
     }
 
     /**
-     * Sets the value for termId
+     * Sets the value for teamId
      */
-    public void setTermId(String termId) {
-        this.termId = termId;
-        this._flagTermId = true;
+    public void setTeamId(String teamId) {
+        this.teamId = teamId;
+        this._flagTeamId = true;
     }
 
     /**
-     * Gets the value for termId
+     * Gets the value for teamId
      */
-    public String getTermId() {
-        return termId;
+    public String getTeamId() {
+        return teamId;
     }
 
     /**
-     * has the value for termId changed?
+     * has the value for teamId changed?
      */
-    public boolean hasChangeTermId() {
-        return _flagTermId;
+    public boolean hasChangeTeamId() {
+        return _flagTeamId;
     }
 
     /**
