@@ -31,10 +31,10 @@ public class DbMaintainTeamUserMap extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
 
-        query.append("insert into maintain_team_user_map ( MAP_ID,TERM_ID,USER_ID ) values ( ");
+        query.append("insert into maintain_team_user_map ( MAP_ID,TEAM_ID,USER_ID ) values ( ");
         query.append(formatString(en.getMapId()));
         query.append(",");
-        query.append(formatString(en.getTermId()));
+        query.append(formatString(en.getTeamId()));
         query.append(",");
         query.append(formatString(en.getUserId()));
         query.append(")");
@@ -76,12 +76,12 @@ public class DbMaintainTeamUserMap extends RootDB{
             query.append(formatString(en.getMapId()));
             bChanged = true;
         }
-        if(en.hasChangeTermId()) {
+        if(en.hasChangeTeamId()) {
             if(bChanged){
                 query.append(",");
             }
-            query.append("TERM_ID=");
-            query.append(formatString(en.getTermId()));
+            query.append("TEAM_ID=");
+            query.append(formatString(en.getTeamId()));
             bChanged = true;
         }
         if(en.hasChangeUserId()) {
@@ -107,7 +107,7 @@ public class DbMaintainTeamUserMap extends RootDB{
         EnMaintainTeamUserMap res = null;
 
         StringBuffer query;
-        query = new StringBuffer("select MAP_ID,TERM_ID,USER_ID from maintain_team_user_map");
+        query = new StringBuffer("select MAP_ID,TEAM_ID,USER_ID from maintain_team_user_map");
 
         query.append(" where ");
         query.append("MAP_ID=");
@@ -164,12 +164,12 @@ public class DbMaintainTeamUserMap extends RootDB{
         boolean bChanged = false;
         query.append("update maintain_team_user_map set ");
 
-        if(en.hasChangeTermId()) {
+        if(en.hasChangeTeamId()) {
             if(bChanged){
                 query.append(",");
             }
-            query.append("TERM_ID=");
-            query.append(formatString(en.getTermId()));
+            query.append("TEAM_ID=");
+            query.append(formatString(en.getTeamId()));
             bChanged = true;
         }
         if(en.hasChangeUserId()) {
@@ -195,7 +195,7 @@ public class DbMaintainTeamUserMap extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select MAP_ID,TERM_ID,USER_ID from maintain_team_user_map");
+        query.append("select MAP_ID,TEAM_ID,USER_ID from maintain_team_user_map");
 
         query.append(" where ");
         query.append("MAP_ID like ");
@@ -233,7 +233,7 @@ public class DbMaintainTeamUserMap extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select MAP_ID,TERM_ID,USER_ID from maintain_team_user_map where ");
+        query.append("select MAP_ID,TEAM_ID,USER_ID from maintain_team_user_map where ");
         query.append(where);
         if(orderBy != null) {
             query.append(orderBy);
@@ -250,7 +250,7 @@ public class DbMaintainTeamUserMap extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select MAP_ID,TERM_ID,USER_ID from maintain_team_user_map");
+        query.append("select MAP_ID,TEAM_ID,USER_ID from maintain_team_user_map");
 
         if(orderBy != null) {
             query.append(orderBy);
@@ -277,12 +277,12 @@ public class DbMaintainTeamUserMap extends RootDB{
             query.append(formatString(en.getMapId()));
             bChanged = true;
         }
-        if(en.hasChangeTermId()) {
+        if(en.hasChangeTeamId()) {
             if(bChanged){
                 query.append(" and ");
             }
-            query.append("TERM_ID=");
-            query.append(formatString(en.getTermId()));
+            query.append("TEAM_ID=");
+            query.append(formatString(en.getTeamId()));
             bChanged = true;
         }
         if(en.hasChangeUserId()) {
@@ -294,9 +294,9 @@ public class DbMaintainTeamUserMap extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select MAP_ID,TERM_ID,USER_ID from maintain_team_user_map where ");
+            query.insert(0,"select MAP_ID,TEAM_ID,USER_ID from maintain_team_user_map where ");
         } else {
-            query.append("select MAP_ID,TERM_ID,USER_ID from maintain_team_user_map");
+            query.append("select MAP_ID,TEAM_ID,USER_ID from maintain_team_user_map");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -323,12 +323,12 @@ public class DbMaintainTeamUserMap extends RootDB{
             query.append(formatString(en.getMapId()));
             bChanged = true;
         }
-        if(en.hasChangeTermId()) {
+        if(en.hasChangeTeamId()) {
             if(bChanged){
                 query.append(" and ");
             }
-            query.append("TERM_ID like ");
-            query.append(formatString(en.getTermId()));
+            query.append("TEAM_ID like ");
+            query.append(formatString(en.getTeamId()));
             bChanged = true;
         }
         if(en.hasChangeUserId()) {
@@ -340,9 +340,9 @@ public class DbMaintainTeamUserMap extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select MAP_ID,TERM_ID,USER_ID from maintain_team_user_map where ");
+            query.insert(0,"select MAP_ID,TEAM_ID,USER_ID from maintain_team_user_map where ");
         } else {
-            query.append("select MAP_ID,TERM_ID,USER_ID from maintain_team_user_map");
+            query.append("select MAP_ID,TEAM_ID,USER_ID from maintain_team_user_map");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -414,12 +414,12 @@ public class DbMaintainTeamUserMap extends RootDB{
             query.append(formatString(en.getMapId()));
             bChanged = true;
         }
-        if(en.hasChangeTermId()) {
+        if(en.hasChangeTeamId()) {
             if(bChanged){
                 query.append(",");
             }
-            query.append("TERM_ID=");
-            query.append(formatString(en.getTermId()));
+            query.append("TEAM_ID=");
+            query.append(formatString(en.getTeamId()));
             bChanged = true;
         }
         if(en.hasChangeUserId()) {
@@ -443,7 +443,7 @@ public class DbMaintainTeamUserMap extends RootDB{
         EnMaintainTeamUserMap en = new EnMaintainTeamUserMap();
 
         en.setMapId(r.getString("MAP_ID"));
-        en.setTermId(r.getString("TERM_ID"));
+        en.setTeamId(r.getString("TEAM_ID"));
         en.setUserId(r.getString("USER_ID"));
 
         return en;
@@ -471,9 +471,9 @@ public class DbMaintainTeamUserMap extends RootDB{
         stmp = (String)otmp;
         en.setMapId(stmp);
 
-        otmp = xml.getInputObject("TERM_ID");
+        otmp = xml.getInputObject("TEAM_ID");
         stmp = (String)otmp;
-        en.setTermId(stmp);
+        en.setTeamId(stmp);
 
         otmp = xml.getInputObject("USER_ID");
         stmp = (String)otmp;
@@ -490,7 +490,7 @@ public class DbMaintainTeamUserMap extends RootDB{
         String stmp;
         EnMaintainTeamUserMap en;
         Object[] oMapId;
-        Object[] oTermId;
+        Object[] oTeamId;
         Object[] oUserId;
         int count = 0;
 
@@ -498,9 +498,9 @@ public class DbMaintainTeamUserMap extends RootDB{
         if (count == 0 && oMapId.length > 0) {
             count = oMapId.length;
         }
-        oTermId = xml.getInputObjects("TERM_ID");
-        if (count == 0 && oTermId.length > 0) {
-            count = oTermId.length;
+        oTeamId = xml.getInputObjects("TEAM_ID");
+        if (count == 0 && oTeamId.length > 0) {
+            count = oTeamId.length;
         }
         oUserId = xml.getInputObjects("USER_ID");
         if (count == 0 && oUserId.length > 0) {
@@ -514,9 +514,9 @@ public class DbMaintainTeamUserMap extends RootDB{
                 en.setMapId(stmp);
             }
 
-            if (oTermId.length == count) {
-                stmp = (String)oTermId[i];
-                en.setTermId(stmp);
+            if (oTeamId.length == count) {
+                stmp = (String)oTeamId[i];
+                en.setTeamId(stmp);
             }
 
             if (oUserId.length == count) {
@@ -535,7 +535,7 @@ public class DbMaintainTeamUserMap extends RootDB{
     public int setToXml(XMLWrap xml,EnMaintainTeamUserMap en) throws ErrorException {
         int row = xml.addRow("MAINTAIN_TEAM_USER_MAP");
         xml.setItemValue("MAINTAIN_TEAM_USER_MAP",row,"MAP_ID",en.getMapId());
-        xml.setItemValue("MAINTAIN_TEAM_USER_MAP",row,"TERM_ID",en.getTermId());
+        xml.setItemValue("MAINTAIN_TEAM_USER_MAP",row,"TEAM_ID",en.getTeamId());
         xml.setItemValue("MAINTAIN_TEAM_USER_MAP",row,"USER_ID",en.getUserId());
         return row;
     }
@@ -550,7 +550,7 @@ public class DbMaintainTeamUserMap extends RootDB{
             en = (EnMaintainTeamUserMap)ens.get(i);
             row = xml.addRow("MAINTAIN_TEAM_USER_MAP");
             xml.setItemValue("MAINTAIN_TEAM_USER_MAP",row,"MAP_ID",en.getMapId());
-            xml.setItemValue("MAINTAIN_TEAM_USER_MAP",row,"TERM_ID",en.getTermId());
+            xml.setItemValue("MAINTAIN_TEAM_USER_MAP",row,"TEAM_ID",en.getTeamId());
             xml.setItemValue("MAINTAIN_TEAM_USER_MAP",row,"USER_ID",en.getUserId());
         }
     }
