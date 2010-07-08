@@ -30,7 +30,7 @@
 	deviceAbbNameEn = xml.getItemValue("DEVICE_INFO",1,"DEVICE_NAME_CN");
 	typeId = xml.getItemValue("DEVICE_INFO",1,"TYPE_ID");
 	locationId = xml.getItemValue("DEVICE_INFO",1,"LOCATION_ID");
-	locationNameCn = xml.getInputValue("LOCATION_NAME");
+	locationNameCn = xml.getItemValue("DEVICE_INFO",1,"LOCATION_NAME");
 	deviceStatus = xml.getItemValue("DEVICE_INFO",1,"DEVICE_STATUS");
 	frontHostId = xml.getItemValue("DEVICE_INFO",1,"FRONT_HOST_ID");
 	frontHostName = xml.getItemValue("DEVICE_INFO",1,"FRONT_HOST_NAME");
@@ -82,73 +82,96 @@
                       <!-- 查询面板内容 -->
                    <form action="ctrl" method="post"name="form1"onSubmit="return doSubmit(this)">
                      <input type="hidden" name="FUNC_ID" value="DeviceSubmit">
-                      <input type="hidden" name="DEVICE_ID" value="<%=deviceId%>"> 
-                     <table border="0" cellpadding="0" cellspacing="0">
-                      <tr>
-                          <td width="150" align="right">设备名称-英文：</td>
-		                  <td width="100">
-             					 <input type="text" class="text" name="DEVICE_NAME_EN"value="<%=deviceNameEn %>" readonly>
-		                  </td>
-		                  
-                          <td width="150" align="right">设备名称缩写-英文：</td>
+                     <input type="hidden" name="DEVICE_ID" value="<%=deviceId%>"> 
+                     <table>
+                     	<tr>
+                        	<td width="150" align="right">设备英文名称：</td>
+		                  	<td width="100">
+             					<input type="text" class="text" name="DEVICE_NAME_EN"value="<%=deviceNameEn %>" readonly>
+		                  	</td>
+		                </tr>
+		                
+		                <tr>
+                          <td width="150" align="right">英文名称缩写：</td>
 		                  <td width="100">
               					<input type="text" class="text" name="DEVICE_ABB_NAME_EN"value="<%=deviceAbbNameEn %>" readonly>
 		                  </td>
 		               </tr>
+		               
 		               <tr>
-		               <td width="150" align="right">设备名称-中文：</td>
+		               <td width="150" align="right">设备中文名称：</td>
 		                 <td>
-              					<input type="text" class="text" name="DEVICE_NAME_CN"value="<%=deviceNameCn %>" readonly>
+              			 	<input type="text" class="text" name="DEVICE_NAME_CN"value="<%=deviceNameCn %>" readonly>
 		                 </td>
+  		               </tr>
+		                
+		                <tr>
 		                <td width="150" align="right">物理位置：</td>
 		                 <td>
-		                  <input type="text" class="date" name="LOCATION_NAME_CN"   value="<%=locationNameCn %>"  readonly>
+		                  <input type="text" class="text" name="LOCATION_NAME_CN"   value="<%=locationNameCn %>"  readonly>
   				         </td>
 		               </tr>
+		               
 		               <tr>
-		               <td width="150" align="right">设备类型：</td>
+		               	  <td width="150" align="right">设备类型：</td>
 		                 <td>
               					<input type="text" class="text" name="TYPE_ID"value="<%=typeId %>" readonly> 
 		                 </td>
+		               </tr>
+		                
+		                <tr>
 		                <td width="150" align="right">堡垒主机：</td>
 		                 <td>
-		                  <input type="text" class="date" name="FRONT_HOST_NAME"   value="<%=frontHostName %>"  readonly>
+		                  <input type="text" class="text" name="FRONT_HOST_NAME"   value="<%=frontHostName %>"  readonly>
 		                 </td>
 		               </tr>
+		               
 		                <tr>
-		                <td width="150" align="right">设备状态：</td>
+		                <td width="120" align="right">设备状态：</td>
 		                <td >
-                         <%for(int i=0;i<deviceStatusValue.length;i++){ %>
-                         if(deviceStatusValue[i].equals(deviceStatus)){
-                        %>
-                        <input type="text" class="date"   value="<%=deviceStatusDesc[i] %>"  readonly>
-                        <%} %>
+                         <%for(int i=0;i<deviceStatusValue.length;i++){ 
+                        	 if(deviceStatusValue[i].equals(deviceStatus)){
+                         %>
+                           <input type="text" class="text" value="<%=deviceStatusDesc[i] %>" readonly> 
+                        <%} }%>
 						 </td>
+		               </tr>
+		                
+		                <tr>
 		                <td width="150" align="right">网络地址：</td>
 		                 <td>
               				<input type="text" class="text" name="DEVICE_IP"value="<%=deviceIp %>" readonly>
 		                 </td>
 		               </tr>
+		               
 		                 <tr>
 		                <td width="150" align="right">网络端口：</td>
 		                 <td>
               					<input type="text" class="text" name="DEVICE_PORT"value="<%=devicePort %>" readonly>
 		                 </td>
+		                </tr>
+		                
+		                <tr>
 		                 <td width="150" align="right">登录用户名：</td>
 		                 <td>
               				<input type="text" class="text" name="DEVICE_USER"value="<%=deviceUser %>" readonly>
 		                 </td>
 		               </tr>
+		               
 		                <tr>
 		                 <td width="150" align="right">登录密码：</td>
 		                 <td>
               					<input type="text" class="text" name="DEVICE_PASSWORD"value="<%=devicePassword %>" readonly>
 		                 </td>
+		                </tr>
+		                
+		                <tr>
 		                 <td width="150" align="right">命令行提示符：</td>
 		                 <td>
               					<input type="text" class="text" name="DEVICE_PROMPT"value="<%=devicePrompt %>" readonly>
 		                 </td>
 		               </tr>
+		               
 		               <tr>
 		                 <td width="150" align="right">备注：</td>
 		                 <td colspan="3">

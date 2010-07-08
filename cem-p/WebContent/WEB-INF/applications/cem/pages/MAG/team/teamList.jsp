@@ -55,7 +55,7 @@ function doSubmit(form) {
   }
   
    function doClear(){
-    form.TERM_NAME.value="";
+    form1.QTEAM_NAME.value="";
   }
 -->
 </script>
@@ -106,8 +106,8 @@ function doSubmit(form) {
               <!-- 列表内容 -->
                <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
                  <tr>
-                  <th>维护团队名称</th>
-                  <th>备注</th>
+                  <th width="30%">维护团队名称</th>
+                  <th width="60%">备注</th>
                   <th width="10%">[ <a href="JavaScript:doAdd()">添加</a> ]</th>
                 </tr>
               <%if(teamIds != null){

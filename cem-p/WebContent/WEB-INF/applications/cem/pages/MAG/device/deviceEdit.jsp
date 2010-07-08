@@ -269,7 +269,7 @@
 <!--
 var sprytextfield1 = new Spry.Widget.ValidationTextField("spryDeviceNameEn","none", {required:true,maxChars:60});
 var sprytextfield2 = new Spry.Widget.ValidationTextField("sprytDeviceAbbNameEn", "none", {maxChars:60});
-var sprytextfield3 = new Spry.Widget.ValidationTextField("sprytDeviceIp", "integer", {required:false,maxChars:50});
+var sprytextfield3 = new Spry.Widget.ValidationTextField("sprytDeviceIp", "none", {required:false,maxChars:50});
 var sprytextfield4 = new Spry.Widget.ValidationTextField("sprytDevicePort", "integer", {required:false,maxChars:50});
 var sprytextfield5 = new Spry.Widget.ValidationTextField("sprytDeviceUser", "none", {maxChars:50});
 var sprytextfield6 = new Spry.Widget.ValidationTextField("sprytDevicePassword", "none", {maxChars:50});

@@ -68,7 +68,7 @@
 <script type="text/javascript">
 <!--
  function doView(hostId) {
-    window.location.href = "ctrl?FUNC_ID=FrontHostView&HOST_ID="+hostId;
+    window.location.href = "ctrl?FUNC_ID=DeviceView&DEVICE_ID="+hostId;
   }
   
 function doSubmit(form) {
@@ -120,7 +120,7 @@ function doSubmit(form) {
 </head>
 <body id="mainArea">
   <div id="mainPanel" class="panel">
-    <div class="panelHead">设备类型管理</div>
+    <div class="panelHead">设备配置管理</div>
     <div class="panelContent">
       <div class="panelContent2">    
         <!-- 查询面板 -->
@@ -213,7 +213,12 @@ function doSubmit(form) {
      
                <%} else {%>
                <tr class="dark" onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
-                   <a href="JavaScript:doView('<%=deviceIds[i]%>')">
+                   
+                  <td align="center">
+                  <a href="JavaScript:doView('<%=deviceIds[i]%>')">
+                  <%=deviceNameEns[i]%>
+                  </a>
+                  </td>
                   <td align="center"><%=deviceNameEns[i]%></td>
                   <td align="center"><%=deviceNameCns[i]%></td>
                   <td align="center"><%=locationNames[i]%></td>

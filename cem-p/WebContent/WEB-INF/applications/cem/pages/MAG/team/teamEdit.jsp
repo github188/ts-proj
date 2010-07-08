@@ -97,7 +97,11 @@
 </head>
 <body id="mainArea">
   <div id="mainPanel" class="panel">
-    <div class="panelHead">维护团队管理 - 维护团队添加/编辑</div>
+    <%if(teamId !=null && teamId.length() != 0){ %>
+    <div class="panelHead">维护团队管理 - 编辑</div>
+    <%}else{ %>
+    <div class="panelHead">维护团队管理 - 添加</div>
+    <%} %>
     <div class="panelContent">
       <div class="panelContent2">
       
@@ -142,7 +146,7 @@
                       <form action="ctrl" method="post"name="form1"onSubmit="return doSubmit(this)">
               <input type="hidden" name="FUNC_ID" value="TeamSubmit">
               <input type="hidden" name="TEAM_ID" value="<%=teamId%>"> 
-              <table border="0" cellpadding="0" cellspacing="0">
+              <table>
                 <tr>
                   <td width="100" align="right"> 维护团队名称： </td>
                   <td> 
