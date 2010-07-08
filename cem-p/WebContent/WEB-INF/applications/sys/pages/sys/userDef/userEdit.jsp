@@ -54,9 +54,9 @@
   }
       
     function onChange(selectedIds,selector){
-      	//alert(selector.element.innerHTML);
-      	//for(var i = 0; i < selectedIds.length; i ++){
-      	//	alert(selectedIds[i]);
+      	// alert(selector.element.innerHTML);
+      	// for(var i = 0; i < selectedIds.length; i ++){
+      	// 	alert(selectedIds[i]);
       	//}
       }
 -->
