@@ -10,7 +10,7 @@
 <frameset rows="70,*,28" cols="*" frameborder="NO" border="0" framespacing="0">
   <frame src="ctrl?FUNC_ID=AppInfo" name="topFrame" scrolling="NO" noresize title="topFrame">
   <frameset id="middleFrames" cols="200,10,*" frameborder="NO" border="0" framespacing="0">
-    <frameset id="leftFrames" rows="73,39,*,14,120" cols="*" frameborder="NO" border="0" framespacing="0">
+    <frameset id="leftFrames" rows="73,39,*,14,5" cols="*" frameborder="NO" border="0" framespacing="0">
       <frame src="ctrl?FUNC_ID=LoginInfo" name="info" scrolling="NO" noresize title="infomation">
       <frame src="../sys/themes/1/pages/menuTop.jsp" name="menuTop" scrolling="NO" noresize title="menuTop">
       <frameset rows="*" cols="10,*,10" frameborder="NO" border="0" framespacing="0">
@@ -19,10 +19,9 @@
         <frame src="../sys/themes/1/pages/menuRight.jsp" name="menuRight" scrolling="NO" noresize title="menuRight">
       </frameset>
       <frame src="../sys/themes/1/pages/menuBottom.jsp" name="menuBottom" scrolling="NO" noresize title="menuBottom">
-      <frame src="ctrl?FUNC_ID=AppMsg" name="msg" scrolling="NO" noresize title="message">
     </frameset>
     <frame src="../sys/themes/1/pages/hoviSlider.jsp" name="hoviSlider" scrolling="NO" noresize title="hoviSlider">
-    <frame src="ctrl?FUNC_ID=InfoInit" name="mainFrame" title="mainFrame">
+    <frame  name="mainFrame" title="mainFrame">
   </frameset>
   <frame src="../sys/themes/1/pages/bottonFrame.jsp" name="bottonFrame" scrolling="NO" noresize title="bottomFrame">
 </frameset>
