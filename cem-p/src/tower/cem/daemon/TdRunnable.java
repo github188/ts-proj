@@ -146,6 +146,8 @@ public class TdRunnable implements Runnable {
 		    // 进行设备登录处理
 		    if (enDeviceInfo.getFrontHostId() == null
 			    || enDeviceInfo.getFrontHostId().trim().length() == 0) {
+			
+			// 直接登录设备的情况
 			sResult = nt.FunLogin(enDeviceInfo.getDeviceIp(), enDeviceInfo.getDevicePort(),
 				enDeviceInfo.getDeviceUser(), enDeviceInfo.getDevicePassword(), enDeviceInfo
 					.getDevicePrompt());
@@ -156,6 +158,8 @@ public class TdRunnable implements Runnable {
 			    Debug.pln("TdRunnable run()", "指令模板执行任务，登录设备失败。");
 			}
 		    } else {
+			
+			// 通过堡垒主机登录设备的情况
 			sResult = nt.FunLogin(enFrontHostInfo.getHostIp(), enFrontHostInfo.getHostPort(),
 				enFrontHostInfo.getHostUser(), enFrontHostInfo.getHostPassword(),
 				enFrontHostInfo.getHostPrompt());
