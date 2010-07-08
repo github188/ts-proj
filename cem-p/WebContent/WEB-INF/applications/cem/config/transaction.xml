@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<transaction>
+	<classname>tmvc.common.Transaction</classname>
+	<databases>
+		<database>
+			<id>default</id>
+			<description>MySQL Connection</description>
+			<driver>com.mysql.jdbc.Driver</driver>
+			<url>jdbc:mysql://localhost/cem?characterEncoding=utf8&amp;autocommit=false&amp;autoReconnect=true</url>
+			<user>cem</user>
+			<password>cem</password>
+			<autocommit></autocommit>
+		</database>
+	</databases>
+</transaction>
