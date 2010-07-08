@@ -221,9 +221,11 @@ function doSubmit(form) {
 			  for (int i = 0; i < deviceIds.length; i++) {
 				if (i % 2 == 0) {%>
                 <tr onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
-                 <a href="JavaScript:doView('<%=deviceIds[i]%>')">
-                  <td align="center"><%=deviceNameEns[i]%></td>
+                 <td align="center">
+                   <a href="JavaScript:doView('<%=deviceIds[i]%>')">
+                  <%=deviceNameEns[i]%>
                   </a>
+                  </td>
                   <td align="center"><%=deviceNameCns[i]%></td>
                   <td align="center"><%=locationNames[i]%></td>
                   <td align="center"><%=frontHostNames[i]%></td>
@@ -239,9 +241,13 @@ function doSubmit(form) {
      
                <%} else {%>
                <tr class="dark" onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
+                  
+                  <td align="center">
                    <a href="JavaScript:doView('<%=deviceIds[i]%>')">
-                  <td align="center"><%=deviceNameEns[i]%></td>
+                  <%=deviceNameEns[i]%>
                   </a>
+                  </td>
+                  
                   <td align="center"><%=deviceNameCns[i]%></td>
                   <td align="center"><%=locationNames[i]%></td>
                    <td align="center"><%=frontHostNames[i]%></td>
