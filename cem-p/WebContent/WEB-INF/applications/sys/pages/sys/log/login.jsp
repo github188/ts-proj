@@ -87,7 +87,6 @@
 <jsp:include flush="true" page="topFrame.jsp"></jsp:include>
 <jsp:include flush="true" page="loginPanel.jsp"></jsp:include>
 <jsp:include flush="true" page="bottonFrame.jsp"></jsp:include>
-
 <script type="text/javascript">
 <!--
 var sprytextfield2 = new Spry.Widget.ValidationTextField("spryPassword", "none",{maxChars:32});

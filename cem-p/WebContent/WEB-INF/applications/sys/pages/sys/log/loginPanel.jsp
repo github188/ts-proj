@@ -18,13 +18,13 @@
                 <tr>
                   <td align="right">登录名：</td>
                   <td><span id="spryLoginName">
-                    <input type="text" class="text" name="LOGIN_NAME" value="" style="width:150px;">
+                    <input type="text" class="text" name="LOGIN_NAME" value="admin" style="width:150px;">
                     <span class="requiredField">*</span> <span class="textfieldRequiredMsg">需要提供一个值。</span></span></td>
                 </tr>
                 <tr>
                   <td align="right">登录密码：</td>
                   <td><span id="spryPassword">
-                    <input type="password" class="password" name="PASSWORD" value="" style="width:150px;">
+                    <input type="password" class="password" name="PASSWORD" value="admin" style="width:150px;">
                     <span class="requiredField">*</span> <span class="textfieldRequiredMsg">需要提供一个值。</span>
                     <span class="textfieldMaxCharsMsg">已超过最大字符数32。</span></span></td>
                 </tr>
