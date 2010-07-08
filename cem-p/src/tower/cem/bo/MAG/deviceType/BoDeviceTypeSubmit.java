@@ -1,5 +1,7 @@
 package tower.cem.bo.MAG.deviceType;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.Vector;
 
 import org.apache.log4j.Logger;
@@ -56,6 +58,8 @@ public class BoDeviceTypeSubmit implements RootBo{
 		Vector vDeviceType;
 		StringBuffer sql1;
 		StringBuffer sql2;
+		File file;   
+        FileInputStream fis;  
 		/***********************************************************************
 		 * 获取输入
 		 **********************************************************************/
@@ -68,6 +72,8 @@ public class BoDeviceTypeSubmit implements RootBo{
 		remark = requestXml.getInputValue("REMARK");
 		//上传文件第3步:获得上传文件
 		//uploadFile = (UploadFile) requestXml.getInputObject("APP_PICTURE");
+		//file = new File(uploadFile.getFullFileName());
+		//fis = new FileInputStream(file);
 		/***********************************************************************
 		 * 创建数据库连接、实例化DB、EN
 		 **********************************************************************/
@@ -90,7 +96,7 @@ public class BoDeviceTypeSubmit implements RootBo{
 			enDeviceType.setInspectCommands(inspectCommands);
 			enDeviceType.setInspectCommandsExp(inspectCommandsExp);
 			enDeviceType.setRemark(remark);
-			//enDeviceType.setAppPicture(appPicture);
+			//enDeviceType.setAppPicture(fis.);
           //判断是添加还是编辑：
 			if(typeId == null || typeId.length() == 0){
 				typeId = SysIdCreator.GenNextId(transaction, null,
