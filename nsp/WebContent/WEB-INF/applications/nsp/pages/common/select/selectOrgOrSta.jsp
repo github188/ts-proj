@@ -186,7 +186,9 @@
                         }
                   %>
                    <tr class="<%=trClass %>" onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
-                    <td align="center"><input type="radio" name="ORG_ID"  value="<%=orgIds[i] %>" nameValue="<%=orgNames[i] %>" parentValue="<%=parentIds[i] %>" flagValue="<%=flags[i] %>"/></td>
+                    <td align="center">
+                    <input type="radio" name="ORG_ID"  value="<%=orgIds[i] %>" nameValue="<%=orgNames[i] %>" parentValue="<%=parentIds[i] %>" flagValue="<%=flags[i] %>"/>
+                    </td>
                     <td align="center"><%=orgNames[i] %></td>
                     <td align="center"><%=parentNames[i] %></td>
                     <td align="center"><%=orgCodes[i]%></td>
