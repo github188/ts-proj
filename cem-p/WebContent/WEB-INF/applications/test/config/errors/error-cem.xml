@@ -49,10 +49,19 @@
 	<!-- 04-device-设备配置管理 -->
 	<error>
 		<id>DI001</id>
-		<message> 设备{0}已经在维护团队与设备对照关系中，该设备不能删除。</message>
+		<message> 设备名称-英文：{0}在系统中已存在,请重新输入。</message>
 		<hint></hint>
 	</error>
-	
+	<error>
+		<id>DI002</id>
+		<message> 设备名称缩写-英文：{0}在系统中已存在,请重新输入。</message>
+		<hint></hint>
+	</error>
+	<error>
+		<id>DI003</id>
+		<message> 设备名称-中文：{0}在系统中已存在,请重新输入。</message>
+		<hint></hint>
+	</error>
 	<!-- 05-team-维护团队管理 -->
 	<error>
 		<id>MT001</id>
