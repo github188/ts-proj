@@ -68,9 +68,9 @@
 <body id="mainArea">
   <div id="mainPanel" class="panel">
     <%if(hostId !=null && hostId.length() != 0){ %>
-    <div class="panelHead">堡垒主机管理 - 堡垒主机编辑</div>
+    <div class="panelHead">堡垒主机管理 - 编辑</div>
     <%}else{ %>
-    <div class="panelHead">堡垒主机管理 - 堡垒主机添加</div>
+    <div class="panelHead">堡垒主机管理 - 添加</div>
     <%} %>
     <div class="panelContent">
       <div class="panelContent2">
@@ -90,105 +90,113 @@
                       <!-- 查询面板内容 -->
                    <form action="ctrl" method="post"name="form1" onSubmit="return doSubmit(this)">
                      <input type="hidden" name="FUNC_ID" value="FrontHostSubmit">
-                      <input type="hidden" name="HOST_ID" value="<%=hostId%>"> 
-                     <table border="0" cellpadding="0" cellspacing="0">
-                      <tr>
-                          <td width="120" align="right">堡垒主机名称-英文：</td>
-		                  <td width="100">
-		                      <span id="spryHostNameEn">
-             					 <input type="text" class="text" name="HOST_NAME_EN"value="<%=hostNameEn %>"><span class="requiredField">*</span>
+                     <input type="hidden" name="HOST_ID" value="<%=hostId%>"> 
+                     <table>
+						<tr>
+							<td width="120" align="right">堡垒主机英文名称：</td>
+							<td width="100">
+								<span id="spryHostNameEn">
+								<input type="text" class="text" name="HOST_NAME_EN"value="<%=hostNameEn %>"><span class="requiredField">*</span>
 		                            <span class="textfieldRequiredMsg">需要提供一个值。</span>
 		                            <span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
-		                            </span>
-		                  </td>
-		                  
-                          <td width="150" align="right">堡垒主机名称缩写-英文：</td>
+								</span>
+							</td>
+						</tr>
+						<tr>   
+                          <td width="150" align="right">英文名称缩写：</td>
 		                  <td width="100">
 		                      <span id="sprytHostAbbNameEn">
               					<input type="text" class="text" name="HOST_ABB_NAME_EN"value="<%=hostAbbNameEn %>">
 		                            <span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
-		                            </span>
+								</span>
 		                  </td>
-		               </tr>
-		               <tr>
-		               <td width="120" align="right">堡垒主机名称-中文：</td>
-		                <td>
-		                   <span id="sprytHostNameCn">
-		                  <input type="text" class="text" name="HOST_NAME_CN"   value="<%=hostNameCn %>" ><span class="requiredField">*</span>
-		                  <span class="textfieldRequiredMsg">需要提供一个值。</span>
-		                   <span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
-		                    </span>
-		              </td>	
-		                <td width="120" align="right">物理位置：</td>
-		                <td>
-		                  <input name="LOCATION_ID" type="hidden"  value="<%=locationId %>">
-		                  <input type="text" class="date" name="LOCATION_NAME"   value="<%=locationName %>"  readonly>
-		                   <input type="button" name="selectLocation" class="selButton" value="选择" onClick="doSelLocation()" />
-		              </td>	
+						</tr>
+						<tr>   
+							<td width="120" align="right">堡垒主机中文名称：</td>
+							<td>
+								<span id="sprytHostNameCn">
+									<input type="text" class="text" name="HOST_NAME_CN"   value="<%=hostNameCn %>" ><span class="requiredField">*</span>
+									<span class="textfieldRequiredMsg">需要提供一个值。</span>
+									<span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
+								</span>
+							</td>	
+						</tr>
+						<tr>   		              
+							<td width="120" align="right">物理位置：</td>
+							<td>
+								<input name="LOCATION_ID" type="hidden"  value="<%=locationId %>">
+								<input type="text" class="date" name="LOCATION_NAME"   value="<%=locationName %>"  readonly>
+								<input type="button" name="selectLocation" class="selButton" value="选择" onClick="doSelLocation()" />
+							</td>	
 		               </tr>
 		                <tr>
-		                <td width="120" align="right">设备状态：</td>
-		                <td >
-	                     <select name="HOST_STATUS" class="select" id="HOST_STATUS" style="width:11em">
-                         <%for(int i=0;i<hostStatusValue.length;i++){ %>
-                        <option value="<%=hostStatusValue[i] %>" <%if(hostStatusValue[i].equals(hostStatus)){out.print("selected");} %>><%=hostStatusDesc[i] %></option>
-                        <%} %>
-                        </select>
-						 </td>
-		                <td width="120" align="right">网络地址：</td>
-		                 <td>
-		                     <span id="sprytHostIp">
-              					<input type="text" class="text" name="HOST_IP"value="<%=hostIp %>"><span class="requiredField">*</span>
-              			      <span class="textfieldRequiredMsg">需要提供一个值。</span>
-              				  <span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
-		                      </span>
-		                 </td>
-		               </tr>
-		                 <tr>
-		                <td width="120" align="right">网络端口：</td>
-		                 <td>
-		                     <span id="sprytHostPort">
-              					<input type="text" class="text" name="HOST_PORT"value="<%=hostPort %>"><span class="requiredField">*</span>
-              			      <span class="textfieldRequiredMsg">需要提供一个值。</span>
-              				  <span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
-		                      </span>
-		                 </td>
-		                 <td width="120" align="right">登录用户名：</td>
-		                 <td>
-		                     <span id="sprytHostUser">
+							<td width="120" align="right">设备状态：</td>
+							<td >
+								<select name="HOST_STATUS" class="select" id="HOST_STATUS" style="width:11em">
+									<%for(int i=0;i<hostStatusValue.length;i++){ %>
+									<option value="<%=hostStatusValue[i] %>" <%if(hostStatusValue[i].equals(hostStatus)){out.print("selected");} %>><%=hostStatusDesc[i] %></option>
+									<%} %>
+								</select>
+							</td>
+						</tr>
+						<tr>   							
+							<td width="120" align="right">网络地址：</td>
+							<td>
+								<span id="sprytHostIp">
+									<input type="text" class="text" name="HOST_IP"value="<%=hostIp %>"><span class="requiredField">*</span>
+								<span class="textfieldRequiredMsg">需要提供一个值。</span>
+								<span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
+								</span>
+							</td>
+						</tr>
+						<tr>   
+							<td width="120" align="right">网络端口：</td>
+							<td>
+								<span id="sprytHostPort">
+									<input type="text" class="text" name="HOST_PORT"value="<%=hostPort %>"><span class="requiredField">*</span>
+								<span class="textfieldRequiredMsg">需要提供一个值。</span>
+								<span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
+								</span>
+							</td>
+						</tr>
+						<tr>   							
+							<td width="120" align="right">登录用户名：</td>
+							<td>
+								<span id="sprytHostUser">
               					<input type="text" class="text" name="HOST_USER"value="<%=hostUser %>"><span class="requiredField">*</span>
-              			      <span class="textfieldRequiredMsg">需要提供一个值。</span>
-              				  <span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
-		                      </span>
-		                 </td>
-		               </tr>
-		                <tr>
-		                
-		                 <td width="120" align="right">命令行提示符：</td>
-		                 <td>
-		                     <span id="sprytHostPrompt">
-              					<input type="text" class="text" name="HOST_PROMPT"value="<%=hostPrompt %>"><span class="requiredField">*</span>
-              			      <span class="textfieldRequiredMsg">需要提供一个值。</span>
-              				  <span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
-		                      </span>
-		                 </td>
-		                  <td width="120" align="right">登录密码：</td>
-		                 <td>
-		                     <span id="sprytHostPassword">
+								<span class="textfieldRequiredMsg">需要提供一个值。</span>
+								<span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
+								</span>
+							</td>
+						</tr>
+						<tr>   
+							<td width="120" align="right">命令行提示符：</td>
+							<td>
+								<span id="sprytHostPrompt">
+								<input type="text" class="text" name="HOST_PROMPT"value="<%=hostPrompt %>"><span class="requiredField">*</span>
+								<span class="textfieldRequiredMsg">需要提供一个值。</span>
+								<span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
+								</span>
+							</td>
+						</tr>
+						<tr>   							
+							<td width="120" align="right">登录密码：</td>
+							<td>
+								<span id="sprytHostPassword">
               					<input type="text" class="text" name="HOST_PASSWORD"value="<%=hostPassword %>"><span class="requiredField">*</span>
-              			      <span class="textfieldRequiredMsg">需要提供一个值。</span>
-              				  <span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
-		                      </span>
-		                 </td>
+              			      	<span class="textfieldRequiredMsg">需要提供一个值。</span>
+              				  	<span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
+		                      	</span>
+		                 	</td>
 		               </tr>
 		               <tr>
-		                 <td width="120" align="right">备注：</td>
-		                 <td colspan="3"> 
-              			<span id="spryRemark">
+		                 	<td width="120" align="right">备注：</td>
+		                 	<td colspan="3"> 
+              					<span id="spryRemark">
               					<textarea name="REMARK" id="textarea" class="textarea" cols="50" rows="4"><%=remark%></textarea>
-              			  <span class="textfieldMaxCharsMsg">已超过最大字符数200。</span>	                          
-		                  </span>
-		                 </td>
+              			  		<span class="textfieldMaxCharsMsg">已超过最大字符数200。</span>	                          
+		                  		</span>
+		                 	</td>
 		               </tr>
                          <tr height="15"></tr>
                         <tr>

@@ -68,9 +68,7 @@ function doSubmit(form) {
   
    function doClear(){
     form1.LOCATION_NAME_EN.value="";
-    form1.LOCATION_NAME_CN.value="";
-    form1.REMARK.value="";
-   
+    form1.LOCATION_NAME_CN.value="";   
   }
 -->
 </script>
@@ -92,20 +90,13 @@ function doSubmit(form) {
                <input  type="hidden" name=CUR_PAGE value="">
               <table>
               	 <tr>
-              	 <td align="right">物理位置名称-英文：</td>
-                  <td><input  ="text" class="text" name="LOCATION_NAME_EN" value="<%=locationNameEn %>"></td>
-                 <td align="right">物理位置名称-中文：</td>
+              	 <td align="right">物理位置英文名称：</td>
+                 <td><input  ="text" class="text" name="LOCATION_NAME_EN" value="<%=locationNameEn %>"></td>
+                 <td align="right">物理位置中文名称：</td>
 	                 <td><input  ="text" class="text" name="LOCATION_NAME_CN" value="<%=locationNameCn %>"></td>
-                 </tr>
-                 <tr>
-	              <td align="right">备注：</td>
-                   <td><input  ="text" class="text" name="REMARK" value="<%=remark %>"></td>
-                   <td>&nbsp;</td>
-                   <td>&nbsp;</td>
-                <td align="right" nowrap="nowrap"><input type="submit" class="submit"  value="查询">
+                 <td align="right" nowrap="nowrap"><input type="submit" class="submit"  value="查询">
                    <input type="button" class="button" onClick="doClear();" value="重置">
                    </td>
-                 </tr>
               </table>
                </form>
               <!-- 查询面板内容结束 -->
@@ -126,9 +117,9 @@ function doSubmit(form) {
               <!-- 列表内容 -->
               <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
                  <tr>
-                  <th>物理位置名称-英文</th>
-                  <th>物理位置名称-中文</th>
-                  <th>备注</th>
+                  <th width="25%">物理位置英文名称</th>
+                  <th width="25%">物理位置中文名称</th>
+                  <th width="40%">备注</th>
                   <th width="10%">[ <a href="JavaScript:doAdd()">添加</a> ]</th>
                 </tr>
               <%if(locationIds != null){

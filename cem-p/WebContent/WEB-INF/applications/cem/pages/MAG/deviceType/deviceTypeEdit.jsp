@@ -54,9 +54,9 @@
 <body id="mainArea">
   <div id="mainPanel" class="panel">
     <%if(typeId !=null && typeId.length() != 0){ %>
-    <div class="panelHead">设备类型管理 - 设备类型编辑</div>
+    <div class="panelHead">设备类型管理 - 编辑</div>
     <%}else{ %>
-    <div class="panelHead">设备类型管理 - 设备类型添加</div>
+    <div class="panelHead">设备类型管理 - 添加</div>
     <%} %>
     <div class="panelContent">
       <div class="panelContent2">
@@ -77,9 +77,9 @@
                    <form action="ctrl" method="post"name="form1"onSubmit="return doSubmit(this)">
                      <input type="hidden" name="FUNC_ID" value="DeviceTypeSubmit">
                       <input type="hidden" name="TYPE_ID" value="<%=typeId%>"> 
-                     <table border="0" cellpadding="0" cellspacing="0">
+                     <table >
                       <tr>
-                          <td width="120" align="right">设备类型名称-英文：</td>
+                          <td width="120" align="right">设备类型英文名称：</td>
 		                  <td width="100">
 		                      <span id="spryTypeNameEn">
              					 <input type="text" class="text" name="TYPE_NAME_EN"value="<%=typeNameEn %>"><span class="requiredField">*</span>
@@ -87,8 +87,9 @@
 		                            <span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 		                            </span>
 		                  </td>
-		                  
-                          <td wwidth="120" align="right">设备类型名称-中文：</td>
+		                  </tr>
+		                <tr>  
+                          <td width="120" align="right">设备类型中文名称：</td>
 		                  <td width="100">
 		                      <span id="sprytTypeNameCn">
               					<input type="text" class="text" name="TYPE_NAME_CN"value="<%=typeNameCn %>"><span class="requiredField">*</span>

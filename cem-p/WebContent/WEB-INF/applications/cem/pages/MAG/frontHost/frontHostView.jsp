@@ -78,20 +78,21 @@
                     <div class="panelContent2">
                       <!-- 查询面板内容 -->
                    <form action="ctrl" method="post"name="form1"onSubmit="return doSubmit(this)">
-                     <table border="0" cellpadding="0" cellspacing="0">
+                     <table>
                       <tr>
-                          <td width="120" align="right">堡垒主机名称-英文：</td>
+                          <td width="120" align="right">堡垒主机英文名称：</td>
 		                  <td width="100">
              				   <input type="text" class="text" value="<%=hostNameEn %>" readonly> 
 		                  </td>
-		                  
-                          <td width="150" align="right">堡垒主机名称缩写-英文：</td>
+						</tr>
+						<tr>   		                  
+                          <td width="150" align="right">英文名称缩写：</td>
 		                  <td width="100">
               					<input type="text" class="text" value="<%=hostAbbNameEn %>" readonly> 
 		                  </td>
 		               </tr>
 		               <tr>
-		               <td width="120" align="right">堡垒主机名称-中文：</td>
+		               <td width="120" align="right">堡垒主机中文名称：</td>
 		                 <td>
 		                 <input type="text" class="text" value="<%=hostNameCn %>" readonly> 
 		                 </td>
@@ -99,7 +100,7 @@
 		                <tr>
 		                <td width="120" align="right">物理位置：</td>
 		                 <td>
-		                 <input type="text" class="text" value=" <%=locationName %>" readonly> 
+		                 <input type="text" class="text" value="<%=locationName %>" readonly> 
 		                 </td>
 		               </tr>
 		                <tr>
@@ -108,38 +109,38 @@
                          <%for(int i=0;i<hostStatusValue.length;i++){ 
                         	 if(hostStatusValue[i].equals(hostStatus)){
                          %>
-                           <input type="text" class="text" value="  <%=hostStatusDesc[i] %>" readonly> 
+                           <input type="text" class="text" value="<%=hostStatusDesc[i] %>" readonly> 
                         <%} }%>
 						 </td>
 		               </tr>
 		               <tr>
 		                <td width="120" align="right">网络地址：</td>
 		                 <td>
-		                  <input type="text" class="text" value="  <%=hostIp %>" readonly> 
+		                  <input type="text" class="text" value="<%=hostIp %>" readonly> 
 		                 </td>
 		               </tr>
 		                 <tr>
 		                <td width="120" align="right">网络端口：</td>
 		                 <td>
-		                  <input type="text" class="text" value=" <%=hostPort %>" readonly> 
+		                  <input type="text" class="text" value="<%=hostPort %>" readonly> 
 		                 </td>
 		               </tr>
 		               <tr>
 		                 <td width="120" align="right">登录用户名：</td>
 		                 <td>
-		                 <input type="text" class="text" value=" <%=hostUser %>" readonly> 
+		                 <input type="text" class="text" value="<%=hostUser %>" readonly> 
 		                 </td>
 		               </tr>
 		                <tr>
 		                 <td width="120" align="right">登录密码：</td>
 		                 <td>
-		                 <input type="text" class="text" value=" <%=hostPassword %>" readonly> 
+		                 <input type="text" class="text" value="<%=hostPassword %>" readonly> 
 		                 </td>
 		               </tr>
 		                <tr>
 		                 <td width="120" align="right">命令行提示符：</td>
 		                 <td>
-		                  <input type="text" class="text" value=" <%=hostPrompt %>" readonly> 
+		                  <input type="text" class="text" value="<%=hostPrompt %>" readonly> 
 		                 </td>
 		               </tr>
 		               <tr>

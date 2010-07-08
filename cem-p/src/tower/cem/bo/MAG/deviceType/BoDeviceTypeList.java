@@ -37,7 +37,7 @@ public class BoDeviceTypeList implements RootBo{
 		/***********************************************************************
 		 * 获取输入
 		 **********************************************************************/
-		typeNameEn = requestXml.getInputValue("TQYPE_NAME_EN");
+		typeNameEn = requestXml.getInputValue("QTYPE_NAME_EN");
 		typeNameCn = requestXml.getInputValue("QTYPE_NAME_CN");
 		remark = requestXml.getInputValue("QREMARK");
 		/***********************************************************************

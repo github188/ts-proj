@@ -96,11 +96,7 @@
     form1.HOST_NAME_EN.value="";
     form1.HOST_NAME_CN.value="";
     form1.HOST_IP.value="";
-    form1.HOST_PORT.value="";
-    form1.HOST_STATUS.selectedIndex=0;
-    form1.LOCATION_ID.value="";
-    form1.LOCATION_NAME.value="";
-   
+    form1.HOST_STATUS.selectedIndex=0;   
   }
   
    function doSelLocation(){
@@ -126,42 +122,26 @@
                <input type="hidden" name=CUR_PAGE value="">
               <table>
               	 <tr>
-              	 <td align="right">堡垒主机名称-英文：</td>
-                  <td><input type="text" class="text" name="HOST_NAME_EN" value="<%=hostNameEn %>"></td>
-                 <td align="right">堡垒主机名称-中文：</td>
-	                 <td><input type="text" class="text" name="HOST_NAME_CN" value="<%=hostNameCn %>"></td>
-                 </tr>
-                  <tr>
-              	 <td align="right">物理位置：</td>
-                   <td>
-		                  <input name="LOCATION_ID" type="hidden"  value="<%=locationId %>">
-		                  <input type="text" class="date" name="LOCATION_NAME"   value="<%=locationName %>"  readonly>
-		                   <input type="button" name="selectLocation" class="selButton" value="选择" onClick="doSelLocation()" />
-		              </td>	
-                 <td align="right">网络地址：</td>
-	                 <td><input type="text" class="text" name="HOST_IP" value="<%=hostIp %>"></td>
-                 </tr>
-                   <tr>
-              	 <td align="right">网络端口：</td>
-                  <td><input type="text" class="text" name="HOST_PORT" value="<%=hostPort %>"></td>
-                 <td align="right">设备状态：</td>
-	                  <td >
-	                     <select name="HOST_STATUS" class="select" id="HOST_STATUS" style="width:11em">
-	                     <option value="">全部</option>
-                         <%for(int i=0;i<hostStatusValue.length;i++){ %>
-                        <option value="<%=hostStatusValue[i] %>" <%if(hostStatusValue[i].equals(hostStatus)){out.print("selected");} %>><%=hostStatusDesc[i] %></option>
-                        <%} %>
-                        </select>
+					<td align="right">堡垒主机英文名称：</td>
+					<td><input type="text" class="text" name="HOST_NAME_EN" value="<%=hostNameEn %>"></td>
+					<td align="right">堡垒主机中文名称：</td>
+					<td><input type="text" class="text" name="HOST_NAME_CN" value="<%=hostNameCn %>"></td>
+				</tr>
+				<tr>					
+					<td align="right">网络地址：</td>
+					<td><input type="text" class="text" name="HOST_IP" value="<%=hostIp %>"></td>
+					<td align="right">设备状态：</td>
+					<td >
+						<select name="HOST_STATUS" class="select" id="HOST_STATUS" style="width:11em">
+							<option value="">全部</option>
+							<%for(int i=0;i<hostStatusValue.length;i++){ %>
+							<option value="<%=hostStatusValue[i] %>" <%if(hostStatusValue[i].equals(hostStatus)){out.print("selected");} %>><%=hostStatusDesc[i] %></option>
+							<%} %>
+						</select>
 					</td>
-                 </tr>
-                 <tr>
-	              <td align="right">备注：</td>
-                   <td><input type="text" class="text" name="REMARK" value="<%=remark %>"></td>
-                   <td>&nbsp;</td>
-                   <td>&nbsp;</td>
-                   <td align="right" nowrap="nowrap">
-                   <input type="submit" class="submit"  value="查询">
-                   <input type="button" class="button" onClick="doClear();" value="重置">
+					<td align="right" nowrap="nowrap">
+						<input type="submit" class="submit"  value="查询">
+						<input type="button" class="button" onClick="doClear();" value="重置">
                    </td>
                  </tr>
                  
@@ -184,8 +164,8 @@
             <!-- 列表内容 -->
                <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
                  <tr>
-                  <th>堡垒主机名称-英文</th>
-                  <th>设堡垒主机名称-中文</th>
+                  <th>堡垒主机英文名称</th>
+                  <th>堡垒主机中文名称</th>
                   <th>物理位置</th>
                   <th>网络地址</th>
                   <th>网络端口</th>

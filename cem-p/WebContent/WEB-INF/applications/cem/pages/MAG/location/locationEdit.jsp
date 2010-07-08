@@ -45,9 +45,9 @@
 <body id="mainArea">
   <div id="mainPanel" class="panel">
     <%if(locationId !=null && locationId.length() != 0){ %>
-    <div class="panelHead">物理位置管理 - 物理位置编辑</div>
+    <div class="panelHead">物理位置管理 - 编辑</div>
     <%}else{ %>
-    <div class="panelHead">物理位置管理 - 物理位置添加</div>
+    <div class="panelHead">物理位置管理 - 添加</div>
     <%} %>
     <div class="panelContent">
       <div class="panelContent2">
@@ -68,9 +68,9 @@
                    <form action="ctrl" method="post"name="form1"onSubmit="return doSubmit(this)">
                      <input type="hidden" name="FUNC_ID" value="LocationSubmit">
                       <input type="hidden" name="LOCATION_ID" value="<%=locationId%>"> 
-                     <table border="0" cellpadding="0" cellspacing="0">
+                     <table >
                       <tr>
-                          <td width="120" align="right">物理位置名称-英文：</td>
+                          <td width="120" align="right">物理位置英文名称：</td>
 		                  <td width="100">
 		                      <span id="spryLocationtNameEn">
              					 <input type="text" class="text" name="LOCATION_NAME_EN"value="<%=locationNameEn %>"><span class="requiredField">*</span>
@@ -78,8 +78,9 @@
 		                            <span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 		                            </span>
 		                  </td>
-		                  
-                          <td width="120" align="right">物理位置名称-中文：</td>
+		               </tr>
+		               <tr>   
+                          <td width="120" align="right">物理位置中文名称：</td>
 		                  <td width="100">
 		                      <span id="spryLocationNameCn">
               					<input type="text" class="text" name="LOCATION_NAME_CN"value="<%=locationNameCn %>"><span class="requiredField">*</span>

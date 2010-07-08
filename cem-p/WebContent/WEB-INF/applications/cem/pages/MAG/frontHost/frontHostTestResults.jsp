@@ -37,7 +37,7 @@
                  
                   <div class="panelHead"></div>
                   <div class="panelContent">
-                    <div class="panelContent2">
+                    <div class="panelContent2">                    
                       <!-- 查询面板内容 -->
                        <%=hostTestResults %>
                       <!-- 查询面板内容结束 -->

@@ -39,20 +39,15 @@
 	deviceNameCn = xml.getInputValue("DEVICE_NAME_CN");
 	frontHostId = xml.getInputValue("FRONT_HOST_ID");
 	frontHostName = xml.getInputValue("FRONT_HOST_NAME");
-	locationId = xml.getInputValue("LOCATION_ID");
-	locationNameCn = xml.getInputValue("LOCATION_NAME");
 	deviceStatus = xml.getInputValue("DEVICE_STATUS");
 	deviceIp = xml.getInputValue("DEVICE_IP");
-	devicePort = xml.getInputValue("DEVICE_PORT");
 
 	deviceIds = xml.getItemValues("DEVICE_INFO","DEVICE_ID");
 	deviceNameEns = xml.getItemValues("DEVICE_INFO", "DEVICE_NAME_EN");
-	deviceNameCns = xml.getItemValues("DEVICE_INFO", "DEVICE_ABB_NAME_EN");
-	deviceAbbNameEns = xml.getItemValues("FRONT_DEVICE_INFO", "DEVICE_NAME_CN");
-	locationIds = xml.getItemValues("FRONT_DEVICE_INFO", "LOCATION_ID");
+	deviceNameCns = xml.getItemValues("DEVICE_INFO", "DEVICE_NAME_CN");
+	deviceAbbNameEns = xml.getItemValues("DEVICE_INFO", "DEVICE_ABB_NAME_EN");
 	locationNames = xml.getItemValues("DEVICE_INFO", "LOCATION_NAME");
 	deviceStatuses = xml.getItemValues("DEVICE_INFO", "DEVICE_STATUS");
-	frontHostIds = xml.getItemValues("DEVICE_INFO", "FRONT_HOST_ID");
 	frontHostNames = xml.getItemValues("DEVICE_INFO", "FRONT_HOST_NAME");
 	deviceIps = xml.getItemValues("DEVICE_INFO", "DEVICE_IP");
 	devicePorts = xml.getItemValues("DEVICE_INFO", "DEVICE_PORT");
@@ -109,14 +104,8 @@ function doSubmit(form) {
    function doClear(){
     form1.DEVICE_NAME_EN.value="";
     form1.DEVICE_NAME_CN.value="";
-    form1.LOCATION_ID.value = "";
-    form1.LOCATION_NAME_CN.value="";
     form1.DEVICE_IP.value="";
-    form1.DEVICE_PORT.value="";
-    form1.DEVICE_STATUS.selectedIndex=0;
-    form1.FRONT_DEVICE_ID.value="";
-    form1.FRONT_DEVICE_NAME.value="";
-   
+    form1.DEVICE_STATUS.selectedIndex=0;   
   }
   
    function onChange(selectedIds,selector){
@@ -145,34 +134,16 @@ function doSubmit(form) {
                <input type="hidden" name=CUR_PAGE value="">
               <table>
               	 <tr>
-              	 <td align="right">设备名称-英文：</td>
-                  <td><input type="text" class="text" name="DEVICE_NAME_EN" value="<%=deviceNameEn %>"></td>
-                 <td align="right">设备名称-中文：</td>
-	                 <td><input type="text" class="text" name="DEVICE_NAME_CN" value="<%=deviceNameCn %>"></td>
-                 </tr>
-                  <tr>
-              	 <td align="right">物理位置：</td>
-                  <td>	
-                   <input name="LOCATION_ID" type="hidden"  value="<%=locationId %>">
-		            <input type="text" class="date" name="LOCATION_NAME_CN"   value="<%=locationNameCn %>"  readonly>
-		            <input type="button" name="selectOutOrg" class="selButton" value="选择" onClick="doSelLocation()" />
-  				</td>
-                 <td align="right">网络地址：</td>
-	                 <td><input type="text" class="text" name="DEVICE_IP" value="<%=deviceIp %>"></td>
-                 </tr>
-                   <tr>
-              	 <td align="right">网络端口：</td>
-                  <td><input type="text" class="text" name="DEVICE_PORT" value="<%=devicePort %>"></td>
-                 <td align="right">堡垒主机：</td>
-		         <td>
-		           <input name="FRONT_DEVICE_ID" type="hidden"  value="<%=frontHostId %>">
-		            <input type="text" class="date" name="FRONT_HOST_NAME"   value="<%=frontHostName %>"  readonly>
-		            <input type="button" name="selectOutOrg" class="selButton" value="选择" onClick="doSelFrontHost()" />
-		          </td>
+              	 	<td align="right">设备英文名称：</td>
+                  	<td><input type="text" class="text" name="DEVICE_NAME_EN" value="<%=deviceNameEn %>"></td>
+                 	<td align="right">设备中文名称：</td>
+	                <td><input type="text" class="text" name="DEVICE_NAME_CN" value="<%=deviceNameCn %>"></td>
                  </tr>
                  <tr>
-	             <td align="right">设备状态：</td>
-	                  <td >
+	                 <td align="right">网络地址：</td>
+	                 <td><input type="text" class="text" name="DEVICE_IP" value="<%=deviceIp %>"></td>            
+		             <td align="right">设备状态：</td>
+	                 <td >
 	                     <select name="DEVICE_STATUS" class="select" id="DEVICE_STATUS" style="width:11em">
 	                     <option value="">全部</option>
                          <%for(int i=0;i<deviceStatusValue.length;i++){ %>
@@ -180,13 +151,12 @@ function doSubmit(form) {
                         <%} %>
                         </select>
 					</td>
-                   <td>&nbsp;</td>
-                   <td>&nbsp;</td>
-                   <td align="right" nowrap="nowrap"><input type="submit" class="submit"  value="查询">
-                   <input type="button" class="button" onClick="doClear();" value="重置">
-                   </td>
+        	        <td>&nbsp;</td>
+            	    <td>&nbsp;</td>
+                	<td align="right" nowrap="nowrap"><input type="submit" class="submit"  value="查询">
+                   	<input type="button" class="button" onClick="doClear();" value="重置">
+                   	</td>
                  </tr>
-                 
               </table>
                </form>
               <!-- 查询面板内容结束 -->
@@ -207,8 +177,8 @@ function doSubmit(form) {
               <!-- 列表内容 -->
              <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
                  <tr>
-                  <th>设备名称-英文</th>
-                  <th>设备名称-中文</th>
+                  <th>设备英文名称</th>
+                  <th>设备中文名称</th>
                   <th>物理位置</th>
                   <th>堡垒主机</th>
                   <th>网络地址</th>

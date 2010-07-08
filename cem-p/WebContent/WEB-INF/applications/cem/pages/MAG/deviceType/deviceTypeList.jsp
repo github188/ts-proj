@@ -78,9 +78,7 @@ function doSubmit(form) {
   
    function doClear(){
     form1.QTYPE_NAME_EN.value="";
-    form1.QTYPE_NAME_CN.value="";
-    form1.REMARK.value="";
-   
+    form1.QTYPE_NAME_CN.value="";   
   }
 -->
 </script>
@@ -103,21 +101,14 @@ function doSubmit(form) {
                <input type="hidden" name=CUR_PAGE value="">
                <table>
               	 <tr>
-              	 <td align="right">设备类型名称-英文：</td>
-                  <td><input type="text" class="text" name="QTYPE_NAME_EN" value="<%=typeNameEn %>"></td>
-                 <td align="right">设备类型名称-中文：</td>
-	                 <td><input type="text" class="text" name="QTYPE_NAME_CN" value="<%=typeNameCn %>"></td>
-                 </tr>
-                 <tr>
-	              <td align="right">备注：</td>
-                   <td><input type="text" class="text" name="QREMARK" value="<%=remark %>"></td>
-                   <td>&nbsp;</td>
-                   <td>&nbsp;</td>
+              	 <td align="right">设备类型英文名称：</td>
+                 <td><input type="text" class="text" name="QTYPE_NAME_EN" value="<%=typeNameEn %>"></td>
+                 <td align="right">设备类型中文名称：</td>
+	             <td><input type="text" class="text" name="QTYPE_NAME_CN" value="<%=typeNameCn %>"></td>
                    <td align="right" nowrap="nowrap"><input type="submit" class="submit"  value="查询">
                    <input type="button" class="button" onClick="doClear();" value="重置">
-                   </td>
-                 </tr>
-                 
+                   </td>                   
+                 </tr>                 
               </table>
                </form>
               <!-- 查询面板内容结束 -->
@@ -138,13 +129,9 @@ function doSubmit(form) {
               <!-- 列表内容 -->
               <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
                  <tr>
-                  <th>设备类型名称-英文</th>
-                  <th>设备类型名称-中文</th>
-                  <th>巡检指令集</th>
-                  <th>巡检指令说明</th>
-                  <th>光功率采集指令</th>
-                  <th>设备外观图片</th>
-                  <th>备注</th>
+                  <th width="25%">设备类型英文名称</th>
+                  <th width="25%">设备类型中文名称</th>
+                  <th width="40%">备注</th>
                   <th width="10%">[ <a href="JavaScript:doAdd()">添加</a> ]</th>
                 </tr>
               <%if(typeIds != null){
@@ -153,24 +140,16 @@ function doSubmit(form) {
                 <tr onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
                   <td align="center" onClick="event.cancelBubble=true"><%=typeNameEns[i]%></td>
                   <td align="center"><%=typeNameCns[i]%></td>
-                  <td align="center"><%=inspectCommandses[i]%></td>
-                  <td align="center"><%=inspectCommandsExps[i]%></td>
-                  <td align="center"><%=collectCommandses[i]%></td>
-                  <td align="center"><%=appPictures[i]%></td>
-                   <td align="center"><%=remarks[i]%></td>
+                  <td align="center"><%=remarks[i]%></td>
                  <td align="center" nowrap>[ <a href="JavaScript:doEdit('<%=typeIds[i] %>')">编辑</a> | <a href="JavaScript:doDelete('<%=typeIds[i] %>')">删除 </a>]</td>
                 </tr>
      
                <%} else {%>
                    <tr class="dark" onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
-                 <td align="center" onClick="event.cancelBubble=true"><%=typeNameEns[i]%></td>
-                  <td align="center"><%=typeNameCns[i]%></td>
-                  <td align="center"><%=inspectCommandses[i]%></td>
-                  <td align="center"><%=inspectCommandsExps[i]%></td>
-                  <td align="center"><%=collectCommandses[i]%></td>
-                  <td align="center"><%=appPictures[i]%></td>
-                   <td align="center"><%=remarks[i]%></td>
-                  <td align="center" nowrap>[ <a href="JavaScript:doEdit('<%=typeIds[i] %>')">编辑</a> | <a href="JavaScript:doDelete('<%=typeIds[i] %>')">删除 </a>]</td>
+                    <td align="center" onClick="event.cancelBubble=true"><%=typeNameEns[i]%></td>
+                    <td align="center"><%=typeNameCns[i]%></td>
+                    <td align="center"><%=remarks[i]%></td>
+                    <td align="center" nowrap>[ <a href="JavaScript:doEdit('<%=typeIds[i] %>')">编辑</a> | <a href="JavaScript:doDelete('<%=typeIds[i] %>')">删除 </a>]</td>
                 </tr>
                <%}}} %>
               </table>
