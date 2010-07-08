@@ -245,7 +245,6 @@ function doSubmit(form) {
                <tr class="dark" onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
                    <a href="JavaScript:doView('<%=deviceIds[i]%>')">
                   <td align="center"><%=deviceNameEns[i]%></td>
-                  </a>
                   <td align="center"><%=deviceNameCns[i]%></td>
                   <td align="center"><%=locationNames[i]%></td>
                    <td align="center"><%=frontHostNames[i]%></td>
