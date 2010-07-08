@@ -21,5 +21,11 @@ public class IdCreatorDefine {
 	
 	public static final String ID_TYPE_MAP_ID = "MAP_ID";
 	public static final int ID_LEN_MAP_ID = 6;
+	
+	public static final String ID_TYPE_TEAM_USER_MAP_ID = "MAP_ID";
+	public static final int ID_LEN_TEAM_USER_MAP_ID = 6;
+	
+	public static final String ID_TYPE_TEAM_DEVICE_MAP_ID = "MAP_ID";
+	public static final int ID_LEN_TEAM_DEVICE_MAP_ID = 6;
 
 }
