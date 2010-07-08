@@ -100,7 +100,7 @@
 		               <tr>
 		                 <td width="120" align="right">设备照片：</td>
 		                 <td>
-              					<input type="text" class="text" name="APP_PICTURE"value="<%=inspectCommands %>">
+              					<input type="file" class="file" name="APP_PICTURE" value="<%=inspectCommands %>">
 		                 </td>
 		               </tr>
 		               <tr>
