@@ -20,6 +20,11 @@ public class EnSystemOperationLog implements java.io.Serializable {
     private String userId;
 
     /**
+     * Type : varchar(60) Name : USER_NAME
+     */
+    private String userName;
+
+    /**
      * Type : char(14) Name : OPERATION_TIME
      */
     private String operationTime;
@@ -53,6 +58,11 @@ public class EnSystemOperationLog implements java.io.Serializable {
      * Type : char(6) Name : USER_ID modify flag
      */
     private boolean _flagUserId;
+
+    /**
+     * Type : varchar(60) Name : USER_NAME modify flag
+     */
+    private boolean _flagUserName;
 
     /**
      * Type : char(14) Name : OPERATION_TIME modify flag
@@ -121,6 +131,28 @@ public class EnSystemOperationLog implements java.io.Serializable {
      */
     public boolean hasChangeUserId() {
         return _flagUserId;
+    }
+
+    /**
+     * Sets the value for userName
+     */
+    public void setUserName(String userName) {
+        this.userName = userName;
+        this._flagUserName = true;
+    }
+
+    /**
+     * Gets the value for userName
+     */
+    public String getUserName() {
+        return userName;
+    }
+
+    /**
+     * has the value for userName changed?
+     */
+    public boolean hasChangeUserName() {
+        return _flagUserName;
     }
 
     /**
