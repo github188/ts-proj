@@ -31,10 +31,12 @@ public class DbSystemOperationLog extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
 
-        query.append("insert into system_operation_log ( LOG_ID,USER_ID,OPERATION_TIME,OPERATION_FUN_ID,OPERATION_FUN_NAME,RETURN_CODE,REMARK ) values ( ");
+        query.append("insert into system_operation_log ( LOG_ID,USER_ID,USER_NAME,OPERATION_TIME,OPERATION_FUN_ID,OPERATION_FUN_NAME,RETURN_CODE,REMARK ) values ( ");
         query.append(formatString(en.getLogId()));
         query.append(",");
         query.append(formatString(en.getUserId()));
+        query.append(",");
+        query.append(formatString(en.getUserName()));
         query.append(",");
         query.append(formatString(en.getOperationTime()));
         query.append(",");
@@ -92,6 +94,14 @@ public class DbSystemOperationLog extends RootDB{
             query.append(formatString(en.getUserId()));
             bChanged = true;
         }
+        if(en.hasChangeUserName()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("USER_NAME=");
+            query.append(formatString(en.getUserName()));
+            bChanged = true;
+        }
         if(en.hasChangeOperationTime()) {
             if(bChanged){
                 query.append(",");
@@ -147,7 +157,7 @@ public class DbSystemOperationLog extends RootDB{
         EnSystemOperationLog res = null;
 
         StringBuffer query;
-        query = new StringBuffer("select LOG_ID,USER_ID,OPERATION_TIME,OPERATION_FUN_ID,OPERATION_FUN_NAME,RETURN_CODE,REMARK from system_operation_log");
+        query = new StringBuffer("select LOG_ID,USER_ID,USER_NAME,OPERATION_TIME,OPERATION_FUN_ID,OPERATION_FUN_NAME,RETURN_CODE,REMARK from system_operation_log");
 
         query.append(" where ");
         query.append("LOG_ID=");
@@ -212,6 +222,14 @@ public class DbSystemOperationLog extends RootDB{
             query.append(formatString(en.getUserId()));
             bChanged = true;
         }
+        if(en.hasChangeUserName()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("USER_NAME=");
+            query.append(formatString(en.getUserName()));
+            bChanged = true;
+        }
         if(en.hasChangeOperationTime()) {
             if(bChanged){
                 query.append(",");
@@ -267,7 +285,7 @@ public class DbSystemOperationLog extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select LOG_ID,USER_ID,OPERATION_TIME,OPERATION_FUN_ID,OPERATION_FUN_NAME,RETURN_CODE,REMARK from system_operation_log");
+        query.append("select LOG_ID,USER_ID,USER_NAME,OPERATION_TIME,OPERATION_FUN_ID,OPERATION_FUN_NAME,RETURN_CODE,REMARK from system_operation_log");
 
         query.append(" where ");
         query.append("LOG_ID like ");
@@ -305,7 +323,7 @@ public class DbSystemOperationLog extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select LOG_ID,USER_ID,OPERATION_TIME,OPERATION_FUN_ID,OPERATION_FUN_NAME,RETURN_CODE,REMARK from system_operation_log where ");
+        query.append("select LOG_ID,USER_ID,USER_NAME,OPERATION_TIME,OPERATION_FUN_ID,OPERATION_FUN_NAME,RETURN_CODE,REMARK from system_operation_log where ");
         query.append(where);
         if(orderBy != null) {
             query.append(orderBy);
@@ -322,7 +340,7 @@ public class DbSystemOperationLog extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select LOG_ID,USER_ID,OPERATION_TIME,OPERATION_FUN_ID,OPERATION_FUN_NAME,RETURN_CODE,REMARK from system_operation_log");
+        query.append("select LOG_ID,USER_ID,USER_NAME,OPERATION_TIME,OPERATION_FUN_ID,OPERATION_FUN_NAME,RETURN_CODE,REMARK from system_operation_log");
 
         if(orderBy != null) {
             query.append(orderBy);
@@ -355,6 +373,14 @@ public class DbSystemOperationLog extends RootDB{
             }
             query.append("USER_ID=");
             query.append(formatString(en.getUserId()));
+            bChanged = true;
+        }
+        if(en.hasChangeUserName()) {
+            if(bChanged){
+                query.append(" and ");
+            }
+            query.append("USER_NAME=");
+            query.append(formatString(en.getUserName()));
             bChanged = true;
         }
         if(en.hasChangeOperationTime()) {
@@ -398,9 +424,9 @@ public class DbSystemOperationLog extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select LOG_ID,USER_ID,OPERATION_TIME,OPERATION_FUN_ID,OPERATION_FUN_NAME,RETURN_CODE,REMARK from system_operation_log where ");
+            query.insert(0,"select LOG_ID,USER_ID,USER_NAME,OPERATION_TIME,OPERATION_FUN_ID,OPERATION_FUN_NAME,RETURN_CODE,REMARK from system_operation_log where ");
         } else {
-            query.append("select LOG_ID,USER_ID,OPERATION_TIME,OPERATION_FUN_ID,OPERATION_FUN_NAME,RETURN_CODE,REMARK from system_operation_log");
+            query.append("select LOG_ID,USER_ID,USER_NAME,OPERATION_TIME,OPERATION_FUN_ID,OPERATION_FUN_NAME,RETURN_CODE,REMARK from system_operation_log");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -433,6 +459,14 @@ public class DbSystemOperationLog extends RootDB{
             }
             query.append("USER_ID like ");
             query.append(formatString(en.getUserId()));
+            bChanged = true;
+        }
+        if(en.hasChangeUserName()) {
+            if(bChanged){
+                query.append(" and ");
+            }
+            query.append("USER_NAME like ");
+            query.append(formatString(en.getUserName()));
             bChanged = true;
         }
         if(en.hasChangeOperationTime()) {
@@ -476,9 +510,9 @@ public class DbSystemOperationLog extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select LOG_ID,USER_ID,OPERATION_TIME,OPERATION_FUN_ID,OPERATION_FUN_NAME,RETURN_CODE,REMARK from system_operation_log where ");
+            query.insert(0,"select LOG_ID,USER_ID,USER_NAME,OPERATION_TIME,OPERATION_FUN_ID,OPERATION_FUN_NAME,RETURN_CODE,REMARK from system_operation_log where ");
         } else {
-            query.append("select LOG_ID,USER_ID,OPERATION_TIME,OPERATION_FUN_ID,OPERATION_FUN_NAME,RETURN_CODE,REMARK from system_operation_log");
+            query.append("select LOG_ID,USER_ID,USER_NAME,OPERATION_TIME,OPERATION_FUN_ID,OPERATION_FUN_NAME,RETURN_CODE,REMARK from system_operation_log");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -558,6 +592,14 @@ public class DbSystemOperationLog extends RootDB{
             query.append(formatString(en.getUserId()));
             bChanged = true;
         }
+        if(en.hasChangeUserName()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("USER_NAME=");
+            query.append(formatString(en.getUserName()));
+            bChanged = true;
+        }
         if(en.hasChangeOperationTime()) {
             if(bChanged){
                 query.append(",");
@@ -612,6 +654,7 @@ public class DbSystemOperationLog extends RootDB{
 
         en.setLogId(r.getString("LOG_ID"));
         en.setUserId(r.getString("USER_ID"));
+        en.setUserName(r.getString("USER_NAME"));
         en.setOperationTime(r.getString("OPERATION_TIME"));
         en.setOperationFunId(r.getString("OPERATION_FUN_ID"));
         en.setOperationFunName(r.getString("OPERATION_FUN_NAME"));
@@ -647,6 +690,10 @@ public class DbSystemOperationLog extends RootDB{
         stmp = (String)otmp;
         en.setUserId(stmp);
 
+        otmp = xml.getInputObject("USER_NAME");
+        stmp = (String)otmp;
+        en.setUserName(stmp);
+
         otmp = xml.getInputObject("OPERATION_TIME");
         stmp = (String)otmp;
         en.setOperationTime(stmp);
@@ -679,6 +726,7 @@ public class DbSystemOperationLog extends RootDB{
         EnSystemOperationLog en;
         Object[] oLogId;
         Object[] oUserId;
+        Object[] oUserName;
         Object[] oOperationTime;
         Object[] oOperationFunId;
         Object[] oOperationFunName;
@@ -693,6 +741,10 @@ public class DbSystemOperationLog extends RootDB{
         oUserId = xml.getInputObjects("USER_ID");
         if (count == 0 && oUserId.length > 0) {
             count = oUserId.length;
+        }
+        oUserName = xml.getInputObjects("USER_NAME");
+        if (count == 0 && oUserName.length > 0) {
+            count = oUserName.length;
         }
         oOperationTime = xml.getInputObjects("OPERATION_TIME");
         if (count == 0 && oOperationTime.length > 0) {
@@ -725,6 +777,11 @@ public class DbSystemOperationLog extends RootDB{
             if (oUserId.length == count) {
                 stmp = (String)oUserId[i];
                 en.setUserId(stmp);
+            }
+
+            if (oUserName.length == count) {
+                stmp = (String)oUserName[i];
+                en.setUserName(stmp);
             }
 
             if (oOperationTime.length == count) {
@@ -764,6 +821,7 @@ public class DbSystemOperationLog extends RootDB{
         int row = xml.addRow("SYSTEM_OPERATION_LOG");
         xml.setItemValue("SYSTEM_OPERATION_LOG",row,"LOG_ID",en.getLogId());
         xml.setItemValue("SYSTEM_OPERATION_LOG",row,"USER_ID",en.getUserId());
+        xml.setItemValue("SYSTEM_OPERATION_LOG",row,"USER_NAME",en.getUserName());
         xml.setItemValue("SYSTEM_OPERATION_LOG",row,"OPERATION_TIME",en.getOperationTime());
         xml.setItemValue("SYSTEM_OPERATION_LOG",row,"OPERATION_FUN_ID",en.getOperationFunId());
         xml.setItemValue("SYSTEM_OPERATION_LOG",row,"OPERATION_FUN_NAME",en.getOperationFunName());
@@ -783,6 +841,7 @@ public class DbSystemOperationLog extends RootDB{
             row = xml.addRow("SYSTEM_OPERATION_LOG");
             xml.setItemValue("SYSTEM_OPERATION_LOG",row,"LOG_ID",en.getLogId());
             xml.setItemValue("SYSTEM_OPERATION_LOG",row,"USER_ID",en.getUserId());
+            xml.setItemValue("SYSTEM_OPERATION_LOG",row,"USER_NAME",en.getUserName());
             xml.setItemValue("SYSTEM_OPERATION_LOG",row,"OPERATION_TIME",en.getOperationTime());
             xml.setItemValue("SYSTEM_OPERATION_LOG",row,"OPERATION_FUN_ID",en.getOperationFunId());
             xml.setItemValue("SYSTEM_OPERATION_LOG",row,"OPERATION_FUN_NAME",en.getOperationFunName());
