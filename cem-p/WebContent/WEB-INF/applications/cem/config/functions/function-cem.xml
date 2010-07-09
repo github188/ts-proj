@@ -219,4 +219,36 @@
         
          <function id="TeamListJsp" description="维护团队列表页面" type="jsp"
         jspPath="/cem/pages/MAG/team/teamList.jsp" />
+        
+        
+       <!-- 21-device-设备端口类型管理 -->
+      <function id="DevicePortTypeSubmit" description="设备端口类型提交" type="bo"
+        className="tower.cem.bo.MAG.devicePortType.BoDevicePortTypeSubmit"
+        forward="DevicePortTypeList" />   
+        
+     <function id="DevicePortTypeList" description="设备端口类型查询" type="bo"
+        className="tower.cem.bo.MAG.devicePortType.BoDevicePortTypeList"
+        forward="DevicePortTypeListJsp" />   
+        
+      <function id="DevicePortTypeEdit" description="设备端口类型编辑" type="bo"
+        className="tower.cem.bo.MAG.devicePortType.BoDevicePortTypeDetail"
+        forward="DevicePortTypeAdd" /> 
+        
+     <function id="DevicePortTypeDelete" description="设备端口类型删除" type="bo"
+        className="tower.cem.bo.MAG.devicePortType.BoDevicePortTypeDelete"
+        forward="DevicePortTypeList" />  
+        
+     <function id="DevicePortTypeView" description="设备端口类型查看" type="bo"
+        className="tower.cem.bo.MAG.devicePortType.BoDevicePortTypeDetail"
+        forward="DevicePortTypeViewJsp" />   
+        
+      <function id="DevicePortTypeListJsp" description="设备端口类型查询页面" type="jsp"
+        jspPath="/cem/pages/MAG/devicePortType/devicePortTypeList.jsp" /> 
+        
+      <function id="DevicePortTypeAdd" description="设备端口类型添加页面" type="jsp"
+        jspPath="/cem/pages/MAG/devicePortType/devicePortTypeEdit.jsp" /> 
+        
+      <function id="DevicePortTypeViewJsp" description="设备端口类型添加页面" type="jsp"
+        jspPath="/cem/pages/MAG/devicePortType/devicePortTypeView.jsp" /> 
+        
 </functions>
