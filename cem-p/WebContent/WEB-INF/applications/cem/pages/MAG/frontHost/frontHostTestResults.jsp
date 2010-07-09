@@ -39,7 +39,12 @@
                   <div class="panelContent">
                     <div class="panelContent2">                    
                       <!-- 查询面板内容 -->
-                       <%=hostTestResults %>
+                      <table width="100%" border="0" cellpadding="0" cellspacing="0">
+              	 <tr>
+              	 <td align="right"><%=hostTestResults %></td>
+                 </tr>
+                 </table>
+                       
                       <!-- 查询面板内容结束 -->
                     </div>
                   </div>
