@@ -20,6 +20,37 @@ public class TdRunnable implements Runnable {
 	this.enSendList = enCommandsSendList;
     }
 
+    public double collectRxpValue(String collectString) {
+
+	String result = collectString;
+	String rxpLable = "Rx Pwr [dbm]";
+	// rxpLable = "/dev/sda1";
+	double rxpValue = 0;
+
+	int ipos = result.indexOf(rxpLable);
+	result = result.substring(ipos + rxpLable.length(), result.length());
+
+	String results[] = result.split("\n");
+	if (results.length > 0)
+	    result = results[0];
+
+	results = result.split(" ");
+	for (int i = 0; i < results.length; i++) {
+	    if (results[i].trim().length() > 0) {
+		result = results[i];
+		break;
+	    }
+	}
+
+	try {
+	    rxpValue = Double.parseDouble(result);
+	} catch (Exception e) {
+	    // TODO: handle exception
+	}
+
+	return rxpValue;
+    }
+
     // 线程执行的部分
     public void run() {
 	if (this.sThreadName == null) {
@@ -146,7 +177,7 @@ public class TdRunnable implements Runnable {
 		    // 进行设备登录处理
 		    if (enDeviceInfo.getFrontHostId() == null
 			    || enDeviceInfo.getFrontHostId().trim().length() == 0) {
-			
+
 			// 直接登录设备的情况
 			sResult = nt.FunLogin(enDeviceInfo.getDeviceIp(), enDeviceInfo.getDevicePort(),
 				enDeviceInfo.getDeviceUser(), enDeviceInfo.getDevicePassword(), enDeviceInfo
@@ -158,7 +189,7 @@ public class TdRunnable implements Runnable {
 			    Debug.pln("TdRunnable run()", "指令模板执行任务，登录设备失败。");
 			}
 		    } else {
-			
+
 			// 通过堡垒主机登录设备的情况
 			sResult = nt.FunLogin(enFrontHostInfo.getHostIp(), enFrontHostInfo.getHostPort(),
 				enFrontHostInfo.getHostUser(), enFrontHostInfo.getHostPassword(),
@@ -380,10 +411,181 @@ public class TdRunnable implements Runnable {
 
 	    }
 	    // command_type ="C"，处理执行光功率采集的任务
-	    else if(enSendList.getCommandsType().equals("C")){
-		sGenResult = "S";
-		System.out.println("TdRunnable run()：光功率采集功能实现中");
+	    else if (enSendList.getCommandsType().equals("C")) {
+
+		// Runtime Code
+		// 根据设备获取到设备信息及所属设备分类信息，当设备空时，获取全部可用的设备信息及所属设备分类信息
+		sSql = " select device_id, device_name_en, front_host_id, device_ip, device_port, "
+			+ " device_user, device_password, device_prompt, collect_commands"
+			+ " from device_info, device_type"
+			+ " where device_info.type_id = device_type.type_id"
+			+ " and device_info.device_status ='N'";
+
+		// 当设备编号不为空时，获取到指定的设备信息及所属设备分类信息
+		if (!(enSendList.getDeviceId() == null || enSendList.getDeviceId().trim().length() == 0)) {
+		    sSql = sSql + " and device_info.device_id ='" + enSendList.getDeviceId() + "'";
+		}
+
+		rs = DaemonDBPool.doQuery(conn, sSql);
+		Vector vDeviceInfo = new Vector();
+		while (rs.next()) {
+		    enDeviceInfo = new EnDeviceInfo();
+		    enDeviceInfo.setDeviceId(rs.getString("DEVICE_ID"));
+		    enDeviceInfo.setDeviceNameEn(rs.getString("DEVICE_NAME_EN"));
+		    enDeviceInfo.setFrontHostId(rs.getString("FRONT_HOST_ID"));
+		    enDeviceInfo.setDeviceIp(rs.getString("DEVICE_IP"));
+		    enDeviceInfo.setDevicePort(rs.getString("DEVICE_PORT"));
+		    enDeviceInfo.setDeviceUser(rs.getString("DEVICE_USER"));
+		    enDeviceInfo.setDevicePassword(rs.getString("DEVICE_PASSWORD"));
+		    enDeviceInfo.setDevicePrompt(rs.getString("DEVICE_PROMPT"));
+		    enDeviceInfo.setRemark(rs.getString("COLLECT_COMMANDS"));
+		    vDeviceInfo.add(enDeviceInfo);
+		}
+
+		// 获取到全部堡垒主机列表
+		sSql = "select * from front_host_info ";
+		rs = DaemonDBPool.doQuery(conn, sSql);
+		Vector vFrontHost = new Vector();
+		while (rs.next()) {
+		    enFrontHostInfo = new EnFrontHostInfo();
+		    enFrontHostInfo.setHostId(rs.getString("HOST_ID"));
+		    enFrontHostInfo.setHostIp(rs.getString("HOST_IP"));
+		    enFrontHostInfo.setHostPort(rs.getString("HOST_PORT"));
+		    enFrontHostInfo.setHostUser(rs.getString("HOST_USER"));
+		    enFrontHostInfo.setHostPassword(rs.getString("HOST_PASSWORD"));
+		    enFrontHostInfo.setHostPrompt(rs.getString("HOST_PROMPT"));
+		    vFrontHost.add(enFrontHostInfo);
+		}
+
+		// 连接设备，并执行设备端口数据采集命令
+		for (int i = 0; i < vDeviceInfo.size(); i++) {
+		    nt = new NetTelnet();
+		    sbResult = new StringBuffer();
+		    enDeviceInfo = (EnDeviceInfo) vDeviceInfo.get(i);
+
+		    // 端口数据采集开始计时
+		    String sCollectBegin = formatter.format(new java.util.Date());
+
+		    if (enDeviceInfo.getFrontHostId() == null
+			    || enDeviceInfo.getFrontHostId().trim().length() == 0) {
+
+			// 直接登录设备
+
+			sResult = nt.FunLogin(enDeviceInfo.getDeviceIp(), enDeviceInfo.getDevicePort(),
+				enDeviceInfo.getDeviceUser(), enDeviceInfo.getDevicePassword(), enDeviceInfo
+					.getDevicePrompt());
+			sbResult.append(sResult);
+			if (!nt.getBflag()) {
+			    sGenResult = "F";
+			    sbResult.append("TdRunnable run()：执行数据采集任务，登录设备失败。");
+			    Debug.pln("TdRunnable run()", "执行数据采集任务，登录设备失败。");
+			}
+		    } else {
+
+			// 通过堡垒主机登录设备
+
+			// 查询堡垒主机信息
+			for (int j = 0; j < vFrontHost.size(); j++) {
+			    enFrontHostInfo = new EnFrontHostInfo();
+			    enFrontHostInfo = (EnFrontHostInfo) vFrontHost.get(j);
+			    if (enFrontHostInfo.getHostId().equals(enDeviceInfo.getFrontHostId())) {
+				break;
+			    } else {
+				enFrontHostInfo = null;
+			    }
+			}
+
+			if (enFrontHostInfo == null) {
+			    sGenResult = "F";
+			    sbResult.append("TdRunnable run()：执行数据采集任务，未找到堡垒主机信息。");
+			    Debug.pln("TdRunnable run()", "执行数据采集任务，未找到堡垒主机信息。");
+			} else {
+			    sResult = nt.FunLogin(enFrontHostInfo.getHostIp(), enFrontHostInfo.getHostPort(),
+				    enFrontHostInfo.getHostUser(), enFrontHostInfo.getHostPassword(),
+				    enFrontHostInfo.getHostPrompt());
+			    sbResult.append(sResult);
+
+			    if (!nt.getBflag()) {
+				sGenResult = "F";
+				sbResult.append("TdRunnable run()：执行数据采集任务，登录堡垒主机失败。");
+				Debug.pln("TdRunnable run()", "执行数据采集任务，登录堡垒主机失败。");
+			    } else {
+				sResult = nt.FunRelogin(enDeviceInfo.getDeviceIp(), enDeviceInfo
+					.getDevicePort(), enDeviceInfo.getDeviceUser(), enDeviceInfo
+					.getDevicePassword(), enDeviceInfo.getDevicePrompt());
+				sbResult.append(sResult);
+				if (!nt.getBflag()) {
+				    sGenResult = "F";
+				    sbResult.append("TdRunnable run()：执行数据采集任务，通过堡垒主机登录设备失败。");
+				    Debug.pln("TdRunnable run()", "执行数据采集任务，通过堡垒主机登录设备失败。");
+
+				    // // 关闭之前的连接
+				    nt.disconnect();
+				}
+			    }
+			}
+		    }
+
+		    // 执行端口数据采集命令
+		    if (sGenResult.equals("S")) {
+			String sCommLine = enDeviceInfo.getRemark();
+
+			// 查询设备的端口列表
+			sSql = "select * from device_port_info where device_id ='"
+				+ enDeviceInfo.getDeviceId() + "' and status ='N'";
+			rs = DaemonDBPool.doQuery(conn, sSql);
+
+			while (rs.next()) {
+			    String portId = rs.getString("PORT_ID");
+			    String portSn = rs.getString("PORT_SN");
+			    sCommLine = sCommLine.replaceAll("%PORT", portSn);
+
+			    if (!(sCommLine == null || sCommLine.trim().length() == 0)) {
+				sResult = nt.sendCommand(sCommLine);
+				sbResult.append(sResult);
+
+				double rxp = this.collectRxpValue(sResult);
+
+				sSql = "insert into device_port_rxp values ('" + enSendList.getSendId()
+					+ "', '" + enDeviceInfo.getDeviceId() + "', '"
+					+ enDeviceInfo.getDeviceNameEn() + "', '" + portId + "', '" + portSn
+					+ "', " + rxp + ")";
+				
+				iSaveFlag = DaemonDBPool.doUpdate(conn, sSql);
+				
+				if (iSaveFlag < 1) {
+				    sbResult.append("TdRunnable run()：执行数据采集任务，记录光功率数据失败。");
+				    Debug.pln("TdRunnable run()", "执行数据采集任务，记录光功率数据失败。");
+				}				
+			    }
+			}
+		    }
+
+		    // 关闭连接
+		    nt.disconnect();
+
+		    // 端口数据采集完成计时
+		    String sCollectEnd = formatter.format(new java.util.Date());
+
+		    // 将执行端口数据采集的情况保存到数据采集日志中
+		    sSql = "insert into device_collect_log values ('" + enSendList.getSendId() + "','"
+			    + enDeviceInfo.getDeviceId() + "','" + enDeviceInfo.getDeviceNameEn() + "','"
+			    + enDeviceInfo.getDeviceIp() + "','" + enSendList.getUserId() + "','"
+			    + sCollectBegin + "','" + sCollectEnd + "','" + sGenResult + "', ?)";
+
+		    java.sql.PreparedStatement ps = null;
+		    ps = conn.prepareStatement(sSql);
+		    ps.setString(1, sbResult.toString());
+		    iSaveFlag = ps.executeUpdate();
+
+		    if (iSaveFlag < 1) {
+			sGenResult = "F";
+			sbResult.append("TdRunnable run()：执行数据采集任务，记录日志失败。");
+			Debug.pln("TdRunnable run()", "执行数据采集任务，记录日志失败。");
+		    }
+		}
 	    }
+	    
 	    // command_type 为其他值，未定义任务类型
 	    else {
 		sGenResult = "F";

@@ -48,7 +48,7 @@ public class TelnetDaemon extends Thread {
 	int n = Thread.enumerate(threads);
 	String sThreadName = null;
 
-	System.out.println("+-----------------当前正在执行的Telnet任务-----------------+");
+	System.out.println("\n+-----------------当前正在执行的Telnet任务-----------------+");
 
 	for (int i = 0; i < n; i++) {
 	    sThreadName = threads[i].getName();
@@ -135,17 +135,12 @@ public class TelnetDaemon extends Thread {
 	    // 执行标志为"T"，服务进行中 ...
 	    setTdconfigMsg("T", iDaemonsMax, iSleepTimer, sLog, dbDriver, dbUrl, dbUser, dbPassword);
 
-	    // // 取得数据库连接，预备Statement
-	    // conn = DaemonDBPool.getConnection();
-	    // conn.setAutoCommit(true);
-	    // pstmt = conn.prepareStatement(sQuerySql);
-
 	    int iSendCount = 0;
 
 	    for (;;) {
 
 		// 在日志中列出当前正在运行的线程
-		// listThread();
+		listThread();
 
 		// 检查运行标志run_flag，当为"F"时退出守护进程
 		sRunFlag = getTdconfigMsg("run_flag").trim();
