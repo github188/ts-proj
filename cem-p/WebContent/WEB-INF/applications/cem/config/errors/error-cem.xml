@@ -68,5 +68,20 @@
 		<message> 维护团队名称：{0}在系统中已存在,请重新输入。</message>
 		<hint></hint>
 	</error>
-	
+		<!-- 21-team-设备端口类型管理 -->
+	<error>
+		<id>DPT001</id>
+		<message> 设备端口类型{0}已经在设备端口定义中使用，该端口类型不能删除。</message>
+		<hint></hint>
+	</error>
+	<error>
+		<id>DPT002</id>
+		<message> 端口类型名称-英文：{0}在系统中已存在,请重新输入。</message>
+		<hint></hint>
+	</error>
+	<error>
+		<id>DPT003</id>
+		<message>端口类型名称-中文：{0}在系统中已存在,请重新输入。</message>
+		<hint></hint>
+	</error>
 </errors>
