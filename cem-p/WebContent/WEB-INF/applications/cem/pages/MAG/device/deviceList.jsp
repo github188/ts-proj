@@ -179,7 +179,6 @@ function doSubmit(form) {
                  <tr>
                   <th>设备英文名称</th>
                   <th>设备中文名称</th>
-                  <th>设类类型</th>
                   <th>物理位置</th>
                   <th>堡垒主机</th>
                   <th>网络地址</th>
@@ -200,7 +199,6 @@ function doSubmit(form) {
                   </td>
                   
                   <td align="center"><%=deviceNameCns[i]%></td>
-                  <td align="center"><%=deviceNameCns[i]%></td>                  
                   <td align="center"><%=locationNames[i]%></td>
                   <td align="center"><%=frontHostNames[i]%></td>
                   <td align="center"><%=deviceIps[i]%></td>
@@ -221,7 +219,6 @@ function doSubmit(form) {
                   <%=deviceNameEns[i]%>
                   </a>
                   </td>
-                  <td align="center"><%=deviceNameEns[i]%></td>
                   <td align="center"><%=deviceNameCns[i]%></td>
                   <td align="center"><%=locationNames[i]%></td>
                    <td align="center"><%=frontHostNames[i]%></td>
