@@ -1,4 +1,4 @@
-package tower.cem.daemon;
+package tower.cem.daemons;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -62,7 +62,7 @@ public class TdRunnable implements Runnable {
 	if (this.sThreadName == null) {
 	    this.sThreadName = Thread.currentThread().getName();
 	}
-	DaemonDBPool dbPool = null; // 数据库连接池
+	DaemonsDBPool dbPool = null; // 数据库连接池
 	Connection conn = null; // 数据库连接
 	String sErrCode = null;
 	SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -88,7 +88,7 @@ public class TdRunnable implements Runnable {
 
 	try {
 	    // 建立appdb的数据连接，并开始事务
-	    dbPool = new DaemonDBPool();
+	    dbPool = new DaemonsDBPool();
 	    dbPool.beginTransction();
 	    conn = dbPool.getConn();
 
@@ -112,7 +112,7 @@ public class TdRunnable implements Runnable {
 		enDeviceInfo = new EnDeviceInfo();
 		if (sGenResult.equals("S")) {
 		    sSql = "select * from device_info where device_id ='" + enSendList.getDeviceId() + "'";
-		    rs = DaemonDBPool.doQuery(conn, sSql);
+		    rs = DaemonsDBPool.doQuery(conn, sSql);
 
 		    if (!rs.next()) {
 			sGenResult = "F";
@@ -137,7 +137,7 @@ public class TdRunnable implements Runnable {
 			    .length() == 0)) {
 			sSql = "select * from front_host_info where host_id ='"
 				+ enDeviceInfo.getFrontHostId() + "'";
-			rs = DaemonDBPool.doQuery(conn, sSql);
+			rs = DaemonsDBPool.doQuery(conn, sSql);
 			if (!rs.next()) {
 			    sGenResult = "F";
 			    sbResult.append("TdRunnable run()：指令模板执行任务，未找到堡垒主机信息。");
@@ -165,7 +165,7 @@ public class TdRunnable implements Runnable {
 		    sSql = "select * from maintain_commands_template where temp_id ='"
 			    + enSendList.getTemplateId() + "'";
 
-		    rs = DaemonDBPool.doQuery(conn, sSql);
+		    rs = DaemonsDBPool.doQuery(conn, sSql);
 		    if (!rs.next()) {
 			sGenResult = "F";
 			sbResult.append("TdRunnable run()：指令模板执行任务，未找到指令模板信息。");
@@ -285,7 +285,7 @@ public class TdRunnable implements Runnable {
 		    sSql = sSql + " and device_info.device_id ='" + enSendList.getDeviceId() + "'";
 		}
 
-		rs = DaemonDBPool.doQuery(conn, sSql);
+		rs = DaemonsDBPool.doQuery(conn, sSql);
 		Vector vDeviceInfo = new Vector();
 		while (rs.next()) {
 		    enDeviceInfo = new EnDeviceInfo();
@@ -303,7 +303,7 @@ public class TdRunnable implements Runnable {
 
 		// 获取到全部堡垒主机列表
 		sSql = "select * from front_host_info ";
-		rs = DaemonDBPool.doQuery(conn, sSql);
+		rs = DaemonsDBPool.doQuery(conn, sSql);
 		Vector vFrontHost = new Vector();
 		while (rs.next()) {
 		    enFrontHostInfo = new EnFrontHostInfo();
@@ -451,7 +451,7 @@ public class TdRunnable implements Runnable {
 		    sSql = sSql + " and device_info.device_id ='" + enSendList.getDeviceId() + "'";
 		}
 
-		rs = DaemonDBPool.doQuery(conn, sSql);
+		rs = DaemonsDBPool.doQuery(conn, sSql);
 		Vector vDeviceInfo = new Vector();
 		while (rs.next()) {
 		    enDeviceInfo = new EnDeviceInfo();
@@ -469,7 +469,7 @@ public class TdRunnable implements Runnable {
 
 		// 获取到全部堡垒主机列表
 		sSql = "select * from front_host_info ";
-		rs = DaemonDBPool.doQuery(conn, sSql);
+		rs = DaemonsDBPool.doQuery(conn, sSql);
 		Vector vFrontHost = new Vector();
 		while (rs.next()) {
 		    enFrontHostInfo = new EnFrontHostInfo();
@@ -560,7 +560,7 @@ public class TdRunnable implements Runnable {
 			// 查询设备的端口列表
 			sSql = "select * from device_port_info where device_id ='"
 				+ enDeviceInfo.getDeviceId() + "' and status ='N'";
-			rs = DaemonDBPool.doQuery(conn, sSql);
+			rs = DaemonsDBPool.doQuery(conn, sSql);
 
 			while (rs.next()) {
 			    String portId = rs.getString("PORT_ID");
@@ -578,7 +578,7 @@ public class TdRunnable implements Runnable {
 					+ enDeviceInfo.getDeviceNameEn() + "', '" + portId + "', '" + portSn
 					+ "', " + rxp + ")";
 
-				iSaveFlag = DaemonDBPool.doUpdate(conn, sSql);
+				iSaveFlag = DaemonsDBPool.doUpdate(conn, sSql);
 
 				if (iSaveFlag < 1) {
 				    sbResult.append("TdRunnable run()：执行数据采集任务，记录光功率数据失败。");
@@ -631,7 +631,7 @@ public class TdRunnable implements Runnable {
 		    + " (select send_id, user_id, device_id, task_define_time, task_plan_time,"
 		    + " commands_type, template_id, '" + sGenResult + "', '" + sTimeBegin + "','" + sTimeEnd
 		    + "'" + " from commands_send_list" + " where send_id ='" + enSendList.getSendId() + "')";
-	    iSaveFlag = DaemonDBPool.doUpdate(conn, sqlInsertHis);
+	    iSaveFlag = DaemonsDBPool.doUpdate(conn, sqlInsertHis);
 	    if (iSaveFlag < 1) {
 		log.error("记录指令发送历史表失败。SID=" + enSendList.getSendId());
 	    }
@@ -639,7 +639,7 @@ public class TdRunnable implements Runnable {
 	    // 删除指令发送任务表
 	    String sqlDeleteList = "delete from commands_send_list where send_id ='" + enSendList.getSendId()
 		    + "'";
-	    iSaveFlag = DaemonDBPool.doUpdate(conn, sqlDeleteList);
+	    iSaveFlag = DaemonsDBPool.doUpdate(conn, sqlDeleteList);
 	    if (iSaveFlag < 1) {
 		log.error("删除指令发送队列表失败。SID=" + enSendList.getSendId());
 	    }

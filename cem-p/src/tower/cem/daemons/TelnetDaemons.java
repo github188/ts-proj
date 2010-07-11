@@ -1,4 +1,4 @@
-package tower.cem.daemon;
+package tower.cem.daemons;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -15,7 +15,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
 import java.util.Vector;
@@ -25,13 +24,13 @@ import org.apache.log4j.PropertyConfigurator;
 
 import tower.cem.en.EnCommandsSendList;
 
-public class TelnetDaemon extends Thread {
+public class TelnetDaemons extends Thread {
 
     // 停止正在运行的线程
     public static void stopThread() {
 	Logger logger;
 	PropertyConfigurator.configure(loadLoggerConfig());
-	logger = Logger.getLogger("TelnetDaemon");
+	logger = Logger.getLogger("TelnetDaemons");
 
 	Thread threads[] = new Thread[Thread.activeCount()];
 	int n = Thread.enumerate(threads);
@@ -41,17 +40,17 @@ public class TelnetDaemon extends Thread {
 	    }
 
 	    try {
-		logger.info("TelnetDaemon.stopThread()，Try to stop thread " + threads[i].getName());
+		logger.info("TelnetDaemons.stopThread()，Try to stop thread " + threads[i].getName());
 		if (threads[i] != null) {
 		    threads[i].stop();
 		}
 
 	    } catch (Exception ex) {
-		logger.error("TelnetDaemon.stopThread()，Failed to stop thread " + threads[i].getName());
+		logger.error("TelnetDaemons.stopThread()，Failed to stop thread " + threads[i].getName());
 	    }
-	    logger.info("TelnetDaemon.stopThread()，Success to stop thread " + threads[i].getName());
+	    logger.info("TelnetDaemons.stopThread()，Success to stop thread " + threads[i].getName());
 	}
-	logger.info("The TelnetDaemon has shut down");
+	logger.info("The TelnetDaemons has shut down");
     }
 
     // 列出所有正在运行的线程
@@ -97,7 +96,7 @@ public class TelnetDaemon extends Thread {
     }
 
     public static void main(String[] args) {
-	DaemonDBPool dbPool = new DaemonDBPool();
+	DaemonsDBPool dbPool = new DaemonsDBPool();
 	Connection conn = null; // 数据库连接
 	String sErrCode = null; // 错误代码
 	int iFirstFlag = 1; // 首次执行标志
@@ -107,7 +106,7 @@ public class TelnetDaemon extends Thread {
 	String sSleepTimer; // 休眠时间sleep_timer
 	int iDaemonsMax; // 运行参数最大线程数daemons_max,
 	int iSleepTimer; // 休眠时间sleep_timer
-	String sLog = null;
+
 	String dbDriver;
 	String dbUrl;
 	String dbUser;
@@ -115,7 +114,7 @@ public class TelnetDaemon extends Thread {
 
 	Logger logger;
 	PropertyConfigurator.configure(loadLoggerConfig());
-	logger = Logger.getLogger("TelnetDaemon");
+	logger = Logger.getLogger("TelnetDaemons");
 
 	EnCommandsSendList enCommandsSendList = null;
 	List listSend = null; // dbCommandSendList的查询结果集
@@ -130,7 +129,7 @@ public class TelnetDaemon extends Thread {
 	    // 检查参数文件是否存在，如果不存在则建立参数文件
 	    sRunFlag = getTdconfigMsg("run_flag");
 	    if (sRunFlag == null) {
-		setTdconfigMsg("F", 10, 5000, "T", "", "", "", "");
+		setTdconfigMsg("F", 10, 5000, "", "", "", "");
 		logger.error("PLS config parameter in file<tdconfig.propertie> before run");
 		return;
 	    }
@@ -139,7 +138,6 @@ public class TelnetDaemon extends Thread {
 	    sRunFlag = getTdconfigMsg("run_flag").trim();
 	    sDaemonsMax = getTdconfigMsg("daemons_max").trim();
 	    sSleepTimer = getTdconfigMsg("sleep_timer").trim();
-	    sLog = getTdconfigMsg("log").trim();
 
 	    dbDriver = getTdconfigMsg("db_driver").trim();
 	    dbUrl = getTdconfigMsg("db_url").trim();
@@ -147,8 +145,8 @@ public class TelnetDaemon extends Thread {
 	    dbPassword = getTdconfigMsg("db_password").trim();
 
 	    // 当参数未设置，提示补充参数配置
-	    if (sRunFlag == null || sDaemonsMax == null || sSleepTimer == null || sLog == null
-		    || dbDriver == null || dbUrl == null || dbUser == null || dbPassword == null) {
+	    if (sRunFlag == null || sDaemonsMax == null || sSleepTimer == null || dbDriver == null
+		    || dbUrl == null || dbUser == null || dbPassword == null) {
 		logger.error("Failed to read parameters from file<tdconfig.propertie>, PLS check the file");
 		return;
 	    }
@@ -156,7 +154,7 @@ public class TelnetDaemon extends Thread {
 	    // 当运行标志为T，提示服务正在运行中
 	    if (sRunFlag.equals("T")) {
 		logger
-			.info("The TelnetDaemon already in RUNing, or Check the parameter RUN_FLAG in file<tdconfig.propertie>");
+			.info("The TelnetDaemons already in RUNing, or Check the parameter RUN_FLAG in file<tdconfig.propertie>");
 		return;
 	    }
 
@@ -170,11 +168,11 @@ public class TelnetDaemon extends Thread {
 	    }
 
 	    // 执行标志为"T"，服务进行中 ...
-	    setTdconfigMsg("T", iDaemonsMax, iSleepTimer, sLog, dbDriver, dbUrl, dbUser, dbPassword);
+	    setTdconfigMsg("T", iDaemonsMax, iSleepTimer, dbDriver, dbUrl, dbUser, dbPassword);
 
 	    int iSendCount = 0;
 
-	    logger.info("The TelnetDaemin has started");
+	    logger.info("The TelnetDaemons has started");
 
 	    for (;;) {
 
@@ -183,17 +181,10 @@ public class TelnetDaemon extends Thread {
 
 		// 检查运行标志run_flag，当为"F"时退出守护进程
 		sRunFlag = getTdconfigMsg("run_flag").trim();
-		sLog = getTdconfigMsg("log").trim();
 
 		if (sRunFlag.equals("F")) {
 		    stopThread();
 		    break;
-		}
-
-		if ("F".equals(sLog)) {
-		    Debug.setOff();
-		} else {
-		    Debug.setOn();
 		}
 
 		try {
@@ -206,7 +197,7 @@ public class TelnetDaemon extends Thread {
 		    // 当为首次执行时,将表中为maintain_commands_send.status='B'修改为'N'
 		    if (iFirstFlag == 1) {
 			String sUpdateSql = "update commands_send_list	 set status ='N' where status ='B'";
-			DaemonDBPool.doUpdate(conn, sUpdateSql);
+			DaemonsDBPool.doUpdate(conn, sUpdateSql);
 			iFirstFlag = 0;
 		    }
 
@@ -238,7 +229,7 @@ public class TelnetDaemon extends Thread {
 			enCommandsSendList.setStatus("B");
 			String sUpdateSql = "update commands_send_list	 set status ='B' where send_id ='"
 				+ enCommandsSendList.getSendId() + "'";
-			DaemonDBPool.doUpdate(conn, sUpdateSql);
+			DaemonsDBPool.doUpdate(conn, sUpdateSql);
 
 		    }
 		} catch (ConnectException excon) {
@@ -264,7 +255,7 @@ public class TelnetDaemon extends Thread {
 	} catch (Exception ex) {
 	    sErrCode = ex.getMessage();
 	    logger.error("捕获到错误，错误信息：" + ex.getMessage());
-	    StopTelnetDaemon.main(null);
+	    StopTelnetDaemons.main(null);
 	} finally {
 	    try {
 		if (pstmt != null) {
@@ -307,8 +298,8 @@ public class TelnetDaemon extends Thread {
     }
 
     // 设置配置文件中的参数
-    public static void setTdconfigMsg(String sRunFlag, int iDaemonsMax, int iSleepTimer, String sLog,
-	    String dbDriver, String dbUrl, String dbUser, String dbPassword) {
+    public static void setTdconfigMsg(String sRunFlag, int iDaemonsMax, int iSleepTimer, String dbDriver,
+	    String dbUrl, String dbUser, String dbPassword) {
 	try {
 	    BufferedWriter out = new BufferedWriter(new FileWriter(
 		    "applications/sys/config/tdconfig.properties"));
@@ -316,7 +307,6 @@ public class TelnetDaemon extends Thread {
 	    out.write("run_flag=" + sRunFlag + "\n");
 	    out.write("daemons_max=" + iDaemonsMax + "\n");
 	    out.write("sleep_timer=" + iSleepTimer + "\n");
-	    out.write("log=" + sLog + "\n");
 	    out.write("db_driver=" + dbDriver + "\n");
 	    out.write("db_url=" + dbUrl + "\n");
 	    out.write("db_user=" + dbUser + "\n");
@@ -358,13 +348,5 @@ public class TelnetDaemon extends Thread {
 	    ex.printStackTrace();
 	}
 	return list;
-    }
-
-    public static void pln(String pos, String msg) {
-	java.util.Date today = new java.util.Date();
-	SimpleDateFormat sdf = new SimpleDateFormat("MMdd HHmmss");
-	String date = sdf.format(today).trim();
-
-	System.out.println("[" + date + " | " + pos + "] - [" + msg + "]");
     }
 }

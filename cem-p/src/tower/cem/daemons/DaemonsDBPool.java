@@ -1,4 +1,4 @@
-package tower.cem.daemon;
+package tower.cem.daemons;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DaemonDBPool {
+public class DaemonsDBPool {
     private String sErrInfo;
 
     private Connection conn = null;
@@ -15,10 +15,10 @@ public class DaemonDBPool {
     public static Connection getConnection() throws Exception {
 	try {
 
-	    String DbDriver = TelnetDaemon.getTdconfigMsg("db_driver").trim();
-	    String DbUrl = TelnetDaemon.getTdconfigMsg("db_url").trim();
-	    String DbUser = TelnetDaemon.getTdconfigMsg("db_user").trim();
-	    String DbPassword = TelnetDaemon.getTdconfigMsg("db_password").trim();
+	    String DbDriver = TelnetDaemons.getTdconfigMsg("db_driver").trim();
+	    String DbUrl = TelnetDaemons.getTdconfigMsg("db_url").trim();
+	    String DbUser = TelnetDaemons.getTdconfigMsg("db_user").trim();
+	    String DbPassword = TelnetDaemons.getTdconfigMsg("db_password").trim();
 
 	    Class.forName(DbDriver).newInstance();
 	    Connection conn = DriverManager.getConnection(DbUrl, DbUser, DbPassword);
