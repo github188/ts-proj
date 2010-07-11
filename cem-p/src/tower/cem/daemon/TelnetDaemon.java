@@ -2,18 +2,26 @@ package tower.cem.daemon;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.ConnectException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.Properties;
 import java.util.Vector;
+
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 import tower.cem.en.EnCommandsSendList;
 
@@ -21,6 +29,10 @@ public class TelnetDaemon extends Thread {
 
     // 停止正在运行的线程
     public static void stopThread() {
+	Logger logger;
+	PropertyConfigurator.configure(loadLoggerConfig());
+	logger = Logger.getLogger("TelnetDaemon");
+
 	Thread threads[] = new Thread[Thread.activeCount()];
 	int n = Thread.enumerate(threads);
 	for (int i = 0; i < n; i++) {
@@ -29,36 +41,59 @@ public class TelnetDaemon extends Thread {
 	    }
 
 	    try {
-		pln("TelnetDaemon.stopThread()", "Try to stop thread " + threads[i].getName());
+		logger.info("TelnetDaemon.stopThread()，Try to stop thread " + threads[i].getName());
 		if (threads[i] != null) {
 		    threads[i].stop();
 		}
 
 	    } catch (Exception ex) {
-		pln("TelnetDaemon.stopThread()", "Failed to stop thread " + threads[i].getName());
+		logger.error("TelnetDaemon.stopThread()，Failed to stop thread " + threads[i].getName());
 	    }
-	    pln("TelnetDaemon.stopThread()", "Success to stop thread " + threads[i].getName());
+	    logger.info("TelnetDaemon.stopThread()，Success to stop thread " + threads[i].getName());
 	}
-	pln("TelnetDaemon.stopThread()", "The main() method has stopped");
+	logger.info("The TelnetDaemon has shut down");
     }
 
     // 列出所有正在运行的线程
-    public static void listThread() {
+    public static void listThread(Logger log) {
 	Thread threads[] = new Thread[Thread.activeCount()];
 	int n = Thread.enumerate(threads);
 	String sThreadName = null;
 
-	System.out.println("\n+-----------------当前正在执行的Telnet任务-----------------+");
+	log.debug("+-----------------当前正在执行的Telnet任务-----------------+");
 
 	for (int i = 0; i < n; i++) {
 	    sThreadName = threads[i].getName();
 	    if ("main".equals(sThreadName)) {
 		continue;
 	    }
-	    System.out.println("+-[" + i + "] " + sThreadName);
+	    log.debug("+-[" + i + "] " + sThreadName);
 	}
 
-	System.out.println("+----------------------------------------------------------+");
+	log.debug("+------------------------------------------------------------+");
+    }
+
+    private static Properties loadLoggerConfig() {
+
+	Properties res;
+	InputStream inputStream;
+	File file;
+	file = new File("applications/sys/config/log4j-td.lcf");
+	if (!file.exists()) {
+	    file = new File("applications/sys/config/log4j-td.lcf");
+	}
+	if (file.exists()) {
+	    try {
+		res = new Properties();
+		inputStream = new FileInputStream(file);
+		res.load(inputStream);
+	    } catch (IOException e) {
+		res = null;
+	    }
+	} else {
+	    res = null;
+	}
+	return res;
     }
 
     public static void main(String[] args) {
@@ -78,6 +113,10 @@ public class TelnetDaemon extends Thread {
 	String dbUser;
 	String dbPassword;
 
+	Logger logger;
+	PropertyConfigurator.configure(loadLoggerConfig());
+	logger = Logger.getLogger("TelnetDaemon");
+
 	EnCommandsSendList enCommandsSendList = null;
 	List listSend = null; // dbCommandSendList的查询结果集
 
@@ -92,7 +131,7 @@ public class TelnetDaemon extends Thread {
 	    sRunFlag = getTdconfigMsg("run_flag");
 	    if (sRunFlag == null) {
 		setTdconfigMsg("F", 10, 5000, "T", "", "", "", "");
-		pln("TelnetDaemon-main()", "PLS config parameter in file<tdconfig.propertie> before run");
+		logger.error("PLS config parameter in file<tdconfig.propertie> before run");
 		return;
 	    }
 
@@ -110,15 +149,14 @@ public class TelnetDaemon extends Thread {
 	    // 当参数未设置，提示补充参数配置
 	    if (sRunFlag == null || sDaemonsMax == null || sSleepTimer == null || sLog == null
 		    || dbDriver == null || dbUrl == null || dbUser == null || dbPassword == null) {
-		pln("TelnetDaemon-main()",
-			"Failed to read parameters from file<tdconfig.propertie>, PLS check the file");
+		logger.error("Failed to read parameters from file<tdconfig.propertie>, PLS check the file");
 		return;
 	    }
 
 	    // 当运行标志为T，提示服务正在运行中
 	    if (sRunFlag.equals("T")) {
-		pln("TelnetDaemon-main()",
-			"The TelnetDaemon already in RUNing, or Check the parameter RUN_FLAG in file<tdconfig.propertie>");
+		logger
+			.info("The TelnetDaemon already in RUNing, or Check the parameter RUN_FLAG in file<tdconfig.propertie>");
 		return;
 	    }
 
@@ -127,8 +165,7 @@ public class TelnetDaemon extends Thread {
 		iDaemonsMax = Integer.parseInt(sDaemonsMax);
 		iSleepTimer = Integer.parseInt(sSleepTimer);
 	    } catch (Exception e) {
-		pln("TelnetDaemon-main()",
-			"Failed to read parameters from file<tdconfig.propertie>, PLS check the file");
+		logger.error("Failed to read parameters from file<tdconfig.propertie>, PLS check the file");
 		return;
 	    }
 
@@ -137,10 +174,12 @@ public class TelnetDaemon extends Thread {
 
 	    int iSendCount = 0;
 
+	    logger.info("The TelnetDaemin has started");
+
 	    for (;;) {
 
 		// 在日志中列出当前正在运行的线程
-		listThread();
+		listThread(logger);
 
 		// 检查运行标志run_flag，当为"F"时退出守护进程
 		sRunFlag = getTdconfigMsg("run_flag").trim();
@@ -185,14 +224,12 @@ public class TelnetDaemon extends Thread {
 		    // 根据最大线程数及任务个数,实例化线程数，并设定线程优先级并启动
 		    for (int iFor = 0; iFor < listSend.size(); iFor++) {
 			enCommandsSendList = (EnCommandsSendList) listSend.get(iFor);
-			TdRunnable rdt = new TdRunnable(enCommandsSendList);
-			Thread rd = new Thread(rdt, "TD Thread " + (iSendCount++) + ":(指令发送编号="
-				+ enCommandsSendList.getSendId() + ";人员编号=" + enCommandsSendList.getUserId()
-				+ ";设备编号=" + enCommandsSendList.getDeviceId() + ";任务定义时间="
-				+ enCommandsSendList.getTaskDefineTime() + ";计划开始时间="
-				+ enCommandsSendList.getTaskPlanTime() + ";指令类型="
-				+ enCommandsSendList.getCommandsType() + ";模板编号="
-				+ enCommandsSendList.getTemplateId() + ")");
+			TdRunnable rdt = new TdRunnable(enCommandsSendList, logger);
+			Thread rd = new Thread(rdt, "[" + enCommandsSendList.getCommandsType() + "][SID="
+				+ enCommandsSendList.getSendId() + "][DID="
+				+ enCommandsSendList.getDeviceId() + "][PT="
+				+ enCommandsSendList.getTaskPlanTime() + "][TID="
+				+ enCommandsSendList.getTemplateId() + "]");
 
 			rd.setPriority(5);
 			rd.start();
@@ -205,30 +242,29 @@ public class TelnetDaemon extends Thread {
 
 		    }
 		} catch (ConnectException excon) {
-		    pln("TelnetDaemon.main():捕获到通讯错误", "错误信息：" + excon.getMessage());
+		    logger.error("捕获到通讯错误，错误信息：" + excon.getMessage());
 
 		} catch (SQLException exsql) {
 		    sErrCode = exsql.getMessage();
-		    pln("TelnetDaemon.main():捕获到SQL错误", "错误信息：" + exsql.getMessage());
+		    logger.error(":捕获到SQL错误，错误信息：" + exsql.getMessage());
 
 		} catch (Exception ex) {
 		    sErrCode = ex.getMessage();
-		    pln("TelnetDaemon.main():捕获到错误", "错误信息：" + ex.getMessage());
+		    logger.error("捕获到错误，错误信息：" + ex.getMessage());
 		}
 
 		// 程序休眠sleep_timer毫秒
 		try {
 		    sleep(iSleepTimer);
 		} catch (InterruptedException e) {
-		    e.printStackTrace();
+		    logger.error(e.getMessage());
 		}
 
 	    }
 	} catch (Exception ex) {
 	    sErrCode = ex.getMessage();
-	    pln("TelnetDaemon.main():捕获到错误", "错误信息：" + ex.getMessage());
+	    logger.error("捕获到错误，错误信息：" + ex.getMessage());
 	    StopTelnetDaemon.main(null);
-	    ex.printStackTrace();
 	} finally {
 	    try {
 		if (pstmt != null) {
@@ -239,7 +275,7 @@ public class TelnetDaemon extends Thread {
 		}
 	    } catch (Exception ex) {
 		sErrCode = ex.getMessage();
-		pln("TelnetDaemon.main():关闭数据库连接时出错", "代码：" + sErrCode);
+		logger.error("关闭数据库连接时出错，代码：" + sErrCode);
 	    }
 	}
     }

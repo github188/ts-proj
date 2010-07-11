@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Vector;
 
+import org.apache.log4j.Logger;
+
 import tower.cem.en.EnCommandsSendList;
 import tower.cem.en.EnDeviceInfo;
 import tower.cem.en.EnFrontHostInfo;
@@ -16,8 +18,12 @@ public class TdRunnable implements Runnable {
 
     private String sThreadName = null;
 
-    public TdRunnable(EnCommandsSendList enCommandsSendList) {
+    private Logger log;
+
+    public TdRunnable(EnCommandsSendList enCommandsSendList, Logger logger) {
 	this.enSendList = enCommandsSendList;
+	this.log = logger;
+	this.log = Logger.getLogger("TdRunnable");
     }
 
     public double collectRxpValue(String collectString) {
@@ -74,18 +80,17 @@ public class TdRunnable implements Runnable {
 	EnFrontHostInfo enFrontHostInfo = new EnFrontHostInfo();
 	EnMaintainCommandsTemplate enTemplate = new EnMaintainCommandsTemplate();
 
+	// 执行命令的结果，初始为S，若出错置为F
+	String sGenResult = "S";
 	int iSaveFlag = 0;
 
-	TelnetDaemon.pln("td.run()-begin", sThreadName);
+	log.info("[BGN]" + sThreadName);
 
 	try {
 	    // 建立appdb的数据连接，并开始事务
 	    dbPool = new DaemonDBPool();
 	    dbPool.beginTransction();
 	    conn = dbPool.getConn();
-
-	    // 执行命令的结果，初始为S，若出错置为F
-	    String sGenResult = "S";
 
 	    // 记录执行命令的开始时间
 	    sTimeBegin = formatter.format(new java.util.Date());
@@ -100,7 +105,7 @@ public class TdRunnable implements Runnable {
 		if (enSendList.getDeviceId() == null || enSendList.getDeviceId().trim().length() == 0) {
 		    sGenResult = "F";
 		    sbResult.append("TdRunnable run()：指令模板执行任务，未指定设备号。");
-		    Debug.pln("TdRunnable run()", "指令模板执行任务，未指定设备号。");
+		    log.error("指令模板执行任务，未指定设备号。SID=" + enSendList.getSendId());
 		}
 
 		// 根据设备编号获取到设备信息
@@ -112,7 +117,7 @@ public class TdRunnable implements Runnable {
 		    if (!rs.next()) {
 			sGenResult = "F";
 			sbResult.append("TdRunnable run()：指令模板执行任务，未找到设备信息。");
-			Debug.pln("TdRunnable run()", "指令模板执行任务，未找到设备信息。");
+			log.error("指令模板执行任务，未找到设备信息。SID=" + enSendList.getSendId());
 		    } else {
 			enDeviceInfo.setDeviceId(rs.getString("DEVICE_ID"));
 			enDeviceInfo.setDeviceNameEn(rs.getString("DEVICE_NAME_EN"));
@@ -136,7 +141,7 @@ public class TdRunnable implements Runnable {
 			if (!rs.next()) {
 			    sGenResult = "F";
 			    sbResult.append("TdRunnable run()：指令模板执行任务，未找到堡垒主机信息。");
-			    Debug.pln("TdRunnable run()", "指令模板执行任务，未找到堡垒主机信息。");
+			    log.error("指令模板执行任务，未找到堡垒主机信息。SID=" + enSendList.getSendId());
 			} else {
 			    enFrontHostInfo.setHostId(rs.getString("HOST_ID"));
 			    enFrontHostInfo.setHostIp(rs.getString("HOST_IP"));
@@ -152,7 +157,7 @@ public class TdRunnable implements Runnable {
 		if (enSendList.getTemplateId() == null || enSendList.getTemplateId().trim().length() == 0) {
 		    sGenResult = "F";
 		    sbResult.append("TdRunnable run()：指令模板执行任务，未指定指令模板编号。");
-		    Debug.pln("TdRunnable run()", "指令模板执行任务，未指定指令模板编号。");
+		    log.error("指令模板执行任务，未指定指令模板编号。SID=" + enSendList.getSendId());
 		}
 
 		enTemplate = new EnMaintainCommandsTemplate();
@@ -164,7 +169,7 @@ public class TdRunnable implements Runnable {
 		    if (!rs.next()) {
 			sGenResult = "F";
 			sbResult.append("TdRunnable run()：指令模板执行任务，未找到指令模板信息。");
-			Debug.pln("TdRunnable run()", "指令模板执行任务，未找到指令模板信息。");
+			log.error("指令模板执行任务，未找到指令模板信息。SID=" + enSendList.getSendId());
 		    } else {
 			enTemplate.setTempId(rs.getString("TEMP_ID"));
 			enTemplate.setTempCont(rs.getString("TEMP_CONT"));
@@ -186,7 +191,7 @@ public class TdRunnable implements Runnable {
 			if (!nt.getBflag()) {
 			    sGenResult = "F";
 			    sbResult.append("TdRunnable run()：指令模板执行任务，登录设备失败。");
-			    Debug.pln("TdRunnable run()", "指令模板执行任务，登录设备失败。");
+			    log.error("指令模板执行任务，登录设备失败。SID=" + enSendList.getSendId());
 			}
 		    } else {
 
@@ -199,7 +204,7 @@ public class TdRunnable implements Runnable {
 			if (!nt.getBflag()) {
 			    sGenResult = "F";
 			    sbResult.append("TdRunnable run()：指令模板执行任务，登录堡垒主机失败。");
-			    Debug.pln("TdRunnable run()", "指令模板执行任务，登录堡垒主机失败。");
+			    log.error("指令模板执行任务，登录堡垒主机失败。SID=" + enSendList.getSendId());
 			} else {
 			    sResult = nt.FunRelogin(enDeviceInfo.getDeviceIp(), enDeviceInfo.getDevicePort(),
 				    enDeviceInfo.getDeviceUser(), enDeviceInfo.getDevicePassword(),
@@ -208,7 +213,7 @@ public class TdRunnable implements Runnable {
 			    if (!nt.getBflag()) {
 				sGenResult = "F";
 				sbResult.append("TdRunnable run()：指令模板执行任务，通过堡垒主机登录设备失败。");
-				Debug.pln("TdRunnable run()", "指令模板执行任务，通过堡垒主机登录设备失败。");
+				log.error("指令模板执行任务，通过堡垒主机登录设备失败。SID=" + enSendList.getSendId());
 
 				// 关闭之前的连接
 				nt.disconnect();
@@ -223,7 +228,13 @@ public class TdRunnable implements Runnable {
 			    String sCommLine = commLine[i];
 			    if (!(sCommLine == null || sCommLine.trim().length() == 0)) {
 				int iCommLen = sCommLine.length();
-				sCommLine = sCommLine.substring(0, iCommLen - 1);
+
+				if (i == commLine.length - 1) {
+				    sCommLine = sCommLine.substring(0, iCommLen);
+				} else {
+				    sCommLine = sCommLine.substring(0, iCommLen - 1);
+				}
+
 				sResult = nt.sendCommand(sCommLine);
 				sbResult.append(sResult);
 			    }
@@ -238,6 +249,9 @@ public class TdRunnable implements Runnable {
 		sTimeEnd = formatter.format(new java.util.Date());
 
 		// 将执行结果保存到命令模板执行日志中
+		log.info("[TEL][" + enSendList.getCommandsType() + "][SID=" + enSendList.getSendId()
+			+ "][DID=" + enSendList.getDeviceId() + "][IP=" + enDeviceInfo.getDeviceIp()
+			+ "][NAME=" + enDeviceInfo.getDeviceNameEn() + "][" + sGenResult + "]");
 		sSql = "insert into device_maintain_log values ('" + enSendList.getSendId() + "','"
 			+ enSendList.getDeviceId() + "','" + enDeviceInfo.getDeviceNameEn() + "','"
 			+ enDeviceInfo.getDeviceIp() + "','" + enSendList.getUserId() + "','" + sTimeBegin
@@ -251,7 +265,7 @@ public class TdRunnable implements Runnable {
 		if (iSaveFlag < 1) {
 		    sGenResult = "F";
 		    sbResult.append("TdRunnable run()：指令模板执行任务，记录日志失败。");
-		    Debug.pln("TdRunnable run()", "指令模板执行任务，记录日志失败。");
+		    log.error("指令模板执行任务，记录日志失败。SID=" + enSendList.getSendId());
 		}
 
 	    }
@@ -308,6 +322,8 @@ public class TdRunnable implements Runnable {
 		    sbResult = new StringBuffer();
 		    enDeviceInfo = (EnDeviceInfo) vDeviceInfo.get(i);
 
+		    sGenResult = "S";
+
 		    // 巡检执行开始计时
 		    String sInspectBegin = formatter.format(new java.util.Date());
 
@@ -323,7 +339,7 @@ public class TdRunnable implements Runnable {
 			if (!nt.getBflag()) {
 			    sGenResult = "F";
 			    sbResult.append("TdRunnable run()：执行巡检任务，登录设备失败。");
-			    Debug.pln("TdRunnable run()", "执行巡检任务，登录设备失败。");
+			    log.error("执行巡检任务，登录设备失败。SID=" + enSendList.getSendId());
 			}
 		    } else {
 
@@ -343,7 +359,7 @@ public class TdRunnable implements Runnable {
 			if (enFrontHostInfo == null) {
 			    sGenResult = "F";
 			    sbResult.append("TdRunnable run()：执行巡检任务，未找到堡垒主机信息。");
-			    Debug.pln("TdRunnable run()", "执行巡检任务，未找到堡垒主机信息。");
+			    log.error("执行巡检任务，未找到堡垒主机信息。SID=" + enSendList.getSendId());
 			} else {
 			    sResult = nt.FunLogin(enFrontHostInfo.getHostIp(), enFrontHostInfo.getHostPort(),
 				    enFrontHostInfo.getHostUser(), enFrontHostInfo.getHostPassword(),
@@ -353,7 +369,7 @@ public class TdRunnable implements Runnable {
 			    if (!nt.getBflag()) {
 				sGenResult = "F";
 				sbResult.append("TdRunnable run()：执行巡检任务，登录堡垒主机失败。");
-				Debug.pln("TdRunnable run()", "执行巡检任务，登录堡垒主机失败。");
+				log.error("执行巡检任务，登录堡垒主机失败。SID=" + enSendList.getSendId());
 			    } else {
 				sResult = nt.FunRelogin(enDeviceInfo.getDeviceIp(), enDeviceInfo
 					.getDevicePort(), enDeviceInfo.getDeviceUser(), enDeviceInfo
@@ -362,7 +378,7 @@ public class TdRunnable implements Runnable {
 				if (!nt.getBflag()) {
 				    sGenResult = "F";
 				    sbResult.append("TdRunnable run()：执行巡检任务，通过堡垒主机登录设备失败。");
-				    Debug.pln("TdRunnable run()", "执行巡检任务，通过堡垒主机登录设备失败。");
+				    log.error("执行巡检任务，通过堡垒主机登录设备失败。SID=" + enSendList.getSendId());
 
 				    // // 关闭之前的连接
 				    nt.disconnect();
@@ -378,7 +394,12 @@ public class TdRunnable implements Runnable {
 			    String sCommLine = commLine[k];
 			    if (!(sCommLine == null || sCommLine.trim().length() == 0)) {
 				int iCommLen = sCommLine.length();
-				sCommLine = sCommLine.substring(0, iCommLen - 1);
+				if (k == commLine.length - 1) {
+				    sCommLine = sCommLine.substring(0, iCommLen);
+				} else {
+				    sCommLine = sCommLine.substring(0, iCommLen - 1);
+				}
+
 				sResult = nt.sendCommand(sCommLine);
 				sbResult.append(sResult);
 			    }
@@ -392,6 +413,10 @@ public class TdRunnable implements Runnable {
 		    String sInspectEnd = formatter.format(new java.util.Date());
 
 		    // 将执行巡检的情况保存到巡检日志中
+		    log.info("[TEL][" + enSendList.getCommandsType() + "][SID=" + enSendList.getSendId()
+			    + "][DID=" + enSendList.getDeviceId() + "][IP=" + enDeviceInfo.getDeviceIp()
+			    + "][NAME=" + enDeviceInfo.getDeviceNameEn() + "][" + sGenResult + "]");
+
 		    sSql = "insert into device_inspect_log values ('" + enSendList.getSendId() + "','"
 			    + enDeviceInfo.getDeviceId() + "','" + enDeviceInfo.getDeviceNameEn() + "','"
 			    + enDeviceInfo.getDeviceIp() + "','" + enSendList.getUserId() + "','"
@@ -405,7 +430,7 @@ public class TdRunnable implements Runnable {
 		    if (iSaveFlag < 1) {
 			sGenResult = "F";
 			sbResult.append("TdRunnable run()：执行巡检任务，记录日志失败。");
-			Debug.pln("TdRunnable run()", "执行巡检任务，记录日志失败。");
+			log.error("执行巡检任务，记录日志失败。SID=" + enSendList.getSendId());
 		    }
 		}
 
@@ -463,6 +488,8 @@ public class TdRunnable implements Runnable {
 		    sbResult = new StringBuffer();
 		    enDeviceInfo = (EnDeviceInfo) vDeviceInfo.get(i);
 
+		    sGenResult = "S";
+
 		    // 端口数据采集开始计时
 		    String sCollectBegin = formatter.format(new java.util.Date());
 
@@ -478,7 +505,7 @@ public class TdRunnable implements Runnable {
 			if (!nt.getBflag()) {
 			    sGenResult = "F";
 			    sbResult.append("TdRunnable run()：执行数据采集任务，登录设备失败。");
-			    Debug.pln("TdRunnable run()", "执行数据采集任务，登录设备失败。");
+			    log.error("执行数据采集任务，登录设备失败。SID=" + enSendList.getSendId());
 			}
 		    } else {
 
@@ -498,7 +525,7 @@ public class TdRunnable implements Runnable {
 			if (enFrontHostInfo == null) {
 			    sGenResult = "F";
 			    sbResult.append("TdRunnable run()：执行数据采集任务，未找到堡垒主机信息。");
-			    Debug.pln("TdRunnable run()", "执行数据采集任务，未找到堡垒主机信息。");
+			    log.error("执行数据采集任务，未找到堡垒主机信息。SID=" + enSendList.getSendId());
 			} else {
 			    sResult = nt.FunLogin(enFrontHostInfo.getHostIp(), enFrontHostInfo.getHostPort(),
 				    enFrontHostInfo.getHostUser(), enFrontHostInfo.getHostPassword(),
@@ -508,7 +535,7 @@ public class TdRunnable implements Runnable {
 			    if (!nt.getBflag()) {
 				sGenResult = "F";
 				sbResult.append("TdRunnable run()：执行数据采集任务，登录堡垒主机失败。");
-				Debug.pln("TdRunnable run()", "执行数据采集任务，登录堡垒主机失败。");
+				log.error("执行数据采集任务，登录堡垒主机失败。SID=" + enSendList.getSendId());
 			    } else {
 				sResult = nt.FunRelogin(enDeviceInfo.getDeviceIp(), enDeviceInfo
 					.getDevicePort(), enDeviceInfo.getDeviceUser(), enDeviceInfo
@@ -517,7 +544,7 @@ public class TdRunnable implements Runnable {
 				if (!nt.getBflag()) {
 				    sGenResult = "F";
 				    sbResult.append("TdRunnable run()：执行数据采集任务，通过堡垒主机登录设备失败。");
-				    Debug.pln("TdRunnable run()", "执行数据采集任务，通过堡垒主机登录设备失败。");
+				    log.error("执行数据采集任务，通过堡垒主机登录设备失败。SID=" + enSendList.getSendId());
 
 				    // // 关闭之前的连接
 				    nt.disconnect();
@@ -550,13 +577,13 @@ public class TdRunnable implements Runnable {
 					+ "', '" + enDeviceInfo.getDeviceId() + "', '"
 					+ enDeviceInfo.getDeviceNameEn() + "', '" + portId + "', '" + portSn
 					+ "', " + rxp + ")";
-				
+
 				iSaveFlag = DaemonDBPool.doUpdate(conn, sSql);
-				
+
 				if (iSaveFlag < 1) {
 				    sbResult.append("TdRunnable run()：执行数据采集任务，记录光功率数据失败。");
-				    Debug.pln("TdRunnable run()", "执行数据采集任务，记录光功率数据失败。");
-				}				
+				    log.error("执行数据采集任务，记录光功率数据失败。SID=" + enSendList.getSendId());
+				}
 			    }
 			}
 		    }
@@ -568,6 +595,10 @@ public class TdRunnable implements Runnable {
 		    String sCollectEnd = formatter.format(new java.util.Date());
 
 		    // 将执行端口数据采集的情况保存到数据采集日志中
+		    log.info("[TEL][" + enSendList.getCommandsType() + "][SID=" + enSendList.getSendId()
+			    + "][DID=" + enSendList.getDeviceId() + "][IP=" + enDeviceInfo.getDeviceIp()
+			    + "][NAME=" + enDeviceInfo.getDeviceNameEn() + "][" + sGenResult + "]");
+
 		    sSql = "insert into device_collect_log values ('" + enSendList.getSendId() + "','"
 			    + enDeviceInfo.getDeviceId() + "','" + enDeviceInfo.getDeviceNameEn() + "','"
 			    + enDeviceInfo.getDeviceIp() + "','" + enSendList.getUserId() + "','"
@@ -581,15 +612,15 @@ public class TdRunnable implements Runnable {
 		    if (iSaveFlag < 1) {
 			sGenResult = "F";
 			sbResult.append("TdRunnable run()：执行数据采集任务，记录日志失败。");
-			Debug.pln("TdRunnable run()", "执行数据采集任务，记录日志失败。");
+			log.error("执行数据采集任务，记录日志失败。SID=" + enSendList.getSendId());
 		    }
 		}
 	    }
-	    
+
 	    // command_type 为其他值，未定义任务类型
 	    else {
 		sGenResult = "F";
-		System.out.println("TdRunnable run()：未定义的任务类型-" + enSendList.getCommandsType());
+		log.error("未定义的任务类型：" + enSendList.getCommandsType() + "。SID=" + enSendList.getSendId());
 	    }
 
 	    // 记录执行命令的完成时间
@@ -602,7 +633,7 @@ public class TdRunnable implements Runnable {
 		    + "'" + " from commands_send_list" + " where send_id ='" + enSendList.getSendId() + "')";
 	    iSaveFlag = DaemonDBPool.doUpdate(conn, sqlInsertHis);
 	    if (iSaveFlag < 1) {
-		Debug.pln("TdRunnable run()", "记录指令发送历史表失败。");
+		log.error("记录指令发送历史表失败。SID=" + enSendList.getSendId());
 	    }
 
 	    // 删除指令发送任务表
@@ -610,7 +641,7 @@ public class TdRunnable implements Runnable {
 		    + "'";
 	    iSaveFlag = DaemonDBPool.doUpdate(conn, sqlDeleteList);
 	    if (iSaveFlag < 1) {
-		Debug.pln("TdRunnable run()", "删除指令发送队列表失败。");
+		log.error("删除指令发送队列表失败。SID=" + enSendList.getSendId());
 	    }
 
 	    // 提交并关闭appdb的数据连接
@@ -620,8 +651,7 @@ public class TdRunnable implements Runnable {
 
 	catch (Exception ex) {
 	    sErrCode = ex.getMessage();
-	    TelnetDaemon.pln("TdRunnable run():捕获到错误", "错误信息：" + ex.getMessage());
-	    ex.printStackTrace();
+	    log.error("捕获到错误，错误信息：" + ex.getMessage() + "。SID=" + enSendList.getSendId());
 	} finally {
 	    try {
 		if (conn != null) {
@@ -629,10 +659,10 @@ public class TdRunnable implements Runnable {
 		}
 	    } catch (Exception ex) {
 		sErrCode = ex.getMessage();
-		TelnetDaemon.pln("TdRunnable run():关闭数据库连接时出错", "错误信息：" + ex.getMessage());
+		log.error("关闭数据库连接时出错，错误信息：" + ex.getMessage() + "。SID=" + enSendList.getSendId());
 		ex.printStackTrace();
 	    }
 	}
-	TelnetDaemon.pln("td.run()-end", sThreadName);
+	log.info("[END]" + sThreadName);
     }
 }
