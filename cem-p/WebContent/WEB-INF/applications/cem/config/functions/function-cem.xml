@@ -16,14 +16,20 @@
     <function id="DeviceTypeDelete" description="设备类型删除" type="bo"
         className="tower.cem.bo.MAG.deviceType.BoDeviceTypeDelete"
         forward="DeviceTypeList" />
-               
+        
+    <function id="SelectDeviceType" description="设备类型选择" type="bo"
+        className="tower.cem.bo.MAG.deviceType.BoDeviceTypeList"
+        forward="SelectDeviceTypeJsp" />
+        
+    <function id="SelectDeviceTypeJsp" description="设备类型选择页面" type="jsp"
+        jspPath="/cem/pages/common/selectDeviceType.jsp" />   
+        
     <function id="DeviceTypeAdd" description="设备类型添加" type="jsp"
         jspPath="/cem/pages/MAG/deviceType/deviceTypeEdit.jsp" />
         
     <function id="DeviceTypeListJsp" description="设备类型列表页面" type="jsp"
         jspPath="/cem/pages/MAG/deviceType/deviceTypeList.jsp" />
-    
-    
+        
      <!-- 02-location-物理位置管理 -->
     <function id="LocationList" description="物理位置查询" type="bo"
         className="tower.cem.bo.MAG.location.BoLocationList"
@@ -220,6 +226,58 @@
          <function id="TeamListJsp" description="维护团队列表页面" type="jsp"
         jspPath="/cem/pages/MAG/team/teamList.jsp" />
         
+        <!-- 07-commLog-设备维护指令查询 -->
+        <function id="CommLogList" description="设备维护指令查询" type="bo"
+        className="tower.cem.bo.MAI.commLog.BoCommLogList"
+        forward="CommLogListJsp" />  
+        
+         <function id="CommLogList" description="设备维护指令查看" type="bo"
+        className="tower.cem.bo.MAI.commLog.BoCommLogDetail"
+        forward="CommLogListView" />    
+        
+        <function id="CommLogListView" description="设备维护指令查看页面" type="jsp"
+        jspPath="/cem/pages/MAI/commLog/commLogView.jsp" />
+        
+        <function id="CommLogListJsp" description="设备维护指令查询页面" type="jsp"
+        jspPath="/cem/pages/MAI/commLog/commLogList.jsp" />
+        
+        <!-- 08-temp-维护指令模板管理 -->
+      <function id="tempSubmit" description="维护指令模板提交" type="bo"
+        className="tower.cem.bo.MAI.temp.BoTempSubmit"
+        forward="tempList" />   
+        
+     <function id="tempList" description="维护指令模板查询" type="bo"
+        className="tower.cem.bo.MAI.temp.BoTempList"
+        forward="tempListJsp" />   
+        
+      <function id="tempEdit" description="维护指令模板编辑" type="bo"
+        className="tower.cem.bo.MAI.temp.BoTempDetail"
+        forward="tempAdd" /> 
+        
+     <function id="tempDelete" description="维护指令模板删除" type="bo"
+        className="tower.cem.bo.MAI.temp.BoTempDelete"
+        forward="tempList" />  
+        
+     <function id="tempView" description="维护指令模板查看" type="bo"
+        className="tower.cem.bo.MAI.temp.BoTempDetail"
+        forward="tempViewJsp" />   
+        
+      <function id="tempListJsp" description="维护指令模板查询页面" type="jsp"
+        jspPath="/cem/pages/MAI/temp/tempList.jsp" /> 
+        
+      <function id="tempAdd" description="维护指令模板添加页面" type="jsp"
+        jspPath="/cem/pages/MAI/temp/tempEdit.jsp" /> 
+        
+      <function id="tempViewJsp" description="维护指令模板添加页面" type="jsp"
+        jspPath="/cem/pages/MAI/temp/tempView.jsp" /> 
+        
+      <!-- 09-tempSend-维护指令模板发送 -->
+      <function id="sendCommandTemp" description="维护指令模板发送" type="bo"
+        className="tower.cem.bo.MAI.tempSend.BoSendCommandTemp"
+        forward="sendSuccessJsp" /> 
+        
+       <function id="sendSuccessJsp" description="维护指令模板发送成功" type="jsp"
+        jspPath="/cem/pages/MAI/tempSend/sendSuccess.jsp" /> 
         
        <!-- 21-device-设备端口类型管理 -->
       <function id="DevicePortTypeSubmit" description="设备端口类型提交" type="bo"
