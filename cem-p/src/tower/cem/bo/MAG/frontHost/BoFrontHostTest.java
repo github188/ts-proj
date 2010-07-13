@@ -53,6 +53,7 @@ public class BoFrontHostTest implements RootBo {
 		 ****************************************************************************************************/
 		// 获取堡垒主机Ip、端口号、登录用户名、登录密码、命令提示符
 		enFrontHostInfo = dbFrontHostInfo.findByKey(hostId);
+		dbFrontHostInfo.setToXml(requestXml, enFrontHostInfo);
 		telnet = new NetTelnet();
 		// 直接登录设备
 		result = telnet.FunLogin(enFrontHostInfo.getHostIp(), enFrontHostInfo.getHostPort(), enFrontHostInfo
