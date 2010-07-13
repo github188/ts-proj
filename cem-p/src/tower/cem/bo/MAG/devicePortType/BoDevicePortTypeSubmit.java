@@ -35,10 +35,10 @@ public class BoDevicePortTypeSubmit implements RootBo{
 		String typeId;                 //端口类型编号
 		String typeNameEn;             //端口类型名称-英文
 		String typeNameCn;             //端口类型名称-中文
-		String standardRxMax;        //标准最大接收光功率
-		String standardRxMin;     //标准最小接收光功率
-		String netWorkRxMin;        //网络要求的最小接收光功率
-		String remark;            //备注
+		String standardRxMax;          //标准最大接收光功率
+		String standardRxMin;          //标准最小接收光功率
+		String netWorkRxMin;           //网络要求的最小接收光功率
+		String remark;                 //备注
 		
 		
 		//其他
