@@ -62,13 +62,29 @@
 		<message> 设备名称-中文：{0}在系统中已存在,请重新输入。</message>
 		<hint></hint>
 	</error>
+	<error>
+		<id>DI004</id>
+		<message> 设备{0}已经在维护团队与设备对照关系中，该设备不能删除。</message>
+		<hint></hint>
+	</error>
 	<!-- 05-team-维护团队管理 -->
 	<error>
 		<id>MT001</id>
 		<message> 维护团队名称：{0}在系统中已存在,请重新输入。</message>
 		<hint></hint>
 	</error>
-		<!-- 21-team-设备端口类型管理 -->
+	<!-- 08-temp-维护指令模板管理 -->
+	<error>
+		<id>MCT001</id>
+		<message> 维护指令模板{0}经在指令发送任务中使用，该指令模板不能删除。</message>
+		<hint></hint>
+	</error>
+	 	<error>
+		<id>MCT002</id>
+		<message> 维护指令模板名称:{0}在系统中已存在,请重新输入。</message>
+		<hint></hint>
+	</error>
+	<!-- 21-team-设备端口类型管理 -->
 	<error>
 		<id>DPT001</id>
 		<message> 设备端口类型{0}已经在设备端口定义中使用，该端口类型不能删除。</message>
@@ -84,4 +100,7 @@
 		<message>端口类型名称-中文：{0}在系统中已存在,请重新输入。</message>
 		<hint></hint>
 	</error>
+	
+	
+	
 </errors>
