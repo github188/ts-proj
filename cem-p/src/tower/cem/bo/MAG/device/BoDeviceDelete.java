@@ -58,13 +58,13 @@ public class BoDeviceDelete implements RootBo{
 		 * 执行业务逻辑、输出
 		 **********************************************************************/
 		 //当要删除的设备信息已经在维护团队与设备对照关系中时，提示不能删除
-		 //DI001:设备{0}已经在维护团队与设备对照关系中，该设备不能删除。
+		 //DI004:设备{0}已经在维护团队与设备对照关系中，该设备不能删除。
 		 vector =  dbMaintainTeamDeviceMap.findAllWhere(" DEVICE_ID ='"
 					+ deviceId + "'");
 		 //获取设备名称
 		 enDeviceInfo  = dbDeviceInfo.findByKey(deviceId);
 		 if (vector.size() > 0) {
-				throw new ErrorException("DI001", new Object[] { enDeviceInfo.getDeviceNameCn() });
+				throw new ErrorException("DI004", new Object[] { enDeviceInfo.getDeviceNameCn() });
 		  }
 		 
 		 //根据设备编号（deviceId）删除设备信息

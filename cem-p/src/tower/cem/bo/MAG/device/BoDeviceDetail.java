@@ -3,9 +3,11 @@ package tower.cem.bo.MAG.device;
 import org.apache.log4j.Logger;
 
 import tower.cem.db.DbDeviceInfo;
+import tower.cem.db.DbDeviceType;
 import tower.cem.db.DbFrontHostInfo;
 import tower.cem.db.DbLocationInfo;
 import tower.cem.en.EnDeviceInfo;
+import tower.cem.en.EnDeviceType;
 import tower.cem.en.EnFrontHostInfo;
 import tower.cem.en.EnLocationInfo;
 import tower.tmvc.ErrorException;
@@ -36,6 +38,10 @@ public class BoDeviceDetail implements RootBo {
 		// 物理位置db en
 		DbLocationInfo dbLocationInfo;
 		EnLocationInfo enLocationInfo;
+		
+	  	// 设备类型db en
+	  	DbDeviceType dbDeviceType;
+	  	EnDeviceType enDeviceType;
 
 		// 堡垒主机编号
 		String deviceId;
@@ -51,6 +57,8 @@ public class BoDeviceDetail implements RootBo {
 		dbDeviceInfo = new DbDeviceInfo(transaction, null);
 		dbFrontHostInfo = new DbFrontHostInfo(transaction, null);
 		dbLocationInfo = new DbLocationInfo(transaction, null);
+		dbDeviceType = new DbDeviceType(transaction, null);
+		enDeviceType = new EnDeviceType();
 		enDeviceInfo = new EnDeviceInfo();
 		/*****************************************************************************************************
 		 * 执行业务逻辑、输出
@@ -71,6 +79,12 @@ public class BoDeviceDetail implements RootBo {
 			enFrontHostInfo = dbFrontHostInfo.findByKey(enDeviceInfo.getFrontHostId());
 			if (!(enFrontHostInfo == null)) {
 				requestXml.setItemValue("DEVICE_INFO", irow, "FRONT_HOST_NAME", enFrontHostInfo.getHostIp());
+			}
+		}
+		if (!(enDeviceInfo.getTypeId() == null || enDeviceInfo.getTypeId().length() == 0)) {
+			enDeviceType = dbDeviceType.findByKey(enDeviceInfo.getTypeId());
+			if (!(enDeviceType == null)) {
+				requestXml.setItemValue("DEVICE_INFO", irow, "TYPE_NAME", enDeviceType.getTypeNameCn());
 			}
 		}
 	}

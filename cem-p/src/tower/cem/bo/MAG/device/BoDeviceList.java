@@ -127,12 +127,12 @@ public class BoDeviceList implements RootBo {
 		}
 		// 查询表，将符合条件的保存到requestXml中返回。
 		if (sqlWhere != null && sqlWhere.length() != 0) {
-			Page.SetPageInfo(transaction, null, requestXml, dbFrontHostInfo, PubFunc.LEN_PAGE_COUNT,
+			Page.SetPageInfo(transaction, null, requestXml, dbDeviceInfo, PubFunc.LEN_PAGE_COUNT,
 					"DEVICE_INFO", sqlWhere.toString());
 			devices = dbDeviceInfo.findAllWhere(sqlWhere.toString());
 
 		} else {
-			Page.SetPageInfo(transaction, null, requestXml, dbFrontHostInfo, PubFunc.LEN_PAGE_COUNT,
+			Page.SetPageInfo(transaction, null, requestXml, dbDeviceInfo, PubFunc.LEN_PAGE_COUNT,
 					"DEVICE_INFO", null);
 			devices = dbDeviceInfo.findAll();
 		}

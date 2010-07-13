@@ -56,55 +56,10 @@ public class BoDeviceTest implements RootBo {
 		 ****************************************************************************************************/
 		// 获取堡垒主机Ip、端口号、登录用户名、登录密码、命令提示符
 		enDeviceInfo = dbDeviceInfo.findByKey(deviceId);
-		telnet = new NetTelnet();
-
-		// 判断该设备是否设置了堡垒主机，如果已设置堡垒主机，则先登录堡垒主机，然后再登陆设备，否则直接登录设备。
-		if (enDeviceInfo.getFrontHostId() == null || enDeviceInfo.getFrontHostId().trim().length() == 0) {
-			// 直接登录设备
-			result = telnet.FunLogin(enDeviceInfo.getDeviceIp(), enDeviceInfo.getDevicePort(), enDeviceInfo
-					.getDeviceUser(), enDeviceInfo.getDevicePassword(), enDeviceInfo.getDevicePrompt());
-			sbResult.append(result);
-
-			if (!telnet.getBflag()) {
-				sbResult.append("登录设备失败！");
-			} else {
-				sbResult.append("\n\n登录设备成功！");
-				telnet.disconnect();
-			}
-		} else {
+		dbDeviceInfo.setToXml(requestXml, enDeviceInfo);
+		if (enDeviceInfo.getFrontHostId() != null && enDeviceInfo.getFrontHostId().trim().length() >0 ) {
 			enFrontHostInfo = dbFrontHostInfo.findByKey(enDeviceInfo.getFrontHostId());
-			if (enFrontHostInfo == null) {
-				sbResult.append("未找到堡垒主机信息！");
-			} else {
-				result = telnet.FunLogin(enFrontHostInfo.getHostIp(), enFrontHostInfo.getHostPort(),
-						enFrontHostInfo.getHostUser(), enFrontHostInfo.getHostPassword(), enFrontHostInfo
-								.getHostPrompt());
-				sbResult.append(result);
-
-				if (!telnet.getBflag()) {
-					sbResult.append("登录堡垒主机失败！");
-				} else {
-					// 通过第一台服务器登录第二台服务器（模拟通过堡垒机登录的情况）
-					result = telnet.FunRelogin(enDeviceInfo.getDeviceIp(), enDeviceInfo.getDevicePort(),
-							enDeviceInfo.getDeviceUser(), enDeviceInfo.getDevicePassword(), enDeviceInfo
-									.getDevicePrompt());
-					sbResult.append(result);
-
-					if (!telnet.getBflag()) {
-						sbResult.append("登录设备失败！");
-					} else {
-						sbResult.append("\n\n登录设备成功！");
-					}
-					telnet.disconnect();
-				}
-			}
-
+			dbFrontHostInfo.setToXml(requestXml, enFrontHostInfo);
 		}
-
-		int row = requestXml.addInputRow("FRONT_DEVICE_TEST_RESULTS");
-		requestXml.setInputValue("FRONT_DEVICE_TEST_RESULTS", row, sbResult.toString());
-
-		// 断开连接
-		telnet.disconnect();
 	}
 }
