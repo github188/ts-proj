@@ -10,7 +10,7 @@ package tower.cem.en;
 
 public class EnCommandsSendList implements java.io.Serializable {
     /**
-     * Type : char(6) Name : SEND_ID
+     * Type : char(10) Name : SEND_ID
      */
     private String sendId;
 
@@ -18,6 +18,11 @@ public class EnCommandsSendList implements java.io.Serializable {
      * Type : char(6) Name : USER_ID
      */
     private String userId;
+
+    /**
+     * Type : char(6) Name : DEVICE_TYPE_ID
+     */
+    private String deviceTypeId;
 
     /**
      * Type : char(6) Name : DEVICE_ID
@@ -50,7 +55,7 @@ public class EnCommandsSendList implements java.io.Serializable {
     private String status;
 
     /**
-     * Type : char(6) Name : SEND_ID modify flag
+     * Type : char(10) Name : SEND_ID modify flag
      */
     private boolean _flagSendId;
 
@@ -58,6 +63,11 @@ public class EnCommandsSendList implements java.io.Serializable {
      * Type : char(6) Name : USER_ID modify flag
      */
     private boolean _flagUserId;
+
+    /**
+     * Type : char(6) Name : DEVICE_TYPE_ID modify flag
+     */
+    private boolean _flagDeviceTypeId;
 
     /**
      * Type : char(6) Name : DEVICE_ID modify flag
@@ -131,6 +141,28 @@ public class EnCommandsSendList implements java.io.Serializable {
      */
     public boolean hasChangeUserId() {
         return _flagUserId;
+    }
+
+    /**
+     * Sets the value for deviceTypeId
+     */
+    public void setDeviceTypeId(String deviceTypeId) {
+        this.deviceTypeId = deviceTypeId;
+        this._flagDeviceTypeId = true;
+    }
+
+    /**
+     * Gets the value for deviceTypeId
+     */
+    public String getDeviceTypeId() {
+        return deviceTypeId;
+    }
+
+    /**
+     * has the value for deviceTypeId changed?
+     */
+    public boolean hasChangeDeviceTypeId() {
+        return _flagDeviceTypeId;
     }
 
     /**

@@ -280,6 +280,11 @@ public class TdRunnable implements Runnable {
 			+ " where device_info.type_id = device_type.type_id"
 			+ " and device_info.device_status ='N'";
 
+		// 当设备类型不为空时，获取到指定设备类型的信息
+		if (!(enSendList.getDeviceTypeId() == null || enSendList.getDeviceTypeId().trim().length() == 0)) {
+			sSql = sSql +" and device_info.type_id = '" + enSendList.getDeviceTypeId() + "'";
+		}
+		
 		// 当设备编号不为空时，获取到指定的设备信息及所属设备分类信息
 		if (!(enSendList.getDeviceId() == null || enSendList.getDeviceId().trim().length() == 0)) {
 		    sSql = sSql + " and device_info.device_id ='" + enSendList.getDeviceId() + "'";
@@ -446,6 +451,11 @@ public class TdRunnable implements Runnable {
 			+ " where device_info.type_id = device_type.type_id"
 			+ " and device_info.device_status ='N'";
 
+		// 当设备类型不为空时，获取到指定设备类型的信息
+		if (!(enSendList.getDeviceTypeId() == null || enSendList.getDeviceTypeId().trim().length() == 0)) {
+			sSql = sSql +" and device_info.type_id = '" + enSendList.getDeviceTypeId() + "'";
+		}
+		
 		// 当设备编号不为空时，获取到指定的设备信息及所属设备分类信息
 		if (!(enSendList.getDeviceId() == null || enSendList.getDeviceId().trim().length() == 0)) {
 		    sSql = sSql + " and device_info.device_id ='" + enSendList.getDeviceId() + "'";
@@ -628,7 +638,7 @@ public class TdRunnable implements Runnable {
 
 	    // 记录指令发送历史表
 	    String sqlInsertHis = "insert into commands_send_his"
-		    + " (select send_id, user_id, device_id, task_define_time, task_plan_time,"
+		    + " (select send_id, user_id, device_type_id, device_id, task_define_time, task_plan_time,"
 		    + " commands_type, template_id, '" + sGenResult + "', '" + sTimeBegin + "','" + sTimeEnd
 		    + "'" + " from commands_send_list" + " where send_id ='" + enSendList.getSendId() + "')";
 	    iSaveFlag = DaemonsDBPool.doUpdate(conn, sqlInsertHis);

@@ -218,7 +218,8 @@ public class TelnetDaemons extends Thread {
 			TdRunnable rdt = new TdRunnable(enCommandsSendList, logger);
 			Thread rd = new Thread(rdt, "[" + enCommandsSendList.getCommandsType() + "][SID="
 				+ enCommandsSendList.getSendId() + "][DID="
-				+ enCommandsSendList.getDeviceId() + "][PT="
+				+ enCommandsSendList.getDeviceId() + "][DT="
+				+ enCommandsSendList.getDeviceTypeId() +"][PT="
 				+ enCommandsSendList.getTaskPlanTime() + "][TID="
 				+ enCommandsSendList.getTemplateId() + "]");
 
@@ -334,6 +335,7 @@ public class TelnetDaemons extends Thread {
 		en = new EnCommandsSendList();
 		en.setSendId(rs.getString("send_id"));
 		en.setUserId(rs.getString("user_id"));
+		en.setDeviceTypeId(rs.getString("device_type_id"));
 		en.setDeviceId(rs.getString("device_id"));
 		en.setTaskDefineTime(rs.getString("task_define_time"));
 		en.setTaskPlanTime(rs.getString("task_plan_time"));
