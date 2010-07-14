@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<listeners>
-	<listener errorCode="TS0001"
-			  forward="JspExample"
-			 />
-	<listener exception="java.lang.NullPointException"
-			  forward="BoExample"
-			 />
-</listeners>
