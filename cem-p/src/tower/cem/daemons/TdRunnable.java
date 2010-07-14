@@ -282,9 +282,9 @@ public class TdRunnable implements Runnable {
 
 		// 当设备类型不为空时，获取到指定设备类型的信息
 		if (!(enSendList.getDeviceTypeId() == null || enSendList.getDeviceTypeId().trim().length() == 0)) {
-			sSql = sSql +" and device_info.type_id = '" + enSendList.getDeviceTypeId() + "'";
+		    sSql = sSql + " and device_info.type_id = '" + enSendList.getDeviceTypeId() + "'";
 		}
-		
+
 		// 当设备编号不为空时，获取到指定的设备信息及所属设备分类信息
 		if (!(enSendList.getDeviceId() == null || enSendList.getDeviceId().trim().length() == 0)) {
 		    sSql = sSql + " and device_info.device_id ='" + enSendList.getDeviceId() + "'";
@@ -453,9 +453,9 @@ public class TdRunnable implements Runnable {
 
 		// 当设备类型不为空时，获取到指定设备类型的信息
 		if (!(enSendList.getDeviceTypeId() == null || enSendList.getDeviceTypeId().trim().length() == 0)) {
-			sSql = sSql +" and device_info.type_id = '" + enSendList.getDeviceTypeId() + "'";
+		    sSql = sSql + " and device_info.type_id = '" + enSendList.getDeviceTypeId() + "'";
 		}
-		
+
 		// 当设备编号不为空时，获取到指定的设备信息及所属设备分类信息
 		if (!(enSendList.getDeviceId() == null || enSendList.getDeviceId().trim().length() == 0)) {
 		    sSql = sSql + " and device_info.device_id ='" + enSendList.getDeviceId() + "'";

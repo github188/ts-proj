@@ -219,7 +219,7 @@ public class TelnetDaemons extends Thread {
 			Thread rd = new Thread(rdt, "[" + enCommandsSendList.getCommandsType() + "][SID="
 				+ enCommandsSendList.getSendId() + "][DID="
 				+ enCommandsSendList.getDeviceId() + "][DT="
-				+ enCommandsSendList.getDeviceTypeId() +"][PT="
+				+ enCommandsSendList.getDeviceTypeId() + "][PT="
 				+ enCommandsSendList.getTaskPlanTime() + "][TID="
 				+ enCommandsSendList.getTemplateId() + "]");
 
