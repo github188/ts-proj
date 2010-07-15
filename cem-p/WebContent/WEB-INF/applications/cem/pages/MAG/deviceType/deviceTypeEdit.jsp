@@ -74,7 +74,7 @@
                   <div class="panelContent">
                     <div class="panelContent2">
                       <!-- 查询面板内容 -->
-                   <form action="ctrl" method="post"name="form1"onSubmit="return doSubmit(this)">
+                   <form action="ctrl" method="post"name="form1" enctype="multipart/form-data" onSubmit="return doSubmit(this)">
                      <input type="hidden" name="FUNC_ID" value="DeviceTypeSubmit">
                       <input type="hidden" name="TYPE_ID" value="<%=typeId%>"> 
                      <table >
