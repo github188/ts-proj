@@ -52,7 +52,7 @@
   	window.location.href="ctrl?FUNC_ID=FrontHostList";
   }
    function doSelHostTestResult(hostId){
-    selDialog("ctrl?FUNC_ID=FrontHostTest&HOST_ID="+hostId,"HOST_ID",850,550,false);
+    selDialog("ctrl?FUNC_ID=FrontHostTest&HOST_ID="+hostId,"HOST_ID",1000,550,false);
   }
 -->
 </script>
@@ -96,8 +96,6 @@
 		                 <td>
 		                 <input type="text" class="text" value="<%=hostNameCn %>" readonly> 
 		                 </td>
-		               </tr>
-		                <tr>
 		                <td width="120" align="right">物理位置：</td>
 		                 <td>
 		                 <input type="text" class="text" value="<%=locationName %>" readonly> 
@@ -112,8 +110,6 @@
                            <input type="text" class="text" value="<%=hostStatusDesc[i] %>" readonly> 
                         <%} }%>
 						 </td>
-		               </tr>
-		               <tr>
 		                <td width="120" align="right">网络地址：</td>
 		                 <td>
 		                  <input type="text" class="text" value="<%=hostIp %>" readonly> 
@@ -124,8 +120,6 @@
 		                 <td>
 		                  <input type="text" class="text" value="<%=hostPort %>" readonly> 
 		                 </td>
-		               </tr>
-		               <tr>
 		                 <td width="120" align="right">登录用户名：</td>
 		                 <td>
 		                 <input type="text" class="text" value="<%=hostUser %>" readonly> 
@@ -136,8 +130,6 @@
 		                 <td>
 		                 <input type="text" class="text" value="<%=hostPassword %>" readonly> 
 		                 </td>
-		               </tr>
-		                <tr>
 		                 <td width="120" align="right">命令行提示符：</td>
 		                 <td>
 		                  <input type="text" class="text" value="<%=hostPrompt %>" readonly> 

@@ -3,15 +3,34 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page import="tower.tmvc.XMLWrap"%>
+<%@ page import="tower.cem.util.*"%>
 <%	
 	XMLWrap xml;
-	String hostTestResults;
- 
+	//String hostTestResults;
+    String hostIp;
+	String hostPort;
+	String hostUser;
+	String hostPassword;
+	String hostPrompt;
 %>
 <%
 	xml = XMLWrap.getRequestXml(request,session,application);
-    hostTestResults = xml.getInputValue("FRONT_HOST_TEST_RESULTS");
-
+   // hostTestResults = xml.getInputValue("FRONT_HOST_TEST_RESULTS");
+   hostIp = xml.getItemValue("FRONT_HOST_INFO",1,"HOST_IP");
+	hostPort = xml.getItemValue("FRONT_HOST_INFO",1,"HOST_PORT");
+	hostUser = xml.getItemValue("FRONT_HOST_INFO",1,"HOST_USER");
+	hostPassword = xml.getItemValue("FRONT_HOST_INFO",1,"HOST_PASSWORD");
+	hostPrompt = xml.getItemValue("FRONT_HOST_INFO",1,"HOST_PROMPT");
+	
+    NetTelnet nt = new NetTelnet();
+  String sResult="";
+  StringBuffer sbResult = new StringBuffer();
+  sResult = nt.FunLogin(hostIp, hostPort, hostUser, hostPassword, hostPrompt);
+  sbResult.append(sResult);
+  if(!nt.getBflag()) {
+   sbResult.append("登录堡垒主机失败。");
+  }
+  nt.disconnect();
 %>
 <html>
 <head>
@@ -41,7 +60,9 @@
                       <!-- 查询面板内容 -->
                       <table width="100%" border="0" cellpadding="0" cellspacing="0">
               	 <tr>
-              	 <td align="right"><%=hostTestResults %></td>
+              	 <td align="left">
+              	 <textarea id="textarea" class="textarea" cols="50" rows="10" readonly> <%=sbResult %></textarea>
+              	 </td>
                  </tr>
                  </table>
                        
@@ -56,7 +77,17 @@
         </div>
         </div>
         <!-- Tab面板结束 -->
-  
+         <!-- 列表面板 -->
+        <div id="mainPanelList" class="panelList">
+          <div class="panelHead">这是文章标题</div>
+          <div class="panelContent">
+            <div class="panelContent2">
+            
+            </div>
+          </div>
+          <div class="panelFoot"><div></div></div>
+        </div>
+        <!-- 列表面板结束 -->
       </div>
     </div>
     <div class="panelFoot"><div></div></div>
