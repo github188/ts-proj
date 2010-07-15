@@ -127,6 +127,7 @@
 </script>
 
 </head>
+<base target="_self">
 <body id="mainArea">
   <div id="mainPanel" class="panel">
     <div class="panelHead">堡垒主机选择</div>
