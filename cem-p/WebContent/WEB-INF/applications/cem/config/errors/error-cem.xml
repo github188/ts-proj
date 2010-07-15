@@ -67,6 +67,12 @@
 		<message> 设备{0}已经在维护团队与设备对照关系中，该设备不能删除。</message>
 		<hint></hint>
 	</error>
+	
+   <error>
+		<id>DPS001</id>
+		<message> 对于设备{0}，在系统中已存在端口类型为{1}的端口编号{2},请重新输入。</message>
+		<hint></hint>
+	</error>
 	<!-- 05-team-维护团队管理 -->
 	<error>
 		<id>MT001</id>
