@@ -407,6 +407,50 @@ public class TdRunnable implements Runnable {
 
 				sResult = nt.sendCommand(sCommLine);
 				sbResult.append(sResult);
+
+				// 根据巡检日志关键字分拣日志
+				sSql = "select * from inspect_pick_keyword ";
+				rs = DaemonsDBPool.doQuery(conn, sSql);
+				boolean bPickFlag = false;
+				while (rs.next()) {
+				    if (bPickFlag) {
+					break;
+				    }
+				    
+				    String sKeyWordsCont = rs.getString("KEYWORD_CONT");
+				    String sKeyWords[] = sKeyWordsCont.split(" ");
+
+				    for (int p = 0; p < sKeyWords.length; p++) {
+					String sKeyWord = sKeyWords[p].trim();
+					int iKeyWordPos = sResult.toLowerCase().indexOf(
+						sKeyWord.toLowerCase());
+
+					if (iKeyWordPos >= 0) {
+					    bPickFlag = true;
+
+					    // 记录分拣日志
+					    String sPickTime = formatter.format(new java.util.Date());
+					    sSql = "insert into device_inspect_pick_log values('"
+						    + enSendList.getSendId() + "','"
+						    + enDeviceInfo.getDeviceId() + "','"
+						    + enDeviceInfo.getDeviceNameEn() + "','"
+						    + enDeviceInfo.getDeviceIp() + "','"
+						    + enDeviceInfo.getLocationId() + "','" + sKeyWord + "','"
+						    + sPickTime + "', ?)";
+					    java.sql.PreparedStatement ps = null;
+					    ps = conn.prepareStatement(sSql);
+					    ps.setString(1, sResult);
+					    iSaveFlag = ps.executeUpdate();
+
+					    if (iSaveFlag < 1) {
+						sGenResult = "F";
+						sbResult.append("TdRunnable run()：执行巡检任务，记录分拣日志失败。");
+						log.error("执行数据采集任务，记录分拣日志失败。SID=" + enSendList.getSendId());
+					    }
+					    break;
+					}
+				    }
+				}
 			    }
 			}
 		    }
