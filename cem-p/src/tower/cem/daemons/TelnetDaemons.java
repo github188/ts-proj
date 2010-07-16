@@ -216,11 +216,11 @@ public class TelnetDaemons extends Thread {
 		    for (int iFor = 0; iFor < listSend.size(); iFor++) {
 			enCommandsSendList = (EnCommandsSendList) listSend.get(iFor);
 			TdRunnable rdt = new TdRunnable(enCommandsSendList, logger);
-			Thread rd = new Thread(rdt, "[" + enCommandsSendList.getCommandsType() + "][SID="
-				+ enCommandsSendList.getSendId() + "][DID="
-				+ enCommandsSendList.getDeviceId() + "][DT="
-				+ enCommandsSendList.getDeviceTypeId() + "][PT="
-				+ enCommandsSendList.getTaskPlanTime() + "][TID="
+			Thread rd = new Thread(rdt, "[" + enCommandsSendList.getCommandsType() + "][SendID="
+				+ enCommandsSendList.getSendId() + "][DeviceID="
+				+ enCommandsSendList.getDeviceId() + "][DeviceType="
+				+ enCommandsSendList.getDeviceTypeId() + "][PlanTime="
+				+ enCommandsSendList.getTaskPlanTime() + "][TempID="
 				+ enCommandsSendList.getTemplateId() + "]");
 
 			rd.setPriority(5);

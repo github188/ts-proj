@@ -3,6 +3,7 @@ package tower.cem.daemons;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Vector;
 
 import org.apache.log4j.Logger;
@@ -64,7 +65,6 @@ public class TdRunnable implements Runnable {
 	}
 	DaemonsDBPool dbPool = null; // 数据库连接池
 	Connection conn = null; // 数据库连接
-	String sErrCode = null;
 	SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
 	String sTimeBegin = "";
 	String sTimeEnd = "";
@@ -74,6 +74,7 @@ public class TdRunnable implements Runnable {
 
 	NetTelnet nt = new NetTelnet();
 	StringBuffer sbResult = new StringBuffer();
+	StringBuffer sbPickLog = new StringBuffer();
 	String sResult = "";
 
 	EnDeviceInfo enDeviceInfo = new EnDeviceInfo();
@@ -249,11 +250,13 @@ public class TdRunnable implements Runnable {
 		sTimeEnd = formatter.format(new java.util.Date());
 
 		// 将执行结果保存到命令模板执行日志中
-		log.info("[TEL][" + enSendList.getCommandsType() + "][SID=" + enSendList.getSendId()
-			+ "][DID=" + enSendList.getDeviceId() + "][IP=" + enDeviceInfo.getDeviceIp()
-			+ "][NAME=" + enDeviceInfo.getDeviceNameEn() + "][" + sGenResult + "]");
+		log.info("[TEL][" + enSendList.getCommandsType() + "][SendID=" + enSendList.getSendId()
+			+ "][DeviceID=" + enDeviceInfo.getDeviceId() + "][DeviceIP="
+			+ enDeviceInfo.getDeviceIp() + "][DeviceName=" + enDeviceInfo.getDeviceNameEn()
+			+ "][" + sGenResult + "]");
+
 		sSql = "insert into device_maintain_log values ('" + enSendList.getSendId() + "','"
-			+ enSendList.getDeviceId() + "','" + enDeviceInfo.getDeviceNameEn() + "','"
+			+ enDeviceInfo.getDeviceId() + "','" + enDeviceInfo.getDeviceNameEn() + "','"
 			+ enDeviceInfo.getDeviceIp() + "','" + enSendList.getUserId() + "','" + sTimeBegin
 			+ "','" + sTimeEnd + "','" + sGenResult + "', ?)";
 
@@ -394,6 +397,22 @@ public class TdRunnable implements Runnable {
 
 		    // 执行巡检命令
 		    if (sGenResult.equals("S")) {
+
+			// 获取巡检日志分拣日志关键字
+			sSql = "select * from inspect_pick_keyword ";
+			rs = DaemonsDBPool.doQuery(conn, sSql);
+			List listKeyWords = new Vector();
+			while (rs.next()) {
+			    String sKeyWordsCont = rs.getString("KEYWORD_CONT");
+			    String sKeyWords[] = sKeyWordsCont.split(" ");
+			    for (int p = 0; p < sKeyWords.length; p++) {
+				if (!(sKeyWords[p] == null || sKeyWords[p].trim().length() == 0)) {
+				    listKeyWords.add(sKeyWords[p].trim());
+				}
+			    }
+			}
+
+			// 获取巡检指令
 			String[] commLine = enDeviceInfo.getRemark().split("\n");
 			for (int k = 0; k < commLine.length; k++) {
 			    String sCommLine = commLine[k];
@@ -409,46 +428,20 @@ public class TdRunnable implements Runnable {
 				sbResult.append(sResult);
 
 				// 根据巡检日志关键字分拣日志
-				sSql = "select * from inspect_pick_keyword ";
-				rs = DaemonsDBPool.doQuery(conn, sSql);
-				boolean bPickFlag = false;
-				while (rs.next()) {
-				    if (bPickFlag) {
+				for (int t = 0; t < listKeyWords.size(); t++) {
+				    String sKeyWord = (String) listKeyWords.get(t);
+				    int iKeyWordPos = sResult.toLowerCase().indexOf(sKeyWord.toLowerCase());
+
+				    if (iKeyWordPos >= 0) {
+					// 记录分拣日志
+					sbPickLog.append("DeviceId:" + enDeviceInfo.getDeviceId()
+						+ " DeviceNameEn:" + enDeviceInfo.getDeviceNameEn()
+						+ " DeviceIP:" + enDeviceInfo.getDeviceIp() + " KeyWord:"
+						+ sKeyWord + "\n");
+					sbPickLog.append(enDeviceInfo.getDevicePrompt() + sResult);
+					sbPickLog.append("\n\n");
+
 					break;
-				    }
-				    
-				    String sKeyWordsCont = rs.getString("KEYWORD_CONT");
-				    String sKeyWords[] = sKeyWordsCont.split(" ");
-
-				    for (int p = 0; p < sKeyWords.length; p++) {
-					String sKeyWord = sKeyWords[p].trim();
-					int iKeyWordPos = sResult.toLowerCase().indexOf(
-						sKeyWord.toLowerCase());
-
-					if (iKeyWordPos >= 0) {
-					    bPickFlag = true;
-
-					    // 记录分拣日志
-					    String sPickTime = formatter.format(new java.util.Date());
-					    sSql = "insert into device_inspect_pick_log values('"
-						    + enSendList.getSendId() + "','"
-						    + enDeviceInfo.getDeviceId() + "','"
-						    + enDeviceInfo.getDeviceNameEn() + "','"
-						    + enDeviceInfo.getDeviceIp() + "','"
-						    + enDeviceInfo.getLocationId() + "','" + sKeyWord + "','"
-						    + sPickTime + "', ?)";
-					    java.sql.PreparedStatement ps = null;
-					    ps = conn.prepareStatement(sSql);
-					    ps.setString(1, sResult);
-					    iSaveFlag = ps.executeUpdate();
-
-					    if (iSaveFlag < 1) {
-						sGenResult = "F";
-						sbResult.append("TdRunnable run()：执行巡检任务，记录分拣日志失败。");
-						log.error("执行数据采集任务，记录分拣日志失败。SID=" + enSendList.getSendId());
-					    }
-					    break;
-					}
 				    }
 				}
 			    }
@@ -462,9 +455,10 @@ public class TdRunnable implements Runnable {
 		    String sInspectEnd = formatter.format(new java.util.Date());
 
 		    // 将执行巡检的情况保存到巡检日志中
-		    log.info("[TEL][" + enSendList.getCommandsType() + "][SID=" + enSendList.getSendId()
-			    + "][DID=" + enSendList.getDeviceId() + "][IP=" + enDeviceInfo.getDeviceIp()
-			    + "][NAME=" + enDeviceInfo.getDeviceNameEn() + "][" + sGenResult + "]");
+		    log.info("[TEL][" + enSendList.getCommandsType() + "][SendID=" + enSendList.getSendId()
+			    + "][DeviceID=" + enDeviceInfo.getDeviceId() + "][DeviceIP="
+			    + enDeviceInfo.getDeviceIp() + "][DeviceName=" + enDeviceInfo.getDeviceNameEn()
+			    + "][" + sGenResult + "]");
 
 		    sSql = "insert into device_inspect_log values ('" + enSendList.getSendId() + "','"
 			    + enDeviceInfo.getDeviceId() + "','" + enDeviceInfo.getDeviceNameEn() + "','"
@@ -480,6 +474,22 @@ public class TdRunnable implements Runnable {
 			sGenResult = "F";
 			sbResult.append("TdRunnable run()：执行巡检任务，记录日志失败。");
 			log.error("执行巡检任务，记录日志失败。SID=" + enSendList.getSendId());
+		    }
+		}
+
+		if (!(sbPickLog == null || sbPickLog.toString().trim().length() == 0)) {
+		    String sPickTime = formatter.format(new java.util.Date());
+		    sSql = "insert into device_inspect_pick_log values('" + enSendList.getSendId() + "','"
+			    + sPickTime + "', ?)";
+		    java.sql.PreparedStatement ps = null;
+		    ps = conn.prepareStatement(sSql);
+		    ps.setString(1, sbPickLog.toString());
+		    iSaveFlag = ps.executeUpdate();
+
+		    if (iSaveFlag < 1) {
+			sGenResult = "F";
+			// sbResult.append("TdRunnable run()：执行巡检任务，记录分拣日志失败。");
+			log.error("执行数据采集任务，记录分拣日志失败。SID=" + enSendList.getSendId());
 		    }
 		}
 
@@ -626,17 +636,19 @@ public class TdRunnable implements Runnable {
 				sbResult.append(sResult);
 
 				double rxp = this.collectRxpValue(sResult);
+				
+				if (rxp != 0) {
+				    sSql = "insert into device_port_rxp values ('" + enSendList.getSendId()
+					    + "', '" + enDeviceInfo.getDeviceId() + "', '"
+					    + enDeviceInfo.getDeviceNameEn() + "', '" + portId + "', '"
+					    + portSn + "', " + rxp + ")";
 
-				sSql = "insert into device_port_rxp values ('" + enSendList.getSendId()
-					+ "', '" + enDeviceInfo.getDeviceId() + "', '"
-					+ enDeviceInfo.getDeviceNameEn() + "', '" + portId + "', '" + portSn
-					+ "', " + rxp + ")";
+				    iSaveFlag = DaemonsDBPool.doUpdate(conn, sSql);
 
-				iSaveFlag = DaemonsDBPool.doUpdate(conn, sSql);
-
-				if (iSaveFlag < 1) {
-				    sbResult.append("TdRunnable run()：执行数据采集任务，记录光功率数据失败。");
-				    log.error("执行数据采集任务，记录光功率数据失败。SID=" + enSendList.getSendId());
+				    if (iSaveFlag < 1) {
+					sbResult.append("TdRunnable run()：执行数据采集任务，记录光功率数据失败。");
+					log.error("执行数据采集任务，记录光功率数据失败。SID=" + enSendList.getSendId());
+				    }
 				}
 			    }
 			}
@@ -649,9 +661,10 @@ public class TdRunnable implements Runnable {
 		    String sCollectEnd = formatter.format(new java.util.Date());
 
 		    // 将执行端口数据采集的情况保存到数据采集日志中
-		    log.info("[TEL][" + enSendList.getCommandsType() + "][SID=" + enSendList.getSendId()
-			    + "][DID=" + enSendList.getDeviceId() + "][IP=" + enDeviceInfo.getDeviceIp()
-			    + "][NAME=" + enDeviceInfo.getDeviceNameEn() + "][" + sGenResult + "]");
+		    log.info("[TEL][" + enSendList.getCommandsType() + "][SendID=" + enSendList.getSendId()
+			    + "][DeviceID=" + enDeviceInfo.getDeviceId() + "][DeviceIP="
+			    + enDeviceInfo.getDeviceIp() + "][DeviceName=" + enDeviceInfo.getDeviceNameEn()
+			    + "][" + sGenResult + "]");
 
 		    sSql = "insert into device_collect_log values ('" + enSendList.getSendId() + "','"
 			    + enDeviceInfo.getDeviceId() + "','" + enDeviceInfo.getDeviceNameEn() + "','"
@@ -704,7 +717,6 @@ public class TdRunnable implements Runnable {
 	}
 
 	catch (Exception ex) {
-	    sErrCode = ex.getMessage();
 	    log.error("捕获到错误，错误信息：" + ex.getMessage() + "。SID=" + enSendList.getSendId());
 	} finally {
 	    try {
@@ -712,7 +724,6 @@ public class TdRunnable implements Runnable {
 		    dbPool.endTransction(false);
 		}
 	    } catch (Exception ex) {
-		sErrCode = ex.getMessage();
 		log.error("关闭数据库连接时出错，错误信息：" + ex.getMessage() + "。SID=" + enSendList.getSendId());
 		ex.printStackTrace();
 	    }

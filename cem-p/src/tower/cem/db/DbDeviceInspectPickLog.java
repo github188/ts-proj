@@ -30,18 +30,8 @@ public class DbDeviceInspectPickLog extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
 
-        query.append("insert into device_inspect_pick_log ( SEND_ID,DEVICE_ID,DEVICE_NAME,DEVICE_IP,LOCATION_ID,PICK_KEYWORD,PICK_TIME,LOG_CONT ) values ( ");
+        query.append("insert into device_inspect_pick_log ( SEND_ID,PICK_TIME,LOG_CONT ) values ( ");
         query.append(formatString(en.getSendId()));
-        query.append(",");
-        query.append(formatString(en.getDeviceId()));
-        query.append(",");
-        query.append(formatString(en.getDeviceName()));
-        query.append(",");
-        query.append(formatString(en.getDeviceIp()));
-        query.append(",");
-        query.append(formatString(en.getLocationId()));
-        query.append(",");
-        query.append(formatString(en.getPickKeyword()));
         query.append(",");
         query.append(formatString(en.getPickTime()));
         query.append(",");
@@ -59,7 +49,7 @@ public class DbDeviceInspectPickLog extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select SEND_ID,DEVICE_ID,DEVICE_NAME,DEVICE_IP,LOCATION_ID,PICK_KEYWORD,PICK_TIME,LOG_CONT from device_inspect_pick_log where ");
+        query.append("select SEND_ID,PICK_TIME,LOG_CONT from device_inspect_pick_log where ");
         query.append(where);
         if(orderBy != null) {
             query.append(orderBy);
@@ -76,7 +66,7 @@ public class DbDeviceInspectPickLog extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select SEND_ID,DEVICE_ID,DEVICE_NAME,DEVICE_IP,LOCATION_ID,PICK_KEYWORD,PICK_TIME,LOG_CONT from device_inspect_pick_log");
+        query.append("select SEND_ID,PICK_TIME,LOG_CONT from device_inspect_pick_log");
 
         if(orderBy != null) {
             query.append(orderBy);
@@ -103,46 +93,6 @@ public class DbDeviceInspectPickLog extends RootDB{
             query.append(formatString(en.getSendId()));
             bChanged = true;
         }
-        if(en.hasChangeDeviceId()) {
-            if(bChanged){
-                query.append(" and ");
-            }
-            query.append("DEVICE_ID=");
-            query.append(formatString(en.getDeviceId()));
-            bChanged = true;
-        }
-        if(en.hasChangeDeviceName()) {
-            if(bChanged){
-                query.append(" and ");
-            }
-            query.append("DEVICE_NAME=");
-            query.append(formatString(en.getDeviceName()));
-            bChanged = true;
-        }
-        if(en.hasChangeDeviceIp()) {
-            if(bChanged){
-                query.append(" and ");
-            }
-            query.append("DEVICE_IP=");
-            query.append(formatString(en.getDeviceIp()));
-            bChanged = true;
-        }
-        if(en.hasChangeLocationId()) {
-            if(bChanged){
-                query.append(" and ");
-            }
-            query.append("LOCATION_ID=");
-            query.append(formatString(en.getLocationId()));
-            bChanged = true;
-        }
-        if(en.hasChangePickKeyword()) {
-            if(bChanged){
-                query.append(" and ");
-            }
-            query.append("PICK_KEYWORD=");
-            query.append(formatString(en.getPickKeyword()));
-            bChanged = true;
-        }
         if(en.hasChangePickTime()) {
             if(bChanged){
                 query.append(" and ");
@@ -160,9 +110,9 @@ public class DbDeviceInspectPickLog extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select SEND_ID,DEVICE_ID,DEVICE_NAME,DEVICE_IP,LOCATION_ID,PICK_KEYWORD,PICK_TIME,LOG_CONT from device_inspect_pick_log where ");
+            query.insert(0,"select SEND_ID,PICK_TIME,LOG_CONT from device_inspect_pick_log where ");
         } else {
-            query.append("select SEND_ID,DEVICE_ID,DEVICE_NAME,DEVICE_IP,LOCATION_ID,PICK_KEYWORD,PICK_TIME,LOG_CONT from device_inspect_pick_log");
+            query.append("select SEND_ID,PICK_TIME,LOG_CONT from device_inspect_pick_log");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -189,46 +139,6 @@ public class DbDeviceInspectPickLog extends RootDB{
             query.append(formatString(en.getSendId()));
             bChanged = true;
         }
-        if(en.hasChangeDeviceId()) {
-            if(bChanged){
-                query.append(" and ");
-            }
-            query.append("DEVICE_ID like ");
-            query.append(formatString(en.getDeviceId()));
-            bChanged = true;
-        }
-        if(en.hasChangeDeviceName()) {
-            if(bChanged){
-                query.append(" and ");
-            }
-            query.append("DEVICE_NAME like ");
-            query.append(formatString(en.getDeviceName()));
-            bChanged = true;
-        }
-        if(en.hasChangeDeviceIp()) {
-            if(bChanged){
-                query.append(" and ");
-            }
-            query.append("DEVICE_IP like ");
-            query.append(formatString(en.getDeviceIp()));
-            bChanged = true;
-        }
-        if(en.hasChangeLocationId()) {
-            if(bChanged){
-                query.append(" and ");
-            }
-            query.append("LOCATION_ID like ");
-            query.append(formatString(en.getLocationId()));
-            bChanged = true;
-        }
-        if(en.hasChangePickKeyword()) {
-            if(bChanged){
-                query.append(" and ");
-            }
-            query.append("PICK_KEYWORD like ");
-            query.append(formatString(en.getPickKeyword()));
-            bChanged = true;
-        }
         if(en.hasChangePickTime()) {
             if(bChanged){
                 query.append(" and ");
@@ -246,9 +156,9 @@ public class DbDeviceInspectPickLog extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select SEND_ID,DEVICE_ID,DEVICE_NAME,DEVICE_IP,LOCATION_ID,PICK_KEYWORD,PICK_TIME,LOG_CONT from device_inspect_pick_log where ");
+            query.insert(0,"select SEND_ID,PICK_TIME,LOG_CONT from device_inspect_pick_log where ");
         } else {
-            query.append("select SEND_ID,DEVICE_ID,DEVICE_NAME,DEVICE_IP,LOCATION_ID,PICK_KEYWORD,PICK_TIME,LOG_CONT from device_inspect_pick_log");
+            query.append("select SEND_ID,PICK_TIME,LOG_CONT from device_inspect_pick_log");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -320,46 +230,6 @@ public class DbDeviceInspectPickLog extends RootDB{
             query.append(formatString(en.getSendId()));
             bChanged = true;
         }
-        if(en.hasChangeDeviceId()) {
-            if(bChanged){
-                query.append(",");
-            }
-            query.append("DEVICE_ID=");
-            query.append(formatString(en.getDeviceId()));
-            bChanged = true;
-        }
-        if(en.hasChangeDeviceName()) {
-            if(bChanged){
-                query.append(",");
-            }
-            query.append("DEVICE_NAME=");
-            query.append(formatString(en.getDeviceName()));
-            bChanged = true;
-        }
-        if(en.hasChangeDeviceIp()) {
-            if(bChanged){
-                query.append(",");
-            }
-            query.append("DEVICE_IP=");
-            query.append(formatString(en.getDeviceIp()));
-            bChanged = true;
-        }
-        if(en.hasChangeLocationId()) {
-            if(bChanged){
-                query.append(",");
-            }
-            query.append("LOCATION_ID=");
-            query.append(formatString(en.getLocationId()));
-            bChanged = true;
-        }
-        if(en.hasChangePickKeyword()) {
-            if(bChanged){
-                query.append(",");
-            }
-            query.append("PICK_KEYWORD=");
-            query.append(formatString(en.getPickKeyword()));
-            bChanged = true;
-        }
         if(en.hasChangePickTime()) {
             if(bChanged){
                 query.append(",");
@@ -389,11 +259,6 @@ public class DbDeviceInspectPickLog extends RootDB{
         EnDeviceInspectPickLog en = new EnDeviceInspectPickLog();
 
         en.setSendId(r.getString("SEND_ID"));
-        en.setDeviceId(r.getString("DEVICE_ID"));
-        en.setDeviceName(r.getString("DEVICE_NAME"));
-        en.setDeviceIp(r.getString("DEVICE_IP"));
-        en.setLocationId(r.getString("LOCATION_ID"));
-        en.setPickKeyword(r.getString("PICK_KEYWORD"));
         en.setPickTime(r.getString("PICK_TIME"));
         en.setLogCont(r.getString("LOG_CONT"));
 
@@ -422,26 +287,6 @@ public class DbDeviceInspectPickLog extends RootDB{
         stmp = (String)otmp;
         en.setSendId(stmp);
 
-        otmp = xml.getInputObject("DEVICE_ID");
-        stmp = (String)otmp;
-        en.setDeviceId(stmp);
-
-        otmp = xml.getInputObject("DEVICE_NAME");
-        stmp = (String)otmp;
-        en.setDeviceName(stmp);
-
-        otmp = xml.getInputObject("DEVICE_IP");
-        stmp = (String)otmp;
-        en.setDeviceIp(stmp);
-
-        otmp = xml.getInputObject("LOCATION_ID");
-        stmp = (String)otmp;
-        en.setLocationId(stmp);
-
-        otmp = xml.getInputObject("PICK_KEYWORD");
-        stmp = (String)otmp;
-        en.setPickKeyword(stmp);
-
         otmp = xml.getInputObject("PICK_TIME");
         stmp = (String)otmp;
         en.setPickTime(stmp);
@@ -461,11 +306,6 @@ public class DbDeviceInspectPickLog extends RootDB{
         String stmp;
         EnDeviceInspectPickLog en;
         Object[] oSendId;
-        Object[] oDeviceId;
-        Object[] oDeviceName;
-        Object[] oDeviceIp;
-        Object[] oLocationId;
-        Object[] oPickKeyword;
         Object[] oPickTime;
         Object[] oLogCont;
         int count = 0;
@@ -473,26 +313,6 @@ public class DbDeviceInspectPickLog extends RootDB{
         oSendId = xml.getInputObjects("SEND_ID");
         if (count == 0 && oSendId.length > 0) {
             count = oSendId.length;
-        }
-        oDeviceId = xml.getInputObjects("DEVICE_ID");
-        if (count == 0 && oDeviceId.length > 0) {
-            count = oDeviceId.length;
-        }
-        oDeviceName = xml.getInputObjects("DEVICE_NAME");
-        if (count == 0 && oDeviceName.length > 0) {
-            count = oDeviceName.length;
-        }
-        oDeviceIp = xml.getInputObjects("DEVICE_IP");
-        if (count == 0 && oDeviceIp.length > 0) {
-            count = oDeviceIp.length;
-        }
-        oLocationId = xml.getInputObjects("LOCATION_ID");
-        if (count == 0 && oLocationId.length > 0) {
-            count = oLocationId.length;
-        }
-        oPickKeyword = xml.getInputObjects("PICK_KEYWORD");
-        if (count == 0 && oPickKeyword.length > 0) {
-            count = oPickKeyword.length;
         }
         oPickTime = xml.getInputObjects("PICK_TIME");
         if (count == 0 && oPickTime.length > 0) {
@@ -508,31 +328,6 @@ public class DbDeviceInspectPickLog extends RootDB{
             if (oSendId.length == count) {
                 stmp = (String)oSendId[i];
                 en.setSendId(stmp);
-            }
-
-            if (oDeviceId.length == count) {
-                stmp = (String)oDeviceId[i];
-                en.setDeviceId(stmp);
-            }
-
-            if (oDeviceName.length == count) {
-                stmp = (String)oDeviceName[i];
-                en.setDeviceName(stmp);
-            }
-
-            if (oDeviceIp.length == count) {
-                stmp = (String)oDeviceIp[i];
-                en.setDeviceIp(stmp);
-            }
-
-            if (oLocationId.length == count) {
-                stmp = (String)oLocationId[i];
-                en.setLocationId(stmp);
-            }
-
-            if (oPickKeyword.length == count) {
-                stmp = (String)oPickKeyword[i];
-                en.setPickKeyword(stmp);
             }
 
             if (oPickTime.length == count) {
@@ -556,11 +351,6 @@ public class DbDeviceInspectPickLog extends RootDB{
     public int setToXml(XMLWrap xml,EnDeviceInspectPickLog en) throws ErrorException {
         int row = xml.addRow("DEVICE_INSPECT_PICK_LOG");
         xml.setItemValue("DEVICE_INSPECT_PICK_LOG",row,"SEND_ID",en.getSendId());
-        xml.setItemValue("DEVICE_INSPECT_PICK_LOG",row,"DEVICE_ID",en.getDeviceId());
-        xml.setItemValue("DEVICE_INSPECT_PICK_LOG",row,"DEVICE_NAME",en.getDeviceName());
-        xml.setItemValue("DEVICE_INSPECT_PICK_LOG",row,"DEVICE_IP",en.getDeviceIp());
-        xml.setItemValue("DEVICE_INSPECT_PICK_LOG",row,"LOCATION_ID",en.getLocationId());
-        xml.setItemValue("DEVICE_INSPECT_PICK_LOG",row,"PICK_KEYWORD",en.getPickKeyword());
         xml.setItemValue("DEVICE_INSPECT_PICK_LOG",row,"PICK_TIME",en.getPickTime());
         xml.setItemValue("DEVICE_INSPECT_PICK_LOG",row,"LOG_CONT",en.getLogCont());
         return row;
@@ -576,11 +366,6 @@ public class DbDeviceInspectPickLog extends RootDB{
             en = (EnDeviceInspectPickLog)ens.get(i);
             row = xml.addRow("DEVICE_INSPECT_PICK_LOG");
             xml.setItemValue("DEVICE_INSPECT_PICK_LOG",row,"SEND_ID",en.getSendId());
-            xml.setItemValue("DEVICE_INSPECT_PICK_LOG",row,"DEVICE_ID",en.getDeviceId());
-            xml.setItemValue("DEVICE_INSPECT_PICK_LOG",row,"DEVICE_NAME",en.getDeviceName());
-            xml.setItemValue("DEVICE_INSPECT_PICK_LOG",row,"DEVICE_IP",en.getDeviceIp());
-            xml.setItemValue("DEVICE_INSPECT_PICK_LOG",row,"LOCATION_ID",en.getLocationId());
-            xml.setItemValue("DEVICE_INSPECT_PICK_LOG",row,"PICK_KEYWORD",en.getPickKeyword());
             xml.setItemValue("DEVICE_INSPECT_PICK_LOG",row,"PICK_TIME",en.getPickTime());
             xml.setItemValue("DEVICE_INSPECT_PICK_LOG",row,"LOG_CONT",en.getLogCont());
         }
