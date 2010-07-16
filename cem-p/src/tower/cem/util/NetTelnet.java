@@ -224,6 +224,10 @@ public class NetTelnet {
 	return this.bFlag;
     }
 
+    public void setTimeOut(int second) {
+	this.timeOut = second * 1000;
+    }
+
     public static void main(String[] args) {
 	try {
 
@@ -279,12 +283,12 @@ public class NetTelnet {
 		    // 命令是 pwd 查看当前所在目录
 		    result = telnet.sendCommand("pwd");
 		    System.out.print(result);
-		    
+
 		    result = telnet.sendCommand("df");
-		    String strSplit[] =result.split("\n");
-		    System.out.println("----split string size():="+strSplit.length);
-		    for(int i=0; i<strSplit.length; i++){
-			System.out.println("----split string ----"+strSplit[i]+"----");
+		    String strSplit[] = result.split("\n");
+		    System.out.println("----split string size():=" + strSplit.length);
+		    for (int i = 0; i < strSplit.length; i++) {
+			System.out.println("----split string ----" + strSplit[i] + "----");
 		    }
 
 		    // 从第二台服务器退出
