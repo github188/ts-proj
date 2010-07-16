@@ -42,7 +42,7 @@
 
 <body id="mainArea">
   <div id="mainPanel" class="panel">
-    <div class="panelHead">设备端口类型查看</div>
+    <div class="panelHead">指令模板查看</div>
     <div class="panelContent">
       <div class="panelContent2">
         <!-- Tab面板 -->
@@ -58,19 +58,24 @@
                     <div class="panelContent2">
                       <!-- 查询面板内容 -->
                    <form action="ctrl" method="post"name="form1"onSubmit="return doSubmit(this)">
-                      <table border="0" cellpadding="0" cellspacing="0">
+                      <table>
                       <tr>
-                          <td width="120" align="right">维护指令模板名称：</td>
+                          <td width="120" align="right">指令模板名称：</td>
 		                  <td width="100">
              					 <input type="text" class="text" name="TEMP_NAME"value="<%=tempName %>" readonly> 
 		                  </td>
-                          <td wwidth="120" align="right">维护指令模板说明：</td>
+		               </tr>
+		                <tr>		                  
+                          <td wwidth="120" align="right">指令模板说明：</td>
 		                  <td width="100">
-              					<input type="text" class="text" name="TEMP_DESC"value="<%=tempDesc %>" readonly>
+		                      <span id="spryTempDesc">
+		                      <textarea name="TEMP_DESC" id="textarea" class="textarea" cols="50" rows="5" readonly><%=tempDesc %></textarea>
+		                            <span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
+		                            </span>
 		                  </td>
 		               </tr>
 		                <tr>
-		                 <td width="120" align="right">维护指令模板内容：</td>
+		                 <td width="120" align="right">指令模板内容：</td>
 		                 <td colspan="3"> 
               				<textarea name="TEMP_CONT" id="textarea" class="textarea" cols="50" rows="10" readonly><%=tempCont%></textarea>
 		                 </td>

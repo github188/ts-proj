@@ -102,9 +102,9 @@ function doSubmit(form) {
                <input type="hidden" name=CUR_PAGE value="">
                <table>
               	 <tr>
-              	 <td align="right">端口类型名称-英文：</td>
+              	 <td align="right">端口类型英文名称：</td>
                   <td><input type="text" class="text" name="QTYPE_NAME_EN" value="<%=typeNameEn %>"></td>
-                 <td align="right">端口类型名称-中文：</td>
+                 <td align="right">端口类型中文名称：</td>
 	                 <td><input type="text" class="text" name="QTYPE_NAME_CN" value="<%=typeNameCn %>"></td>
 	                 
 	                  <td align="right" nowrap="nowrap"><input type="submit" class="submit"  value="查询">
@@ -131,12 +131,11 @@ function doSubmit(form) {
               <!-- 列表内容 -->
               <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
                  <tr>
-                  <th>端口类型名称-英文</th>
-                  <th>端口类型名称-中文</th>
-                  <th>标准最大接收光功率</th>
-                  <th>标准最小接收光功率</th>
-                  <th>网络要求的最小接收光功率</th>
-                  <th>备注</th>
+                  <th>端口类型英文名称</th>
+                  <th>端口类型中文名称</th>
+                  <th>光功率/标准最大值</th>
+                  <th>光功率/标准最小值</th>
+                  <th>光功率/网络要求最小值</th>
                   <th width="10%">[ <a href="JavaScript:doAdd()">添加</a> ]</th>
                 </tr>
               <%if(typeIds != null){
@@ -153,12 +152,12 @@ function doSubmit(form) {
                   <td align="center"><%=standardRxMaxs[i]%></td>
                   <td align="center"><%=standardRxMins[i]%></td>
                   <td align="center"><%=netWorkRxMins[i]%></td>
-                   <td align="center"><%=remarks[i]%></td>
                  <td align="center" nowrap>[ <a href="JavaScript:doEdit('<%=typeIds[i] %>')">编辑</a> | <a href="JavaScript:doDelete('<%=typeIds[i] %>')">删除 </a>]</td>
                 </tr>
      
                <%} else {%>
                    <tr class="dark" onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
+                   <td align="center" onClick="event.cancelBubble=true">
                   <a href="JavaScript:doView('<%=typeIds[i]%>')">
                   <%=typeNameEns[i]%>
                   </a>
@@ -166,7 +165,6 @@ function doSubmit(form) {
                   <td align="center"><%=standardRxMaxs[i]%></td>
                   <td align="center"><%=standardRxMins[i]%></td>
                   <td align="center"><%=netWorkRxMins[i]%></td>
-                   <td align="center"><%=remarks[i]%></td>
                   <td align="center" nowrap>[ <a href="JavaScript:doEdit('<%=typeIds[i] %>')">编辑</a> | <a href="JavaScript:doDelete('<%=typeIds[i] %>')">删除 </a>]</td>
                 </tr>
                <%}}} %>

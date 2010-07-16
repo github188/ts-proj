@@ -79,7 +79,7 @@ function doSubmit(form) {
 </head>
 <body id="mainArea">
   <div id="mainPanel" class="panel">
-    <div class="panelHead">维护指令模板管理</div>
+    <div class="panelHead">指令模板管理</div>
     <div class="panelContent">
       <div class="panelContent2">    
         <!-- 查询面板 -->
@@ -93,9 +93,9 @@ function doSubmit(form) {
                <input type="hidden" name=CUR_PAGE value="">
                <table>
               	 <tr>
-              	 <td align="right">维护指令模板名称：</td>
+              	 <td align="right">指令模板名称：</td>
                   <td><input type="text" class="text" name="QTEMP_NAME" value="<%=tempName %>"></td>
-                 <td align="right">维护指令模板说明：</td>
+                 <td align="right">指令模板说明：</td>
 	              <td><input type="text" class="text" name="QTEMP_DESC" value="<%=tempDesc %>"></td>
 	                 
 	                  <td align="right" nowrap="nowrap"><input type="submit" class="submit"  value="查询">
@@ -121,8 +121,8 @@ function doSubmit(form) {
               <!-- 列表内容 -->
               <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
                  <tr>
-                  <th>维护指令模板名称</th>
-                  <th>维护指令模板说明</th>
+                  <th width="30%">指令模板名称</th>
+                  <th width="60%">指令模板说明</th>
                   <th width="10%">[ <a href="JavaScript:doAdd()">添加</a> ]</th>
                 </tr>
               <%if(tempIds != null){
@@ -139,10 +139,12 @@ function doSubmit(form) {
                 </tr>
                <%} else {%>
                    <tr class="dark" onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
+                   <td align="center" onClick="event.cancelBubble=true">
                   <a href="JavaScript:doView('<%=tempIds[i]%>')">
                   <%=tempNames[i]%>
                   </a>
-                  <td align="center"><%=tempDescs[i]%></td>
+                  </td>
+                  <td align="center"><%=tempDescs[i]%>
                    <td align="center" nowrap>[ <a href="JavaScript:doEdit('<%=tempIds[i] %>')">编辑</a> | <a href="JavaScript:doDelete('<%=tempIds[i] %>')">删除 </a>]</td>
                 </tr>
                <%}}} %>

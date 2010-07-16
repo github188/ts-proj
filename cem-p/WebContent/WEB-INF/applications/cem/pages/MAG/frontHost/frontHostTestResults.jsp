@@ -28,7 +28,9 @@
   sResult = nt.FunLogin(hostIp, hostPort, hostUser, hostPassword, hostPrompt);
   sbResult.append(sResult);
   if(!nt.getBflag()) {
-   sbResult.append("登录堡垒主机失败。");
+      sbResult.append("登录堡垒主机失败。");
+  }else{
+      sbResult.append("登录堡垒主机成功。");
   }
   nt.disconnect();
 %>
@@ -58,10 +60,10 @@
                   <div class="panelContent">
                     <div class="panelContent2">                    
                       <!-- 查询面板内容 -->
-                      <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                      <table width="50%" border="0" cellpadding="0" cellspacing="0">
               	 <tr>
               	 <td align="left">
-              	 <textarea id="textarea" class="textarea" cols="50" rows="10" readonly> <%=sbResult %></textarea>
+              	 <textarea id="textarea" class="textarea" cols="60" rows="10" readonly> <%=sbResult %></textarea>
               	 </td>
                  </tr>
                  </table>

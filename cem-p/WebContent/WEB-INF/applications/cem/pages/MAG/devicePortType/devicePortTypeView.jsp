@@ -66,35 +66,39 @@
                     <div class="panelContent2">
                       <!-- 查询面板内容 -->
                    <form action="ctrl" method="post"name="form1"onSubmit="return doSubmit(this)">
-                     <table border="0" cellpadding="0" cellspacing="0">
+                     <table>
                       <tr>
-                          <td width="120" align="right">端口类型名称-英文：</td>
+                          <td width="150" align="right">端口类型英文名称：</td>
 		                  <td width="100">
 		                   <input type="text" class="text" value="<%=typeNameEn %>" readonly>
 		                  </td>
-                          <td wwidth="120" align="right">端口类型名称-中文：</td>
+		               </tr>
+		                <tr>		                  
+                          <td wwidth="150" align="right">端口类型中文名称：</td>
 		                  <td width="100">
 		                  <input type="text" class="text" value="<%=typeNameCn %>" readonly>
 		                  </td>
 		               </tr>
 		                <tr>
-                          <td width="120" align="right">标准最大接收光功率：</td>
+                          <td width="120" align="right">光功率/标准最大值：</td>
 		                  <td width="100">
 		                   <input type="text" class="text" value="<%=standardRxMax %>" readonly>
 		                  </td>
-                          <td wwidth="120" align="right">标准最小接收光功率：</td>
+		               </tr>
+		                <tr>		                  
+                          <td wwidth="120" align="right">光功率/标准最小值：</td>
 		                  <td width="100">
 		                   <input type="text" class="text" value="<%=standardRxMin %>" readonly>
 		                  </td>
 		               </tr>
 		                <tr>
-                          <td width="150" align="right">网络要求的最小接收光功率：</td>
+                          <td width="150" align="right">光功率/网络要求最小值：</td>
 		                  <td width="100">
 		                   <input type="text" class="text" value="<%=netWorkRxMin %>" readonly>
 		                  </td>
 		               </tr>
 		                <tr>
-		                 <td width="120" align="right">备注：</td>
+		                 <td width="150" align="right">备注：</td>
 		                 <td colspan="3"> 
               					<textarea name="REMARK" id="textarea" class="textarea" cols="50" rows="4" readonly><%=remark%></textarea>
 		                 </td>

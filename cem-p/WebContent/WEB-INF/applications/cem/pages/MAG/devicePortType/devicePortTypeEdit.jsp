@@ -49,9 +49,9 @@
 <body id="mainArea">
   <div id="mainPanel" class="panel">
     <%if(typeId !=null && typeId.length() != 0){ %>
-    <div class="panelHead">设备端口类型管理 - 设备端口类型编辑</div>
+    <div class="panelHead">设备端口类型管理 - 编辑</div>
     <%}else{ %>
-    <div class="panelHead">设备端口类型管理 - 设备端口类型添加</div>
+    <div class="panelHead">设备端口类型管理 - 添加</div>
     <%} %>
     <div class="panelContent">
       <div class="panelContent2">
@@ -72,9 +72,9 @@
                    <form action="ctrl" method="post"name="form1"onSubmit="return doSubmit(this)">
                      <input type="hidden" name="FUNC_ID" value="DevicePortTypeSubmit">
                       <input type="hidden" name="TYPE_ID" value="<%=typeId%>"> 
-                     <table border="0" cellpadding="0" cellspacing="0">
+                     <table>
                       <tr>
-                          <td width="120" align="right">端口类型名称-英文：</td>
+                          <td width="150" align="right">端口类型英文名称：</td>
 		                  <td width="100">
 		                      <span id="spryTypeNameEn">
              					 <input type="text" class="text" name="TYPE_NAME_EN"value="<%=typeNameEn %>"><span class="requiredField">*</span>
@@ -82,24 +82,28 @@
 		                            <span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 		                            </span>
 		                  </td>
-		                  
-                          <td wwidth="120" align="right">端口类型名称-中文：</td>
+		               </tr>
+		                <tr>		                  
+                          <td width="150" align="right">端口类型英中文名称：</td>
 		                  <td width="100">
 		                      <span id="sprytStandardRxMax">
-              					<input type="text" class="text" name="TYPE_NAME_CN"value="<%=typeNameCn %>">
+              					<input type="text" class="text" name="TYPE_NAME_CN"value="<%=typeNameCn %>"><span class="requiredField">*</span>
+		                            <span class="textfieldRequiredMsg">需要提供一个值。</span>              					
 		                            <span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 		                            </span>
 		                  </td>
 		               </tr>
 		                <tr>
-                          <td width="120" align="right">标准最大接收光功率：</td>
+                          <td width="150" align="right">光功率/标准最大值：</td>
 		                  <td width="100">
 		                      <span id="spryTypeNameEn">
              					 <input type="text" class="text" name="STANDARD_RX_MAX"value="<%=standardRxMax %>">
 		                            <span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 		                            </span>
 		                  </td>
-                          <td wwidth="120" align="right">标准最小接收光功率：</td>
+		               </tr>
+		                <tr>		                  
+                          <td width="150" align="right">光功率/标准最小值：</td>
 		                  <td width="100">
 		                      <span id="sprytStandardRxMin">
               					<input type="text" class="text" name="STANDARD_RX_MIN"value="<%=standardRxMin %>">
@@ -108,7 +112,7 @@
 		                  </td>
 		               </tr>
 		                <tr>
-                          <td width="120" align="right">网络要求的最小接收光功率：</td>
+                          <td width="150" align="right">光功率/网络要求最小值：</td>
 		                  <td width="100">
 		                      <span id="spryNetWorkRxMin">
              					 <input type="text" class="text" name="NETWORK_RX_MIN"value="<%=netWorkRxMin %>">
@@ -117,7 +121,7 @@
 		                  </td>
 		               </tr>
 		                <tr>
-		                 <td width="120" align="right">备注：</td>
+		                 <td width="150" align="right">备注：</td>
 		                 <td colspan="3"> 
               			<span id="spryRemark">
               					<textarea name="REMARK" id="textarea" class="textarea" cols="50" rows="4"><%=remark%></textarea>

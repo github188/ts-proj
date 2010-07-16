@@ -43,9 +43,9 @@
 <body id="mainArea">
   <div id="mainPanel" class="panel">
     <%if(tempId !=null && tempId.length() != 0){ %>
-    <div class="panelHead">维护指令模板管理 - 维护指令模板编辑</div>
+    <div class="panelHead">指令模板管理 - 编辑</div>
     <%}else{ %>
-    <div class="panelHead">维护指令模板管理 - 维护指令模板添加</div>
+    <div class="panelHead">指令模板管理 - 添加</div>
     <%} %>
     <div class="panelContent">
       <div class="panelContent2">
@@ -66,9 +66,9 @@
                    <form action="ctrl" method="post"name="form1"onSubmit="return doSubmit(this)">
                       <input type="hidden" name="FUNC_ID" value="tempSubmit">
                       <input type="hidden" name="TEMP_ID" value="<%=tempId%>"> 
-                     <table border="0" cellpadding="0" cellspacing="0">
+                     <table>
                       <tr>
-                          <td width="120" align="right">维护指令模板名称：</td>
+                          <td width="120" align="right">指令模板名称：</td>
 		                  <td width="100">
 		                      <span id="spryTempName">
              					 <input type="text" class="text" name="TEMP_NAME"value="<%=tempName %>"><span class="requiredField">*</span>
@@ -78,7 +78,7 @@
 		                  </td>
 		                  </tr>
 		                  <tr>
-                          <td wwidth="120" align="right">维护指令模板说明：</td>
+                          <td wwidth="120" align="right">指令模板说明：</td>
 		                  <td width="100">
 		                      <span id="spryTempDesc">
 		                      <textarea name="TEMP_DESC" id="textarea" class="textarea" cols="50" rows="5"><%=tempDesc %></textarea>
@@ -87,7 +87,7 @@
 		                  </td>
 		               </tr>
 		                <tr>
-		                 <td width="120" align="right">维护指令模板内容：</td>
+		                 <td width="120" align="right">指令模板内容：</td>
 		                 <td colspan="3"> 
               			<span id="spryTempCont">
               					<textarea name="TEMP_CONT" id="textarea" class="textarea" cols="50" rows="10"><%=tempCont%></textarea>

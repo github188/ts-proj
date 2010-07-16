@@ -22,7 +22,7 @@
 </head>
 <body id="mainArea">
   <div id="mainPanel" class="panel">
-    <div class="panelHead">维护指令模板发送</div>
+    <div class="panelHead">指令模板发送-完成！</div>
     <div class="panelContent">
       <div class="panelContent2">
         

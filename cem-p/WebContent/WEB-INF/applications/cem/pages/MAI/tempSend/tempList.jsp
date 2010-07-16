@@ -76,7 +76,7 @@ function doSubmit(form) {
 </head>
 <body id="mainArea">
   <div id="mainPanel" class="panel">
-    <div class="panelHead">维护指令模板发送-选择模板</div>
+    <div class="panelHead">指令模板发送-第二步.选择指令模板（共两步）</div>
     <div class="panelContent">
       <div class="panelContent2">    
         <!-- 查询面板 -->
@@ -93,9 +93,9 @@ function doSubmit(form) {
                <input type="hidden" name=CUR_PAGE value="">
                <table>
               	 <tr>
-              	 <td align="right">维护指令模板名称：</td>
+              	 <td align="right">指令模板名称：</td>
                   <td><input type="text" class="text" name="QTEMP_NAME" value="<%=tempName %>"></td>
-                 <td align="right">维护指令模板说明：</td>
+                 <td align="right">指令模板说明：</td>
 	              <td><input type="text" class="text" name="QTEMP_DESC" value="<%=tempDesc %>"></td>
 	                 
 	                  <td align="right" nowrap="nowrap"><input type="submit" class="submit"  value="查询">
@@ -128,8 +128,8 @@ function doSubmit(form) {
               <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
                  <tr>
                   <th></th>
-                  <th>维护指令模板名称</th>
-                  <th>维护指令模板说明</th>
+                  <th>指令模板名称</th>
+                  <th>指令模板说明</th>
                 </tr>
               <%if(tempIds != null){
 			  for (int i = 0; i < tempIds.length; i++) {
@@ -158,7 +158,7 @@ function doSubmit(form) {
               <table width="100%" border="0" cellpadding="0" cellspacing="0" >
               <tr>
                 <td colspan="9" align="center">
-                 	<input size="10" type="submit" class="submit"  value="发送模板" >
+                 	<input size="10" type="submit" class="submit"  value="发送指令模板" >
                 </td>
                 <td></td>
                 <td></td>

@@ -35,13 +35,13 @@ public class IdCreatorDefine {
 	public static final int ID_LEN_TEMP_ID = 6;
 	
 	public static final String ID_TYPE_SEND_ID = "SEND_ID";
-	public static final int ID_LEN_SEND_ID = 6;
+	public static final int ID_LEN_SEND_ID = 10;
 	
 	public static final String ID_TYPE_DEVICE_PORT_ID = "PORT_ID";
 	public static final int ID_LEN_DEVICE_PORT_ID = 6;
 	
 	public static final String ID_TYPE_DEVICE_COMMAND_LOG_ID = "LOG_ID";
-	public static final int ID_LEN_DEVICE_COMMAND_LOG_ID = 6;
+	public static final int ID_LEN_DEVICE_COMMAND_LOG_ID = 10;
 	
 	
 }
