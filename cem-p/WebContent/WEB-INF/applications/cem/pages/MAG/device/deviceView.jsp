@@ -10,6 +10,7 @@
 	String deviceNameCn;
 	String deviceAbbNameEn;
 	String typeId;
+	String typeName;
 	String locationId;
 	String locationNameCn;
 	String deviceStatus;
@@ -29,6 +30,7 @@
 	deviceNameCn = xml.getItemValue("DEVICE_INFO",1,"DEVICE_ABB_NAME_EN");
 	deviceAbbNameEn = xml.getItemValue("DEVICE_INFO",1,"DEVICE_NAME_CN");
 	typeId = xml.getItemValue("DEVICE_INFO",1,"TYPE_ID");
+	typeName = xml.getItemValue("DEVICE_INFO",1,"TYPE_NAME");
 	locationId = xml.getItemValue("DEVICE_INFO",1,"LOCATION_ID");
 	locationNameCn = xml.getItemValue("DEVICE_INFO",1,"LOCATION_NAME");
 	deviceStatus = xml.getItemValue("DEVICE_INFO",1,"DEVICE_STATUS");
@@ -55,7 +57,7 @@
   	window.location.href="ctrl?FUNC_ID=DeviceList";
   }
    function doSelDeviceTestResult(deviceId){
-    selDialog("ctrl?FUNC_ID=DevoceTest&DEVICE_ID="+deviceId,"DEVICE_ID",850,550,false);
+    selDialog("ctrl?FUNC_ID=DevoceTest&DEVICE_ID="+deviceId,"DEVICE_ID","DEVICE_NAME_CN",850,550,false);
   }
 -->
 </script>
@@ -115,7 +117,7 @@
 		               <tr>
 		               	  <td width="150" align="right">设备类型：</td>
 		                 <td>
-              					<input type="text" class="text" name="TYPE_ID"value="<%=typeId %>" readonly> 
+              					<input type="text" class="text" "value="<%=typeName %>" readonly> 
 		                 </td>
 		               </tr>
 		                

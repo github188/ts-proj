@@ -41,6 +41,9 @@
 	frontHostName = xml.getInputValue("FRONT_HOST_NAME");
 	deviceStatus = xml.getInputValue("DEVICE_STATUS");
 	deviceIp = xml.getInputValue("DEVICE_IP");
+	devicePort = xml.getInputValue("DEVICE_PORT");
+	locationId = xml.getInputValue("LOCATION_ID");
+	locationNameCn = xml.getInputValue("LOCATION_NAME_CN");
 
 	deviceIds = xml.getItemValues("DEVICE_INFO","DEVICE_ID");
 	deviceNameEns = xml.getItemValues("DEVICE_INFO", "DEVICE_NAME_EN");
@@ -95,7 +98,7 @@ function doSubmit(form) {
   form1.submit();
   }
    function doSelFrontHost(){
-    selDialog("ctrl?FUNC_ID=SelectFrontHost","FRONT_DEVICE_ID","FRONT_DEVICE_NAME",850,550,false);
+    selDialog("ctrl?FUNC_ID=SelectFrontHost","FRONT_HOST_ID","FRONT_HOST_NAME",850,550,false);
   }
   
    function doSelLocation(){
@@ -105,6 +108,10 @@ function doSubmit(form) {
     form1.DEVICE_NAME_EN.value="";
     form1.DEVICE_NAME_CN.value="";
     form1.DEVICE_IP.value="";
+    form1.LOCATION_ID.value="";
+    form1.LOCATION_NAME_CN.value="";
+    form1.FRONT_HOST_ID.value="";
+    form1.FRONT_HOST_NAME.value="";
     form1.DEVICE_STATUS.selectedIndex=0;   
   }
   
@@ -139,9 +146,28 @@ function doSubmit(form) {
                  	<td align="right">设备中文名称：</td>
 	                <td><input type="text" class="text" name="DEVICE_NAME_CN" value="<%=deviceNameCn %>"></td>
                  </tr>
+                 	<tr>
+		                	<td width="150" align="right">物理位置：</td>
+		                 	<td>
+		                  		<input name="LOCATION_ID" type="hidden"  value="<%=locationId %>">
+		                  		<input type="text" class="date" name="LOCATION_NAME_CN"   value="<%=locationNameCn %>"  readonly>
+		                  		<input type="button" name="selectOutOrg" class="selButton" value="选择" onClick="doSelLocation()" />
+  				         	</td>
+  				         	
+  				         	<td width="150" align="right">堡垒主机：</td>
+			                <td>
+			                  <input name="FRONT_HOST_ID" type="hidden"  value="<%=frontHostId %>">
+			                  <input type="text" class="date" name="FRONT_HOST_NAME"   value="<%=frontHostName %>"  readonly>
+			                   <input type="button" name="selectOutOrg" class="selButton" value="选择" onClick="doSelFrontHost()" />
+			                 </td>
+		               </tr>
                  <tr>
 	                 <td align="right">网络地址：</td>
-	                 <td><input type="text" class="text" name="DEVICE_IP" value="<%=deviceIp %>"></td>            
+	                 <td><input type="text" class="text" name="DEVICE_IP" value="<%=deviceIp %>"></td>  
+	                   <td align="right">端口：</td>
+	                 <td><input type="text" class="text" name="DEVICE_PORT" value="<%=devicePort %>"></td>            
+		           </tr>
+		            <tr>
 		             <td align="right">设备状态：</td>
 	                 <td >
 	                     <select name="DEVICE_STATUS" class="select" id="DEVICE_STATUS" style="width:11em">
@@ -151,8 +177,8 @@ function doSubmit(form) {
                         <%} %>
                         </select>
 					</td>
-        	        <td>&nbsp;</td>
-            	    <td>&nbsp;</td>
+					<td></td>
+					<td></td>
                 	<td align="right" nowrap="nowrap"><input type="submit" class="submit"  value="查询">
                    	<input type="button" class="button" onClick="doClear();" value="重置">
                    	</td>

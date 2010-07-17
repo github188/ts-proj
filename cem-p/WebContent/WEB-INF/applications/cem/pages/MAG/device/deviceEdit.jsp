@@ -10,6 +10,7 @@
 	String deviceNameCn;
 	String deviceAbbNameEn;
 	String typeId;
+	String typeName;
 	String locationId;
 	String locationNameCn;
 	String deviceStatus;
@@ -29,8 +30,9 @@
 	deviceNameCn = xml.getItemValue("DEVICE_INFO",1,"DEVICE_ABB_NAME_EN");
 	deviceAbbNameEn = xml.getItemValue("DEVICE_INFO",1,"DEVICE_NAME_CN");
 	typeId = xml.getItemValue("DEVICE_INFO",1,"TYPE_ID");
+	typeName = xml.getItemValue("DEVICE_INFO",1,"TYPE_NAME");
 	locationId = xml.getItemValue("DEVICE_INFO",1,"LOCATION_ID");
-	locationNameCn = xml.getInputValue("LOCATION_NAME");
+	locationNameCn = xml.getItemValue("DEVICE_INFO",1,"LOCATION_NAME");
 	deviceStatus = xml.getItemValue("DEVICE_INFO",1,"DEVICE_STATUS");
 	frontHostId = xml.getItemValue("DEVICE_INFO",1,"FRONT_HOST_ID");
 	frontHostName = xml.getItemValue("DEVICE_INFO",1,"FRONT_HOST_NAME");
@@ -56,7 +58,7 @@
 <!--
     
   function doSelFrontHost(){
-    selDialog("ctrl?FUNC_ID=SelectFrontHost","FRONT_DEVICE_ID","FRONT_DEVICE_NAME",850,550,false);
+    selDialog("ctrl?FUNC_ID=SelectFrontHost","FRONT_HOST_ID","FRONT_HOST_NAME",850,550,false);
   }
   function doReturn(){
   	window.location.href="ctrl?FUNC_ID=DeviceList";
@@ -64,6 +66,9 @@
   
    function doSelLocation(){
    	selDialog("ctrl?FUNC_ID=SelectLocation","LOCATION_ID","LOCATION_NAME_CN",850,550,false);
+   }
+   function doSelDeviceType(){
+   	selDialog("ctrl?FUNC_ID=SelectDeviceType","TYPE_ID","TYPE_NAME",850,550,false);
    }
    
    function doSubmit(form) 
@@ -86,16 +91,17 @@
     <%} %>
     <div class="panelContent">
       <div class="panelContent2">
-        
         <!-- Tab面板 -->
-        <div id="TabbedPanels1" class="TabbedPanels">
-        <div id="TabbedPanels1" class="TabbedPanels">
+        <div id="TabbedPanels1" class="TabbedPanels"> 
+        <ul class="TabbedPanelsTabGroup">
+          <li class="TabbedPanelsTab TabbedPanelsTabSelected" tabindex="0" ><a onclick="window.location.href='ctrl?FUNC_ID=DeviceEdit&DEVICE_ID=<%=deviceId %>'">设备信息</a></li>
+          <li class="TabbedPanelsTab" tabindex="0"><a onclick="window.location.href='ctrl?FUNC_ID=DevicePortList&DEVICE_ID=<%=deviceId %>'">设备端口信息</a></li>
+        </ul>
           <div class="TabbedPanelsContentGroup">
             <div class="TabbedPanelsContent">
               <!-- Tab内容 -->
                 <!-- 查询面板 -->
                 <div class="panelQuery">
-                 
                   <div class="panelHead"></div>
                   <div class="panelContent">
                     <div class="panelContent2">
@@ -104,7 +110,6 @@
                      <input type="hidden" name="FUNC_ID" value="DeviceSubmit">
                       <input type="hidden" name="DEVICE_ID" value="<%=deviceId%>"> 
                      <table>
-                     
 						<tr>
                           <td width="150" align="right">设备英文名称：</td>
 		                  <td width="100">
@@ -130,7 +135,7 @@
 		               		<td width="150" align="right">设备中文名称：</td>
 		                 	<td>
 		                      <span id="sprytDeviceAbbNameEn">
-              					<input type="text" class="text" name="DEVICE_NAME_CN"value="<%=deviceNameCn %>"><span class="requiredField">*</span>
+              					<input type="text" class="text" name="DEVICE_NAME_CN"value="<%=deviceNameCn %>" readonly><span class="requiredField">*</span>
               					 <span class="textfieldRequiredMsg">需要提供一个值。</span>
               					<span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 		                         </span>
@@ -148,9 +153,11 @@
 		               
 		               <tr>
 			               <td width="150" align="right">设备类型：</td>
-		    	           <td>
-              					<input type="text" class="text" name="TYPE_ID"value="<%=typeId %>"> 
-		        	       </td>
+		        	       <td>
+		                  		<input name="TYPE_ID" type="hidden"  value="<%=typeId %>">
+		                  		<input type="text" class="date" name="TYPE_NAME"   value="<%=typeName %>"  readonly>
+		                  		<input type="button" name="selectOutOrg" class="selButton" value="选择" onClick="doSelDeviceType()" />
+  				         	</td>
 		               </tr>
 		               
 		               <tr>
@@ -263,7 +270,6 @@
       </div>
     </div>
     <div class="panelFoot"><div></div></div>
-  </div>
     
   <script type="text/javascript">
 <!--
