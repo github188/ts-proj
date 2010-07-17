@@ -86,9 +86,8 @@
 		                <tr>		                  
                           <td width="150" align="right">端口类型英中文名称：</td>
 		                  <td width="100">
-		                      <span id="sprytStandardRxMax">
-              					<input type="text" class="text" name="TYPE_NAME_CN"value="<%=typeNameCn %>"><span class="requiredField">*</span>
-		                            <span class="textfieldRequiredMsg">需要提供一个值。</span>              					
+		                      <span id="spryTypeNameCn">
+              					<input type="text" class="text" name="TYPE_NAME_CN"value="<%=typeNameCn %>">
 		                            <span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 		                            </span>
 		                  </td>
@@ -96,7 +95,7 @@
 		                <tr>
                           <td width="150" align="right">光功率/标准最大值：</td>
 		                  <td width="100">
-		                      <span id="spryTypeNameEn">
+		                      <span id="sprytStandardRxMax">
              					 <input type="text" class="text" name="STANDARD_RX_MAX"value="<%=standardRxMax %>">
 		                            <span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 		                            </span>
@@ -161,7 +160,7 @@
   <script type="text/javascript">
 <!--
 var sprytextfield1 = new Spry.Widget.ValidationTextField("spryTypeNameEn","none", {required:true,maxChars:60});
-var sprytextfield2 = new Spry.Widget.ValidationTextField("sprytTypeNameCn", "none", {required:false,maxChars:60});
+var sprytextfield2 = new Spry.Widget.ValidationTextField("spryTypeNameCn", "none", {required:false,maxChars:60});
 var sprytextfield3 = new Spry.Widget.ValidationTextField("sprytStandardRxMax", "none", {required:false,maxChars:50});
 var sprytextfield4 = new Spry.Widget.ValidationTextField("sprytStandardRxMin", "none", {required:false,maxChars:50});
 var sprytextfield5 = new Spry.Widget.ValidationTextField("spryNetWorkRxMin", "none", {required:false,maxChars:50});
