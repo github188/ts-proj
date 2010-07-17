@@ -76,14 +76,8 @@ function doSubmit(form) {
    function doClear(){
     form1.DEVICE_NAME_EN.value="";
     form1.DEVICE_NAME_CN.value="";
-    form1.LOCATION_ID.value = "";
-    form1.LOCATION_NAME_CN.value="";
     form1.DEVICE_IP.value="";
-    form1.DEVICE_PORT.value="";
     form1.DEVICE_STATUS.selectedIndex=0;
-    form1.FRONT_DEVICE_ID.value="";
-    form1.FRONT_DEVICE_NAME.value="";
-   
   }
    function onChange(selectedIds,selector){
   	//alert(selector.element.innerHTML);
@@ -91,6 +85,34 @@ function doSubmit(form) {
   	//	alert(selectedIds[i]);
   	//}
   }
+  function doCheck(form){
+    var flg = 0;
+    if((typeof form.TYPE_ID.length) == "undefined")
+    {
+       if(formQuery.TYPE_ID.checked == true)
+  	  	{
+  	  		flg = 1;
+  	  	}
+    }else{
+      for(var i=0;i<formQuery.TYPE_ID.length;i++)
+      {
+        if(formQuery.TYPE_ID[i].checked)
+        {
+          flg = 1;
+          break;
+        }
+      }
+    }
+    if(flg == 0)
+    {
+      alert("请选择设备");
+      return false;
+    }
+    else
+    {
+      return true;
+    }
+    }
 -->
 </script>
 
@@ -173,12 +195,14 @@ function doSubmit(form) {
                   <th>网络端口</th>
                   <th>设备状态</th>
                 </tr>
-                <%if(deviceIds != null){
+                <%int flag=0;
+                if(deviceIds != null){
 			  for (int i = 0; i < deviceIds.length; i++) {
 				if (i % 2 == 0) {%>
                 <tr onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
                   <td align="center">
                   <%if(deviceStatuses[i].endsWith("N")){ %>
+                  flag = 1;
                    <input type="checkbox" name="DEVICE_ID" value="<%=deviceIds[i] %>"> 
                    <%} %>
 				  </td>
@@ -187,6 +211,7 @@ function doSubmit(form) {
                   <%=deviceNameEns[i]%>
                   </a>
                   </td>
+                   <td align="center"><%=deviceNameEns[i]%></td>
                   <td align="center"><%=deviceNameCns[i]%></td>
                    <td align="center"><%=typeNames[i]%></td>
                   <td align="center"><%=locationNames[i]%></td>
@@ -203,6 +228,7 @@ function doSubmit(form) {
                <tr class="dark" onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
                    <td align="center">
                   <%if(deviceStatuses[i].endsWith("N")){ %>
+                  flag = 1;
                    <input type="checkbox" name="DEVICE_ID" value="<%=deviceIds[i] %>"> 
                    <%} %>
 				  </td>
@@ -211,6 +237,7 @@ function doSubmit(form) {
                   <%=deviceNameEns[i]%>
                     </a>
                   </td>
+                   <td align="center"><%=deviceNameEns[i]%></td>
                   <td align="center"><%=deviceNameCns[i]%></td>
                   <td align="center"><%=typeNames[i]%></td>
                   <td align="center"><%=locationNames[i]%></td>
@@ -227,8 +254,12 @@ function doSubmit(form) {
                <%if(deviceIds != null && deviceIds.length > 0){%>
               <table width="100%" border="0" cellpadding="0" cellspacing="0" >
               <tr>
-                <td colspan="9" align="center">
+                <td colspan="9" align="center" height="10">
+                <%if(flag == 1){ %>
                  <input type="submit" class="submit"  value="下一步">
+                 <%}else{ %>
+                	 没有可选择的设备
+                 <%} %>
                 </td>
                 <td></td>
                 <td></td>

@@ -17,7 +17,11 @@
 	
 	//维护设备编号
 	String[] deviceIds;
-	
+	String deviceNameEn;
+	String deviceNameCn;
+	String deviceStatus;
+	String deviceIp;
+	String typeId;
 	
 %>
 <%
@@ -30,6 +34,11 @@
 	tempDescs = xml.getItemValues("MAINTAIN_COMMANDS_TEMPLATE","TEMP_DESC");
 	
 	deviceIds = xml.getInputValues("DEVICE_ID");
+	deviceNameEn = xml.getInputValue("DEVICE_NAME_EN");
+	deviceNameCn = xml.getInputValue("DEVICE_NAME_CN");
+	deviceStatus = xml.getInputValue("DEVICE_STATUS");
+	deviceIp = xml.getInputValue("DEVICE_IP");
+	typeId = xml.getInputValue("TYPE_ID");
     
 %>
 <html>
@@ -69,6 +78,11 @@ function doSubmit(form) {
     form1.QTEMP_DESC.value="";
    
   }
+  
+ function   doBack(){
+ 	form2.FUNC_ID.VALUE = "tempSendDeviceList";
+ 	form2.submit();
+  }
 -->
 </script>
 
@@ -90,6 +104,12 @@ function doSubmit(form) {
               <%for(int n = 0;n < deviceIds.length;n++){ %>
                  <input type="hidden" name="DEVICE_ID" value="<%=deviceIds[n] %>">
              <%} %>
+                 <input type="hidden" name="DEVICE_NAME_EN" value="<%=deviceNameEn %>">
+                 <input type="hidden" name="DEVICE_NAME_CN" value="<%=deviceNameCn %>">
+                 <input type="hidden" name="DEVICE_STATUS" value="<%=deviceStatus %>">
+                 <input type="hidden" name="DEVICE_IP" value="<%=deviceIp%>">
+                 <input type="hidden" name="TYPE_ID" value="<%=typeId %>">
+                 
                <input type="hidden" name=CUR_PAGE value="">
                <table>
               	 <tr>
@@ -118,12 +138,16 @@ function doSubmit(form) {
           <div class="panelHead">这是文章标题</div>
           <div class="panelContent">
             <div class="panelContent2">
-            <form name="form1" action="ctrl" method="get"  onSubmit="return doSubmit(this)">
+            <form name="form2" action="ctrl" method="get"  onSubmit="return doSubmit(this)">
              <input type="hidden" name="FUNC_ID" value="sendCommandTemp">
              <%for(int n = 0;n < deviceIds.length;n++){ %>
                  <input type="hidden" name="DEVICE_ID" value="<%=deviceIds[n] %>">
              <%} %>
-            
+            <input type="hidden" name="DEVICE_NAME_EN" value="<%=deviceNameEn %>">
+                 <input type="hidden" name="DEVICE_NAME_CN" value="<%=deviceNameCn %>">
+                 <input type="hidden" name="DEVICE_STATUS" value="<%=deviceStatus %>">
+                 <input type="hidden" name="DEVICE_IP" value="<%=deviceIp%>">
+                 <input type="hidden" name="TYPE_ID" value="<%=typeId %>">
               <!-- 列表内容 -->
               <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
                  <tr>
@@ -156,8 +180,9 @@ function doSubmit(form) {
                <%}}} %>
               </table>
               <table width="100%" border="0" cellpadding="0" cellspacing="0" >
-              <tr>
+              <tr height="10">
                 <td colspan="9" align="center">
+                	<input size="10" type="button" class="button"  onclick="doBack()" value="上一步" >
                  	<input size="10" type="submit" class="submit"  value="发送指令模板" >
                 </td>
                 <td></td>

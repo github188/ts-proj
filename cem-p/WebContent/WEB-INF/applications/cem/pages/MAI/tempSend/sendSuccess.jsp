@@ -39,14 +39,21 @@
                   <div class="panelContent">
                     <div class="panelContent2">
                       <!-- 查询面板内容 -->
+            <form name="form1" action="ctrl" method="get"  onSubmit="return doSubmit(this)">
+              <input type="hidden" name="FUNC_ID" value="tempSendDeviceList">
                  <table width="100%" height="100" border="0" cellpadding="0" cellspacing="0">
               	 <tr>
               	 <td align="center">
               	 向设备发送指令模板成功，请稍后在指令模板发送日志中查询执行情况。
               	 </td>
                  </tr>
+                 <tr>
+                <td colspan="9" align="center" height="10">
+                 <input type="submit" class="submit"  value="返回">
+                </td>
+              </tr>
               </table>
-                       
+             </form>
                       <!-- 查询面板内容结束 -->
                     </div>
                   </div>
