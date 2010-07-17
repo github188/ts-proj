@@ -46,7 +46,7 @@ function doSubmit(form) {
   function doAdd() {
     window.location.href = "ctrl?FUNC_ID=LocationAdd";
   }
-  function doEdit( locationId) {
+  function doEdit(locationId) {
     window.location.href ="ctrl?FUNC_ID=LocationEdit&LOCATION_ID="+locationId;
   }
   function doDelete(locationId) {
@@ -56,12 +56,10 @@ function doSubmit(form) {
   }
  
   function TDoChangePage(curPage){
-  form1["CUR_PAGE"].value = curPage;
-  form1.submit();
+  	form1["CUR_PAGE"].value = curPage;
+  	form1.submit();
   }
-  function doReturn1(){
-  	window.history.back();
-  }
+  
   function doReturn(){
   	window.location.href="ctrl?FUNC_ID=LocationtList";
   }

@@ -32,10 +32,13 @@
   function doReturn(){
   	window.location.href="ctrl?FUNC_ID=LocationList";
   }
-    function doSubmit(form) 
+  
+      function doSubmit(form) 
     { 
-     if(){
-     }
+       var result = Spry.Widget.Form.validate(form);
+       if (result == false){
+          return result;
+       }
     }
 -->
 </script>
