@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <functions>
+     <!-- 获取图片 -->
+     <function id="GetAppPic" description="获取设备类型图片" type="bo"
+		className="tower.cem.bo.MAG.deviceType.BoDownloadUploadedFile" 
+		forward="ServletFileDisplay" />
+	
     <!-- 01-deviceType-设备类型管理 -->
     <function id="DeviceTypeList" description="设备类型查询" type="bo"
         className="tower.cem.bo.MAG.deviceType.BoDeviceTypeList"
@@ -12,6 +17,10 @@
     <function id="DeviceTypeEdit" description="设备类型编辑" type="bo"
         className="tower.cem.bo.MAG.deviceType.BoDeviceTypeDetail"
         forward="DeviceTypeAdd" />
+        
+     <function id="DeviceTypeView" description="设备类型查看" type="bo"
+        className="tower.cem.bo.MAG.deviceType.BoDeviceTypeDetail"
+        forward="DeviceTypeViewJsp" />
         
     <function id="DeviceTypeDelete" description="设备类型删除" type="bo"
         className="tower.cem.bo.MAG.deviceType.BoDeviceTypeDelete"
@@ -26,6 +35,9 @@
         
     <function id="DeviceTypeAdd" description="设备类型添加" type="jsp"
         jspPath="/cem/pages/MAG/deviceType/deviceTypeEdit.jsp" />
+        
+     <function id="DeviceTypeViewJsp" description="设备类型查看" type="jsp"
+        jspPath="/cem/pages/MAG/deviceType/deviceTypeView.jsp" />
         
     <function id="DeviceTypeListJsp" description="设备类型列表页面" type="jsp"
         jspPath="/cem/pages/MAG/deviceType/deviceTypeList.jsp" />
@@ -332,12 +344,26 @@
         
         
         <!-- 10-tempLog-指令模板执行日志查询 -->
-          <function id="TempLogList" description="设备维护指令模板查询" type="bo"
+        <function id="TempLogList" description="设备维护指令模板查询" type="bo"
         className="tower.cem.bo.MAI.tempLog.tempLogList"
-        forward="TempLogListJsp" />   
+        forward="TempLogListJsp" />  
+        
+        <function id="TempLogSave" description="指令模板执行日志另存为" type="bo"
+        className="tower.cem.bo.MAI.tempLog.tempLogDetail"
+        forward="ServletTempLogTxt" /> 
+        
+         <function id="TempLogView" description="指令模板执行日志查看" type="bo"
+        className="tower.cem.bo.MAI.tempLog.tempLogDetail"
+        forward="TempLogViewJsp" /> 
+        
+       <function id="ServletTempLogTxt" description="导出日志文件输出" type="jsp"
+		jspPath="/servlet/ServletTempLogTxt"/>
         
          <function id="TempLogListJsp" description="设备维护指令模板查询页面" type="jsp"
         jspPath="/cem/pages/MAI/tempLog/tempLogList.jsp" /> 
+        
+         <function id="TempLogViewJsp" description="设备维护指令日志查看" type="jsp"
+        jspPath="/cem/pages/MAI/tempLog/tempLogView.jsp" /> 
          
        <!-- 21-device-设备端口类型管理 -->
       <function id="DevicePortTypeSubmit" description="设备端口类型提交" type="bo"
@@ -358,7 +384,14 @@
         
      <function id="DevicePortTypeView" description="设备端口类型查看" type="bo"
         className="tower.cem.bo.MAG.devicePortType.BoDevicePortTypeDetail"
-        forward="DevicePortTypeViewJsp" />   
+        forward="DevicePortTypeViewJsp" />  
+        
+     <function id="SelectDevicePortType" description="设备端口类型选择" type="bo"
+        className="tower.cem.bo.MAG.devicePortType.BoDevicePortTypeList"
+        forward="SelectDevicePortTypeJsp" /> 
+      
+     <function id="SelectDevicePortTypeJsp" description="设备端口类型选择界面" type="jsp"
+          jspPath="/cem/pages/common/selectDevicePortType.jsp" /> 
         
       <function id="DevicePortTypeListJsp" description="设备端口类型查询页面" type="jsp"
         jspPath="/cem/pages/MAG/devicePortType/devicePortTypeList.jsp" /> 
