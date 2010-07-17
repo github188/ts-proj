@@ -56,6 +56,9 @@ function doSubmit(form) {
   function doAdd() {
     window.location.href = "ctrl?FUNC_ID=DeviceTypeAdd";
   }
+    function doView(typeId) {
+    window.location.href ="ctrl?FUNC_ID=DeviceTypeView&TYPE_ID="+typeId;
+  }
   function doEdit(typeId) {
     window.location.href ="ctrl?FUNC_ID=DeviceTypeEdit&TYPE_ID="+typeId;
   }
@@ -138,7 +141,9 @@ function doSubmit(form) {
 			  for (int i = 0; i < typeIds.length; i++) {
 				if (i % 2 == 0) {%>
                 <tr onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
+                 <a href="JavaScript:doView('<%=typeIds[i]%>')">
                   <td align="center" onClick="event.cancelBubble=true"><%=typeNameEns[i]%></td>
+                  </a>
                   <td align="center"><%=typeNameCns[i]%></td>
                   <td align="center"><%=remarks[i]%></td>
                  <td align="center" nowrap>[ <a href="JavaScript:doEdit('<%=typeIds[i] %>')">编辑</a> | <a href="JavaScript:doDelete('<%=typeIds[i] %>')">删除 </a>]</td>
@@ -146,7 +151,9 @@ function doSubmit(form) {
      
                <%} else {%>
                    <tr class="dark" onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
-                    <td align="center" onClick="event.cancelBubble=true"><%=typeNameEns[i]%></td>
+                    <a href="JavaScript:doView('<%=typeIds[i]%>')">
+                  <td align="center" onClick="event.cancelBubble=true"><%=typeNameEns[i]%></td>
+                  </a>
                     <td align="center"><%=typeNameCns[i]%></td>
                     <td align="center"><%=remarks[i]%></td>
                     <td align="center" nowrap>[ <a href="JavaScript:doEdit('<%=typeIds[i] %>')">编辑</a> | <a href="JavaScript:doDelete('<%=typeIds[i] %>')">删除 </a>]</td>
