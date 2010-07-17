@@ -5,9 +5,11 @@ import java.util.Vector;
 import org.apache.log4j.Logger;
 
 import tower.cem.db.DbDeviceInfo;
+import tower.cem.db.DbDeviceType;
 import tower.cem.db.DbFrontHostInfo;
 import tower.cem.db.DbLocationInfo;
 import tower.cem.en.EnDeviceInfo;
+import tower.cem.en.EnDeviceType;
 import tower.cem.en.EnFrontHostInfo;
 import tower.cem.en.EnLocationInfo;
 import tower.common.util.Page;
@@ -33,6 +35,11 @@ public class BoDeviceList implements RootBo {
 		// 设备配置db en
 		DbDeviceInfo dbDeviceInfo;
 		EnDeviceInfo enDeviceInfo;
+		
+		// 设备类型db en
+		DbDeviceType dbDeviceType;
+		EnDeviceType enDeviceType;
+		
 
 		// 堡垒主机db en
 		DbFrontHostInfo dbFrontHostInfo;
@@ -71,6 +78,7 @@ public class BoDeviceList implements RootBo {
 		dbFrontHostInfo = new DbFrontHostInfo(transaction, null);
 		dbLocationInfo = new DbLocationInfo(transaction, null);
 		dbDeviceInfo = new DbDeviceInfo(transaction, null);
+		dbDeviceType = new DbDeviceType(transaction, null);
 		/*****************************************************************************************************
 		 * 执行业务逻辑、输出
 		 ****************************************************************************************************/
@@ -156,6 +164,13 @@ public class BoDeviceList implements RootBo {
 							.getHostIp());
 				}
 			}
+			if (!(enDeviceInfo.getTypeId()== null || enDeviceInfo.getTypeId().trim().length() == 0)) {
+				enDeviceType = dbDeviceType.findByKey(enDeviceInfo.getTypeId());
+				if (!(enDeviceType == null)) {
+					requestXml.setItemValue("DEVICE_INFO", row, "TYPE_NAME", enDeviceType.getTypeNameCn());
+				}
+			}
+			
 		}
 	}
 }
