@@ -40,6 +40,16 @@
 <title>堡垒主机登录测试</title>
 <jsp:include flush="true" page="../../../../sys/pages/common/include/css.jsp"></jsp:include>
 <jsp:include flush="true" page="../../../../sys/pages/common/include/js.jsp"></jsp:include>
+<script type="text/javascript">
+<!--
+  
+    function doclose()
+  {
+	window.close();
+  }
+  
+-->
+</script>
 </head>
 <body id="mainArea">
   <div id="mainPanel" class="panel">
@@ -60,14 +70,20 @@
                   <div class="panelContent">
                     <div class="panelContent2">                    
                       <!-- 查询面板内容 -->
-                      <table width="50%" border="0" cellpadding="0" cellspacing="0">
+                      <table width="100%" border="0" cellpadding="0" cellspacing="0">
               	 <tr>
-              	 <td align="left">
-              	 <textarea id="textarea" class="textarea" cols="60" rows="10" readonly> <%=sbResult %></textarea>
+              	 <td align="center">
+              	 <textarea id="textarea" class="textarea" cols="110" rows="25" readonly> <%=sbResult %></textarea>
               	 </td>
                  </tr>
+                  <tr>
+				    <td colspan="5" align="center" nowrap="nowrap">&nbsp;</td>
+				  </tr>
+				  <tr>
+				  <td align="center">
+				    <input type="button" class="button" onclick="doclose()" value="关闭"></td>
+				  </tr>
                  </table>
-                       
                       <!-- 查询面板内容结束 -->
                     </div>
                   </div>

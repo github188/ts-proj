@@ -117,7 +117,7 @@
           <div class="panelContent">
             <div class="panelContent2">
               <!-- 查询面板内容 -->
-               <form name="form1" action="ctrl" method="get"  onSubmit="return doSubmit(this)">
+               <form name="form1" action="ctrl" method="get" >
               <input type="hidden" name="FUNC_ID" value="FrontHostList">
                <input type="hidden" name=CUR_PAGE value="">
               <table>

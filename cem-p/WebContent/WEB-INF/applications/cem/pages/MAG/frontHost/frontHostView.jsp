@@ -52,7 +52,7 @@
   	window.location.href="ctrl?FUNC_ID=FrontHostList";
   }
    function doSelHostTestResult(hostId){
-    selDialog("ctrl?FUNC_ID=FrontHostTest&HOST_ID="+hostId,"HOST_ID",1000,550,false);
+    selDialog("ctrl?FUNC_ID=FrontHostTest&HOST_ID="+hostId,"HOST_ID","HOST_NAME",850,550,false);
   }
 -->
 </script>
@@ -72,7 +72,6 @@
               <!-- Tab内容 -->
                 <!-- 查询面板 -->
                 <div class="panelQuery">
-                 
                   <div class="panelHead"></div>
                   <div class="panelContent">
                     <div class="panelContent2">
@@ -80,7 +79,7 @@
                    <form action="ctrl" method="post"name="form1"onSubmit="return doSubmit(this)">
                      <table>
                       <tr>
-                          <td width="120" align="right">堡垒主机英文名称：</td>
+                          <td width="150" align="right">堡垒主机英文名称：</td>
 		                  <td width="100">
              				   <input type="text" class="text" value="<%=hostNameEn %>" readonly> 
 		                  </td>
