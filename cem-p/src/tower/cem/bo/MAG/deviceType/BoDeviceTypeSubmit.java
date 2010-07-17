@@ -3,6 +3,7 @@ package tower.cem.bo.MAG.deviceType;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -59,6 +60,7 @@ public class BoDeviceTypeSubmit implements RootBo {
 	ResultSet rs = null;
 	PreparedStatement ps = null;
 	Statement stm = null;
+	
 	/***********************************************************************
          * 获取输入
          **********************************************************************/
