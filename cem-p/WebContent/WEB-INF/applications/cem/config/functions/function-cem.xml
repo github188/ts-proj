@@ -266,13 +266,17 @@
         forward="commDeviceListJsp" /> 
         
          <function id="Disconnection" description="设备维护指令-断开连接并提交维护指令" type="bo"
-        className="tower.cem.bo.MAG.device.commsSubmit"
+        className="tower.cem.bo.MAI.comm.BoCommsSubmit"
         forward="commDeviceList" /> 
+        
+        <function id="SendCommand" description="设备维护指令-连接设备" type="bo"
+        className="tower.cem.bo.MAI.comm.BoDeviceDetail"
+        forward="SendCommandJsp" /> 
         
          <function id="commDeviceListJsp" description="设备维护指令-设备查询页面" type="jsp"
         jspPath="/cem/pages/MAI/comm/deviceList.jsp" />
         
-        <function id="SendCommandTo" description="发送指令" type="jsp"
+        <function id="SendCommandJsp" description="发送指令" type="jsp"
         jspPath="/cem/pages/MAI/comm/sendCommand.jsp" />
         
         <!-- 07-commLog-设备维护指令查询 -->
@@ -318,7 +322,15 @@
         jspPath="/cem/pages/MAI/temp/tempEdit.jsp" /> 
         
       <function id="tempViewJsp" description="维护指令模板添加页面" type="jsp"
-        jspPath="/cem/pages/MAI/temp/tempView.jsp" /> 
+        jspPath="/cem/pages/MAI/temp/tempView.jsp" />
+        
+       <function id="SelectTemp" description="选择指令模板" type="bo"
+        className="tower.cem.bo.MAI.temp.BoTempList"
+        forward="SelTempListJsp" />   
+        
+         <function id="SelTempListJsp" description="维护指令模板添加页面" type="jsp"
+        jspPath="/cem/pages/common/SelectTemp.jsp" />
+        
         
       <!-- 09-tempSend-维护指令模板发送 -->
        <function id="tempSendDeviceList" description="维护指令模板发送-设备查询" type="bo"
