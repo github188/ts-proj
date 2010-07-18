@@ -2,7 +2,7 @@
     pageEncoding="utf-8"%>
 <div id="topFrame" class="panel">
   <div class="panelHead">
-    <div id="appName">中国移动通讯集团山东有限公司青岛分公司</div>
+    <div id="appName">中国移动通信集团山东有限公司青岛分公司</div>
     <div id="sysFuncBar">
     </div>
   </div>

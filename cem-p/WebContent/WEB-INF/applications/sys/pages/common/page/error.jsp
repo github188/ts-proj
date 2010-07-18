@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>中国移动通讯集团山东有限公司青岛分公司 - CE维护项目 - 错误提示</title>
+<title>中国移动通信集团山东有限公司青岛分公司 - CE维护项目 - 错误提示</title>
 <jsp:include flush="true" page="../../common/include/css.jsp"></jsp:include>
 <jsp:include flush="true" page="../../common/include/js.jsp"></jsp:include>
 </head>

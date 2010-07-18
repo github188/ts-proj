@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>中国移动通讯集团山东有限公司青岛分公司CE维护项目 / CEM-P</title>
+<title>中国移动通信集团山东有限公司青岛分公司CE维护项目 / CEM-P</title>
 </head>
 
 <frameset rows="70,*,28" cols="*" frameborder="NO" border="0" framespacing="0">

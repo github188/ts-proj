@@ -32,7 +32,7 @@ public class TdRunnable implements Runnable {
 	String result = collectString;
 	String rxpLable = "Rx Pwr [dbm]";
 	// rxpLable = "/dev/sda1";
-	double rxpValue = 0;
+	double rxpValue = 99999999.99;
 
 	int ipos = result.indexOf(rxpLable);
 	result = result.substring(ipos + rxpLable.length(), result.length());
@@ -60,9 +60,12 @@ public class TdRunnable implements Runnable {
 
     // 线程执行的部分
     public void run() {
+
 	if (this.sThreadName == null) {
 	    this.sThreadName = Thread.currentThread().getName();
 	}
+
+	double RX_MAX_VALUE = 99999999.99;
 	DaemonsDBPool dbPool = null; // 数据库连接池
 	Connection conn = null; // 数据库连接
 	SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -636,8 +639,8 @@ public class TdRunnable implements Runnable {
 				sbResult.append(sResult);
 
 				double rxp = this.collectRxpValue(sResult);
-				
-				if (rxp != 0) {
+
+				if (rxp < RX_MAX_VALUE) {
 				    sSql = "insert into device_port_rxp values ('" + enSendList.getSendId()
 					    + "', '" + enDeviceInfo.getDeviceId() + "', '"
 					    + enDeviceInfo.getDeviceNameEn() + "', '" + portId + "', '"

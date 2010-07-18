@@ -35,7 +35,7 @@
 <body>
 <div id="topFrame" class="panel">
   <div class="panelHead">
-    <div id="appName">中国移动通讯集团山东有限公司青岛分公司</div>
+    <div id="appName">中国移动通信集团山东有限公司青岛分公司</div>
     <div id="sysFuncBar">
       <a href="ctrl?FUNC_ID=UserPassWord" " target="mainFrame" class="password"><label>密码</label></a>
       <a href="ctrl?FUNC_ID=ReportItemList" target="mainFrame" class="desktop"><label>桌面</label></a>
