@@ -136,6 +136,7 @@
               <!-- 列表内容 -->
               <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
                  <tr>
+                  <th></th>
                   <th>维护指令模板名称</th>
                   <th>维护指令模板说明</th>
                 </tr>
@@ -156,13 +157,26 @@
                 <td>
                 <input type="radio" name="TEMP_ID"  value="<%=tempIds[i] %>" nameValue="<%=tempNames[i] %>"/>
                 </td>
-                  <%=tempNames[i]%>
+                  <td align="center"> <%=tempNames[i]%></td>
                   <td align="center"><%=tempDescs[i]%></td>
                 </tr>
                <%}}} %>
               </table>
+               <table width="100%">
+                  <tr>
+				    <td colspan="5" align="center" nowrap="nowrap">&nbsp;</td>
+				  </tr>
+				  <tr>
+				    <td colspan="5" align="center" nowrap="nowrap">
+					<%if(tempIds != null && tempIds.length > 0){ %>
+				    <input type="button" class="submit" value="提交" onclick="doAdd()"> 
+				    <%} %>
+				    <input type="button" class="button" onclick="doclose()" value="关闭"></td>
+				  </tr>
+              </table>
+               </form>
               <!-- 列表内容结束 -->
-          </form>
+         
             </div>
           </div>
           <div class="panelFoot"><div></div></div>

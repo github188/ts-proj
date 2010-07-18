@@ -54,7 +54,8 @@
 <script type="text/javascript">
 <!--
   function doReturn(){
-  	window.location.href="ctrl?FUNC_ID=DeviceList";
+     window.history.back();
+  	//window.location.href="ctrl?FUNC_ID=DeviceList";
   }
    function doSelDeviceTestResult(deviceId){
     selDialog("ctrl?FUNC_ID=DevoceTest&DEVICE_ID="+deviceId,"DEVICE_ID","DEVICE_NAME_CN",850,550,false);
@@ -117,7 +118,7 @@
 		               <tr>
 		               	  <td width="150" align="right">设备类型：</td>
 		                 <td>
-              					<input type="text" class="text" "value="<%=typeName %>" readonly> 
+              					<input type="text" class="text" value="<%=typeName %>" readonly> 
 		                 </td>
 		               </tr>
 		                

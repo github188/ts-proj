@@ -15,12 +15,15 @@
 	String deviceStatus;
 	String deviceIp;
 	String devicePort;
+	String typeId;
+	String typeName;
  
 	String[] deviceIds;
 	String[] deviceNameEns;
 	String[] deviceNameCns;
 	String[] deviceAbbNameEns;
 	String[] typeIds;
+	String[] typeNames;
 	String[] locationIds;
 	String[] locationNames;
 	String[] deviceStatuses;
@@ -44,6 +47,8 @@
 	devicePort = xml.getInputValue("DEVICE_PORT");
 	locationId = xml.getInputValue("LOCATION_ID");
 	locationNameCn = xml.getInputValue("LOCATION_NAME_CN");
+	typeId = xml.getInputValue("TYPE_ID");
+	typeName = xml.getInputValue("TYPE_NAME");
 
 	deviceIds = xml.getItemValues("DEVICE_INFO","DEVICE_ID");
 	deviceNameEns = xml.getItemValues("DEVICE_INFO", "DEVICE_NAME_EN");
@@ -58,6 +63,7 @@
 	devicePasswords = xml.getItemValues("DEVICE_INFO", "DEVICE_PASSWORD");
 	devicePrompts = xml.getItemValues("DEVICE_INFO", "DEVICE_PROMPT");
 	remarks = xml.getItemValues("DEVICE_INFO", "REMARK");
+	typeNames = xml.getItemValues("DEVICE_INFO", "TYPE_NAME");
     
 	String[] deviceStatusDesc = {"在用","停用"};
 	String[] deviceStatusValue = {"N","S"};
@@ -70,8 +76,8 @@
 
 <script type="text/javascript">
 <!--
- function doView(hostId) {
-    window.location.href = "ctrl?FUNC_ID=DeviceView&DEVICE_ID="+hostId;
+ function doView(deviceId) {
+    window.location.href = "ctrl?FUNC_ID=DeviceView&DEVICE_ID="+deviceId;
   }
   
 function doSubmit(form) {
@@ -104,11 +110,19 @@ function doSubmit(form) {
    function doSelLocation(){
    	selDialog("ctrl?FUNC_ID=SelectLocation","LOCATION_ID","LOCATION_NAME_CN",850,550,false);
    }
+   
+   function doSelDeviceType(){
+   	selDialog("ctrl?FUNC_ID=SelectDeviceType","TYPE_ID","TYPE_NAME",850,550,false);
+   }
+   
+   
    function doClear(){
     form1.DEVICE_NAME_EN.value="";
     form1.DEVICE_NAME_CN.value="";
     form1.DEVICE_IP.value="";
     form1.LOCATION_ID.value="";
+    form1.TYPE_ID.value="";
+    form1.TYPE_NAME.value="";
     form1.LOCATION_NAME_CN.value="";
     form1.FRONT_HOST_ID.value="";
     form1.FRONT_HOST_NAME.value="";
@@ -168,6 +182,12 @@ function doSubmit(form) {
 	                 <td><input type="text" class="text" name="DEVICE_PORT" value="<%=devicePort %>"></td>            
 		           </tr>
 		            <tr>
+			               <td width="150" align="right">设备类型：</td>
+		        	       <td>
+		                  		<input name="TYPE_ID" type="hidden"  value="<%=typeId %>">
+		                  		<input type="text" class="date" name="TYPE_NAME"   value="<%=typeName %>"  readonly>
+		                  		<input type="button" name="selectOutOrg" class="selButton" value="选择" onClick="doSelDeviceType()" />
+  				         	</td>
 		             <td align="right">设备状态：</td>
 	                 <td >
 	                     <select name="DEVICE_STATUS" class="select" id="DEVICE_STATUS" style="width:11em">
@@ -177,12 +197,11 @@ function doSubmit(form) {
                         <%} %>
                         </select>
 					</td>
-					<td></td>
-					<td></td>
-                	<td align="right" nowrap="nowrap"><input type="submit" class="submit"  value="查询">
+                	<td align="right" nowrap="nowrap">
+                	<input type="submit" class="submit"  value="查询">
                    	<input type="button" class="button" onClick="doClear();" value="重置">
                    	</td>
-                 </tr>
+                   	</tr>
               </table>
                </form>
               <!-- 查询面板内容结束 -->
@@ -205,6 +224,7 @@ function doSubmit(form) {
                  <tr>
                   <th>设备英文名称</th>
                   <th>设备中文名称</th>
+                  <th>设备类型</th>
                   <th>物理位置</th>
                   <th>堡垒主机</th>
                   <th>网络地址</th>
@@ -225,6 +245,7 @@ function doSubmit(form) {
                   </td>
                   
                   <td align="center"><%=deviceNameCns[i]%></td>
+                   <td align="center"><%=typeNames[i]%></td>
                   <td align="center"><%=locationNames[i]%></td>
                   <td align="center"><%=frontHostNames[i]%></td>
                   <td align="center"><%=deviceIps[i]%></td>
@@ -246,6 +267,7 @@ function doSubmit(form) {
                   </a>
                   </td>
                   <td align="center"><%=deviceNameCns[i]%></td>
+                  <td align="center"><%=typeNames[i]%></td>
                   <td align="center"><%=locationNames[i]%></td>
                    <td align="center"><%=frontHostNames[i]%></td>
                   <td align="center"><%=deviceIps[i]%></td>

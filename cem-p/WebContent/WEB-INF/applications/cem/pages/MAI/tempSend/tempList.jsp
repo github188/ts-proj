@@ -17,11 +17,13 @@
 	
 	//维护设备编号
 	String[] deviceIds;
+	String[] checkFlag;
 	String deviceNameEn;
 	String deviceNameCn;
 	String deviceStatus;
 	String deviceIp;
 	String typeId;
+	String typeName;
 	
 %>
 <%
@@ -34,11 +36,13 @@
 	tempDescs = xml.getItemValues("MAINTAIN_COMMANDS_TEMPLATE","TEMP_DESC");
 	
 	deviceIds = xml.getInputValues("DEVICE_ID");
+	checkFlag = xml.getInputValues("CHECK_FLAG");
 	deviceNameEn = xml.getInputValue("DEVICE_NAME_EN");
 	deviceNameCn = xml.getInputValue("DEVICE_NAME_CN");
 	deviceStatus = xml.getInputValue("DEVICE_STATUS");
 	deviceIp = xml.getInputValue("DEVICE_IP");
-	typeId = xml.getInputValue("TYPE_ID");
+	typeId = xml.getInputValue("QTYPE_ID");
+	typeName = xml.getInputValue("QTYPE_NAME");
     
 %>
 <html>
@@ -50,10 +54,6 @@
 
 <script type="text/javascript">
 <!--
-
- function doSendCommandTemp(tempId) {
-    window.location.href ="ctrl?FUNC_ID=tempView&TEMP_ID="+tempId;
-  }
 function doSubmit(form) {
       var result = Spry.Widget.Form.validate(form);
       if (result == false){
@@ -66,11 +66,8 @@ function doSubmit(form) {
   form1["CUR_PAGE"].value = curPage;
   form1.submit();
   }
-  function doReturn1(){
-  	window.history.back();
-  }
   function doReturn(){
-  	window.location.href="ctrl?FUNC_ID=tempList";
+ 	form3.submit();
   }
   
    function doClear(){
@@ -79,10 +76,34 @@ function doSubmit(form) {
    
   }
   
- function   doBack(){
- 	form2.FUNC_ID.VALUE = "tempSendDeviceList";
- 	form2.submit();
-  }
+  function doCheck(){
+    var flg = 0;
+    if((typeof form2.TEMP_ID.length) == "undefined")
+    {
+       if(form2.TEMP_ID.checked == true)
+  	  	{
+  	  		flg = 1;
+  	  	}
+    }else{
+      for(var i=0;i<form2.TEMP_ID.length;i++)
+      {
+        if(form2.TEMP_ID[i].checked)
+        {
+          flg = 1;
+          break;
+        }
+      }
+    }
+    if(flg == 0)
+    {
+      alert("请选择模板");
+      return false;
+    }
+    else
+    {
+      return true;
+    }
+    }
 -->
 </script>
 
@@ -108,7 +129,8 @@ function doSubmit(form) {
                  <input type="hidden" name="DEVICE_NAME_CN" value="<%=deviceNameCn %>">
                  <input type="hidden" name="DEVICE_STATUS" value="<%=deviceStatus %>">
                  <input type="hidden" name="DEVICE_IP" value="<%=deviceIp%>">
-                 <input type="hidden" name="TYPE_ID" value="<%=typeId %>">
+                 <input type="hidden" name="QTYPE_ID" value="<%=typeId %>">
+                 <input type="hidden" name="QTYPE_NAME" value="<%=typeName %>">
                  
                <input type="hidden" name=CUR_PAGE value="">
                <table>
@@ -138,8 +160,8 @@ function doSubmit(form) {
           <div class="panelHead">这是文章标题</div>
           <div class="panelContent">
             <div class="panelContent2">
-            <form name="form2" action="ctrl" method="get"  onSubmit="return doSubmit(this)">
-             <input type="hidden" name="FUNC_ID" value="sendCommandTemp">
+             <form name="form3" action="ctrl" method="get"  onSubmit="return doCheck(this)">
+             <input type="hidden" name="FUNC_ID" value="tempSendDeviceList">
              <%for(int n = 0;n < deviceIds.length;n++){ %>
                  <input type="hidden" name="DEVICE_ID" value="<%=deviceIds[n] %>">
              <%} %>
@@ -148,6 +170,14 @@ function doSubmit(form) {
                  <input type="hidden" name="DEVICE_STATUS" value="<%=deviceStatus %>">
                  <input type="hidden" name="DEVICE_IP" value="<%=deviceIp%>">
                  <input type="hidden" name="TYPE_ID" value="<%=typeId %>">
+                 <input type="hidden" name="TYPE_NAME" value="<%=typeName %>">
+                 
+            </form>
+            <form name="form2" action="ctrl" method="get"  onSubmit="return doCheck(this)">
+             <input type="hidden" name="FUNC_ID" value="sendCommandTemp">
+             <%for(int n = 0;n < deviceIds.length;n++){ %>
+                 <input type="hidden" name="DEVICE_ID" value="<%=deviceIds[n] %>">
+             <%} %>
               <!-- 列表内容 -->
               <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
                  <tr>
@@ -179,10 +209,12 @@ function doSubmit(form) {
                 </tr>
                <%}}} %>
               </table>
-              <table width="100%" border="0" cellpadding="0" cellspacing="0" >
+              <div class="pageBar"><%=Page.BuildPageTextByMethod(xml,"TDoChangePage") %></div>
+              
+                <table width="100%" border="0" cellpadding="0" cellspacing="0" height="10">
               <tr height="10">
                 <td colspan="9" align="center">
-                	<input size="10" type="button" class="button"  onclick="doBack()" value="上一步" >
+                	<input size="10" type="button" class="button"  onclick="doReturn()" value="上一步" >
                  	<input size="10" type="submit" class="submit"  value="发送指令模板" >
                 </td>
                 <td></td>
@@ -195,7 +227,6 @@ function doSubmit(form) {
               </tr>
               </table>
               </form>
-              <div class="pageBar"><%=Page.BuildPageTextByMethod(xml,"TDoChangePage") %></div>
               <!-- 列表内容结束 -->
           
             </div>
