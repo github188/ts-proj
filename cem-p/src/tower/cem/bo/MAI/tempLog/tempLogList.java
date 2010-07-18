@@ -82,13 +82,12 @@ public class tempLogList implements RootBo{
 		 * 执行业务逻辑、输出
 		 **********************************************************************/
 		 sql.append("select a.SEND_ID,b.DEVICE_NAME_EN,b.DEVICE_NAME_CN,e.TYPE_NAME_CN,b.DEVICE_IP,a.TASK_DEFINE_TIME," +
-		 		"c.TEMP_NAME,d.STATUS,d.MAINTAIN_END " +
-		 		"from COMMANDS_SEND_HIS a " +
-		 		"left join DEVICE_INFO b on a.DEVICE_ID = b.DEVICE_ID" +
-		 		"left join MAINTAIN_COMMANDS_TEMPLATE c on a.TEMPLATE_ID = c.TEMP_ID" +
-		 		"left join DEVICE_MAINTAIN_LOG d on a.SEND_ID = d.SEND_ID" +
-		 		"left join DEVICE_TYPE e on a.TYPE_ID = e.TYPE_ID" +
-		 		"left join LOCATION_INFO f on a.TYPE_ID = e.TYPE_ID" +
+		 		"c.TEMP_NAME,d.STATUS,d.MAINTAIN_END  " +
+		 		"from COMMANDS_SEND_HIS a  " +
+		 		"left join DEVICE_INFO b on a.DEVICE_ID = b.DEVICE_ID " +
+		 		"left join MAINTAIN_COMMANDS_TEMPLATE c on a.TEMPLATE_ID = c.TEMP_ID " +
+		 		"left join DEVICE_MAINTAIN_LOG d on a.SEND_ID = d.SEND_ID " +
+		 		"left join DEVICE_TYPE e on a.DEVICE_TYPE_ID = e.TYPE_ID " +
 		 		"where a.USER_ID=");
 		 sql.append(Transaction.formatString(userId));
 		 sql.append(" AND a.COMMANDS_TYPE =");
