@@ -262,7 +262,7 @@
         
         <!-- 06-commLog-设备维护指令-->
          <function id="commDeviceList" description="设备维护指令-设备查询" type="bo"
-        className="tower.cem.bo.MAG.device.BoDeviceList"
+        className="tower.cem.bo.MAI.comm.BoCommDeviceList"
         forward="commDeviceListJsp" /> 
         
          <function id="Disconnection" description="设备维护指令-断开连接并提交维护指令" type="bo"
