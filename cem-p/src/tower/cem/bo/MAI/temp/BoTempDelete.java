@@ -13,6 +13,7 @@ import tower.cem.en.EnDevicePortInfo;
 import tower.cem.en.EnDevicePortType;
 import tower.cem.en.EnMaintainCommandsTemplate;
 import tower.tmvc.ErrorException;
+import tower.tmvc.RootBo;
 import tower.tmvc.Transaction;
 import tower.tmvc.XMLWrap;
 
@@ -22,7 +23,7 @@ import tower.tmvc.XMLWrap;
  * @author flj
  *
  */
-public class BoTempDelete {
+public class BoTempDelete implements RootBo {
 
 	public void doBusiness(Transaction transaction, XMLWrap requestXml, 
 			XMLWrap sessionXml, XMLWrap applicationXml, Logger logger) throws ErrorException {
@@ -57,16 +58,16 @@ public class BoTempDelete {
 		 * 执行业务逻辑、输出
 		 **********************************************************************/
 		 //如维护指令模板已经在指令发送任务表中引用，提示暂时不能删除,抛出异常：MCT001：指令模板{0}经在指令发送任务中使用，该指令模板不能删除。
-		 vMaintainCommandsTemplates = dbMaintainCommandsTemplate.findAllWhere(" TEMP_ID ='"
+		 vMaintainCommandsTemplates = dbCommandsSendList.findAllWhere(" TEMPLATE_ID ='"
 					+ tempId + "'");
 		 //获取指令模板名称
 		 enMaintainCommandsTemplate  = dbMaintainCommandsTemplate.findByKey(tempId);
 		 if (vMaintainCommandsTemplates.size() > 0) {
-				throw new ErrorException("MCT001", new Object[] { enMaintainCommandsTemplate.getTempName()});
+				throw new ErrorException("MCT001", new Object[] {enMaintainCommandsTemplate.getTempName()});
 			}
 		 
 		 //根据指令模板编号（tempId）删除指令模板信息
-		 dbCommandsSendList.deleteByKey(tempId);
+		 dbMaintainCommandsTemplate.deleteByKey(tempId);
 		 
 	}
 }

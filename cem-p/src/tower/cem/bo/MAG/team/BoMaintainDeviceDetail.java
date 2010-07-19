@@ -4,11 +4,15 @@ import org.apache.log4j.Logger;
 
 import tower.cem.db.DbDeviceInfo;
 import tower.cem.db.DbDeviceType;
+import tower.cem.db.DbFrontHostInfo;
+import tower.cem.db.DbLocationInfo;
 import tower.cem.db.DbMaintainTeam;
 import tower.cem.db.DbMaintainTeamDeviceMap;
 import tower.cem.db.DbMaintainTeamUserMap;
 import tower.cem.en.EnDeviceInfo;
 import tower.cem.en.EnDeviceType;
+import tower.cem.en.EnFrontHostInfo;
+import tower.cem.en.EnLocationInfo;
 import tower.cem.en.EnMaintainTeam;
 import tower.cem.en.EnMaintainTeamDeviceMap;
 import tower.cem.en.EnMaintainTeamUserMap;
@@ -51,6 +55,15 @@ public class BoMaintainDeviceDetail implements RootBo{
 		DbDeviceType dbDeviceType;
 		EnDeviceType enDeviceType;
 		
+		 //堡垒主机db en
+		DbFrontHostInfo dbFrontHostInfo;
+		EnFrontHostInfo enFrontHostInfo;
+
+		// 物理位置db en
+		DbLocationInfo dbLocationInfo;
+		EnLocationInfo enLocationInfo;
+		
+		
 		//页面参数
 		String teamId;    //维护团队编号
 		String deviceId;  //维护设备编号
@@ -70,20 +83,36 @@ public class BoMaintainDeviceDetail implements RootBo{
 		dbDeviceInfo = new DbDeviceInfo(transaction,null);
 		dbDeviceType = new DbDeviceType(transaction,null);
 		enDeviceType = new EnDeviceType();
+		dbFrontHostInfo = new DbFrontHostInfo(transaction, null);
+		dbLocationInfo = new DbLocationInfo(transaction, null);
+		dbDeviceType = new DbDeviceType(transaction, null);
+		enDeviceType = new EnDeviceType();
+		enDeviceInfo = new EnDeviceInfo();
 		/***********************************************************************
 		 * 执行业务逻辑、输出
 		 **********************************************************************/
-		// 取得所有的设备信息
+//		 根据堡垒主机编号（hostId）
 		enDeviceInfo = dbDeviceInfo.findByKey(deviceId);
-		if (enDeviceInfo != null) {
-			int row = dbDeviceInfo.setToXml(requestXml, enDeviceInfo);
+		int irow = dbDeviceInfo.setToXml(requestXml, enDeviceInfo);
 
+		if (!(enDeviceInfo.getLocationId() == null || enDeviceInfo.getLocationId().trim().length() == 0)) {
+			enLocationInfo = dbLocationInfo.findByKey(enDeviceInfo.getLocationId());
+			if (!(enLocationInfo == null)) {
+				requestXml.setItemValue("DEVICE_INFO", irow, "LOCATION_NAME", enLocationInfo
+						.getLocationNameCn());
+			}
+		}
+
+		if (!(enDeviceInfo.getFrontHostId() == null || enDeviceInfo.getFrontHostId().trim().length() == 0)) {
+			enFrontHostInfo = dbFrontHostInfo.findByKey(enDeviceInfo.getFrontHostId());
+			if (!(enFrontHostInfo == null)) {
+				requestXml.setItemValue("DEVICE_INFO", irow, "FRONT_HOST_NAME", enFrontHostInfo.getHostIp());
+			}
+		}
+		if (!(enDeviceInfo.getTypeId() == null || enDeviceInfo.getTypeId().length() == 0)) {
 			enDeviceType = dbDeviceType.findByKey(enDeviceInfo.getTypeId());
-			if (enDeviceType != null) {
-				requestXml.setItemValue("DEVICE_INFO", row, "DEVICE_TYPE_NAME",
-						enDeviceType.getTypeNameCn());
-			} else {
-				requestXml.setItemValue("DEVICE_INFO", row, "DEVICE_TYPE_NAME", "");
+			if (!(enDeviceType == null)) {
+				requestXml.setItemValue("DEVICE_INFO", irow, "TYPE_NAME", enDeviceType.getTypeNameCn());
 			}
 		}
 		

@@ -13,6 +13,7 @@ import tower.cem.en.EnDevicePortInfo;
 import tower.cem.en.EnDevicePortType;
 import tower.cem.en.EnDeviceType;
 import tower.tmvc.ErrorException;
+import tower.tmvc.RootBo;
 import tower.tmvc.Transaction;
 import tower.tmvc.XMLWrap;
 
@@ -22,7 +23,7 @@ import tower.tmvc.XMLWrap;
  * @author flj
  *
  */
-public class BoDevicePortTypeDelete {
+public class BoDevicePortTypeDelete implements RootBo{
 
 	public void doBusiness(Transaction transaction, XMLWrap requestXml, 
 			XMLWrap sessionXml, XMLWrap applicationXml, Logger logger) throws ErrorException {

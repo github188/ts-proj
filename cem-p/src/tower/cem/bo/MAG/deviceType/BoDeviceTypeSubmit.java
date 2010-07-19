@@ -90,7 +90,7 @@ public class BoDeviceTypeSubmit implements RootBo {
 	    		 fis =new FileInputStream(uploadFile.getFullFileName());
 	    	 }
 			 if (typeId == null || typeId.length() == 0) {
-				   sql = "insert into DEVICE_TYPE value(?,?,?,?,?,?,?,?)";
+				   
 				    typeId = SysIdCreator.GenNextId(transaction, null, IdCreatorDefine.ID_TYPE_DEVICE_TYPE_ID,
 					    IdCreatorDefine.ID_LEN_TYPE_DEVICE_ID);
 				    rs = stm.executeQuery(sql1.toString());
@@ -102,15 +102,29 @@ public class BoDeviceTypeSubmit implements RootBo {
 				    if (rs.next()) {
 					throw new ErrorException("MDT002", new Object[] { typeNameCn });// 设备类型名称-中文：{0}在系统中已存在,请重新输入。
 				    }
-				    ps = conn.prepareStatement(sql); 
-				    ps.setString(1, typeId);
-				    ps.setString(2, typeNameEn);
-				    ps.setString(3, typeNameCn);
-				    ps.setString(4, inspectCommands);
-				    ps.setString(5, inspectCommandsExp);
-				    ps.setString(6, collectCommands);
-				    ps.setBinaryStream(7, fis,fis.available() );
-				    ps.setString(8, remark);
+				    if(fis != null){
+				    	sql = "insert into DEVICE_TYPE value(?,?,?,?,?,?,?,?)";
+				    	 ps = conn.prepareStatement(sql); 
+						 ps.setString(1, typeId);
+						 ps.setString(2, typeNameEn);
+						 ps.setString(3, typeNameCn);
+						 ps.setString(4, inspectCommands);
+						 ps.setString(5, inspectCommandsExp);
+						 ps.setString(6, collectCommands);
+				    	 ps.setBinaryStream(7, fis,fis.available() );
+					     ps.setString(8, remark);
+				    }else{
+				    	sql = "insert into DEVICE_TYPE (TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,COLLECT_COMMANDS,REMARK) value(?,?,?,?,?,?,?)";
+				    	 ps = conn.prepareStatement(sql); 
+						 ps.setString(1, typeId);
+						 ps.setString(2, typeNameEn);
+						 ps.setString(3, typeNameCn);
+						 ps.setString(4, inspectCommands);
+						 ps.setString(5, inspectCommandsExp);
+						 ps.setString(6, collectCommands);
+					     ps.setString(7, remark);
+				    }
+				   
 				    ps.execute();
 				}else {
 				    sql1.append(" AND TYPE_ID != '" + typeId + "'");

@@ -57,7 +57,7 @@ public class BoDeviceTypeDelete implements RootBo {
 	// 获取设备类型名称
 	enDeviceType = dbDeviceType.findByKey(typeId);
 	if (vDeviceInfos.size() > 0) {
-	    throw new ErrorException("MDT001", new Object[] { enDeviceType.getTypeNameCn() });
+	    throw new ErrorException("MDT003", new Object[] { enDeviceType.getTypeNameCn() });
 	}
 
 	// 根据设备类型编号（typeId）

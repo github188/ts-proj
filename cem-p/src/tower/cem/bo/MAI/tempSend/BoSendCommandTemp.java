@@ -44,6 +44,7 @@ public class BoSendCommandTemp  implements RootBo{
 		
 		//获取页面参数
 		String[] deviceIds;    //维护设备编号
+		String[] deviceTypeIds;    //维护设备编号
 		String sendId;        //指令发送编号
 		String tempId;        //维护指令模板编号
 		String taskPlanTime;  //计划开始时间
@@ -62,6 +63,7 @@ public class BoSendCommandTemp  implements RootBo{
 		 * 获取输入
 		 **********************************************************************/
 		deviceIds = requestXml.getInputValues("DEVICE_ID");
+		deviceTypeIds = requestXml.getInputValues("DEVICE_TYPE_ID");
 		tempId = requestXml.getInputValue("TEMP_ID");
 		taskPlanTime = date;
 		taskDefineTime = date;
@@ -90,6 +92,7 @@ public class BoSendCommandTemp  implements RootBo{
 						IdCreatorDefine.ID_LEN_SEND_ID);
 			 enCommandsSendList.setSendId(sendId);
 			 enCommandsSendList.setDeviceId(deviceIds[i]);
+			 enCommandsSendList.setDeviceTypeId(deviceTypeIds[i]);
 			 dbCommandsSendList.insert(enCommandsSendList);
 		 }
 	}

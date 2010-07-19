@@ -1,5 +1,6 @@
-package tower.cem.bo.MAG.device;
+package tower.cem.bo.MAI.tempSend;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 import org.apache.log4j.Logger;
@@ -8,25 +9,25 @@ import tower.cem.db.DbDeviceInfo;
 import tower.cem.db.DbDeviceType;
 import tower.cem.db.DbFrontHostInfo;
 import tower.cem.db.DbLocationInfo;
+import tower.cem.db.DbMaintainTeamDeviceMap;
+import tower.cem.db.DbMaintainTeamUserMap;
 import tower.cem.en.EnDeviceInfo;
 import tower.cem.en.EnDeviceType;
 import tower.cem.en.EnFrontHostInfo;
 import tower.cem.en.EnLocationInfo;
+import tower.cem.en.EnMaintainTeamDeviceMap;
+import tower.cem.en.EnMaintainTeamUserMap;
 import tower.common.util.Page;
 import tower.common.util.PubFunc;
 import tower.tmvc.ErrorException;
+import tower.tmvc.QueryResult;
+import tower.tmvc.QueryResultRow;
 import tower.tmvc.RootBo;
 import tower.tmvc.Transaction;
 import tower.tmvc.XMLWrap;
 
-/**
- * 功能描述：根据查询条件从设备信息定义表中获取满足条件的设信息。
- * 
- * @author flj
- * 
- */
-public class BoDeviceList implements RootBo {
-
+public class BoTempSendDeviceList implements RootBo{
+	
 	public void doBusiness(Transaction transaction, XMLWrap requestXml, XMLWrap sessionXml,
 			XMLWrap applicationXml, Logger logger) throws ErrorException {
 		/*****************************************************************************************************
@@ -48,7 +49,15 @@ public class BoDeviceList implements RootBo {
 		// 物理位置db en
 		DbLocationInfo dbLocationInfo;
 		EnLocationInfo enLocationInfo;
-
+		
+		//维护团队与设备对照DB EN 
+		DbMaintainTeamDeviceMap dbMaintainTeamDeviceMap;
+		EnMaintainTeamDeviceMap enMaintainTeamDeviceMap;
+		
+		//维护团队与人员对照DB EN 
+		DbMaintainTeamUserMap dbMaintainTeamUserMap;
+		EnMaintainTeamUserMap enMaintainTeamUserMap;
+		
 		// 查询条件：
 		String deviceNameEn;// 设备名称-英文
 		String deviceNameCn;// 设备名称-中文
@@ -57,10 +66,14 @@ public class BoDeviceList implements RootBo {
 		String deviceStatus;// 设备状态
 		String deviceIp; // 网络地址
 		String devicePort; // 网络端口
-
+		String userId;
+		
 		// 其他
 		Vector devices;
-		StringBuffer sqlWhere;
+        StringBuffer sql = new StringBuffer();
+        StringBuffer sqlWhere = new StringBuffer();
+		QueryResult rs = null;
+		QueryResult rs1 = null;
 		/*****************************************************************************************************
 		 * 获取输入
 		 ****************************************************************************************************/
@@ -71,6 +84,7 @@ public class BoDeviceList implements RootBo {
 		deviceStatus = requestXml.getInputValue("DEVICE_STATUS");
 		deviceIp = requestXml.getInputValue("DEVICE_IP");
 		devicePort = requestXml.getInputValue("DEVICE_PORT");
+		userId = sessionXml.getItemValue("SYS_USER", 1, "USER_ID");
 		/*****************************************************************************************************
 		 * 创建数据库连接、实例化DB、EN
 		 ****************************************************************************************************/
@@ -79,11 +93,33 @@ public class BoDeviceList implements RootBo {
 		dbLocationInfo = new DbLocationInfo(transaction, null);
 		dbDeviceInfo = new DbDeviceInfo(transaction, null);
 		dbDeviceType = new DbDeviceType(transaction, null);
+		dbMaintainTeamDeviceMap = new DbMaintainTeamDeviceMap(transaction, null);
+		dbMaintainTeamUserMap = new DbMaintainTeamUserMap(transaction, null);
 		/*****************************************************************************************************
 		 * 执行业务逻辑、输出
 		 ****************************************************************************************************/
+		//维护当前维护人员编号获取维护设备编号
+		sql.append("SELECT a.device_id  FROM maintain_team_device_map a,maintain_team_user_map b where a.team_id = b.team_id and b.user_id=");
+		sql.append(transaction.formatString(userId));
+		rs = transaction.doQuery(null, sql.toString());
+		StringBuffer deviceIds = new StringBuffer();
+		for(int i=0; i<rs.size(); i++){
+			QueryResultRow rsRow = rs.get(i);
+			String value = rsRow.getString("device_id");
+			if(deviceIds != null && deviceIds.toString().length() != 0){
+				deviceIds = deviceIds.append(",");
+				deviceIds = deviceIds.append(value);
+			}else{
+				deviceIds = deviceIds.append(value);
+			}
+		}
+		if(deviceIds != null && deviceIds.toString().length() != 0){
+			deviceIds.insert(0, "(");
+			deviceIds.append(")");
+			sqlWhere.append(" DEVICE_ID IN ");
+			sqlWhere.append(deviceIds);
+		}
 		// 根据查询条件组装查询语句
-		sqlWhere = new StringBuffer();
 		if (deviceNameEn != null && deviceNameEn.length() != 0) {
 			if (sqlWhere == null || sqlWhere.length() == 0) {
 				sqlWhere.append(" DEVICE_NAME_EN  LIKE'%" + deviceNameEn + "%'");
@@ -133,6 +169,7 @@ public class BoDeviceList implements RootBo {
 				sqlWhere.append(" AND DEVICE_PORT LIKE '%" + devicePort + "%'");
 			}
 		}
+		
 		// 查询表，将符合条件的保存到requestXml中返回。
 		if (sqlWhere != null && sqlWhere.length() != 0) {
 			Page.SetPageInfo(transaction, null, requestXml, dbDeviceInfo, PubFunc.LEN_PAGE_COUNT,
@@ -174,4 +211,5 @@ public class BoDeviceList implements RootBo {
 			
 		}
 	}
+
 }
