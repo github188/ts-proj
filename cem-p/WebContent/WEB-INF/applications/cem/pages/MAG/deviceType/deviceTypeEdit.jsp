@@ -13,6 +13,10 @@
 	String collectCommands;
 	String appPicture;
 	String remark;
+	String rxpLineStart;
+	String rxpValueStart;
+	String rxpValueEnd;
+	String rxpValuePos;
 %>
 <%
     xml = XMLWrap.getRequestXml(request,session,application);
@@ -24,6 +28,10 @@
     collectCommands = xml.getItemValue("DEVICE_TYPE",1,"COLLECT_COMMANDS");
     appPicture = xml.getItemValue("DEVICE_TYPE",1,"APP_PICTURE");
     remark = xml.getItemValue("DEVICE_TYPE",1,"REMARK");
+    rxpLineStart = xml.getItemValue("DEVICE_TYPE",1,"RXP_LINE_START");    
+    rxpValueStart = xml.getItemValue("DEVICE_TYPE",1,"RXP_VALUE_START");
+    rxpValueEnd = xml.getItemValue("DEVICE_TYPE",1,"RXP_VALUE_END");
+    rxpValuePos = xml.getItemValue("DEVICE_TYPE",1,"RXP_VALUE_POS");  
 
 %>
 <html>
@@ -147,6 +155,42 @@
 		                 <td></td>
 		                </tr>
 		                <tr>
+                          <td width="150" align="right">光功率/行起始符：</td>
+		                  <td width="100">
+		                      <span id="sprytRxpLineStart">
+             					 <input type="text" class="text" name="RXP_LINE_START"value="<%=rxpLineStart %>">
+		                            <span class="textfieldMaxCharsMsg">已超过最大字符数50。</span>	                          
+		                            </span>
+		                  </td>
+		               </tr>
+		               <tr>
+                          <td width="150" align="right">光功率/数据起始符：</td>
+		                  <td width="100">
+		                      <span id="sprytRxpValueStart">
+             					 <input type="text" class="text" name="RXP_VALUE_START"value="<%=rxpValueStart %>">
+		                            <span class="textfieldMaxCharsMsg">已超过最大字符数50。</span>	                          
+		                            </span>
+		                  </td>
+		               </tr>
+		               <tr>
+                          <td width="150" align="right">光功率/数据截止符：</td>
+		                  <td width="100">
+		                      <span id="sprytRxpValueEnd">
+             					 <input type="text" class="text" name="RXP_VALUE_END"value="<%=rxpValueEnd %>">
+		                            <span class="textfieldMaxCharsMsg">已超过最大字符数50。</span>	                          
+		                            </span>
+		                  </td>
+		               </tr>
+		               <tr>
+                          <td width="150" align="right">光功率/数据位置：</td>
+		                  <td width="100">
+		                      <span id="sprytRxpValuePos">
+             					 <input type="text" class="text" name="RXP_VALUE_POS"value="<%=rxpValuePos %>">
+		                            <span class="textfieldMaxCharsMsg">已超过最大字符数50。</span>	                          
+		                            </span>
+		                  </td>
+		               </tr>
+		                <tr>
 		                 <td width="120" align="right">备注：</td>
 		                 <td colspan="3"> 
               			<span id="spryRemark">
@@ -194,6 +238,10 @@ var sprytextfield4 = new Spry.Widget.ValidationTextField("spryRemark", "none", {
 var sprytextfield4 = new Spry.Widget.ValidationTextField("spryCollectCommands", "none", {maxChars:1000});
 var sprytextfield4 = new Spry.Widget.ValidationTextField("spryInspectCommandsExp", "none", {maxChars:1000});	
 var sprytextfield4 = new Spry.Widget.ValidationTextField("spryInspectCommands", "none", {maxChars:1000});
+var sprytextfield2 = new Spry.Widget.ValidationTextField("sprytRxpLineStart", "none", {required:false,maxChars:50});
+var sprytextfield2 = new Spry.Widget.ValidationTextField("sprytRxpValueStart", "none", {required:false,maxChars:50});
+var sprytextfield2 = new Spry.Widget.ValidationTextField("sprytRxpValueEnd", "none", {required:false,maxChars:50});
+var sprytextfield2 = new Spry.Widget.ValidationTextField("sprytRxpValuePos", "none", {required:false,maxChars:50});
 
 //-->
 </script>
