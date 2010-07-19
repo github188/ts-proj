@@ -127,10 +127,7 @@
 		               <tr>
 		                 <td width="120" align="right">巡检指令集：</td>
 		                 <td colspan="3">
-		                   <span id="spryInspectCommands">
               					<textarea name="INSPECT_COMMANDS" id="textarea" class="textarea" cols="50" rows="4"><%=inspectCommands %></textarea>
-              			  <span class="textfieldMaxCharsMsg">已超过最大字符数200。</span>	                          
-		                  </span>
 		                 </td>
 		               </tr>
 		                <tr>
@@ -147,10 +144,7 @@
 		                <tr>
 		                <td width="120" align="right">光功率采集指令：</td>
 		                 <td colspan="3">
-		                   <span id="spryCollectCommands">
               					<textarea name="COLLECT_COMMANDS" id="textarea" class="textarea" cols="50" rows="4"><%=collectCommands %></textarea>
-              			  <span class="textfieldMaxCharsMsg">已超过最大字符数200。</span>	                          
-		                  </span>
 		                 </td>
 		                 <td></td>
 		                </tr>
@@ -230,18 +224,14 @@
     
   <script type="text/javascript">
 <!--
-var sprytextfield1 = new Spry.Widget.ValidationTextField("spryTypeNameEn","none", {required:false,maxChars:60});
-var sprytextfield2 = new Spry.Widget.ValidationTextField("sprytTypeNameCn", "none", {maxChars:60});
-var sprytextfield3 = new Spry.Widget.ValidationTextField("spryTypeConfAmount", "integer", {required:false,maxChars:50});
-var sprytextfield4 = new Spry.Widget.ValidationTextField("className", "none", {maxChars:50});	
-var sprytextfield4 = new Spry.Widget.ValidationTextField("spryRemark", "none", {maxChars:200});	
-var sprytextfield4 = new Spry.Widget.ValidationTextField("spryCollectCommands", "none", {maxChars:1000});
-var sprytextfield4 = new Spry.Widget.ValidationTextField("spryInspectCommandsExp", "none", {maxChars:1000});	
-var sprytextfield4 = new Spry.Widget.ValidationTextField("spryInspectCommands", "none", {maxChars:1000});
-var sprytextfield2 = new Spry.Widget.ValidationTextField("sprytRxpLineStart", "none", {required:false,maxChars:50});
-var sprytextfield2 = new Spry.Widget.ValidationTextField("sprytRxpValueStart", "none", {required:false,maxChars:50});
-var sprytextfield2 = new Spry.Widget.ValidationTextField("sprytRxpValueEnd", "none", {required:false,maxChars:50});
-var sprytextfield2 = new Spry.Widget.ValidationTextField("sprytRxpValuePos", "none", {required:false,maxChars:50});
+var sprytextfield1 = new Spry.Widget.ValidationTextField("spryTypeNameEn","none", {required:true,maxChars:60});
+var sprytextfield2 = new Spry.Widget.ValidationTextField("sprytTypeNameCn", "none", {required:true,maxChars:60});
+var sprytextfield6 = new Spry.Widget.ValidationTextField("spryInspectCommandsExp",{isRequired:false,maxChars:200});	
+var sprytextfield8 = new Spry.Widget.ValidationTextField("spryRemark", {isRequired:false,maxChars:200});
+var sprytextfield2 = new Spry.Widget.ValidationTextField("sprytRxpLineStart",  {isRequired:false,maxChars:50});
+var sprytextfield2 = new Spry.Widget.ValidationTextField("sprytRxpValueStart", {isRequired:false,maxChars:50});
+var sprytextfield2 = new Spry.Widget.ValidationTextField("sprytRxpValueEnd",  {isRequired:false,maxChars:50});
+var sprytextfield2 = new Spry.Widget.ValidationTextField("sprytRxpValuePos", {isRequired:false,maxChars:50});
 
 //-->
 </script>
