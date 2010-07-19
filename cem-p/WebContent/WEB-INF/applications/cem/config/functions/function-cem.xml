@@ -334,7 +334,7 @@
         
       <!-- 09-tempSend-维护指令模板发送 -->
        <function id="tempSendDeviceList" description="维护指令模板发送-设备查询" type="bo"
-        className="tower.cem.bo.MAG.device.BoDeviceList"
+        className="tower.cem.bo.MAI.tempSend.BoTempSendDeviceList"
         forward="tempSendDeviceListJsp" /> 
         
         <function id="selectTempList" description="维护指令模板发送-选择模板" type="bo"
@@ -376,6 +376,14 @@
         
          <function id="TempLogViewJsp" description="设备维护指令日志查看" type="jsp"
         jspPath="/cem/pages/MAI/tempLog/tempLogView.jsp" /> 
+        
+      <!-- 10-partDevices-设备巡检 -->
+       <function id="partDevicesList" description="设备巡检-设备查询" type="bo"
+        className="tower.cem.bo.MAI.tempSend.BoTempSendDeviceList"
+        forward="partDevicesListJsp" /> 
+        
+        <function id="partDevicesListJsp" description="设备巡检-设备查询界面" type="jsp"
+        jspPath="/cem/pages/INS/partDevices/deviceList.jsp" /> 
          
        <!-- 21-device-设备端口类型管理 -->
       <function id="DevicePortTypeSubmit" description="设备端口类型提交" type="bo"
