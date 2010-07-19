@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 
 import tower.cem.en.EnCommandsSendList;
 import tower.cem.en.EnDeviceInfo;
+import tower.cem.en.EnDeviceType;
 import tower.cem.en.EnFrontHostInfo;
 import tower.cem.en.EnMaintainCommandsTemplate;
 import tower.cem.util.NetTelnet;
@@ -27,28 +28,84 @@ public class TdRunnable implements Runnable {
 	this.log = Logger.getLogger("TdRunnable");
     }
 
-    public double collectRxpValue(String collectString) {
+    public double collectRxpValue(String collectString, String startString, String beginString,
+	    String endString, String pos) {
 
 	String result = collectString;
-	String rxpLable = "Rx Pwr [dbm]";
-	// rxpLable = "/dev/sda1";
+	String rxpLable = startString;
+	String rxpBegin = beginString;
+	String rxpEnd = endString;
+	int ValuePos = 1;
+
 	double rxpValue = 99999999.99;
 
+	if (rxpLable == null || rxpLable.trim().length() == 0) {
+	    return rxpValue;
+	}
+	// 根据行起始符，截取自起始符之后的字符串
 	int ipos = result.indexOf(rxpLable);
-	result = result.substring(ipos + rxpLable.length(), result.length());
+	if (ipos < 0) {
+	    return rxpValue;
+	}
 
+	result = result.substring(ipos, result.length());
+
+	// 将截取到的字符串按行分隔开，并取得第一行
 	String results[] = result.split("\n");
-	if (results.length > 0)
+	if (results.length > 0) {
 	    result = results[0];
+	}
 
+	if (result == null || result.trim().length() == 0) {
+	    return rxpValue;
+	}
+
+	// 找到开始位置
+	if (rxpBegin == null || rxpBegin.trim().length() == 0) {
+	    rxpBegin = startString;
+	}
+	int iPosBegin = result.indexOf(rxpBegin);
+	if (iPosBegin < 0) {
+	    return rxpValue;
+	}
+	iPosBegin = iPosBegin + rxpBegin.length();
+
+	// 找到截止位置
+	int iPosEnd = result.length();
+	if (!(rxpEnd == null || rxpEnd.trim().length() == 0)) {
+	    iPosEnd = result.indexOf(rxpEnd);
+	}
+	if (iPosEnd < 0) {
+	    return rxpValue;
+	}
+
+	// 截取出含有数据的字符串
+	if (iPosBegin > iPosEnd) {
+	    return rxpValue;
+	}
+	result = result.substring(iPosBegin, iPosEnd);
+
+	// 截取串中的第几个数据
+	try {
+	    ValuePos = Integer.parseInt(pos);
+	} catch (Exception e) {
+	    // TODO: handle exception
+	}
+
+	// 按照空格分隔开，并取得指定位置的数据
 	results = result.split(" ");
+	int iValuePosCount = 0;
 	for (int i = 0; i < results.length; i++) {
 	    if (results[i].trim().length() > 0) {
-		result = results[i];
-		break;
+		iValuePosCount++;
+		if (iValuePosCount == ValuePos) {
+		    result = results[i];
+		    break;
+		}
 	    }
 	}
 
+	// 将数据转换为数值
 	try {
 	    rxpValue = Double.parseDouble(result);
 	} catch (Exception e) {
@@ -81,6 +138,7 @@ public class TdRunnable implements Runnable {
 	String sResult = "";
 
 	EnDeviceInfo enDeviceInfo = new EnDeviceInfo();
+	EnDeviceType enDeviceType = new EnDeviceType();
 	EnFrontHostInfo enFrontHostInfo = new EnFrontHostInfo();
 	EnMaintainCommandsTemplate enTemplate = new EnMaintainCommandsTemplate();
 
@@ -503,7 +561,8 @@ public class TdRunnable implements Runnable {
 		// Runtime Code
 		// 根据设备获取到设备信息及所属设备分类信息，当设备空时，获取全部可用的设备信息及所属设备分类信息
 		sSql = " select device_id, device_name_en, front_host_id, device_ip, device_port, "
-			+ " device_user, device_password, device_prompt, collect_commands"
+			+ " device_user, device_password, device_prompt, collect_commands, "
+			+ " rxp_line_start, rxp_value_start, rxp_value_end, rxp_value_pos "
 			+ " from device_info, device_type"
 			+ " where device_info.type_id = device_type.type_id"
 			+ " and device_info.device_status ='N'";
@@ -520,6 +579,7 @@ public class TdRunnable implements Runnable {
 
 		rs = DaemonsDBPool.doQuery(conn, sSql);
 		Vector vDeviceInfo = new Vector();
+		Vector vDeviceType = new Vector();
 		while (rs.next()) {
 		    enDeviceInfo = new EnDeviceInfo();
 		    enDeviceInfo.setDeviceId(rs.getString("DEVICE_ID"));
@@ -532,6 +592,14 @@ public class TdRunnable implements Runnable {
 		    enDeviceInfo.setDevicePrompt(rs.getString("DEVICE_PROMPT"));
 		    enDeviceInfo.setRemark(rs.getString("COLLECT_COMMANDS"));
 		    vDeviceInfo.add(enDeviceInfo);
+
+		    enDeviceType = new EnDeviceType();
+		    enDeviceType.setRxpLineStart(rs.getString("RXP_LINE_START"));
+		    enDeviceType.setRxpValueStart(rs.getString("RXP_VALUE_START"));
+		    enDeviceType.setRxpValueEnd(rs.getString("RXP_VALUE_END"));
+		    enDeviceType.setRxpValuePos(rs.getString("RXP_VALUE_POS"));
+		    vDeviceType.add(enDeviceType);
+
 		}
 
 		// 获取到全部堡垒主机列表
@@ -554,6 +622,7 @@ public class TdRunnable implements Runnable {
 		    nt = new NetTelnet();
 		    sbResult = new StringBuffer();
 		    enDeviceInfo = (EnDeviceInfo) vDeviceInfo.get(i);
+		    enDeviceType = (EnDeviceType) vDeviceType.get(i);
 
 		    sGenResult = "S";
 
@@ -638,7 +707,9 @@ public class TdRunnable implements Runnable {
 				sResult = nt.sendCommand(sCommLine);
 				sbResult.append(sResult);
 
-				double rxp = this.collectRxpValue(sResult);
+				double rxp = this.collectRxpValue(sResult, enDeviceType.getRxpLineStart(),
+					enDeviceType.getRxpValueStart(), enDeviceType.getRxpValueEnd(),
+					enDeviceType.getRxpValuePos());
 
 				if (rxp < RX_MAX_VALUE) {
 				    sSql = "insert into device_port_rxp values ('" + enSendList.getSendId()

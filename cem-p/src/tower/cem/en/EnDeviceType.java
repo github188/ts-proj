@@ -40,6 +40,26 @@ public class EnDeviceType implements java.io.Serializable {
     private String collectCommands;
 
     /**
+     * Type : varchar(50) Name : RXP_LINE_START
+     */
+    private String rxpLineStart;
+
+    /**
+     * Type : varchar(50) Name : RXP_VALUE_START
+     */
+    private String rxpValueStart;
+
+    /**
+     * Type : varchar(50) Name : RXP_VALUE_END
+     */
+    private String rxpValueEnd;
+
+    /**
+     * Type : varchar(50) Name : RXP_VALUE_POS
+     */
+    private String rxpValuePos;
+
+    /**
      * Type : longblob Name : APP_PICTURE
      */
     private byte[] appPicture;
@@ -78,6 +98,26 @@ public class EnDeviceType implements java.io.Serializable {
      * Type : text Name : COLLECT_COMMANDS modify flag
      */
     private boolean _flagCollectCommands;
+
+    /**
+     * Type : varchar(50) Name : RXP_LINE_START modify flag
+     */
+    private boolean _flagRxpLineStart;
+
+    /**
+     * Type : varchar(50) Name : RXP_VALUE_START modify flag
+     */
+    private boolean _flagRxpValueStart;
+
+    /**
+     * Type : varchar(50) Name : RXP_VALUE_END modify flag
+     */
+    private boolean _flagRxpValueEnd;
+
+    /**
+     * Type : varchar(50) Name : RXP_VALUE_POS modify flag
+     */
+    private boolean _flagRxpValuePos;
 
     /**
      * Type : longblob Name : APP_PICTURE modify flag
@@ -219,6 +259,94 @@ public class EnDeviceType implements java.io.Serializable {
      */
     public boolean hasChangeCollectCommands() {
         return _flagCollectCommands;
+    }
+
+    /**
+     * Sets the value for rxpLineStart
+     */
+    public void setRxpLineStart(String rxpLineStart) {
+        this.rxpLineStart = rxpLineStart;
+        this._flagRxpLineStart = true;
+    }
+
+    /**
+     * Gets the value for rxpLineStart
+     */
+    public String getRxpLineStart() {
+        return rxpLineStart;
+    }
+
+    /**
+     * has the value for rxpLineStart changed?
+     */
+    public boolean hasChangeRxpLineStart() {
+        return _flagRxpLineStart;
+    }
+
+    /**
+     * Sets the value for rxpValueStart
+     */
+    public void setRxpValueStart(String rxpValueStart) {
+        this.rxpValueStart = rxpValueStart;
+        this._flagRxpValueStart = true;
+    }
+
+    /**
+     * Gets the value for rxpValueStart
+     */
+    public String getRxpValueStart() {
+        return rxpValueStart;
+    }
+
+    /**
+     * has the value for rxpValueStart changed?
+     */
+    public boolean hasChangeRxpValueStart() {
+        return _flagRxpValueStart;
+    }
+
+    /**
+     * Sets the value for rxpValueEnd
+     */
+    public void setRxpValueEnd(String rxpValueEnd) {
+        this.rxpValueEnd = rxpValueEnd;
+        this._flagRxpValueEnd = true;
+    }
+
+    /**
+     * Gets the value for rxpValueEnd
+     */
+    public String getRxpValueEnd() {
+        return rxpValueEnd;
+    }
+
+    /**
+     * has the value for rxpValueEnd changed?
+     */
+    public boolean hasChangeRxpValueEnd() {
+        return _flagRxpValueEnd;
+    }
+
+    /**
+     * Sets the value for rxpValuePos
+     */
+    public void setRxpValuePos(String rxpValuePos) {
+        this.rxpValuePos = rxpValuePos;
+        this._flagRxpValuePos = true;
+    }
+
+    /**
+     * Gets the value for rxpValuePos
+     */
+    public String getRxpValuePos() {
+        return rxpValuePos;
+    }
+
+    /**
+     * has the value for rxpValuePos changed?
+     */
+    public boolean hasChangeRxpValuePos() {
+        return _flagRxpValuePos;
     }
 
     /**
