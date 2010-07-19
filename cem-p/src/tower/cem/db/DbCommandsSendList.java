@@ -31,10 +31,12 @@ public class DbCommandsSendList extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
 
-        query.append("insert into commands_send_list ( SEND_ID,USER_ID,DEVICE_ID,TASK_DEFINE_TIME,TASK_PLAN_TIME,COMMANDS_TYPE,TEMPLATE_ID,STATUS ) values ( ");
+        query.append("insert into commands_send_list ( SEND_ID,USER_ID,DEVICE_TYPE_ID,DEVICE_ID,TASK_DEFINE_TIME,TASK_PLAN_TIME,COMMANDS_TYPE,TEMPLATE_ID,STATUS ) values ( ");
         query.append(formatString(en.getSendId()));
         query.append(",");
         query.append(formatString(en.getUserId()));
+        query.append(",");
+        query.append(formatString(en.getDeviceTypeId()));
         query.append(",");
         query.append(formatString(en.getDeviceId()));
         query.append(",");
@@ -92,6 +94,14 @@ public class DbCommandsSendList extends RootDB{
             }
             query.append("USER_ID=");
             query.append(formatString(en.getUserId()));
+            bChanged = true;
+        }
+        if(en.hasChangeDeviceTypeId()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("DEVICE_TYPE_ID=");
+            query.append(formatString(en.getDeviceTypeId()));
             bChanged = true;
         }
         if(en.hasChangeDeviceId()) {
@@ -157,7 +167,7 @@ public class DbCommandsSendList extends RootDB{
         EnCommandsSendList res = null;
 
         StringBuffer query;
-        query = new StringBuffer("select SEND_ID,USER_ID,DEVICE_ID,TASK_DEFINE_TIME,TASK_PLAN_TIME,COMMANDS_TYPE,TEMPLATE_ID,STATUS from commands_send_list");
+        query = new StringBuffer("select SEND_ID,USER_ID,DEVICE_TYPE_ID,DEVICE_ID,TASK_DEFINE_TIME,TASK_PLAN_TIME,COMMANDS_TYPE,TEMPLATE_ID,STATUS from commands_send_list");
 
         query.append(" where ");
         query.append("SEND_ID=");
@@ -220,6 +230,14 @@ public class DbCommandsSendList extends RootDB{
             }
             query.append("USER_ID=");
             query.append(formatString(en.getUserId()));
+            bChanged = true;
+        }
+        if(en.hasChangeDeviceTypeId()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("DEVICE_TYPE_ID=");
+            query.append(formatString(en.getDeviceTypeId()));
             bChanged = true;
         }
         if(en.hasChangeDeviceId()) {
@@ -285,7 +303,7 @@ public class DbCommandsSendList extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select SEND_ID,USER_ID,DEVICE_ID,TASK_DEFINE_TIME,TASK_PLAN_TIME,COMMANDS_TYPE,TEMPLATE_ID,STATUS from commands_send_list");
+        query.append("select SEND_ID,USER_ID,DEVICE_TYPE_ID,DEVICE_ID,TASK_DEFINE_TIME,TASK_PLAN_TIME,COMMANDS_TYPE,TEMPLATE_ID,STATUS from commands_send_list");
 
         query.append(" where ");
         query.append("SEND_ID like ");
@@ -323,7 +341,7 @@ public class DbCommandsSendList extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select SEND_ID,USER_ID,DEVICE_ID,TASK_DEFINE_TIME,TASK_PLAN_TIME,COMMANDS_TYPE,TEMPLATE_ID,STATUS from commands_send_list where ");
+        query.append("select SEND_ID,USER_ID,DEVICE_TYPE_ID,DEVICE_ID,TASK_DEFINE_TIME,TASK_PLAN_TIME,COMMANDS_TYPE,TEMPLATE_ID,STATUS from commands_send_list where ");
         query.append(where);
         if(orderBy != null) {
             query.append(orderBy);
@@ -340,7 +358,7 @@ public class DbCommandsSendList extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select SEND_ID,USER_ID,DEVICE_ID,TASK_DEFINE_TIME,TASK_PLAN_TIME,COMMANDS_TYPE,TEMPLATE_ID,STATUS from commands_send_list");
+        query.append("select SEND_ID,USER_ID,DEVICE_TYPE_ID,DEVICE_ID,TASK_DEFINE_TIME,TASK_PLAN_TIME,COMMANDS_TYPE,TEMPLATE_ID,STATUS from commands_send_list");
 
         if(orderBy != null) {
             query.append(orderBy);
@@ -373,6 +391,14 @@ public class DbCommandsSendList extends RootDB{
             }
             query.append("USER_ID=");
             query.append(formatString(en.getUserId()));
+            bChanged = true;
+        }
+        if(en.hasChangeDeviceTypeId()) {
+            if(bChanged){
+                query.append(" and ");
+            }
+            query.append("DEVICE_TYPE_ID=");
+            query.append(formatString(en.getDeviceTypeId()));
             bChanged = true;
         }
         if(en.hasChangeDeviceId()) {
@@ -424,9 +450,9 @@ public class DbCommandsSendList extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select SEND_ID,USER_ID,DEVICE_ID,TASK_DEFINE_TIME,TASK_PLAN_TIME,COMMANDS_TYPE,TEMPLATE_ID,STATUS from commands_send_list where ");
+            query.insert(0,"select SEND_ID,USER_ID,DEVICE_TYPE_ID,DEVICE_ID,TASK_DEFINE_TIME,TASK_PLAN_TIME,COMMANDS_TYPE,TEMPLATE_ID,STATUS from commands_send_list where ");
         } else {
-            query.append("select SEND_ID,USER_ID,DEVICE_ID,TASK_DEFINE_TIME,TASK_PLAN_TIME,COMMANDS_TYPE,TEMPLATE_ID,STATUS from commands_send_list");
+            query.append("select SEND_ID,USER_ID,DEVICE_TYPE_ID,DEVICE_ID,TASK_DEFINE_TIME,TASK_PLAN_TIME,COMMANDS_TYPE,TEMPLATE_ID,STATUS from commands_send_list");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -459,6 +485,14 @@ public class DbCommandsSendList extends RootDB{
             }
             query.append("USER_ID like ");
             query.append(formatString(en.getUserId()));
+            bChanged = true;
+        }
+        if(en.hasChangeDeviceTypeId()) {
+            if(bChanged){
+                query.append(" and ");
+            }
+            query.append("DEVICE_TYPE_ID like ");
+            query.append(formatString(en.getDeviceTypeId()));
             bChanged = true;
         }
         if(en.hasChangeDeviceId()) {
@@ -510,9 +544,9 @@ public class DbCommandsSendList extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select SEND_ID,USER_ID,DEVICE_ID,TASK_DEFINE_TIME,TASK_PLAN_TIME,COMMANDS_TYPE,TEMPLATE_ID,STATUS from commands_send_list where ");
+            query.insert(0,"select SEND_ID,USER_ID,DEVICE_TYPE_ID,DEVICE_ID,TASK_DEFINE_TIME,TASK_PLAN_TIME,COMMANDS_TYPE,TEMPLATE_ID,STATUS from commands_send_list where ");
         } else {
-            query.append("select SEND_ID,USER_ID,DEVICE_ID,TASK_DEFINE_TIME,TASK_PLAN_TIME,COMMANDS_TYPE,TEMPLATE_ID,STATUS from commands_send_list");
+            query.append("select SEND_ID,USER_ID,DEVICE_TYPE_ID,DEVICE_ID,TASK_DEFINE_TIME,TASK_PLAN_TIME,COMMANDS_TYPE,TEMPLATE_ID,STATUS from commands_send_list");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -592,6 +626,14 @@ public class DbCommandsSendList extends RootDB{
             query.append(formatString(en.getUserId()));
             bChanged = true;
         }
+        if(en.hasChangeDeviceTypeId()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("DEVICE_TYPE_ID=");
+            query.append(formatString(en.getDeviceTypeId()));
+            bChanged = true;
+        }
         if(en.hasChangeDeviceId()) {
             if(bChanged){
                 query.append(",");
@@ -654,6 +696,7 @@ public class DbCommandsSendList extends RootDB{
 
         en.setSendId(r.getString("SEND_ID"));
         en.setUserId(r.getString("USER_ID"));
+        en.setDeviceTypeId(r.getString("DEVICE_TYPE_ID"));
         en.setDeviceId(r.getString("DEVICE_ID"));
         en.setTaskDefineTime(r.getString("TASK_DEFINE_TIME"));
         en.setTaskPlanTime(r.getString("TASK_PLAN_TIME"));
@@ -689,6 +732,10 @@ public class DbCommandsSendList extends RootDB{
         otmp = xml.getInputObject("USER_ID");
         stmp = (String)otmp;
         en.setUserId(stmp);
+
+        otmp = xml.getInputObject("DEVICE_TYPE_ID");
+        stmp = (String)otmp;
+        en.setDeviceTypeId(stmp);
 
         otmp = xml.getInputObject("DEVICE_ID");
         stmp = (String)otmp;
@@ -726,6 +773,7 @@ public class DbCommandsSendList extends RootDB{
         EnCommandsSendList en;
         Object[] oSendId;
         Object[] oUserId;
+        Object[] oDeviceTypeId;
         Object[] oDeviceId;
         Object[] oTaskDefineTime;
         Object[] oTaskPlanTime;
@@ -741,6 +789,10 @@ public class DbCommandsSendList extends RootDB{
         oUserId = xml.getInputObjects("USER_ID");
         if (count == 0 && oUserId.length > 0) {
             count = oUserId.length;
+        }
+        oDeviceTypeId = xml.getInputObjects("DEVICE_TYPE_ID");
+        if (count == 0 && oDeviceTypeId.length > 0) {
+            count = oDeviceTypeId.length;
         }
         oDeviceId = xml.getInputObjects("DEVICE_ID");
         if (count == 0 && oDeviceId.length > 0) {
@@ -777,6 +829,11 @@ public class DbCommandsSendList extends RootDB{
             if (oUserId.length == count) {
                 stmp = (String)oUserId[i];
                 en.setUserId(stmp);
+            }
+
+            if (oDeviceTypeId.length == count) {
+                stmp = (String)oDeviceTypeId[i];
+                en.setDeviceTypeId(stmp);
             }
 
             if (oDeviceId.length == count) {
@@ -821,6 +878,7 @@ public class DbCommandsSendList extends RootDB{
         int row = xml.addRow("COMMANDS_SEND_LIST");
         xml.setItemValue("COMMANDS_SEND_LIST",row,"SEND_ID",en.getSendId());
         xml.setItemValue("COMMANDS_SEND_LIST",row,"USER_ID",en.getUserId());
+        xml.setItemValue("COMMANDS_SEND_LIST",row,"DEVICE_TYPE_ID",en.getDeviceTypeId());
         xml.setItemValue("COMMANDS_SEND_LIST",row,"DEVICE_ID",en.getDeviceId());
         xml.setItemValue("COMMANDS_SEND_LIST",row,"TASK_DEFINE_TIME",en.getTaskDefineTime());
         xml.setItemValue("COMMANDS_SEND_LIST",row,"TASK_PLAN_TIME",en.getTaskPlanTime());
@@ -841,6 +899,7 @@ public class DbCommandsSendList extends RootDB{
             row = xml.addRow("COMMANDS_SEND_LIST");
             xml.setItemValue("COMMANDS_SEND_LIST",row,"SEND_ID",en.getSendId());
             xml.setItemValue("COMMANDS_SEND_LIST",row,"USER_ID",en.getUserId());
+            xml.setItemValue("COMMANDS_SEND_LIST",row,"DEVICE_TYPE_ID",en.getDeviceTypeId());
             xml.setItemValue("COMMANDS_SEND_LIST",row,"DEVICE_ID",en.getDeviceId());
             xml.setItemValue("COMMANDS_SEND_LIST",row,"TASK_DEFINE_TIME",en.getTaskDefineTime());
             xml.setItemValue("COMMANDS_SEND_LIST",row,"TASK_PLAN_TIME",en.getTaskPlanTime());
