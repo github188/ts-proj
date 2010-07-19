@@ -218,7 +218,7 @@ function doSubmit(form) {
               <tr height="10">
                 <td colspan="9" align="center">
                 	<input size="10" type="button" class="button"  onclick="doReturn()" value="上一步" >
-                 	<input size="10" type="submit" class="submit"  value="发送指令模板" >
+                 	<input size="10" type="submit" class="submit"  value="发送模板" >
                 </td>
                 <td></td>
                 <td></td>
