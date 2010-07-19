@@ -9,7 +9,6 @@
 	//维护团队信息
 	String teamId;
 	String teamName;
-	String remark;
 	
 	//维护设备信息
 	String deviceId;
@@ -17,7 +16,9 @@
 	String deviceNameCn;
 	String deviceAbbNameEn;
 	String typeId;
+	String typeName;
 	String locationId;
+	String locationNameCn;
 	String deviceStatus;
 	String frontHostId;
 	String frontHostName;
@@ -26,7 +27,7 @@
 	String deviceUser;
 	String devicePassword;
 	String devicePrompt;
-	String deviceRemark;
+	String remark;
 %>
 <%
     xml = XMLWrap.getRequestXml(request,session,application);
@@ -41,7 +42,9 @@
 	deviceNameCn = xml.getItemValue("DEVICE_INFO",1,"DEVICE_ABB_NAME_EN");
 	deviceAbbNameEn = xml.getItemValue("DEVICE_INFO",1,"DEVICE_NAME_CN");
 	typeId = xml.getItemValue("DEVICE_INFO",1,"TYPE_ID");
+	typeName = xml.getItemValue("DEVICE_INFO",1,"TYPE_NAME");
 	locationId = xml.getItemValue("DEVICE_INFO",1,"LOCATION_ID");
+	locationNameCn = xml.getItemValue("DEVICE_INFO",1,"LOCATION_NAME");
 	deviceStatus = xml.getItemValue("DEVICE_INFO",1,"DEVICE_STATUS");
 	frontHostId = xml.getItemValue("DEVICE_INFO",1,"FRONT_HOST_ID");
 	frontHostName = xml.getItemValue("DEVICE_INFO",1,"FRONT_HOST_NAME");
@@ -50,10 +53,10 @@
 	deviceUser = xml.getItemValue("DEVICE_INFO",1,"DEVICE_USER");
 	devicePassword = xml.getItemValue("DEVICE_INFO",1,"DEVICE_PASSWORD");
 	devicePrompt = xml.getItemValue("DEVICE_INFO",1,"DEVICE_PROMPT");
-	deviceRemark = xml.getItemValue("DEVICE_INFO",1,"REMARK");
+    remark = xml.getItemValue("DEVICE_INFO",1,"REMARK");
     
-	 String[] deviceStatusDesc = {"正常","不正常"};
-	 String[] deviceStatusValue = {"0","1"};
+	String[] deviceStatusDesc = {"在用","停用"};
+	String[] deviceStatusValue = {"N","S"};
 %>
 <html>
 <head>
@@ -98,12 +101,6 @@
           <div class="panelContent">
             <div class="panelContent2">
               <!-- 查询面板内容 -->
-               <table>
-                <tr>
-                  <th>维护团队名称：</th>
-                  <td><%=teamName %></td>
-                </tr>
-              </table>
               <!-- 查询面板内容结束 -->
             </div>
           </div>
@@ -146,13 +143,13 @@
 		                 </td>
 		                <td width="100" align="right">物理位置：</td>
 		                 <td>
-		                  <input type="text" class="text" value="<%=locationId%>" readonly>
+		                  <input type="text" class="text" value="<%=locationNameCn%>" readonly>
 		                 </td>
 		               </tr>
 		               <tr>
 		               <td width="100" align="right">设备类型：</td>
 		                 <td>
-              				<input type="text" class="text" name="TYPE_ID"value="<%=typeId %>"> 
+              				<input type="text" class="text" name="TYPE_ID"value="<%=typeName %>"> 
 		                 </td>
 		                <td width="100" align="right">堡垒主机：</td>
 		                 <td>
@@ -162,10 +159,10 @@
 		               </tr>
 		                <tr>
 		                <td width="100" align="right">设备状态：</td>
+		                <td>
                          <%for(int i=0;i<deviceStatusValue.length;i++){
                         	 if(deviceStatusValue[i].endsWith(deviceStatus)){
                         %>
-                       <td>
                         <input type="text" class="text" value="<%=deviceStatusDesc[i] %>" readonly>
                         <%}} %>
 						 </td>
@@ -197,14 +194,14 @@
 		               <tr>
 		                 <td width="100" align="right">备注:</td>
 		                 <td>
-		                  <textarea id="textarea" class="textarea" cols="50" rows="4" readonly> <%=deviceRemark %></textarea>
+		                  <textarea id="textarea" class="textarea" cols="50" rows="4" readonly> <%=remark %></textarea>
 		                    
 		                 </td>
 		               </tr>
                          <tr height="15"></tr>
                         <tr>
                           <td colspan="4" align="center" nowrap="nowrap">
-                            <input type="button" class="reset" onclick="hitory.banck();" value="取消">
+                            <input type="button" class="reset" onclick="doReturn1();" value="返回">
                           </td>
                         </tr>
                       </table>

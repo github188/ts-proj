@@ -59,6 +59,10 @@
 %>
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="pragma" content="no-cache">
+<meta HTTP-EQUIV="Cache-Control" content="no-cache, must-revalidate">
+<meta HTTP-EQUIV="expires" content="0">
 <title>堡垒主机管理</title>
 <jsp:include flush="true" page="../../../sys/pages/common/include/css.jsp"></jsp:include>
 <jsp:include flush="true" page="../../../sys/pages/common/include/js.jsp"></jsp:include>
@@ -90,7 +94,7 @@
     }
     if(flg == 0)
     {
-      alert("请选择物理位置");
+      alert("请选择堡垒主机");
       return false;
     }
     else

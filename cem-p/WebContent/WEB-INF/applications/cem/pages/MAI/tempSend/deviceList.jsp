@@ -17,15 +17,14 @@
 	String[] deviceNameEns;
 	String[] deviceNameCns;
 	String[] typeNames;
+	String[] typeIds;
 	String[] locationNames;
 	String[] deviceStatuses;
 	String[] deviceIps;
 	String[] devicePorts;
 	
 	//设置返回条件
-	String[] checkFlags;
 	String[] Ids;
-	String backflag;//返回标志
 %>
 <%
 	xml = XMLWrap.getRequestXml(request,session,application);
@@ -44,6 +43,7 @@
 	deviceIps = xml.getItemValues("DEVICE_INFO", "DEVICE_IP");
 	devicePorts = xml.getItemValues("DEVICE_INFO", "DEVICE_PORT");
 	typeNames = xml.getItemValues("DEVICE_INFO", "TYPE_NAME");
+	typeIds = xml.getItemValues("DEVICE_INFO", "TYPE_ID");
     
 	Ids = xml.getInputValues("DEVICE_ID");
 	
@@ -125,7 +125,7 @@ function doSubmit(form) {
     {
       return true;
     }
-    }
+ }
     
 -->
 </script>
@@ -239,7 +239,10 @@ function doSubmit(form) {
                   </a>
                   </td>
                   <td align="center"><%=deviceNameCns[i]%></td>
-                   <td align="center"><%=typeNames[i]%></td>
+                   <td align="center">
+                   <%=typeNames[i]%>
+                    <input type="hidden" name="DEVICE_TYPE_ID" value="<%=typeIds[i] %>"  > 
+                   </td>
                   <td align="center"><%=locationNames[i]%></td>
                   <td align="center"><%=deviceIps[i]%></td>
                   <td align="center"><%=devicePorts[i]%></td>
@@ -265,7 +268,10 @@ function doSubmit(form) {
                     </a>
                   </td>
                   <td align="center"><%=deviceNameCns[i]%></td>
-                  <td align="center"><%=typeNames[i]%></td>
+                  <td align="center">
+                   <%=typeNames[i]%>
+                    <input type="hidden" name="DEVICE_TYPE_ID" value="<%=typeIds[i] %>"  > 
+                   </td>
                   <td align="center"><%=locationNames[i]%></td>
                   <td align="center"><%=deviceIps[i]%></td>
                   <td align="center"><%=devicePorts[i]%></td>

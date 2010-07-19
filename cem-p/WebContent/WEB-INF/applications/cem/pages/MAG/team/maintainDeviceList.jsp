@@ -58,8 +58,8 @@
 	devicePrompts = xml.getItemValues("DEVICE_INFO", "DEVICE_PROMPT");
 	remarks = xml.getItemValues("DEVICE_INFO", "REMARK");
 	
-	String[] deviceStatusDesc = {"正常","不正常"};
-	String[] deviceStatusValue = {"0","1"};
+	String[] deviceStatusDesc = {"在用","停用"};
+	String[] deviceStatusValue = {"N","S"};
 %>
 <html>
 <head>
@@ -77,7 +77,7 @@
 		}
 	}
 	
-	function doView(userId,teamId) {
+	function doView(deviceId,teamId) {
 		window.location.href ="ctrl?FUNC_ID=MaintainDeviceView&DEVICE_ID="+deviceId+"&TEAM_ID="+teamId;;
 	}
 	
@@ -111,12 +111,6 @@
           <div class="panelContent">
             <div class="panelContent2">
               <!-- 查询面板内容 -->
-              <table>
-                <tr>
-                  <th>维护团队名称：</th>
-                  <td><%=teamName %></td>
-                </tr>
-              </table>
               <!-- 查询面板内容结束 -->
             </div>
           </div>
@@ -138,7 +132,7 @@
                 <div class="panelContent">
                   <div class="panelContent2">
                     <!-- 查询面板内容 -->
-              <form name="form1" action="ctrl" method="get">
+                  <form name="form1" action="ctrl" method="get">
               		<input type="hidden" name="FUNC_ID" value="MaintainDeviceList">
               		<input type="hidden" name="TEAM_ID" value=<%=teamId %>>
              		 <table>

@@ -243,7 +243,6 @@ function doSubmit(form) {
                   <%=deviceNameEns[i]%>
                   </a>
                   </td>
-                  
                   <td align="center"><%=deviceNameCns[i]%></td>
                    <td align="center"><%=typeNames[i]%></td>
                   <td align="center"><%=locationNames[i]%></td>

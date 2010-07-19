@@ -105,12 +105,6 @@
           <div class="panelContent">
             <div class="panelContent2">
               <!-- 查询面板内容 -->
-              <table>
-                <tr>
-                  <th>维护团队名称：</th>
-                  <td><%=teamName %></td>
-                </tr>
-              </table>
               <!-- 查询面板内容结束 -->
             </div>
           </div>

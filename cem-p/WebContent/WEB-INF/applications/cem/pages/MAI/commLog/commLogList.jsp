@@ -46,7 +46,7 @@
 	deviceNameEn = xml.getInputValue("DEVICE_NAME_EN");
 	deviceNameCn = xml.getInputValue("DEVICE_NAME_CN");
 	locationId = xml.getInputValue("LOCATION_ID");
-	locationNameCn = xml.getInputValue("LOCATION_NAME");
+	locationNameCn = xml.getInputValue("LOCATION_NAME_CN");
 	deviceStatus = xml.getInputValue("DEVICE_STATUS");
 	deviceIp = xml.getInputValue("DEVICE_IP");
 	devicePort = xml.getInputValue("DEVICE_PORT");
@@ -87,6 +87,22 @@
     window.location.href = "ctrl?FUNC_ID=commLogView&LOG_ID="+logId;
   }
 function doSubmit(form) {
+    var bgnDate = form.BENGIN_EXEC_BEGIN.value;
+	var endDate = form.END_EXEC_BEGIN.value;
+	var bgnDate1 = form.BENGIN_EXEC_END.value;
+	var endDate1 = form.END_EXEC_END.value;
+	if(bgnDate.length !=0 && endDate.length !=0){
+		if(bgnDate > endDate){
+			alert("截至时间应大于开始时间！");
+			return false;
+		}
+	}
+	if(bgnDate1.length !=0 && endDate1.length !=0){
+		if(bgnDate1 > endDate1){
+			alert("截至时间应大于开始时间！");
+			return false;
+		}
+	}
       var result = Spry.Widget.Form.validate(form);
       if (result == false){
         return result;

@@ -17,10 +17,7 @@
 	function doClear(){
 	form1.DEVICE_NAME_EN.value="";
 	form1.DEVICE_NAME_CN.value="";
-	form1.LOCATION_ID.value="";
 	form1.DEVICE_STATUS.selectedIndex=0;
-	form1.DEVICE_IP.value="";
-	form1.DEVICE_PORT.value="";
 	  
 	}
 	
@@ -29,6 +26,34 @@
 	form1.submit();
 	}
 	
+	function doCheck(){
+    var flg = 0;
+    if((typeof formQuery.DEVICE_ID.length) == "undefined")
+    {
+       if(formQuery.DEVICE_ID.checked == true)
+  	  	{
+  	  		flg = 1;
+  	  	}
+    }else{
+      for(var i=0;i<formQuery.DEVICE_ID.length;i++)
+      {
+        if(formQuery.DEVICE_ID[i].checked)
+        {
+          flg = 1;
+          break;
+        }
+      }
+    }
+    if(flg == 0)
+    {
+      alert("请选择维护设备");
+      return false;
+    }
+    else
+    {
+      return true;
+    }
+ }
 	function onChange(selectedIds,selector){
   	//alert(selector.element.innerHTML);
   	//for(var i = 0; i < selectedIds.length; i ++){
@@ -60,6 +85,7 @@
 	String[] deviceNameCns;
 	String[] deviceAbbNameEns;
 	String[] typeIds;
+	String[] typeNames;
 	String[] locationIds;
 	String[] locationNames;
 	String[] deviceStatuses;
@@ -82,21 +108,22 @@
 	devicePort = xml.getInputValue("DEVICE_PORT");
 
 
-        deviceIds = xml.getItemValues("DEVICE_INFO","DEVICE_ID");
-    	deviceNameEns = xml.getItemValues("DEVICE_INFO", "DEVICE_NAME_EN");
-    	deviceNameCns = xml.getItemValues("DEVICE_INFO", "DEVICE_ABB_NAME_EN");
-    	deviceAbbNameEns = xml.getItemValues("FRONT_DEVICE_INFO", "DEVICE_NAME_CN");
-    	locationIds = xml.getItemValues("FRONT_DEVICE_INFO", "LOCATION_ID");
-    	locationNames = xml.getItemValues("DEVICE_INFO", "LOCATION_NAME");
-    	deviceStatuses = xml.getItemValues("DEVICE_INFO", "DEVICE_STATUS");
-    	frontHostIds = xml.getItemValues("DEVICE_INFO", "FRONT_HOST_ID");
-    	frontHostNames = xml.getItemValues("DEVICE_INFO", "FRONT_HOST_NAME");
-    	deviceIps = xml.getItemValues("DEVICE_INFO", "DEVICE_IP");
-    	devicePorts = xml.getItemValues("DEVICE_INFO", "DEVICE_PORT");
-    	deviceUsers = xml.getItemValues("DEVICE_INFO", "DEVICE_USER");
-    	devicePasswords = xml.getItemValues("DEVICE_INFO", "DEVICE_PASSWORD");
-    	devicePrompts = xml.getItemValues("DEVICE_INFO", "DEVICE_PROMPT");
-    	remarks = xml.getItemValues("DEVICE_INFO", "REMARK");
+    deviceIds = xml.getItemValues("DEVICE_INFO","DEVICE_ID");
+    deviceNameEns = xml.getItemValues("DEVICE_INFO", "DEVICE_NAME_EN");
+    deviceNameCns = xml.getItemValues("DEVICE_INFO", "DEVICE_ABB_NAME_EN");
+    deviceAbbNameEns = xml.getItemValues("FRONT_DEVICE_INFO", "DEVICE_NAME_CN");
+    locationIds = xml.getItemValues("FRONT_DEVICE_INFO", "LOCATION_ID");
+    locationNames = xml.getItemValues("DEVICE_INFO", "LOCATION_NAME");
+    deviceStatuses = xml.getItemValues("DEVICE_INFO", "DEVICE_STATUS");
+    frontHostIds = xml.getItemValues("DEVICE_INFO", "FRONT_HOST_ID");
+    frontHostNames = xml.getItemValues("DEVICE_INFO", "FRONT_HOST_NAME");
+    deviceIps = xml.getItemValues("DEVICE_INFO", "DEVICE_IP");
+    devicePorts = xml.getItemValues("DEVICE_INFO", "DEVICE_PORT");
+    deviceUsers = xml.getItemValues("DEVICE_INFO", "DEVICE_USER");
+    devicePasswords = xml.getItemValues("DEVICE_INFO", "DEVICE_PASSWORD");
+    devicePrompts = xml.getItemValues("DEVICE_INFO", "DEVICE_PROMPT");
+    remarks = xml.getItemValues("DEVICE_INFO", "REMARK");
+    typeNames = xml.getItemValues("DEVICE_INFO", "TYPE_NAME");
     	
     	teamId  = xml.getInputValue("TEAM_ID");
     	teamName = xml.getInputValue("TEAM_NAME");
@@ -119,12 +146,6 @@
           <div class="panelContent">
             <div class="panelContent2">
               <!-- 查询面板内容 -->
-               <table>
-                <tr>
-                  <th>维护团队名称：</th>
-                  <td><%=teamName %></td>
-                </tr>
-              </table>
               <!-- 查询面板内容结束 -->
             </div>
           </div>
@@ -189,7 +210,7 @@
                     <!-- 查询面板内容 -->
                     <div class="panelInnerHead"></div>
                      <!-- 列表内容 -->
-                      <form name="formQuery" action="ctrl" method="get"  onSubmit="return doSubmit(this)">
+                      <form name="formQuery" action="ctrl" method="get"  onSubmit="return doCheck(this)">
             		  <input type="hidden" name="FUNC_ID" value="MaintainDeviceSubmit">
              		 <input type = "hidden" name="TEAM_ID" value="<%=teamId %>">
                      <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
@@ -197,6 +218,7 @@
                   <th></th>
                   <th>设备名称-英文</th>
                   <th>设备名称-中文</th>
+                  <th>设备类型</th>
                   <th>物理位置</th>
                   <th>堡垒主机</th>
                   <th>网络地址</th>
@@ -213,6 +235,7 @@
                  </td>
                   <td align="center"><%=deviceNameEns[i]%></td>
                   <td align="center"><%=deviceNameCns[i]%></td>
+                  <td align="center"><%=typeNames[i]%></td>
                   <td align="center"><%=locationNames[i]%></td>
                   <td align="center"><%=frontHostNames[i]%></td>
                   <td align="center"><%=deviceIps[i]%></td>
@@ -223,7 +246,6 @@
                     <%} %>
                    </td>
                 </tr>
-     
                <%} else {%>
                <tr class="dark" onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
                 <td align="center">
@@ -231,6 +253,7 @@
                  </td>
                   <td align="center"><%=deviceNameEns[i]%></td>
                   <td align="center"><%=deviceNameCns[i]%></td>
+                  <td align="center"><%=typeNames[i]%></td>
                   <td align="center"><%=locationNames[i]%></td>
                    <td align="center"><%=frontHostNames[i]%></td>
                   <td align="center"><%=deviceIps[i]%></td>

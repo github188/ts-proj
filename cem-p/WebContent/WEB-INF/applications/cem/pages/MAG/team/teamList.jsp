@@ -15,7 +15,7 @@
 %>
 <%
     xml = XMLWrap.getRequestXml(request,session,application);
-    teamName = xml.getInputValue("TEAM_NAME");
+    teamName = xml.getInputValue("QTEAM_NAME");
     remark = xml.getInputValue("REMARK");
     
     teamIds = xml.getItemValues("MAINTAIN_TEAM","TEAM_ID");

@@ -114,8 +114,6 @@
     }else{
         alert("维护指令不能为空。");
     }
-    
-  
   }
   
   function disconnection(){

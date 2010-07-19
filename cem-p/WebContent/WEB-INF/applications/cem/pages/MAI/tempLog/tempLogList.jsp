@@ -43,7 +43,7 @@
 	deviceNameEn = xml.getInputValue("QDEVICE_NAME_EN");
 	deviceNameCn = xml.getInputValue("QDEVICE_NAME_CN");
 	locationId = xml.getInputValue("QLOCATION_ID");
-	locationNameCn = xml.getInputValue("QLOCATION_NAME");
+	locationNameCn = xml.getInputValue("QLOCATION_NAME_CN");
 	deviceIp = xml.getInputValue("QDEVICE_IP");
 	execBeginBegin = xml.getInputValue("QEXEC_BEGIN_BEGIN");
 	execBeginEnd = xml.getInputValue("QEXEC_BEGIN_END");

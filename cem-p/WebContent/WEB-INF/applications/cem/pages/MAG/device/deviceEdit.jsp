@@ -27,8 +27,8 @@
     xml = XMLWrap.getRequestXml(request,session,application);
 	deviceId = xml.getItemValue("DEVICE_INFO",1,"DEVICE_ID");
 	deviceNameEn = xml.getItemValue("DEVICE_INFO",1,"DEVICE_NAME_EN");
-	deviceNameCn = xml.getItemValue("DEVICE_INFO",1,"DEVICE_ABB_NAME_EN");
-	deviceAbbNameEn = xml.getItemValue("DEVICE_INFO",1,"DEVICE_NAME_CN");
+	deviceAbbNameEn = xml.getItemValue("DEVICE_INFO",1,"DEVICE_ABB_NAME_EN");
+	deviceNameCn = xml.getItemValue("DEVICE_INFO",1,"DEVICE_NAME_CN");
 	typeId = xml.getItemValue("DEVICE_INFO",1,"TYPE_ID");
 	typeName = xml.getItemValue("DEVICE_INFO",1,"TYPE_NAME");
 	locationId = xml.getItemValue("DEVICE_INFO",1,"LOCATION_ID");
@@ -94,8 +94,12 @@
         <!-- Tab面板 -->
         <div id="TabbedPanels1" class="TabbedPanels"> 
         <ul class="TabbedPanelsTabGroup">
+        <%if(deviceId != null && deviceId.length() != 0){%>
           <li class="TabbedPanelsTab TabbedPanelsTabSelected" tabindex="0" ><a onclick="window.location.href='ctrl?FUNC_ID=DeviceEdit&DEVICE_ID=<%=deviceId %>'">设备信息</a></li>
           <li class="TabbedPanelsTab" tabindex="0"><a onclick="window.location.href='ctrl?FUNC_ID=DevicePortList&DEVICE_ID=<%=deviceId %>'">设备端口信息</a></li>
+        <%}else{ %>
+          <li class="TabbedPanelsTab TabbedPanelsTabSelected" tabindex="0" ><a onclick="window.location.href='ctrl?FUNC_ID=DeviceAdd'">设备信息</a></li>
+         <%} %>
         </ul>
           <div class="TabbedPanelsContentGroup">
             <div class="TabbedPanelsContent">
@@ -134,8 +138,8 @@
 		               	<tr>
 		               		<td width="150" align="right">设备中文名称：</td>
 		                 	<td>
-		                      <span id="sprytDeviceAbbNameEn">
-              					<input type="text" class="text" name="DEVICE_NAME_CN"value="<%=deviceNameCn %>" readonly><span class="requiredField">*</span>
+		                      <span id="sprytDeviceNameCn">
+              					<input type="text" class="text" name="DEVICE_NAME_CN"value="<%=deviceNameCn %>"><span class="requiredField">*</span>
               					 <span class="textfieldRequiredMsg">需要提供一个值。</span>
               					<span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 		                         </span>
@@ -274,13 +278,14 @@
   <script type="text/javascript">
 <!--
 var sprytextfield1 = new Spry.Widget.ValidationTextField("spryDeviceNameEn","none", {required:true,maxChars:60});
-var sprytextfield2 = new Spry.Widget.ValidationTextField("sprytDeviceAbbNameEn", "none", {maxChars:60});
-var sprytextfield3 = new Spry.Widget.ValidationTextField("sprytDeviceIp", "none", {required:false,maxChars:50});
-var sprytextfield4 = new Spry.Widget.ValidationTextField("sprytDevicePort", "integer", {required:false,maxChars:50});
+var sprytextfield2 = new Spry.Widget.ValidationTextField("sprytDeviceAbbNameEn", {isRequired:false,maxChars:60});
+var sprytextfield3 = new Spry.Widget.ValidationTextField("sprytDeviceIp", "none", {required:true,maxChars:50});
+var sprytextfield4 = new Spry.Widget.ValidationTextField("sprytDevicePort", "integer", {required:true,useCharacterMasking:true,maxChars:50});
 var sprytextfield5 = new Spry.Widget.ValidationTextField("sprytDeviceUser", "none", {maxChars:50});
 var sprytextfield6 = new Spry.Widget.ValidationTextField("sprytDevicePassword", "none", {maxChars:50});
 var sprytextfield7 = new Spry.Widget.ValidationTextField("sprytDevicePrompt", "none", {maxChars:200});
 var sprytextfield8 = new Spry.Widget.ValidationTextField("sprytRemark", "none", {maxChars:200});
+var sprytextfield9 = new Spry.Widget.ValidationTextField("sprytDeviceNameCn","none", {required:true,maxChars:60});
 
 //-->
 </script>

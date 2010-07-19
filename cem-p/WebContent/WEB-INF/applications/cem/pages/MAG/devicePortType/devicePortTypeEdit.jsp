@@ -37,6 +37,34 @@
   }
     function doSubmit(form) 
     { 
+    	//验证小数点后面不能超过两位
+       var max =  form.STANDARD_RX_MAX.value;
+       var min =  form.STANDARD_RX_MIN.value;
+       var workMin =  form.NETWORK_RX_MIN.value;
+       if(max !="" && max.length > 0){
+         var n = max.substring(max.lastIndexOf(".")+1);
+         if(n.length > 2){
+           alert("光功率/标准最大值小数点后面不能超过2位");
+           return false;
+         } 
+       }
+       
+       if(min !="" && min.length > 0){
+         var n = min.substring(min.lastIndexOf(".")+1);
+         if(n.length > 2){
+           alert("光功率/标准最小值小数点后面不能超过2位");
+            return false;
+         } 
+       }
+       if(workMin !="" && workMin.length > 0){
+         var n = workMin.substring(workMin.lastIndexOf(".")+1);
+         if(n.length > 2){
+           alert("光功率/网络要求最小值小数点后面不能超过2位");
+            return false;
+         } 
+       }
+       
+       
        var result = Spry.Widget.Form.validate(form);
        if (result == false){
           return result;
@@ -74,22 +102,22 @@
                       <input type="hidden" name="TYPE_ID" value="<%=typeId%>"> 
                      <table>
                       <tr>
-                          <td width="150" align="right">端口类型英文名称：</td>
+                          <td width="150" align="right">端口类型名称-英文：</td>
 		                  <td width="100">
 		                      <span id="spryTypeNameEn">
              					 <input type="text" class="text" name="TYPE_NAME_EN"value="<%=typeNameEn %>"><span class="requiredField">*</span>
 		                            <span class="textfieldRequiredMsg">需要提供一个值。</span>
 		                            <span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
-		                            </span>
+		                      </span>
 		                  </td>
 		               </tr>
 		                <tr>		                  
-                          <td width="150" align="right">端口类型英中文名称：</td>
+                          <td width="150" align="right">端口类型名称-中文：</td>
 		                  <td width="100">
 		                      <span id="spryTypeNameCn">
               					<input type="text" class="text" name="TYPE_NAME_CN"value="<%=typeNameCn %>">
 		                            <span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
-		                            </span>
+		                      </span>
 		                  </td>
 		               </tr>
 		                <tr>
@@ -97,6 +125,7 @@
 		                  <td width="100">
 		                      <span id="sprytStandardRxMax">
              					 <input type="text" class="text" name="STANDARD_RX_MAX"value="<%=standardRxMax %>">
+             					    <span class="textfieldInvalidFormatMsg">格式无效，有效格式为实数。</span>
 		                            <span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 		                            </span>
 		                  </td>
@@ -106,6 +135,7 @@
 		                  <td width="100">
 		                      <span id="sprytStandardRxMin">
               					<input type="text" class="text" name="STANDARD_RX_MIN"value="<%=standardRxMin %>">
+              					      <span class="textfieldInvalidFormatMsg">格式无效，有效格式为实数。</span>
 		                            <span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 		                            </span>
 		                  </td>
@@ -115,6 +145,7 @@
 		                  <td width="100">
 		                      <span id="spryNetWorkRxMin">
              					 <input type="text" class="text" name="NETWORK_RX_MIN"value="<%=netWorkRxMin %>">
+             					   <span class="textfieldInvalidFormatMsg">格式无效，有效格式为实数。</span>
 		                            <span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 		                            </span>
 		                  </td>
@@ -160,10 +191,10 @@
   <script type="text/javascript">
 <!--
 var sprytextfield1 = new Spry.Widget.ValidationTextField("spryTypeNameEn","none", {required:true,maxChars:60});
-var sprytextfield2 = new Spry.Widget.ValidationTextField("spryTypeNameCn", "none", {required:false,maxChars:60});
-var sprytextfield3 = new Spry.Widget.ValidationTextField("sprytStandardRxMax", "none", {required:false,maxChars:50});
-var sprytextfield4 = new Spry.Widget.ValidationTextField("sprytStandardRxMin", "none", {required:false,maxChars:50});
-var sprytextfield5 = new Spry.Widget.ValidationTextField("spryNetWorkRxMin", "none", {required:false,maxChars:50});
+var sprytextfield2 = new Spry.Widget.ValidationTextField("spryTypeNameCn", {isRequired:false,maxChars:60});
+var sprytextfield3 = new Spry.Widget.ValidationTextField("sprytStandardRxMax","real", {isRequired:false,useCharacterMasking:true,maxChars:50});
+var sprytextfield4 = new Spry.Widget.ValidationTextField("sprytStandardRxMin", "real", {isRequired:false,useCharacterMasking:true,maxChars:50});
+var sprytextfield5 = new Spry.Widget.ValidationTextField("spryNetWorkRxMin", "real", {isRequired:false,useCharacterMasking:true,maxChars:50});
 var sprytextfield6 = new Spry.Widget.ValidationTextField("spryRemark",  {required:false,maxChars:200});
 
 //-->

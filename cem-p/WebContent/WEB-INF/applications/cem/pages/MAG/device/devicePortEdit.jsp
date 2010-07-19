@@ -37,8 +37,8 @@
 <script type="text/javascript">
 
 <!--
-  function doReturn(){
-  	window.location.href="ctrl?FUNC_ID=DevicePortList";
+  function doReturn(deviceId){
+  	window.location.href="ctrl?FUNC_ID=DevicePortList&DEVICE_ID="+deviceId;
   }
   
   function doSelDevicePortType(){
@@ -88,7 +88,7 @@
                           <td width="150" align="right">本端端口编号：</td>
 		                  <td width="100">
 		                      <span id="sprytpostSn">
-              					<input type="text" class="text" name="PORT_SN" value="<%=postSn %>" <%if(portId != null &&portId.length()>0 ){ %> readonly<%} %>>
+              					<input type="text" class="text" name="PORT_SN" value="<%=postSn %>" <%if(portId != null &&portId.length()>0 ){ %> readonly<%} %>><span class="requiredField">*</span>
               					<span class="textfieldRequiredMsg">需要提供一个值。</span>
 		                            <span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 		                            </span>
@@ -99,13 +99,11 @@
 		               		<td width="150" align="right">端口类型：</td>
 		                 	<td>
 		                      <span id="spryttypeName">
-              					
-                                     <input name="TYPE_ID" type="hidden"  value="<%=typeId %>">
+                             <input name="TYPE_ID" type="hidden"  value="<%=typeId %>">
 		               <input type="text" class="date" name="TYPE_NAME"   value="<%=typeName %>"  readonly>
 		               <%if(portId == null || portId.length()<=0){%>
-		               <input type="button"  class="selButton" value="选择" onClick="doSelDevicePortType()" /><span class="requiredField">*</span>
+		               <input type="button"  class="selButton" value="选择" onClick="doSelDevicePortType()" />
               			<%} %>		
-              					 <span class="textfieldRequiredMsg">需要提供一个值。</span>
               					<span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 		                         </span>
 		                 	</td>
@@ -117,7 +115,7 @@
             		             <%for(int i=0;i<deviceStatusValue.length;i++){ %>
                     		    <option value="<%=deviceStatusValue[i] %>" <%if(deviceStatusValue[i].equals(status)){out.print("selected");} %>><%=deviceStatusDesc[i] %></option>
 		                        <%} %>
-        		                </select>
+        		                </select><span class="requiredField">*</span>
 				             </td>
 		               </tr>
 		               <tr>
@@ -134,7 +132,7 @@
                         <tr>
                           <td colspan="4" align="center" nowrap="nowrap">
                             <input type="submit" class="submit"  value="保存">
-                            <input type="button" class="reset" onclick="doReturn()" value="取消">
+                            <input type="button" class="reset" onclick="doReturn('<%=deviceId %>')" value="取消">
                           </td>
                         </tr>
                       </table>
@@ -159,8 +157,8 @@
   <script type="text/javascript">
 <!--
 var sprytextfield1 = new Spry.Widget.ValidationTextField("sprytpostSn","none", {required:true,maxChars:60});
-var sprytextfield2 = new Spry.Widget.ValidationTextField("spryttypeName", "none", {maxChars:60});
-var sprytextfield8 = new Spry.Widget.ValidationTextField("sprytRemark", "none", {maxChars:200});
+var sprytextfield2 = new Spry.Widget.ValidationTextField("spryttypeName", {isRequired:false,maxChars:60});
+var sprytextfield8 = new Spry.Widget.ValidationTextField("sprytRemark",  {isRequired:false,maxChars:200});
 
 //-->
 </script>

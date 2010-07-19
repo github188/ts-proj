@@ -29,6 +29,37 @@
 	form1.submit();
 	}
 	
+	
+		
+	function doCheck(){
+    var flg = 0;
+    if((typeof formQuery.USER_ID.length) == "undefined")
+    {
+       if(formQuery.USER_ID.checked == true)
+  	  	{
+  	  		flg = 1;
+  	  	}
+    }else{
+      for(var i=0;i<formQuery.USER_ID.length;i++)
+      {
+        if(formQuery.USER_ID[i].checked)
+        {
+          flg = 1;
+          break;
+        }
+      }
+    }
+    if(flg == 0)
+    {
+      alert("请选择维护人员");
+      return false;
+    }
+    else
+    {
+      return true;
+    }
+ }
+ 
 	function onChange(selectedIds,selector){
   	//alert(selector.element.innerHTML);
   	//for(var i = 0; i < selectedIds.length; i ++){
@@ -77,12 +108,6 @@
           <div class="panelContent">
             <div class="panelContent2">
               <!-- 查询面板内容 -->
-               <table>
-                <tr>
-                  <th>维护团队名称：</th>
-                  <td><%=teamName %></td>
-                </tr>
-              </table>
               <!-- 查询面板内容结束 -->
             </div>
           </div>

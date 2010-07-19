@@ -79,7 +79,7 @@
                       <input type="hidden" name="TYPE_ID" value="<%=typeId%>"> 
                      <table >
                       <tr>
-                          <td width="120" align="right">设备类型英文名称：</td>
+                          <td width="120" align="right">设备类型名称-英文：</td>
 		                  <td width="100">
 		                      <span id="spryTypeNameEn">
              					 <input type="text" class="text" name="TYPE_NAME_EN"value="<%=typeNameEn %>"><span class="requiredField">*</span>
@@ -89,7 +89,7 @@
 		                  </td>
 		                  </tr>
 		                <tr>  
-                          <td width="120" align="right">设备类型中文名称：</td>
+                          <td width="120" align="right">设备类型名称-中文：</td>
 		                  <td width="100">
 		                      <span id="sprytTypeNameCn">
               					<input type="text" class="text" name="TYPE_NAME_CN"value="<%=typeNameCn %>"><span class="requiredField">*</span>
@@ -113,7 +113,7 @@
 		               <tr>
 		                 <td width="120" align="right">更新设备照片：</td>
 		                 <td>
-              					<input type="file" class="file" name="APP_PICTURE" value="<%=inspectCommands %>">
+              					<input type="file" class="file" name="APP_PICTURE" >
 		                 </td>
 		               </tr>
 		               <tr>

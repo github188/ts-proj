@@ -68,7 +68,9 @@
 
 <script type="text/javascript">
 <!--
-  
+ function doView(deviceId) {
+    window.location.href = "ctrl?FUNC_ID=DeviceView&DEVICE_ID="+deviceId;
+  }
 function doSubmit(form) {
       var result = Spry.Widget.Form.validate(form);
       if (result == false){
