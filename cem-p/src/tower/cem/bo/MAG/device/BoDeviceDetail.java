@@ -78,7 +78,7 @@ public class BoDeviceDetail implements RootBo {
 		if (!(enDeviceInfo.getFrontHostId() == null || enDeviceInfo.getFrontHostId().trim().length() == 0)) {
 			enFrontHostInfo = dbFrontHostInfo.findByKey(enDeviceInfo.getFrontHostId());
 			if (!(enFrontHostInfo == null)) {
-				requestXml.setItemValue("DEVICE_INFO", irow, "FRONT_HOST_NAME", enFrontHostInfo.getHostIp());
+				requestXml.setItemValue("DEVICE_INFO", irow, "FRONT_HOST_NAME", enFrontHostInfo.getHostNameCn());
 			}
 		}
 		if (!(enDeviceInfo.getTypeId() == null || enDeviceInfo.getTypeId().length() == 0)) {
