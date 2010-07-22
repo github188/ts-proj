@@ -179,9 +179,9 @@ function doSubmit(form) {
                    </td>
  				 </tr>
  				<tr height="50">
-                <td colspan="6" align="center">
+                <td colspan="10" align="center">
                 	<input size="10" type="button" class="button"  onclick="doReturn()" value="上一步" >
-                 	<input size="10" type="submit" class="submit" style="width:80px" value="添加巡检任务" >
+                 	<input size="10" type="submit" class="submit" style="width:80px" value="添加任务" >
                 </td>
               </tr>
               </table>

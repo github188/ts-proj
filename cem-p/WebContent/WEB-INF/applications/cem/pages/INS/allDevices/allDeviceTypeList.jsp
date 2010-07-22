@@ -63,7 +63,7 @@ function doSubmit(form) {
 </head>
 <body id="mainArea">
   <div id="mainPanel" class="panel">
-    <div class="panelHead">全网设备巡检-第一步.选择设备（共两步）</div>
+    <div class="panelHead">全网设备巡检-第一步.选择设备类型（共两步）</div>
     <div class="panelContent">
       <div class="panelContent2">    
         <!-- 查询面板 -->
@@ -76,8 +76,22 @@ function doSubmit(form) {
                <table>
               	 <tr>
               	 <td align="left">
-              	 全网设备巡检功能将在指定时间对全网可用设备进行巡检，列表显示全部设备类型，可以多选设备类型，
-              	 点击“确认”按钮后进入计划巡检时间设定。当未选择设备类型，即对全网的全部设备类型执行巡检。
+              	 全网设备巡检功能将在指定时间对全网可用设备进行巡检。
+              	 </td>
+                 </tr>
+                 <tr>
+              	 <td align="left">
+              	 可以选择设备类型，对指定设备类型进行巡检。
+              	 </td>
+                 </tr>
+                 <tr>
+              	 <td align="left">
+              	 当未选择设备类型，即对全网的全部设备类型执行巡检。
+              	 </td>
+                 </tr>
+                 <tr>
+              	 <td align="left">
+              	 点击“下一步”，设定执行巡检任务的时间。
               	 </td>
                  </tr>                 
               </table>
@@ -103,8 +117,8 @@ function doSubmit(form) {
               <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
                  <tr>
                  <th width="10%"></th>
-                  <th width="25%">设备类型名称-英文</th>
-                  <th width="25%">设备类型名称-中文</th>
+                  <th width="25%">设备类型英文名称</th>
+                  <th width="25%">设备类型中文名称</th>
                   <th width="40%">备注</th>
                 </tr>
               <%if(typeIds != null){
@@ -140,8 +154,8 @@ function doSubmit(form) {
               <!-- 列表内容结束 -->
           		 <table width="100%" border="0" cellpadding="0" cellspacing="0" height="10">
               <tr height="10">
-                <td colspan="9" align="center" height="10">
-                 <input type="submit" class="submit"  value="确认">
+                <td colspan="10" align="center" height="10">
+                 <input type="submit" class="submit"  value="下一步">
                 </td>
                 <td></td>
                 <td></td>

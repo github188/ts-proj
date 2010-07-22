@@ -135,9 +135,9 @@
                <input type="hidden" name=CUR_PAGE value="">
               <table>
               	 <tr>
-              	 	<td align="right">设备名称-英文：</td> 
+              	 	<td align="right">英文设备名称：</td> 
                   	<td><input type="text" class="text" name="DEVICE_NAME_EN" value="<%=deviceNameEn %>"></td>
-                 	<td align="right">设备名称-中文：</td>
+                 	<td align="right">设备中文名称：</td>
 	                <td><input type="text" class="text" name="DEVICE_NAME_CN" value="<%=deviceNameCn %>"></td>
                  </tr>
                  	 <tr>
@@ -151,7 +151,7 @@
 	                 <td><input type="text" class="text" name="DEVICE_IP" value="<%=deviceIp %>"></td>      
                  </tr>
 			     <tr>
-	               <td align="right">结束时间：</td>
+	               <td align="right">执行时间：</td>
 	                 <td><input type="text" class="date" name="INSPECT_END_BEGIN" value="<%=inspectEndBegin %>" readonly><input type="button" class="calendarBtn" onclick="return showCalendar('INSPECT_END_BEGIN', 'y-mm-dd');"><span class="requiredField">*</span>
 	                 -
 	                 <input type="text" class="date" name="INSPECT_ENDC_END" value="<%=inspectEndEnd %>" readonly><input type="button" class="calendarBtn" onclick="return showCalendar('INSPECT_ENDC_END', 'y-mm-dd');"><span class="requiredField">*</span>
