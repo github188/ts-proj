@@ -78,50 +78,20 @@
                   <div class="panelContent">
                   <div class="panelContent2">
                       <!-- 查询面板内容 -->
-                      <form name="form1" action="ctrl" method="get"  onSubmit="return doSubmit(this)">
-                 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
-                  <tr>
-                          <td width="150" align="right">设备名称-英文：</td>
-		                  <td width="100">
-             					 <input type="text" class="text" name="DEVICE_NAME_EN"value="<%=deviceNameEn %>" readonly>
-		                  </td>
-		                  
-                        <td width="150" align="right">设备名称-中文：</td>
-		                 <td>
-              					<input type="text" class="text" name="DEVICE_NAME_CN"value="<%=deviceNameCn %>" readonly>
-		                 </td>
-		               </tr>
-                    <tr>
-              	 <td align="right">物理位置：</td>
-              	  <td>
-		          <input type="text" class="date" name="LOCATION_NAME_CN"   value="<%=locationNameCn %>"  readonly>
-  				  </td>
-		          <td align="right">网络地址：</td>
-              	 <td>
-              		<input type="text" class="text" name="DEVICE_IP"value="<%=deviceIp %>" readonly>
-		         </td>
-		           <td align="right">设备状态：</td>
-              	   <td >
-                         <%for(int i=0;i<deviceStatusValue.length;i++){ 
-                         if(deviceStatusValue[i].equals(deviceStatus)){ %>
-                        <input type="text" class="date"   value="<%=deviceStatusDesc[i] %>"  readonly>
-                        <%} }%>
-						 </td>
+                     <table width="100%" border="0" cellpadding="0" cellspacing="0" >
+              	 <tr>
+              	 <td align="right">
+              	   <textarea id="textarea" class="textarea" cols="110" rows="25" readonly> <%=commandCont %></textarea>
+				</td>
                  </tr>
                   <tr>
-              	 <td align="right">指令：</td>
-              	  <td colspan="5">
-              		<input size="100" type="text" class="text" name="COMMAND_CONT" <%=commandCont %>> 
-		          </td>
-                 </tr>
-                   <tr height="15"></tr>
-                     <tr>
-                        <td colspan="4" align="center" nowrap="nowrap">
-                          <input type="button" class="reset" onclick="history.back();" value="返回">
-                      </td>
-                  </tr>
+				    <td colspan="5" align="center" nowrap="nowrap">&nbsp;</td>
+				  </tr>
+				  <tr>
+				  <td align="center">
+				    <input type="button" class="button" onclick="doclose()" value="关闭"></td>
+				  </tr>
               </table>
-                 </form>    
                       <!-- 查询面板内容结束 -->
                     </div>
                   </div>

@@ -14,8 +14,6 @@
 	String deviceStatus;
 	String deviceIp;
 	String devicePort;
-	String beginExecBegin; //维护开始日期
-	String endExecBegin;
 	String beginExecEnd;//维护结束日期
 	String endExecEnd;  
 	
@@ -50,8 +48,6 @@
 	deviceStatus = xml.getInputValue("DEVICE_STATUS");
 	deviceIp = xml.getInputValue("DEVICE_IP");
 	devicePort = xml.getInputValue("DEVICE_PORT");
-	beginExecBegin = xml.getInputValue("BENGIN_EXEC_BEGIN");
-	endExecBegin = xml.getInputValue("END_EXEC_BEGIN");
 	beginExecEnd = xml.getInputValue("BENGIN_EXEC_END");
 	endExecEnd = xml.getInputValue("END_EXEC_END");
 	
@@ -87,17 +83,13 @@
     window.location.href = "ctrl?FUNC_ID=commLogView&LOG_ID="+logId;
   }
 function doSubmit(form) {
-    var bgnDate = form.BENGIN_EXEC_BEGIN.value;
-	var endDate = form.END_EXEC_BEGIN.value;
-	var bgnDate1 = form.BENGIN_EXEC_END.value;
-	var endDate1 = form.END_EXEC_END.value;
-	if(bgnDate.length !=0 && endDate.length !=0){
-		if(bgnDate > endDate){
-			alert("截至时间应大于开始时间！");
-			return false;
-		}
+	var bgnDate = form.BENGIN_EXEC_END.value;
+	var endDate = form.END_EXEC_END.value;
+	if(bgnDate.length ==0 || endDate.length ==0){
+		alert("请输入完成时间");
+		return false;
 	}
-	if(bgnDate1.length !=0 && endDate1.length !=0){
+	if(bgnDate.length !=0 && endDate.length !=0){
 		if(bgnDate1 > endDate1){
 			alert("截至时间应大于开始时间！");
 			return false;
@@ -123,12 +115,9 @@ function doSubmit(form) {
     form1.DEVICE_NAME_CN.value="";
     form1.DEVICE_IP.value="";
     form1.LOCATION_NAME_CN.value="";
-    form1.DEVICE_PORT.value="";
-    form1.BENGIN_EXEC_BEGIN.value="";
-    form1.END_EXEC_BEGIN.value="";
+    form1.LOCATION_ID.value="";
     form1.BENGIN_EXEC_END.value="";
     form1.END_EXEC_END.value="";
-    form1.DEVICE_STATUS.selectedIndex=0;   
   }
   
    function onChange(selectedIds,selector){
@@ -173,30 +162,11 @@ function doSubmit(form) {
                  	 <td align="right">网络地址：</td>
 	                 <td><input type="text" class="text" name="DEVICE_IP" value="<%=deviceIp %>"></td>      
                  </tr>
-                 <tr>
-	                  <td align="right">端口：</td>
-	                 <td><input type="text" class="text" name="DEVICE_PORT" value="<%=devicePort %>"></td>          
-		             <td align="right">设备状态：</td>
-	                 <td >
-	                     <select name="DEVICE_STATUS" class="select" id="DEVICE_STATUS" style="width:11em">
-	                     <option value="">全部</option>
-                         <%for(int i=0;i<deviceStatusValue.length;i++){ %>
-                        <option value="<%=deviceStatusValue[i] %>" <%if(deviceStatusValue[i].equals(deviceStatus)){out.print("selected");} %>><%=deviceStatusDesc[i] %></option>
-                        <%} %>
-                        </select>
-					</td>
-			     </tr>	
 			     <tr>
-			      <td align="right">开始时间：</td>
-	                 <td><input type="text" class="date" name="BENGIN_EXEC_BEGIN" value="<%=beginExecBegin %>" readonly><input type="button" class="calendarBtn" onclick="return showCalendar('BENGIN_EXEC_BEGIN', 'y-mm-dd');">
-	                 -
-	                 <input type="text" class="date" name="END_EXEC_BEGIN" value="<%=endExecBegin %>" readonly><input type="button" class="calendarBtn" onclick="return showCalendar('END_EXEC_BEGIN', 'y-mm-dd');">
-	                 </td> 
-	                 
 	               <td align="right">结束时间：</td>
-	                 <td><input type="text" class="date" name="BENGIN_EXEC_END" value="<%=beginExecEnd %>" readonly><input type="button" class="calendarBtn" onclick="return showCalendar('BENGIN_EXEC_END', 'y-mm-dd');">
+	                 <td><input type="text" class="date" name="BENGIN_EXEC_END" value="<%=beginExecEnd %>" readonly><input type="button" class="calendarBtn" onclick="return showCalendar('BENGIN_EXEC_END', 'y-mm-dd');"><span class="requiredField">*</span>
 	                 -
-	                 <input type="text" class="date" name="END_EXEC_END" value="<%=endExecEnd %>" readonly><input type="button" class="calendarBtn" onclick="return showCalendar('END_EXEC_END', 'y-mm-dd');">
+	                 <input type="text" class="date" name="END_EXEC_END" value="<%=endExecEnd %>" readonly><input type="button" class="calendarBtn" onclick="return showCalendar('END_EXEC_END', 'y-mm-dd');"><span class="requiredField">*</span>
 	                 </td> 
         	        <td>&nbsp;</td>
             	    <td>&nbsp;</td>
@@ -231,6 +201,7 @@ function doSubmit(form) {
                   <th>设备状态</th>
                   <th>开始时间</th>
                   <th>结束时间</th>
+                  <th></th>
                 </tr>
             
               <%if(deviceIds != null){
@@ -239,9 +210,7 @@ function doSubmit(form) {
                 <tr onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
                  
                   <td align="center">
-                  <a href="JavaScript:doView('<%=logIdS[i]%>',)">
                   <%=deviceNameEns[i]%>
-                  </a>
                   </td>
                   
                   <td align="center"><%=deviceNameCns[i]%></td>
@@ -254,6 +223,9 @@ function doSubmit(form) {
                    </td>
                    <td align="center"><%=execBegins[i]%></td>
                    <td align="center"><%=execEnds[i]%></td>
+                  <td align="center" nowrap>
+                 <input type="button" class="button" onClick="doView('<%=logIdS[i] %>');" value="查看指令">
+                 </td>
                 </tr>
      
                <%} else {%>
@@ -275,6 +247,9 @@ function doSubmit(form) {
                    </td>
                  <td align="center"><%=execBegins[i]%></td>
                  <td align="center"><%=execEnds[i]%></td>
+                   <td align="center" nowrap>
+                 <input type="button" class="button" onClick="doView('<%=logIdS[i] %>');" value="查看指令">
+                 </td>
                 </tr>
                <%}}} %>
               </table>
