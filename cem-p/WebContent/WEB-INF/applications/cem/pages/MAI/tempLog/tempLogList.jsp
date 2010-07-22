@@ -12,8 +12,6 @@
 	String locationId;
 	String locationNameCn;
 	String deviceIp;
-	String execBeginBegin;
-	String execBeginEnd;
 	String execEndBegin;
 	String execEndEnd;
 	String tempId;
@@ -45,8 +43,6 @@
 	locationId = xml.getInputValue("QLOCATION_ID");
 	locationNameCn = xml.getInputValue("QLOCATION_NAME_CN");
 	deviceIp = xml.getInputValue("QDEVICE_IP");
-	execBeginBegin = xml.getInputValue("QEXEC_BEGIN_BEGIN");
-	execBeginEnd = xml.getInputValue("QEXEC_BEGIN_END");
 	execEndBegin = xml.getInputValue("QEXEC_END_BEGIN");
 	execEndEnd = xml.getInputValue("QEXEC_END_END");
 	tempId = xml.getInputValue("QTEMP_ID");
@@ -92,6 +88,18 @@
  }
  
 function doSubmit(form) {
+	var bgnDate = form.QEXEC_END_BEGIN.value;
+	var endDate = form.QEXEC_END_END.value;
+	if(bgnDate.length ==0 || endDate.length ==0){
+		alert("请输入完成时间");
+		return false;
+	}
+	if(bgnDate.length !=0 && endDate.length !=0){
+		if(bgnDate1 > endDate1){
+			alert("截至时间应大于开始时间！");
+			return false;
+		}
+	}
       var result = Spry.Widget.Form.validate(form);
       if (result == false){
         return result;
@@ -114,8 +122,6 @@ function doSubmit(form) {
     form1.QLOCATION_NAME_CN.value="";
     form1.QTEMP_ID.value="";
     form1.QTEMP_NAME.value="";
-    form1.QEXEC_BEGIN_BEGIN.value="";
-    form1.QEXEC_BEGIN_END.value="";
     form1.QEXEC_END_BEGIN.value="";
     form1.QEXEC_END_END.value="";
     form1.QDEVICE_IP.value="";
@@ -156,9 +162,9 @@ function doSubmit(form) {
                <input type="hidden" name=CUR_PAGE value="">
               <table>
               	 <tr>
-              	 	<td align="right">设备英文名称：</td>
+              	 	<td align="right">设备名称-英文：</td>
                   	<td><input type="text" class="text" name="QDEVICE_NAME_EN" value="<%=deviceNameEn %>"></td>
-                 	<td align="right">设备中文名称：</td>
+                 	<td align="right">设备名称-中文：</td>
 	                <td><input type="text" class="text" name="QDEVICE_NAME_CN" value="<%=deviceNameCn %>"></td>
                  </tr>
                  <tr>
@@ -186,19 +192,14 @@ function doSubmit(form) {
   				     </td>   
                  </tr>
 			     <tr>
-			       
-			         <td align="right">开始日期：</td>
+        	        <td align="right">完成时间：</td>
 	                 <td>
-	                 <input type="text" class="date" name="QEXEC_BEGIN_BEGIN" value="<%=execBeginBegin %>"><input type="button" class="calendarBtn" onclick="return showCalendar('QEXEC_BEGIN_BEGIN', 'y-mm-dd');">
+	                 <input type="text" class="date" name="QEXEC_END_BEGIN" value="<%=execEndBegin %>"><input type="button" class="calendarBtn" onclick="return showCalendar('QEXEC_END_BEGIN', 'y-mm-dd');"><span class="requiredField">*</span>
 	                 -
-	                 <input type="text" class="date" name="QEXEC_BEGIN_END" value="<%=execBeginEnd %>"><input type="button" class="calendarBtn" onclick="return showCalendar('QEXEC_BEGIN_END', 'y-mm-dd');">
+	                 <input type="text" class="date" name="QEXEC_END_END" value="<%=execEndEnd %>"><input type="button" class="calendarBtn" onclick="return showCalendar('QEXEC_END_END', 'y-mm-dd');"><span class="requiredField">*</span>
 	                 </td> 
-        	        <td align="right">截止日期：</td>
-	                 <td>
-	                 <input type="text" class="date" name="QEXEC_END_BEGIN" value="<%=execEndBegin %>"><input type="button" class="calendarBtn" onclick="return showCalendar('QEXEC_END_BEGIN', 'y-mm-dd');">
-	                 -
-	                 <input type="text" class="date" name="QEXEC_END_END" value="<%=execEndEnd %>"><input type="button" class="calendarBtn" onclick="return showCalendar('QEXEC_END_END', 'y-mm-dd');">
-	                 </td> 
+	                <td>&nbsp;</td>
+            	    <td>&nbsp;</td>
                 	<td align="right" nowrap="nowrap"><input type="submit" class="submit"  value="查询">
                    	<input type="button" class="button" onClick="doClear();" value="重置">
                    	</td>
@@ -222,8 +223,8 @@ function doSubmit(form) {
               <!-- 列表内容 -->
              <table width="100%"  border="0" cellpadding="0" cellspacing="0" class="list">
                  <tr>
-                  <th>设备名称-EN</th>
-                  <th>设备名称-CN</th>
+                  <th>设备名称-英文</th>
+                  <th>设备名称-中文</th>
                   <th>设备类型</th>
                   <th>网络地址</th>
                   <th>定义时间</th>
