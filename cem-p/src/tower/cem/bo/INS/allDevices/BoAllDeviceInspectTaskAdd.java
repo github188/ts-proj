@@ -1,13 +1,9 @@
-package tower.cem.bo.INS.partDevices;
-
-import java.util.Date;
+package tower.cem.bo.INS.allDevices;
 
 import org.apache.log4j.Logger;
 
 import tower.cem.db.DbCommandsSendList;
-import tower.cem.db.DbMaintainCommandsTemplate;
 import tower.cem.en.EnCommandsSendList;
-import tower.cem.en.EnMaintainCommandsTemplate;
 import tower.cem.util.IdCreatorDefine;
 import tower.common.util.DateFunc;
 import tower.common.util.SysIdCreator;
@@ -16,9 +12,9 @@ import tower.tmvc.RootBo;
 import tower.tmvc.Transaction;
 import tower.tmvc.XMLWrap;
 
-public class BoDeviceInspectTaskAdd implements RootBo{
-	
-	public void doBusiness(Transaction transaction, XMLWrap requestXml, XMLWrap sessionXml, XMLWrap applicationXml, Logger logger) throws ErrorException {
+public class BoAllDeviceInspectTaskAdd implements RootBo{
+
+public void doBusiness(Transaction transaction, XMLWrap requestXml, XMLWrap sessionXml, XMLWrap applicationXml, Logger logger) throws ErrorException {
 		
 		/***********************************************************************
 		 * 声明变量
@@ -29,8 +25,7 @@ public class BoDeviceInspectTaskAdd implements RootBo{
 		
 		
 		//获取页面参数
-		String[] deviceIds;    //维护设备编号
-		String[] deviceTypeIds;  //维护设备类型编号
+		String[]  TypeIds; //维护设备编号
 		String sendId;        //指令发送编号
 		String taskDefineTime; //任务定义时间
 		String taskPlanTime;  //计划开始时间
@@ -46,8 +41,7 @@ public class BoDeviceInspectTaskAdd implements RootBo{
 		/***********************************************************************
 		 * 获取输入
 		 **********************************************************************/
-		deviceIds = requestXml.getInputValues("DEVICE_ID");
-		deviceTypeIds = requestXml.getInputValues("DEVICE_TYPE_ID");
+		TypeIds = requestXml.getInputValues("TYPE_ID");
 		userId = sessionXml.getItemValue("SYS_USER", 1, "USER_ID");
 		commandsType = "I";
 		status = "N";
@@ -89,13 +83,12 @@ public class BoDeviceInspectTaskAdd implements RootBo{
 		 enCommandsSendList.setTaskPlanTime(taskPlanTime);
 		 enCommandsSendList.setUserId(userId);
 		 
-		 for(int i = 0; i<deviceIds.length;i++){
+		 for(int i = 0; i<TypeIds.length;i++){
 			 sendId = SysIdCreator.GenNextId(transaction, null,
 						IdCreatorDefine.ID_TYPE_SEND_ID,
 						IdCreatorDefine.ID_LEN_SEND_ID);
 			 enCommandsSendList.setSendId(sendId);
-			 enCommandsSendList.setDeviceId(deviceIds[i]);
-			 enCommandsSendList.setDeviceTypeId(deviceTypeIds[i]);
+			 enCommandsSendList.setDeviceTypeId(TypeIds[i]);
 			 dbCommandsSendList.insert(enCommandsSendList);
 		 }
 	}
