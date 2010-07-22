@@ -103,7 +103,7 @@
 							</td>
 						</tr>
 						<tr>   
-                          <td width="150" align="right">英文名称缩写：</td>
+                          <td width="120" align="right">英文名称缩写：</td>
 		                  <td width="100">
 		                      <span id="sprytHostAbbNameEn">
               					<input type="text" class="text" name="HOST_ABB_NAME_EN"value="<%=hostAbbNameEn %>">
@@ -170,16 +170,6 @@
 							</td>
 						</tr>
 						<tr>   
-							<td width="120" align="right">命令行提示符：</td>
-							<td>
-								<span id="sprytHostPrompt">
-								<input type="text" class="text" name="HOST_PROMPT"value="<%=hostPrompt %>"><span class="requiredField">*</span>
-								<span class="textfieldRequiredMsg">需要提供一个值。</span>
-								<span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
-								</span>
-							</td>
-						</tr>
-						<tr>   							
 							<td width="120" align="right">登录密码：</td>
 							<td>
 								<span id="sprytHostPassword">
@@ -188,6 +178,17 @@
               				  	<span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 		                      	</span>
 		                 	</td>
+							
+						</tr>
+						<tr>   							
+						<td width="120" align="right">命令行提示符：</td>
+							<td>
+								<span id="sprytHostPrompt">
+								<input type="text" class="text" name="HOST_PROMPT"value="<%=hostPrompt %>"><span class="requiredField">*</span>
+								<span class="textfieldRequiredMsg">需要提供一个值。</span>
+								<span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
+								</span>
+							</td>
 		               </tr>
 		               <tr>
 		                 	<td width="120" align="right">备注：</td>
