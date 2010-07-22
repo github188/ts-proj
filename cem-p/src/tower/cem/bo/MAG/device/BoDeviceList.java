@@ -160,8 +160,7 @@ public class BoDeviceList implements RootBo {
 			if (!(enDeviceInfo.getFrontHostId() == null || enDeviceInfo.getFrontHostId().trim().length() == 0)) {
 				enFrontHostInfo = dbFrontHostInfo.findByKey(enDeviceInfo.getFrontHostId());
 				if (!(enFrontHostInfo == null)) {
-					requestXml.setItemValue("DEVICE_INFO", row, "FRONT_HOST_NAME", enFrontHostInfo
-							.getHostIp());
+					requestXml.setItemValue("DEVICE_INFO", row, "FRONT_HOST_NAME", enFrontHostInfo.getHostNameCn());
 				}
 			}
 			if (!(enDeviceInfo.getTypeId()== null || enDeviceInfo.getTypeId().trim().length() == 0)) {
