@@ -105,11 +105,11 @@ function doSubmit(form) {
   	//for(var i = 0; i < selectedIds.length; i ++){
   	//	alert(selectedIds[i]);
   	//}
-  }
+  } 
    
   function doSend(deviceId){
-   	selDialog("ctrl?FUNC_ID=SendCommand&DEVICE_ID="+deviceId,"DEVICE_ID","DEVICE_NAME",850,550,false);
-   }
+  popSel("ctrl?FUNC_ID=SendCommand&DEVICE_ID="+deviceId,850,550,false);
+ }
 -->
 </script>
 

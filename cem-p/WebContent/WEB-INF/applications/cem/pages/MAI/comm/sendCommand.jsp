@@ -8,6 +8,8 @@
 
 <%	
 	XMLWrap xml;
+	XMLWrap sessionXml;
+	
 	String deviceId;
 	String deviceNameEn;
 	String deviceNameCn;
@@ -31,11 +33,13 @@
 	String hostPrompt;
 	
 	String command;
+	String comms;
 	
 %>
 
 <%
 	xml = XMLWrap.getRequestXml(request,session,application);
+	sessionXml = XMLWrap.getSessionXml(request,session,application);
 	
 	deviceId = xml.getInputValue("DEVICE_ID");
 	deviceNameEn = xml.getItemValue("DEVICE_INFO",1,"DEVICE_NAME_EN");
@@ -58,42 +62,67 @@
 	hostPassword = xml.getItemValue("DEVICE_INFO",1,"HOST_PASSWORD");
 	hostPrompt = xml.getItemValue("DEVICE_INFO",1,"HOST_PROMPT");
 	
-	//设备维护开始时间
-	String date = DateFunc.GenNowTime();
-	command = xml.getInputValue("COMMAND");
+	//保存维护开始时间
+   if(sessionXml.getRowCount("EXEC_BEGIN") > 0){
+  }else{
+     sessionXml.addInputRow("EXEC_BEGIN");
+     String date = DateFunc.GenNowTime();
+     sessionXml.setInputValue("EXEC_BEGIN",1,date);
+  }
+	
+  //保存维护指令
+    command = xml.getInputValue("COMMAND");
+    if(sessionXml.getRowCount("COMMANDS") > 0){
+    	comms = sessionXml.getInputValue("COMMANDS");
+    	comms = comms+command;
+    	sessionXml.setInputValue("COMMANDS",1,comms);
+    	
+  }else{
+     sessionXml.addInputRow("COMMANDS");
+     sessionXml.setInputValue("COMMANDS",1,command);
+  }
+
 	
 	//登录设备，发送指令
-	NetTelnet nt = new NetTelnet();
+	NetTelnet nt ;
 	String sResult="";
 	StringBuffer sbResult = new StringBuffer();
 	
-	//直接登录设备
-	if(frontHostId == null || frontHostId.length() <= 0){
-		sResult = nt.FunLogin(deviceIp, devicePort, deviceUser, devicePassword, devicePrompt);
-		sbResult.append(sResult);
-		if(!nt.getBflag()) {
-		   sbResult.append("登录堡垒主机失败。");
-		 }else{
-			 sResult =  nt.sendCommand(command);
-			 sbResult.append(sResult);
-		 }
-	//通过堡垒主机登录：先登录堡垒主机，再通过堡垒主机登录设备
-	}else{
-		 sResult = nt.FunLogin(hostIp, hostPort, hostUser, hostPassword, hostPrompt); //登录堡垒主机
-		 sbResult.append(sResult);
-		  if(!nt.getBflag()) {
-		    sbResult.append("登录堡垒主机失败。");
-		   }else {
-		       sResult = nt.FunRelogin(deviceIp, devicePort, deviceUser, devicePassword, devicePrompt); //登录设备
-		       sbResult.append(sResult);
-		       if(!nt.getBflag()) {
-		          sbResult.append("登录设备失败。");
-		      }else{
+	  if(sessionXml.getRowCount("NET_TELNET") > 0){
+		  nt = (NetTelnet)sessionXml.getInputObject("NET_TELNET");
+		  nt.sendCommand(command);
+		  sResult =  nt.sendCommand(command);
+		  sbResult.append(sResult);
+	  }else{
+		  nt = new NetTelnet();
+			//直接登录设备
+			if(frontHostId == null || frontHostId.length() <= 0){
+				sResult = nt.FunLogin(deviceIp, devicePort, deviceUser, devicePassword, devicePrompt);
+				sbResult.append(sResult);
+				if(!nt.getBflag()) {
+				   sbResult.append("登录堡垒主机失败。");
+				 }else{
 					 sResult =  nt.sendCommand(command);
 					 sbResult.append(sResult);
 				 }
-		   }
-	}
+			//通过堡垒主机登录：先登录堡垒主机，再通过堡垒主机登录设备
+			}else{
+				 sResult = nt.FunLogin(hostIp, hostPort, hostUser, hostPassword, hostPrompt); //登录堡垒主机
+				 sbResult.append(sResult);
+				  if(!nt.getBflag()) {
+				    sbResult.append("登录堡垒主机失败。");
+				   }else {
+				       sResult = nt.FunRelogin(deviceIp, devicePort, deviceUser, devicePassword, devicePrompt); //登录设备
+				       sbResult.append(sResult);
+				       if(!nt.getBflag()) {
+				          sbResult.append("登录设备失败。");
+				      }else{
+							 sResult =  nt.sendCommand(command);
+							 sbResult.append(sResult);
+						 }
+				   }
+			}
+	  }
     String[] deviceStatusDesc = {"在用","停用"};
 	String[] deviceStatusValue = {"N","S"};
 %>
@@ -105,22 +134,13 @@
 <jsp:include flush="true" page="../../../../sys/pages/common/include/js.jsp"></jsp:include>
 <script type="text/javascript">
 <!--
-  var comms;
   function doSendCommand(){
-   var comm = form1.COMMAND.value
-    if(comm != null){
-         form1.COMMAND.value="";
-         form1.submit();
-    }else{
-        alert("维护指令不能为空。");
-    }
+  var command = FORM.COMMAND.VALUE;
+  <%nt.sendCommand(command);%>
   }
   
   function disconnection(){
-   <%
-     nt.disconnect();
-   %>
-   form1.submit();
+    form1.submit();
     window.close();
   }
   
@@ -149,7 +169,6 @@
                   <input type="hidden" name="FUNC_ID" value="SendCommand">
                   <input  type="hidden"  name="COMMANDS"> 
                   <input  type="hidden"  name="DEVICE_ID" value="<%=deviceId %>"> 
-                   <input  type="hidden"  name="EXEC_BEGIN" value="<%=deviceId %>"> 
                  <table width="100%"  >
                   <tr>
                           <td width="15%" align="right">设备名称-英文：</td>
@@ -193,7 +212,7 @@
               	 <td  align="right">指令：</td>
               	  <td colspan="5">
               		<input size="80" type="text" class="text" name="COMMAND" > 
-              		<input type="button" class="button"  value="发送指令"  onclick="doSendCommand('<%=deviceId %>')">
+              		<input type="button" class="button"  value="发送指令"  onclick="doSendCommand();">
               		<input type="button" class="button"  value="断开连接"  onclick="disconnection()">
 		          </td>
                  </tr>
