@@ -32,21 +32,10 @@ public class tempLogList implements RootBo{
 		/***********************************************************************
 		 * 声明变量
 		 **********************************************************************/
-		//指令发送任务历史表 db en
-		DbCommandsSendHis dbCommandsSendHis;
-		EnCommandsSendHis enCommandsSendHis;
-		
-		//维护指令模板发送日志 db en
-		DbDeviceMaintainLog dbDeviceMaintainLog;
-		EnDeviceMaintainLog enDeviceMaintainLog;
-		
 		//查询条件
 		String deviceNameEn;   //设备名称-英文
 		String deviceNameCn;   //设备名称-中文
-		String locationId;     //物理位置
 		String deviceIp;       //网络地址
-		String execBeginBegin; //维护开始时间
-		String execBeginEnd;   //维护开始时间
 		String execEndBegin;   //维护结束时间
 		String execEndEnd;     //维护结束时间
 		String tempId;         //模板编号
@@ -63,10 +52,7 @@ public class tempLogList implements RootBo{
 		 **********************************************************************/
 		deviceNameEn = requestXml.getInputValue("QDEVICE_NAME_EN");
 		deviceNameCn = requestXml.getInputValue("QDEVICE_NAME_CN");
-		locationId = requestXml.getInputValue("QLOCATION_ID");
 		deviceIp = requestXml.getInputValue("QDEVICE_IP");
-		execBeginBegin = requestXml.getInputValue("QEXEC_BEGIN_BEGIN");
-		execBeginEnd = requestXml.getInputValue("QEXEC_BEGIN_END");
 		execEndBegin = requestXml.getInputValue("QEXEC_END_BEGIN");
 		execEndEnd = requestXml.getInputValue("QEXEC_END_END");
 		tempId = requestXml.getInputValue("QTEMP_ID");
@@ -76,8 +62,6 @@ public class tempLogList implements RootBo{
 		 * 创建数据库连接、实例化DB、EN
 		 **********************************************************************/
 		 transaction.createDefaultConnection(null, true);
-		 dbCommandsSendHis = new DbCommandsSendHis(transaction,null);
-		 enCommandsSendHis = new EnCommandsSendHis();
 		/***********************************************************************
 		 * 执行业务逻辑、输出
 		 **********************************************************************/
@@ -131,20 +115,6 @@ public class tempLogList implements RootBo{
 				}
 			}
 				
-			if (execBeginBegin != null && execBeginBegin.length() != 0) {
-				if (sqlWhere == null || sqlWhere.length() == 0) {
-					sqlWhere.append(" a.MAINTAIN_BEGIN  >='" + execBeginBegin + "'");
-				} else {
-					sqlWhere.append(" AND a.MAINTAIN_BEGIN  >='" + execBeginBegin + "'");
-				}
-			}
-			if (execBeginEnd != null && execBeginEnd.length() != 0) {
-				if (sqlWhere == null || sqlWhere.length() == 0) {
-					sqlWhere.append(" a.MAINTAIN_BEGIN  <='" + execBeginEnd + "'");
-				} else {
-					sqlWhere.append(" AND a.MAINTAIN_BEGIN  <='" + execBeginEnd + "'");
-				}
-			}
 			if (execEndBegin != null && execEndBegin.length() != 0) {
 				if (sqlWhere == null || sqlWhere.length() == 0) {
 					sqlWhere.append(" a.MAINTAIN_END  >='" + execEndBegin + "'");
