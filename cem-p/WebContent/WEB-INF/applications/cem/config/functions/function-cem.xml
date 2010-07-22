@@ -377,14 +377,79 @@
          <function id="TempLogViewJsp" description="设备维护指令日志查看" type="jsp"
         jspPath="/cem/pages/MAI/tempLog/tempLogView.jsp" /> 
         
-      <!-- 10-partDevices-设备巡检 -->
+      <!-- 11-partDevices-设备巡检 -->
        <function id="partDevicesList" description="设备巡检-设备查询" type="bo"
-        className="tower.cem.bo.MAI.tempSend.BoTempSendDeviceList"
+        className="tower.cem.bo.MAI.comm.BoCommDeviceList"
         forward="partDevicesListJsp" /> 
         
+       <function id="deviceInspectTaskAdd" description="设备巡检-添加巡检任务" type="bo"
+        className="tower.cem.bo.INS.partDevices.BoDeviceInspectTaskAdd"
+        forward="deviceInspectTaskAddSuccessJsp" /> 
+        
         <function id="partDevicesListJsp" description="设备巡检-设备查询界面" type="jsp"
-        jspPath="/cem/pages/INS/partDevices/deviceList.jsp" /> 
-         
+        jspPath="/cem/pages/INS/partDevices/partDeviceList.jsp" /> 
+        
+        <function id="planTimeDefJsp" description="设备巡检-巡检任务执行时间定义界面" type="jsp"
+        jspPath="/cem/pages/INS/partDevices/planTimeDef.jsp" /> 
+        
+        <function id="deviceInspectTaskAddSuccessJsp" description="设备巡检-添加巡检任务成功提示界面" type="jsp"
+        jspPath="/cem/pages/INS/partDevices/taskAddSuccess.jsp" /> 
+      
+       <!-- 12-allDevices-全网设备巡检 -->
+        <function id="AllDeviceTypeList" description="全网设备巡检-设备类型查询" type="bo"
+        className="tower.cem.bo.MAG.deviceType.BoDeviceTypeList"
+        forward="AllDeviceTypeListJsp" /> 
+        
+       <function id="AllDeviceInspectTaskAdd" description="全网设备巡检-添加巡检任务" type="bo"
+        className="tower.cem.bo.INS.allDevices.BoAllDeviceInspectTaskAdd"
+        forward="AllDeviceInspectTaskAddSuccessJsp" /> 
+        
+        <function id="AllDeviceTypeListJsp" description="全网设备巡检-设备类型列表面" type="jsp"
+        jspPath="/cem/pages/INS/allDevices/allDeviceTypeList.jsp" /> 
+        
+        <function id="allPlanTimeDefJsp" description="全网设备巡检-巡检任务执行时间定义界面" type="jsp"
+        jspPath="/cem/pages/INS/allDevices/planTimeDef.jsp" /> 
+        
+        <function id="AllDeviceInspectTaskAddSuccessJsp" description="全网设备巡检-添加巡检任务成功提示界面" type="jsp"
+        jspPath="/cem/pages/INS/allDevices/taskAddSuccess.jsp" /> 
+        
+       <!-- 13-partDeviceslog-设备巡检日志查询 -->
+        <function id="DeviceInspectLogList" description="设备巡检日志查询" type="bo"
+        className="tower.cem.bo.INS.partDevicesLog.BoDeviceInspectLogList"
+        forward="DeviceInspectLogListJsp" /> 
+        
+       
+        <function id="PickLogView" description="设备巡检日志查询-查看分练日志" type="bo"
+        className="tower.cem.bo.INS.partDevicesLog.BoPickLogDetail"
+        forward="PickLogViewJsp" />
+        
+        <function id="InspectLogView" description="设备巡检日志查询-查看巡检日志" type="bo"
+        className="tower.cem.bo.INS.partDevicesLog.BoInspectLogDetail"
+        forward="InspectLogViewJsp" />InspectLogSave
+        
+        <function id="InspectLogSave" description="设备巡检日志查询-导出" type="bo"
+        className="tower.cem.bo.INS.partDevicesLog.BoInspectLogDetail"
+        forward="ServletInspectLogTxt" />
+        
+        <function id="PickLogSave" description="设备分拣日志查询-导出" type="bo"
+        className="tower.cem.bo.INS.partDevicesLog.BoPickLogDetail"
+        forward="ServletPickLogTxt" />
+        
+        <function id="ServletInspectLogTxt" description="导出设备巡检日志文件输出" type="jsp"
+		jspPath="/servlet/ServletInspectLogTxt"/>
+		
+		 <function id="ServletPickLogTxt" description="导出设备分拣日志文件输出" type="jsp"
+		jspPath="/servlet/ServletPickLogTxt"/>
+		
+        <function id="DeviceInspectLogListJsp" description="设备巡检日志查询界面" type="jsp"
+        jspPath="/cem/pages/INS/partDevicesLog/partDevicesLogList.jsp" /> 
+        
+        <function id="PickLogViewJsp" description="设备巡检日志查询-分拣日志查看界面" type="jsp"
+        jspPath="/cem/pages/INS/partDevicesLog/pickLogView.jsp" /> 
+        
+         <function id="InspectLogViewJsp" description="设备巡检日志查询-巡检日志查看界面" type="jsp"
+        jspPath="/cem/pages/INS/partDevicesLog/inspectLogView.jsp" /> 
+        
        <!-- 21-device-设备端口类型管理 -->
       <function id="DevicePortTypeSubmit" description="设备端口类型提交" type="bo"
         className="tower.cem.bo.MAG.devicePortType.BoDevicePortTypeSubmit"
