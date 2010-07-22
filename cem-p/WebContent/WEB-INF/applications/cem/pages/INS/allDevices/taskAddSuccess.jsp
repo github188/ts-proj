@@ -2,8 +2,6 @@
     pageEncoding="utf-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
-<%@ page import="tower.tmvc.XMLWrap"%>
-FD
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -13,7 +11,7 @@ FD
 </head>
 <body id="mainArea">
   <div id="mainPanel" class="panel">
-    <div class="panelHead">添加设备巡检任务-完成！</div>
+    <div class="panelHead">添加全网设备巡检任务-完成！</div>
     <div class="panelContent">
       <div class="panelContent2">
         
@@ -31,11 +29,11 @@ FD
                     <div class="panelContent2">
                       <!-- 查询面板内容 -->
             <form name="form1" action="ctrl" method="get"  onSubmit="return doSubmit(this)">
-              <input type="hidden" name="FUNC_ID" value="partDevicesList">
+              <input type="hidden" name="FUNC_ID" value="AllDeviceTypeList">
                  <table width="100%" height="100" border="0" cellpadding="0" cellspacing="0">
               	 <tr>
-              	 <td align="center"DD>
-              	向设备发送巡检任务成功，请稍后在设备巡检日志中查询巡检情况。
+              	 <td align="center">
+              	向全网设备发送巡检任务成功，请稍后在全网设备巡检日志中查询巡检情况。
               	 </td>
                  </tr>
                  <tr>

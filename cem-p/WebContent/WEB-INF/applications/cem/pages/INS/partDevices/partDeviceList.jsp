@@ -52,7 +52,7 @@
 %>
 <html>
 <head>
-<title>维护指令模板发送</title>
+<title>设备巡检管理</title>
 <jsp:include flush="true" page="../../../../sys/pages/common/include/css.jsp"></jsp:include>
 <jsp:include flush="true" page="../../../../sys/pages/common/include/js.jsp"></jsp:include>
 
@@ -253,6 +253,19 @@ function doSubmit(form) {
      
                <%} else {%>
                <tr class="dark" onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
+                 <td align="center">
+                  <%if(deviceStatuses[i].endsWith("N")){  flag = 1; %>
+                    <%if(Ids != null && Ids.length != 0){ %>
+                    <%for(int j=0 ;j<Ids.length;j++){
+                    	if(deviceIds[i].endsWith(Ids[j])){
+                   %>
+                   <input type="checkbox" name="DEVICE_ID" value="<%=deviceIds[i] %>"  checked> 
+                  <%}else{%>
+                   <input type="checkbox" name="DEVICE_ID" value="<%=deviceIds[i] %>"  > 
+                 <% }  }}else{ %>
+                   <input type="checkbox" name="DEVICE_ID" value="<%=deviceIds[i] %>"  > 
+                   <%}} %>
+				  </td>
                    <td align="center">
                   <%if(deviceStatuses[i].endsWith("N")){ 
                 	  flag = 1;
