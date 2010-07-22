@@ -1,23 +1,18 @@
 package tower.cem.servlet;
 
 import java.io.BufferedOutputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 
+import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mysql.jdbc.StringUtils;
-
 import tower.tmvc.XMLWrap;
 
-public class ServletTempLogTxt {
+public class ServletTempLogTxt extends HttpServlet implements Servlet{
 
 	private static final long serialVersionUID = 7982396433338743263L;
 	XMLWrap xml ;
