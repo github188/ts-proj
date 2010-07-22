@@ -37,16 +37,7 @@ public class BoCommLogList implements RootBo {
 		 * 声明变量
 		 ****************************************************************************************************/
 		// 设备配置db en
-		DbDeviceInfo dbDeviceInfo;
 		EnDeviceInfo enDeviceInfo;
-		
-		//维护指令执行日志 db en
-		DbDeviceCommandExecLog dbDeviceCommandExecLog;
-		EnDeviceCommandExecLog enDeviceCommandExecLog;
-
-		// 物理位置db en
-		DbLocationInfo dbLocationInfo;
-		EnLocationInfo enLocationInfo;
 		
 		// 查询条件：
 		String deviceNameEn;// 设备名称-英文
@@ -55,8 +46,6 @@ public class BoCommLogList implements RootBo {
 		String deviceStatus;// 设备状态
 		String deviceIp; // 网络地址
 		String devicePort; // 网络端口
-		String beginExecBegin; //维护开始日期
-		String endExecBegin;
 		String beginExecEnd;//维护结束日期
 		String endExecEnd;  
 		
@@ -75,17 +64,11 @@ public class BoCommLogList implements RootBo {
 		deviceStatus = requestXml.getInputValue("DEVICE_STATUS");
 		deviceIp = requestXml.getInputValue("DEVICE_IP");
 		devicePort = requestXml.getInputValue("DEVICE_PORT");
-		beginExecBegin = requestXml.getInputValue("BENGIN_EXEC_BEGIN");
-		endExecBegin = requestXml.getInputValue("END_EXEC_BEGIN");
 		beginExecEnd = requestXml.getInputValue("BENGIN_EXEC_END");
 		endExecEnd = requestXml.getInputValue("END_EXEC_END");
 		/*****************************************************************************************************
 		 * 创建数据库连接、实例化DB、EN
 		 ****************************************************************************************************/
-		transaction.createDefaultConnection(null, true);
-		dbLocationInfo = new DbLocationInfo(transaction, null);
-		dbDeviceInfo = new DbDeviceInfo(transaction, null);
-		dbDeviceCommandExecLog = new DbDeviceCommandExecLog(transaction, null);
 		/*****************************************************************************************************
 		 * 执行业务逻辑、输出
 		 ****************************************************************************************************/
@@ -139,22 +122,6 @@ public class BoCommLogList implements RootBo {
 				sqlWhere.append(" b.DEVICE_PORT LIKE '%" + devicePort + "%'");
 			} else {
 				sqlWhere.append(" AND b.DEVICE_PORT LIKE '%" + devicePort + "%'");
-			}
-		}
-		
-		if (beginExecBegin != null && beginExecBegin.length() != 0) {
-			if (sqlWhere == null || sqlWhere.length() == 0) {
-				sqlWhere.append(" a.EXEC_BEGIN >='" + DateFunc.ParseDateTime(beginExecBegin) + "'");
-			} else {
-				sqlWhere.append(" AND a.EXEC_BEGIN >='" + DateFunc.ParseDateTime(beginExecBegin) + "'");
-			}
-		}
-		
-		if (endExecBegin != null && endExecBegin.length() != 0) {
-			if (sqlWhere == null || sqlWhere.length() == 0) {
-				sqlWhere.append(" a.EXEC_BEGIN <='" + DateFunc.ParseDateTime(endExecBegin) + "'");
-			} else {
-				sqlWhere.append(" AND a.EXEC_BEGIN <='" + DateFunc.ParseDateTime(endExecBegin) + "'");
 			}
 		}
 		
