@@ -1,7 +1,7 @@
 # 默认日志级别ERROR。其他可供选择的级别包括INFO和DEBUG
 log4j.rootLogger=DEBUG,ROOT,stdout
 log4j.appender.ROOT=org.apache.log4j.RollingFileAppender
-log4j.appender.ROOT.File={APP-PATH}WEB-INF/logs/cem.log
+log4j.appender.ROOT.File={APP-PATH}/logs/cem.log
 log4j.appender.ROOT.MaxFileSize=1000KB
 # 保留5个旧的日志文件
 log4j.appender.ROOT.MaxBackupIndex=5
