@@ -54,24 +54,91 @@
 	typeId = xml.getItemValue("DEVICE_INFO",1,"TYPE_ID");
 	typeName = xml.getItemValue("DEVICE_INFO",1,"TYPE_NAME");
 	
+	frontHostId = xml.getItemValue("DEVICE_INFO",1,"FRONT_HOST_ID");
+	frontHostName = xml.getItemValue("DEVICE_INFO",1,"FRONT_HOST_NAME");
 	hostIp = xml.getItemValue("DEVICE_INFO",1,"HOST_IP");
 	hostPort = xml.getItemValue("DEVICE_INFO",1,"HOST_PORT");
 	hostUser = xml.getItemValue("DEVICE_INFO",1,"HOST_USER");
 	hostPassword = xml.getItemValue("DEVICE_INFO",1,"HOST_PASSWORD");
 	hostPrompt = xml.getItemValue("DEVICE_INFO",1,"HOST_PROMPT");
 	
+	//保存维护开始时间
+   if(sessionXml.getRowCount("EXEC_BEGIN") > 0){
+  }else{
+     sessionXml.addInputRow("EXEC_BEGIN");
+     String date = DateFunc.GenNowTime();
+     sessionXml.setInputValue("EXEC_BEGIN",1,date);
+  }
+	
+  //保存维护指令
+    command = xml.getInputValue("COMMAND");
+    if(sessionXml.getRowCount("COMMANDS") > 0){
+    	comms = sessionXml.getInputValue("COMMANDS");
+    	comms = comms+command;
+    	sessionXml.setInputValue("COMMANDS",1,comms);
+    	
+  }else{
+     sessionXml.addInputRow("COMMANDS");
+     sessionXml.setInputValue("COMMANDS",1,command);
+  }
+
+	
+	//登录设备，发送指令
+	NetTelnet nt ;
+	String sResult="";
+	StringBuffer sbResult = new StringBuffer();
+	
+	  if(sessionXml.getRowCount("NET_TELNET") > 0){
+		  nt = (NetTelnet)sessionXml.getInputObject("NET_TELNET");
+		  nt.sendCommand(command);
+		  sResult =  nt.sendCommand(command);
+		  sbResult.append(sResult);
+	  }else{
+		  nt = new NetTelnet();
+			//直接登录设备
+			if(frontHostId == null || frontHostId.length() <= 0){
+				sResult = nt.FunLogin(deviceIp, devicePort, deviceUser, devicePassword, devicePrompt);
+				sbResult.append(sResult);
+				if(!nt.getBflag()) {
+				   sbResult.append("登录堡垒主机失败。");
+				 }else{
+					 sResult =  nt.sendCommand(command);
+					 sbResult.append(sResult);
+				 }
+			//通过堡垒主机登录：先登录堡垒主机，再通过堡垒主机登录设备
+			}else{
+				 sResult = nt.FunLogin(hostIp, hostPort, hostUser, hostPassword, hostPrompt); //登录堡垒主机
+				 sbResult.append(sResult);
+				  if(!nt.getBflag()) {
+				    sbResult.append("登录堡垒主机失败。");
+				   }else {
+				       sResult = nt.FunRelogin(deviceIp, devicePort, deviceUser, devicePassword, devicePrompt); //登录设备
+				       sbResult.append(sResult);
+				       if(!nt.getBflag()) {
+				          sbResult.append("登录设备失败。");
+				      }else{
+							 sResult =  nt.sendCommand(command);
+							 sbResult.append(sResult);
+						 }
+				   }
+			}
+	  }
     String[] deviceStatusDesc = {"在用","停用"};
 	String[] deviceStatusValue = {"N","S"};
 %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>设备维护指令</title>
+<title>设备登录测试</title>
 <jsp:include flush="true" page="../../../../sys/pages/common/include/css.jsp"></jsp:include>
 <jsp:include flush="true" page="../../../../sys/pages/common/include/js.jsp"></jsp:include>
 <script type="text/javascript">
 <!--
-   
+  function doSendCommand(){
+  var command = FORM.COMMAND.VALUE;
+  <%nt.sendCommand(command);%>
+  }
+  
   function disconnection(){
     form1.submit();
     window.close();
@@ -103,19 +170,30 @@
                   <input  type="hidden"  name="COMMANDS"> 
                   <input  type="hidden"  name="DEVICE_ID" value="<%=deviceId %>"> 
                  <table width="100%"  >
-				 <tr>
-					<td width="15%" align="right">英文名称：</td>
-		            <td width="15%"><%=deviceNameEn %></td>
-		            <td width="15%" align="right">中文名称：</td>
-		            <td width="15%"><%=deviceNameCn %></td>
-              	 	<td width="15%" align="right">物理位置：</td>
-              	  	<td width="15%"><%=locationNameCn %></td>
+                  <tr>
+                          <td width="15%" align="right">设备名称-英文：</td>
+		                  <td  width="15%"> 
+		                  <%=deviceNameEn %>
+		                  </td>
+		                  
+                        <td width="15%" align="right">设备名称-中文：</td>
+		                 <td width="15%"> 
+		                 <%=deviceNameCn %>
+		                 </td>
+              	 <td width="15%" align="right">物理位置：</td>
+              	  <td width="15%"> 
+              	  <%=locationNameCn %>
+  				  </td>
   				  </tr>
   				  <tr>
-					<td align="right">网络地址：</td>
-              	 	<td><%=deviceIp %></td>
+		          <td align="right">网络地址：</td>
+              	 <td> 
+              	 <%=deviceIp %>
+		         </td>
 		            <td align="right">设备类型：</td>
-	              	<td><%=typeName %></td>
+              	 <td> 
+              	 <%=typeName %>
+		         </td>
 		           <td align="right">设备状态：</td>
               	   <td > 
                          <%for(int i=0;i<deviceStatusValue.length;i++){ 
@@ -123,35 +201,30 @@
                          <%=deviceStatusDesc[i] %>
                         <%} }%>
 				   </td>
-                 </tr>                 
-                 <tr height="5">
+                 </tr>
+                 <tr height="10">
                  <td></td>
                  <td></td>
                  <td></td>
                  <td></td>
-                 <td></td>
-                 <td></td>
-                 </tr>                                   
+                 </tr>
+                  <tr>
+              	 <td  align="right">指令：</td>
+              	  <td colspan="5">
+              		<input size="80" type="text" class="text" name="COMMAND" > 
+              		<input type="button" class="button"  value="发送指令"  onclick="doSendCommand();">
+              		<input type="button" class="button"  value="断开连接"  onclick="disconnection()">
+		          </td>
+                 </tr>
+              	 <tr>
+              	  <td colspan="7" align="center">
+              		<textarea name="COMMAND_RESULT" id="textarea" class="textarea" cols="100" rows="23" readonly>
+              		<%=sbResult %>
+              		</textarea>
+		          </td>
+		           <td align="right"></td>
+                 </tr>
               </table>
-              <table width="100%"  >
-				 <tr>
-				 	<td align="center">
-				 		<applet code="tower.TelnetApplet" codebase="../sys/applet/" archive="commons-net-2.0.jar,applet.jar" width=800 height=500>
-              				<param   name=DeviceIP   value= "<%=deviceIp%>">
-             			 	<param   name=DevicePort   value= "<%=devicePort%>"> 
-          			    	<param   name=DeviceUser   value= "<%=deviceUser%>"> 
-         			     	<param   name=DevicePassword   value= "<%=devicePassword%>"> 
-         			     	<param   name=DevicePrompt   value= "<%=devicePrompt%>"> 
-      			        	<param   name=FrontHostIP   value= "<%=hostIp%>"> 
-       				       	<param   name=FrontHostPort   value= "<%=hostPort%>"> 
-           				   	<param   name=FrontHostUser   value= "<%=hostUser%>"> 
-           				   	<param   name=FrontHostPassword   value= "<%=hostPassword%>"> 
-         			     	<param   name=FrontHostPrompt   value= "<%=hostPrompt%>"> 
-         		     </applet>
-				 	</td>
-				 </tr>
-				 
-              
                  </form>    
                       <!-- 查询面板内容结束 -->
                     </div>

@@ -21,11 +21,11 @@ public class TelnetApplet extends Applet {
 
     Button bSend = new Button("发送指令");
 
-    Button bDisConnButton = new Button("重新连接");
+    Button bReConnButton = new Button("重新连接");
 
-    TextArea tResult = new TextArea(30, 120);
+    TextArea tResult = new TextArea(27, 120);
 
-    Label lStatus = new Label("");
+    Label lStatus = new Label("没有连接");
 
     @Override
     public void init() {
@@ -37,7 +37,7 @@ public class TelnetApplet extends Applet {
 	add(lCommand);
 	add(tCommand);
 	add(bSend);
-	add(bDisConnButton);
+	add(bReConnButton);
 	add(lStatus);
 	add(tResult);
 
@@ -75,6 +75,15 @@ public class TelnetApplet extends Applet {
 		}
 	    } else {
 		lStatus.setText("连接失败");
+		// // 测试程序段
+		// result = nt.FunLogin("60.209.94.194", "23", "ecode315",
+		// "password", "$");
+		// tResult.append(result);
+		// if (nt.getBflag()) {
+		// lStatus.setText("连接成功");
+		// } else {
+		// lStatus.setText("连接失败");
+		// }
 	    }
 
 	} else {
@@ -135,8 +144,9 @@ public class TelnetApplet extends Applet {
 
 	    bSend.setEnabled(true);
 	    tCommand.setText("");
+	    tCommand.requestFocus();
 
-	} else if (evt.target.equals(bDisConnButton)) {
+	} else if (evt.target.equals(bReConnButton)) {
 
 	    tResult.setText("");
 	    this.start();
