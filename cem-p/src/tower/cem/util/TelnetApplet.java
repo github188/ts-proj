@@ -8,6 +8,8 @@ import java.awt.Graphics;
 import java.awt.Label;
 import java.awt.TextArea;
 import java.awt.TextField;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class TelnetApplet extends Applet {
 
@@ -29,8 +31,6 @@ public class TelnetApplet extends Applet {
 
     StringBuffer sbCommands = new StringBuffer();
 
-    Button bTest = new Button("测试");
-
     @Override
     public void init() {
 	// TODO 自动生成方法存根
@@ -42,10 +42,36 @@ public class TelnetApplet extends Applet {
 	add(tCommand);
 	add(bSend);
 	add(bReConnButton);
-	add(bTest);
 	add(lStatus);
 	add(tResult);
 
+	tCommand.addKeyListener(new MyKeyListener());
+
+    }
+
+    public class MyKeyListener extends KeyAdapter {
+	public void keyPressed(KeyEvent evt) {
+	    String sComm;
+
+	    if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+		bSend.setEnabled(false);
+		sComm = tCommand.getText().trim();
+		if (sComm != null && sComm.length() != 0) {
+		    sbCommands.append(sComm + "\n");
+		    String result = nt.sendCommand(sComm);
+		    tResult.append(result);
+		    if (nt.getBflag()) {
+			lStatus.setText("执行成功");
+		    } else {
+			lStatus.setText("执行失败");
+		    }
+		}
+
+		bSend.setEnabled(true);
+		tCommand.setText("");
+		tCommand.requestFocus();
+	    }
+	}
     }
 
     @Override
@@ -82,15 +108,6 @@ public class TelnetApplet extends Applet {
 		}
 	    } else {
 		lStatus.setText("连接失败");
-		// // 测试程序段
-		// result = nt.FunLogin("60.209.94.194", "23", "ecode315",
-		// "password", "$");
-		// tResult.append(result);
-		// if (nt.getBflag()) {
-		// lStatus.setText("连接成功");
-		// } else {
-		// lStatus.setText("连接失败");
-		// }
 	    }
 
 	} else {
@@ -159,10 +176,7 @@ public class TelnetApplet extends Applet {
 	    tResult.setText("");
 	    this.start();
 	}
-	// } else if (evt.target.equals(bTest)) {
-	// tResult.append(sbCommands.toString());
-	// }
-	// Let the base class handle it:
+
 	else
 	    return super.action(evt, arg);
 
@@ -172,4 +186,5 @@ public class TelnetApplet extends Applet {
     public StringBuffer getCommands() {
 	return this.sbCommands;
     }
+
 }
