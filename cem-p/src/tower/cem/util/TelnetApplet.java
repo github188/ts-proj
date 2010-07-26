@@ -27,6 +27,10 @@ public class TelnetApplet extends Applet {
 
     Label lStatus = new Label("没有连接");
 
+    StringBuffer sbCommands = new StringBuffer();
+
+    Button bTest = new Button("测试");
+
     @Override
     public void init() {
 	// TODO 自动生成方法存根
@@ -38,6 +42,7 @@ public class TelnetApplet extends Applet {
 	add(tCommand);
 	add(bSend);
 	add(bReConnButton);
+	add(bTest);
 	add(lStatus);
 	add(tResult);
 
@@ -47,6 +52,8 @@ public class TelnetApplet extends Applet {
     public void start() {
 	// TODO 自动生成方法存根
 	super.start();
+
+	this.sbCommands = new StringBuffer();
 
 	final String deviceIp = getParameter("DeviceIP");
 	final String devicePort = getParameter("DevicePort");
@@ -132,6 +139,7 @@ public class TelnetApplet extends Applet {
 	    bSend.setEnabled(false);
 	    sComm = tCommand.getText().trim();
 	    if (sComm != null && sComm.length() != 0) {
+		sbCommands.append(sComm + "\n");
 		String result = nt.sendCommand(sComm);
 		tResult.append(result);
 		if (nt.getBflag()) {
@@ -151,6 +159,9 @@ public class TelnetApplet extends Applet {
 	    tResult.setText("");
 	    this.start();
 	}
+	// } else if (evt.target.equals(bTest)) {
+	// tResult.append(sbCommands.toString());
+	// }
 	// Let the base class handle it:
 	else
 	    return super.action(evt, arg);
@@ -158,4 +169,7 @@ public class TelnetApplet extends Applet {
 	return true; // We've handled it here
     }
 
+    public StringBuffer getCommands() {
+	return this.sbCommands;
+    }
 }
