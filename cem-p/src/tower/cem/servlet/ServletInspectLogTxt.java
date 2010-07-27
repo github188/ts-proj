@@ -52,7 +52,7 @@ import tower.tmvc.XMLWrap;
 	        try {   
 	            outSTr = res.getOutputStream();// 建立   
 	            buff = new BufferedOutputStream(outSTr);   
-	                write.append("维护日志内容：" + tab);   
+	                //write.append("维护日志内容：" + tab);   
 	                write.append( logCont+ enter);
 	            buff.write(write.toString().getBytes("UTF-8"));   
 	            buff.flush();   
