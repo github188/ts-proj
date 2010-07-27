@@ -82,24 +82,21 @@
  function doView(logId) {
     window.location.href = "ctrl?FUNC_ID=commLogView&LOG_ID="+logId;
   }
-function doSubmit(form) {
-	var bgnDate = form.BENGIN_EXEC_END.value;
-	var endDate = form.END_EXEC_END.value;
+function doSubmit() {
+
+	var bgnDate = form1.BENGIN_EXEC_END.value;
+	var endDate = form1.END_EXEC_END.value;
 	if(bgnDate.length ==0 || endDate.length ==0){
-		alert("请输入完成时间");
+		alert("结束时间不能为空");
 		return false;
 	}
 	if(bgnDate.length !=0 && endDate.length !=0){
-		if(bgnDate1 > endDate1){
+		if(bgnDate > endDate){
 			alert("截至时间应大于开始时间！");
 			return false;
 		}
 	}
-      var result = Spry.Widget.Form.validate(form);
-      if (result == false){
-        return result;
-      }
-      return true;
+      
  }
  
   function TDoChangePage(curPage){
