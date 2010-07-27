@@ -46,19 +46,19 @@ CREATE TABLE `commands_send_his` (
 
 /*!40000 ALTER TABLE `commands_send_his` DISABLE KEYS */;
 INSERT INTO `commands_send_his` (`SEND_ID`,`USER_ID`,`DEVICE_TYPE_ID`,`DEVICE_ID`,`TASK_DEFINE_TIME`,`TASK_PLAN_TIME`,`COMMANDS_TYPE`,`TEMPLATE_ID`,`STATUS`,`EXEC_BEGIN_TIME`,`EXEC_END_TIME`) VALUES 
- ('0000000024','000000','000021','000010','20100720011148','000000','I',NULL,'S','20100722102923','20100722102923'),
- ('0000000025','000000','000021','000010','20100720011236','000000','I',NULL,'S','20100722102923','20100722102923'),
- ('0000000026','000000','000021','000010','20100720011424','000000','I',NULL,'S','20100722102923','20100722102923'),
- ('0000000027','000000','000021','000010','20100720011516','000000','I',NULL,'S','20100722102923','20100722102923'),
- ('0000000028','000000','000021','000010','20100720011551','000000','I',NULL,'S','20100722102923','20100722102923'),
- ('0000000029','000000','000021','000010','20100720011835','20100715000000','I',NULL,'S','20100722102923','20100722102923'),
- ('0000000031','000000','000021','000010','20100720012111','20100715233323','I',NULL,'S','20100722102923','20100722102923'),
- ('0000000032','000000','000021','000010','20100720084651','20100720084651','I',NULL,'S','20100722102924','20100722102924');
+ ('0000000029','000000','000021','000010','20100720011835','20100715000000','I',NULL,'F','20100723105735','20100723105749'),
+ ('0000000027','000000','000021','000010','20100720011516','000000','I',NULL,'F','20100723105735','20100723105749'),
+ ('0000000026','000000','000021','000010','20100720011424','000000','I',NULL,'F','20100723105735','20100723105749'),
+ ('0000000025','000000','000021','000010','20100720011236','000000','I',NULL,'F','20100723105735','20100723105749'),
+ ('0000000033','000000','000021','000010','20100720085110','20100720085110','I',NULL,'F','20100723105735','20100723105749'),
+ ('0000000024','000000','000021','000010','20100720011148','000000','I',NULL,'F','20100723105735','20100723105749'),
+ ('0000000031','000000','000021','000010','20100720012111','20100715233323','I',NULL,'F','20100723105735','20100723105749'),
+ ('0000000034','000000','000021',NULL,'20100721233703','20100722000000','I',NULL,'F','20100723105735','20100723105749');
 INSERT INTO `commands_send_his` (`SEND_ID`,`USER_ID`,`DEVICE_TYPE_ID`,`DEVICE_ID`,`TASK_DEFINE_TIME`,`TASK_PLAN_TIME`,`COMMANDS_TYPE`,`TEMPLATE_ID`,`STATUS`,`EXEC_BEGIN_TIME`,`EXEC_END_TIME`) VALUES 
- ('0000000033','000000','000021','000010','20100720085110','20100720085110','I',NULL,'S','20100722102924','20100722102924'),
- ('0000000034','000000','000021',NULL,'20100721233703','20100722000000','I',NULL,'S','20100722102924','20100722102924'),
- ('0000000035','000000','000022',NULL,'20100721233703','20100722000000','I',NULL,'S','20100722102929','20100722102929'),
- ('0000000030','000000','000021','000010','20100720012017','20100722000000','I',NULL,'S','20100722102929','20100722102930');
+ ('0000000032','000000','000021','000010','20100720084651','20100720084651','I',NULL,'F','20100723105735','20100723105749'),
+ ('0000000028','000000','000021','000010','20100720011551','000000','I',NULL,'F','20100723105735','20100723105749'),
+ ('0000000035','000000','000022',NULL,'20100721233703','20100722000000','I',NULL,'S','20100723105750','20100723105750'),
+ ('0000000030','000000','000021','000010','20100720012017','20100722000000','I',NULL,'S','20100723105750','20100723105810');
 /*!40000 ALTER TABLE `commands_send_his` ENABLE KEYS */;
 
 
@@ -192,7 +192,18 @@ CREATE TABLE `device_inspect_log` (
 
 /*!40000 ALTER TABLE `device_inspect_log` DISABLE KEYS */;
 INSERT INTO `device_inspect_log` (`SEND_ID`,`DEVICE_ID`,`DEVICE_NAME`,`DEVICE_IP`,`USER_ID`,`INSPECT_BEGIN`,`INSPECT_END`,`STATUS`,`LOG_CONT`) VALUES 
- ('0000000030','000010','device1','192.168.1.254','000000','20100722102929','20100722102930','S','Red Hat Enterprise Linux ES release 4 (Nahant Update 4)\r\nKernel 2.6.9-42.ELsmp on an i686\r\nlogin:\n Password:\r\nLast login: Mon Jul 19 16:50:39 from 192.168.1.251\r\n-bash-3.00$ telnet 192.168.1.254 23\r\nTrying 192.168.1.254...\r\r\nConnected to 192.168.1.254 (192.168.1.254).\r\r\nEscape character is \'^]\'.\r\r\n\r\n\r\ntelnet (AIXserver)\r\n\r\r\n\r\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\rAIX Version 5\r\n\r(C) Copyrights by IBM and by others 1982, 2005.\r\n\rlogin: oracle\r\noracle\'s Password: \r\n*******************************************************************************\r\n*                                                                             *\r\n*                                                                             *\r\n*  Welcome to AIX Version 5.2!                                                *\r\n*                                                                             *\r\n*                                                                             *\r\n*  Please see the README file in /usr/lpp/bos for information pertinent to    *\r\n*  this release of the AIX Operating System.                                  *\r\n*                                                                             *\r\n*                                                                             *\r\n*******************************************************************************\r\nLast unsuccessful login: Mon Jun 21 16:50:07 BEIST 2010 on /dev/pts/4 from 192.168.1.251\r\nLast login: Mon Jul 19 16:54:27 BEIST 2010 on /dev/pts/1 from 192.168.1.136\r\n\r\n$');
+ ('0000000029','000010','device1','192.168.1.254','000000','20100723105735','20100723105748','F','TdRunnable run()：执行巡检任务，登录堡垒主机失败。'),
+ ('0000000027','000010','device1','192.168.1.254','000000','20100723105735','20100723105748','F','TdRunnable run()：执行巡检任务，登录堡垒主机失败。'),
+ ('0000000026','000010','device1','192.168.1.254','000000','20100723105735','20100723105748','F','TdRunnable run()：执行巡检任务，登录堡垒主机失败。'),
+ ('0000000025','000010','device1','192.168.1.254','000000','20100723105735','20100723105748','F','TdRunnable run()：执行巡检任务，登录堡垒主机失败。'),
+ ('0000000033','000010','device1','192.168.1.254','000000','20100723105735','20100723105748','F','TdRunnable run()：执行巡检任务，登录堡垒主机失败。'),
+ ('0000000024','000010','device1','192.168.1.254','000000','20100723105735','20100723105748','F','TdRunnable run()：执行巡检任务，登录堡垒主机失败。'),
+ ('0000000031','000010','device1','192.168.1.254','000000','20100723105735','20100723105748','F','TdRunnable run()：执行巡检任务，登录堡垒主机失败。');
+INSERT INTO `device_inspect_log` (`SEND_ID`,`DEVICE_ID`,`DEVICE_NAME`,`DEVICE_IP`,`USER_ID`,`INSPECT_BEGIN`,`INSPECT_END`,`STATUS`,`LOG_CONT`) VALUES 
+ ('0000000034','000010','device1','192.168.1.254','000000','20100723105735','20100723105748','F','TdRunnable run()：执行巡检任务，登录堡垒主机失败。'),
+ ('0000000032','000010','device1','192.168.1.254','000000','20100723105735','20100723105748','F','TdRunnable run()：执行巡检任务，登录堡垒主机失败。'),
+ ('0000000028','000010','device1','192.168.1.254','000000','20100723105736','20100723105748','F','TdRunnable run()：执行巡检任务，登录堡垒主机失败。'),
+ ('0000000030','000010','device1','192.168.1.254','000000','20100723105750','20100723105753','S','Red Hat Enterprise Linux ES release 4 (Nahant Update 4)\r\nKernel 2.6.9-42.ELsmp on an i686\r\nlogin:\n Password:\r\nLast login: Thu Jul 22 14:03:37 from 192.168.1.1\r\n-bash-3.00$ telnet 192.168.1.254 23\r\nTrying 192.168.1.254...\r\r\nConnected to 192.168.1.254 (192.168.1.254).\r\r\nEscape character is \'^]\'.\r\r\n\r\n\r\ntelnet (AIXserver)\r\n\r\r\n\r\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\rAIX Version 5\r\n\r(C) Copyrights by IBM and by others 1982, 2005.\r\n\rlogin: oracle\r\noracle\'s Password: \r\n*******************************************************************************\r\n*                                                                             *\r\n*                                                                             *\r\n*  Welcome to AIX Version 5.2!                                                *\r\n*                                                                             *\r\n*                                                                             *\r\n*  Please see the README file in /usr/lpp/bos for information pertinent to    *\r\n*  this release of the AIX Operating System.                                  *\r\n*                                                                             *\r\n*                                                                             *\r\n*******************************************************************************\r\nLast unsuccessful login: Mon Jun 21 16:50:07 BEIST 2010 on /dev/pts/4 from 192.168.1.251\r\nLast login: Thu Jul 22 14:08:03 BEIST 2010 on /dev/pts/0 from 192.168.1.251\r\n\r\n$');
 /*!40000 ALTER TABLE `device_inspect_log` ENABLE KEYS */;
 
 
@@ -398,7 +409,7 @@ CREATE TABLE `inspect_pick_keyword` (
 /*!40000 ALTER TABLE `inspect_pick_keyword` DISABLE KEYS */;
 INSERT INTO `inspect_pick_keyword` (`KEYWORD_ID`,`REMARK`,`KEYWORD_CONT`) VALUES 
  ('000000','测试用分拣关键字','error down reset removed remove unavailable VerifyServer failed lost fault crash failure reload reboot LOG_ERR'),
- ('000001','测试用分拣关键字','super ddds ddddd sss boot dddssss');
+ ('000001','测试用分拣关键字11','super ddds ddddd sss boot dddssss');
 /*!40000 ALTER TABLE `inspect_pick_keyword` ENABLE KEYS */;
 
 
@@ -789,6 +800,9 @@ CREATE TABLE `sys_perm` (
 
 /*!40000 ALTER TABLE `sys_perm` DISABLE KEYS */;
 INSERT INTO `sys_perm` (`USER_ID`,`MENU_ID`) VALUES 
+ ('000000','AllDeviceInspectLogListJsp'),
+ ('000000','AllDevicesRxpQueryListJsp'),
+ ('000000','AllDeviceTypeCollectList'),
  ('000000','AllDeviceTypeList'),
  ('000000','commDeviceList'),
  ('000000','CommLogListJsp'),
@@ -796,13 +810,16 @@ INSERT INTO `sys_perm` (`USER_ID`,`MENU_ID`) VALUES
  ('000000','DeviceListJsp'),
  ('000000','DeviceMaintainList'),
  ('000000','DevicePortTypeList'),
+ ('000000','DevicesCollect'),
  ('000000','DeviceTypeListJsp'),
  ('000000','FrontHostListJsp'),
+ ('000000','KeyWordList'),
  ('000000','LocationListJsp'),
  ('000000','MainListBase'),
  ('000000','MENU_ROOT'),
  ('000000','OrgList'),
  ('000000','partDevices'),
+ ('000000','partDevicesCollectListJsp'),
  ('000000','partDevicesListJsp'),
  ('000000','StatListJsp'),
  ('000000','TeamListJsp'),
