@@ -19,6 +19,43 @@
 		<servlet-name>ServletFileDisplay</servlet-name>
 		<servlet-class>tower.common.servlet.ServletFileDisplay</servlet-class>
 	</servlet>
+	<!--巡检日志存为txt的Servlet定义 -->
+	<servlet>
+		<display-name>
+		ServletInspectLogTxt</display-name>
+		<servlet-name>ServletInspectLogTxt</servlet-name>
+		<servlet-class>
+		tower.cem.servlet.ServletInspectLogTxt</servlet-class>
+	</servlet>
+	
+	<!--分练日志存为txt的Servlet定义 -->
+	<servlet>
+		<display-name>
+		ServletPickLogTxt</display-name>
+		<servlet-name>ServletPickLogTxt</servlet-name>
+		<servlet-class>
+		tower.cem.servlet.ServletPickLogTxt</servlet-class>
+	</servlet>
+	
+	<!--数据采集日志存为txt的Servlet定义 -->
+	<servlet>
+		<display-name>
+		ServletCollectLogTxt</display-name>
+		<servlet-name>ServletCollectLogTxt</servlet-name>
+		<servlet-class>
+		tower.cem.servlet.ServletCollectLogTxt</servlet-class>
+	</servlet>
+	
+	<!--采集数据存为excle的Servlet定义 -->
+	<servlet>
+		<description>
+		</description>
+		<display-name>
+		ServletRxpToExcel</display-name>
+		<servlet-name>ServletRxpToExcel</servlet-name>
+		<servlet-class>
+		tower.cem.servlet.ServletRxpToExcel</servlet-class>
+	</servlet>
 
 	<!-- Standard Action Servlet Mapping -->
 	<servlet-mapping>
@@ -28,6 +65,22 @@
 	<servlet-mapping>
 		<servlet-name>ServletFileDisplay</servlet-name>
 		<url-pattern>/WEB-INF/applications/sys/servlets/ServletFileDisplay</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ServletInspectLogTxt</servlet-name>
+		<url-pattern>/servlet/ServletInspectLogTxt</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ServletPickLogTxt</servlet-name>
+		<url-pattern>/servlet/ServletPickLogTxt</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ServletCollectLogTxt</servlet-name>
+		<url-pattern>/servlet/ServletCollectLogTxt</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ServletRxpToExcel</servlet-name>
+		<url-pattern>/servlet/ServletRxpToExcel</url-pattern>
 	</servlet-mapping>
 	
 	<welcome-file-list>
