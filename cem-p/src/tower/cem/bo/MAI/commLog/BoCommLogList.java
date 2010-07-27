@@ -36,8 +36,6 @@ public class BoCommLogList implements RootBo {
 		/*****************************************************************************************************
 		 * 声明变量
 		 ****************************************************************************************************/
-		// 设备配置db en
-		EnDeviceInfo enDeviceInfo;
 		
 		// 查询条件：
 		String deviceNameEn;// 设备名称-英文
@@ -48,13 +46,11 @@ public class BoCommLogList implements RootBo {
 		String devicePort; // 网络端口
 		String beginExecEnd;//维护结束日期
 		String endExecEnd;  
+		String userId;
 		
 		// 其他
-		Vector devices;
 		StringBuffer sqlWhere;
-		
 		QueryResult rs = null;
-		QueryResult rs1 = null;
 		/*****************************************************************************************************
 		 * 获取输入
 		 ****************************************************************************************************/
@@ -66,6 +62,7 @@ public class BoCommLogList implements RootBo {
 		devicePort = requestXml.getInputValue("DEVICE_PORT");
 		beginExecEnd = requestXml.getInputValue("BENGIN_EXEC_END");
 		endExecEnd = requestXml.getInputValue("END_EXEC_END");
+		userId = sessionXml.getItemValue("SYS_USER", 1, "USER_ID");
 		/*****************************************************************************************************
 		 * 创建数据库连接、实例化DB、EN
 		 ****************************************************************************************************/
@@ -75,12 +72,17 @@ public class BoCommLogList implements RootBo {
 		// 根据查询条件组装查询语句
 		sqlWhere = new StringBuffer();
 		
-		sqlWhere.append("select a. LOG_ID,a.DEVICE_ID,a.EXEC_BEGIN,a.EXEC_END,b.DEVICE_NAME_EN,b.DEVICE_NAME_CN," +
-				"c.LOCATION_NAME_CN,b.DEVICE_IP,b.DEVICE_STATUS"
-				+ " from  DEVICE_COMMAND_EXEC_LOG a " +
-			   "inner join DEVICE_INFO  b on a.DEVICE_ID =b.DEVICE_ID " +
-			   "left join LOCATION_INFO c on b.LOCATION_ID = c.LOCATION_ID"
-			   + " where 1=1 ");
+		sqlWhere.append("select a. LOG_ID,a.DEVICE_ID,a.EXEC_BEGIN,a.EXEC_END,b.DEVICE_NAME_EN,b.DEVICE_NAME_CN, " +
+				        "c.LOCATION_NAME_CN,b.DEVICE_IP,b.DEVICE_STATUS " +
+				        "from DEVICE_COMMAND_EXEC_LOG a,DEVICE_INFO  b,LOCATION_INFO c " +
+				        "where a.DEVICE_ID =b.DEVICE_ID " +
+				        "and b.LOCATION_ID = c.LOCATION_ID " +
+				        "and a.DEVICE_ID IN  (select distinct device_id  " +
+				        "from maintain_team t, maintain_team_device_map d, maintain_team_user_map u " +
+				        "where t.team_id = d.team_id and t.team_id = u.team_id and u.user_id = ");
+		
+		sqlWhere.append(transaction.formatString(userId));
+		sqlWhere.append(")");
 		
 		if (deviceNameEn != null && deviceNameEn.length() != 0) {
 			if (sqlWhere == null || sqlWhere.length() == 0) {

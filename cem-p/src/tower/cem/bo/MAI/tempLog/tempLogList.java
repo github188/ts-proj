@@ -66,14 +66,16 @@ public class tempLogList implements RootBo{
 		 * 执行业务逻辑、输出
 		 **********************************************************************/
 		 sql.append("select a.SEND_ID,b.DEVICE_NAME_EN,b.DEVICE_NAME_CN,e.TYPE_NAME_CN,b.DEVICE_IP,a.TASK_DEFINE_TIME," +
-		 		"c.TEMP_NAME,d.STATUS,d.MAINTAIN_END  " +
-		 		"from COMMANDS_SEND_HIS a  " +
-		 		"left join DEVICE_INFO b on a.DEVICE_ID = b.DEVICE_ID " +
-		 		"left join MAINTAIN_COMMANDS_TEMPLATE c on a.TEMPLATE_ID = c.TEMP_ID " +
-		 		"left join DEVICE_MAINTAIN_LOG d on a.SEND_ID = d.SEND_ID " +
-		 		"left join DEVICE_TYPE e on a.DEVICE_TYPE_ID = e.TYPE_ID " +
-		 		"where a.USER_ID=");
+		 		    " c.TEMP_NAME,a.STATUS,a.EXEC_END_TIME " +
+		 		    " from  COMMANDS_SEND_HIS a ,DEVICE_INFO b ,MAINTAIN_COMMANDS_TEMPLATE c,DEVICE_TYPE  e" +
+		 		    " where a.DEVICE_ID = b.DEVICE_ID  " +
+		 		    " and a.TEMPLATE_ID = c.TEMP_ID " +
+		 		    " and  a.DEVICE_TYPE_ID = e.TYPE_ID " +
+		 		    " and a.DEVICE_ID IN  (select distinct device_id  " +
+				        "from maintain_team t, maintain_team_device_map d, maintain_team_user_map u " +
+				        "where t.team_id = d.team_id and t.team_id = u.team_id and u.user_id = ");
 		 sql.append(Transaction.formatString(userId));
+		 sql.append(")");
 		 sql.append(" AND a.COMMANDS_TYPE =");
 		 sql.append(Transaction.formatString("T"));
 		 //根据查询条件组装查询语句
@@ -117,17 +119,22 @@ public class tempLogList implements RootBo{
 				
 			if (execEndBegin != null && execEndBegin.length() != 0) {
 				if (sqlWhere == null || sqlWhere.length() == 0) {
-					sqlWhere.append(" a.MAINTAIN_END  >='" + execEndBegin + "'");
+					sqlWhere.append(" a.EXEC_END_TIME  >='" +DateFunc.ParseDateTime( execEndBegin )+ "'");
 				} else {
-					sqlWhere.append(" AND a.MAINTAIN_END  >='" + execEndBegin + "'");
+					sqlWhere.append(" AND a.EXEC_END_TIME  >='" +DateFunc.ParseDateTime( execEndBegin )+ "'");
 				}
 			}
 			if (execEndEnd != null && execEndEnd.length() != 0) {
 				if (sqlWhere == null || sqlWhere.length() == 0) {
-					sqlWhere.append(" a.MAINTAIN_END  >='" + execEndEnd + "'");
+					sqlWhere.append(" a.EXEC_END_TIME  <='" +DateFunc.ParseDateTime( execEndEnd) + "'");
 				} else {
-					sqlWhere.append(" AND a.MAINTAIN_END  >='" + execEndEnd + "'");
+					sqlWhere.append(" AND a.EXEC_END_TIME  <='" +DateFunc.ParseDateTime( execEndEnd )+ "'");
 				}
+			}
+			
+			if (sqlWhere != null && sqlWhere.length() != 0) {
+				sql.append(" and ");
+				sql.append(sqlWhere.toString());
 			}
 			
 			
@@ -145,11 +152,11 @@ public class tempLogList implements RootBo{
 					requestXml.setItemValue("DEVICE_MAINTAIN_LOG", row, "DEVICE_NAME_CN", rsRow.getString("DEVICE_NAME_CN"));
 					requestXml.setItemValue("DEVICE_MAINTAIN_LOG", row, "TYPE_NAME", rsRow.getString("TYPE_NAME"));
 					requestXml.setItemValue("DEVICE_MAINTAIN_LOG", row, "DEVICE_IP", rsRow.getString("DEVICE_IP"));
-					requestXml.setItemValue("DEVICE_MAINTAIN_LOG", row, "TASK_DEFINE_TIME", rsRow.getString("TASK_DEFINE_TIME"));
+					requestXml.setItemValue("DEVICE_MAINTAIN_LOG", row, "TASK_DEFINE_TIME",DateFunc.FormatDateTime(rsRow.getString("TASK_DEFINE_TIME")));
 					requestXml.setItemValue("DEVICE_MAINTAIN_LOG", row, "TEMPLATE_NAME", rsRow.getString("TEMPLATE_NAME"));
 					requestXml.setItemValue("DEVICE_MAINTAIN_LOG", row, "STATUS", rsRow.getString("STATUS"));
 					requestXml.setItemValue("DEVICE_MAINTAIN_LOG", row, "EXEC_BEGIN_TIME", rsRow.getString("EXEC_BEGIN_TIME"));
-					requestXml.setItemValue("DEVICE_MAINTAIN_LOG", row, "EXEC_END_TIME", rsRow.getString("EXEC_END_TIME"));
+					requestXml.setItemValue("DEVICE_MAINTAIN_LOG", row, "EXEC_END_TIME", DateFunc.FormatDateTime(rsRow.getString("EXEC_END_TIME")));
 				}
 			}
 			
