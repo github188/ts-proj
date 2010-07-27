@@ -41,6 +41,7 @@ public class tempLogList implements RootBo{
 		String tempId;         //模板编号
 		String typeId;         //设备类型
 		String userId;        
+		String locationId;
 		//其他
 		StringBuffer sqlWhere = new StringBuffer();
 		StringBuffer sql = new StringBuffer();
@@ -57,6 +58,7 @@ public class tempLogList implements RootBo{
 		execEndEnd = requestXml.getInputValue("QEXEC_END_END");
 		tempId = requestXml.getInputValue("QTEMP_ID");
 		typeId = requestXml.getInputValue("QTYPE_ID");
+		locationId = requestXml.getInputValue("QLOCATION_ID");
 		userId = sessionXml.getItemValue("SYS_USER", 1, "USER_ID");
 		/***********************************************************************
 		 * 创建数据库连接、实例化DB、EN
@@ -100,6 +102,13 @@ public class tempLogList implements RootBo{
 					sqlWhere.append(" b.DEVICE_IP  ='" + deviceIp + "'");
 				} else {
 					sqlWhere.append(" AND b.DEVICE_IP  ='" + deviceIp + "'");
+				}
+			}
+			if (locationId != null && locationId.length() != 0) {
+				if (sqlWhere == null || sqlWhere.length() == 0) {
+					sqlWhere.append(" b.LOCATION_ID  ='" + locationId + "'");
+				} else {
+				    sqlWhere.append(" AND b.LOCATION_ID  ='" + locationId + "'");
 				}
 			}
 			if (tempId != null && tempId.length() != 0) {
@@ -147,15 +156,15 @@ public class tempLogList implements RootBo{
 				if(rsRow != null){
 					int row = requestXml.addRow("DEVICE_MAINTAIN_LOG");
 					requestXml.setItemValue("DEVICE_MAINTAIN_LOG", row, "SEND_ID", rsRow.getString("SEND_ID"));
-					requestXml.setItemValue("DEVICE_MAINTAIN_LOG", row, "DEVICE_ID", rsRow.getString("DEVICE_ID"));
+//					requestXml.setItemValue("DEVICE_MAINTAIN_LOG", row, "DEVICE_ID", rsRow.getString("DEVICE_ID"));
 					requestXml.setItemValue("DEVICE_MAINTAIN_LOG", row, "DEVICE_NAME_EN", rsRow.getString("DEVICE_NAME_EN"));
 					requestXml.setItemValue("DEVICE_MAINTAIN_LOG", row, "DEVICE_NAME_CN", rsRow.getString("DEVICE_NAME_CN"));
-					requestXml.setItemValue("DEVICE_MAINTAIN_LOG", row, "TYPE_NAME", rsRow.getString("TYPE_NAME"));
+					requestXml.setItemValue("DEVICE_MAINTAIN_LOG", row, "TYPE_NAME", rsRow.getString("TYPE_NAME_CN"));
 					requestXml.setItemValue("DEVICE_MAINTAIN_LOG", row, "DEVICE_IP", rsRow.getString("DEVICE_IP"));
 					requestXml.setItemValue("DEVICE_MAINTAIN_LOG", row, "TASK_DEFINE_TIME",DateFunc.FormatDateTime(rsRow.getString("TASK_DEFINE_TIME")));
-					requestXml.setItemValue("DEVICE_MAINTAIN_LOG", row, "TEMPLATE_NAME", rsRow.getString("TEMPLATE_NAME"));
+					requestXml.setItemValue("DEVICE_MAINTAIN_LOG", row, "TEMPLATE_NAME", rsRow.getString("TEMP_NAME"));
 					requestXml.setItemValue("DEVICE_MAINTAIN_LOG", row, "STATUS", rsRow.getString("STATUS"));
-					requestXml.setItemValue("DEVICE_MAINTAIN_LOG", row, "EXEC_BEGIN_TIME", rsRow.getString("EXEC_BEGIN_TIME"));
+//					requestXml.setItemValue("DEVICE_MAINTAIN_LOG", row, "EXEC_BEGIN_TIME", rsRow.getString("EXEC_BEGIN_TIME"));
 					requestXml.setItemValue("DEVICE_MAINTAIN_LOG", row, "EXEC_END_TIME", DateFunc.FormatDateTime(rsRow.getString("EXEC_END_TIME")));
 				}
 			}

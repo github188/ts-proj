@@ -80,8 +80,8 @@
                       <!-- 查询面板内容 -->
                      <table width="100%" border="0" cellpadding="0" cellspacing="0" >
               	 <tr>
-              	 <td align="right">
-              	   <textarea id="textarea" class="textarea" cols="110" rows="25" readonly> <%=commandCont %></textarea>
+              	 <td align="center">
+              	   <textarea id="textarea" class="textarea" cols="100" rows="20" readonly> <%=commandCont %></textarea>
 				</td>
                  </tr>
                   <tr>
@@ -89,7 +89,7 @@
 				  </tr>
 				  <tr>
 				  <td align="center">
-				    <input type="button" class="button" onclick="doclose()" value="关闭"></td>
+				    <input type="button" class="button" onclick="doClose" value="关闭"></td>
 				  </tr>
               </table>
                       <!-- 查询面板内容结束 -->

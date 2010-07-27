@@ -31,6 +31,7 @@ public void doBusiness(Transaction transaction, XMLWrap requestXml, XMLWrap sess
 		String execEndEnd;     //维护结束时间
 		String typeId;         //设备类型
 		String userId;        
+		String sendId;
 		//其他
 		StringBuffer sqlWhere = new StringBuffer();
 		StringBuffer sql = new StringBuffer();
@@ -45,6 +46,7 @@ public void doBusiness(Transaction transaction, XMLWrap requestXml, XMLWrap sess
 		deviceIp = requestXml.getInputValue("DEVICE_IP");
 		execEndBegin = requestXml.getInputValue("INSPECT_END_BEGIN");
 		execEndEnd = requestXml.getInputValue("INSPECT_ENDC_END");
+		sendId = requestXml.getInputValue("SEND_ID");
 		typeId = requestXml.getInputValue("TYPE_ID");
 		userId = sessionXml.getItemValue("SYS_USER", 1, "USER_ID");
 		/***********************************************************************

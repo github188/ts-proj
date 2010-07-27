@@ -266,17 +266,10 @@ function doSubmit(form) {
                    <input type="checkbox" name="DEVICE_ID" value="<%=deviceIds[i] %>"  > 
                    <%}} %>
 				  </td>
-                   <td align="center">
-                  <%if(deviceStatuses[i].endsWith("N")){ 
-                	  flag = 1;
-                  %>
-                   <input type="checkbox" name="DEVICE_ID" value="<%=deviceIds[i] %>"> 
-                   <%} %>
-				  </td>
                   <td align="center">
-                   <a href="JavaScript:doView('<%=deviceIds[i]%>')">
+                  <a href="JavaScript:doView('<%=deviceIds[i]%>')">
                   <%=deviceNameEns[i]%>
-                    </a>
+                  </a>
                   </td>
                   <td align="center"><%=deviceNameCns[i]%></td>
                   <td align="center">

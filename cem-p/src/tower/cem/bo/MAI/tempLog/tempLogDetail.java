@@ -51,7 +51,7 @@ public class tempLogDetail implements RootBo{
 		/***********************************************************************
 		 * 执行业务逻辑、输出
 		 **********************************************************************/
-		 vector = dbDeviceMaintainLog.findAllWhere(" LOG_ID='"+logId+"'");
+		 vector = dbDeviceMaintainLog.findAllWhere(" SEND_ID='"+logId+"'");
 		 for(int i=0;i<vector.size();i++){
 			 enDeviceMaintainLog = (EnDeviceMaintainLog)vector.get(i);
 			 if(enDeviceMaintainLog != null){

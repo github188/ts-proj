@@ -67,7 +67,7 @@
 	execEndTimes = xml.getItemValues("DEVICE_MAINTAIN_LOG", "EXEC_END_TIME");
 	
 	
-	String[] statusDesc = {"未执行","正在执行中","执行失败","执行成功"};
+	String[] statusDesc = {"未执行","执行中","失败","成功"};
 	String[] statusValue = {"N","B","F","S"};
 	
 %>
@@ -162,9 +162,9 @@ function doSubmit(form) {
                <input type="hidden" name=CUR_PAGE value="">
               <table>
               	 <tr>
-              	 	<td align="right">设备名称-英文：</td>
+              	 	<td align="right">设备英文名称：</td>
                   	<td><input type="text" class="text" name="QDEVICE_NAME_EN" value="<%=deviceNameEn %>"></td>
-                 	<td align="right">设备名称-中文：</td>
+                 	<td align="right">设备中文名称：</td>
 	                <td><input type="text" class="text" name="QDEVICE_NAME_CN" value="<%=deviceNameCn %>"></td>
                  </tr>
                  <tr>
@@ -223,8 +223,8 @@ function doSubmit(form) {
               <!-- 列表内容 -->
              <table width="100%"  border="0" cellpadding="0" cellspacing="0" class="list">
                  <tr>
-                  <th>设备名称-英文</th>
-                  <th>设备名称-中文</th>
+                  <th>设备英文名称</th>
+                  <th>设备中文名称</th>
                   <th>设备类型</th>
                   <th>网络地址</th>
                   <th>定义时间</th>
@@ -248,7 +248,6 @@ function doSubmit(form) {
                         <%if(statusValue[j].equals(statuses[i]))%><%=statusDesc[j] %>
                     <%} %>
                    </td>
-                   <td align="center"><%=execBeginTimes[i]%></td>
                    <td align="center"><%=execEndTimes[i]%></td>
                    <td align="center" nowrap>[ <a href="JavaScript:doLogView('<%=logIds[i] %>')">查看日志</a> | <a href="JavaScript:doSaveLog('<%=logIds[i] %>')">保存日志 </a>]</td>
                 </tr>
@@ -266,7 +265,6 @@ function doSubmit(form) {
                         <%if(statusValue[j].equals(statuses[i]))%><%=statusDesc[j] %>
                     <%} %>
                    </td>
-                   <td align="center"><%=execBeginTimes[i]%></td>
                    <td align="center"><%=execEndTimes[i]%></td>
                    <td align="center" nowrap>[ <a href="JavaScript:doLogView('<%=logIds[i] %>')">查看日志</a> | <a href="JavaScript:doSaveLog('<%=logIds[i] %>')">保存日志 </a>]</td>
                 </tr>
