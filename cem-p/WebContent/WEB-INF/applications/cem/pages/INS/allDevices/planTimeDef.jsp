@@ -43,12 +43,24 @@ function doSubmit(form) {
       var date = form1.EXE_DATE.value;
       
       //判断:时<=24 ,分<=60,秒<=60
+       if(hour.length > 0 && hour.length > 2){
+         alert("小时数长度应小于等于2位");
+         return false;
+      }
       if(hour.length > 0 && hour > 24){
          alert("小时数应小于24");
          return false;
       }
+       if(minute.length > 0 && minute.length > 2){
+         alert("分钟数长度应小于等于2位");
+         return false;
+      }
       if(minute.length > 0 && minute > 60){
          alert("分钟数应小于60");
+         return false;
+      }
+        if(second.length > 0 && second.length > 2){
+         alert("秒数长度应小于等于2位");
          return false;
       }
       if(second.length > 0 && second > 60){

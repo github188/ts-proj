@@ -115,7 +115,7 @@
 </head>
 <body id="mainArea">
   <div id="mainPanel" class="panel">
-    <div class="panelHead">设备巡检日志查询</div>
+    <div class="panelHead">全网设备巡检日志查询 - 设备巡检日志查询</div>
     <div class="panelContent">
       <div class="panelContent2">    
         <!-- 查询面板 -->
@@ -125,7 +125,7 @@
             <div class="panelContent2">
               <!-- 查询面板内容 -->
               <form name="form1" action="ctrl" method="get"  onSubmit="return doSubmit(this)">
-              <input type="hidden" name="FUNC_ID" value="DeviceInspectLogList">
+              <input type="hidden" name="FUNC_ID" value="ADeviceInspectLogList">
                <input type="hidden" name=CUR_PAGE value="">
               <table>
               	 <tr>
@@ -203,9 +203,6 @@
                    <td align="center"><%=inspectEnds[i]%></td>
                  <td align="center" nowrap>
                  [
-                  <a href="JavaScript:doPickLogView('<%=sendIds[i] %>');">
-                     分拣日志
-                  </a>|
                    <a href="JavaScript:doInspectLogView('<%=sendIds[i] %>');">
                      查看日志
                   </a>|
@@ -231,9 +228,6 @@
                    <td align="center"><%=inspectEnds[i]%></td>
                  <td align="center" nowrap>
                  [
-                  <a href="JavaScript:doPickLogView('<%=sendIds[i] %>');">
-                     分拣日志
-                  </a>|
                    <a href="JavaScript:doInspectLogView('<%=sendIds[i] %>');">
                      查看日志
                   </a>|

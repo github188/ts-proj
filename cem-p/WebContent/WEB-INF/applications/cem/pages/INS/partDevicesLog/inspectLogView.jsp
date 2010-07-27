@@ -60,7 +60,7 @@
 				  </tr>
 				  <tr>
 				  <td align="center">
-				   <input type="button" class="reset" onclick="doSaveLog(<%=sendId %>)" value="另存为">
+				   <input type="button" class="reset" onclick="doSaveLog('<%=sendId %>')" value="另存为">
 				    <input type="button" class="button" onclick="doclose()" value="关闭"></td>
 				  </tr>
               </table>

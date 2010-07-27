@@ -33,7 +33,7 @@
               <input type="hidden" name="FUNC_ID" value="partDevicesList">
                  <table width="100%" height="100" border="0" cellpadding="0" cellspacing="0">
               	 <tr>
-              	 <td align="center"DD>
+              	 <td align="center">
               	向设备发送巡检任务成功，请稍后在设备巡检日志中查询巡检情况。
               	 </td>
                  </tr>

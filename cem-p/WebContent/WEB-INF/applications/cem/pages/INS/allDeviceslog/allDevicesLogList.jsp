@@ -7,48 +7,35 @@
 <%	
 	XMLWrap xml;
 
-	String deviceNameEn;
-	String deviceNameCn;
-	String typeId;
-	String typeName;
-	String deviceIp;
 	String inspectEndBegin;//巡检结束日期  
 	String inspectEndEnd;
 	
-	
 	String[] sendIds;
-	String[] deviceIds;
-	String[] deviceNameEns;
-	String[] deviceNameCns;
+	String[] userNames;
 	String[] typeNames;
-	String[] deviceIps;
 	String[] taskDefTimes;
+	String[] taskPlanTimes;
 	String[] statuses;
-	String[] inspectEnds;
+	String[] execBeginTimes;
+	String[] exeEndTimes;
 %>
 <%
 	xml = XMLWrap.getRequestXml(request,session,application);
 
-	deviceNameEn = xml.getInputValue("DEVICE_NAME_EN");
-	deviceNameCn = xml.getInputValue("DEVICE_NAME_CN");
-	typeId = xml.getInputValue("TYPE_ID");
-	typeName = xml.getInputValue("TYPE_NAME");
-	deviceIp = xml.getInputValue("DEVICE_IP");
 	inspectEndBegin = xml.getInputValue("INSPECT_END_BEGIN");
-	inspectEndEnd = xml.getInputValue("INSPECT_ENDC_END");
+	inspectEndEnd = xml.getInputValue("INSPECT_END_END");
 	
-	sendIds = xml.getItemValues("DEVICE_INSPECT_LOG","SEND_ID");
-	deviceIds = xml.getItemValues("DEVICE_INSPECT_LOG","DEVICE_ID");
-	deviceNameEns = xml.getItemValues("DEVICE_INSPECT_LOG", "DEVICE_NAME_EN");
-	deviceNameCns = xml.getItemValues("DEVICE_INSPECT_LOG", "DEVICE_NAME_CN");
-	typeNames = xml.getItemValues("DEVICE_INSPECT_LOG", "TYPE_NAME_CN");
-	deviceIps = xml.getItemValues("DEVICE_INSPECT_LOG", "DEVICE_IP");
-	taskDefTimes = xml.getItemValues("DEVICE_INSPECT_LOG", "TASK_DEFINE_TIME");
-	statuses = xml.getItemValues("DEVICE_INSPECT_LOG", "STATUS");
-	inspectEnds = xml.getItemValues("DEVICE_INSPECT_LOG", "EXEC_END_TIME");
-    
-	String[] statusDesc = {"成功","失败"};
-	String[] statusValue = {"S","F"};
+	sendIds = xml.getItemValues("COMMANDS_SEND_HIS","SEND_ID");
+	userNames = xml.getItemValues("COMMANDS_SEND_HIS","USER_NAME");
+	typeNames = xml.getItemValues("COMMANDS_SEND_HIS", "TYPE_NAME_CN");
+	taskDefTimes = xml.getItemValues("COMMANDS_SEND_HIS", "TASK_DEFINE_TIME");
+	taskPlanTimes = xml.getItemValues("COMMANDS_SEND_HIS", "TASK_PLAN_TIME");
+	statuses = xml.getItemValues("COMMANDS_SEND_HIS", "STATUS");
+	execBeginTimes = xml.getItemValues("COMMANDS_SEND_HIS", "EXEC_BEGIN_TIME");
+	exeEndTimes = xml.getItemValues("COMMANDS_SEND_HIS", "EXEC_END_TIME");
+	
+	String[] statusDesc = {"未执行","正在执行中","执行失败","执行成功"};
+	String[] statusValue = {"N","B","F","S"};
 %>
 <html>
 <head>
@@ -62,15 +49,16 @@
     selDialog("ctrl?FUNC_ID=PickLogView&SEND_ID="+sendId,"SEND_ID","LOG_CONTEN",850,550,false);
   }
   
-  function doInspectLogView(sendId) {
-  	selDialog("ctrl?FUNC_ID=InspectLogView&SEND_ID="+sendId,"SEND_ID","LOG_CONTEN",850,550,false);
+  function doDownloadLog(sendId) {
+  	selDialog("ctrl?FUNC_ID=&SEND_ID="+sendId,"SEND_ID","LOG_CONTEN",850,550,false);
   }
-  function doInspectLogSave(logId) {
-    window.location.href = "ctrl?FUNC_ID=InspectLogSave&SEND_ID="+logId;
+  function doDeviceInspectLog(sendId) {
+    window.location.href = "ctrl?FUNC_ID=ADeviceInspectLogList&SEND_ID="+sendId;
   }
 	function doSubmit() {
 	var bgnDate = form1.INSPECT_END_BEGIN.value;
-	var endDate = form1.INSPECT_ENDC_END.value;
+	var endDate = form1.INSPECT_END_END.value;
+	
 	if(bgnDate.length ==0 || endDate.length ==0){
 		alert("请输入完成时间");
 		return false;
@@ -88,18 +76,9 @@
   form1.submit();
   }
   
-   function doSelDeviceType(){
-   	selDialog("ctrl?FUNC_ID=SelectDeviceType","TYPE_ID","TYPE_NAME",850,550,false);
-   }
-  
    function doClear(){
-    form1.DEVICE_NAME_EN.value="";
-    form1.DEVICE_NAME_CN.value="";
-    form1.DEVICE_IP.value="";
-    form1.TYPE_ID.value="";
-    form1.TYPE_NAME.value="";
     form1.INSPECT_END_BEGIN.value="";
-    form1.INSPECT_ENDC_END.value="";
+    form1.INSPECT_END_END.value="";
   }
   
    function onChange(selectedIds,selector){
@@ -115,7 +94,7 @@
 </head>
 <body id="mainArea">
   <div id="mainPanel" class="panel">
-    <div class="panelHead">设备巡检日志查询</div>
+    <div class="panelHead">全网设备巡检日志查询</div>
     <div class="panelContent">
       <div class="panelContent2">    
         <!-- 查询面板 -->
@@ -125,30 +104,14 @@
             <div class="panelContent2">
               <!-- 查询面板内容 -->
               <form name="form1" action="ctrl" method="get"  onSubmit="return doSubmit(this)">
-              <input type="hidden" name="FUNC_ID" value="DeviceInspectLogList">
+              <input type="hidden" name="FUNC_ID" value="AllDeviceInspectLogList">
                <input type="hidden" name=CUR_PAGE value="">
               <table>
-              	 <tr>
-              	 	<td align="right">英文设备名称：</td> 
-                  	<td><input type="text" class="text" name="DEVICE_NAME_EN" value="<%=deviceNameEn %>"></td>
-                 	<td align="right">设备中文名称：</td>
-	                <td><input type="text" class="text" name="DEVICE_NAME_CN" value="<%=deviceNameCn %>"></td>
-                 </tr>
-                 	 <tr>
-              	  <td width="150" align="right">设备类型：</td>
-		        	  <td>
-		                  <input name="TYPE_ID" type="hidden"  value="<%=typeId %>">
-		                  <input type="text" class="date" name="TYPE_NAME"   value="<%=typeName %>"  readonly>
-		                  <input type="button" name="selectDeviceType" class="selButton" value="选择" onClick="doSelDeviceType();" />
-  				  </td>
-                 	 <td align="right">网络地址：</td>
-	                 <td><input type="text" class="text" name="DEVICE_IP" value="<%=deviceIp %>"></td>      
-                 </tr>
 			     <tr>
 	               <td align="right">完成时间：</td>
 	                 <td><input type="text" class="date" name="INSPECT_END_BEGIN" value="<%=inspectEndBegin %>" readonly><input type="button" class="calendarBtn" onclick="return showCalendar('INSPECT_END_BEGIN', 'y-mm-dd');"><span class="requiredField">*</span>
 	                 -
-	                 <input type="text" class="date" name="INSPECT_ENDC_END" value="<%=inspectEndEnd %>" readonly><input type="button" class="calendarBtn" onclick="return showCalendar('INSPECT_ENDC_END', 'y-mm-dd');"><span class="requiredField">*</span>
+	                 <input type="text" class="date" name="INSPECT_END_END" value="<%=inspectEndEnd %>" readonly><input type="button" class="calendarBtn" onclick="return showCalendar('INSPECT_END_END', 'y-mm-dd');"><span class="requiredField">*</span>
                 	</td>
                 	<td></td>
                 	<td></td>
@@ -176,69 +139,62 @@
               <!-- 列表内容 -->
              <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
                  <tr>
-                  <th>设备英文名称</th>
-                  <th>设备中文名称</th>
+                  <th>任务定义人</th>
                   <th>设备类型</th>
-                  <th>网络地址</th>
-                  <th>定义时间</th>
-                  <th>状态</th>
-                  <th>完成时间</th>
-                  <th>操作</th>
+                  <th>任务定义时间</th>
+                  <th>计划开始时间</th>
+                  <th>任务状态</th>
+                  <th>实际执行时间</th>
+                  <th>实际完成时间</th>
+                  <th></th>
                 </tr>
-            
               <%if(sendIds != null){
 			  for (int i = 0; i < sendIds.length; i++) {
 				if (i % 2 == 0) {%>
                 <tr onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
-                  <td align="center"> <%=deviceNameEns[i]%>  </td>
-                  <td align="center"><%=deviceNameCns[i]%></td>
+                  <td align="center"> <%=userNames[i]%> </td>
                   <td align="center"><%=typeNames[i]%></td>
-                  <td align="center"><%=deviceIps[i]%></td>
                   <td align="center"><%=taskDefTimes[i]%></td>
-                   <td align="center">
+                  <td align="center"><%=taskPlanTimes[i]%></td>
+                  <td align="center">
                    <%for(int j=0;j<statusValue.length;j++){ %>
                         <%if(statusValue[j].equals(statuses[i]))%><%=statusDesc[j] %>
                     <%} %>
                    </td>
-                   <td align="center"><%=inspectEnds[i]%></td>
-                 <td align="center" nowrap>
+                 <td align="center"><%=execBeginTimes[i]%></td>
+                 <td align="center"><%=exeEndTimes[i]%></td>
+                 
+                  <td align="center" nowrap>
                  [
                   <a href="JavaScript:doPickLogView('<%=sendIds[i] %>');">
                      分拣日志
                   </a>|
-                   <a href="JavaScript:doInspectLogView('<%=sendIds[i] %>');">
-                     查看日志
-                  </a>|
-                   <a href="JavaScript:doInspectLogSave('<%=sendIds[i] %>');">
-                     保存日志
+                   <a href="JavaScript:doDeviceInspectLog('<%=sendIds[i] %>');">
+                     设备日志
                   </a>
                   ]
                  </td>
                 </tr>
-     
                <%} else {%>
                <tr class="dark" onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
-                  <td align="center"> <%=deviceNameEns[i]%>  </td>
-                  <td align="center"><%=deviceNameCns[i]%></td>
+                  <td align="center"> <%=userNames[i]%>  </td>
                   <td align="center"><%=typeNames[i]%></td>
-                  <td align="center"><%=deviceIps[i]%></td>
                   <td align="center"><%=taskDefTimes[i]%></td>
-                   <td align="center">
+                  <td align="center"><%=taskPlanTimes[i]%></td>
+                  <td align="center">
                    <%for(int j=0;j<statusValue.length;j++){ %>
                         <%if(statusValue[j].equals(statuses[i]))%><%=statusDesc[j] %>
                     <%} %>
                    </td>
-                   <td align="center"><%=inspectEnds[i]%></td>
+                   <td align="center"><%=execBeginTimes[i]%></td>
+                   <td align="center"><%=exeEndTimes[i]%></td>
                  <td align="center" nowrap>
                  [
                   <a href="JavaScript:doPickLogView('<%=sendIds[i] %>');">
                      分拣日志
                   </a>|
-                   <a href="JavaScript:doInspectLogView('<%=sendIds[i] %>');">
-                     查看日志
-                  </a>|
-                   <a href="JavaScript:doInspectLogSave('<%=sendIds[i] %>');">
-                     保存日志
+                   <a href="JavaScript:doDeviceInspectLog('<%=sendIds[i] %>');">
+                     设备日志
                   </a>
                   ]
                  </td>
