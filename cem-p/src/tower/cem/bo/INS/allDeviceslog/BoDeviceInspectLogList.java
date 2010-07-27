@@ -1,7 +1,11 @@
-package tower.cem.bo.INS.partDevicesLog;
+package tower.cem.bo.INS.allDeviceslog;
+
+import java.util.Vector;
 
 import org.apache.log4j.Logger;
 
+import tower.cem.db.DbCommandsSendHis;
+import tower.cem.en.EnCommandsSendHis;
 import tower.common.util.DateFunc;
 import tower.common.util.Page;
 import tower.common.util.PubFunc;
@@ -12,9 +16,10 @@ import tower.tmvc.RootBo;
 import tower.tmvc.Transaction;
 import tower.tmvc.XMLWrap;
 
-public class BoDeviceInspectLogList  implements RootBo{
+public class BoDeviceInspectLogList implements RootBo{
 
-	public void doBusiness(Transaction transaction, XMLWrap requestXml, XMLWrap sessionXml, XMLWrap applicationXml, Logger logger) throws ErrorException {
+public void doBusiness(Transaction transaction, XMLWrap requestXml, XMLWrap sessionXml, XMLWrap applicationXml, Logger logger) throws ErrorException {
+		
 		/***********************************************************************
 		 * 声明变量
 		 **********************************************************************/
@@ -130,6 +135,5 @@ public class BoDeviceInspectLogList  implements RootBo{
 					requestXml.setItemValue("DEVICE_INSPECT_LOG", row, "EXEC_END_TIME", DateFunc.FormatDateTime(rsRow.getString("EXEC_END_TIME")));
 				}
 			}
-			
 	}
 }

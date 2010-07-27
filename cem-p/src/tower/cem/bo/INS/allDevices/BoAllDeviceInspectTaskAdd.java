@@ -83,13 +83,22 @@ public void doBusiness(Transaction transaction, XMLWrap requestXml, XMLWrap sess
 		 enCommandsSendList.setTaskPlanTime(taskPlanTime);
 		 enCommandsSendList.setUserId(userId);
 		 
-		 for(int i = 0; i<TypeIds.length;i++){
+		 if(TypeIds != null && TypeIds.length != 0){
+			 for(int i = 0; i<TypeIds.length;i++){
+				 sendId = SysIdCreator.GenNextId(transaction, null,
+							IdCreatorDefine.ID_TYPE_SEND_ID,
+							IdCreatorDefine.ID_LEN_SEND_ID);
+				 enCommandsSendList.setSendId(sendId);
+				 enCommandsSendList.setDeviceTypeId(TypeIds[i]);
+				 dbCommandsSendList.insert(enCommandsSendList);
+			 }
+		 }else{
 			 sendId = SysIdCreator.GenNextId(transaction, null,
 						IdCreatorDefine.ID_TYPE_SEND_ID,
 						IdCreatorDefine.ID_LEN_SEND_ID);
 			 enCommandsSendList.setSendId(sendId);
-			 enCommandsSendList.setDeviceTypeId(TypeIds[i]);
 			 dbCommandsSendList.insert(enCommandsSendList);
 		 }
+		 
 	}
 }

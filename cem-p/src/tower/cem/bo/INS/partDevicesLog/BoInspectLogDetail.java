@@ -53,15 +53,21 @@ public class BoInspectLogDetail  implements RootBo{
 	 * 执行业务逻辑、输出
 	 ****************************************************************************************************/
 	vector = dbDeviceInspectLog.findAllWhere(" send_id='"+sendId+"'");
-	enDeviceInspectLog = (EnDeviceInspectLog)vector.get(0);
+	if(vector != null && vector.size() != 0){
+		enDeviceInspectLog = (EnDeviceInspectLog)vector.get(0);
+	}
 	
-	int row = dbDeviceInspectLog.setToXml(requestXml, enDeviceInspectLog);
+	int row=0;
 	if(enDeviceInspectLog != null){
+		row = dbDeviceInspectLog.setToXml(requestXml, enDeviceInspectLog);
 		enDeviceInfo = dbDeviceInfo.findByKey(enDeviceInspectLog.getDeviceId());
 	}
-	requestXml.setItemValue("DEVICE_INSPECT_LOG", row, "DEVICE_NAME_CN", enDeviceInfo.getDeviceNameCn());
-	requestXml.setItemValue("DEVICE_INSPECT_LOG", row, "DEVICE_NAME_EN", enDeviceInfo.getDeviceNameEn());
-	requestXml.setItemValue("DEVICE_INSPECT_LOG", row, "DEVICE_IP", enDeviceInfo.getDeviceIp());
+	if(enDeviceInfo != null){
+		requestXml.setItemValue("DEVICE_INSPECT_LOG", row, "DEVICE_NAME_CN", enDeviceInfo.getDeviceNameCn());
+		requestXml.setItemValue("DEVICE_INSPECT_LOG", row, "DEVICE_NAME_EN", enDeviceInfo.getDeviceNameEn());
+		requestXml.setItemValue("DEVICE_INSPECT_LOG", row, "DEVICE_IP", enDeviceInfo.getDeviceIp());
+	}
+	
 	
 }
 }

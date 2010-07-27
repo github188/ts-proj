@@ -42,7 +42,10 @@ public class BoPickLogDetail implements RootBo{
 	 * 执行业务逻辑、输出
 	 ****************************************************************************************************/
 	vector = dbDeviceInspectPickLog.findAllWhere(" send_id='"+sendId+"'");
-	enDeviceInspectPickLog = (EnDeviceInspectPickLog)vector.get(0);
-	dbDeviceInspectPickLog.setToXml(requestXml, enDeviceInspectPickLog);
+	if(vector != null && vector.size() != 0){
+		enDeviceInspectPickLog = (EnDeviceInspectPickLog)vector.get(0);
+		dbDeviceInspectPickLog.setToXml(requestXml, enDeviceInspectPickLog);
+	}
+	
 }
 }
