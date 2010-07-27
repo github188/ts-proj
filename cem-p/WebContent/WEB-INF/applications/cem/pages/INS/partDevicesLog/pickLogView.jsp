@@ -50,9 +50,7 @@
               	   <textarea id="textarea" class="textarea" cols="110" rows="25" readonly>
               	   <%if(logCont != null && logCont.length() != 0){ %>
               	    	<%=logCont %>
-              	    <%}else{ %>
-              	    	 没有分拣日志。
-              	    <%} %>
+              	    <%}else{ %>没有分拣日志。<%} %>
               	    </textarea>
 				</td>
                  </tr>
