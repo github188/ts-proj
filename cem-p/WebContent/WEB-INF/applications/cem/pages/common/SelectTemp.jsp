@@ -105,7 +105,7 @@
             <div class="panelContent2">
               <!-- 查询面板内容 -->
              <form name="form1" action="ctrl" method="get" onSubmit="return doList(this)">
-              <input  type="hidden" name="FUNC_ID" value="SelectTempList">
+              <input  type="hidden" name="FUNC_ID" value="SelectTemp">
                <input  type="hidden" name=CUR_PAGE value="">
              <table>
               	 <tr>
