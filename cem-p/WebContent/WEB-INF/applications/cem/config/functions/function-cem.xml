@@ -358,7 +358,7 @@
         className="tower.cem.bo.MAI.temp.BoTempList"
         forward="SelTempListJsp" />   
         
-         <function id="SelTempListJsp" description="维护指令模板添加页面" type="jsp"
+       <function id="SelTempListJsp" description="维护指令模板添加页面" type="jsp"
         jspPath="/cem/pages/common/SelectTemp.jsp" />
         
         
@@ -497,14 +497,14 @@
         jspPath="/cem/pages/DAT/partDevicesCollect/partDeviceList.jsp" /> 
         
         <function id="CollectTimeDefJsp" description="设备数据采集-数据采集任务执行时间定义界面" type="jsp"
-        jspPath="/cem/pages/DAT/partDevicesCollect/planTimeDef.jsp" /> 
+        jspPath="/cem/pages/DAT/partDevicesCollect/collectTimeDef.jsp" /> 
         
         <function id="DeviceCollectTaskAddSuccessJsp" description="设备数据采集-添加数据采集任务成功提示界面" type="jsp"
         jspPath="/cem/pages/DAT/partDevicesCollect/taskAddSuccess.jsp" /> 
        
        <!-- 16-partDeviceRxpQuery-设备光功率数据查询 -->
         <function id="PartDeviceRxpQuerList" description="设备光功率数据查询-设备查询" type="bo"
-        className="tower.cem.bo.MAI.comm.BoCommDeviceList"
+        className="tower.cem.bo.DAT.partDeviceRxpQuery.BoDeviceCollectLogList"
         forward="PartDeviceRxpQuerListJsp" /> 
         
         <function id="CollectLogView" description="设备光功率数据查询-设备数据采集日志查看" type="bo"
@@ -524,12 +524,12 @@
         forward="ServletRxpToExcel" />
        
        <function id="ServletCollectLogTxt" description="设备数据采集日志导出txt" type="jsp"
-		jspPath="/servlet/ServletCollectLogTxt"/>
+		jspPath="/../../servlet/ServletCollectLogTxt"/>
        
         <function id="ServletRxpToExcel" description="设备光功率数据导出excel" type="jsp"
-		jspPath="/servlet/ServletRxpToExcel"/>
+		jspPath="/../../servlet/ServletRxpToExcel"/>
        
-       <function id="RxpViewJsp" description="设备光功率数据查询-设备数据采集日志界面" type="jsp"
+       <function id="CollectLogViewJsp" description="设备光功率数据查询-设备数据采集日志界面" type="jsp"
         jspPath="/cem/pages/DAT/partDeviceRxpQuery/collectLogView.jsp" />  
         
         <function id="PartDeviceRxpQuerListJsp" description="设备光功率数据查询-设备查询界面" type="jsp"
@@ -601,7 +601,7 @@
         forward="AllDeviceCollectTaskAddSuccessJsp" /> 
         
         <function id="AllDeviceTypeListCollectJsp" description="全网设备数据采集-设备类型列表面" type="jsp"
-        jspPath="/cem/pages/DAT/allDevicesCollect/allDeviceTypeList.jsp" /> 
+        jspPath="/cem/pages/DAT/allDevicesCollect/allDevicesTypeList.jsp" /> 
         
         <function id="AllCollectTimeDefJsp" description="全网设备数据采集-采集任务执行时间定义界面" type="jsp"
         jspPath="/cem/pages/DAT/allDevicesCollect/collectTimeDef.jsp" /> 
@@ -610,7 +610,7 @@
         jspPath="/cem/pages/DAT/allDevicesCollect/taskAddSuccess.jsp" /> 
         
         
-         <!-- 23-allDevicesCollect-全网设备光功率数据查询 -->
+         <!-- 24-allDevicesCollect-全网设备数据采查询 -->
         <function id="AllDevicesRxpQueryList" description="全网设备光功率数据查询-采集任务查询" type="bo"
         className="tower.cem.bo.DAT.allDevicesRxpQuery.BoAllDevicesRxpQueryList"
         forward="AllDevicesRxpQueryListJsp" /> 
