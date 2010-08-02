@@ -56,6 +56,14 @@
 		<servlet-class>
 		tower.cem.servlet.ServletRxpToExcel</servlet-class>
 	</servlet>
+	<!--模板执行日志存为txt的Servlet定义 -->
+	<servlet>
+		<display-name>
+		ServletTempLogTxt</display-name>
+		<servlet-name>ServletTempLogTxt</servlet-name>
+		<servlet-class>
+		tower.cem.servlet.ServletTempLogTxt</servlet-class>
+	</servlet>
 
 	<!-- Standard Action Servlet Mapping -->
 	<servlet-mapping>
@@ -81,6 +89,10 @@
 	<servlet-mapping>
 		<servlet-name>ServletRxpToExcel</servlet-name>
 		<url-pattern>/servlet/ServletRxpToExcel</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ServletTempLogTxt</servlet-name>
+		<url-pattern>/servlet/ServletTempLogTxt</url-pattern>
 	</servlet-mapping>
 	
 	<welcome-file-list>
