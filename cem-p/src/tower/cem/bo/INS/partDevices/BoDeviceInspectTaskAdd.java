@@ -63,12 +63,24 @@ public class BoDeviceInspectTaskAdd implements RootBo{
 		}else{
 			if(hour == null || hour.length()  == 0){
 				hour = "00";
+			}else{
+				if(hour.length() < 2){
+					hour = "0"+hour;
+				}
 			}
 			if(minute == null || minute.length()  == 0){
 				minute = "00";
+			}else{
+				if(minute.length() < 2){
+					minute = "0"+minute;
+				}
 			}
 			if(second == null || second.length()  == 0){
 				second = "00";
+			}else{
+				if(second.length() < 2){
+					second = "0"+second;
+				}
 			}
 			taskDefineTime =  DateFunc.GenNowTime();
 			taskPlanTime = DateFunc.ParseDateTime(date)+hour+minute+second;

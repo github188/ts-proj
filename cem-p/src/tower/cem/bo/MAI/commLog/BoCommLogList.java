@@ -161,8 +161,8 @@ public class BoCommLogList implements RootBo {
 				requestXml.setItemValue("DEVICE_COMMAND_EXEC_LOG", row, "LOCATION_NAME", rsRow.getString("LOCATION_NAME_CN"));
 				requestXml.setItemValue("DEVICE_COMMAND_EXEC_LOG", row, "DEVICE_IP", rsRow.getString("DEVICE_IP"));
 				requestXml.setItemValue("DEVICE_COMMAND_EXEC_LOG", row, "DEVICE_STATUS", rsRow.getString("DEVICE_STATUS"));
-				requestXml.setItemValue("DEVICE_COMMAND_EXEC_LOG", row, "EXEC_BEGIN", rsRow.getString("EXEC_BEGIN"));
-				requestXml.setItemValue("DEVICE_COMMAND_EXEC_LOG", row, "EXEC_END", rsRow.getString("EXEC_END"));
+				requestXml.setItemValue("DEVICE_COMMAND_EXEC_LOG", row, "EXEC_BEGIN", DateFunc.FormatDateTime(rsRow.getString("EXEC_BEGIN")));
+				requestXml.setItemValue("DEVICE_COMMAND_EXEC_LOG", row, "EXEC_END",DateFunc.FormatDateTime( rsRow.getString("EXEC_END")));
 				
 			}
 		}

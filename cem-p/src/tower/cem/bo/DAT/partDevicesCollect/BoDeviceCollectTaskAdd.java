@@ -1,9 +1,13 @@
-package tower.cem.bo.INS.allDevices;
+package tower.cem.bo.DAT.partDevicesCollect;
+
+import java.util.Date;
 
 import org.apache.log4j.Logger;
 
 import tower.cem.db.DbCommandsSendList;
+import tower.cem.db.DbMaintainCommandsTemplate;
 import tower.cem.en.EnCommandsSendList;
+import tower.cem.en.EnMaintainCommandsTemplate;
 import tower.cem.util.IdCreatorDefine;
 import tower.common.util.DateFunc;
 import tower.common.util.SysIdCreator;
@@ -12,9 +16,9 @@ import tower.tmvc.RootBo;
 import tower.tmvc.Transaction;
 import tower.tmvc.XMLWrap;
 
-public class BoAllDeviceInspectTaskAdd implements RootBo{
-
-public void doBusiness(Transaction transaction, XMLWrap requestXml, XMLWrap sessionXml, XMLWrap applicationXml, Logger logger) throws ErrorException {
+public class BoDeviceCollectTaskAdd implements RootBo{
+	
+	public void doBusiness(Transaction transaction, XMLWrap requestXml, XMLWrap sessionXml, XMLWrap applicationXml, Logger logger) throws ErrorException {
 		
 		/***********************************************************************
 		 * 声明变量
@@ -25,7 +29,8 @@ public void doBusiness(Transaction transaction, XMLWrap requestXml, XMLWrap sess
 		
 		
 		//获取页面参数
-		String[]  TypeIds; //维护设备编号
+		String[] deviceIds;    //维护设备编号
+		String[] deviceTypeIds;  //维护设备类型编号
 		String sendId;        //指令发送编号
 		String taskDefineTime; //任务定义时间
 		String taskPlanTime;  //计划开始时间
@@ -41,9 +46,10 @@ public void doBusiness(Transaction transaction, XMLWrap requestXml, XMLWrap sess
 		/***********************************************************************
 		 * 获取输入
 		 **********************************************************************/
-		TypeIds = requestXml.getInputValues("TYPE_ID");
+		deviceIds = requestXml.getInputValues("DEVICE_ID");
+		deviceTypeIds = requestXml.getInputValues("DEVICE_TYPE_ID");
 		userId = sessionXml.getItemValue("SYS_USER", 1, "USER_ID");
-		commandsType = "I";
+		commandsType = "C";
 		status = "N";
 		exeType = requestXml.getInputValue("EXE_TYPE");
 		date = requestXml.getInputValue("EXE_DATE");
@@ -57,24 +63,12 @@ public void doBusiness(Transaction transaction, XMLWrap requestXml, XMLWrap sess
 		}else{
 			if(hour == null || hour.length()  == 0){
 				hour = "00";
-			}else{
-				if(hour.length() < 2){
-					hour = "0"+hour;
-				}
 			}
 			if(minute == null || minute.length()  == 0){
 				minute = "00";
-			}else{
-				if(minute.length() < 2){
-					minute = "0"+minute;
-				}
 			}
 			if(second == null || second.length()  == 0){
 				second = "00";
-			}else{
-				if(second.length() < 2){
-					second = "0"+second;
-				}
 			}
 			taskDefineTime =  DateFunc.GenNowTime();
 			taskPlanTime = DateFunc.ParseDateTime(date)+hour+minute+second;
@@ -95,22 +89,14 @@ public void doBusiness(Transaction transaction, XMLWrap requestXml, XMLWrap sess
 		 enCommandsSendList.setTaskPlanTime(taskPlanTime);
 		 enCommandsSendList.setUserId(userId);
 		 
-		 if(TypeIds != null && TypeIds.length != 0){
-			 for(int i = 0; i<TypeIds.length;i++){
-				 sendId = SysIdCreator.GenNextId(transaction, null,
-							IdCreatorDefine.ID_TYPE_SEND_ID,
-							IdCreatorDefine.ID_LEN_SEND_ID);
-				 enCommandsSendList.setSendId(sendId);
-				 enCommandsSendList.setDeviceTypeId(TypeIds[i]);
-				 dbCommandsSendList.insert(enCommandsSendList);
-			 }
-		 }else{
+		 for(int i = 0; i<deviceIds.length;i++){
 			 sendId = SysIdCreator.GenNextId(transaction, null,
 						IdCreatorDefine.ID_TYPE_SEND_ID,
 						IdCreatorDefine.ID_LEN_SEND_ID);
 			 enCommandsSendList.setSendId(sendId);
+			 enCommandsSendList.setDeviceId(deviceIds[i]);
+			 enCommandsSendList.setDeviceTypeId(deviceTypeIds[i]);
 			 dbCommandsSendList.insert(enCommandsSendList);
 		 }
-		 
 	}
 }
