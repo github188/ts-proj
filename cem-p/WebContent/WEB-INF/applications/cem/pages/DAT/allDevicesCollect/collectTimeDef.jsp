@@ -111,7 +111,7 @@ function doSubmit(form) {
 </head>
 <body id="mainArea" onload="init();">
   <div id="mainPanel" class="panel">
-    <div class="panelHead">设备巡检-第二步.定义任务计划执行时间（共两步）</div>
+    <div class="panelHead">全网设备数据采集-第二步.定义任务计划执行时间（共两步）</div>
     <div class="panelContent">
       <div class="panelContent2">    
         <!-- 查询面板 -->
@@ -176,7 +176,7 @@ function doSubmit(form) {
                     <td  align="left">
                     <span id="hour">
                     <span id="sprytHour">
-                  时： <input   type="text" class="text" size="3" name="HOUR">
+                  		<input   type="text" class="text" size="3" name="HOUR"> 时
                     <span class="textfieldInvalidFormatMsg">格式无效，有效格式为实数。</span>
 		            <span class="textfieldMaxCharsMsg">已超过最大字符数2。</span>	
                    </span>
@@ -185,7 +185,7 @@ function doSubmit(form) {
                     <td  align="left">
                     <span id="minute">
                     <span id="sprytMinute">
-                   分：<input   type="text" class="text" size="3" name="MINUTE">
+                  		<input   type="text" class="text" size="3" name="MINUTE"> 分
                     <span class="textfieldInvalidFormatMsg">格式无效，有效格式为实数。</span>
 		            <span class="textfieldMaxCharsMsg">已超过最大字符数2。</span>	
                    </span>
@@ -194,7 +194,7 @@ function doSubmit(form) {
                     <td align="left">
                     <span id="second">
                     <span id="sprytSecond">
-                  秒： <input   type="text" class="text" size="3" name="SECOND">
+                  		<input   type="text" class="text" size="3" name="SECOND"> 秒
                     <span class="textfieldInvalidFormatMsg">格式无效，有效格式为实数。</span>
 		            <span class="textfieldMaxCharsMsg">已超过最大字符数2。</span>	
                    </span>
@@ -204,7 +204,7 @@ function doSubmit(form) {
  				<tr height="50">
                 <td colspan="6" align="center">
                 	<input size="10" type="button" class="button"  onclick="doReturn()" value="上一步" >
-                 	<input size="10" type="submit" class="submit" style="width:90px" value="添加数据采集任务" >
+                 	<input size="10" type="submit" class="submit" style="width:90px" value="添加采集任务" >
                 </td>
               </tr>
               </table>

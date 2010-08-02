@@ -95,16 +95,16 @@ public class BoDeviceInspectLogList  implements RootBo{
 				
 			if (execEndBegin != null && execEndBegin.length() != 0) {
 				if (sqlWhere == null || sqlWhere.length() == 0) {
-					sqlWhere.append(" a.EXEC_END_TIME  >='" + DateFunc.ParseDateTime(execEndBegin) + "'");
+					sqlWhere.append(" a.EXEC_END_TIME  >='" + DateFunc.ParseDateTime(execEndBegin) + "000000'");
 				} else {
-					sqlWhere.append(" AND a.EXEC_END_TIME  >='" +DateFunc.ParseDateTime( execEndBegin )+ "'");
+					sqlWhere.append(" AND a.EXEC_END_TIME  >='" +DateFunc.ParseDateTime( execEndBegin )+ "000000'");
 				}
 			}
 			if (execEndEnd != null && execEndEnd.length() != 0) {
 				if (sqlWhere == null || sqlWhere.length() == 0) {
-					sqlWhere.append(" a.EXEC_END_TIME  <='" + DateFunc.ParseDateTime(execEndEnd )+ "'");
+					sqlWhere.append(" a.EXEC_END_TIME  <='" + DateFunc.ParseDateTime(execEndEnd )+ "999999'");
 				} else {
-					sqlWhere.append(" AND a.EXEC_END_TIME  <='" +DateFunc.ParseDateTime( execEndEnd )+ "'");
+					sqlWhere.append(" AND a.EXEC_END_TIME  <='" +DateFunc.ParseDateTime( execEndEnd )+ "999999'");
 				}
 			}
 			if (sqlWhere != null && sqlWhere.length() != 0) {

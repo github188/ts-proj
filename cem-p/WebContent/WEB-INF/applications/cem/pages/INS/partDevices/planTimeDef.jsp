@@ -177,7 +177,7 @@ function doSubmit(form) {
                     <td  align="left">
                     <span id="hour">
                     <span id="sprytHour">
-                  		<input   type="text" class="text" size="3" name="HOUR">时
+                  		<input   type="text" class="text" size="3" name="HOUR"> 时
                     <span class="textfieldInvalidFormatMsg">格式无效，有效格式为实数。</span>
 		            <span class="textfieldMaxCharsMsg">已超过最大字符数2。</span>	
                    </span>
@@ -186,7 +186,7 @@ function doSubmit(form) {
                     <td  align="left">
                     <span id="minute">
                     <span id="sprytMinute">
-                   		<input   type="text" class="text" size="3" name="MINUTE">分
+                   		<input   type="text" class="text" size="3" name="MINUTE"> 分
                     <span class="textfieldInvalidFormatMsg">格式无效，有效格式为实数。</span>
 		            <span class="textfieldMaxCharsMsg">已超过最大字符数2。</span>	
                    </span>

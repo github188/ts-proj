@@ -50,7 +50,7 @@
                      <table width="100%" border="0" cellpadding="0" cellspacing="0" >
               	 <tr>
               	 <td align="center">
-              	   <textarea id="textarea" class="textarea" cols="110" rows="25" readonly> <%=commandCont %></textarea>
+              	   <textarea id="textarea" class="textarea" cols="110" rows="25" readonly><%=commandCont %></textarea>
 				</td>
                  </tr>
                   <tr>

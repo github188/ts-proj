@@ -55,7 +55,7 @@
                      <table width="100%" border="0" cellpadding="0" cellspacing="0" >
               	 <tr>
               	 <td align="right">
-              	   <textarea id="textarea" class="textarea" cols="110" rows="25" readonly> <%=logCont %></textarea>
+              	   <textarea id="textarea" class="textarea" cols="110" rows="25" readonly><%=logCont %></textarea>
 				</td>
                  </tr>
                   <tr>

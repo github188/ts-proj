@@ -42,7 +42,7 @@ public void doBusiness(Transaction transaction, XMLWrap requestXml, XMLWrap sess
 		/***********************************************************************
 		 * 执行业务逻辑、输出
 		 **********************************************************************/
-		 sql.append(" select a.SEND_ID,b.DEVICE_NAME_CN,e.TYPE_NAME_CN,a.DEVICE_IP,a.INSPECT_BEGIN, a.STATUS,a.INSPECT_END" +
+		 sql.append(" select a.SEND_ID,b.DEVICE_NAME_CN, a.DEVICE_ID, e.TYPE_NAME_CN,a.DEVICE_IP,a.INSPECT_BEGIN, a.STATUS,a.INSPECT_END" +
 		 		    " from DEVICE_INSPECT_LOG a ,DEVICE_INFO b ,DEVICE_TYPE e" +
 		 		    " where  a.DEVICE_ID = b.DEVICE_ID " +
 		 		    " and b.TYPE_ID = e.TYPE_ID " +
@@ -63,6 +63,7 @@ public void doBusiness(Transaction transaction, XMLWrap requestXml, XMLWrap sess
 					requestXml.setItemValue("DEVICE_INSPECT_LOG", row, "INSPECT_BEGIN", DateFunc.FormatDateTime(rsRow.getString("INSPECT_BEGIN")));
 					requestXml.setItemValue("DEVICE_INSPECT_LOG", row, "STATUS", rsRow.getString("STATUS"));
 					requestXml.setItemValue("DEVICE_INSPECT_LOG", row, "INSPECT_END", DateFunc.FormatDateTime(rsRow.getString("INSPECT_END")));
+					requestXml.setItemValue("DEVICE_INSPECT_LOG", row, "DEVICE_ID", rsRow.getString("DEVICE_ID"));
 				}
 			}
 	}

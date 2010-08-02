@@ -34,7 +34,7 @@ public class BoDeviceCollectLogList implements RootBo{
 		/***********************************************************************
 		 * 执行业务逻辑、输出
 		 **********************************************************************/
-		 sql.append(" select a.SEND_ID,b.DEVICE_NAME_CN,e.TYPE_NAME_CN,a.DEVICE_IP,a.COLLECT_BEGIN, a.STATUS,a.COLLECT_END" +
+		 sql.append(" select a.SEND_ID,b.DEVICE_NAME_CN,e.TYPE_NAME_CN,a.DEVICE_IP,a.COLLECT_BEGIN, a.STATUS,a.COLLECT_END,a.DEVICE_ID" +
 		 		    " from DEVICE_COLLECT_LOG a ,DEVICE_INFO b ,DEVICE_TYPE e" +
 		 		    " where  a.DEVICE_ID = b.DEVICE_ID " +
 		 		    " and b.TYPE_ID = e.TYPE_ID " +
@@ -58,6 +58,7 @@ public class BoDeviceCollectLogList implements RootBo{
 					requestXml.setItemValue("DEVICE_COLLECT_LOG", row, "COLLECT_BEGIN", DateFunc.FormatDateTime(rsRow.getString("COLLECT_BEGIN")));
 					requestXml.setItemValue("DEVICE_COLLECT_LOG", row, "STATUS", rsRow.getString("STATUS"));
 					requestXml.setItemValue("DEVICE_COLLECT_LOG", row, "COLLECT_END", DateFunc.FormatDateTime(rsRow.getString("COLLECT_END")));
+					requestXml.setItemValue("DEVICE_COLLECT_LOG", row, "DEVICE", rsRow.getString("DEVICE"));
 				}
 			}
 			

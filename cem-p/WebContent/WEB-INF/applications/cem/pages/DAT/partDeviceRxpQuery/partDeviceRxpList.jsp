@@ -221,7 +221,7 @@
                   </a>|
                    <a href="JavaScript:doCollectLogView('<%=sendIds[i] %>');">
                      查看日志
-                  </a>|
+                  </a>
                   ]
                  </td>
                  
@@ -247,7 +247,7 @@
                   </a>|
                    <a href="JavaScript:doCollectLogView('<%=sendIds[i] %>');">
                      查看日志
-                  </a>|
+                  </a>
                   ]
                  </td>
                 </tr>

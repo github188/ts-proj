@@ -63,7 +63,7 @@ function doSubmit(form) {
 </head>
 <body id="mainArea">
   <div id="mainPanel" class="panel">
-    <div class="panelHead">全网设备数据采集-第一步.选择设备（共两步）</div>
+    <div class="panelHead">全网设备数据采集-第一步.选择设备类型（共两步）</div>
     <div class="panelContent">
       <div class="panelContent2">    
         <!-- 查询面板 -->
@@ -117,8 +117,8 @@ function doSubmit(form) {
               <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
                  <tr>
                  <th width="10%"></th>
-                  <th width="25%">设备类型名称-英文</th>
-                  <th width="25%">设备类型名称-中文</th>
+                  <th width="25%">设备类型英文名称</th>
+                  <th width="25%">设备类型中文名称</th>
                   <th width="40%">备注</th>
                 </tr>
               <%if(typeIds != null){

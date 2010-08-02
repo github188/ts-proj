@@ -34,13 +34,19 @@ public class BoInspectLogDetail  implements RootBo{
 	
 	//发送编号
 	String sendId;
+	String deviceId;
 	
 	//其他
 	Vector vector;
+	
+	StringBuffer sqlWhere =new StringBuffer();
+	
 	/*****************************************************************************************************
 	 * 获取输入
 	 ****************************************************************************************************/
 	sendId = requestXml.getInputValue("SEND_ID");
+	deviceId = requestXml.getInputValue("DEVICE_ID");
+	
 	/*****************************************************************************************************
 	 * 创建数据库连接、实例化DB、EN
 	 ****************************************************************************************************/
@@ -52,7 +58,10 @@ public class BoInspectLogDetail  implements RootBo{
 	/*****************************************************************************************************
 	 * 执行业务逻辑、输出
 	 ****************************************************************************************************/
-	vector = dbDeviceInspectLog.findAllWhere(" send_id='"+sendId+"'");
+	sqlWhere.append("  send_id='"+sendId+"'");
+	if(!(deviceId==null || deviceId.trim().length()==0))
+	    sqlWhere.append(" and device_id='"+deviceId+"'");
+	vector = dbDeviceInspectLog.findAllWhere(sqlWhere.toString());
 	if(vector != null && vector.size() != 0){
 		enDeviceInspectLog = (EnDeviceInspectLog)vector.get(0);
 	}

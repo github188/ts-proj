@@ -44,6 +44,7 @@
 	inspectBegins = xml.getItemValues("DEVICE_INSPECT_LOG", "INSPECT_BEGIN");
 	statuses = xml.getItemValues("DEVICE_INSPECT_LOG", "STATUS");
 	inspectEnds = xml.getItemValues("DEVICE_INSPECT_LOG", "INSPECT_END");
+	deviceIds = xml.getItemValues("DEVICE_INSPECT_LOG", "DEVICE_ID");
     
 	String[] statusDesc = {"成功","失败"};
 	String[] statusValue = {"S","F"};
@@ -60,11 +61,11 @@
     selDialog("ctrl?FUNC_ID=PickLogView&SEND_ID="+sendId,"SEND_ID","LOG_CONTEN",850,550,false);
   }
   
-  function doInspectLogView(sendId) {
-  	selDialog("ctrl?FUNC_ID=InspectLogView&SEND_ID="+sendId,"SEND_ID","LOG_CONTEN",850,550,false);
+  function doInspectLogView(sendId, deviceId) {
+  	selDialog("ctrl?FUNC_ID=InspectLogView&SEND_ID="+sendId+"&DEVICE_ID="+deviceId,"SEND_ID","LOG_CONTEN",850,550,false);
   }
-  function doInspectLogSave(sendId) {
-    window.location.href = "ctrl?FUNC_ID=InspectLogSave&SEND_ID="+sendId;
+  function doInspectLogSave(sendId, deviceId) {
+    window.location.href = "ctrl?FUNC_ID=InspectLogSave&SEND_ID="+sendId+"&DEVICE_ID="+deviceId;
   }
 	function doSubmit(form) {
 	 var result = Spry.Widget.Form.validate(form);
@@ -218,10 +219,10 @@
                   
                  <td align="center" nowrap>
                  [
-                   <a href="JavaScript:doInspectLogView('<%=sendIds[i] %>');">
+                   <a href="JavaScript:doInspectLogView('<%=sendIds[i] %>','<%=deviceIds[i] %>');">
                      查看日志
                   </a>|
-                   <a href="JavaScript:doInspectLogSave('<%=sendIds[i] %>')">
+                   <a href="JavaScript:doInspectLogSave('<%=sendIds[i] %>','<%=deviceIds[i] %>');">
                      保存日志
                   </a>
                   ]
@@ -241,13 +242,12 @@
                     <%} %>
                    </td>
                   
-                   <td align="center"><%=inspectEnds[i]%></td>
                   <td align="center" nowrap>
                  [
-                   <a href="JavaScript:doInspectLogView('<%=sendIds[i] %>');">
+                   <a href="JavaScript:doInspectLogView('<%=sendIds[i] %>','<%=deviceIds[i] %>');">
                      查看日志
                   </a>|
-                   <a href="JavaScript:doInspectLogSave('<%=sendIds[i] %>';">
+                   <a href="JavaScript:doInspectLogSave('<%=sendIds[i] %>','<%=deviceIds[i] %>');">
                      保存日志
                   </a>
                   ]

@@ -129,16 +129,16 @@ public class BoCommLogList implements RootBo {
 		
 		if (beginExecEnd != null && beginExecEnd.length() != 0) {
 			if (sqlWhere == null || sqlWhere.length() == 0) {
-				sqlWhere.append(" a.EXEC_END >= '" + DateFunc.ParseDateTime(beginExecEnd) + "'");
+				sqlWhere.append(" a.EXEC_END >= '" + DateFunc.ParseDateTime(beginExecEnd) + "000000'");
 			} else {
-				sqlWhere.append(" AND a.EXEC_END >= '" + DateFunc.ParseDateTime(beginExecEnd )+ "'");
+				sqlWhere.append(" AND a.EXEC_END >= '" + DateFunc.ParseDateTime(beginExecEnd )+ "000000'");
 			}
 		}
 		if (endExecEnd != null && endExecEnd.length() != 0) {
 			if (sqlWhere == null || sqlWhere.length() == 0) {
-				sqlWhere.append(" a.EXEC_END LIKE <= '" + DateFunc.ParseDateTime(endExecEnd) + "'");
+				sqlWhere.append(" a.EXEC_END LIKE <= '" + DateFunc.ParseDateTime(endExecEnd) + "999999'");
 			} else {
-				sqlWhere.append(" AND a.EXEC_END <= '" + DateFunc.ParseDateTime(endExecEnd )+ "'");
+				sqlWhere.append(" AND a.EXEC_END <= '" + DateFunc.ParseDateTime(endExecEnd )+ "999999'");
 			}
 		}
 		sqlWhere.append(" order by a.DEVICE_ID , a.EXEC_BEGIN  DESC");

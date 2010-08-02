@@ -10,7 +10,7 @@
 %>
 <%
 	xml = XMLWrap.getRequestXml(request,session,application);
-	logCont = xml.getItemValue("DEVICE_INSPECT_LOG",1,"LOG_CONT");
+	logCont = xml.getItemValue("DEVICE_INSPECT_PICK_LOG",1,"LOG_CONT");
 
 %>
 <html>
@@ -50,11 +50,7 @@
                 <table width="100%" border="0" cellpadding="0" cellspacing="0" >
               	 <tr>
               	 <td align="right">
-              	   <textarea id="textarea" class="textarea" cols="110" rows="25" readonly>
-              	   <%if(logCont != null && logCont.length() != 0){ %>
-              	    	<%=logCont %>
-              	    <%}else{ %>没有分拣日志。<%} %>
-              	    </textarea>
+              	   <textarea id="textarea" class="textarea" cols="110" rows="25" readonly><%=logCont%></textarea>
 				</td>
                  </tr>
                   <tr>
