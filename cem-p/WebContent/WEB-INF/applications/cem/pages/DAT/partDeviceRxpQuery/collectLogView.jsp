@@ -6,11 +6,13 @@
 <%	
 	XMLWrap xml;
 	String logCont;
+	String sendId;
  
 %>
 <%
 	xml = XMLWrap.getRequestXml(request,session,application);
-	logCont = xml.getItemValue("DEVICE_INSPECT_LOG",1,"LOG_CONT");
+	logCont = xml.getItemValue("DEVICE_COLLECT_LOG",1,"LOG_CONT");
+	sendId = xml.getItemValue("DEVICE_COLLECT_LOG",1,"SEND_ID");
 
 %>
 <html>
@@ -19,7 +21,7 @@
 <meta http-equiv="pragma" content="no-cache">
 <meta HTTP-EQUIV="Cache-Control" content="no-cache, must-revalidate">
 <meta HTTP-EQUIV="expires" content="0">
-<title>设备巡检管理</title>
+<title>设备光功率数据查询</title>
 <jsp:include flush="true" page="../../../../sys/pages/common/include/css.jsp"></jsp:include>
 <jsp:include flush="true" page="../../../../sys/pages/common/include/js.jsp"></jsp:include>
 <script type="text/javascript">
@@ -27,12 +29,15 @@
   function doclose(){
   	window.close();
   }
+    function doSaveLog(sendId) {
+    window.location.href = "ctrl?FUNC_ID=CollectLogSave&SEND_ID="+sendId;
+ }
 -->
 </script>
 </head>
 <body id="mainArea">
   <div id="mainPanel" class="panel">
-    <div class="panelHead">设备巡检分拣日志查看</div>
+    <div class="panelHead">设备巡检日志查看</div>
     <div class="panelContent">
       <div class="panelContent2">
         <!-- Tab面板 -->
@@ -47,14 +52,10 @@
                   <div class="panelContent">
                   <div class="panelContent2">
                       <!-- 查询面板内容 -->
-                <table width="100%" border="0" cellpadding="0" cellspacing="0" >
+                     <table width="100%" border="0" cellpadding="0" cellspacing="0" >
               	 <tr>
               	 <td align="right">
-              	   <textarea id="textarea" class="textarea" cols="110" rows="25" readonly>
-              	   <%if(logCont != null && logCont.length() != 0){ %>
-              	    	<%=logCont %>
-              	    <%}else{ %>没有分拣日志。<%} %>
-              	    </textarea>
+              	   <textarea id="textarea" class="textarea" cols="110" rows="25" readonly> <%=logCont %></textarea>
 				</td>
                  </tr>
                   <tr>
@@ -62,8 +63,8 @@
 				  </tr>
 				  <tr>
 				  <td align="center">
-				    <input type="button" class="button" onclick="doclose()" value="关闭">
-				    </td>
+				   <input type="button" class="reset" onclick="doSaveLog('<%=sendId %>')" value="另存为">
+				    <input type="button" class="button" onclick="doclose()" value="关闭"></td>
 				  </tr>
               </table>
                       <!-- 查询面板内容结束 -->

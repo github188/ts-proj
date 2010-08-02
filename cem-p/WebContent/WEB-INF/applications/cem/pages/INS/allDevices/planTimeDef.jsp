@@ -12,10 +12,6 @@
     xml = XMLWrap.getRequestXml(request,session,application);
 	
 	typeIds = xml.getInputValues("TYPE_ID");
-	
-	if(typeIds == null || typeIds.length == 0){
-		typeIds =  xml.getInputValues("QTYPE_ID");
-	}
     
 	String[] excTypeIds = {"0","1"};
 	String[] excTypeDescs={"即时执行","设定计划执行时间"};
@@ -41,26 +37,17 @@ function doSubmit(form) {
       var second = form1.SECOND.value;
       var exeType = form1.EXE_TYPE.value;
       var date = form1.EXE_DATE.value;
-      
-      //判断:时<=24 ,分<=60,秒<=60
-       if(hour.length > 0 && hour.length > 2){
-         alert("小时数长度应小于等于2位");
-         return false;
+        var result = Spry.Widget.Form.validate(form);
+      if (result == false){
+        return result;
       }
+      //判断:时<=24 ,分<=60,秒<=60
       if(hour.length > 0 && hour > 24){
          alert("小时数应小于24");
          return false;
       }
-       if(minute.length > 0 && minute.length > 2){
-         alert("分钟数长度应小于等于2位");
-         return false;
-      }
       if(minute.length > 0 && minute > 60){
          alert("分钟数应小于60");
-         return false;
-      }
-        if(second.length > 0 && second.length > 2){
-         alert("秒数长度应小于等于2位");
          return false;
       }
       if(second.length > 0 && second > 60){
@@ -73,10 +60,7 @@ function doSubmit(form) {
            return false;
         }
       }
-      var result = Spry.Widget.Form.validate(form);
-      if (result == false){
-        return result;
-      }
+    
       return true;
  }
   function doReturn(){
@@ -157,8 +141,10 @@ function doSubmit(form) {
                    <td  align="left">
                     <span id="date">
                    <span id="sprytDate">
-                   日期：<input type="text" class="date" name="EXE_DATE" readonly><input type="button" class="calendarBtn" onclick="return showCalendar('EXE_DATE', 'y-mm-dd');"><span class="requiredField">*</span>
+                   日期：<input type="text" class="date" name="EXE_DATE" ><input type="button" class="calendarBtn" onclick="return showCalendar('EXE_DATE', 'y-mm-dd');"><span class="requiredField">*</span>
                    <span class="textfieldRequiredMsg">需要提供一个值。</span>
+                   <span   class="textfieldInvalidFormatMsg">日期格式：yyyy-mm-dd。</span>
+                   <span   class="textfieldMinCharsMsg">日期格式：yyyy-mm-dd。</span>
                    </span>
                    </span>
                    </td>
@@ -206,16 +192,13 @@ function doSubmit(form) {
           <div class="panelFoot"><div></div></div>
         </div>
         <!-- 列表面板结束 -->
-     
       </div>
-      
     </div>
     <div class="panelFoot"><div></div></div>
   </div>
-   
   <script type="text/javascript">
 <!--
-var sprytextfield1 = new Spry.Widget.ValidationTextField("sprytDate", "none", {required:true});
+var sprytextfield1 = new Spry.Widget.ValidationTextField("sprytDate", "date", {format:"yyyy-mm-dd",isRequired:false,useCharacterMasking:true,maxChars:10,minChars:10});
 var sprytextfield2 = new Spry.Widget.ValidationTextField("sprytHour", "integer", {isRequired:false,useCharacterMasking:true,maxChars:2});
 var sprytextfield3 = new Spry.Widget.ValidationTextField("sprytMinute", "integer", {isRequired:false,useCharacterMasking:true,maxChars:2});
 var sprytextfield4 = new Spry.Widget.ValidationTextField("sprytSecond", "integer", {isRequired:false,useCharacterMasking:true,maxChars:2});

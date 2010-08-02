@@ -11,6 +11,10 @@
 	String[] typeIds;
 	String[] typeNameEns;
 	String[] typeNameCns;
+	String[] inspectCommandses;
+	String[] inspectCommandsExps;
+	String[] collectCommandses;
+	String[] appPictures;
 	String[] remarks;
 	
 	//设置返回条件
@@ -22,6 +26,10 @@
     typeIds = xml.getItemValues("DEVICE_TYPE","TYPE_ID");
     typeNameEns = xml.getItemValues("DEVICE_TYPE","TYPE_NAME_EN");
     typeNameCns = xml.getItemValues("DEVICE_TYPE","TYPE_NAME_CN");
+    inspectCommandses = xml.getItemValues("DEVICE_TYPE","INSPECT_COMMANDS");
+    inspectCommandsExps = xml.getItemValues("DEVICE_TYPE","INSPECT_COMMANDS_EXP");
+    collectCommandses = xml.getItemValues("DEVICE_TYPE","COLLECT_COMMANDS");
+    appPictures = xml.getItemValues("DEVICE_TYPE","APP_PICTURE");
     remarks = xml.getItemValues("DEVICE_TYPE","REMARK");
     
     Ids = xml.getInputValues("TYPE_ID");
@@ -55,7 +63,7 @@ function doSubmit(form) {
 </head>
 <body id="mainArea">
   <div id="mainPanel" class="panel">
-    <div class="panelHead">全网设备巡检-第一步.选择设备类型（共两步）</div>
+    <div class="panelHead">全网设备数据采集-第一步.选择设备（共两步）</div>
     <div class="panelContent">
       <div class="panelContent2">    
         <!-- 查询面板 -->
@@ -68,22 +76,22 @@ function doSubmit(form) {
                <table>
               	 <tr>
               	 <td align="left">
-              	 全网设备巡检功能将在指定时间对全网可用设备进行巡检。
+              	 全网设备数据采集功能将在指定时间对全网可用设备进行数据采集。
               	 </td>
                  </tr>
                  <tr>
               	 <td align="left">
-              	 可以选择设备类型，对指定设备类型进行巡检。
+              	 可以选择设备类型，对指定设备类型进行数据采集。
               	 </td>
                  </tr>
                  <tr>
               	 <td align="left">
-              	 当未选择设备类型，即对全网的全部设备类型执行巡检。
+              	 当未选择设备类型，即对全网的全部设备类型执行数据采集。
               	 </td>
                  </tr>
                  <tr>
               	 <td align="left">
-              	 点击“下一步”，设定执行巡检任务的时间。
+              	 点击“下一步”，设定执行数据采集任务的时间。
               	 </td>
                  </tr>                 
               </table>
@@ -105,12 +113,12 @@ function doSubmit(form) {
             
               <!-- 列表内容 -->
                <form name="form2" action="ctrl" method="get" onSubmit="return doSubmit();" >
-              <input type="hidden" name="FUNC_ID" value="allPlanTimeDefJsp">
+              <input type="hidden" name="FUNC_ID" value="AllCollectTimeDefJsp">
               <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
                  <tr>
                  <th width="10%"></th>
-                  <th width="25%">设备类型英文名称</th>
-                  <th width="25%">设备类型中文名称</th>
+                  <th width="25%">设备类型名称-英文</th>
+                  <th width="25%">设备类型名称-中文</th>
                   <th width="40%">备注</th>
                 </tr>
               <%if(typeIds != null){
@@ -127,8 +135,11 @@ function doSubmit(form) {
                     	if(typeIds[i].endsWith(Ids[j])){
                     %>
                    <input type="checkbox" name=TYPE_ID" value="<%=typeIds[i] %>" <%if(typeIds[i].endsWith(Ids[j])){out.print("check");} %>> 
+                   <input type="hidden" name="QTYPE_ID" value="<%=typeIds[i] %>">
                  <% }}}else{ %>
                    <input type="checkbox" name="TYPE_ID" value="<%=typeIds[i] %>"  > 
+                    <input type="hidden" name="QTYPE_ID" value="<%=typeIds[i] %>">
+                   
                  <%} %>
 				  </td>
                   <td align="center" onClick="event.cancelBubble=true">
@@ -143,8 +154,8 @@ function doSubmit(form) {
               <!-- 列表内容结束 -->
           		 <table width="100%" border="0" cellpadding="0" cellspacing="0" height="10">
               <tr height="10">
-                <td colspan="10" align="center" height="10">
-                 <input type="submit" class="submit"  value="下一步">
+                <td colspan="9" align="center" height="10">
+                 <input type="submit" class="submit"  value="确认">
                 </td>
                 <td></td>
                 <td></td>

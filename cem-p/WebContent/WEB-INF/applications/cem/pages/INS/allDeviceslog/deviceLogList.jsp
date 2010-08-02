@@ -22,7 +22,7 @@
 	String[] deviceNameCns;
 	String[] typeNames;
 	String[] deviceIps;
-	String[] taskDefTimes;
+	String[] inspectBegins;
 	String[] statuses;
 	String[] inspectEnds;
 %>
@@ -35,17 +35,15 @@
 	typeName = xml.getInputValue("TYPE_NAME");
 	deviceIp = xml.getInputValue("DEVICE_IP");
 	inspectEndBegin = xml.getInputValue("INSPECT_END_BEGIN");
-	inspectEndEnd = xml.getInputValue("INSPECT_ENDC_END");
+	inspectEndEnd = xml.getInputValue("INSPECT_END_END");
 	
 	sendIds = xml.getItemValues("DEVICE_INSPECT_LOG","SEND_ID");
-	deviceIds = xml.getItemValues("DEVICE_INSPECT_LOG","DEVICE_ID");
-	deviceNameEns = xml.getItemValues("DEVICE_INSPECT_LOG", "DEVICE_NAME_EN");
 	deviceNameCns = xml.getItemValues("DEVICE_INSPECT_LOG", "DEVICE_NAME_CN");
 	typeNames = xml.getItemValues("DEVICE_INSPECT_LOG", "TYPE_NAME_CN");
 	deviceIps = xml.getItemValues("DEVICE_INSPECT_LOG", "DEVICE_IP");
-	taskDefTimes = xml.getItemValues("DEVICE_INSPECT_LOG", "TASK_DEFINE_TIME");
+	inspectBegins = xml.getItemValues("DEVICE_INSPECT_LOG", "INSPECT_BEGIN");
 	statuses = xml.getItemValues("DEVICE_INSPECT_LOG", "STATUS");
-	inspectEnds = xml.getItemValues("DEVICE_INSPECT_LOG", "EXEC_END_TIME");
+	inspectEnds = xml.getItemValues("DEVICE_INSPECT_LOG", "INSPECT_END");
     
 	String[] statusDesc = {"成功","失败"};
 	String[] statusValue = {"S","F"};
@@ -65,10 +63,14 @@
   function doInspectLogView(sendId) {
   	selDialog("ctrl?FUNC_ID=InspectLogView&SEND_ID="+sendId,"SEND_ID","LOG_CONTEN",850,550,false);
   }
-  function doInspectLogSave(logId) {
-    window.location.href = "ctrl?FUNC_ID=InspectLogSave&SEND_ID="+logId;
+  function doInspectLogSave(sendId) {
+    window.location.href = "ctrl?FUNC_ID=InspectLogSave&SEND_ID="+sendId;
   }
-	function doSubmit() {
+	function doSubmit(form) {
+	 var result = Spry.Widget.Form.validate(form);
+      if (result == false){
+        return result;
+      }
 	var bgnDate = form1.INSPECT_END_BEGIN.value;
 	var endDate = form1.INSPECT_ENDC_END.value;
 	if(bgnDate.length ==0 || endDate.length ==0){
@@ -87,11 +89,13 @@
   form1["CUR_PAGE"].value = curPage;
   form1.submit();
   }
-  
+
    function doSelDeviceType(){
    	selDialog("ctrl?FUNC_ID=SelectDeviceType","TYPE_ID","TYPE_NAME",850,550,false);
    }
-  
+    function doBack(){
+     window.location.href = "ctrl?FUNC_ID=AllDeviceInspectLogListJsp";
+   }
    function doClear(){
     form1.DEVICE_NAME_EN.value="";
     form1.DEVICE_NAME_CN.value="";
@@ -124,6 +128,7 @@
           <div class="panelContent">
             <div class="panelContent2">
               <!-- 查询面板内容 -->
+               <!--
               <form name="form1" action="ctrl" method="get"  onSubmit="return doSubmit(this)">
               <input type="hidden" name="FUNC_ID" value="ADeviceInspectLogList">
                <input type="hidden" name=CUR_PAGE value="">
@@ -146,18 +151,29 @@
                  </tr>
 			     <tr>
 	               <td align="right">完成时间：</td>
-	                 <td><input type="text" class="date" name="INSPECT_END_BEGIN" value="<%=inspectEndBegin %>" readonly><input type="button" class="calendarBtn" onclick="return showCalendar('INSPECT_END_BEGIN', 'y-mm-dd');"><span class="requiredField">*</span>
+	                 <td>
+	                  <span id="sprytDate1">
+	                 <input type="text" class="date" name="INSPECT_END_BEGIN" value="<%=inspectEndBegin %>" ><input type="button" class="calendarBtn" onclick="return showCalendar('INSPECT_END_BEGIN', 'y-mm-dd');"><span class="requiredField">*</span>
+	                 <span class="textfieldRequiredMsg">需要提供一个值。</span>
+                   <span   class="textfieldInvalidFormatMsg">格式：yyyy-mm-dd。</span>
+                   </span>
 	                 -
-	                 <input type="text" class="date" name="INSPECT_ENDC_END" value="<%=inspectEndEnd %>" readonly><input type="button" class="calendarBtn" onclick="return showCalendar('INSPECT_ENDC_END', 'y-mm-dd');"><span class="requiredField">*</span>
+	                  <span id="sprytDate2">
+	                 <input type="text" class="date" name="INSPECT_ENDC_END" value="<%=inspectEndEnd %>" ><input type="button" class="calendarBtn" onclick="return showCalendar('INSPECT_ENDC_END', 'y-mm-dd');"><span class="requiredField">*</span>
+                	<span class="textfieldRequiredMsg">需要提供一个值。</span>
+                   <span   class="textfieldInvalidFormatMsg">格式：yyyy-mm-dd。</span>
+                   </span>
                 	</td>
                 	<td></td>
-                	<td></td>
+                	<td></td>AllDeviceInspectLogList
                 	<td align="right" nowrap="nowrap"><input type="submit" class="submit"  value="查询">
                    	<input type="button" class="button" onClick="doClear();" value="重置">
+                    <input type="button" class="button" onClick="doBack();" value="返回">
                    	</td>
                  </tr>
               </table>
                </form>
+                -->
               <!-- 查询面板内容结束 -->
             </div>
           </div>
@@ -176,13 +192,12 @@
               <!-- 列表内容 -->
              <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
                  <tr>
-                  <th>设备英文名称</th>
-                  <th>设备中文名称</th>
+                  <th>设备名称</th>
                   <th>设备类型</th>
                   <th>网络地址</th>
-                  <th>定义时间</th>
-                  <th>状态</th>
-                  <th>完成时间</th>
+                  <th>巡检开始时间</th>
+                  <th>巡检完成时间</th>
+                  <th>执行状态</th>
                   <th>操作</th>
                 </tr>
             
@@ -190,23 +205,23 @@
 			  for (int i = 0; i < sendIds.length; i++) {
 				if (i % 2 == 0) {%>
                 <tr onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
-                  <td align="center"> <%=deviceNameEns[i]%>  </td>
                   <td align="center"><%=deviceNameCns[i]%></td>
                   <td align="center"><%=typeNames[i]%></td>
                   <td align="center"><%=deviceIps[i]%></td>
-                  <td align="center"><%=taskDefTimes[i]%></td>
+                  <td align="center"><%=inspectBegins[i]%></td>
+                   <td align="center"><%=inspectEnds[i]%></td>
                    <td align="center">
                    <%for(int j=0;j<statusValue.length;j++){ %>
                         <%if(statusValue[j].equals(statuses[i]))%><%=statusDesc[j] %>
                     <%} %>
                    </td>
-                   <td align="center"><%=inspectEnds[i]%></td>
+                  
                  <td align="center" nowrap>
                  [
                    <a href="JavaScript:doInspectLogView('<%=sendIds[i] %>');">
                      查看日志
                   </a>|
-                   <a href="JavaScript:doInspectLogSave('<%=sendIds[i] %>');">
+                   <a href="JavaScript:doInspectLogSave('<%=sendIds[i] %>')">
                      保存日志
                   </a>
                   ]
@@ -215,23 +230,24 @@
      
                <%} else {%>
                <tr class="dark" onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
-                  <td align="center"> <%=deviceNameEns[i]%>  </td>
                   <td align="center"><%=deviceNameCns[i]%></td>
                   <td align="center"><%=typeNames[i]%></td>
                   <td align="center"><%=deviceIps[i]%></td>
-                  <td align="center"><%=taskDefTimes[i]%></td>
+                  <td align="center"><%=inspectBegins[i]%></td>
+                   <td align="center"><%=inspectEnds[i]%></td>
                    <td align="center">
                    <%for(int j=0;j<statusValue.length;j++){ %>
                         <%if(statusValue[j].equals(statuses[i]))%><%=statusDesc[j] %>
                     <%} %>
                    </td>
+                  
                    <td align="center"><%=inspectEnds[i]%></td>
-                 <td align="center" nowrap>
+                  <td align="center" nowrap>
                  [
                    <a href="JavaScript:doInspectLogView('<%=sendIds[i] %>');">
                      查看日志
                   </a>|
-                   <a href="JavaScript:doInspectLogSave('<%=sendIds[i] %>');">
+                   <a href="JavaScript:doInspectLogSave('<%=sendIds[i] %>';">
                      保存日志
                   </a>
                   ]
@@ -241,7 +257,25 @@
               </table>
               <div class="pageBar"><%=Page.BuildPageTextByMethod(xml,"TDoChangePage") %></div>
               <!-- 列表内容结束 -->
-          
+           <form name="form1" action="ctrl" method="get"  onSubmit="return doSubmit(this)">
+           <input type="hidden" name="FUNC_ID" value="AllDeviceInspectLogList">
+           <input type="hidden" name="INSPECT_END_BEGIN" value="<%=inspectEndBegin %>"> 
+           <input type="hidden" name="INSPECT_END_END" value="<%=inspectEndEnd %>"> 
+           <table width="100%" border="0" cellpadding="0" cellspacing="0" height="10">
+              <tr height="10">
+                <td colspan="9" align="center" height="10">
+                <input type="submit" class="submit"  value="返回">
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+               <td></td>
+              </tr>
+              </table>
+              </form>
             </div>
           </div>
           <div class="panelFoot"><div></div></div>
@@ -253,6 +287,12 @@
     </div>
     <div class="panelFoot"><div></div></div>
   </div>
- 
+  <script type="text/javascript">
+<!--
+var sprytextfield1 = new Spry.Widget.ValidationTextField("sprytDate1", "date", {format:"yyyy-mm-dd",required:true,useCharacterMasking:true});
+var sprytextfield2 = new Spry.Widget.ValidationTextField("sprytDate2", "date", {format:"yyyy-mm-dd",required:true,useCharacterMasking:true});
+
+//-->
+</script>
 </body>
 </html>

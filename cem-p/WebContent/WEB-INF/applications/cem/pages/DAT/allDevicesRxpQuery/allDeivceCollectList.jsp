@@ -7,8 +7,8 @@
 <%	
 	XMLWrap xml;
 
-	String inspectEndBegin;//巡检结束日期  
-	String inspectEndEnd;
+	String execEndBegin;//数据采集结束日期  
+	String execEndEnd;
 	
 	String[] sendIds;
 	String[] userNames;
@@ -22,8 +22,8 @@
 <%
 	xml = XMLWrap.getRequestXml(request,session,application);
 
-	inspectEndBegin = xml.getInputValue("INSPECT_END_BEGIN");
-	inspectEndEnd = xml.getInputValue("INSPECT_END_END");
+	execEndBegin = xml.getInputValue("EXEC_END_TIME_BEGIN");
+	execEndEnd = xml.getInputValue("EXEC_END_TIME_END");
 	
 	sendIds = xml.getItemValues("COMMANDS_SEND_HIS","SEND_ID");
 	userNames = xml.getItemValues("COMMANDS_SEND_HIS","USER_NAME");
@@ -39,30 +39,26 @@
 %>
 <html>
 <head>
-<title>设备巡检管理</title>
+<title>数据采集管理</title>
 <jsp:include flush="true" page="../../../../sys/pages/common/include/css.jsp"></jsp:include>
 <jsp:include flush="true" page="../../../../sys/pages/common/include/js.jsp"></jsp:include>
 
 <script type="text/javascript">
 <!--
- function doPickLogView(sendId) {
-    selDialog("ctrl?FUNC_ID=PickLogView&SEND_ID="+sendId,"SEND_ID","LOG_CONTEN",850,550,false);
+  function doRxpView(sendId) {
+    selDialog("ctrl?FUNC_ID=RxpView&SEND_ID="+sendId,"SEND_ID","SEND_ID",850,550,false);
   }
   
-  function doDownloadLog(sendId) {
-  	selDialog("ctrl?FUNC_ID=&SEND_ID="+sendId,"SEND_ID","LOG_CONTEN",850,550,false);
-  }
-  function doDeviceInspectLog(sendId,inspectEndBegin,inspectEndEnd) {
-    window.location.href = "ctrl?FUNC_ID=ADeviceInspectLogList&SEND_ID="+sendId+"&INSPECT_END_BEGIN="+inspectEndBegin+"&INSPECT_END_END="+inspectEndEnd;
+  function doDeviceCollectLog(sendId,execEndBegin,execEndEnd) {
+    window.location.href = "ctrl?FUNC_ID=DeviceCollectLogList&SEND_ID="+sendId+"&EXEC_END_TIME_BEGIN="+execEndBegin+"&EXEC_END_TIME_END="+execEndEnd;
   }
 	function doSubmit(form) {
-	 var result = Spry.Widget.Form.validate(form);
+      var result = Spry.Widget.Form.validate(form);
       if (result == false){
         return result;
       }
-	var bgnDate = form1.INSPECT_END_BEGIN.value;
-	var endDate = form1.INSPECT_END_END.value;
-	
+	var bgnDate = form.EXEC_END_TIME_BEGIN.value;
+	var endDate = form.EXEC_END_TIME_END.value;
 	if(bgnDate.length ==0 || endDate.length ==0){
 		alert("请输入完成时间");
 		return false;
@@ -73,6 +69,7 @@
 			return false;
 		}
 	}
+	 return true;
  }
  
   function TDoChangePage(curPage){
@@ -81,8 +78,8 @@
   }
   
    function doClear(){
-    form1.INSPECT_END_BEGIN.value="";
-    form1.INSPECT_END_END.value="";
+    form1.EXEC_END_TIME_BEGIN.value="";
+    form1.EXEC_END_TIME_END.value="";
   }
   
    function onChange(selectedIds,selector){
@@ -98,7 +95,7 @@
 </head>
 <body id="mainArea">
   <div id="mainPanel" class="panel">
-    <div class="panelHead">全网设备巡检日志查询</div>
+    <div class="panelHead">全网设备光功率数据查询</div>
     <div class="panelContent">
       <div class="panelContent2">    
         <!-- 查询面板 -->
@@ -108,26 +105,26 @@
             <div class="panelContent2">
               <!-- 查询面板内容 -->
               <form name="form1" action="ctrl" method="get"  onSubmit="return doSubmit(this)">
-              <input type="hidden" name="FUNC_ID" value="AllDeviceInspectLogList">
+              <input type="hidden" name="FUNC_ID" value="AllDevicesRxpQueryList">
                <input type="hidden" name=CUR_PAGE value="">
               <table>
 			     <tr>
-	               <td align="right">完成时间：</td>
+	               <td align="right">结束时间：</td>
 	                 <td>
-	                  <span id="sprytDate1">
-	                 <input type="text" class="date" name="INSPECT_END_BEGIN" value="<%=inspectEndBegin %>" ><input type="button" class="calendarBtn" onclick="return showCalendar('INSPECT_END_BEGIN', 'y-mm-dd');"><span class="requiredField">*</span>
-	                <span class="textfieldRequiredMsg">需要提供一个值。</span>
+	                 <span id="sprytDate1">
+	                 <input type="text" class="date" name="EXEC_END_TIME_BEGIN" value="<%=execEndBegin %>" ><input type="button" class="calendarBtn" onclick="return showCalendar('EXEC_END_TIME_BEGIN', 'y-mm-dd');"><span class="requiredField">*</span>
+	               <span class="textfieldRequiredMsg">需要提供一个值。</span>
                    <span   class="textfieldInvalidFormatMsg">格式：yyyy-mm-dd。</span>
                    <span   class="textfieldMinCharsMsg">格式：yyyy-mm-dd。</span>
                    </span>
 	                 -
 	                 <span id="sprytDate2">
-	                 <input type="text" class="date" name="INSPECT_END_END" value="<%=inspectEndEnd %>" ><input type="button" class="calendarBtn" onclick="return showCalendar('INSPECT_END_END', 'y-mm-dd');"><span class="requiredField">*</span>
+	                 <input type="text" class="date" name="EXEC_END_TIME_END" value="<%=execEndEnd %>" ><input type="button" class="calendarBtn" onclick="return showCalendar('EXEC_END_TIME_END', 'y-mm-dd');"><span class="requiredField">*</span>
                 	<span class="textfieldRequiredMsg">需要提供一个值。</span>
                    <span   class="textfieldInvalidFormatMsg">格式：yyyy-mm-dd。</span>
                    <span   class="textfieldMinCharsMsg">格式：yyyy-mm-dd。</span>
                    </span>
-                   </td>
+                	</td>
                 	<td></td>
                 	<td></td>
                 	<td align="right" nowrap="nowrap"><input type="submit" class="submit"  value="查询">
@@ -161,7 +158,7 @@
                   <th>任务状态</th>
                   <th>实际执行时间</th>
                   <th>实际完成时间</th>
-                  <th></th>
+                  <th>操作</th>
                 </tr>
               <%if(sendIds != null){
 			  for (int i = 0; i < sendIds.length; i++) {
@@ -181,11 +178,11 @@
                  
                   <td align="center" nowrap>
                  [
-                  <a href="JavaScript:doPickLogView('<%=sendIds[i] %>');">
-                     分拣日志
+                   <a href="JavaScript:doRxpView('<%=sendIds[i] %>');">
+                    光功率数据
                   </a>|
-                   <a href="JavaScript:doDeviceInspectLog('<%=sendIds[i] %>','<%=inspectEndBegin %>','<%=inspectEndEnd %>');">
-                     设备日志
+                   <a href="JavaScript:doDeviceCollectLog('<%=sendIds[i] %>','<%=execEndBegin %>','<%=execEndEnd%>');">
+                     采集日志
                   </a>
                   ]
                  </td>
@@ -203,13 +200,13 @@
                    </td>
                    <td align="center"><%=execBeginTimes[i]%></td>
                    <td align="center"><%=exeEndTimes[i]%></td>
-                 <td align="center" nowrap>
+                   <td align="center" nowrap>
                  [
-                  <a href="JavaScript:doPickLogView('<%=sendIds[i] %>');">
-                     分拣日志
+                   <a href="JavaScript:doRxpView('<%=sendIds[i] %>');">
+                    光功率数据
                   </a>|
-                   <a href="JavaScript:doDeviceInspectLog('<%=sendIds[i] %>','<%=inspectEndBegin %>','<%=inspectEndEnd %>');">
-                     设备日志
+                   <a href="JavaScript:doDeviceCollectLog('<%=sendIds[i] %>','<%=execEndBegin %>','<%=execEndEnd%>');">
+                     采集日志
                   </a>
                   ]
                  </td>
@@ -230,11 +227,10 @@
     </div>
     <div class="panelFoot"><div></div></div>
   </div>
-  <script type="text/javascript">
+   <script type="text/javascript">
 <!--
 var sprytextfield1 = new Spry.Widget.ValidationTextField("sprytDate1", "date", {format:"yyyy-mm-dd",required:true,useCharacterMasking:true,minChars:10});
 var sprytextfield2 = new Spry.Widget.ValidationTextField("sprytDate2", "date", {format:"yyyy-mm-dd",required:true,useCharacterMasking:true,minChars:10});
-
 //-->
 </script>
 </body>

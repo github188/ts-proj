@@ -3,60 +3,29 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page import="tower.tmvc.XMLWrap"%>
-<%@ page import="tower.cem.util.NetTelnet"%>
 <%	
 	XMLWrap xml;
-	String deviceId;
-	String deviceNameEn;
-	String deviceNameCn;
-	String deviceAbbNameEn;
-	String typeId;
-	String locationId;
-	String locationNameCn;
-	String deviceStatus;
-	String deviceIp;
-	String devicePort;
-	String deviceUser;
-	String devicePassword;
-	String devicePrompt;
 	String commandCont;
 	
-	
- 
 %>
 <%
 	xml = XMLWrap.getRequestXml(request,session,application);
-	deviceId = xml.getItemValue("DEVICE_INFO",1,"DEVICE_ID");
-	deviceNameEn = xml.getItemValue("DEVICE_INFO",1,"DEVICE_NAME_EN");
-	deviceNameCn = xml.getItemValue("DEVICE_INFO",1,"DEVICE_ABB_NAME_EN");
-	deviceAbbNameEn = xml.getItemValue("DEVICE_INFO",1,"DEVICE_NAME_CN");
-	typeId = xml.getItemValue("DEVICE_INFO",1,"TYPE_ID");
-	locationId = xml.getItemValue("DEVICE_INFO",1,"LOCATION_ID");
-    locationNameCn = xml.getItemValue("DEVICE_INFO",1,"LOCATION_ID");
-	deviceStatus = xml.getItemValue("DEVICE_INFO",1,"DEVICE_STATUS");
-	deviceIp = xml.getItemValue("DEVICE_INFO",1,"DEVICE_IP");
-	devicePort = xml.getItemValue("DEVICE_INFO",1,"DEVICE_PORT");
-	deviceUser = xml.getItemValue("DEVICE_INFO",1,"DEVICE_USER");
-	devicePassword = xml.getItemValue("DEVICE_INFO",1,"DEVICE_PASSWORD");
-	devicePrompt = xml.getItemValue("DEVICE_INFO",1,"DEVICE_PROMPT");
-	commandCont = xml.getItemValue("DEVICE_INFO",1,"COMMAND_CONT");
+	commandCont = xml.getItemValue("DEVICE_COMMAND_EXEC_LOG",1,"COMMAND_CONT");
 	
-	
-    String[] deviceStatusDesc = {"在用","停用"};
-	String[] deviceStatusValue = {"N","S"};
-
 %>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>设备登录测试</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="pragma" content="no-cache">
+<meta HTTP-EQUIV="Cache-Control" content="no-cache, must-revalidate">
+<meta HTTP-EQUIV="expires" content="0">
+<title>设备管理</title>
 <jsp:include flush="true" page="../../../../sys/pages/common/include/css.jsp"></jsp:include>
 <jsp:include flush="true" page="../../../../sys/pages/common/include/js.jsp"></jsp:include>
 <script type="text/javascript">
 <!--
-  function doReturn(deviceId){
-    form1.COMMAND.value="";
-    window.location.href="ctrl?FUNC_ID=CommLogList&DEVICE_ID="+deviceId;
+ function doclose(){
+  	window.close();
   }
 -->
 </script>
@@ -81,15 +50,16 @@
                      <table width="100%" border="0" cellpadding="0" cellspacing="0" >
               	 <tr>
               	 <td align="center">
-              	   <textarea id="textarea" class="textarea" cols="100" rows="20" readonly> <%=commandCont %></textarea>
+              	   <textarea id="textarea" class="textarea" cols="110" rows="25" readonly> <%=commandCont %></textarea>
 				</td>
                  </tr>
                   <tr>
 				    <td colspan="5" align="center" nowrap="nowrap">&nbsp;</td>
 				  </tr>
 				  <tr>
-				  <td align="center">
-				    <input type="button" class="button" onclick="doClose" value="关闭"></td>
+				 <td align="center">
+				    <input type="button" class="button" onclick="doclose();" value="关闭">
+				    </td>
 				  </tr>
               </table>
                       <!-- 查询面板内容结束 -->

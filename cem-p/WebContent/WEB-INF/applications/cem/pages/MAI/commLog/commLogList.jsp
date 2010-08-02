@@ -80,12 +80,15 @@
 <script type="text/javascript">
 <!--
  function doView(logId) {
-    window.location.href = "ctrl?FUNC_ID=commLogView&LOG_ID="+logId;
+    selDialog("ctrl?FUNC_ID=commLogView&LOG_ID="+logId,"LOG_ID","COMM_CONT",850,550,false);
   }
-function doSubmit() {
-
-	var bgnDate = form1.BENGIN_EXEC_END.value;
-	var endDate = form1.END_EXEC_END.value;
+function doSubmit(form) {
+	  var result = Spry.Widget.Form.validate(form);
+      if (result == false){
+        return result;
+      }
+	var bgnDate = form.BENGIN_EXEC_END.value;
+	var endDate = form.END_EXEC_END.value;
 	if(bgnDate.length ==0 || endDate.length ==0){
 		alert("结束时间不能为空");
 		return false;
@@ -96,7 +99,8 @@ function doSubmit() {
 			return false;
 		}
 	}
-      
+  
+      return true;
  }
  
   function TDoChangePage(curPage){
@@ -161,9 +165,20 @@ function doSubmit() {
                  </tr>
 			     <tr>
 	               <td align="right">结束时间：</td>
-	                 <td><input type="text" class="date" name="BENGIN_EXEC_END" value="<%=beginExecEnd %>" readonly><input type="button" class="calendarBtn" onclick="return showCalendar('BENGIN_EXEC_END', 'y-mm-dd');"><span class="requiredField">*</span>
+	                 <td>
+	                 <span id="sprytDate1">
+	                 <input type="text" class="date" name="BENGIN_EXEC_END" value="<%=beginExecEnd %>" ><input type="button" class="calendarBtn" onclick="return showCalendar('BENGIN_EXEC_END', 'y-mm-dd');"><span class="requiredField">*</span>
+	                 <span class="textfieldRequiredMsg">需要提供一个值。</span>
+                   <span   class="textfieldInvalidFormatMsg">格式：yyyy-mm-dd。</span>
+                    <span   class="textfieldMinCharsMsg">格式：yyyy-mm-dd。</span>
+                   </span>
 	                 -
-	                 <input type="text" class="date" name="END_EXEC_END" value="<%=endExecEnd %>" readonly><input type="button" class="calendarBtn" onclick="return showCalendar('END_EXEC_END', 'y-mm-dd');"><span class="requiredField">*</span>
+	              <span id="sprytDate2">
+				  <input type="text" class="date" name="END_EXEC_END" value="<%=endExecEnd %>" ><input type="button" class="calendarBtn" onclick="return showCalendar('END_EXEC_END', 'y-mm-dd');"><span class="requiredField">*</span>
+	              <span class="textfieldRequiredMsg">需要提供一个值。</span>
+                   <span   class="textfieldInvalidFormatMsg">格式：yyyy-mm-dd。</span>
+                    <span   class="textfieldMinCharsMsg">格式：yyyy-mm-dd。</span>
+                   </span>
 	                 </td> 
         	        <td>&nbsp;</td>
             	    <td>&nbsp;</td>
@@ -196,9 +211,8 @@ function doSubmit() {
                   <th>物理位置</th>
                   <th>网络地址</th>
                   <th>设备状态</th>
-                  <th>开始时间</th>
                   <th>结束时间</th>
-                  <th></th>
+                  <th>操作</th>
                 </tr>
             
               <%if(deviceIds != null){
@@ -218,13 +232,13 @@ function doSubmit() {
                         <%if(deviceStatusValue[j].equals(deviceStatuses[i]))%><%=deviceStatusDesc[j] %>
                     <%} %>
                    </td>
-                   <td align="center"><%=execBegins[i]%></td>
                    <td align="center"><%=execEnds[i]%></td>
                   <td align="center" nowrap>
-                 <input type="button" class="button" onClick="doView('<%=logIdS[i] %>');" value="查看指令">
+                   <a href="JavaScript:doView('<%=logIdS[i] %>');">
+                     查看指令
+                  </a>
                  </td>
                 </tr>
-     
                <%} else {%>
                <tr class="dark" onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
                    
@@ -242,10 +256,11 @@ function doSubmit() {
                         <%if(deviceStatusValue[j].equals(deviceStatuses[i]))%><%=deviceStatusDesc[j] %>
                     <%} %>
                    </td>
-                 <td align="center"><%=execBegins[i]%></td>
                  <td align="center"><%=execEnds[i]%></td>
                    <td align="center" nowrap>
-                 <input type="button" class="button" onClick="doView('<%=logIdS[i] %>');" value="查看指令">
+                 <a href="JavaScript:doView('<%=logIdS[i] %>');">
+                     查看指令
+                  </a>
                  </td>
                 </tr>
                <%}}} %>
@@ -264,6 +279,13 @@ function doSubmit() {
     </div>
     <div class="panelFoot"><div></div></div>
   </div>
- 
+    
+  <script type="text/javascript">
+<!--
+var sprytextfield1 = new Spry.Widget.ValidationTextField("sprytDate1", "date", {format:"yyyy-mm-dd",required:true,useCharacterMasking:true,minChars:10});
+var sprytextfield2 = new Spry.Widget.ValidationTextField("sprytDate2", "date", {format:"yyyy-mm-dd",required:true,useCharacterMasking:true,minChars:10});
+
+//-->
+</script>
 </body>
 </html>

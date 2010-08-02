@@ -36,7 +36,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>设备巡检</title>
+<title>维护指令模板管理</title>
 <jsp:include flush="true" page="../../../../sys/pages/common/include/css.jsp"></jsp:include>
 <jsp:include flush="true" page="../../../../sys/pages/common/include/js.jsp"></jsp:include>
 
@@ -54,8 +54,7 @@ function doSubmit(form) {
       var second = form1.SECOND.value;
       var exeType = form1.EXE_TYPE.value;
       var date = form1.EXE_DATE.value;
-      
-      var result = Spry.Widget.Form.validate(form);
+       var result = Spry.Widget.Form.validate(form);
       if (result == false){
         return result;
       }
@@ -78,7 +77,7 @@ function doSubmit(form) {
            return false;
         }
       }
-     
+   
       return true;
  }
   function doReturn(){
@@ -135,8 +134,8 @@ function doSubmit(form) {
           <div class="panelHead">这是文章标题</div>
           <div class="panelContent">
             <div class="panelContent2">
-             <form action="ctrl" method="post"name="form2" >
-               <input type="hidden" name="FUNC_ID" value="partDevicesList">
+             <form action="ctrl" method="post"name="form2">
+               <input type="hidden" name="FUNC_ID" value="PartDevicesCollectList">
               <%for(int n = 0;n < deviceIds.length;n++){ %>
                  <input type="hidden" name="DEVICE_ID" value="<%=deviceIds[n] %>">
                   <input type="hidden" name="DEVICE_TYPE_ID" value="<%=typeIds[n] %>">
@@ -149,7 +148,7 @@ function doSubmit(form) {
                  <input type="hidden" name="QTYPE_NAME" value="<%=typeName %>">
              </form>
             <form action="ctrl" method="post"name="form1" onSubmit="return doSubmit(this)">
-               <input type="hidden" name="FUNC_ID" value="deviceInspectTaskAdd">
+               <input type="hidden" name="FUNC_ID" value="DeviceCollectTaskAdd">
               <%for(int n = 0;n < deviceIds.length;n++){ %>
                  <input type="hidden" name="DEVICE_ID" value="<%=deviceIds[n] %>">
                   <input type="hidden" name="DEVICE_TYPE_ID" value="<%=typeIds[n] %>">
@@ -166,10 +165,10 @@ function doSubmit(form) {
                    </td>
                    <td  align="left">
                     <span id="date">
-                    <span id="sprytDate">
+                   <span id="sprytDate">
                    日期：<input   type="text" class="date" name="EXE_DATE" ><input type="button" class="calendarBtn" onclick="return showCalendar('EXE_DATE', 'y-mm-dd');"><span class="requiredField">*</span>
                    <span class="textfieldRequiredMsg">需要提供一个值。</span>
-                   <span   class="textfieldInvalidFormatMsg">日期格式：yyyy-mm-dd。</span>
+                    <span   class="textfieldInvalidFormatMsg">日期格式：yyyy-mm-dd。</span>
                     <span   class="textfieldMinCharsMsg">日期格式：yyyy-mm-dd。</span>
                    </span>
                    </span>
@@ -177,7 +176,7 @@ function doSubmit(form) {
                     <td  align="left">
                     <span id="hour">
                     <span id="sprytHour">
-                  		<input   type="text" class="text" size="3" name="HOUR">时
+                  时： <input   type="text" class="text" size="3" name="HOUR">
                     <span class="textfieldInvalidFormatMsg">格式无效，有效格式为实数。</span>
 		            <span class="textfieldMaxCharsMsg">已超过最大字符数2。</span>	
                    </span>
@@ -186,7 +185,7 @@ function doSubmit(form) {
                     <td  align="left">
                     <span id="minute">
                     <span id="sprytMinute">
-                   		<input   type="text" class="text" size="3" name="MINUTE">分
+                   分：<input   type="text" class="text" size="3" name="MINUTE">
                     <span class="textfieldInvalidFormatMsg">格式无效，有效格式为实数。</span>
 		            <span class="textfieldMaxCharsMsg">已超过最大字符数2。</span>	
                    </span>
@@ -195,7 +194,7 @@ function doSubmit(form) {
                     <td align="left">
                     <span id="second">
                     <span id="sprytSecond">
-                 		<input   type="text" class="text" size="3" name="SECOND"> 秒
+                  秒： <input   type="text" class="text" size="3" name="SECOND">
                     <span class="textfieldInvalidFormatMsg">格式无效，有效格式为实数。</span>
 		            <span class="textfieldMaxCharsMsg">已超过最大字符数2。</span>	
                    </span>
@@ -205,7 +204,7 @@ function doSubmit(form) {
  				<tr height="50">
                 <td colspan="6" align="center">
                 	<input size="10" type="button" class="button"  onclick="doReturn()" value="上一步" >
-                 	<input size="10" type="submit" class="submit" style="width:80px" value="添加任务" >
+                 	<input size="10" type="submit" class="submit" style="width:90px" value="添加数据采集任务" >
                 </td>
               </tr>
               </table>
@@ -227,7 +226,7 @@ function doSubmit(form) {
    
   <script type="text/javascript">
 <!--
-var sprytextfield1 = new Spry.Widget.ValidationTextField("sprytDate", "date", {isRequired:false, format:"yyyy-mm-dd",useCharacterMasking:true,maxChars:10,minChars:10});
+var sprytextfield1 = new Spry.Widget.ValidationTextField("sprytDate", "date", {format:"yyyy-mm-dd",isRequired:false,useCharacterMasking:true, maxChars:10,minChars:10});
 var sprytextfield2 = new Spry.Widget.ValidationTextField("sprytHour", "integer", {isRequired:false,useCharacterMasking:true,maxChars:2});
 var sprytextfield3 = new Spry.Widget.ValidationTextField("sprytMinute", "integer", {isRequired:false,useCharacterMasking:true,maxChars:2});
 var sprytextfield4 = new Spry.Widget.ValidationTextField("sprytSecond", "integer", {isRequired:false,useCharacterMasking:true,maxChars:2});

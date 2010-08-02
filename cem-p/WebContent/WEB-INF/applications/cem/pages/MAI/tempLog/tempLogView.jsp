@@ -5,30 +5,21 @@
 <%@ page import="tower.tmvc.XMLWrap"%>
 <%	
     XMLWrap xml;
-	String logId;
-	String  deviceName;
-	String  deviceIp;
-	String userName;
-	String  maintainBegin;
-	String maintainEnd;
-	String  status;
+	String sendId;
 	String logCont;
 %>
 <%
     xml = XMLWrap.getRequestXml(request,session,application);
-	logId = xml.getItemValue("DEVICE_MAINTAIN_LOG",1,"LOG_ID");
-	deviceName = xml.getItemValue("DEVICE_MAINTAIN_LOG",1,"TYPE_NAME");
-	deviceIp = xml.getItemValue("DEVICE_MAINTAIN_LOG",1,"DEVICE_IP");
-	userName = xml.getItemValue("DEVICE_MAINTAIN_LOG",1,"USER_NAME");
-	maintainBegin = xml.getItemValue("DEVICE_MAINTAIN_LOG",1,"MAINTAIN_BEGIN");
-	maintainEnd = xml.getItemValue("DEVICE_MAINTAIN_LOG",1,"MAINTAIN_END");
-	status = xml.getItemValue("DEVICE_MAINTAIN_LOG",1,"STATUS");
+	sendId = xml.getItemValue("DEVICE_MAINTAIN_LOG",1,"SEND_ID");
 	logCont = xml.getItemValue("DEVICE_MAINTAIN_LOG",1,"LOG_CONT");
 
 %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="pragma" content="no-cache">
+<meta HTTP-EQUIV="Cache-Control" content="no-cache, must-revalidate">
+<meta HTTP-EQUIV="expires" content="0">
 <title>维护指令日志查看</title>
 <jsp:include flush="true" page="../../../../sys/pages/common/include/css.jsp"></jsp:include>
 <jsp:include flush="true" page="../../../../sys/pages/common/include/js.jsp"></jsp:include>
@@ -46,16 +37,19 @@
     }
     
   function doSaveLog(logId) {
-    window.location.href = "ctrl?FUNC_ID=TempLogSave&LOG_ID="+logId;
+    window.location.href = "ctrl?FUNC_ID=TempLogSave&SEND_ID="+logId;
  }
- 
+  function  doclose() {
+    window.close();
+ }
+
 -->
 </script>
 </head>
 
 <body id="mainArea">
   <div id="mainPanel" class="panel">
-    <div class="panelHead">维护指令日志查看</div>
+    <div class="panelHead">模板执行日志查看</div>
     <div class="panelContent">
       <div class="panelContent2">
         
@@ -71,59 +65,21 @@
                   <div class="panelHead"></div>
                   <div class="panelContent">
                     <div class="panelContent2">
-                     <table>
-                      <tr>
-                          <td width="120" align="right">设备名称：</td>
-		                  <td width="100">
-             					 <input type="text" class="text" value="<%=deviceName %>" readonly>
-		                  </td>
-		                  </tr>
-		                  <tr>
-                          <td wwidth="120" align="right">设备网络地址：</td>
-		                  <td width="100">
-		                       <input type="text" class="text" value="<%=deviceIp %>" readonly>
-		                  </td>
-		               </tr>
-		                 <tr>
-                          <td width="120" align="right">维护人员：</td>
-		                  <td width="100">
-             					 <input type="text" class="text" value="<%=userName %>" readonly>
-		                  </td>
-		                  </tr>
-		                  <tr>
-                          <td wwidth="120" align="right">维护开始时间：</td>
-		                  <td width="100">
-		                       <input type="text" class="text" value="<%=maintainBegin %>" readonly>
-		                  </td>
-		               </tr>
-		                    <tr>
-                          <td width="120" align="right">维护结束时间：</td>
-		                  <td width="100">
-             					 <input type="text" class="text" value="<%=maintainEnd %>" readonly>
-		                  </td>
-		                  </tr>
-		                  <tr>
-                          <td wwidth="120" align="right">状态：</td>
-		                  <td width="100">
-		                       <input type="text" class="text" value="<%=status %>" readonly>
-		                  </td>
-		               </tr>
-		                <tr>
-		                 <td width="120" align="right">维护日志内容：</td>
-		                 <td colspan="3"> 
-              					<textarea name="TEMP_CONT" id="textarea" class="textarea" cols="50" rows="10" readonly><%=logCont%></textarea>
-		                 </td>
-		                 <td></td>
-		                <td></td>
-		               </tr>
-                         <tr height="15"></tr>
-                        <tr>
-                          <td colspan="4" align="center" nowrap="nowrap">
-                           <input type="button" class="reset" onclick="doSaveLog(<%=logId %>)" value="另存为">
-                            <input type="button" class="reset" onclick="doReturn()" value="返回">
-                          </td>
-                        </tr>
-                      </table>
+                       <table width="100%" border="0" cellpadding="0" cellspacing="0" >
+              	 <tr>
+              	 <td align="right">
+              	   <textarea id="textarea" class="textarea" cols="110" rows="25" readonly> <%=logCont %></textarea>
+				</td>
+                 </tr>
+                  <tr>
+				    <td colspan="5" align="center" nowrap="nowrap">&nbsp;</td>
+				  </tr>
+				  <tr>
+				  <td align="center">
+				   <input type="button" class="reset" onclick="doSaveLog('<%=sendId %>')" value="另存为">
+				    <input type="button" class="button" onclick="doclose()" value="关闭"></td>
+				  </tr>
+              </table>
                       <!-- 查询面板内容结束 -->
                     </div>
                   </div>

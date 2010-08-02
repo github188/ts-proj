@@ -65,10 +65,14 @@
   function doInspectLogView(sendId) {
   	selDialog("ctrl?FUNC_ID=InspectLogView&SEND_ID="+sendId,"SEND_ID","LOG_CONTEN",850,550,false);
   }
-  function doInspectLogSave(logId) {
-    window.location.href = "ctrl?FUNC_ID=InspectLogSave&SEND_ID="+logId;
+  function doInspectLogSave(sendId) {
+    window.location.href = "ctrl?FUNC_ID=InspectLogSave&SEND_ID="+sendId;
   }
-	function doSubmit() {
+	function doSubmit(form) {
+	 var result = Spry.Widget.Form.validate(form);
+      if (result == false){
+        return result;
+      }
 	var bgnDate = form1.INSPECT_END_BEGIN.value;
 	var endDate = form1.INSPECT_ENDC_END.value;
 	if(bgnDate.length ==0 || endDate.length ==0){
@@ -146,9 +150,20 @@
                  </tr>
 			     <tr>
 	               <td align="right">完成时间：</td>
-	                 <td><input type="text" class="date" name="INSPECT_END_BEGIN" value="<%=inspectEndBegin %>" readonly><input type="button" class="calendarBtn" onclick="return showCalendar('INSPECT_END_BEGIN', 'y-mm-dd');"><span class="requiredField">*</span>
+	                 <td>
+	                <span id="sprytDate1">
+	                 <input type="text" class="date" name="INSPECT_END_BEGIN" value="<%=inspectEndBegin %>" ><input type="button" class="calendarBtn" onclick="return showCalendar('INSPECT_END_BEGIN', 'y-mm-dd');"><span class="requiredField">*</span>
+	                <span class="textfieldRequiredMsg">需要提供一个值。</span>
+                   <span   class="textfieldInvalidFormatMsg">格式：yyyy-mm-dd。</span>
+                     <span   class="textfieldMinCharsMsg">格式：yyyy-mm-dd。</span>
+                   </span>
 	                 -
-	                 <input type="text" class="date" name="INSPECT_ENDC_END" value="<%=inspectEndEnd %>" readonly><input type="button" class="calendarBtn" onclick="return showCalendar('INSPECT_ENDC_END', 'y-mm-dd');"><span class="requiredField">*</span>
+	                <span id="sprytDate2">
+	                 <input type="text" class="date" name="INSPECT_ENDC_END" value="<%=inspectEndEnd %>" ><input type="button" class="calendarBtn" onclick="return showCalendar('INSPECT_ENDC_END', 'y-mm-dd');"><span class="requiredField">*</span>
+                	<span class="textfieldRequiredMsg">需要提供一个值。</span>
+                   <span   class="textfieldInvalidFormatMsg">格式：yyyy-mm-dd。</span>
+                   <span   class="textfieldMinCharsMsg">格式：yyyy-mm-dd。</span>
+                   </span>
                 	</td>
                 	<td></td>
                 	<td></td>
@@ -259,6 +274,13 @@
     </div>
     <div class="panelFoot"><div></div></div>
   </div>
- 
+    
+  <script type="text/javascript">
+<!--
+var sprytextfield1 = new Spry.Widget.ValidationTextField("sprytDate1", "date", {format:"yyyy-mm-dd",required:true,useCharacterMasking:true,minChars:10});
+var sprytextfield2 = new Spry.Widget.ValidationTextField("sprytDate2", "date", {format:"yyyy-mm-dd",required:true,useCharacterMasking:true,minChars:10});
+
+//-->
+</script>
 </body>
 </html>

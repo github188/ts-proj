@@ -17,7 +17,10 @@
 %>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="pragma" content="no-cache">
+<meta HTTP-EQUIV="Cache-Control" content="no-cache, must-revalidate">
+<meta HTTP-EQUIV="expires" content="0">
 <title>设备巡检管理</title>
 <jsp:include flush="true" page="../../../../sys/pages/common/include/css.jsp"></jsp:include>
 <jsp:include flush="true" page="../../../../sys/pages/common/include/js.jsp"></jsp:include>
@@ -60,7 +63,7 @@
 				  </tr>
 				  <tr>
 				  <td align="center">
-				   <input type="button" class="reset" onclick="doSaveLog('<%=sendId %>')" value="另存为">
+				   <input type="button" class="button" onclick="doSaveLog('<%=sendId%>')" value="另存为">
 				    <input type="button" class="button" onclick="doclose()" value="关闭"></td>
 				  </tr>
               </table>

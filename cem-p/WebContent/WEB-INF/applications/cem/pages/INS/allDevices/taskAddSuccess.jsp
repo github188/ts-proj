@@ -28,7 +28,7 @@
                   <div class="panelContent">
                     <div class="panelContent2">
                       <!-- 查询面板内容 -->
-            <form name="form1" action="ctrl" method="get"  onSubmit="return doSubmit(this)">
+            <form name="form1" action="ctrl" method="get" >
               <input type="hidden" name="FUNC_ID" value="AllDeviceTypeList">
                  <table width="100%" height="100" border="0" cellpadding="0" cellspacing="0">
               	 <tr>

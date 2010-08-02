@@ -49,20 +49,21 @@
          } 
        }
        
-       if(min !="" && min.length > 0){
-         var n = min.substring(min.lastIndexOf(".")+1);
-         if(n.length > 2){
-           alert("光功率/标准最小值小数点后面不能超过2位");
-            return false;
-         } 
-       }
-       if(workMin !="" && workMin.length > 0){
-         var n = workMin.substring(workMin.lastIndexOf(".")+1);
-         if(n.length > 2){
-           alert("光功率/网络要求最小值小数点后面不能超过2位");
-            return false;
-         } 
-       }
+       //if(min !="" && min.length > 0){
+       //  var n = min.substring(min.lastIndexOf(".")+1);
+       //  alert(n);
+       //  if(n.length > 2){
+       //    alert("光功率/标准最小值小数点后面不能超过2位");
+        //    return false;
+       //  } 
+     //  }
+     //  if(workMin !="" && workMin.length > 0){
+      //   var n = workMin.substring(workMin.lastIndexOf(".")+1);
+      //   if(n.length > 2){
+      //     alert("光功率/网络要求最小值小数点后面不能超过2位");
+      //      return false;
+      //   } 
+      // }
        
        
        var result = Spry.Widget.Form.validate(form);
@@ -192,9 +193,9 @@
 <!--
 var sprytextfield1 = new Spry.Widget.ValidationTextField("spryTypeNameEn","none", {required:true,maxChars:60});
 var sprytextfield2 = new Spry.Widget.ValidationTextField("spryTypeNameCn", {isRequired:false,maxChars:60});
-var sprytextfield3 = new Spry.Widget.ValidationTextField("sprytStandardRxMax","real", {isRequired:false,useCharacterMasking:true,maxChars:50});
-var sprytextfield4 = new Spry.Widget.ValidationTextField("sprytStandardRxMin", "real", {isRequired:false,useCharacterMasking:true,maxChars:50});
-var sprytextfield5 = new Spry.Widget.ValidationTextField("spryNetWorkRxMin", "real", {isRequired:false,useCharacterMasking:true,maxChars:50});
+var sprytextfield3 = new Spry.Widget.ValidationTextField("sprytStandardRxMax","double", {isRequired:false,useCharacterMasking:true,maxChars:50});
+var sprytextfield4 = new Spry.Widget.ValidationTextField("sprytStandardRxMin", "double", {isRequired:false,useCharacterMasking:true,maxChars:50});
+var sprytextfield5 = new Spry.Widget.ValidationTextField("spryNetWorkRxMin", "double", {isRequired:false,useCharacterMasking:true,maxChars:50});
 var sprytextfield6 = new Spry.Widget.ValidationTextField("spryRemark",  {required:false,maxChars:200});
 
 //-->

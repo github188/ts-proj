@@ -50,7 +50,7 @@
 	typeId = xml.getInputValue("QTYPE_ID");
 	typeName = xml.getInputValue("QTYPE_NAME");
 	
-	logIds = xml.getItemValues("DEVICE_MAINTAIN_LOG","LOG_ID");
+	logIds = xml.getItemValues("DEVICE_MAINTAIN_LOG","SEND_ID");
 	deviceIds = xml.getItemValues("DEVICE_MAINTAIN_LOG","DEVICE_ID");
 	userNames = xml.getItemValues("DEVICE_MAINTAIN_LOG","USER_NAME");
 	deviceNameEns = xml.getItemValues("DEVICE_MAINTAIN_LOG", "DEVICE_NAME_EN");
@@ -59,9 +59,9 @@
 	taskDefinTimes = xml.getItemValues("DEVICE_MAINTAIN_LOG", "TASK_DEFINE_TIME");
 	taskPlanTimes = xml.getItemValues("DEVICE_MAINTAIN_LOG", "TASK_PLAN_TIME");
 	tempIds = xml.getItemValues("DEVICE_MAINTAIN_LOG", "TEMPLATE_ID");
-	tempNames = xml.getItemValues("DEVICE_MAINTAIN_LOG", "TEMPLATE_NAME");
+	tempNames = xml.getItemValues("DEVICE_MAINTAIN_LOG", "TEMP_NAME");
 	typeIds = xml.getItemValues("DEVICE_MAINTAIN_LOG", "TYPE_ID");
-	typeNames = xml.getItemValues("DEVICE_MAINTAIN_LOG", "TYPE_NAME");
+	typeNames = xml.getItemValues("DEVICE_MAINTAIN_LOG", "TYPE_NAME_CN");
 	statuses = xml.getItemValues("DEVICE_MAINTAIN_LOG", "STATUS");
 	execBeginTimes = xml.getItemValues("DEVICE_MAINTAIN_LOG", "EXEC_BEGIN_TIME");
 	execEndTimes = xml.getItemValues("DEVICE_MAINTAIN_LOG", "EXEC_END_TIME");
@@ -79,15 +79,19 @@
 
 <script type="text/javascript">
 <!--
- function doView(logId) {
-    window.location.href = "ctrl?FUNC_ID=TempLogView&LOG_ID="+logId;
+ function doLogView(sendId) {
+     selDialog("ctrl?FUNC_ID=TempLogView&SEND_ID="+sendId,"SEND_ID","LOG_CONTEN",850,550,false);
  }
  
- function doSaveLog(logId) {
-    window.location.href = "ctrl?FUNC_ID=TempLogSave&LOG_ID="+logId;
+ function doSaveLog(sendId) {
+    window.location.href = "ctrl?FUNC_ID=TempLogSave&SEND_ID="+sendId;
  }
  
 function doSubmit(form) {
+  var result = Spry.Widget.Form.validate(form);
+      if (result == false){
+        return result;
+      }
 	var bgnDate = form.QEXEC_END_BEGIN.value;
 	var endDate = form.QEXEC_END_END.value;
 	if(bgnDate.length ==0 || endDate.length ==0){
@@ -95,15 +99,12 @@ function doSubmit(form) {
 		return false;
 	}
 	if(bgnDate.length !=0 && endDate.length !=0){
-		if(bgnDate1 > endDate1){
+		if(bgnDate > endDate){
 			alert("截至时间应大于开始时间！");
 			return false;
 		}
 	}
-      var result = Spry.Widget.Form.validate(form);
-      if (result == false){
-        return result;
-      }
+ 
       return true;
  }
  
@@ -194,9 +195,19 @@ function doSubmit(form) {
 			     <tr>
         	        <td align="right">完成时间：</td>
 	                 <td>
+	                  <span id="sprytDate1">
 	                 <input type="text" class="date" name="QEXEC_END_BEGIN" value="<%=execEndBegin %>"><input type="button" class="calendarBtn" onclick="return showCalendar('QEXEC_END_BEGIN', 'y-mm-dd');"><span class="requiredField">*</span>
+	                <span class="textfieldRequiredMsg">需要提供一个值。</span>
+                   <span   class="textfieldInvalidFormatMsg">格式：yyyy-mm-dd。</span>
+                    <span   class="textfieldMinCharsMsg">格式：yyyy-mm-dd。</span>
+                   </span>
 	                 -
+	               <span id="sprytDate2">
 	                 <input type="text" class="date" name="QEXEC_END_END" value="<%=execEndEnd %>"><input type="button" class="calendarBtn" onclick="return showCalendar('QEXEC_END_END', 'y-mm-dd');"><span class="requiredField">*</span>
+	                 <span class="textfieldRequiredMsg">需要提供一个值。</span>
+                   <span   class="textfieldInvalidFormatMsg">格式：yyyy-mm-dd。</span>
+                    <span   class="textfieldMinCharsMsg">格式：yyyy-mm-dd。</span>
+                   </span>
 	                 </td> 
 	                <td>&nbsp;</td>
             	    <td>&nbsp;</td>
@@ -231,7 +242,7 @@ function doSubmit(form) {
                   <th>指令模板名称</th>
                   <th>状态</th>
                   <th>完成时间</th>
-                   <th></th>
+                   <th>操作</th>
                 </tr>
               <%if(logIds != null){
 			  for (int i = 0; i < logIds.length; i++) {
@@ -280,12 +291,17 @@ function doSubmit(form) {
           <div class="panelFoot"><div></div></div>
         </div>
         <!-- 列表面板结束 -->
-     
       </div>
-      
     </div>
     <div class="panelFoot"><div></div></div>
   </div>
- 
+    
+  <script type="text/javascript">
+<!--
+var sprytextfield1 = new Spry.Widget.ValidationTextField("sprytDate1", "date", {format:"yyyy-mm-dd",required:true,useCharacterMasking:true,minChars:10});
+var sprytextfield2 = new Spry.Widget.ValidationTextField("sprytDate2", "date", {format:"yyyy-mm-dd",required:true,useCharacterMasking:true,minChars:10});
+
+//-->
+</script>
 </body>
 </html>
