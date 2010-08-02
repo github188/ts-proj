@@ -75,16 +75,16 @@ public class BoRxpDetail implements RootBo{
 		requestXml.setItemValue("DEVICE_PORT_RXP", row, "DEVICE_IP",rsRow.getString("DEVICE_IP"));
 		requestXml.setItemValue("DEVICE_PORT_RXP", row, "PORT_SN",rsRow.getString("PORT_SN"));
 		requestXml.setItemValue("DEVICE_PORT_RXP", row, "TYPE_NAME_CN",rsRow.getString("TYPE_NAME_CN"));
-		requestXml.setItemValue("DEVICE_PORT_RXP", row, "RXP",rsRow.getLong("RXP"));
-		requestXml.setItemValue("DEVICE_PORT_RXP", row, "STANDARD_RX_MAX",rsRow.getLong("STANDARD_RX_MAX"));
-		requestXml.setItemValue("DEVICE_PORT_RXP", row, "STANDARD_RX_MIN",rsRow.getLong("STANDARD_RX_MIN"));
-		requestXml.setItemValue("DEVICE_PORT_RXP", row, "NETWORK_RX_MIN",rsRow.getLong("NETWORK_RX_MIN"));
-		requestXml.setItemValue("DEVICE_PORT_RXP", row, "COLLECT_END",rsRow.getLong("COLLECT_END"));
-		requestXml.setItemValue("DEVICE_PORT_RXP", row, "COLLECT_END",rsRow.getLong("STATUS"));
+		requestXml.setItemValue("DEVICE_PORT_RXP", row, "RXP",rsRow.getDouble("RXP").toString());
+		requestXml.setItemValue("DEVICE_PORT_RXP", row, "STANDARD_RX_MAX",rsRow.getDouble("STANDARD_RX_MAX").toString());
+		requestXml.setItemValue("DEVICE_PORT_RXP", row, "STANDARD_RX_MIN",rsRow.getDouble("STANDARD_RX_MIN").toString());
+		requestXml.setItemValue("DEVICE_PORT_RXP", row, "NETWORK_RX_MIN",rsRow.getDouble("NETWORK_RX_MIN").toString());
+		requestXml.setItemValue("DEVICE_PORT_RXP", row, "COLLECT_END",rsRow.getDouble("COLLECT_END").toString());
+		requestXml.setItemValue("DEVICE_PORT_RXP", row, "COLLECT_END",rsRow.getString("STATUS"));
 		
-		long rxp = rsRow.getLong("RXP");
-		long rxMax = rsRow.getLong("STANDARD_RX_MAX");
-		long rxMin = rsRow.getLong("NETWORK_RX_MIN");
+		double rxp = rsRow.getDouble("RXP");
+		double rxMax = rsRow.getDouble("STANDARD_RX_MAX");
+		double rxMin = rsRow.getDouble("NETWORK_RX_MIN");
 		
 		if(rxp >= rxMin && rxp <= rxMax){
 			requestXml.setItemValue("DEVICE_PORT_RXP", row, "IS_NORMAL","是");

@@ -91,6 +91,8 @@ public class BoAllDeviceInspectLogList implements RootBo {
 			requestXml.setItemValue("COMMANDS_SEND_HIS", row, "TYPE_NAME_CN", enDeviceType
 				.getTypeNameCn());
 		    }
+		}else{
+			requestXml.setItemValue("COMMANDS_SEND_HIS", row, "TYPE_NAME_CN", "全网设备");
 		}
 
 		requestXml.setItemValue("COMMANDS_SEND_HIS", row, "SEND_ID", rsRow.getString("SEND_ID"));

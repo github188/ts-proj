@@ -15,6 +15,7 @@
 	String[] inspectBegins;
 	String[] inspectEnds;
 	String[] statuses;
+	String[] deviceIds;
 	
 	String execEndBegin;//数据采集结束日期  
 	String execEndEnd;
@@ -35,6 +36,7 @@
 	inspectBegins = xml.getItemValues("DEVICE_COLLECT_LOG", "COLLECT_BEGIN");
 	inspectEnds = xml.getItemValues("DEVICE_COLLECT_LOG", "COLLECT_END");
 	statuses = xml.getItemValues("DEVICE_COLLECT_LOG", "STATUS");
+	deviceIds = xml.getItemValues("DEVICE_COLLECT_LOG", "DEVICE_ID");
     
 	String[] statusDesc = {"成功","失败"};
 	String[] statusValue = {"S","F"};
@@ -47,11 +49,11 @@
 
 <script type="text/javascript">
 <!--
-   function doSaveLog(sendId) {
-    window.location.href = "ctrl?FUNC_ID=CollectLogSave&SEND_ID="+sendId;
+   function doSaveLog(sendId, deviceId) {
+    window.location.href = "ctrl?FUNC_ID=CollectLogSave&SEND_ID="+sendId+"&DEVICE_ID="+deviceId;
     }
-   function doCollectLogView(sendId) {
-  	selDialog("ctrl?FUNC_ID=CollectLogView&SEND_ID="+sendId,"SEND_ID","LOG_CONTEN",850,550,false);
+   function doCollectLogView(sendId, deviceId) {
+  	selDialog("ctrl?FUNC_ID=CollectLogView&SEND_ID="+sendId+"&DEVICE_ID="+deviceId,"SEND_ID","LOG_CONTEN",850,550,false);
   }
  
   function TDoChangePage(curPage){
@@ -124,10 +126,10 @@
                    </td>
                       <td align="center" nowrap>
                  [
-                   <a href="JavaScript:doCollectLogView('<%=sendIds[i] %>');">
+                   <a href="JavaScript:doCollectLogView('<%=sendIds[i]%>','<%=deviceIds[i]%>');">
                      查看日志
                   </a>|
-                   <a href="JavaScript:doSaveLog('<%=sendIds[i] %>');">
+                   <a href="JavaScript:doSaveLog('<%=sendIds[i]%>','<%=deviceIds[i]%>');">
                      保存日志
                   </a>
                   ]
@@ -148,10 +150,10 @@
                    </td>
                    <td align="center" nowrap>
                  [
-                   <a href="JavaScript:doCollectLogView('<%=sendIds[i] %>');">
+                   <a href="JavaScript:doCollectLogView('<%=sendIds[i]%>','<%=deviceIds[i]%>');">
                      查看日志
                   </a>|
-                   <a href="JavaScript:doSaveLog('<%=sendIds[i] %>');">
+                   <a href="JavaScript:doSaveLog('<%=sendIds[i]%>','<%=deviceIds[i]%>');">
                      保存日志
                   </a>
                   ]
