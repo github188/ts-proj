@@ -62,6 +62,8 @@
 	
     String[] deviceStatusDesc = {"在用","停用"};
 	String[] deviceStatusValue = {"N","S"};
+	
+	String date = DateFunc.GenNowTime();
 %>
 <html>
 <head>
@@ -77,6 +79,13 @@
     window.close();
   }
   
+ window.onbeforeunload=function(){   
+ var deviceId = '<%=deviceId%>';
+ var execBegin = '<%=date%>';
+ var comms = window.document.Test.getCommands();
+  window.location.href = "ctrl?FUNC_ID=Disconnection&DEVICE_ID="+deviceId+"&COMMANDS="+comms;
+ 
+} 
 -->
 </script>
 </head>
@@ -136,7 +145,7 @@
               <table width="100%"  >
 				 <tr>
 				 	<td align="center">
-				 		<applet code="tower.TelnetApplet" codebase="../sys/applet/" archive="commons-net-2.0.jar,applet.jar" width=800 height=500>
+				 		<applet name="Test" code="tower.TelnetApplet" codebase="../sys/applet/" archive="commons-net-2.0.jar,applet.jar" width=700 height=400>
               				<param   name=DeviceIP   value= "<%=deviceIp%>">
              			 	<param   name=DevicePort   value= "<%=devicePort%>"> 
           			    	<param   name=DeviceUser   value= "<%=deviceUser%>"> 
@@ -146,7 +155,7 @@
        				       	<param   name=FrontHostPort   value= "<%=hostPort%>"> 
            				   	<param   name=FrontHostUser   value= "<%=hostUser%>"> 
            				   	<param   name=FrontHostPassword   value= "<%=hostPassword%>"> 
-         			     	<param   name=FrontHostPrompt   value= "<%=hostPrompt%>"> 
+         			     	<param   name=FrontHostPrompt   value= "<%=hostPrompt%>" MAYSCRIPT> 
          		     </applet>
 				 	</td>
 				 </tr>
