@@ -56,7 +56,7 @@ public class BoCommsSubmit implements RootBo {
 	enDeviceCommandExecLog.setUserId(userId);
 	enDeviceCommandExecLog.setCommandCont(comms);
 	enDeviceCommandExecLog.setDeviceId(deviceId);
-	enDeviceCommandExecLog.setExecBegin(execBegin);
+	enDeviceCommandExecLog.setExecBegin(DateFunc.ParseDateTime(execBegin));
 	enDeviceCommandExecLog.setExecEnd(execEnd);
 	dbDeviceCommandExecLog.insert(enDeviceCommandExecLog);
 	
