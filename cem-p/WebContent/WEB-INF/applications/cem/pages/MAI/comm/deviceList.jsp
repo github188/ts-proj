@@ -78,7 +78,6 @@ function doSubmit(form) {
       }
       return true;
  }
- 
   function TDoChangePage(curPage){
   form1["CUR_PAGE"].value = curPage;
   form1.submit();
