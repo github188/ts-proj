@@ -83,7 +83,7 @@
  var deviceId = '<%=deviceId%>';
  var execBegin = '<%=date%>';
  var comms = window.document.Test.getCommands();
-  window.location.href = "ctrl?FUNC_ID=Disconnection&DEVICE_ID="+deviceId+"&COMMANDS="+comms;
+  window.location.href = "ctrl?FUNC_ID=Disconnection&DEVICE_ID="+deviceId+"&COMMANDS="+comms+"&EXEC_BEGIN="+execBegin;
  
 } 
 -->
