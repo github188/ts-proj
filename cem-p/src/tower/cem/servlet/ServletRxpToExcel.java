@@ -13,6 +13,7 @@ import jxl.WorkbookSettings;
 import jxl.format.Alignment;
 import jxl.format.Border;
 import jxl.format.BorderLineStyle;
+import jxl.format.Colour;
 import jxl.write.Label;
 import jxl.write.WritableCell;
 import jxl.write.WritableCellFormat;
@@ -52,7 +53,10 @@ import tower.tmvc.XMLWrap;
 		String[] deviceIps;
 		String[] status;
 		String[] isNormals;
-
+		
+		String[] deviceStatusDesc = {"在用","停用"};
+		String[] deviceStatusValue = {"N","S"};
+		
 		protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException,
 				IOException {
 			
@@ -70,8 +74,8 @@ import tower.tmvc.XMLWrap;
 			collectEnds = xml.getItemValues("DEVICE_PORT_RXP","COLLECT_END");
 			isNormals = xml.getItemValues("DEVICE_PORT_RXP","IS_NORMAL");
 			status = xml.getItemValues("DEVICE_PORT_RXP","STATUS");
-			String fileName1 = "rxp"+deviceIps[0]+collectEnds[0];
-				
+			String fileName1 = "rxp"+deviceIps[0]+collectEnds[0]+".xls";
+			
 			byte[] data;
 			try {
 				data = buildResult();
@@ -117,12 +121,22 @@ import tower.tmvc.XMLWrap;
 			createHead(0, 11, "备注");
 
 			for (int i = 0; i < sendIds.length; i++) {
-				createCell(i + 1, 0, typeNames[i]);
+				createCell(i + 1, 0, typeNameCns[i]);
 				createCell(i + 1, 1, deviceNames[i]);
+				if(i!=0 && deviceNames[i].equals(deviceNames[i-1])){
+					sheet.mergeCells(0,1,0, i+2);
+					sheet.mergeCells(1,1,1, i+2);
+					sheet.mergeCells(2,1,2, i+2);
+				}
 				createCell(i + 1, 2, deviceIps[i]);
 				createCell(i + 1, 3, portSns[i]);
-				createCell(i + 1, 4, status[i]);
-				createCell(i + 1, 5, typeNameCns[i]);
+				for(int j=0;j < deviceStatusValue.length;j++){
+					if(status[i].equals(deviceStatusValue[j])){
+						createCell(i + 1, 4, deviceStatusDesc[j]);
+					}
+				}
+				
+				createCell(i + 1, 5, typeNames[i]);
 				createCell(i + 1, 6, rxps[i]);
 				createCell(i + 1, 7, isNormals[i]);
 				createCell(i + 1, 8, rxMaxs[i]);
@@ -150,13 +164,15 @@ import tower.tmvc.XMLWrap;
 		 */
 		WritableCell createHead(int row, int col, String value) throws RowsExceededException, WriteException {
 			WritableCell res = new Label(col, row, value);
-			WritableFont font = new WritableFont(WritableFont.TIMES, 10, WritableFont.BOLD);
+			WritableFont font = new WritableFont(WritableFont.TIMES, 10);
+			font.setColour(Colour.WHITE);
 			WritableCellFormat titleFormat = new WritableCellFormat(font);
-			// titleFormat.setBackground(Colour.TURQOISE2);
+			titleFormat.setBackground(Colour.BLUE);
 			titleFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
 			titleFormat.setAlignment(Alignment.CENTRE);
+			titleFormat.setLocked(true);
 			res.setCellFormat(titleFormat);
-			sheet.setColumnView(col, 20);
+			sheet.setColumnView(col, 200);
 			sheet.setRowView(row, 400);
 			sheet.addCell(res);
 			return res;
