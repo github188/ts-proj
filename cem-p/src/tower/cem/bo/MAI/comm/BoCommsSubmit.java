@@ -39,7 +39,7 @@ public class BoCommsSubmit implements RootBo {
 	deviceId = requestXml.getInputValue("DEVICE_ID");
 	execBegin = requestXml.getInputValue("EXEC_BEGIN");
 	execEnd = DateFunc.GenNowTime();
-	userId = sessionXml.getItemValue("SYS_USER", 1, "USER_NAME");
+	userId = sessionXml.getItemValue("SYS_USER", 1, "USER_ID");
 	/*****************************************************************************************************
 	 * 创建数据库连接、实例化DB、EN
 	 ****************************************************************************************************/
