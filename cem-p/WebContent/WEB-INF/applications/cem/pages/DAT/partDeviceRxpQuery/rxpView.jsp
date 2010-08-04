@@ -89,7 +89,7 @@
                </table>
               <%if(sendIds != null &&sendIds.length != 0){%>
               <table width="100%" border="0" cellpadding="0" cellspacing="0" height="10">
-              <tr height="10">
+              <tr height="100">
                 <td colspan="9" align="center" height="10">
                  <input type="submit" class="submit"  value="导出excel">
                 </td>
