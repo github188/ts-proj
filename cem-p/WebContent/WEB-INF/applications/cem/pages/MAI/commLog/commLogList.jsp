@@ -241,13 +241,10 @@ function doSubmit(form) {
                 </tr>
                <%} else {%>
                <tr class="dark" onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
-                   
-                  <td align="center">
-                  <a href="JavaScript:doView('<%=logIdS[i]%>')">
+                 <td align="center">
                   <%=deviceNameEns[i]%>
-                  </a>
                   </td>
-                  <td align="center"><%=deviceNameEns[i]%></td>
+                  
                   <td align="center"><%=deviceNameCns[i]%></td>
                   <td align="center"><%=locationNames[i]%></td>
                   <td align="center"><%=deviceIps[i]%></td>
@@ -256,9 +253,9 @@ function doSubmit(form) {
                         <%if(deviceStatusValue[j].equals(deviceStatuses[i]))%><%=deviceStatusDesc[j] %>
                     <%} %>
                    </td>
-                 <td align="center"><%=execEnds[i]%></td>
-                   <td align="center" nowrap>
-                 <a href="JavaScript:doView('<%=logIdS[i] %>');">
+                   <td align="center"><%=execEnds[i]%></td>
+                  <td align="center" nowrap>
+                   <a href="JavaScript:doView('<%=logIdS[i] %>');">
                      查看指令
                   </a>
                  </td>
