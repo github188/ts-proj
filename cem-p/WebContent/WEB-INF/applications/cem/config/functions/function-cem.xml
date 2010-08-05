@@ -538,6 +538,25 @@
        <function id="RxpViewJsp" description="设备光功率数据查询-设备光功率数据查看界面" type="jsp"
         jspPath="/cem/pages/DAT/partDeviceRxpQuery/rxpView.jsp" />  
         
+        <!-- 27-view-网络拓扑图 -->
+        <function id="DeviceTreeList" description="网络拓扑" type="bo"
+        className="tower.cem.bo.TOP.view.BoDeviceTreeList"
+        forward="TopViewTreeJsp" />
+        
+         <function id="DeviceDetail" description="设备详细信息" type="bo"
+        className="tower.cem.bo.TOP.view.BoDeviceTreeList"
+        forward="DeviceDetailTo" />
+        
+         <function id="DeviceDetailTo" description="设备详细信息" type="bo"
+        className="tower.cem.bo.MAG.device.BoDeviceDetail"
+        forward="DeviceDetailJsp" />
+        
+        
+         <function id="TopViewTreeJsp" description="网络拓扑界面" type="jsp"
+        jspPath="/cem/pages/TOP/view/topViewTree.jsp" />  
+        
+        <function id="DeviceDetailJsp" description="设备详细信息界面" type="jsp"
+        jspPath="/cem/pages/TOP/view/deviceDetail.jsp" />  
         
        <!-- 21-device-设备端口类型管理 -->
       <function id="DevicePortTypeSubmit" description="设备端口类型提交" type="bo"
@@ -625,5 +644,5 @@
          <function id="DeviceCollectLogListJsp" description="全网设备光功率数据查询-采集任务查询页面" type="jsp"
         jspPath="/cem/pages/DAT/allDevicesRxpQuery/partDeivceCollectList.jsp" /> 
          
-         
+          
 </functions>
