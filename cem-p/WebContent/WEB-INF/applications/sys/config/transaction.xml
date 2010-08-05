@@ -8,7 +8,7 @@
 			<driver>com.mysql.jdbc.Driver</driver>
 			<url>jdbc:mysql://localhost/cem?characterEncoding=utf8&amp;autocommit=false&amp;autoReconnect=true</url>
 			<user>cem</user>
-			<password>password</password>
+			<password>cem</password>
 			<autocommit></autocommit>
 		</database>
 	</databases>

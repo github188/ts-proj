@@ -106,6 +106,24 @@
 		                            </span>
 		                  </td>
 		               </tr>
+		               <%if(typeId != null && typeId.length() > 0){ %>
+		                   <tr>
+		                   <td width="120" align="right">设备照片：</td>
+                        <td colspan="3">
+                         <img src="ctrl?FUNC_ID=GetAppPic&ID=<%=typeId %>" 
+           					onload="javascript:DrawImage(this,80,100)">
+                        	 
+                        </td>
+                        <td></td>
+                        </tr>
+		               <%} %>
+		              
+		               <tr>
+		                 <td width="120" align="right">更新设备照片：</td>
+		                 <td>
+              					<input type="file" class="file" name="APP_PICTURE" >
+		                 </td>
+		               </tr>
 		               <tr>
 		                 <td width="120" align="right">巡检指令集：</td>
 		                 <td colspan="3">

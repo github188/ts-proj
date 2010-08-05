@@ -184,7 +184,7 @@
 		                <tr>
 		                 <td width="100" align="right">登录密码：</td>
 		                 <td>
-		                  <input type="text" class="text" value=" <%=devicePassword %>" readonly>
+		                  <input type="password" class="password" value=" <%=devicePassword %>" readonly>
 		                 </td>
 		                 <td width="100" align="right">命令行提示符：</td>
 		                 <td>

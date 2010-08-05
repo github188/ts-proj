@@ -18,6 +18,8 @@
 	String hostPassword;
 	String hostPrompt;
 	String remark;
+	String userPrompt;
+	String passwordPrompt;
 %>
 <%
     xml = XMLWrap.getRequestXml(request,session,application);
@@ -34,6 +36,8 @@
 	hostPassword = xml.getItemValue("FRONT_HOST_INFO",1,"HOST_PASSWORD");
 	hostPrompt = xml.getItemValue("FRONT_HOST_INFO",1,"HOST_PROMPT");
     remark = xml.getItemValue("FRONT_HOST_INFO",1,"REMARK");
+    userPrompt = xml.getItemValue("FRONT_HOST_INFO",1,"USER_PROMPT");
+    passwordPrompt = xml.getItemValue("FRONT_HOST_INFO",1,"PASSWORD_PROMPT");
     
     String[] hostStatusDesc = {"在用","停用"};
 	 String[] hostStatusValue = {"N","S"};
@@ -81,23 +85,21 @@
                       <tr>
                           <td width="150" align="right">堡垒主机英文名称：</td>
 		                  <td width="100">
-             				   <input type="text" class="text" value="<%=hostNameEn %>" readonly> 
-		                  </td>
-						</tr>
-						<tr>   		                  
+             				   <input type="text" class="text" value="<%=hostNameEn%>" readonly> 
+		                  </td>					   		                  
                           <td width="150" align="right">英文名称缩写：</td>
 		                  <td width="100">
-              					<input type="text" class="text" value="<%=hostAbbNameEn %>" readonly> 
+              					<input type="text" class="text" value="<%=hostAbbNameEn%>" readonly> 
 		                  </td>
 		               </tr>
 		               <tr>
 		               <td width="120" align="right">堡垒主机中文名称：</td>
 		                 <td>
-		                 <input type="text" class="text" value="<%=hostNameCn %>" readonly> 
+		                 <input type="text" class="text" value="<%=hostNameCn%>" readonly> 
 		                 </td>
 		                <td width="120" align="right">物理位置：</td>
 		                 <td>
-		                 <input type="text" class="text" value="<%=locationName %>" readonly> 
+		                 <input type="text" class="text" value="<%=locationName%>" readonly> 
 		                 </td>
 		               </tr>
 		                <tr>
@@ -106,33 +108,42 @@
                          <%for(int i=0;i<hostStatusValue.length;i++){ 
                         	 if(hostStatusValue[i].equals(hostStatus)){
                          %>
-                           <input type="text" class="text" value="<%=hostStatusDesc[i] %>" readonly> 
+                           <input type="text" class="text" value="<%=hostStatusDesc[i]%>" readonly> 
                         <%} }%>
 						 </td>
 		                <td width="120" align="right">网络地址：</td>
 		                 <td>
-		                  <input type="text" class="text" value="<%=hostIp %>" readonly> 
+		                  <input type="text" class="text" value="<%=hostIp%>" readonly> 
 		                 </td>
 		               </tr>
 		                 <tr>
 		                <td width="120" align="right">网络端口：</td>
 		                 <td>
-		                  <input type="text" class="text" value="<%=hostPort %>" readonly> 
-		                 </td>
-		                 <td width="120" align="right">登录用户名：</td>
-		                 <td>
-		                 <input type="text" class="text" value="<%=hostUser %>" readonly> 
-		                 </td>
-		               </tr>
-		                <tr>
-		                 <td width="120" align="right">登录密码：</td>
-		                 <td>
-		                 <input type="text" class="text" value="<%=hostPassword %>" readonly> 
+		                  <input type="text" class="text" value="<%=hostPort%>" readonly> 
 		                 </td>
 		                 <td width="120" align="right">命令行提示符：</td>
 		                 <td>
-		                  <input type="text" class="text" value="<%=hostPrompt %>" readonly> 
+		                  <input type="text" class="text" value="<%=hostPrompt%>" readonly> 
 		                 </td>
+		                <tr>
+		                 <td width="120" align="right">用户名提示符：</td>
+		                 <td>
+		                 <input type="text" class="text" value="<%=userPrompt%>" readonly> 
+		                 </td>
+		                 <td width="120" align="right">登录用户名：</td>
+		                 <td>
+		                 <input type="text" class="text" value="<%=hostUser%>" readonly> 
+		                 </td>
+		               </tr>
+		                <tr>
+		                 <td width="120" align="right">密码提示符：</td>
+		                 <td>
+		                  <input type="text" class="text" value="<%=passwordPrompt%>" readonly> 
+		                 </td>
+		                 <td width="120" align="right">登录密码：</td>
+		                 <td>
+		                 <input type="password" class="password" value="<%=hostPassword%>" readonly> 
+		                 </td>		                 
 		               </tr>
 		               <tr>
 		                 <td width="120" align="right">备注:</td>

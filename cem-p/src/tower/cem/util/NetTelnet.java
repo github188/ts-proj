@@ -19,12 +19,6 @@ public class NetTelnet {
     // 命令行提示符
     private String prompt = "";
 
-    // 登录用户名提示符
-    private String loginPrompt = "login:";
-
-    // 登录密码提示符
-    private String passwordPrompt = "Password:";
-
     // 服务器响应超时
     private int timeOut = 5000;
 
@@ -46,7 +40,8 @@ public class NetTelnet {
          *                命令行提示符
          * @return 登录过程的提示信息；登录失败时返回null，通常是由于地址、端口、用户名或者密码错误，以及可能的命令行提示符设置错误导致。
          */
-    public String FunLogin(String ip, String port, String user, String password, String prom) {
+    public String FunLogin(String ip, String port, String loginPrompt, String user, String passwordPrompt,
+	    String password, String prom) {
 
 	StringBuffer returnResult = new StringBuffer();
 	String result;
@@ -104,7 +99,8 @@ public class NetTelnet {
          *                命令行提示符
          * @return 登录过程的提示信息；登录失败时返回null，通常是由于地址、端口、用户名或者密码错误，以及可能的命令行提示符设置错误导致。
          */
-    public String FunRelogin(String ip, String port, String user, String password, String prom) {
+    public String FunRelogin(String ip, String port, String loginPrompt, String user, String passwordPrompt,
+	    String password, String prom) {
 
 	String result;
 	StringBuffer returnResult = new StringBuffer();
@@ -228,6 +224,10 @@ public class NetTelnet {
 	this.timeOut = second * 1000;
     }
 
+    public void setPrompt(String promptStr) {
+	this.prompt = promptStr;
+    }
+
     public static void main(String[] args) {
 	try {
 
@@ -236,7 +236,8 @@ public class NetTelnet {
 
 	    // 例子1：直接登录设备
 	    System.out.println("\n\n例子1：直接登录设备。");
-	    result = telnet.FunLogin("60.209.94.194", "23", "ecode315", "password", "$");
+	    result = telnet.FunLogin("60.209.94.194", "23", "login:", "ecode315", "Password:", "password",
+		    "$");
 	    System.out.print(result);
 
 	    // 判断是否登录成功
@@ -260,7 +261,8 @@ public class NetTelnet {
 	    // 例子2：通过堡垒机登录设备
 	    // 登录第一个服务器
 	    System.out.println("\n\n例子2：通过堡垒机登录设备");
-	    result = telnet.FunLogin("60.209.94.194", "23", "ecode315", "password", "$");
+	    result = telnet.FunLogin("60.209.94.194", "23", "login:", "ecode315", "Password:", "password",
+		    "$");
 	    System.out.print(result);
 
 	    // 判断是否登录成功
@@ -269,7 +271,8 @@ public class NetTelnet {
 	    } else {
 
 		// 通过第一台服务器登录第二台服务器（模拟通过堡垒机登录的情况）
-		result = telnet.FunRelogin("192.168.1.254", "23", "oracle", "password", "$");
+		result = telnet.FunRelogin("192.168.1.254", "23", "login:", "oracle", "Password:",
+			"password", "$");
 		System.out.print(result);
 
 		// 判断是否登录成功
@@ -293,9 +296,13 @@ public class NetTelnet {
 
 		    // 从第二台服务器退出
 		    telnet.write("exit");
+
+		    // 重新设置为堡垒主机的提示符
+		    telnet.setPrompt("$");
+		    // 关闭登录堡垒主机的连接
+		    telnet.write("exit");
 		}
 
-		// 关闭登录连接
 		telnet.disconnect();
 		System.out.println("\n\n例子2：断开服务器连接。");
 	    }

@@ -22,6 +22,12 @@
 	String hostUser;
 	String hostPassword;
 	String hostPrompt;
+	
+	//提示符
+	String userPrompt;
+	String passwordPrompt;
+	String hostUserPrompt;
+	String hostPasswordPrompt;	
  
 %>
 <%
@@ -33,37 +39,46 @@
 	devicePassword = xml.getItemValue("DEVICE_INFO",1,"DEVICE_PASSWORD");
 	devicePrompt = xml.getItemValue("DEVICE_INFO",1,"DEVICE_PROMPT");
 	frontHostId = xml.getItemValue("DEVICE_INFO",1,"FRONT_HOST_ID");
+	userPrompt = xml.getItemValue("DEVICE_INFO",1,"USER_PROMPT");
+	passwordPrompt = xml.getItemValue("DEVICE_INFO",1,"PASSWORD_PROMPT");
 	
 	hostIp = xml.getItemValue("FRONT_HOST_INFO",1,"HOST_IP");
 	hostPort = xml.getItemValue("FRONT_HOST_INFO",1,"HOST_PORT");
 	hostUser = xml.getItemValue("FRONT_HOST_INFO",1,"HOST_USER");
 	hostPassword = xml.getItemValue("FRONT_HOST_INFO",1,"HOST_PASSWORD");
 	hostPrompt = xml.getItemValue("FRONT_HOST_INFO",1,"HOST_PROMPT");
+	hostUserPrompt = xml.getItemValue("FRONT_HOST_INFO",1,"USER_PROMPT");
+	hostPasswordPrompt = xml.getItemValue("FRONT_HOST_INFO",1,"PASSWORD_PROMPT");
 	
 	
 	NetTelnet nt = new NetTelnet();
 	  String sResult="";
 	  StringBuffer sbResult = new StringBuffer();
 	  if(frontHostId != null && frontHostId.length() > 0) {
-	    sResult = nt.FunLogin(hostIp, hostPort, hostUser, hostPassword, hostPrompt); //登录堡垒主机
+	    sResult = nt.FunLogin(hostIp, hostPort, hostUser, hostUser, hostPasswordPrompt, hostPassword, hostPrompt); //登录堡垒主机
 	    sbResult.append(sResult);
 	    if(!nt.getBflag()) {
 	      sbResult.append("登录堡垒主机失败。");
 	     }else {
-	      sResult = nt.FunRelogin(deviceIp, devicePort, deviceUser,devicePassword, devicePrompt); //登录设备
+	      sResult = nt.FunRelogin(deviceIp, devicePort, userPrompt, deviceUser, passwordPrompt,devicePassword, devicePrompt); //登录设备
 	      sbResult.append(sResult);
 	      if(!nt.getBflag()) {
 	         sbResult.append("登录设备失败。");
 	         nt.disconnect();
+	       }else{
+    		 sbResult.append("登录设备成功。");
+    		 nt.sendCommand("exit");
+    		 nt.disconnect();
 	       }
 	      }
 	  } else {
-	    sResult = nt.FunLogin(deviceIp, devicePort, deviceUser,devicePassword, devicePrompt); //直接登录设备
+	    sResult = nt.FunLogin(deviceIp, devicePort, userPrompt, deviceUser, passwordPrompt,devicePassword, devicePrompt); //直接登录设备
 	    sbResult.append(sResult);
 	    if(!nt.getBflag()) {
 	      sbResult.append("登录设备失败。");
 	     } else {
-	       nt.disconnect();
+		  sbResult.append("登录设备成功。");	
+		  nt.disconnect();
 	     }
 	  }
 
@@ -107,7 +122,7 @@
                  <table width="100%" border="0" cellpadding="0" cellspacing="0" >
               	 <tr>
               	 <td align="right">
-              	   <textarea id="textarea" class="textarea" cols="110" rows="25" readonly> <%=sbResult %></textarea>
+              	   <textarea id="textarea" class="textarea" cols="110" rows="25" readonly> <%=sbResult%></textarea>
 				</td>
                  </tr>
                   <tr>

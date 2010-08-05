@@ -1,5 +1,8 @@
 package tower.cem.daemons;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
@@ -22,10 +25,13 @@ public class TdRunnable implements Runnable {
 
     private Logger log;
 
+    private String InspectLogsPath;
+
     public TdRunnable(EnCommandsSendList enCommandsSendList, Logger logger) {
 	this.enSendList = enCommandsSendList;
 	this.log = logger;
 	this.log = Logger.getLogger("TdRunnable");
+	this.InspectLogsPath = TelnetDaemons.getTdconfigMsg("inspect_logs_path");
     }
 
     public double collectRxpValue(String collectString, String startString, String beginString,
@@ -189,6 +195,8 @@ public class TdRunnable implements Runnable {
 			enDeviceInfo.setDeviceUser(rs.getString("DEVICE_USER"));
 			enDeviceInfo.setDevicePassword(rs.getString("DEVICE_PASSWORD"));
 			enDeviceInfo.setDevicePrompt(rs.getString("DEVICE_PROMPT"));
+			enDeviceInfo.setUserPrompt(rs.getString("USER_PROMPT"));
+			enDeviceInfo.setPasswordPrompt(rs.getString("PASSWORD_PROMPT"));
 		    }
 		}
 
@@ -211,6 +219,8 @@ public class TdRunnable implements Runnable {
 			    enFrontHostInfo.setHostUser(rs.getString("HOST_USER"));
 			    enFrontHostInfo.setHostPassword(rs.getString("HOST_PASSWORD"));
 			    enFrontHostInfo.setHostPrompt(rs.getString("HOST_PROMPT"));
+			    enFrontHostInfo.setUserPrompt(rs.getString("USER_PROMPT"));
+			    enFrontHostInfo.setPasswordPrompt(rs.getString("PASSWORD_PROMPT"));
 			}
 		    }
 		}
@@ -247,7 +257,8 @@ public class TdRunnable implements Runnable {
 
 			// 直接登录设备的情况
 			sResult = nt.FunLogin(enDeviceInfo.getDeviceIp(), enDeviceInfo.getDevicePort(),
-				enDeviceInfo.getDeviceUser(), enDeviceInfo.getDevicePassword(), enDeviceInfo
+				enDeviceInfo.getUserPrompt(), enDeviceInfo.getDeviceUser(), enDeviceInfo
+					.getPasswordPrompt(), enDeviceInfo.getDevicePassword(), enDeviceInfo
 					.getDevicePrompt());
 			sbResult.append(sResult);
 			if (!nt.getBflag()) {
@@ -259,7 +270,8 @@ public class TdRunnable implements Runnable {
 
 			// 通过堡垒主机登录设备的情况
 			sResult = nt.FunLogin(enFrontHostInfo.getHostIp(), enFrontHostInfo.getHostPort(),
-				enFrontHostInfo.getHostUser(), enFrontHostInfo.getHostPassword(),
+				enFrontHostInfo.getUserPrompt(), enFrontHostInfo.getHostUser(),
+				enFrontHostInfo.getPasswordPrompt(), enFrontHostInfo.getHostPassword(),
 				enFrontHostInfo.getHostPrompt());
 			sbResult.append(sResult);
 
@@ -269,7 +281,8 @@ public class TdRunnable implements Runnable {
 			    log.error("指令模板执行任务，登录堡垒主机失败。SID=" + enSendList.getSendId());
 			} else {
 			    sResult = nt.FunRelogin(enDeviceInfo.getDeviceIp(), enDeviceInfo.getDevicePort(),
-				    enDeviceInfo.getDeviceUser(), enDeviceInfo.getDevicePassword(),
+				    enDeviceInfo.getUserPrompt(), enDeviceInfo.getDeviceUser(), enDeviceInfo
+					    .getPasswordPrompt(), enDeviceInfo.getDevicePassword(),
 				    enDeviceInfo.getDevicePrompt());
 			    sbResult.append(sResult);
 			    if (!nt.getBflag()) {
@@ -339,8 +352,8 @@ public class TdRunnable implements Runnable {
 		// Runtime Code
 		// 根据设备获取到设备信息及所属设备分类信息，当设备空时，获取全部可用的设备信息及所属设备分类信息
 		sSql = " select device_id, device_name_en, front_host_id, device_ip, device_port, "
-			+ " device_user, device_password, device_prompt, inspect_commands"
-			+ " from device_info, device_type"
+			+ " device_user, device_password, device_prompt, inspect_commands, "
+			+ " user_prompt, password_prompt " + " from device_info, device_type"
 			+ " where device_info.type_id = device_type.type_id"
 			+ " and device_info.device_status ='N'";
 
@@ -352,6 +365,25 @@ public class TdRunnable implements Runnable {
 		// 当设备编号不为空时，获取到指定的设备信息及所属设备分类信息
 		if (!(enSendList.getDeviceId() == null || enSendList.getDeviceId().trim().length() == 0)) {
 		    sSql = sSql + " and device_info.device_id ='" + enSendList.getDeviceId() + "'";
+		}
+
+		// 当设备编号及设备类型都为空，即创建全网巡检日志保存目录
+		boolean bSaveInspectLog = false;
+		if (((enSendList.getDeviceTypeId() == null || enSendList.getDeviceTypeId().trim().length() == 0))
+			&& ((enSendList.getDeviceId() == null || enSendList.getDeviceId().trim().length() == 0))) {
+
+		    if (!(InspectLogsPath == null || InspectLogsPath.trim().length() == 0)) {
+			File fdir = new File(InspectLogsPath);
+			if (fdir.exists()) {
+			    fdir = new File(InspectLogsPath + "/" + enSendList.getTaskPlanTime());
+			    fdir.mkdir();
+			    bSaveInspectLog = true;
+			} else {
+			    log.error("执行全网巡检任务，无法打开指定的日志保存目录：" + InspectLogsPath);
+			}
+		    } else {
+			log.warn("执行全网巡检任务，未指定的日志保存目录。");
+		    }
 		}
 
 		rs = DaemonsDBPool.doQuery(conn, sSql);
@@ -367,6 +399,8 @@ public class TdRunnable implements Runnable {
 		    enDeviceInfo.setDevicePassword(rs.getString("DEVICE_PASSWORD"));
 		    enDeviceInfo.setDevicePrompt(rs.getString("DEVICE_PROMPT"));
 		    enDeviceInfo.setRemark(rs.getString("INSPECT_COMMANDS"));
+		    enDeviceInfo.setUserPrompt(rs.getString("USER_PROMPT"));
+		    enDeviceInfo.setPasswordPrompt(rs.getString("PASSWORD_PROMPT"));
 		    vDeviceInfo.add(enDeviceInfo);
 		}
 
@@ -382,6 +416,8 @@ public class TdRunnable implements Runnable {
 		    enFrontHostInfo.setHostUser(rs.getString("HOST_USER"));
 		    enFrontHostInfo.setHostPassword(rs.getString("HOST_PASSWORD"));
 		    enFrontHostInfo.setHostPrompt(rs.getString("HOST_PROMPT"));
+		    enFrontHostInfo.setUserPrompt(rs.getString("USER_PROMPT"));
+		    enFrontHostInfo.setPasswordPrompt(rs.getString("PASSWORD_PROMPT"));
 		    vFrontHost.add(enFrontHostInfo);
 		}
 
@@ -402,7 +438,8 @@ public class TdRunnable implements Runnable {
 			// 直接登录设备
 
 			sResult = nt.FunLogin(enDeviceInfo.getDeviceIp(), enDeviceInfo.getDevicePort(),
-				enDeviceInfo.getDeviceUser(), enDeviceInfo.getDevicePassword(), enDeviceInfo
+				enDeviceInfo.getUserPrompt(), enDeviceInfo.getDeviceUser(), enDeviceInfo
+					.getPasswordPrompt(), enDeviceInfo.getDevicePassword(), enDeviceInfo
 					.getDevicePrompt());
 			sbResult.append(sResult);
 			if (!nt.getBflag()) {
@@ -431,7 +468,8 @@ public class TdRunnable implements Runnable {
 			    log.error("执行巡检任务，未找到堡垒主机信息。SID=" + enSendList.getSendId());
 			} else {
 			    sResult = nt.FunLogin(enFrontHostInfo.getHostIp(), enFrontHostInfo.getHostPort(),
-				    enFrontHostInfo.getHostUser(), enFrontHostInfo.getHostPassword(),
+				    enFrontHostInfo.getUserPrompt(), enFrontHostInfo.getHostUser(),
+				    enFrontHostInfo.getPasswordPrompt(), enFrontHostInfo.getHostPassword(),
 				    enFrontHostInfo.getHostPrompt());
 			    sbResult.append(sResult);
 
@@ -441,7 +479,8 @@ public class TdRunnable implements Runnable {
 				log.error("执行巡检任务，登录堡垒主机失败。SID=" + enSendList.getSendId());
 			    } else {
 				sResult = nt.FunRelogin(enDeviceInfo.getDeviceIp(), enDeviceInfo
-					.getDevicePort(), enDeviceInfo.getDeviceUser(), enDeviceInfo
+					.getDevicePort(), enDeviceInfo.getUserPrompt(), enDeviceInfo
+					.getDeviceUser(), enDeviceInfo.getPasswordPrompt(), enDeviceInfo
 					.getDevicePassword(), enDeviceInfo.getDevicePrompt());
 				sbResult.append(sResult);
 				if (!nt.getBflag()) {
@@ -497,9 +536,23 @@ public class TdRunnable implements Runnable {
 					// 记录分拣日志
 					sbPickLog.append("DeviceId:" + enDeviceInfo.getDeviceId()
 						+ " DeviceNameEn:" + enDeviceInfo.getDeviceNameEn()
-						+ " DeviceIP:" + enDeviceInfo.getDeviceIp() + " KeyWord:"
-						+ sKeyWord + "\n");
-					sbPickLog.append(enDeviceInfo.getDevicePrompt() + sResult);
+						+ " DeviceIP:" + enDeviceInfo.getDeviceIp() + "\n");
+
+					String[] sResultLines = sResult.split("\n");
+					sbPickLog.append(enDeviceInfo.getDevicePrompt() + sResultLines[0]);
+
+					for (int x = 1; x < sResultLines.length; x++) {
+					    for (int y = 0; y < listKeyWords.size(); y++) {
+						if (sResultLines[x].toLowerCase().indexOf(
+							listKeyWords.get(y).toString().toLowerCase()) >= 0) {
+						    sbPickLog.append("\n");
+						    sbPickLog.append("[KeyWord:"
+							    + listKeyWords.get(y).toString() + "] Message:");
+						    sbPickLog.append(sResultLines[x]);
+						}
+					    }
+					}
+
 					sbPickLog.append("\n\n");
 
 					break;
@@ -536,6 +589,23 @@ public class TdRunnable implements Runnable {
 			sbResult.append("TdRunnable run()：执行巡检任务，记录日志失败。");
 			log.error("执行巡检任务，记录日志失败。SID=" + enSendList.getSendId());
 		    }
+
+		    // 将全网巡检的日志保存到文件中
+		    if (bSaveInspectLog) {
+			try {
+			    BufferedWriter out = new BufferedWriter(new FileWriter(InspectLogsPath + "/"
+				    + enSendList.getTaskPlanTime() + "/" + enDeviceInfo.getDeviceNameEn()
+				    + "-" + enDeviceInfo.getDeviceIp() + "-" + sInspectEnd + ".log"));
+			    out.write(sbResult.toString());
+			    out.flush();
+			    out.close();
+
+			} catch (Exception e) {
+			    // TODO: handle exception
+			    log.error("执行巡检任务，写入日志文件失败。");
+			    log.error(e.getMessage());
+			}
+		    }
 		}
 
 		if (!(sbPickLog == null || sbPickLog.toString().trim().length() == 0)) {
@@ -562,8 +632,8 @@ public class TdRunnable implements Runnable {
 		// 根据设备获取到设备信息及所属设备分类信息，当设备空时，获取全部可用的设备信息及所属设备分类信息
 		sSql = " select device_id, device_name_en, front_host_id, device_ip, device_port, "
 			+ " device_user, device_password, device_prompt, collect_commands, "
-			+ " rxp_line_start, rxp_value_start, rxp_value_end, rxp_value_pos "
-			+ " from device_info, device_type"
+			+ " rxp_line_start, rxp_value_start, rxp_value_end, rxp_value_pos, "
+			+ " user_prompt, password_prompt " + " from device_info, device_type"
 			+ " where device_info.type_id = device_type.type_id"
 			+ " and device_info.device_status ='N'";
 
@@ -591,6 +661,8 @@ public class TdRunnable implements Runnable {
 		    enDeviceInfo.setDevicePassword(rs.getString("DEVICE_PASSWORD"));
 		    enDeviceInfo.setDevicePrompt(rs.getString("DEVICE_PROMPT"));
 		    enDeviceInfo.setRemark(rs.getString("COLLECT_COMMANDS"));
+		    enDeviceInfo.setUserPrompt(rs.getString("USER_PROMPT"));
+		    enDeviceInfo.setPasswordPrompt(rs.getString("PASSWORD_PROMPT"));
 		    vDeviceInfo.add(enDeviceInfo);
 
 		    enDeviceType = new EnDeviceType();
@@ -614,6 +686,8 @@ public class TdRunnable implements Runnable {
 		    enFrontHostInfo.setHostUser(rs.getString("HOST_USER"));
 		    enFrontHostInfo.setHostPassword(rs.getString("HOST_PASSWORD"));
 		    enFrontHostInfo.setHostPrompt(rs.getString("HOST_PROMPT"));
+		    enFrontHostInfo.setUserPrompt(rs.getString("USER_PROMPT"));
+		    enFrontHostInfo.setPasswordPrompt(rs.getString("PASSWORD_PROMPT"));
 		    vFrontHost.add(enFrontHostInfo);
 		}
 
@@ -635,7 +709,8 @@ public class TdRunnable implements Runnable {
 			// 直接登录设备
 
 			sResult = nt.FunLogin(enDeviceInfo.getDeviceIp(), enDeviceInfo.getDevicePort(),
-				enDeviceInfo.getDeviceUser(), enDeviceInfo.getDevicePassword(), enDeviceInfo
+				enDeviceInfo.getUserPrompt(), enDeviceInfo.getDeviceUser(), enDeviceInfo
+					.getPasswordPrompt(), enDeviceInfo.getDevicePassword(), enDeviceInfo
 					.getDevicePrompt());
 			sbResult.append(sResult);
 			if (!nt.getBflag()) {
@@ -664,7 +739,8 @@ public class TdRunnable implements Runnable {
 			    log.error("执行数据采集任务，未找到堡垒主机信息。SID=" + enSendList.getSendId());
 			} else {
 			    sResult = nt.FunLogin(enFrontHostInfo.getHostIp(), enFrontHostInfo.getHostPort(),
-				    enFrontHostInfo.getHostUser(), enFrontHostInfo.getHostPassword(),
+				    enFrontHostInfo.getUserPrompt(), enFrontHostInfo.getHostUser(),
+				    enFrontHostInfo.getPasswordPrompt(), enFrontHostInfo.getHostPassword(),
 				    enFrontHostInfo.getHostPrompt());
 			    sbResult.append(sResult);
 
@@ -674,7 +750,8 @@ public class TdRunnable implements Runnable {
 				log.error("执行数据采集任务，登录堡垒主机失败。SID=" + enSendList.getSendId());
 			    } else {
 				sResult = nt.FunRelogin(enDeviceInfo.getDeviceIp(), enDeviceInfo
-					.getDevicePort(), enDeviceInfo.getDeviceUser(), enDeviceInfo
+					.getDevicePort(), enDeviceInfo.getUserPrompt(), enDeviceInfo
+					.getDeviceUser(), enDeviceInfo.getPasswordPrompt(), enDeviceInfo
 					.getDevicePassword(), enDeviceInfo.getDevicePrompt());
 				sbResult.append(sResult);
 				if (!nt.getBflag()) {

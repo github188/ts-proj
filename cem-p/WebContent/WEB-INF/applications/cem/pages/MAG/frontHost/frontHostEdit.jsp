@@ -18,6 +18,8 @@
 	String hostPassword;
 	String hostPrompt;
 	String remark;
+	String userPrompt;
+	String passwordPrompt;
 %>
 <%
     xml = XMLWrap.getRequestXml(request,session,application);
@@ -34,6 +36,8 @@
 	hostPassword = xml.getItemValue("FRONT_HOST_INFO",1,"HOST_PASSWORD");
 	hostPrompt = xml.getItemValue("FRONT_HOST_INFO",1,"HOST_PROMPT");
     remark = xml.getItemValue("FRONT_HOST_INFO",1,"REMARK");
+    userPrompt = xml.getItemValue("FRONT_HOST_INFO",1,"USER_PROMPT");
+    passwordPrompt = xml.getItemValue("FRONT_HOST_INFO",1,"PASSWORD_PROMPT");
     
 	 String[] hostStatusDesc = {"在用","停用"};
 	 String[] hostStatusValue = {"N","S"};
@@ -96,7 +100,7 @@
 							<td width="120" align="right">堡垒主机英文名称：</td>
 							<td width="100">
 								<span id="spryHostNameEn">
-								<input type="text" class="text" name="HOST_NAME_EN"value="<%=hostNameEn %>"><span class="requiredField">*</span>
+								<input type="text" class="text" name="HOST_NAME_EN"value="<%=hostNameEn%>"><span class="requiredField">*</span>
 		                            <span class="textfieldRequiredMsg">需要提供一个值。</span>
 		                            <span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 								</span>
@@ -106,7 +110,8 @@
                           <td width="120" align="right">英文名称缩写：</td>
 		                  <td width="100">
 		                      <span id="sprytHostAbbNameEn">
-              					<input type="text" class="text" name="HOST_ABB_NAME_EN"value="<%=hostAbbNameEn %>">
+              					<input type="text" class="text" name="HOST_ABB_NAME_EN"value="<%=hostAbbNameEn%>"><span class="requiredField">*</span>
+              					    <span class="textfieldRequiredMsg">需要提供一个值。</span>
 		                            <span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 								</span>
 		                  </td>
@@ -115,7 +120,7 @@
 							<td width="120" align="right">堡垒主机中文名称：</td>
 							<td>
 								<span id="sprytHostNameCn">
-									<input type="text" class="text" name="HOST_NAME_CN"   value="<%=hostNameCn %>" ><span class="requiredField">*</span>
+									<input type="text" class="text" name="HOST_NAME_CN"   value="<%=hostNameCn%>" ><span class="requiredField">*</span>
 									<span class="textfieldRequiredMsg">需要提供一个值。</span>
 									<span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 								</span>
@@ -125,7 +130,7 @@
 							<td width="120" align="right">物理位置：</td>
 							<td>
 								<input name="LOCATION_ID" type="hidden"  value="<%=locationId %>">
-								<input type="text" class="date" name="LOCATION_NAME"   value="<%=locationName %>"  readonly>
+								<input type="text" class="date" name="LOCATION_NAME"   value="<%=locationName%>"  readonly>
 								<input type="button" name="selectLocation" class="selButton" value="选择" onClick="doSelLocation()" />
 							</td>	
 		               </tr>
@@ -143,7 +148,7 @@
 							<td width="120" align="right">网络地址：</td>
 							<td>
 								<span id="sprytHostIp">
-									<input type="text" class="text" name="HOST_IP"value="<%=hostIp %>"><span class="requiredField">*</span>
+									<input type="text" class="text" name="HOST_IP"value="<%=hostIp%>"><span class="requiredField">*</span>
 								<span class="textfieldRequiredMsg">需要提供一个值。</span>
 								<span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 								</span>
@@ -153,7 +158,17 @@
 							<td width="120" align="right">网络端口：</td>
 							<td>
 								<span id="sprytHostPort">
-									<input type="text" class="text" name="HOST_PORT"value="<%=hostPort %>"><span class="requiredField">*</span>
+									<input type="text" class="text" name="HOST_PORT"value="<%=hostPort%>"><span class="requiredField">*</span>
+								<span class="textfieldRequiredMsg">需要提供一个值。</span>
+								<span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
+								</span>
+							</td>
+						</tr>						
+						<tr>   							
+							<td width="120" align="right">用户名提示符：</td>
+							<td>
+								<span id="sprytHostUser">
+              					<input type="text" class="text" name="USER_PROMPT"value="<%=userPrompt%>"><span class="requiredField">*</span>
 								<span class="textfieldRequiredMsg">需要提供一个值。</span>
 								<span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 								</span>
@@ -163,7 +178,17 @@
 							<td width="120" align="right">登录用户名：</td>
 							<td>
 								<span id="sprytHostUser">
-              					<input type="text" class="text" name="HOST_USER"value="<%=hostUser %>"><span class="requiredField">*</span>
+              					<input type="text" class="text" name="HOST_USER"value="<%=hostUser%>"><span class="requiredField">*</span>
+								<span class="textfieldRequiredMsg">需要提供一个值。</span>
+								<span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
+								</span>
+							</td>
+						</tr>
+						<tr>   							
+							<td width="120" align="right">密码提示符：</td>
+							<td>
+								<span id="sprytHostPassword">
+              					<input type="text" class="text" name="PASSWORD_PROMPT"value="<%=passwordPrompt%>"><span class="requiredField">*</span>
 								<span class="textfieldRequiredMsg">需要提供一个值。</span>
 								<span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 								</span>
@@ -173,7 +198,7 @@
 							<td width="120" align="right">登录密码：</td>
 							<td>
 								<span id="sprytHostPassword">
-              					<input type="text" class="text" name="HOST_PASSWORD"value="<%=hostPassword %>"><span class="requiredField">*</span>
+              					<input type="password" class="password" name="HOST_PASSWORD"value="<%=hostPassword%>"><span class="requiredField">*</span>
               			      	<span class="textfieldRequiredMsg">需要提供一个值。</span>
               				  	<span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 		                      	</span>
@@ -184,7 +209,7 @@
 						<td width="120" align="right">命令行提示符：</td>
 							<td>
 								<span id="sprytHostPrompt">
-								<input type="text" class="text" name="HOST_PROMPT"value="<%=hostPrompt %>"><span class="requiredField">*</span>
+								<input type="text" class="text" name="HOST_PROMPT"value="<%=hostPrompt%>"><span class="requiredField">*</span>
 								<span class="textfieldRequiredMsg">需要提供一个值。</span>
 								<span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 								</span>

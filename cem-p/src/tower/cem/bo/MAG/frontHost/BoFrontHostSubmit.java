@@ -47,6 +47,8 @@ public class BoFrontHostSubmit implements RootBo {
 	String hostPassword;// 登录密码
 	String hostPrompt; // 命令行提示符
 	String remark; // 备注
+	String userPrompt;
+	String passwordPrompt;
 
 	// 其他
 	Vector hosts;
@@ -68,6 +70,8 @@ public class BoFrontHostSubmit implements RootBo {
 	hostPassword = requestXml.getInputValue("HOST_PASSWORD");
 	hostPrompt = requestXml.getInputValue("HOST_PROMPT");
 	remark = requestXml.getInputValue("REMARK");
+	userPrompt = requestXml.getInputValue("USER_PROMPT");
+	passwordPrompt = requestXml.getInputValue("PASSWORD_PROMPT");
 	/***********************************************************************
          * 创建数据库连接、实例化DB、EN
          **********************************************************************/
@@ -96,6 +100,8 @@ public class BoFrontHostSubmit implements RootBo {
 	enFrontHostInfo.setHostUser(hostUser);
 	enFrontHostInfo.setLocationId(locationId);
 	enFrontHostInfo.setRemark(remark);
+	enFrontHostInfo.setUserPrompt(userPrompt);
+	enFrontHostInfo.setPasswordPrompt(passwordPrompt);
 	// 判断是添加还是编辑：
 	if (hostId == null || hostId.length() == 0) {
 	    hostId = SysIdCreator.GenNextId(transaction, null, IdCreatorDefine.ID_TYPE_HOST_ID,

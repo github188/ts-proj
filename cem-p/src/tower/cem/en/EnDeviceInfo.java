@@ -60,9 +60,19 @@ public class EnDeviceInfo implements java.io.Serializable {
     private String devicePort;
 
     /**
+     * Type : varchar(50) Name : USER_PROMPT
+     */
+    private String userPrompt;
+
+    /**
      * Type : varchar(50) Name : DEVICE_USER
      */
     private String deviceUser;
+
+    /**
+     * Type : varchar(50) Name : PASSWORD_PROMPT
+     */
+    private String passwordPrompt;
 
     /**
      * Type : varchar(50) Name : DEVICE_PASSWORD
@@ -130,9 +140,19 @@ public class EnDeviceInfo implements java.io.Serializable {
     private boolean _flagDevicePort;
 
     /**
+     * Type : varchar(50) Name : USER_PROMPT modify flag
+     */
+    private boolean _flagUserPrompt;
+
+    /**
      * Type : varchar(50) Name : DEVICE_USER modify flag
      */
     private boolean _flagDeviceUser;
+
+    /**
+     * Type : varchar(50) Name : PASSWORD_PROMPT modify flag
+     */
+    private boolean _flagPasswordPrompt;
 
     /**
      * Type : varchar(50) Name : DEVICE_PASSWORD modify flag
@@ -370,6 +390,28 @@ public class EnDeviceInfo implements java.io.Serializable {
     }
 
     /**
+     * Sets the value for userPrompt
+     */
+    public void setUserPrompt(String userPrompt) {
+        this.userPrompt = userPrompt;
+        this._flagUserPrompt = true;
+    }
+
+    /**
+     * Gets the value for userPrompt
+     */
+    public String getUserPrompt() {
+        return userPrompt;
+    }
+
+    /**
+     * has the value for userPrompt changed?
+     */
+    public boolean hasChangeUserPrompt() {
+        return _flagUserPrompt;
+    }
+
+    /**
      * Sets the value for deviceUser
      */
     public void setDeviceUser(String deviceUser) {
@@ -389,6 +431,28 @@ public class EnDeviceInfo implements java.io.Serializable {
      */
     public boolean hasChangeDeviceUser() {
         return _flagDeviceUser;
+    }
+
+    /**
+     * Sets the value for passwordPrompt
+     */
+    public void setPasswordPrompt(String passwordPrompt) {
+        this.passwordPrompt = passwordPrompt;
+        this._flagPasswordPrompt = true;
+    }
+
+    /**
+     * Gets the value for passwordPrompt
+     */
+    public String getPasswordPrompt() {
+        return passwordPrompt;
+    }
+
+    /**
+     * has the value for passwordPrompt changed?
+     */
+    public boolean hasChangePasswordPrompt() {
+        return _flagPasswordPrompt;
     }
 
     /**

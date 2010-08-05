@@ -12,6 +12,8 @@
 	String hostUser;
 	String hostPassword;
 	String hostPrompt;
+	String userPrompt;
+	String passwordPrompt;
 %>
 <%
 	xml = XMLWrap.getRequestXml(request,session,application);
@@ -21,11 +23,13 @@
 	hostUser = xml.getItemValue("FRONT_HOST_INFO",1,"HOST_USER");
 	hostPassword = xml.getItemValue("FRONT_HOST_INFO",1,"HOST_PASSWORD");
 	hostPrompt = xml.getItemValue("FRONT_HOST_INFO",1,"HOST_PROMPT");
+	userPrompt = xml.getItemValue("FRONT_HOST_INFO",1,"USER_PROMPT");
+	passwordPrompt = xml.getItemValue("FRONT_HOST_INFO",1,"PASSWORD_PROMPT");
 	
     NetTelnet nt = new NetTelnet();
   String sResult="";
   StringBuffer sbResult = new StringBuffer();
-  sResult = nt.FunLogin(hostIp, hostPort, hostUser, hostPassword, hostPrompt);
+  sResult = nt.FunLogin(hostIp, hostPort, userPrompt, hostUser, passwordPrompt, hostPassword, hostPrompt);
   sbResult.append(sResult);
   if(!nt.getBflag()) {
       sbResult.append("登录堡垒主机失败。");

@@ -22,6 +22,8 @@
 	String devicePassword;
 	String devicePrompt;
 	String remark;
+	String userPrompt;
+	String passwordPrompt;
 %>
 <%
     xml = XMLWrap.getRequestXml(request,session,application);
@@ -42,6 +44,8 @@
 	devicePassword = xml.getItemValue("DEVICE_INFO",1,"DEVICE_PASSWORD");
 	devicePrompt = xml.getItemValue("DEVICE_INFO",1,"DEVICE_PROMPT");
     remark = xml.getItemValue("DEVICE_INFO",1,"REMARK");
+    userPrompt = xml.getItemValue("DEVICE_INFO",1,"USER_PROMPT");
+    passwordPrompt = xml.getItemValue("DEVICE_INFO",1,"PASSWORD_PROMPT");    
     
 	String[] deviceStatusDesc = {"在用","停用"};
 	String[] deviceStatusValue = {"N","S"};
@@ -135,7 +139,7 @@
                          <%for(int i=0;i<deviceStatusValue.length;i++){ 
                         	 if(deviceStatusValue[i].equals(deviceStatus)){
                          %>
-                           <input type="text" class="text" value="<%=deviceStatusDesc[i] %>" readonly> 
+                           <input type="text" class="text" value="<%=deviceStatusDesc[i]%>" readonly> 
                         <%} }%>
 						 </td>
 		               </tr>
@@ -143,14 +147,21 @@
 		                <tr>
 		                <td width="150" align="right">网络地址：</td>
 		                 <td>
-              				<input type="text" class="text" name="DEVICE_IP"value="<%=deviceIp %>" readonly>
+              				<input type="text" class="text" name="DEVICE_IP"value="<%=deviceIp%>" readonly>
 		                 </td>
 		               </tr>
 		               
 		                 <tr>
 		                <td width="150" align="right">网络端口：</td>
 		                 <td>
-              					<input type="text" class="text" name="DEVICE_PORT"value="<%=devicePort %>" readonly>
+              					<input type="text" class="text" name="DEVICE_PORT"value="<%=devicePort%>" readonly>
+		                 </td>
+		                </tr>
+		                
+		                <tr>
+		                 <td width="150" align="right">用户名提示符：</td>
+		                 <td>
+              				<input type="text" class="text" name="USER_PROMPT"value="<%=userPrompt%>" readonly>
 		                 </td>
 		                </tr>
 		                
@@ -161,24 +172,31 @@
 		                 </td>
 		               </tr>
 		               
+		               <tr>
+		                 <td width="150" align="right">密码提示符：</td>
+		                 <td>
+              				<input type="text" class="text" name="PASSWORD_PROMPT"value="<%=passwordPrompt%>" readonly>
+		                 </td>
+		               </tr>
+		               
 		                <tr>
 		                 <td width="150" align="right">登录密码：</td>
 		                 <td>
-              					<input type="text" class="text" name="DEVICE_PASSWORD"value="<%=devicePassword %>" readonly>
+              					<input type="password" class="password" name="DEVICE_PASSWORD"value="<%=devicePassword%>" readonly>
 		                 </td>
 		                </tr>
 		                
 		                <tr>
 		                 <td width="150" align="right">命令行提示符：</td>
 		                 <td>
-              					<input type="text" class="text" name="DEVICE_PROMPT"value="<%=devicePrompt %>" readonly>
+              					<input type="text" class="text" name="DEVICE_PROMPT"value="<%=devicePrompt%>" readonly>
 		                 </td>
 		               </tr>
 		               
 		               <tr>
 		                 <td width="150" align="right">备注：</td>
 		                 <td colspan="3">
-              					<textarea name="REMARK" id="textarea" class="textarea" cols="50" rows="4" readonly><%=remark %></textarea>
+              					<textarea name="REMARK" id="textarea" class="textarea" cols="50" rows="4" readonly><%=remark%></textarea>
 		                 </td>
 		               </tr>
                          <tr height="15"></tr>

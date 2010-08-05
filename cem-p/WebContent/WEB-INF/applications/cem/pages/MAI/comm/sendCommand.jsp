@@ -34,6 +34,10 @@
 	
 	String command;
 	String comms;
+	String userPrompt;
+	String passwordPrompt;
+	String hostUserPrompt;
+	String hostPasswordPrompt;
 	
 %>
 
@@ -53,12 +57,16 @@
 	devicePrompt = xml.getItemValue("DEVICE_INFO",1,"DEVICE_PROMPT");
 	typeId = xml.getItemValue("DEVICE_INFO",1,"TYPE_ID");
 	typeName = xml.getItemValue("DEVICE_INFO",1,"TYPE_NAME");
+	userPrompt = xml.getItemValue("DEVICE_INFO",1,"USER_PROMPT");
+	passwordPrompt = xml.getItemValue("DEVICE_INFO",1,"PASSWORD_PROMPT");
 	
 	hostIp = xml.getItemValue("DEVICE_INFO",1,"HOST_IP");
 	hostPort = xml.getItemValue("DEVICE_INFO",1,"HOST_PORT");
 	hostUser = xml.getItemValue("DEVICE_INFO",1,"HOST_USER");
 	hostPassword = xml.getItemValue("DEVICE_INFO",1,"HOST_PASSWORD");
 	hostPrompt = xml.getItemValue("DEVICE_INFO",1,"HOST_PROMPT");
+	hostUserPrompt = xml.getItemValue("DEVICE_INFO",1,"HOST_USER_PROMPT");
+	hostPasswordPrompt = xml.getItemValue("DEVICE_INFO",1,"HOST_PASSWORD_PROMPT");
 	
     String[] deviceStatusDesc = {"在用","停用"};
 	String[] deviceStatusValue = {"N","S"};
@@ -145,16 +153,20 @@
               <table width="100%"  >
 				 <tr>
 				 	<td align="center">
-				 		<applet name="Test" code="tower.TelnetApplet" codebase="../sys/applet/" archive="commons-net-2.0.jar,applet.jar" width=700 height=400>
+				 		<applet name="Test" code="tower.TelnetApplet" codebase="../sys/applet/" archive="commons-net-2.0.jar,applet.jar" width=800 height=500>
               				<param   name=DeviceIP   value= "<%=deviceIp%>">
              			 	<param   name=DevicePort   value= "<%=devicePort%>"> 
           			    	<param   name=DeviceUser   value= "<%=deviceUser%>"> 
          			     	<param   name=DevicePassword   value= "<%=devicePassword%>"> 
-         			     	<param   name=DevicePrompt   value= "<%=devicePrompt%>"> 
+         			     	<param   name=DevicePrompt   value= "<%=devicePrompt%>">
+         			     	<param   name=UserPrompt   value= "<%=userPrompt%>">
+         			     	<param   name=PasswordPrompt   value= "<%=passwordPrompt%>"> 
       			        	<param   name=FrontHostIP   value= "<%=hostIp%>"> 
        				       	<param   name=FrontHostPort   value= "<%=hostPort%>"> 
            				   	<param   name=FrontHostUser   value= "<%=hostUser%>"> 
            				   	<param   name=FrontHostPassword   value= "<%=hostPassword%>"> 
+           				   	<param   name=HostUserPrompt   value= "<%=hostUserPrompt%>">
+         			     	<param   name=HostPasswordPrompt   value= "<%=hostPasswordPrompt%>"> 
          			     	<param   name=FrontHostPrompt   value= "<%=hostPrompt%>" MAYSCRIPT> 
          		     </applet>
 				 	</td>

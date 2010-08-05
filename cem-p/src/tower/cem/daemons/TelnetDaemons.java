@@ -112,6 +112,8 @@ public class TelnetDaemons extends Thread {
 	String dbUser;
 	String dbPassword;
 
+	String inspectLogsPath;
+
 	Logger logger;
 	PropertyConfigurator.configure(loadLoggerConfig());
 	logger = Logger.getLogger("TelnetDaemons");
@@ -129,7 +131,7 @@ public class TelnetDaemons extends Thread {
 	    // 检查参数文件是否存在，如果不存在则建立参数文件
 	    sRunFlag = getTdconfigMsg("run_flag");
 	    if (sRunFlag == null) {
-		setTdconfigMsg("F", 10, 5000, "", "", "", "");
+		setTdconfigMsg("F", 10, 5000, "", "", "", "", "");
 		logger.error("PLS config parameter in file<tdconfig.propertie> before run");
 		return;
 	    }
@@ -143,6 +145,8 @@ public class TelnetDaemons extends Thread {
 	    dbUrl = getTdconfigMsg("db_url").trim();
 	    dbUser = getTdconfigMsg("db_user").trim();
 	    dbPassword = getTdconfigMsg("db_password").trim();
+
+	    inspectLogsPath = getTdconfigMsg("inspect_logs_path").trim();
 
 	    // 当参数未设置，提示补充参数配置
 	    if (sRunFlag == null || sDaemonsMax == null || sSleepTimer == null || dbDriver == null
@@ -168,7 +172,8 @@ public class TelnetDaemons extends Thread {
 	    }
 
 	    // 执行标志为"T"，服务进行中 ...
-	    setTdconfigMsg("T", iDaemonsMax, iSleepTimer, dbDriver, dbUrl, dbUser, dbPassword);
+	    setTdconfigMsg("T", iDaemonsMax, iSleepTimer, dbDriver, dbUrl, dbUser, dbPassword,
+		    inspectLogsPath);
 
 	    int iSendCount = 0;
 
@@ -300,7 +305,7 @@ public class TelnetDaemons extends Thread {
 
     // 设置配置文件中的参数
     public static void setTdconfigMsg(String sRunFlag, int iDaemonsMax, int iSleepTimer, String dbDriver,
-	    String dbUrl, String dbUser, String dbPassword) {
+	    String dbUrl, String dbUser, String dbPassword, String inspectLogsPath) {
 	try {
 	    BufferedWriter out = new BufferedWriter(new FileWriter(
 		    "applications/sys/config/tdconfig.properties"));
@@ -312,6 +317,7 @@ public class TelnetDaemons extends Thread {
 	    out.write("db_url=" + dbUrl + "\n");
 	    out.write("db_user=" + dbUser + "\n");
 	    out.write("db_password=" + dbPassword + "\n");
+	    out.write("inspect_logs_path=" + inspectLogsPath + "\n");
 	    out.flush();
 	    out.close();
 	} catch (Exception e) {

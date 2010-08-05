@@ -286,7 +286,7 @@ try{
 		                <tr>
 		                 <td width="150" align="right">登录密码：</td>
 		                 <td>
-              					<input type="text" class="text" name="DEVICE_PASSWORD"value="<%=devicePassword %>" readonly>
+              					<input type="password" class="password" name="DEVICE_PASSWORD"value="<%=devicePassword %>" readonly>
 		                 </td>
 		                </tr>
 		                
@@ -302,6 +302,10 @@ try{
 		                 <td colspan="3">
               					<textarea name="REMARK" id="textarea" class="textarea" cols="50" rows="4" readonly><%=remark %></textarea>
 		                 </td>
+		               </tr>
+		               <tr>
+		               </tr>
+		               <tr>
 		               </tr>
                       </table>
                             <!-- 工作任务面板内容结束 -->

@@ -85,6 +85,8 @@ public class BoDeviceDetail implements RootBo{
 				requestXml.setItemValue("DEVICE_INFO",row,"HOST_PASSWORD",enFrontHostInfo.getHostPassword());
 				requestXml.setItemValue("DEVICE_INFO",row,"HOST_PROMPT",enFrontHostInfo.getHostPrompt());
 				requestXml.setItemValue("DEVICE_INFO",row,"REMARK",enFrontHostInfo.getRemark());
+				requestXml.setItemValue("DEVICE_INFO",row,"HOST_USER_PROMPT",enFrontHostInfo.getUserPrompt());
+				requestXml.setItemValue("DEVICE_INFO",row,"HOST_PASSWORD_PROMPT",enFrontHostInfo.getPasswordPrompt());
 			}
 		}
 		if (!(enDeviceInfo.getTypeId() == null || enDeviceInfo.getTypeId().length() == 0)) {

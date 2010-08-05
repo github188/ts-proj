@@ -31,7 +31,7 @@ public class DbDeviceInfo extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
 
-        query.append("insert into device_info ( DEVICE_ID,DEVICE_NAME_EN,DEVICE_ABB_NAME_EN,DEVICE_NAME_CN,TYPE_ID,LOCATION_ID,DEVICE_STATUS,FRONT_HOST_ID,DEVICE_IP,DEVICE_PORT,DEVICE_USER,DEVICE_PASSWORD,DEVICE_PROMPT,REMARK ) values ( ");
+        query.append("insert into device_info ( DEVICE_ID,DEVICE_NAME_EN,DEVICE_ABB_NAME_EN,DEVICE_NAME_CN,TYPE_ID,LOCATION_ID,DEVICE_STATUS,FRONT_HOST_ID,DEVICE_IP,DEVICE_PORT,USER_PROMPT,DEVICE_USER,PASSWORD_PROMPT,DEVICE_PASSWORD,DEVICE_PROMPT,REMARK ) values ( ");
         query.append(formatString(en.getDeviceId()));
         query.append(",");
         query.append(formatString(en.getDeviceNameEn()));
@@ -52,7 +52,11 @@ public class DbDeviceInfo extends RootDB{
         query.append(",");
         query.append(formatString(en.getDevicePort()));
         query.append(",");
+        query.append(formatString(en.getUserPrompt()));
+        query.append(",");
         query.append(formatString(en.getDeviceUser()));
+        query.append(",");
+        query.append(formatString(en.getPasswordPrompt()));
         query.append(",");
         query.append(formatString(en.getDevicePassword()));
         query.append(",");
@@ -170,12 +174,28 @@ public class DbDeviceInfo extends RootDB{
             query.append(formatString(en.getDevicePort()));
             bChanged = true;
         }
+        if(en.hasChangeUserPrompt()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("USER_PROMPT=");
+            query.append(formatString(en.getUserPrompt()));
+            bChanged = true;
+        }
         if(en.hasChangeDeviceUser()) {
             if(bChanged){
                 query.append(",");
             }
             query.append("DEVICE_USER=");
             query.append(formatString(en.getDeviceUser()));
+            bChanged = true;
+        }
+        if(en.hasChangePasswordPrompt()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("PASSWORD_PROMPT=");
+            query.append(formatString(en.getPasswordPrompt()));
             bChanged = true;
         }
         if(en.hasChangeDevicePassword()) {
@@ -217,7 +237,7 @@ public class DbDeviceInfo extends RootDB{
         EnDeviceInfo res = null;
 
         StringBuffer query;
-        query = new StringBuffer("select DEVICE_ID,DEVICE_NAME_EN,DEVICE_ABB_NAME_EN,DEVICE_NAME_CN,TYPE_ID,LOCATION_ID,DEVICE_STATUS,FRONT_HOST_ID,DEVICE_IP,DEVICE_PORT,DEVICE_USER,DEVICE_PASSWORD,DEVICE_PROMPT,REMARK from device_info");
+        query = new StringBuffer("select DEVICE_ID,DEVICE_NAME_EN,DEVICE_ABB_NAME_EN,DEVICE_NAME_CN,TYPE_ID,LOCATION_ID,DEVICE_STATUS,FRONT_HOST_ID,DEVICE_IP,DEVICE_PORT,USER_PROMPT,DEVICE_USER,PASSWORD_PROMPT,DEVICE_PASSWORD,DEVICE_PROMPT,REMARK from device_info");
 
         query.append(" where ");
         query.append("DEVICE_ID=");
@@ -346,12 +366,28 @@ public class DbDeviceInfo extends RootDB{
             query.append(formatString(en.getDevicePort()));
             bChanged = true;
         }
+        if(en.hasChangeUserPrompt()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("USER_PROMPT=");
+            query.append(formatString(en.getUserPrompt()));
+            bChanged = true;
+        }
         if(en.hasChangeDeviceUser()) {
             if(bChanged){
                 query.append(",");
             }
             query.append("DEVICE_USER=");
             query.append(formatString(en.getDeviceUser()));
+            bChanged = true;
+        }
+        if(en.hasChangePasswordPrompt()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("PASSWORD_PROMPT=");
+            query.append(formatString(en.getPasswordPrompt()));
             bChanged = true;
         }
         if(en.hasChangeDevicePassword()) {
@@ -393,7 +429,7 @@ public class DbDeviceInfo extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select DEVICE_ID,DEVICE_NAME_EN,DEVICE_ABB_NAME_EN,DEVICE_NAME_CN,TYPE_ID,LOCATION_ID,DEVICE_STATUS,FRONT_HOST_ID,DEVICE_IP,DEVICE_PORT,DEVICE_USER,DEVICE_PASSWORD,DEVICE_PROMPT,REMARK from device_info");
+        query.append("select DEVICE_ID,DEVICE_NAME_EN,DEVICE_ABB_NAME_EN,DEVICE_NAME_CN,TYPE_ID,LOCATION_ID,DEVICE_STATUS,FRONT_HOST_ID,DEVICE_IP,DEVICE_PORT,USER_PROMPT,DEVICE_USER,PASSWORD_PROMPT,DEVICE_PASSWORD,DEVICE_PROMPT,REMARK from device_info");
 
         query.append(" where ");
         query.append("DEVICE_ID like ");
@@ -431,7 +467,7 @@ public class DbDeviceInfo extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select DEVICE_ID,DEVICE_NAME_EN,DEVICE_ABB_NAME_EN,DEVICE_NAME_CN,TYPE_ID,LOCATION_ID,DEVICE_STATUS,FRONT_HOST_ID,DEVICE_IP,DEVICE_PORT,DEVICE_USER,DEVICE_PASSWORD,DEVICE_PROMPT,REMARK from device_info where ");
+        query.append("select DEVICE_ID,DEVICE_NAME_EN,DEVICE_ABB_NAME_EN,DEVICE_NAME_CN,TYPE_ID,LOCATION_ID,DEVICE_STATUS,FRONT_HOST_ID,DEVICE_IP,DEVICE_PORT,USER_PROMPT,DEVICE_USER,PASSWORD_PROMPT,DEVICE_PASSWORD,DEVICE_PROMPT,REMARK from device_info where ");
         query.append(where);
         if(orderBy != null) {
             query.append(orderBy);
@@ -448,7 +484,7 @@ public class DbDeviceInfo extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select DEVICE_ID,DEVICE_NAME_EN,DEVICE_ABB_NAME_EN,DEVICE_NAME_CN,TYPE_ID,LOCATION_ID,DEVICE_STATUS,FRONT_HOST_ID,DEVICE_IP,DEVICE_PORT,DEVICE_USER,DEVICE_PASSWORD,DEVICE_PROMPT,REMARK from device_info");
+        query.append("select DEVICE_ID,DEVICE_NAME_EN,DEVICE_ABB_NAME_EN,DEVICE_NAME_CN,TYPE_ID,LOCATION_ID,DEVICE_STATUS,FRONT_HOST_ID,DEVICE_IP,DEVICE_PORT,USER_PROMPT,DEVICE_USER,PASSWORD_PROMPT,DEVICE_PASSWORD,DEVICE_PROMPT,REMARK from device_info");
 
         if(orderBy != null) {
             query.append(orderBy);
@@ -547,12 +583,28 @@ public class DbDeviceInfo extends RootDB{
             query.append(formatString(en.getDevicePort()));
             bChanged = true;
         }
+        if(en.hasChangeUserPrompt()) {
+            if(bChanged){
+                query.append(" and ");
+            }
+            query.append("USER_PROMPT=");
+            query.append(formatString(en.getUserPrompt()));
+            bChanged = true;
+        }
         if(en.hasChangeDeviceUser()) {
             if(bChanged){
                 query.append(" and ");
             }
             query.append("DEVICE_USER=");
             query.append(formatString(en.getDeviceUser()));
+            bChanged = true;
+        }
+        if(en.hasChangePasswordPrompt()) {
+            if(bChanged){
+                query.append(" and ");
+            }
+            query.append("PASSWORD_PROMPT=");
+            query.append(formatString(en.getPasswordPrompt()));
             bChanged = true;
         }
         if(en.hasChangeDevicePassword()) {
@@ -580,9 +632,9 @@ public class DbDeviceInfo extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select DEVICE_ID,DEVICE_NAME_EN,DEVICE_ABB_NAME_EN,DEVICE_NAME_CN,TYPE_ID,LOCATION_ID,DEVICE_STATUS,FRONT_HOST_ID,DEVICE_IP,DEVICE_PORT,DEVICE_USER,DEVICE_PASSWORD,DEVICE_PROMPT,REMARK from device_info where ");
+            query.insert(0,"select DEVICE_ID,DEVICE_NAME_EN,DEVICE_ABB_NAME_EN,DEVICE_NAME_CN,TYPE_ID,LOCATION_ID,DEVICE_STATUS,FRONT_HOST_ID,DEVICE_IP,DEVICE_PORT,USER_PROMPT,DEVICE_USER,PASSWORD_PROMPT,DEVICE_PASSWORD,DEVICE_PROMPT,REMARK from device_info where ");
         } else {
-            query.append("select DEVICE_ID,DEVICE_NAME_EN,DEVICE_ABB_NAME_EN,DEVICE_NAME_CN,TYPE_ID,LOCATION_ID,DEVICE_STATUS,FRONT_HOST_ID,DEVICE_IP,DEVICE_PORT,DEVICE_USER,DEVICE_PASSWORD,DEVICE_PROMPT,REMARK from device_info");
+            query.append("select DEVICE_ID,DEVICE_NAME_EN,DEVICE_ABB_NAME_EN,DEVICE_NAME_CN,TYPE_ID,LOCATION_ID,DEVICE_STATUS,FRONT_HOST_ID,DEVICE_IP,DEVICE_PORT,USER_PROMPT,DEVICE_USER,PASSWORD_PROMPT,DEVICE_PASSWORD,DEVICE_PROMPT,REMARK from device_info");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -681,12 +733,28 @@ public class DbDeviceInfo extends RootDB{
             query.append(formatString(en.getDevicePort()));
             bChanged = true;
         }
+        if(en.hasChangeUserPrompt()) {
+            if(bChanged){
+                query.append(" and ");
+            }
+            query.append("USER_PROMPT like ");
+            query.append(formatString(en.getUserPrompt()));
+            bChanged = true;
+        }
         if(en.hasChangeDeviceUser()) {
             if(bChanged){
                 query.append(" and ");
             }
             query.append("DEVICE_USER like ");
             query.append(formatString(en.getDeviceUser()));
+            bChanged = true;
+        }
+        if(en.hasChangePasswordPrompt()) {
+            if(bChanged){
+                query.append(" and ");
+            }
+            query.append("PASSWORD_PROMPT like ");
+            query.append(formatString(en.getPasswordPrompt()));
             bChanged = true;
         }
         if(en.hasChangeDevicePassword()) {
@@ -714,9 +782,9 @@ public class DbDeviceInfo extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select DEVICE_ID,DEVICE_NAME_EN,DEVICE_ABB_NAME_EN,DEVICE_NAME_CN,TYPE_ID,LOCATION_ID,DEVICE_STATUS,FRONT_HOST_ID,DEVICE_IP,DEVICE_PORT,DEVICE_USER,DEVICE_PASSWORD,DEVICE_PROMPT,REMARK from device_info where ");
+            query.insert(0,"select DEVICE_ID,DEVICE_NAME_EN,DEVICE_ABB_NAME_EN,DEVICE_NAME_CN,TYPE_ID,LOCATION_ID,DEVICE_STATUS,FRONT_HOST_ID,DEVICE_IP,DEVICE_PORT,USER_PROMPT,DEVICE_USER,PASSWORD_PROMPT,DEVICE_PASSWORD,DEVICE_PROMPT,REMARK from device_info where ");
         } else {
-            query.append("select DEVICE_ID,DEVICE_NAME_EN,DEVICE_ABB_NAME_EN,DEVICE_NAME_CN,TYPE_ID,LOCATION_ID,DEVICE_STATUS,FRONT_HOST_ID,DEVICE_IP,DEVICE_PORT,DEVICE_USER,DEVICE_PASSWORD,DEVICE_PROMPT,REMARK from device_info");
+            query.append("select DEVICE_ID,DEVICE_NAME_EN,DEVICE_ABB_NAME_EN,DEVICE_NAME_CN,TYPE_ID,LOCATION_ID,DEVICE_STATUS,FRONT_HOST_ID,DEVICE_IP,DEVICE_PORT,USER_PROMPT,DEVICE_USER,PASSWORD_PROMPT,DEVICE_PASSWORD,DEVICE_PROMPT,REMARK from device_info");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -860,12 +928,28 @@ public class DbDeviceInfo extends RootDB{
             query.append(formatString(en.getDevicePort()));
             bChanged = true;
         }
+        if(en.hasChangeUserPrompt()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("USER_PROMPT=");
+            query.append(formatString(en.getUserPrompt()));
+            bChanged = true;
+        }
         if(en.hasChangeDeviceUser()) {
             if(bChanged){
                 query.append(",");
             }
             query.append("DEVICE_USER=");
             query.append(formatString(en.getDeviceUser()));
+            bChanged = true;
+        }
+        if(en.hasChangePasswordPrompt()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("PASSWORD_PROMPT=");
+            query.append(formatString(en.getPasswordPrompt()));
             bChanged = true;
         }
         if(en.hasChangeDevicePassword()) {
@@ -914,7 +998,9 @@ public class DbDeviceInfo extends RootDB{
         en.setFrontHostId(r.getString("FRONT_HOST_ID"));
         en.setDeviceIp(r.getString("DEVICE_IP"));
         en.setDevicePort(r.getString("DEVICE_PORT"));
+        en.setUserPrompt(r.getString("USER_PROMPT"));
         en.setDeviceUser(r.getString("DEVICE_USER"));
+        en.setPasswordPrompt(r.getString("PASSWORD_PROMPT"));
         en.setDevicePassword(r.getString("DEVICE_PASSWORD"));
         en.setDevicePrompt(r.getString("DEVICE_PROMPT"));
         en.setRemark(r.getString("REMARK"));
@@ -980,9 +1066,17 @@ public class DbDeviceInfo extends RootDB{
         stmp = (String)otmp;
         en.setDevicePort(stmp);
 
+        otmp = xml.getInputObject("USER_PROMPT");
+        stmp = (String)otmp;
+        en.setUserPrompt(stmp);
+
         otmp = xml.getInputObject("DEVICE_USER");
         stmp = (String)otmp;
         en.setDeviceUser(stmp);
+
+        otmp = xml.getInputObject("PASSWORD_PROMPT");
+        stmp = (String)otmp;
+        en.setPasswordPrompt(stmp);
 
         otmp = xml.getInputObject("DEVICE_PASSWORD");
         stmp = (String)otmp;
@@ -1016,7 +1110,9 @@ public class DbDeviceInfo extends RootDB{
         Object[] oFrontHostId;
         Object[] oDeviceIp;
         Object[] oDevicePort;
+        Object[] oUserPrompt;
         Object[] oDeviceUser;
+        Object[] oPasswordPrompt;
         Object[] oDevicePassword;
         Object[] oDevicePrompt;
         Object[] oRemark;
@@ -1062,9 +1158,17 @@ public class DbDeviceInfo extends RootDB{
         if (count == 0 && oDevicePort.length > 0) {
             count = oDevicePort.length;
         }
+        oUserPrompt = xml.getInputObjects("USER_PROMPT");
+        if (count == 0 && oUserPrompt.length > 0) {
+            count = oUserPrompt.length;
+        }
         oDeviceUser = xml.getInputObjects("DEVICE_USER");
         if (count == 0 && oDeviceUser.length > 0) {
             count = oDeviceUser.length;
+        }
+        oPasswordPrompt = xml.getInputObjects("PASSWORD_PROMPT");
+        if (count == 0 && oPasswordPrompt.length > 0) {
+            count = oPasswordPrompt.length;
         }
         oDevicePassword = xml.getInputObjects("DEVICE_PASSWORD");
         if (count == 0 && oDevicePassword.length > 0) {
@@ -1131,9 +1235,19 @@ public class DbDeviceInfo extends RootDB{
                 en.setDevicePort(stmp);
             }
 
+            if (oUserPrompt.length == count) {
+                stmp = (String)oUserPrompt[i];
+                en.setUserPrompt(stmp);
+            }
+
             if (oDeviceUser.length == count) {
                 stmp = (String)oDeviceUser[i];
                 en.setDeviceUser(stmp);
+            }
+
+            if (oPasswordPrompt.length == count) {
+                stmp = (String)oPasswordPrompt[i];
+                en.setPasswordPrompt(stmp);
             }
 
             if (oDevicePassword.length == count) {
@@ -1171,7 +1285,9 @@ public class DbDeviceInfo extends RootDB{
         xml.setItemValue("DEVICE_INFO",row,"FRONT_HOST_ID",en.getFrontHostId());
         xml.setItemValue("DEVICE_INFO",row,"DEVICE_IP",en.getDeviceIp());
         xml.setItemValue("DEVICE_INFO",row,"DEVICE_PORT",en.getDevicePort());
+        xml.setItemValue("DEVICE_INFO",row,"USER_PROMPT",en.getUserPrompt());
         xml.setItemValue("DEVICE_INFO",row,"DEVICE_USER",en.getDeviceUser());
+        xml.setItemValue("DEVICE_INFO",row,"PASSWORD_PROMPT",en.getPasswordPrompt());
         xml.setItemValue("DEVICE_INFO",row,"DEVICE_PASSWORD",en.getDevicePassword());
         xml.setItemValue("DEVICE_INFO",row,"DEVICE_PROMPT",en.getDevicePrompt());
         xml.setItemValue("DEVICE_INFO",row,"REMARK",en.getRemark());
@@ -1197,7 +1313,9 @@ public class DbDeviceInfo extends RootDB{
             xml.setItemValue("DEVICE_INFO",row,"FRONT_HOST_ID",en.getFrontHostId());
             xml.setItemValue("DEVICE_INFO",row,"DEVICE_IP",en.getDeviceIp());
             xml.setItemValue("DEVICE_INFO",row,"DEVICE_PORT",en.getDevicePort());
+            xml.setItemValue("DEVICE_INFO",row,"USER_PROMPT",en.getUserPrompt());
             xml.setItemValue("DEVICE_INFO",row,"DEVICE_USER",en.getDeviceUser());
+            xml.setItemValue("DEVICE_INFO",row,"PASSWORD_PROMPT",en.getPasswordPrompt());
             xml.setItemValue("DEVICE_INFO",row,"DEVICE_PASSWORD",en.getDevicePassword());
             xml.setItemValue("DEVICE_INFO",row,"DEVICE_PROMPT",en.getDevicePrompt());
             xml.setItemValue("DEVICE_INFO",row,"REMARK",en.getRemark());

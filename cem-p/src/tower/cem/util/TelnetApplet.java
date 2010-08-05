@@ -86,12 +86,16 @@ public class TelnetApplet extends Applet {
 	final String deviceUser = getParameter("DeviceUser");
 	final String devicePassword = getParameter("DevicePassword");
 	final String devicePrompt = getParameter("DevicePrompt");
+	final String userPrompt = getParameter("UserPrompt");
+	final String passwordPrompt = getParameter("PasswordPrompt");
 
 	final String frontHostIp = getParameter("FrontHostIP");
 	final String frontHostPort = getParameter("FrontHostPort");
 	final String frontHostUser = getParameter("FrontHostUser");
 	final String frontHostPassword = getParameter("FrontHostPassword");
 	final String frontHostPrompt = getParameter("FrontHostPrompt");
+	final String hostUserPrompt = getParameter("HostUserPrompt");
+	final String hostPasswordPrompt = getParameter("HostPasswordPrompt");
 
 	String result;
 
@@ -99,7 +103,8 @@ public class TelnetApplet extends Applet {
 	nt.setTimeOut(0);
 	if (frontHostIp == null || frontHostIp.trim().length() == 0) {
 	    if (!(deviceIp == null || deviceIp.trim().length() == 0)) {
-		result = nt.FunLogin(deviceIp, devicePort, deviceUser, devicePassword, devicePrompt);
+		result = nt.FunLogin(deviceIp, devicePort, userPrompt, deviceUser, passwordPrompt,
+			devicePassword, devicePrompt);
 		tResult.append(result);
 		if (nt.getBflag()) {
 		    lStatus.setText("连接成功");
@@ -111,11 +116,12 @@ public class TelnetApplet extends Applet {
 	    }
 
 	} else {
-	    result = nt.FunLogin(frontHostIp, frontHostPort, frontHostUser, frontHostPassword,
-		    frontHostPrompt);
+	    result = nt.FunLogin(frontHostIp, frontHostPort, hostUserPrompt, frontHostUser,
+		    hostPasswordPrompt, frontHostPassword, frontHostPrompt);
 	    tResult.append(result);
 	    if (nt.getBflag()) {
-		result = nt.FunRelogin(deviceIp, devicePort, deviceUser, devicePassword, devicePrompt);
+		result = nt.FunRelogin(deviceIp, devicePort, userPrompt, deviceUser, passwordPrompt,
+			devicePassword, devicePrompt);
 		tResult.append(result);
 		if (nt.getBflag()) {
 		    lStatus.setText("连接成功");
@@ -139,7 +145,7 @@ public class TelnetApplet extends Applet {
     public void stop() {
 	// TODO 自动生成方法存根
 	super.stop();
-
+	
 	nt.disconnect();
     }
 
@@ -164,7 +170,6 @@ public class TelnetApplet extends Applet {
 		} else {
 		    lStatus.setText("执行失败");
 		}
-
 	    }
 
 	    bSend.setEnabled(true);

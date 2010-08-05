@@ -22,6 +22,8 @@
 	String devicePassword;
 	String devicePrompt;
 	String remark;
+	String userPrompt;
+	String passwordPrompt;	
 %>
 <%
     xml = XMLWrap.getRequestXml(request,session,application);
@@ -42,6 +44,8 @@
 	devicePassword = xml.getItemValue("DEVICE_INFO",1,"DEVICE_PASSWORD");
 	devicePrompt = xml.getItemValue("DEVICE_INFO",1,"DEVICE_PROMPT");
     remark = xml.getItemValue("DEVICE_INFO",1,"REMARK");
+    userPrompt = xml.getItemValue("DEVICE_INFO",1,"USER_PROMPT");
+    passwordPrompt = xml.getItemValue("DEVICE_INFO",1,"PASSWORD_PROMPT");        
     
 	String[] deviceStatusDesc = {"在用","停用"};
 	String[] deviceStatusValue = {"N","S"};
@@ -207,6 +211,17 @@
 		               </tr>
 		               
 		               <tr>
+							<td width="150" align="right">用户名提示符：</td>
+			                <td>
+		                    	<span id="sprytDeviceUser">
+              					<input type="text" class="text" name="USER_PROMPT"value="<%=userPrompt%>"><span class="requiredField">*</span>
+              			      	<span class="textfieldRequiredMsg">需要提供一个值。</span>
+              				  	<span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
+		                      	</span>
+		                 	</td>
+		               </tr>
+		               
+		               <tr>
 							<td width="150" align="right">登录用户名：</td>
 			                <td>
 		                    	<span id="sprytDeviceUser">
@@ -217,11 +232,22 @@
 		                 	</td>
 		               </tr>
 		               
+		               <tr>
+							<td width="150" align="right">密码提示符：</td>
+			                <td>
+		                    	<span id="sprytDevicePassword">
+              					<input type="text" class="text" name="PASSWORD_PROMPT"value="<%=passwordPrompt%>"><span class="requiredField">*</span>
+              			      	<span class="textfieldRequiredMsg">需要提供一个值。</span>
+              				  	<span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
+		                      	</span>
+		                 	</td>
+		               </tr>
+		               
 		                <tr>
 		                	<td width="150" align="right">登录密码：</td>
 		                 	<td>
 		                    	<span id="sprytDevicePassword">
-              					<input type="text" class="text" name="DEVICE_PASSWORD"value="<%=devicePassword %>"><span class="requiredField">*</span>
+              					<input type="password" class="password" name="DEVICE_PASSWORD"value="<%=devicePassword %>"><span class="requiredField">*</span>
               			      	<span class="textfieldRequiredMsg">需要提供一个值。</span>
               				  	<span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 		                      	</span>

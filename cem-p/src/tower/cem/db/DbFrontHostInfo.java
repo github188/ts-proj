@@ -31,7 +31,7 @@ public class DbFrontHostInfo extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
 
-        query.append("insert into front_host_info ( HOST_ID,HOST_NAME_EN,HOST_ABB_NAME_EN,HOST_NAME_CN,LOCATION_ID,HOST_STATUS,HOST_IP,HOST_PORT,HOST_USER,HOST_PASSWORD,HOST_PROMPT,REMARK ) values ( ");
+        query.append("insert into front_host_info ( HOST_ID,HOST_NAME_EN,HOST_ABB_NAME_EN,HOST_NAME_CN,LOCATION_ID,HOST_STATUS,HOST_IP,HOST_PORT,USER_PROMPT,HOST_USER,PASSWORD_PROMPT,HOST_PASSWORD,HOST_PROMPT,REMARK ) values ( ");
         query.append(formatString(en.getHostId()));
         query.append(",");
         query.append(formatString(en.getHostNameEn()));
@@ -48,7 +48,11 @@ public class DbFrontHostInfo extends RootDB{
         query.append(",");
         query.append(formatString(en.getHostPort()));
         query.append(",");
+        query.append(formatString(en.getUserPrompt()));
+        query.append(",");
         query.append(formatString(en.getHostUser()));
+        query.append(",");
+        query.append(formatString(en.getPasswordPrompt()));
         query.append(",");
         query.append(formatString(en.getHostPassword()));
         query.append(",");
@@ -150,12 +154,28 @@ public class DbFrontHostInfo extends RootDB{
             query.append(formatString(en.getHostPort()));
             bChanged = true;
         }
+        if(en.hasChangeUserPrompt()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("USER_PROMPT=");
+            query.append(formatString(en.getUserPrompt()));
+            bChanged = true;
+        }
         if(en.hasChangeHostUser()) {
             if(bChanged){
                 query.append(",");
             }
             query.append("HOST_USER=");
             query.append(formatString(en.getHostUser()));
+            bChanged = true;
+        }
+        if(en.hasChangePasswordPrompt()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("PASSWORD_PROMPT=");
+            query.append(formatString(en.getPasswordPrompt()));
             bChanged = true;
         }
         if(en.hasChangeHostPassword()) {
@@ -197,7 +217,7 @@ public class DbFrontHostInfo extends RootDB{
         EnFrontHostInfo res = null;
 
         StringBuffer query;
-        query = new StringBuffer("select HOST_ID,HOST_NAME_EN,HOST_ABB_NAME_EN,HOST_NAME_CN,LOCATION_ID,HOST_STATUS,HOST_IP,HOST_PORT,HOST_USER,HOST_PASSWORD,HOST_PROMPT,REMARK from front_host_info");
+        query = new StringBuffer("select HOST_ID,HOST_NAME_EN,HOST_ABB_NAME_EN,HOST_NAME_CN,LOCATION_ID,HOST_STATUS,HOST_IP,HOST_PORT,USER_PROMPT,HOST_USER,PASSWORD_PROMPT,HOST_PASSWORD,HOST_PROMPT,REMARK from front_host_info");
 
         query.append(" where ");
         query.append("HOST_ID=");
@@ -310,12 +330,28 @@ public class DbFrontHostInfo extends RootDB{
             query.append(formatString(en.getHostPort()));
             bChanged = true;
         }
+        if(en.hasChangeUserPrompt()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("USER_PROMPT=");
+            query.append(formatString(en.getUserPrompt()));
+            bChanged = true;
+        }
         if(en.hasChangeHostUser()) {
             if(bChanged){
                 query.append(",");
             }
             query.append("HOST_USER=");
             query.append(formatString(en.getHostUser()));
+            bChanged = true;
+        }
+        if(en.hasChangePasswordPrompt()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("PASSWORD_PROMPT=");
+            query.append(formatString(en.getPasswordPrompt()));
             bChanged = true;
         }
         if(en.hasChangeHostPassword()) {
@@ -357,7 +393,7 @@ public class DbFrontHostInfo extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select HOST_ID,HOST_NAME_EN,HOST_ABB_NAME_EN,HOST_NAME_CN,LOCATION_ID,HOST_STATUS,HOST_IP,HOST_PORT,HOST_USER,HOST_PASSWORD,HOST_PROMPT,REMARK from front_host_info");
+        query.append("select HOST_ID,HOST_NAME_EN,HOST_ABB_NAME_EN,HOST_NAME_CN,LOCATION_ID,HOST_STATUS,HOST_IP,HOST_PORT,USER_PROMPT,HOST_USER,PASSWORD_PROMPT,HOST_PASSWORD,HOST_PROMPT,REMARK from front_host_info");
 
         query.append(" where ");
         query.append("HOST_ID like ");
@@ -395,7 +431,7 @@ public class DbFrontHostInfo extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select HOST_ID,HOST_NAME_EN,HOST_ABB_NAME_EN,HOST_NAME_CN,LOCATION_ID,HOST_STATUS,HOST_IP,HOST_PORT,HOST_USER,HOST_PASSWORD,HOST_PROMPT,REMARK from front_host_info where ");
+        query.append("select HOST_ID,HOST_NAME_EN,HOST_ABB_NAME_EN,HOST_NAME_CN,LOCATION_ID,HOST_STATUS,HOST_IP,HOST_PORT,USER_PROMPT,HOST_USER,PASSWORD_PROMPT,HOST_PASSWORD,HOST_PROMPT,REMARK from front_host_info where ");
         query.append(where);
         if(orderBy != null) {
             query.append(orderBy);
@@ -412,7 +448,7 @@ public class DbFrontHostInfo extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select HOST_ID,HOST_NAME_EN,HOST_ABB_NAME_EN,HOST_NAME_CN,LOCATION_ID,HOST_STATUS,HOST_IP,HOST_PORT,HOST_USER,HOST_PASSWORD,HOST_PROMPT,REMARK from front_host_info");
+        query.append("select HOST_ID,HOST_NAME_EN,HOST_ABB_NAME_EN,HOST_NAME_CN,LOCATION_ID,HOST_STATUS,HOST_IP,HOST_PORT,USER_PROMPT,HOST_USER,PASSWORD_PROMPT,HOST_PASSWORD,HOST_PROMPT,REMARK from front_host_info");
 
         if(orderBy != null) {
             query.append(orderBy);
@@ -495,12 +531,28 @@ public class DbFrontHostInfo extends RootDB{
             query.append(formatString(en.getHostPort()));
             bChanged = true;
         }
+        if(en.hasChangeUserPrompt()) {
+            if(bChanged){
+                query.append(" and ");
+            }
+            query.append("USER_PROMPT=");
+            query.append(formatString(en.getUserPrompt()));
+            bChanged = true;
+        }
         if(en.hasChangeHostUser()) {
             if(bChanged){
                 query.append(" and ");
             }
             query.append("HOST_USER=");
             query.append(formatString(en.getHostUser()));
+            bChanged = true;
+        }
+        if(en.hasChangePasswordPrompt()) {
+            if(bChanged){
+                query.append(" and ");
+            }
+            query.append("PASSWORD_PROMPT=");
+            query.append(formatString(en.getPasswordPrompt()));
             bChanged = true;
         }
         if(en.hasChangeHostPassword()) {
@@ -528,9 +580,9 @@ public class DbFrontHostInfo extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select HOST_ID,HOST_NAME_EN,HOST_ABB_NAME_EN,HOST_NAME_CN,LOCATION_ID,HOST_STATUS,HOST_IP,HOST_PORT,HOST_USER,HOST_PASSWORD,HOST_PROMPT,REMARK from front_host_info where ");
+            query.insert(0,"select HOST_ID,HOST_NAME_EN,HOST_ABB_NAME_EN,HOST_NAME_CN,LOCATION_ID,HOST_STATUS,HOST_IP,HOST_PORT,USER_PROMPT,HOST_USER,PASSWORD_PROMPT,HOST_PASSWORD,HOST_PROMPT,REMARK from front_host_info where ");
         } else {
-            query.append("select HOST_ID,HOST_NAME_EN,HOST_ABB_NAME_EN,HOST_NAME_CN,LOCATION_ID,HOST_STATUS,HOST_IP,HOST_PORT,HOST_USER,HOST_PASSWORD,HOST_PROMPT,REMARK from front_host_info");
+            query.append("select HOST_ID,HOST_NAME_EN,HOST_ABB_NAME_EN,HOST_NAME_CN,LOCATION_ID,HOST_STATUS,HOST_IP,HOST_PORT,USER_PROMPT,HOST_USER,PASSWORD_PROMPT,HOST_PASSWORD,HOST_PROMPT,REMARK from front_host_info");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -613,12 +665,28 @@ public class DbFrontHostInfo extends RootDB{
             query.append(formatString(en.getHostPort()));
             bChanged = true;
         }
+        if(en.hasChangeUserPrompt()) {
+            if(bChanged){
+                query.append(" and ");
+            }
+            query.append("USER_PROMPT like ");
+            query.append(formatString(en.getUserPrompt()));
+            bChanged = true;
+        }
         if(en.hasChangeHostUser()) {
             if(bChanged){
                 query.append(" and ");
             }
             query.append("HOST_USER like ");
             query.append(formatString(en.getHostUser()));
+            bChanged = true;
+        }
+        if(en.hasChangePasswordPrompt()) {
+            if(bChanged){
+                query.append(" and ");
+            }
+            query.append("PASSWORD_PROMPT like ");
+            query.append(formatString(en.getPasswordPrompt()));
             bChanged = true;
         }
         if(en.hasChangeHostPassword()) {
@@ -646,9 +714,9 @@ public class DbFrontHostInfo extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select HOST_ID,HOST_NAME_EN,HOST_ABB_NAME_EN,HOST_NAME_CN,LOCATION_ID,HOST_STATUS,HOST_IP,HOST_PORT,HOST_USER,HOST_PASSWORD,HOST_PROMPT,REMARK from front_host_info where ");
+            query.insert(0,"select HOST_ID,HOST_NAME_EN,HOST_ABB_NAME_EN,HOST_NAME_CN,LOCATION_ID,HOST_STATUS,HOST_IP,HOST_PORT,USER_PROMPT,HOST_USER,PASSWORD_PROMPT,HOST_PASSWORD,HOST_PROMPT,REMARK from front_host_info where ");
         } else {
-            query.append("select HOST_ID,HOST_NAME_EN,HOST_ABB_NAME_EN,HOST_NAME_CN,LOCATION_ID,HOST_STATUS,HOST_IP,HOST_PORT,HOST_USER,HOST_PASSWORD,HOST_PROMPT,REMARK from front_host_info");
+            query.append("select HOST_ID,HOST_NAME_EN,HOST_ABB_NAME_EN,HOST_NAME_CN,LOCATION_ID,HOST_STATUS,HOST_IP,HOST_PORT,USER_PROMPT,HOST_USER,PASSWORD_PROMPT,HOST_PASSWORD,HOST_PROMPT,REMARK from front_host_info");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -776,12 +844,28 @@ public class DbFrontHostInfo extends RootDB{
             query.append(formatString(en.getHostPort()));
             bChanged = true;
         }
+        if(en.hasChangeUserPrompt()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("USER_PROMPT=");
+            query.append(formatString(en.getUserPrompt()));
+            bChanged = true;
+        }
         if(en.hasChangeHostUser()) {
             if(bChanged){
                 query.append(",");
             }
             query.append("HOST_USER=");
             query.append(formatString(en.getHostUser()));
+            bChanged = true;
+        }
+        if(en.hasChangePasswordPrompt()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("PASSWORD_PROMPT=");
+            query.append(formatString(en.getPasswordPrompt()));
             bChanged = true;
         }
         if(en.hasChangeHostPassword()) {
@@ -828,7 +912,9 @@ public class DbFrontHostInfo extends RootDB{
         en.setHostStatus(r.getString("HOST_STATUS"));
         en.setHostIp(r.getString("HOST_IP"));
         en.setHostPort(r.getString("HOST_PORT"));
+        en.setUserPrompt(r.getString("USER_PROMPT"));
         en.setHostUser(r.getString("HOST_USER"));
+        en.setPasswordPrompt(r.getString("PASSWORD_PROMPT"));
         en.setHostPassword(r.getString("HOST_PASSWORD"));
         en.setHostPrompt(r.getString("HOST_PROMPT"));
         en.setRemark(r.getString("REMARK"));
@@ -886,9 +972,17 @@ public class DbFrontHostInfo extends RootDB{
         stmp = (String)otmp;
         en.setHostPort(stmp);
 
+        otmp = xml.getInputObject("USER_PROMPT");
+        stmp = (String)otmp;
+        en.setUserPrompt(stmp);
+
         otmp = xml.getInputObject("HOST_USER");
         stmp = (String)otmp;
         en.setHostUser(stmp);
+
+        otmp = xml.getInputObject("PASSWORD_PROMPT");
+        stmp = (String)otmp;
+        en.setPasswordPrompt(stmp);
 
         otmp = xml.getInputObject("HOST_PASSWORD");
         stmp = (String)otmp;
@@ -920,7 +1014,9 @@ public class DbFrontHostInfo extends RootDB{
         Object[] oHostStatus;
         Object[] oHostIp;
         Object[] oHostPort;
+        Object[] oUserPrompt;
         Object[] oHostUser;
+        Object[] oPasswordPrompt;
         Object[] oHostPassword;
         Object[] oHostPrompt;
         Object[] oRemark;
@@ -958,9 +1054,17 @@ public class DbFrontHostInfo extends RootDB{
         if (count == 0 && oHostPort.length > 0) {
             count = oHostPort.length;
         }
+        oUserPrompt = xml.getInputObjects("USER_PROMPT");
+        if (count == 0 && oUserPrompt.length > 0) {
+            count = oUserPrompt.length;
+        }
         oHostUser = xml.getInputObjects("HOST_USER");
         if (count == 0 && oHostUser.length > 0) {
             count = oHostUser.length;
+        }
+        oPasswordPrompt = xml.getInputObjects("PASSWORD_PROMPT");
+        if (count == 0 && oPasswordPrompt.length > 0) {
+            count = oPasswordPrompt.length;
         }
         oHostPassword = xml.getInputObjects("HOST_PASSWORD");
         if (count == 0 && oHostPassword.length > 0) {
@@ -1017,9 +1121,19 @@ public class DbFrontHostInfo extends RootDB{
                 en.setHostPort(stmp);
             }
 
+            if (oUserPrompt.length == count) {
+                stmp = (String)oUserPrompt[i];
+                en.setUserPrompt(stmp);
+            }
+
             if (oHostUser.length == count) {
                 stmp = (String)oHostUser[i];
                 en.setHostUser(stmp);
+            }
+
+            if (oPasswordPrompt.length == count) {
+                stmp = (String)oPasswordPrompt[i];
+                en.setPasswordPrompt(stmp);
             }
 
             if (oHostPassword.length == count) {
@@ -1055,7 +1169,9 @@ public class DbFrontHostInfo extends RootDB{
         xml.setItemValue("FRONT_HOST_INFO",row,"HOST_STATUS",en.getHostStatus());
         xml.setItemValue("FRONT_HOST_INFO",row,"HOST_IP",en.getHostIp());
         xml.setItemValue("FRONT_HOST_INFO",row,"HOST_PORT",en.getHostPort());
+        xml.setItemValue("FRONT_HOST_INFO",row,"USER_PROMPT",en.getUserPrompt());
         xml.setItemValue("FRONT_HOST_INFO",row,"HOST_USER",en.getHostUser());
+        xml.setItemValue("FRONT_HOST_INFO",row,"PASSWORD_PROMPT",en.getPasswordPrompt());
         xml.setItemValue("FRONT_HOST_INFO",row,"HOST_PASSWORD",en.getHostPassword());
         xml.setItemValue("FRONT_HOST_INFO",row,"HOST_PROMPT",en.getHostPrompt());
         xml.setItemValue("FRONT_HOST_INFO",row,"REMARK",en.getRemark());
@@ -1079,7 +1195,9 @@ public class DbFrontHostInfo extends RootDB{
             xml.setItemValue("FRONT_HOST_INFO",row,"HOST_STATUS",en.getHostStatus());
             xml.setItemValue("FRONT_HOST_INFO",row,"HOST_IP",en.getHostIp());
             xml.setItemValue("FRONT_HOST_INFO",row,"HOST_PORT",en.getHostPort());
+            xml.setItemValue("FRONT_HOST_INFO",row,"USER_PROMPT",en.getUserPrompt());
             xml.setItemValue("FRONT_HOST_INFO",row,"HOST_USER",en.getHostUser());
+            xml.setItemValue("FRONT_HOST_INFO",row,"PASSWORD_PROMPT",en.getPasswordPrompt());
             xml.setItemValue("FRONT_HOST_INFO",row,"HOST_PASSWORD",en.getHostPassword());
             xml.setItemValue("FRONT_HOST_INFO",row,"HOST_PROMPT",en.getHostPrompt());
             xml.setItemValue("FRONT_HOST_INFO",row,"REMARK",en.getRemark());
