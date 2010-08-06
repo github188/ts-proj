@@ -88,7 +88,7 @@
                           <td width="150" align="right">本端端口编号：</td>
 		                  <td width="100">
 		                      <span id="sprytpostSn">
-              					<input type="text" class="text" name="PORT_SN" value="<%=postSn %>"><span class="requiredField">*</span>
+              					<input type="text" class="text" name="PORT_SN" value="<%=postSn%>"><span class="requiredField">*</span>
               					<span class="textfieldRequiredMsg">需要提供一个值。</span>
 		                            <span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 		                            </span>
@@ -99,8 +99,8 @@
 		               		<td width="150" align="right">端口类型：</td>
 		                 	<td>
 		                      <span id="spryttypeName">
-                             <input name="TYPE_ID" type="hidden"  value="<%=typeId %>">
-		               <input type="text" class="date" name="TYPE_NAME"   value="<%=typeName %>"  readonly>
+                             <input name="TYPE_ID" type="hidden"  value="<%=typeId%>">
+		               <input type="text" class="date" name="TYPE_NAME"   value="<%=typeName%>"  readonly>
 		               <input type="button"  class="selButton" value="选择" onClick="doSelDevicePortType()" />
               					<span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 		                         </span>
@@ -120,7 +120,7 @@
 			               <td width="150" align="right">备注：</td>
 		        	       <td>
 		                  		 <span id="sprytRemark">
-              					<textarea name="REMARK" id="textarea" class="textarea" cols="50" rows="4"} ><%=remark %></textarea>
+              					<textarea name="REMARK" id="textarea" class="textarea" cols="50" rows="4"} ><%=remark%></textarea>
               					<span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 		                        </span>
   				         	</td>

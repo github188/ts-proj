@@ -156,51 +156,40 @@ function doSubmit(form) {
               <table>
               	 <tr>
               	 	<td align="right">设备英文名称：</td>
-                  	<td><input type="text" class="text" name="DEVICE_NAME_EN" value="<%=deviceNameEn %>"></td>
+                  	<td><input type="text" class="text" name="DEVICE_NAME_EN" value="<%=deviceNameEn%>"></td>
                  	<td align="right">设备中文名称：</td>
-	                <td><input type="text" class="text" name="DEVICE_NAME_CN" value="<%=deviceNameCn %>"></td>
+	                <td><input type="text" class="text" name="DEVICE_NAME_CN" value="<%=deviceNameCn%>"></td>
                  </tr>
-                 	<tr>
-		                	<td width="150" align="right">物理位置：</td>
-		                 	<td>
-		                  		<input name="LOCATION_ID" type="hidden"  value="<%=locationId %>">
-		                  		<input type="text" class="date" name="LOCATION_NAME_CN"   value="<%=locationNameCn %>"  readonly>
-		                  		<input type="button" name="selectOutOrg" class="selButton" value="选择" onClick="doSelLocation()" />
-  				         	</td>
-  				         	
-  				         	<td width="150" align="right">堡垒主机：</td>
-			                <td>
-			                  <input name="FRONT_HOST_ID" type="hidden"  value="<%=frontHostId %>">
-			                  <input type="text" class="date" name="FRONT_HOST_NAME"   value="<%=frontHostName %>"  readonly>
-			                   <input type="button" name="selectOutOrg" class="selButton" value="选择" onClick="doSelFrontHost()" />
-			                 </td>
-		               </tr>
                  <tr>
 	                 <td align="right">网络地址：</td>
-	                 <td><input type="text" class="text" name="DEVICE_IP" value="<%=deviceIp %>"></td>  
-	                   <td align="right">端口：</td>
-	                 <td><input type="text" class="text" name="DEVICE_PORT" value="<%=devicePort %>"></td>            
-		           </tr>
-		            <tr>
-			               <td width="150" align="right">设备类型：</td>
-		        	       <td>
-		                  		<input name="TYPE_ID" type="hidden"  value="<%=typeId %>">
-		                  		<input type="text" class="date" name="TYPE_NAME"   value="<%=typeName %>"  readonly>
-		                  		<input type="button" name="selectOutOrg" class="selButton" value="选择" onClick="doSelDeviceType()" />
-  				         	</td>
-		             <td align="right">设备状态：</td>
+	                 <td><input type="text" class="text" name="DEVICE_IP" value="<%=deviceIp%>"></td>  
+	                 <td align="right">设备状态：</td>
 	                 <td >
-	                     <select name="DEVICE_STATUS" class="select" id="DEVICE_STATUS" style="width:11em">
-	                     <option value="">全部</option>
-                         <%for(int i=0;i<deviceStatusValue.length;i++){ %>
-                        <option value="<%=deviceStatusValue[i] %>" <%if(deviceStatusValue[i].equals(deviceStatus)){out.print("selected");} %>><%=deviceStatusDesc[i] %></option>
+	                 	<select name="DEVICE_STATUS" class="select" id="DEVICE_STATUS" style="width:11em">
+	                    <option value="">全部</option>
+                        <%for(int i=0;i<deviceStatusValue.length;i++){ %>
+                        <option value="<%=deviceStatusValue[i]%>" <%if(deviceStatusValue[i].equals(deviceStatus)){out.print("selected");} %>><%=deviceStatusDesc[i]%></option>
                         <%} %>
                         </select>
-					</td>
-                	<td align="right" nowrap="nowrap">
-                	<input type="submit" class="submit"  value="查询">
-                   	<input type="button" class="button" onClick="doClear();" value="重置">
-                   	</td>
+					 </td>
+		           </tr>
+                   <tr>
+                   		<td width="150" align="right">设备类型：</td>
+		        	    <td>
+							<input name="TYPE_ID" type="hidden"  value="<%=typeId %>">
+		                  	<input type="text" class="date" name="TYPE_NAME"   value="<%=typeName%>"  readonly>
+		                  	<input type="button" name="selectOutOrg" class="selButton" value="选择" onClick="doSelDeviceType()" />
+  				        </td>
+		                <td width="150" align="right">物理位置：</td>
+		                <td>
+		                	<input name="LOCATION_ID" type="hidden"  value="<%=locationId%>">
+		                  	<input type="text" class="date" name="LOCATION_NAME_CN"   value="<%=locationNameCn%>"  readonly>
+		                  	<input type="button" name="selectOutOrg" class="selButton" value="选择" onClick="doSelLocation()" />
+  				        </td>
+							<td align="right" nowrap="nowrap">
+                				<input type="submit" class="submit"  value="查询">
+                   				<input type="button" class="button" onClick="doClear();" value="重置">
+                   		</td>
                    	</tr>
               </table>
                </form>
@@ -254,7 +243,7 @@ function doSubmit(form) {
                         <%if(deviceStatusValue[j].equals(deviceStatuses[i]))%><%=deviceStatusDesc[j] %>
                     <%} %>
                    </td>
-                 <td align="center" nowrap>[ <a href="JavaScript:doEdit('<%=deviceIds[i] %>')">编辑</a> | <a href="JavaScript:doDelete('<%=deviceIds[i] %>')">删除 </a>]</td>
+                 <td align="center" nowrap>[ <a href="JavaScript:doEdit('<%=deviceIds[i]%>')">编辑</a> | <a href="JavaScript:doDelete('<%=deviceIds[i]%>')">删除 </a>]</td>
                 </tr>
      
                <%} else {%>
@@ -276,7 +265,7 @@ function doSubmit(form) {
                         <%if(deviceStatusValue[j].equals(deviceStatuses[i]))%><%=deviceStatusDesc[j] %>
                     <%} %>
                    </td>
-                  <td align="center" nowrap>[ <a href="JavaScript:doEdit('<%=deviceIds[i] %>')">编辑</a> | <a href="JavaScript:doDelete('<%=deviceIds[i] %>')">删除 </a>]</td>
+                  <td align="center" nowrap>[ <a href="JavaScript:doEdit('<%=deviceIds[i]%>')">编辑</a> | <a href="JavaScript:doDelete('<%=deviceIds[i]%>')">删除 </a>]</td>
                 </tr>
                <%}}} %>
               </table>

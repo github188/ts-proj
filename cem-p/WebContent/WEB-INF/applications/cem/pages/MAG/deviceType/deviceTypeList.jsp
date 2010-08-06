@@ -104,9 +104,9 @@ function doSubmit(form) {
                <input type="hidden" name=CUR_PAGE value="">
                <table>
               	 <tr>
-              	 <td align="right">设备类型名称-英文：</td>
+              	 <td align="right">设备类型英文名称：</td>
                  <td><input type="text" class="text" name="QTYPE_NAME_EN" value="<%=typeNameEn %>"></td>
-                 <td align="right">设备类型名称-中文：</td>
+                 <td align="right">设备类型中文名称：</td>
 	             <td><input type="text" class="text" name="QTYPE_NAME_CN" value="<%=typeNameCn %>"></td>
                    <td align="right" nowrap="nowrap"><input type="submit" class="submit"  value="查询">
                    <input type="button" class="button" onClick="doClear();" value="重置">
@@ -132,8 +132,8 @@ function doSubmit(form) {
               <!-- 列表内容 -->
               <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
                  <tr>
-                  <th width="25%">设备类型名称-英文</th>
-                  <th width="25%">设备类型名称-中文</th>
+                  <th width="25%">设备类型英文名称</th>
+                  <th width="25%">设备类型中文名称</th>
                   <th width="40%">备注</th>
                   <th width="10%">[ <a href="JavaScript:doAdd()">添加</a> ]</th>
                 </tr>

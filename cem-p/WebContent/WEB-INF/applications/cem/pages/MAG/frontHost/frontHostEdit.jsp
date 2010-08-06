@@ -129,9 +129,13 @@
 						<tr>   		              
 							<td width="120" align="right">物理位置：</td>
 							<td>
-								<input name="LOCATION_ID" type="hidden"  value="<%=locationId %>">
-								<input type="text" class="date" name="LOCATION_NAME"   value="<%=locationName%>"  readonly>
-								<input type="button" name="selectLocation" class="selButton" value="选择" onClick="doSelLocation()" />
+								<span id="sprytLocationId">
+									<input name="LOCATION_ID" type="hidden"  value="<%=locationId%>">
+									<input type="text" class="date" name="LOCATION_NAME"   value="<%=locationName%>"  readonly><span class="requiredField">*</span>
+									<input type="button" name="selectLocation" class="selButton" value="选择" onClick="doSelLocation()" />
+									<span class="textfieldRequiredMsg">需要提供一个值。</span>
+								</span>
+								
 							</td>	
 		               </tr>
 		                <tr>
@@ -167,7 +171,7 @@
 						<tr>   							
 							<td width="120" align="right">用户名提示符：</td>
 							<td>
-								<span id="sprytHostUser">
+								<span id="sprytUserPrompt">
               					<input type="text" class="text" name="USER_PROMPT"value="<%=userPrompt%>"><span class="requiredField">*</span>
 								<span class="textfieldRequiredMsg">需要提供一个值。</span>
 								<span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
@@ -187,7 +191,7 @@
 						<tr>   							
 							<td width="120" align="right">密码提示符：</td>
 							<td>
-								<span id="sprytHostPassword">
+								<span id="sprytPasswordPrompt">
               					<input type="text" class="text" name="PASSWORD_PROMPT"value="<%=passwordPrompt%>"><span class="requiredField">*</span>
 								<span class="textfieldRequiredMsg">需要提供一个值。</span>
 								<span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
@@ -262,6 +266,9 @@ var sprytextfield6 = new Spry.Widget.ValidationTextField("sprytHostPassword", "n
 var sprytextfield7 = new Spry.Widget.ValidationTextField("sprytHostPrompt", "none", {required:true,maxChars:200});
 var sprytextfield8 = new Spry.Widget.ValidationTextField("sprytRemark", "none", {maxChars:200});
 var sprytextfield9 = new Spry.Widget.ValidationTextField("sprytHostNameCn","none", {required:true,maxChars:60});
+var sprytextfield10 = new Spry.Widget.ValidationTextField("sprytLocationId","none", {required:true,maxChars:60});
+var sprytextfield11 = new Spry.Widget.ValidationTextField("sprytUserPrompt","none", {required:true,maxChars:60});
+var sprytextfield12 = new Spry.Widget.ValidationTextField("sprytPasswordPrompt","none", {required:true,maxChars:60});
 
 //-->
 </script>

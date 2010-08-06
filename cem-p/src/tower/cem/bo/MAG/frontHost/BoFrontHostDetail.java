@@ -48,6 +48,7 @@ public class BoFrontHostDetail implements RootBo {
 	/***********************************************************************
          * 执行业务逻辑、输出
          **********************************************************************/
+
 	// 根据堡垒主机编号（hostId）
 	enFrontHostInfo = dbFrontHostInfo.findByKey(hostId);
 	int irow = dbFrontHostInfo.setToXml(requestXml, enFrontHostInfo);
@@ -56,7 +57,7 @@ public class BoFrontHostDetail implements RootBo {
 	if (!(enFrontHostInfo.getLocationId() == null || enFrontHostInfo.getLocationId().trim().length() == 0)) {
 	    enLocationInfo = dbLocationInfo.findByKey(enFrontHostInfo.getLocationId());
 	    requestXml.setItemValue("FRONT_HOST_INFO", irow, "LOCATION_NAME", enLocationInfo
-		    .getLocationNameEn());
+		    .getLocationNameCn());
 	}
     }
 }

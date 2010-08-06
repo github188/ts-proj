@@ -123,19 +123,19 @@
               <table>
               	 <tr>
 					<td align="right">堡垒主机英文名称：</td>
-					<td><input type="text" class="text" name="HOST_NAME_EN" value="<%=hostNameEn %>"></td>
+					<td><input type="text" class="text" name="HOST_NAME_EN" value="<%=hostNameEn%>"></td>
 					<td align="right">堡垒主机中文名称：</td>
-					<td><input type="text" class="text" name="HOST_NAME_CN" value="<%=hostNameCn %>"></td>
+					<td><input type="text" class="text" name="HOST_NAME_CN" value="<%=hostNameCn%>"></td>
 				</tr>
 				<tr>					
 					<td align="right">网络地址：</td>
-					<td><input type="text" class="text" name="HOST_IP" value="<%=hostIp %>"></td>
+					<td><input type="text" class="text" name="HOST_IP" value="<%=hostIp%>"></td>
 					<td align="right">设备状态：</td>
 					<td >
 						<select name="HOST_STATUS" class="select" id="HOST_STATUS" style="width:11em">
 							<option value="">全部</option>
 							<%for(int i=0;i<hostStatusValue.length;i++){ %>
-							<option value="<%=hostStatusValue[i] %>" <%if(hostStatusValue[i].equals(hostStatus)){out.print("selected");} %>><%=hostStatusDesc[i] %></option>
+							<option value="<%=hostStatusValue[i]%>" <%if(hostStatusValue[i].equals(hostStatus)){out.print("selected");} %>><%=hostStatusDesc[i]%></option>
 							<%} %>
 						</select>
 					</td>
@@ -189,16 +189,16 @@
                   <td align="center"><%=hostPorts[i]%></td>
                    <td align="center">
                    <%for(int j=0;j<hostStatusValue.length;j++){ %>
-                        <%if(hostStatusValue[j].equals(hostStatuss[i]))%><%=hostStatusDesc[j] %>
+                        <%if(hostStatusValue[j].equals(hostStatuss[i]))%><%=hostStatusDesc[j]%>
                     <%} %>
                    </td>
-                 <td align="center" nowrap>[ <a href="JavaScript:doEdit('<%=hostIds[i] %>')">编辑</a> | <a href="JavaScript:doDelete('<%=hostIds[i] %>')">删除 </a>]</td>
+                 <td align="center" nowrap>[ <a href="JavaScript:doEdit('<%=hostIds[i]%>')">编辑</a> | <a href="JavaScript:doDelete('<%=hostIds[i]%>')">删除 </a>]</td>
                 </tr>
      
                <%} else {%>
                <tr class="dark" onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
                     <td align="center">
-                  <a href="JavaScript:doView('<%=hostIds[i] %>')">
+                  <a href="JavaScript:doView('<%=hostIds[i]%>')">
                   <%=hostNameEns[i]%>
                   </a>
                   <td align="center"><%=hostNameCns[i]%></td>
@@ -207,14 +207,14 @@
                   <td align="center"><%=hostPorts[i]%></td>
                    <td align="center">
                    <%for(int j=0;j<hostStatusValue.length;j++){ %>
-                        <%if(hostStatusValue[j].equals(hostStatuss[i]))%><%=hostStatusDesc[j] %>
+                        <%if(hostStatusValue[j].equals(hostStatuss[i]))%><%=hostStatusDesc[j]%>
                     <%} %>
                    </td>
-                  <td align="center" nowrap>[ <a href="JavaScript:doEdit('<%=hostIds[i] %>')">编辑</a> | <a href="JavaScript:doDelete('<%=hostIds[i] %>')">删除 </a>]</td>
+                  <td align="center" nowrap>[ <a href="JavaScript:doEdit('<%=hostIds[i]%>')">编辑</a> | <a href="JavaScript:doDelete('<%=hostIds[i]%>')">删除 </a>]</td>
                 </tr>
                <%}}} %>
               </table>
-              <div class="pageBar"><%=Page.BuildPageTextByMethod(xml,"TDoChangePage") %></div>
+              <div class="pageBar"><%=Page.BuildPageTextByMethod(xml,"TDoChangePage")%></div>
               <!-- 列表内容结束 -->
           
             </div>

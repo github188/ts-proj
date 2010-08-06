@@ -103,7 +103,7 @@
                       <input type="hidden" name="TYPE_ID" value="<%=typeId%>"> 
                      <table>
                       <tr>
-                          <td width="150" align="right">端口类型名称-英文：</td>
+                          <td width="150" align="right">端口类型英文名称：</td>
 		                  <td width="100">
 		                      <span id="spryTypeNameEn">
              					 <input type="text" class="text" name="TYPE_NAME_EN"value="<%=typeNameEn %>"><span class="requiredField">*</span>
@@ -113,7 +113,7 @@
 		                  </td>
 		               </tr>
 		                <tr>		                  
-                          <td width="150" align="right">端口类型名称-中文：</td>
+                          <td width="150" align="right">端口类型中文名称：</td>
 		                  <td width="100">
 		                      <span id="spryTypeNameCn">
               					<input type="text" class="text" name="TYPE_NAME_CN"value="<%=typeNameCn %>">

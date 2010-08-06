@@ -122,7 +122,7 @@
                           <td width="150" align="right">设备英文名称：</td>
 		                  <td width="100">
 		                      <span id="spryDeviceNameEn">
-             					 <input type="text" class="text" name="DEVICE_NAME_EN"value="<%=deviceNameEn %>"><span class="requiredField">*</span>
+             					 <input type="text" class="text" name="DEVICE_NAME_EN"value="<%=deviceNameEn%>"><span class="requiredField">*</span>
 		                            <span class="textfieldRequiredMsg">需要提供一个值。</span>
 		                            <span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 		                            </span>
@@ -133,7 +133,7 @@
                           <td width="150" align="right">英文名称缩写：</td>
 		                  <td width="100">
 		                      <span id="sprytDeviceAbbNameEn">
-              					<input type="text" class="text" name="DEVICE_ABB_NAME_EN"value="<%=deviceAbbNameEn %>">
+              					<input type="text" class="text" name="DEVICE_ABB_NAME_EN"value="<%=deviceAbbNameEn%>">
 		                            <span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 		                            </span>
 		                  </td>
@@ -143,37 +143,43 @@
 		               		<td width="150" align="right">设备中文名称：</td>
 		                 	<td>
 		                      <span id="sprytDeviceNameCn">
-              					<input type="text" class="text" name="DEVICE_NAME_CN"value="<%=deviceNameCn %>"><span class="requiredField">*</span>
+              					<input type="text" class="text" name="DEVICE_NAME_CN"value="<%=deviceNameCn%>"><span class="requiredField">*</span>
               					 <span class="textfieldRequiredMsg">需要提供一个值。</span>
               					<span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
-		                         </span>
+		                      </span>
 		                 	</td>
 		               	</tr>
 		               	
 		               	<tr>
 		                	<td width="150" align="right">物理位置：</td>
 		                 	<td>
-		                  		<input name="LOCATION_ID" type="hidden"  value="<%=locationId %>">
-		                  		<input type="text" class="date" name="LOCATION_NAME_CN"   value="<%=locationNameCn %>"  readonly>
-		                  		<input type="button" name="selectOutOrg" class="selButton" value="选择" onClick="doSelLocation()" />
+		                 		<span id="sprytLocationId">
+		                  			<input name="LOCATION_ID" type="hidden"  value="<%=locationId%>">
+		                  			<input type="text" class="date" name="LOCATION_NAME_CN"   value="<%=locationNameCn%>"  readonly><span class="requiredField">*</span>
+		                  			<input type="button" name="selectOutOrg" class="selButton" value="选择" onClick="doSelLocation()" />
+		                  			<span class="textfieldRequiredMsg">需要提供一个值。</span>
+		                  		</span>
   				         	</td>
 		               </tr>
 		               
 		               <tr>
 			               <td width="150" align="right">设备类型：</td>
 		        	       <td>
-		                  		<input name="TYPE_ID" type="hidden"  value="<%=typeId %>">
-		                  		<input type="text" class="date" name="TYPE_NAME"   value="<%=typeName %>"  readonly>
-		                  		<input type="button" name="selectOutOrg" class="selButton" value="选择" onClick="doSelDeviceType()" />
+		        	       		<span id="sprytTypeId">
+		                  			<input name="TYPE_ID" type="hidden"  value="<%=typeId%>">
+		                  			<input type="text" class="date" name="TYPE_NAME"   value="<%=typeName%>"  readonly><span class="requiredField">*</span>
+		                  			<input type="button" name="selectOutOrg" class="selButton" value="选择" onClick="doSelDeviceType()" />
+		                  			<span class="textfieldRequiredMsg">需要提供一个值。</span>
+		                  		</span>
   				         	</td>
 		               </tr>
 		               
 		               <tr>
 							<td width="150" align="right">堡垒主机：</td>
 			                <td>
-			                  <input name="FRONT_HOST_ID" type="hidden"  value="<%=frontHostId %>">
-			                  <input type="text" class="date" name="FRONT_HOST_NAME"   value="<%=frontHostName %>"  readonly>
-			                   <input type="button" name="selectOutOrg" class="selButton" value="选择" onClick="doSelFrontHost()" />
+			                	<input name="FRONT_HOST_ID" type="hidden"  value="<%=frontHostId%>">
+		                  		<input type="text" class="date" name="FRONT_HOST_NAME"   value="<%=frontHostName%>"  readonly>
+		                   		<input type="button" name="selectOutOrg" class="selButton" value="选择" onClick="doSelFrontHost()" />
 			                 </td>
 		               </tr>
 		               
@@ -192,7 +198,7 @@
 		                	<td width="150" align="right">网络地址：</td>
 							<td>
 								<span id="sprytDeviceIp">
-              					<input type="text" class="text" name="DEVICE_IP"value="<%=deviceIp %>"><span class="requiredField">*</span>
+              					<input type="text" class="text" name="DEVICE_IP"value="<%=deviceIp%>"><span class="requiredField">*</span>
               			      	<span class="textfieldRequiredMsg">需要提供一个值。</span>
               				  	<span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 		                      	</span>
@@ -203,7 +209,7 @@
 		               		<td width="150" align="right">网络端口：</td>
 			                 <td>
 			                    <span id="sprytDevicePort">
-								<input type="text" class="text" name="DEVICE_PORT"value="<%=devicePort %>"><span class="requiredField">*</span>
+								<input type="text" class="text" name="DEVICE_PORT"value="<%=devicePort%>"><span class="requiredField">*</span>
 								<span class="textfieldRequiredMsg">需要提供一个值。</span>
               				  	<span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 		                      	</span>
@@ -213,7 +219,7 @@
 		               <tr>
 							<td width="150" align="right">用户名提示符：</td>
 			                <td>
-		                    	<span id="sprytDeviceUser">
+		                    	<span id="sprytUserPrompt">
               					<input type="text" class="text" name="USER_PROMPT"value="<%=userPrompt%>"><span class="requiredField">*</span>
               			      	<span class="textfieldRequiredMsg">需要提供一个值。</span>
               				  	<span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
@@ -225,7 +231,7 @@
 							<td width="150" align="right">登录用户名：</td>
 			                <td>
 		                    	<span id="sprytDeviceUser">
-              					<input type="text" class="text" name="DEVICE_USER"value="<%=deviceUser %>"><span class="requiredField">*</span>
+              					<input type="text" class="text" name="DEVICE_USER"value="<%=deviceUser%>"><span class="requiredField">*</span>
               			      	<span class="textfieldRequiredMsg">需要提供一个值。</span>
               				  	<span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 		                      	</span>
@@ -235,7 +241,7 @@
 		               <tr>
 							<td width="150" align="right">密码提示符：</td>
 			                <td>
-		                    	<span id="sprytDevicePassword">
+		                    	<span id="sprytPasswordPrompt">
               					<input type="text" class="text" name="PASSWORD_PROMPT"value="<%=passwordPrompt%>"><span class="requiredField">*</span>
               			      	<span class="textfieldRequiredMsg">需要提供一个值。</span>
               				  	<span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
@@ -247,7 +253,7 @@
 		                	<td width="150" align="right">登录密码：</td>
 		                 	<td>
 		                    	<span id="sprytDevicePassword">
-              					<input type="password" class="password" name="DEVICE_PASSWORD"value="<%=devicePassword %>"><span class="requiredField">*</span>
+              					<input type="password" class="password" name="DEVICE_PASSWORD"value="<%=devicePassword%>"><span class="requiredField">*</span>
               			      	<span class="textfieldRequiredMsg">需要提供一个值。</span>
               				  	<span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 		                      	</span>
@@ -258,7 +264,7 @@
 			           		<td width="150" align="right">命令行提示符：</td>
 			                <td>
 		                    	<span id="sprytDevicePrompt">
-              					<input type="text" class="text" name="DEVICE_PROMPT"value="<%=devicePrompt %>"><span class="requiredField">*</span>
+              					<input type="text" class="text" name="DEVICE_PROMPT"value="<%=devicePrompt%>"><span class="requiredField">*</span>
 	              			    <span class="textfieldRequiredMsg">需要提供一个值。</span>
     	          				<span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 			                    </span>
@@ -269,7 +275,7 @@
 							<td width="150" align="right">备注：</td>
 		                 	<td colspan="3">
 		                        <span id="sprytRemark">
-              					<textarea name="REMARK" id="textarea" class="textarea" cols="50" rows="4"><%=remark %></textarea>
+              					<textarea name="REMARK" id="textarea" class="textarea" cols="50" rows="4"><%=remark%></textarea>
               					<span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 		                        </span>
 		                 </td>
@@ -312,6 +318,10 @@ var sprytextfield6 = new Spry.Widget.ValidationTextField("sprytDevicePassword", 
 var sprytextfield7 = new Spry.Widget.ValidationTextField("sprytDevicePrompt", "none", {maxChars:200});
 var sprytextfield8 = new Spry.Widget.ValidationTextField("sprytRemark", "none", {maxChars:200});
 var sprytextfield9 = new Spry.Widget.ValidationTextField("sprytDeviceNameCn","none", {required:true,maxChars:60});
+var sprytextfield10 = new Spry.Widget.ValidationTextField("sprytLocationId","none", {required:true,maxChars:60});
+var sprytextfield11 = new Spry.Widget.ValidationTextField("sprytTypeId","none", {required:true,maxChars:60});
+var sprytextfield13 = new Spry.Widget.ValidationTextField("sprytUserPrompt","none", {required:true,maxChars:60});
+var sprytextfield14 = new Spry.Widget.ValidationTextField("sprytPasswordPrompt","none", {required:true,maxChars:60});
 
 //-->
 </script>

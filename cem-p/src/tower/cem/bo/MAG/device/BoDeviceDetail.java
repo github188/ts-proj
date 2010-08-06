@@ -63,6 +63,7 @@ public class BoDeviceDetail implements RootBo {
 		/*****************************************************************************************************
 		 * 执行业务逻辑、输出
 		 ****************************************************************************************************/
+		
 		// 根据堡垒主机编号（hostId）
 		enDeviceInfo = dbDeviceInfo.findByKey(deviceId);
 		int irow = dbDeviceInfo.setToXml(requestXml, enDeviceInfo);
