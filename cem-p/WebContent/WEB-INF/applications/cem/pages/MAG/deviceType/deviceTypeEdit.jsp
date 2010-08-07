@@ -88,7 +88,7 @@
                      <table >
                       <tr>
                           <td width="120" align="right">设备类型英文名称：</td>
-		                  <td width="100">
+		                  <td  >
 		                      <span id="spryTypeNameEn">
              					 <input type="text" class="text" name="TYPE_NAME_EN"value="<%=typeNameEn %>"><span class="requiredField">*</span>
 		                            <span class="textfieldRequiredMsg">需要提供一个值。</span>
@@ -98,7 +98,7 @@
 		                  </tr>
 		                <tr>  
                           <td width="120" align="right">设备类型中文名称：</td>
-		                  <td width="100">
+		                  <td >
 		                      <span id="sprytTypeNameCn">
               					<input type="text" class="text" name="TYPE_NAME_CN"value="<%=typeNameCn %>"><span class="requiredField">*</span>
 		                            <span class="textfieldRequiredMsg">需要提供一个值。</span>
