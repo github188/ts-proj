@@ -57,7 +57,7 @@
                   <div class="panelContent">
                   <div class="panelContent2">
                       <!-- 查询面板内容 -->
-        <form name="form2" action="ctrl" method="get" onSubmit="return doCheck()" >
+        <form name="form2" action="ctrl" method="get" >
               <input type="hidden" name="FUNC_ID" value="RxpToExcel">
                <input type="hidden" name="SEND_ID" value="<%= sendId%>">
               <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
