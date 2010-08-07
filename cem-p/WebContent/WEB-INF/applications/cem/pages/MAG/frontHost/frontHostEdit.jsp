@@ -98,7 +98,7 @@
                      <table>
 						<tr>
 							<td width="120" align="right">堡垒主机英文名称：</td>
-							<td width="100">
+							<td  >
 								<span id="spryHostNameEn">
 								<input type="text" class="text" name="HOST_NAME_EN"value="<%=hostNameEn%>"><span class="requiredField">*</span>
 		                            <span class="textfieldRequiredMsg">需要提供一个值。</span>
@@ -108,7 +108,7 @@
 						</tr>
 						<tr>   
                           <td width="120" align="right">英文名称缩写：</td>
-		                  <td width="100">
+		                  <td  >
 		                      <span id="sprytHostAbbNameEn">
               					<input type="text" class="text" name="HOST_ABB_NAME_EN"value="<%=hostAbbNameEn%>"><span class="requiredField">*</span>
               					    <span class="textfieldRequiredMsg">需要提供一个值。</span>
