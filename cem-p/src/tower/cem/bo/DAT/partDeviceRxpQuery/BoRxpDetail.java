@@ -68,7 +68,7 @@ public class BoRxpDetail implements RootBo{
 	rs = transaction.doQuery(null, sql.toString());
 	for(int i =0; i<rs.size();i++){
 		QueryResultRow rsRow =  rs.get(i);
-		int row  = requestXml.addInputRow("DEVICE_PORT_RXP");
+		int row  = requestXml.addRow("DEVICE_PORT_RXP");
 		requestXml.setItemValue("DEVICE_PORT_RXP", row, "SEND_ID",rsRow.getString("SEND_ID"));
 		requestXml.setItemValue("DEVICE_PORT_RXP", row, "TYPE_NAME",rsRow.getString("TYPE_NAME_CN"));
 		requestXml.setItemValue("DEVICE_PORT_RXP", row, "DEVICE_NAME",rsRow.getString("DEVICE_NAME"));
