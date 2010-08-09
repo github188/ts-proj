@@ -8,7 +8,7 @@
 <%!
   XMLWrap xml;
   //设备详细信息
-  	String deviceId;
+	String deviceId;
 	String deviceNameEn;
 	String deviceNameCn;
 	String deviceAbbNameEn;
@@ -25,6 +25,8 @@
 	String devicePassword;
 	String devicePrompt;
 	String remark;
+	String userPrompt;
+	String passwordPrompt;
 
   //拓扑信息
   String[] deviceTreeIds;
@@ -64,6 +66,8 @@
 	devicePassword = xml.getItemValue("DEVICE_INFO",1,"DEVICE_PASSWORD");
 	devicePrompt = xml.getItemValue("DEVICE_INFO",1,"DEVICE_PROMPT");
     remark = xml.getItemValue("DEVICE_INFO",1,"REMARK");
+    userPrompt = xml.getItemValue("DEVICE_INFO",1,"USER_PROMPT");
+    passwordPrompt = xml.getItemValue("DEVICE_INFO",1,"PASSWORD_PROMPT");  
 	
 	String[] deviceStatusDesc = {"在用","停用"};
 	String[] deviceStatusValue = {"N","S"};
@@ -93,8 +97,9 @@
 	          html.append(formatAttr("href","#")) ;
 	          html.append(formatAttr("onclick","doTreeNodeTitleClick(this)"));
 	        } else {
-	        	html.append(formatAttr("href","ctrl?FUNC_ID=DeviceDetail&DEVICE_ID=" + node.getId()));
+	        	html.append(formatAttr("href","ctrl?FUNC_ID=DeviceDetail&DEVICE_ID=" + node.getId().toString().substring(0,6)));
 	      	    html.append(formatAttr("onclick", "doTitle(this)"));
+	      	  html.append(formatAttr("title",node.getId().toString().substring(6)));
 	        }
 	    
 	    html.append(">");
@@ -178,7 +183,7 @@ try{
 <div class="panelHead">网络拓扑</div>
 <div class="panelContent">
 <div class="panelContent2" >
-<table width="758" height="450" border="0" cellpadding="2" cellspacing="0">
+<table width="100%" height="450" border="0" cellpadding="2" cellspacing="0">
 <tr>
     <td  colspan="5" valign="top">
 <div id="noticePanel" class="panelSimple">
@@ -201,14 +206,14 @@ try{
                       </div>
                     </div>
 </td>
-<td width="700" valign="top">
+<td width="1000" valign="top">
 <div id="noticePanel" class="panelSimple">
                         <div class="panelHead"></div>
                       <div class="panelContent">
                           <div class="panelContent2">
                             <!-- 工作任务面板内容 -->
                             <div class="panelInnerHead">设备详细信息<a name="notice"></a></div>
-                     <table width="490" border="0" cellpadding="0" cellspacing="0" class="list">
+                    <table  width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
                      	<tr>
                         	<td width="150" align="right">设备英文名称：</td>
 		                  	<td width="100">
@@ -257,7 +262,7 @@ try{
                          <%for(int i=0;i<deviceStatusValue.length;i++){ 
                         	 if(deviceStatusValue[i].equals(deviceStatus)){
                          %>
-                           <input type="text" class="text" value="<%=deviceStatusDesc[i] %>" readonly> 
+                           <input type="text" class="text" value="<%=deviceStatusDesc[i]%>" readonly> 
                         <%} }%>
 						 </td>
 		               </tr>
@@ -265,14 +270,21 @@ try{
 		                <tr>
 		                <td width="150" align="right">网络地址：</td>
 		                 <td>
-              				<input type="text" class="text" name="DEVICE_IP"value="<%=deviceIp %>" readonly>
+              				<input type="text" class="text" name="DEVICE_IP"value="<%=deviceIp%>" readonly>
 		                 </td>
 		               </tr>
 		               
 		                 <tr>
 		                <td width="150" align="right">网络端口：</td>
 		                 <td>
-              					<input type="text" class="text" name="DEVICE_PORT"value="<%=devicePort %>" readonly>
+              					<input type="text" class="text" name="DEVICE_PORT"value="<%=devicePort%>" readonly>
+		                 </td>
+		                </tr>
+		                
+		                <tr>
+		                 <td width="150" align="right">用户名提示符：</td>
+		                 <td>
+              				<input type="text" class="text" name="USER_PROMPT"value="<%=userPrompt%>" readonly>
 		                 </td>
 		                </tr>
 		                
@@ -283,29 +295,32 @@ try{
 		                 </td>
 		               </tr>
 		               
+		               <tr>
+		                 <td width="150" align="right">密码提示符：</td>
+		                 <td>
+              				<input type="text" class="text" name="PASSWORD_PROMPT"value="<%=passwordPrompt%>" readonly>
+		                 </td>
+		               </tr>
+		               
 		                <tr>
 		                 <td width="150" align="right">登录密码：</td>
 		                 <td>
-              					<input type="password" class="password" name="DEVICE_PASSWORD"value="<%=devicePassword %>" readonly>
+              					<input type="password" class="password" name="DEVICE_PASSWORD"value="<%=devicePassword%>" readonly>
 		                 </td>
 		                </tr>
 		                
 		                <tr>
 		                 <td width="150" align="right">命令行提示符：</td>
 		                 <td>
-              					<input type="text" class="text" name="DEVICE_PROMPT"value="<%=devicePrompt %>" readonly>
+              					<input type="text" class="text" name="DEVICE_PROMPT"value="<%=devicePrompt%>" readonly>
 		                 </td>
 		               </tr>
 		               
 		               <tr>
 		                 <td width="150" align="right">备注：</td>
 		                 <td colspan="3">
-              					<textarea name="REMARK" id="textarea" class="textarea" cols="50" rows="4" readonly><%=remark %></textarea>
+              					<textarea name="REMARK" id="textarea" class="textarea" cols="50" rows="4" readonly><%=remark%></textarea>
 		                 </td>
-		               </tr>
-		               <tr>
-		               </tr>
-		               <tr>
 		               </tr>
                       </table>
                             <!-- 工作任务面板内容结束 -->

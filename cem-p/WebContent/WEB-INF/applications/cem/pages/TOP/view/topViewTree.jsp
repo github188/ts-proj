@@ -13,7 +13,8 @@
   String[] deviceTreeIds;
   String[] deviceTreeNames;
   String[] deviceTreeparentIds;
-  
+  String[] test1 =  {"a","b","c"};
+  String[][] test2 =  {{"1","2","3"},{"4","5","6"}};
   
   TreeHtmlBuilder treeHtmlBuilder;
   String treeHtml =null;
@@ -55,8 +56,9 @@
 	          html.append(formatAttr("href","#")) ;
 	          html.append(formatAttr("onclick","doTreeNodeTitleClick(this)"));
 	        } else {
-	        	html.append(formatAttr("href","ctrl?FUNC_ID=DeviceDetail&DEVICE_ID=" + node.getId()));
+	        	html.append(formatAttr("href","ctrl?FUNC_ID=DeviceDetail&DEVICE_ID=" + node.getId().toString().substring(0,6)));
 	      	    html.append(formatAttr("onclick", "doTitle(this)"));
+	      	  html.append(formatAttr("title",node.getId().toString().substring(6)));
 	        }
 	   // html.append(formatAttr("title", ""+node.getId()));
 	    html.append(">");
