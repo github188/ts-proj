@@ -23,7 +23,7 @@
 	String devicePrompt;
 	String remark;
 	String userPrompt;
-	String passwordPrompt;
+	String passwordPrompt;	
 %>
 <%
     xml = XMLWrap.getRequestXml(request,session,application);
@@ -45,7 +45,7 @@
 	devicePrompt = xml.getItemValue("DEVICE_INFO",1,"DEVICE_PROMPT");
     remark = xml.getItemValue("DEVICE_INFO",1,"REMARK");
     userPrompt = xml.getItemValue("DEVICE_INFO",1,"USER_PROMPT");
-    passwordPrompt = xml.getItemValue("DEVICE_INFO",1,"PASSWORD_PROMPT");    
+    passwordPrompt = xml.getItemValue("DEVICE_INFO",1,"PASSWORD_PROMPT");  
     
 	String[] deviceStatusDesc = {"在用","停用"};
 	String[] deviceStatusValue = {"N","S"};
