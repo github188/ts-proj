@@ -76,7 +76,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>设备维护指令</title>
+<title><%=deviceNameCn %></title>
 <jsp:include flush="true" page="../../../../sys/pages/common/include/css.jsp"></jsp:include>
 <jsp:include flush="true" page="../../../../sys/pages/common/include/js.jsp"></jsp:include>
 <script type="text/javascript">
@@ -88,10 +88,13 @@
   }
   
  window.onbeforeunload=function(){   
+ 
  var deviceId = '<%=deviceId%>';
  var execBegin = '<%=date%>';
  var comms = window.document.Test.getCommands();
-  window.location.href = "ctrl?FUNC_ID=Disconnection&DEVICE_ID="+deviceId+"&COMMANDS="+comms+"&EXEC_BEGIN="+execBegin;
+ form1.COMMANDS.value = comms;
+ form1.submit();
+ //window.location.href = "ctrl?FUNC_ID=Disconnection&DEVICE_ID="+deviceId+"&COMMANDS="+comms+"&EXEC_BEGIN="+execBegin;
  
 } 
 -->
@@ -116,8 +119,9 @@
                   <div class="panelContent2">
                       <!-- 查询面板内容 -->
                   <form name="form1" action="ctrl" method="get" >
-                  <input type="hidden" name="FUNC_ID" value="SendCommand">
+                  <input type="hidden" name="FUNC_ID" value="Disconnection">
                   <input  type="hidden"  name="COMMANDS"> 
+                   <input  type="hidden"  name="EXEC_BEGIN" value="<%=date %>">
                   <input  type="hidden"  name="DEVICE_ID" value="<%=deviceId %>"> 
                  <table width="100%"  >
 				 <tr>
@@ -153,7 +157,7 @@
               <table width="100%"  >
 				 <tr>
 				 	<td align="center">
-				 		<applet name="Test" code="tower.TelnetApplet" codebase="../sys/applet/" archive="commons-net-2.0.jar,applet.jar" width=800 height=500>
+				 		<applet name="Test" code="tower.TelnetApplet" codebase="../sys/applet/" archive="commons-net-2.0.jar,applet.jar" width=700 height=400>
               				<param   name=DeviceIP   value= "<%=deviceIp%>">
              			 	<param   name=DevicePort   value= "<%=devicePort%>"> 
           			    	<param   name=DeviceUser   value= "<%=deviceUser%>"> 

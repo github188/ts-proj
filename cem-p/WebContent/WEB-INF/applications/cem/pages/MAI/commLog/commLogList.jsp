@@ -235,7 +235,7 @@ function doSubmit(form) {
                    <td align="center"><%=execEnds[i]%></td>
                   <td align="center" nowrap>
                    <a href="JavaScript:doView('<%=logIdS[i] %>');">
-                     查看指令
+                     [查看指令]
                   </a>
                  </td>
                 </tr>
@@ -256,7 +256,7 @@ function doSubmit(form) {
                    <td align="center"><%=execEnds[i]%></td>
                   <td align="center" nowrap>
                    <a href="JavaScript:doView('<%=logIdS[i] %>');">
-                     查看指令
+                     [查看指令]
                   </a>
                  </td>
                 </tr>

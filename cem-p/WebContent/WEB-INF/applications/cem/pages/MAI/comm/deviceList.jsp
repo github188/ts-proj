@@ -188,7 +188,7 @@ function doSubmit(form) {
                   <th>网络地址</th>
                   <th>网络端口</th>
                   <th>设备状态</th>
-                  <th></th>
+                  <th>操作</th>
                 </tr>
             
               <%if(deviceIds != null){
