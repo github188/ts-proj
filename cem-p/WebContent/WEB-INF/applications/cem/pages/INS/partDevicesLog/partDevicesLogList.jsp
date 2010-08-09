@@ -47,8 +47,8 @@
 	statuses = xml.getItemValues("DEVICE_INSPECT_LOG", "STATUS");
 	inspectEnds = xml.getItemValues("DEVICE_INSPECT_LOG", "EXEC_END_TIME");
     
-	String[] statusDesc = {"成功","失败"};
-	String[] statusValue = {"S","F"};
+	String[] statusDesc = {"未执行","正在执行中","执行失败","执行成功"};
+	String[] statusValue = {"N","B","F","S"};
 %>
 <html>
 <head>

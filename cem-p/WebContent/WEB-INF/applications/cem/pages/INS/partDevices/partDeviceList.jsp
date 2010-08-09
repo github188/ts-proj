@@ -145,6 +145,7 @@ function doSubmit(form) {
               <form name="form1" action="ctrl" method="get"  onSubmit="return doSubmit(this)">
               <input type="hidden" name="FUNC_ID" value="partDevicesList">
                <input type="hidden" name=CUR_PAGE value="">
+               
               <table>
               	 <tr>
               	 <td align="right">设备英文名称：</td>
