@@ -19,6 +19,7 @@
 	
 	String execEndBegin;//数据采集结束日期  
 	String execEndEnd;
+	String sendId;
 %>
 <%
 	xml = XMLWrap.getRequestXml(request,session,application);
@@ -26,6 +27,7 @@
 
 	execEndBegin = xml.getInputValue("EXEC_END_TIME_BEGIN");
 	execEndEnd = xml.getInputValue("EXEC_END_TIME_END");
+	sendId = xml.getInputValue("SEND_ID");
 	
 	sessionXml.addInputRow("EXEC_END_TIME_END");
 	
@@ -37,9 +39,9 @@
 	inspectEnds = xml.getItemValues("DEVICE_COLLECT_LOG", "COLLECT_END");
 	statuses = xml.getItemValues("DEVICE_COLLECT_LOG", "STATUS");
 	deviceIds = xml.getItemValues("DEVICE_COLLECT_LOG", "DEVICE_ID");
-    
-	String[] statusDesc = {"成功","失败"};
-	String[] statusValue = {"S","F"};
+	
+	String[] statusDesc = {"未执行","正在执行中","执行失败","执行成功"};
+	String[] statusValue = {"N","B","F","S"};
 %>
 <html>
 <head>
@@ -57,8 +59,8 @@
   }
  
   function TDoChangePage(curPage){
-  form1["CUR_PAGE"].value = curPage;
-  form1.submit();
+  form2["CUR_PAGE"].value = curPage;
+  form2.submit();
   }
   
    function onChange(selectedIds,selector){
@@ -181,6 +183,11 @@
                <td></td>
               </tr>
               </table>
+              </form>
+               <form name="form2" action="ctrl" method="get"  onSubmit="return doSubmit(this)">
+           <input type="hidden" name="FUNC_ID" value="DeviceCollectLogList">
+            <input type="hidden" name="CUR_PAGE" value="">
+           <input type="hidden" name="SEND_ID" value="<%=sendId %>"> 
               </form>
             </div>
           </div>

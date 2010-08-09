@@ -73,6 +73,8 @@ function doSubmit(form) {
             <div class="panelContent2">
               <!-- 查询面板内容 -->
               <form name="form1" action="ctrl" method="get"  onSubmit="return doSubmit(this)">
+               <input type="hidden" name="FUNC_ID" value="AllDeviceTypeCollectList">
+               <input type="hidden" name=CUR_PAGE value="">
                <table>
               	 <tr>
               	 <td align="left">
@@ -95,7 +97,7 @@ function doSubmit(form) {
               	 </td>
                  </tr>                 
               </table>
-               </form>
+             </form>
               <!-- 查询面板内容结束 -->
             </div>
           </div>
@@ -114,6 +116,7 @@ function doSubmit(form) {
               <!-- 列表内容 -->
                <form name="form2" action="ctrl" method="get" onSubmit="return doSubmit();" >
               <input type="hidden" name="FUNC_ID" value="AllCollectTimeDefJsp">
+             
               <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
                  <tr>
                  <th width="10%"></th>
@@ -155,7 +158,7 @@ function doSubmit(form) {
           		 <table width="100%" border="0" cellpadding="0" cellspacing="0" height="10">
               <tr height="10">
                 <td colspan="9" align="center" height="10">
-                 <input type="submit" class="submit"  value="确认">
+                 <input type="submit" class="submit"  value="下一步">
                 </td>
                 <td></td>
                 <td></td>

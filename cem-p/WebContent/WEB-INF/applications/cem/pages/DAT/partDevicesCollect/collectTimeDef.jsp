@@ -134,7 +134,7 @@ function doSubmit(form) {
           <div class="panelHead">这是文章标题</div>
           <div class="panelContent">
             <div class="panelContent2">
-             <form action="ctrl" method="post"name="form2">
+             <form action="ctrl" method="post" name="form2">
                <input type="hidden" name="FUNC_ID" value="PartDevicesCollectList">
               <%for(int n = 0;n < deviceIds.length;n++){ %>
                  <input type="hidden" name="DEVICE_ID" value="<%=deviceIds[n] %>">

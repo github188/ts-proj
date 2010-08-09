@@ -13,6 +13,7 @@
 	String[] sendIds;
 	String[] userNames;
 	String[] typeNames;
+	String[] deviceTypeIds;
 	String[] taskDefTimes;
 	String[] taskPlanTimes;
 	String[] statuses;
@@ -28,6 +29,7 @@
 	sendIds = xml.getItemValues("COMMANDS_SEND_HIS","SEND_ID");
 	userNames = xml.getItemValues("COMMANDS_SEND_HIS","USER_NAME");
 	typeNames = xml.getItemValues("COMMANDS_SEND_HIS", "TYPE_NAME_CN");
+	deviceTypeIds = xml.getItemValues("COMMANDS_SEND_HIS", "DEVICE_TYPE_ID");
 	taskDefTimes = xml.getItemValues("COMMANDS_SEND_HIS", "TASK_DEFINE_TIME");
 	taskPlanTimes = xml.getItemValues("COMMANDS_SEND_HIS", "TASK_PLAN_TIME");
 	statuses = xml.getItemValues("COMMANDS_SEND_HIS", "STATUS");
@@ -45,8 +47,8 @@
 
 <script type="text/javascript">
 <!--
-  function doRxpView(sendId) {
-    selDialog("ctrl?FUNC_ID=RxpView&SEND_ID="+sendId,"SEND_ID","SEND_ID",850,550,false);
+  function doRxpView(sendId,deviceTypeId) {
+    selDialog("ctrl?FUNC_ID=RxpView&SEND_ID="+sendId+"&DEVICE_TYPE_ID="+deviceTypeId,"SEND_ID","SEND_ID",850,550,false);
   }
   
   function doDeviceCollectLog(sendId,execEndBegin,execEndEnd) {
@@ -178,7 +180,7 @@
                  
                   <td align="center" nowrap>
                  [
-                   <a href="JavaScript:doRxpView('<%=sendIds[i] %>');">
+                   <a href="JavaScript:doRxpView('<%=sendIds[i] %>','<%=deviceTypeIds[i] %>');">
                     光功率数据
                   </a>|
                    <a href="JavaScript:doDeviceCollectLog('<%=sendIds[i] %>','<%=execEndBegin %>','<%=execEndEnd%>');">
@@ -202,7 +204,7 @@
                    <td align="center"><%=exeEndTimes[i]%></td>
                    <td align="center" nowrap>
                  [
-                   <a href="JavaScript:doRxpView('<%=sendIds[i] %>');">
+                   <a href="JavaScript:doRxpView('<%=sendIds[i] %>','<%=deviceTypeIds[i] %>');">
                     光功率数据
                   </a>|
                    <a href="JavaScript:doDeviceCollectLog('<%=sendIds[i] %>','<%=execEndBegin %>','<%=execEndEnd%>');">

@@ -19,6 +19,7 @@
 	String[] sendIds;
 	String[] deviceNameEns;
 	String[] deviceNameCns;
+	String[] deviceTypeIds;
 	String[] typeNames;
 	String[] deviceIps;
 	String[] taskDefTimes;
@@ -39,14 +40,15 @@
 	sendIds = xml.getItemValues("DEVICE_COLLECT_LOG","SEND_ID");
 	deviceNameEns = xml.getItemValues("DEVICE_COLLECT_LOG", "DEVICE_NAME_EN");
 	deviceNameCns = xml.getItemValues("DEVICE_COLLECT_LOG", "DEVICE_NAME_CN");
+	deviceTypeIds = xml.getItemValues("DEVICE_COLLECT_LOG", "DEVICE_TYPE_ID");
 	typeNames = xml.getItemValues("DEVICE_COLLECT_LOG", "TYPE_NAME_CN");
 	deviceIps = xml.getItemValues("DEVICE_COLLECT_LOG", "DEVICE_IP");
 	taskDefTimes = xml.getItemValues("DEVICE_COLLECT_LOG", "TASK_DEFINE_TIME");
 	statuses = xml.getItemValues("DEVICE_COLLECT_LOG", "STATUS");
 	inspectEnds = xml.getItemValues("DEVICE_COLLECT_LOG", "EXEC_END_TIME");
 	
-	String[] statusDesc = {"成功","失败"};
-	String[] statusValue = {"S","F"};
+	String[] statusDesc = {"未执行","正在执行中","执行失败","执行成功"};
+	String[] statusValue = {"N","B","F","S"};
 %>
 <html>
 <head>
@@ -56,9 +58,10 @@
 
 <script type="text/javascript">
 <!--
- function doRxpView(sendId) {
-    selDialog("ctrl?FUNC_ID=RxpView&SEND_ID="+sendId,"SEND_ID","SEND_ID",850,550,false);
+  function doRxpView(sendId,deviceTypeId) {
+    selDialog("ctrl?FUNC_ID=RxpView&SEND_ID="+sendId+"&DEVICE_TYPE_ID="+deviceTypeId,"SEND_ID","SEND_ID",850,550,false);
   }
+  
   
   function doCollectLogView(sendId) {
   	selDialog("ctrl?FUNC_ID=CollectLogView&SEND_ID="+sendId,"SEND_ID","LOG_CONTEN",850,550,false);
@@ -69,8 +72,8 @@
       if (result == false){
         return result;
       }
-	var bgnDate = form.INSPECT_END_BEGIN.value;
-	var endDate = form.INSPECT_ENDC_END.value;
+	var bgnDate = form.EXEC_END_TIME_BEGIN.value;
+	var endDate = form.EXEC_END_TIME_END.value;
 	if(bgnDate.length ==0 || endDate.length ==0){
 		alert("请输入完成时间");
 		return false;
@@ -216,7 +219,7 @@
                    
                  <td align="center" nowrap>
                  [
-                  <a href="JavaScript:doRxpView('<%=sendIds[i] %>');">
+                  <a href="JavaScript:doRxpView('<%=sendIds[i] %>','<%=deviceTypeIds[i] %>');">
                      光功率数据
                   </a>|
                    <a href="JavaScript:doCollectLogView('<%=sendIds[i] %>');">
@@ -242,7 +245,7 @@
                    <td align="center"><%=inspectEnds[i]%></td>
                  <td align="center" nowrap>
                  [
-                  <a href="JavaScript:doRxpView('<%=sendIds[i] %>');">
+                  <a href="JavaScript:doRxpView('<%=sendIds[i] %>','<%=deviceTypeIds[i] %>');">
                      光功率数据
                   </a>|
                    <a href="JavaScript:doCollectLogView('<%=sendIds[i] %>');">

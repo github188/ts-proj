@@ -11,6 +11,7 @@
 	String[] rxps;
 	
 	String sendId ;
+	String deviceTypeId;
  
 %>
 <%
@@ -21,6 +22,7 @@
 	rxps = xml.getItemValues("DEVICE_PORT_RXP","RXP");
 	
 	sendId = xml.getInputValue("SEND_ID");
+	deviceTypeId = xml.getInputValue("DEVICE_TYPE_ID");
 
 %>
 <html>
@@ -60,6 +62,7 @@
         <form name="form2" action="ctrl" method="get" >
               <input type="hidden" name="FUNC_ID" value="RxpToExcel">
                <input type="hidden" name="SEND_ID" value="<%= sendId%>">
+                <input type="hidden" name="DEVICE_TYPE_ID" value="<%= deviceTypeId%>">
               <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
                    <tr>
                   		<th>设备名称</th>
