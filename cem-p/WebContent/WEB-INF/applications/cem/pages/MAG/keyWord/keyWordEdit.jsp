@@ -73,6 +73,7 @@
 		                 <td colspan="3"> 
               			<span id="spryKeyWordCont">
               					<textarea name="KEYWORD_CONT" id="textarea" class="textarea" cols="50" rows="4"><%=keyWordCont%></textarea>
+              			 <span class="textfieldRequiredMsg">需要提供一个值。</span>
               			  <span class="textfieldMaxCharsMsg">已超过最大字符数2000。</span>	                          
 		                  </span>
 		                 </td>
@@ -106,8 +107,6 @@
         </div>
         </div>
         <!-- Tab面板结束 -->
-        
-  
       </div>
     </div>
     <div class="panelFoot"><div></div></div>
@@ -116,7 +115,7 @@
   <script type="text/javascript">
 <!--
 var sprytextfield1 = new Spry.Widget.ValidationTextField("spryRemark",  {isRequired:false,maxChars:200});
-var sprytextfield2 = new Spry.Widget.ValidationTextField("spryKeyWordCont",  {isRequired:false,maxChars:2000});
+var sprytextfield2 = new Spry.Widget.ValidationTextField("spryKeyWordCont","none",{required:true,maxChars:2000});
 //-->
 </script>
 </body>

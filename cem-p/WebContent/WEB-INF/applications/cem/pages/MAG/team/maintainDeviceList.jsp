@@ -133,6 +133,7 @@
                   <div class="panelContent2">
                     <!-- 查询面板内容 -->
                   <form name="form1" action="ctrl" method="get">
+                  <input type="hidden" name=CUR_PAGE value="">
               		<input type="hidden" name="FUNC_ID" value="MaintainDeviceList">
               		<input type="hidden" name="TEAM_ID" value=<%=teamId %>>
              		 <table>
