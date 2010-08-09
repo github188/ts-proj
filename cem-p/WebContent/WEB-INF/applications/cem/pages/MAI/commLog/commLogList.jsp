@@ -37,6 +37,7 @@
 	String[] remarks;
 	String[] execBegins;
 	String[] execEnds;
+	String[] userNames;
 %>
 <%
 	xml = XMLWrap.getRequestXml(request,session,application);
@@ -67,6 +68,7 @@
 	remarks = xml.getItemValues("DEVICE_COMMAND_EXEC_LOG", "REMARK");
 	execBegins = xml.getItemValues("DEVICE_COMMAND_EXEC_LOG", "EXEC_BEGIN");
 	execEnds = xml.getItemValues("DEVICE_COMMAND_EXEC_LOG", "EXEC_END");
+	userNames = xml.getItemValues("DEVICE_COMMAND_EXEC_LOG", "USER_NAME");
     
 	String[] deviceStatusDesc = {"在用","停用"};
 	String[] deviceStatusValue = {"N","S"};
@@ -210,7 +212,7 @@ function doSubmit(form) {
                   <th>设备中文名称</th>
                   <th>物理位置</th>
                   <th>网络地址</th>
-                  <th>设备状态</th>
+                  <th>用户名</th>
                   <th>结束时间</th>
                   <th>操作</th>
                 </tr>
@@ -220,18 +222,11 @@ function doSubmit(form) {
 				if (i % 2 == 0) {%>
                 <tr onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
                  
-                  <td align="center">
-                  <%=deviceNameEns[i]%>
-                  </td>
-                  
+                  <td align="center"><%=deviceNameEns[i]%></td>                  
                   <td align="center"><%=deviceNameCns[i]%></td>
                   <td align="center"><%=locationNames[i]%></td>
                   <td align="center"><%=deviceIps[i]%></td>
-                   <td align="center">
-                   <%for(int j=0;j<deviceStatusValue.length;j++){ %>
-                        <%if(deviceStatusValue[j].equals(deviceStatuses[i]))%><%=deviceStatusDesc[j] %>
-                    <%} %>
-                   </td>
+                  <td align="center"><%=userNames[i]%></td>
                    <td align="center"><%=execEnds[i]%></td>
                   <td align="center" nowrap>
                    <a href="JavaScript:doView('<%=logIdS[i] %>');">
@@ -241,18 +236,11 @@ function doSubmit(form) {
                 </tr>
                <%} else {%>
                <tr class="dark" onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
-                 <td align="center">
-                  <%=deviceNameEns[i]%>
-                  </td>
-                  
+                 <td align="center"><%=deviceNameEns[i]%></td>                  
                   <td align="center"><%=deviceNameCns[i]%></td>
                   <td align="center"><%=locationNames[i]%></td>
                   <td align="center"><%=deviceIps[i]%></td>
-                   <td align="center">
-                   <%for(int j=0;j<deviceStatusValue.length;j++){ %>
-                        <%if(deviceStatusValue[j].equals(deviceStatuses[i]))%><%=deviceStatusDesc[j] %>
-                    <%} %>
-                   </td>
+                  <td align="center"><%=userNames[i]%></td>
                    <td align="center"><%=execEnds[i]%></td>
                   <td align="center" nowrap>
                    <a href="JavaScript:doView('<%=logIdS[i] %>');">
