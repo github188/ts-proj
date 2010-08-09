@@ -49,7 +49,7 @@ public class BoDeviceCollectLogList implements RootBo{
 		/***********************************************************************
 		 * 执行业务逻辑、输出
 		 **********************************************************************/
-		 sql.append(" select a.SEND_ID,b.DEVICE_NAME_EN,b.DEVICE_NAME_CN,e.TYPE_NAME_CN,b.DEVICE_IP,a.TASK_DEFINE_TIME, a.STATUS,a.EXEC_END_TIME" +
+		 sql.append(" select a.SEND_ID,a.DEVICE_TYPE_ID,b.DEVICE_NAME_EN,b.DEVICE_NAME_CN,e.TYPE_NAME_CN,b.DEVICE_IP,a.TASK_DEFINE_TIME, a.STATUS,a.EXEC_END_TIME" +
 		 		    " from COMMANDS_SEND_HIS a ,DEVICE_INFO b ,DEVICE_TYPE e" +
 		 		    " where  a.DEVICE_ID = b.DEVICE_ID " +
 		 		    " and a.DEVICE_TYPE_ID = e.TYPE_ID " +
@@ -123,6 +123,7 @@ public class BoDeviceCollectLogList implements RootBo{
 					requestXml.setItemValue("DEVICE_COLLECT_LOG", row, "SEND_ID", rsRow.getString("SEND_ID"));
 					requestXml.setItemValue("DEVICE_COLLECT_LOG", row, "DEVICE_NAME_EN", rsRow.getString("DEVICE_NAME_EN"));
 					requestXml.setItemValue("DEVICE_COLLECT_LOG", row, "DEVICE_NAME_CN", rsRow.getString("DEVICE_NAME_CN"));
+					requestXml.setItemValue("DEVICE_COLLECT_LOG", row, "DEVICE_TYPE_ID", rsRow.getString("DEVICE_TYPE_ID"));
 					requestXml.setItemValue("DEVICE_COLLECT_LOG", row, "TYPE_NAME_CN", rsRow.getString("TYPE_NAME_CN"));
 					requestXml.setItemValue("DEVICE_COLLECT_LOG", row, "DEVICE_IP", rsRow.getString("DEVICE_IP"));
 					requestXml.setItemValue("DEVICE_COLLECT_LOG", row, "TASK_DEFINE_TIME", DateFunc.FormatDateTime(rsRow.getString("TASK_DEFINE_TIME")));

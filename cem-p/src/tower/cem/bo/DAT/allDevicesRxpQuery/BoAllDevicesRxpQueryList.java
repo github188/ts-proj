@@ -92,6 +92,8 @@ public class BoAllDevicesRxpQueryList implements RootBo {
 		    if (enDeviceType != null) {
 			requestXml.setItemValue("COMMANDS_SEND_HIS", row, "TYPE_NAME_CN", enDeviceType
 				.getTypeNameCn());
+			requestXml.setItemValue("COMMANDS_SEND_HIS", row, "DEVICE_TYPE_ID", enDeviceType
+					.getTypeId());
 		    }
 		}else{
 			requestXml.setItemValue("COMMANDS_SEND_HIS", row, "TYPE_NAME_CN", "全网设备");

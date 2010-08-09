@@ -67,7 +67,7 @@ public class BoMaintainDeviceList implements RootBo {
 		String typeId; // 设备类型编号
 
 		Vector vector;
-		StringBuffer sqlWhere;
+		StringBuffer sqlWhere = new StringBuffer();
 		StringBuffer deviceIds;
 		/*****************************************************************************************************
 		 * 获取输入
@@ -94,26 +94,12 @@ public class BoMaintainDeviceList implements RootBo {
 		/*****************************************************************************************************
 		 * 执行业务逻辑、输出
 		 ****************************************************************************************************/
-		// 根据维护团队编号从维护团队与设备对照表中获取维护设备编号
-		vector = dbMaintainTeamDeviceMap.findAllWhere(" TEAM_ID ='" + teamId + "'");
-		if (vector != null && vector.size() > 0) {
+		// 维护当前维护人员编号获取维护设备编号
+		sqlWhere.append(" device_id in (select distinct device_id"
+			+ " from maintain_team t, maintain_team_device_map d "
+			+ " where t.team_id = d.team_id and t.team_id ='" + teamId
+			+ "')");
 
-			deviceIds = new StringBuffer();
-			deviceIds.append("(");
-			for (int i = 0; i < vector.size(); i++) {
-				enMaintainTeamDeviceMap = (EnMaintainTeamDeviceMap) vector.get(i);
-				if (i == 0) {
-					deviceIds.append(enMaintainTeamDeviceMap.getDeviceId());
-				} else {
-					deviceIds.append(",");
-					deviceIds.append(enMaintainTeamDeviceMap.getDeviceId());
-				}
-
-			}
-			deviceIds.append(")");
-			// 根据提交的参数，构造查询where子句，提供模糊查询。
-			sqlWhere = new StringBuffer();
-			sqlWhere.append(" DEVICE_ID IN " + deviceIds.toString());
 			if (deviceNameEn != null && deviceNameEn.length() != 0) {
 				if (sqlWhere == null || sqlWhere.length() == 0) {
 					sqlWhere.append(" DEVICE_NAME_EN LIKE '%" + deviceNameEn + "%'");
@@ -181,9 +167,6 @@ public class BoMaintainDeviceList implements RootBo {
 
 				}
 			}
-
-		}
-
 		// 获取团队信息
 		enMaintainTeam = dbMaintainTeam.findByKey(teamId);
 		dbMaintainTeam.setToXml(requestXml, enMaintainTeam);

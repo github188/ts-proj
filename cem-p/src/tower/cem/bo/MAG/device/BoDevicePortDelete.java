@@ -24,7 +24,7 @@ public class BoDevicePortDelete implements RootBo{
 		/***********************************************************************
 		 * 声明变量
 		 **********************************************************************/
-		//设备配置db en 
+		//设备配置端口db en 
 		DbDevicePortInfo dbDevicePortInfo;
 		EnDevicePortInfo enDevicePortInfo;
 		

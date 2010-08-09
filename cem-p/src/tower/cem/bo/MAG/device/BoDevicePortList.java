@@ -86,7 +86,7 @@ public class BoDevicePortList implements RootBo{
 			}
 			
 			// 查询表，将符合条件的保存到requestXml中返回。
-				Page.SetPageInfo(transaction, null, requestXml, dbDeviceInfo, PubFunc.LEN_PAGE_COUNT,
+				Page.SetPageInfo(transaction, null, requestXml, dbDevicePortInfo, PubFunc.LEN_PAGE_COUNT,
 						"DEVICE_PORT_INFO", sqlWhere.toString());
 				vector = dbDevicePortInfo.findAllWhere(sqlWhere.toString());
 				

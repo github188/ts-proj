@@ -103,27 +103,11 @@ public class BoCommDeviceList implements RootBo{
 		/*****************************************************************************************************
 		 * 执行业务逻辑、输出
 		 ****************************************************************************************************/
-//		维护当前维护人员编号获取维护设备编号
-		sql.append("SELECT a.device_id  FROM maintain_team_device_map a,maintain_team_user_map b where a.team_id = b.team_id and b.user_id=");
-		sql.append(transaction.formatString(userId));
-		rs = transaction.doQuery(null, sql.toString());
-		StringBuffer deviceIds = new StringBuffer();
-		for(int i=0; i<rs.size(); i++){
-			QueryResultRow rsRow = rs.get(i);
-			String value = rsRow.getString("device_id");
-			if(deviceIds != null && deviceIds.toString().length() != 0){
-				deviceIds = deviceIds.append(",");
-				deviceIds = deviceIds.append(value);
-			}else{
-				deviceIds = deviceIds.append(value);
-			}
-		}
-		if(deviceIds != null && deviceIds.toString().length() != 0){
-			deviceIds.insert(0, "(");
-			deviceIds.append(")");
-			sqlWhere.append(" DEVICE_ID IN ");
-			sqlWhere.append(deviceIds);
-		}
+		//维护当前维护人员编号获取维护设备编号
+		sqlWhere.append(" device_id in (select distinct device_id"
+				+ " from maintain_team t, maintain_team_device_map d, maintain_team_user_map u"
+				+ " where t.team_id = d.team_id and t.team_id = u.team_id" + " and u.user_id ='" + userId
+				+ "')");
 		
        // 根据查询条件组装查询语句
 		if (deviceNameEn != null && deviceNameEn.length() != 0) {

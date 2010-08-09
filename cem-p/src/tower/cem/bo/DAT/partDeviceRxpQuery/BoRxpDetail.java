@@ -7,12 +7,20 @@ import java.util.Vector;
 
 import org.apache.log4j.Logger;
 
+import tower.cem.db.DbDeviceCollectLog;
 import tower.cem.db.DbDeviceInfo;
 import tower.cem.db.DbDeviceInspectLog;
+import tower.cem.db.DbDevicePortInfo;
 import tower.cem.db.DbDevicePortRxp;
+import tower.cem.db.DbDevicePortType;
+import tower.cem.db.DbDeviceType;
+import tower.cem.en.EnDeviceCollectLog;
 import tower.cem.en.EnDeviceInfo;
 import tower.cem.en.EnDeviceInspectLog;
+import tower.cem.en.EnDevicePortInfo;
 import tower.cem.en.EnDevicePortRxp;
+import tower.cem.en.EnDevicePortType;
+import tower.cem.en.EnDeviceType;
 import tower.common.util.Page;
 import tower.common.util.PubFunc;
 import tower.tmvc.ErrorException;
@@ -34,11 +42,34 @@ public class BoRxpDetail implements RootBo{
 	DbDevicePortRxp dbDevicePortRxp;
 	EnDevicePortRxp enDevicePortRxp;
 	
+	//设备配置db en
+	DbDeviceInfo dbDeviceInfo;
+	EnDeviceInfo enDeviceInfo;
+	
+	//设备配置端口db en 
+	DbDevicePortInfo dbDevicePortInfo;
+	EnDevicePortInfo enDevicePortInfo;
+	
+	//设备端口类型db en
+	DbDevicePortType dbDevicePortType;
+	EnDevicePortType enDevicePortType;
+	
+	//采集日志 db en 
+	DbDeviceCollectLog dbDeviceCollectLog;
+	EnDeviceCollectLog enDeviceCollectLog;
+	
+	// 设备类型db en
+	DbDeviceType dbDeviceType;
+	EnDeviceType enDeviceType;
+	
 	//发送编号
 	String sendId;
 	
 	//其他
 	StringBuffer sql = new StringBuffer();
+	
+	Vector vector;
+	Vector vLog;
 	
 	QueryResult rs = null;
 	
@@ -51,40 +82,40 @@ public class BoRxpDetail implements RootBo{
 	 ****************************************************************************************************/
 	transaction.createDefaultConnection(null, true);
 	dbDevicePortRxp = new DbDevicePortRxp(transaction, null);
+	dbDeviceInfo = new DbDeviceInfo(transaction, null);
+	dbDevicePortInfo = new DbDevicePortInfo(transaction,null);
+	dbDevicePortType = new DbDevicePortType(transaction,null);
+	dbDeviceCollectLog = new DbDeviceCollectLog(transaction,null);
+	dbDeviceType = new DbDeviceType(transaction, null);
 	enDevicePortRxp = new EnDevicePortRxp();
+	dbDevicePortRxp.setOrderBy(" ORDER BY DEVICE_NAME ASC ");
 	/*****************************************************************************************************
 	 * 执行业务逻辑、输出
 	 ****************************************************************************************************/
-	sql.append("select c.TYPE_NAME_CN,a.DEVICE_NAME,a.SEND_ID,b.DEVICE_IP,a.RXP,a.PORT_SN,d.STATUS,f.TYPE_NAME_CN,g.COLLECT_END ," +
-			   "f.STANDARD_RX_MAX,f.STANDARD_RX_MIN ,f.NETWORK_RX_MIN" +
-			   " from DEVICE_PORT_RXP a,DEVICE_INFO b, DEVICE_TYPE c,DEVICE_PORT_INFO d,DEVICE_PORT_TYPE f, DEVICE_COLLECT_LOG g" +
-			   " where a.DEVICE_ID = b.DEVICE_ID " +
-			   " and a.PORT_ID = d.PORT_ID " +
-			   " and  d.TYPE_ID = f.TYPE_ID " +
-			   " and a.SEND_ID = g.SEND_ID" +
-			   " and  b.TYPE_ID = c.TYPE_ID" +
-			   " and a.SEND_ID = ");
-	sql.append(transaction.formatString(sendId));
-	rs = transaction.doQuery(null, sql.toString());
-	for(int i =0; i<rs.size();i++){
-		QueryResultRow rsRow =  rs.get(i);
-		int row  = requestXml.addRow("DEVICE_PORT_RXP");
-		requestXml.setItemValue("DEVICE_PORT_RXP", row, "SEND_ID",rsRow.getString("SEND_ID"));
-		requestXml.setItemValue("DEVICE_PORT_RXP", row, "TYPE_NAME",rsRow.getString("TYPE_NAME_CN"));
-		requestXml.setItemValue("DEVICE_PORT_RXP", row, "DEVICE_NAME",rsRow.getString("DEVICE_NAME"));
-		requestXml.setItemValue("DEVICE_PORT_RXP", row, "DEVICE_IP",rsRow.getString("DEVICE_IP"));
-		requestXml.setItemValue("DEVICE_PORT_RXP", row, "PORT_SN",rsRow.getString("PORT_SN"));
-		requestXml.setItemValue("DEVICE_PORT_RXP", row, "TYPE_NAME_CN",rsRow.getString("TYPE_NAME_CN"));
-		requestXml.setItemValue("DEVICE_PORT_RXP", row, "RXP",rsRow.getDouble("RXP").toString());
-		requestXml.setItemValue("DEVICE_PORT_RXP", row, "STANDARD_RX_MAX",rsRow.getDouble("STANDARD_RX_MAX").toString());
-		requestXml.setItemValue("DEVICE_PORT_RXP", row, "STANDARD_RX_MIN",rsRow.getDouble("STANDARD_RX_MIN").toString());
-		requestXml.setItemValue("DEVICE_PORT_RXP", row, "NETWORK_RX_MIN",rsRow.getDouble("NETWORK_RX_MIN").toString());
-		requestXml.setItemValue("DEVICE_PORT_RXP", row, "COLLECT_END",rsRow.getDouble("COLLECT_END").toString());
-		requestXml.setItemValue("DEVICE_PORT_RXP", row, "COLLECT_END",rsRow.getString("STATUS"));
+	//获取光功率数据
+	vector = dbDevicePortRxp.findAllWhere(" SEND_ID='"+sendId+"'");
+	vLog = dbDeviceCollectLog.findAllWhere(" SEND_ID='"+sendId+"'");
+	enDeviceCollectLog =(EnDeviceCollectLog) vLog.get(0);
+	//获取设备Ip
+	for(int i=0;i<vector.size();i++){
+		enDevicePortRxp = (EnDevicePortRxp)vector.get(i);
+		int row  = dbDevicePortRxp.setToXml(requestXml, enDevicePortRxp);
+		enDeviceInfo = dbDeviceInfo.findByKey(enDevicePortRxp.getDeviceId());
+		enDeviceType = dbDeviceType.findByKey(enDeviceInfo.getTypeId());
+		enDevicePortInfo = dbDevicePortInfo.findByKey(enDevicePortRxp.getPortId());
+		enDevicePortType = dbDevicePortType.findByKey(enDevicePortInfo.getTypeId());
+		requestXml.setItemValue("DEVICE_PORT_RXP", row, "DEVICE_IP",enDeviceInfo.getDeviceIp());
+		requestXml.setItemValue("DEVICE_PORT_RXP", row, "PORT_TYPE_NAME",enDevicePortType.getTypeNameCn());
+		requestXml.setItemValue("DEVICE_PORT_RXP", row, "STANDARD_RX_MAX",enDevicePortType.getStandardRxMax());
+		requestXml.setItemValue("DEVICE_PORT_RXP", row, "STANDARD_RX_MIN",enDevicePortType.getStandardRxMin());
+		requestXml.setItemValue("DEVICE_PORT_RXP", row, "NETWORK_RX_MIN",enDevicePortType.getNetworkRxMin());
+		requestXml.setItemValue("DEVICE_PORT_RXP", row, "COLLECT_END",enDeviceCollectLog.getCollectEnd());
+		requestXml.setItemValue("DEVICE_PORT_RXP", row, "STATUS",enDevicePortInfo.getStatus());
+		requestXml.setItemValue("DEVICE_PORT_RXP", row, "DEVICE_TYPE_NAME",enDeviceType.getTypeNameCn());
 		
-		double rxp = rsRow.getDouble("RXP");
-		double rxMax = rsRow.getDouble("STANDARD_RX_MAX");
-		double rxMin = rsRow.getDouble("NETWORK_RX_MIN");
+		double rxp =enDevicePortRxp.getRxp();
+		double rxMax = enDevicePortType.getStandardRxMax();
+		double rxMin = enDevicePortType.getStandardRxMin();
 		
 		if(rxp >= rxMin && rxp <= rxMax){
 			requestXml.setItemValue("DEVICE_PORT_RXP", row, "IS_NORMAL","是");
@@ -94,6 +125,6 @@ public class BoRxpDetail implements RootBo{
 		
 	}
 	
-	
 	}
+	
 }
