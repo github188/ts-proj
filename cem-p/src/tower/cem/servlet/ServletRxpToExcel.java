@@ -54,6 +54,8 @@ import tower.tmvc.XMLWrap;
 		String[] status;
 		String[] isNormals;
 		
+		String deviceTypeId;
+		
 		String[] deviceStatusDesc = {"在用","停用"};
 		String[] deviceStatusValue = {"N","S"};
 		
@@ -62,11 +64,11 @@ import tower.tmvc.XMLWrap;
 			
 			xml = (XMLWrap) req.getAttribute("XML");
 			sendIds = xml.getItemValues("DEVICE_PORT_RXP","SEND_ID");
-			typeNames = xml.getItemValues("DEVICE_PORT_RXP","TYPE_NAME");
+			typeNames = xml.getItemValues("DEVICE_PORT_RXP","PORT_TYPE_NAME");
 			deviceNames = xml.getItemValues("DEVICE_PORT_RXP","DEVICE_NAME");
 			deviceIps = xml.getItemValues("DEVICE_PORT_RXP","DEVICE_IP");
 			portSns = xml.getItemValues("DEVICE_PORT_RXP","PORT_SN");
-			typeNameCns = xml.getItemValues("DEVICE_PORT_RXP","TYPE_NAME_CN");
+			typeNameCns = xml.getItemValues("DEVICE_PORT_RXP","DEVICE_TYPE_NAME");
 			rxps = xml.getItemValues("DEVICE_PORT_RXP","RXP");
 			rxMaxs = xml.getItemValues("DEVICE_PORT_RXP","STANDARD_RX_MAX");
 			rxMins = xml.getItemValues("DEVICE_PORT_RXP","STANDARD_RX_MIN");
@@ -74,7 +76,15 @@ import tower.tmvc.XMLWrap;
 			collectEnds = xml.getItemValues("DEVICE_PORT_RXP","COLLECT_END");
 			isNormals = xml.getItemValues("DEVICE_PORT_RXP","IS_NORMAL");
 			status = xml.getItemValues("DEVICE_PORT_RXP","STATUS");
-			String fileName1 = "rxp"+deviceIps[0]+collectEnds[0]+".xls";
+			
+			deviceTypeId = xml.getInputValue("DEVICE_TYPE_ID");
+			String fileName1="";
+			if(deviceTypeId == null || deviceTypeId.length() == 0){
+				 fileName1 = "rxp_all_"+collectEnds[0]+".xls";
+			}else{
+				 fileName1 = "rxp_"+deviceIps[0]+"_"+collectEnds[0]+".xls";
+			}
+			
 			
 			byte[] data;
 			try {
@@ -124,9 +134,9 @@ import tower.tmvc.XMLWrap;
 				createCell(i + 1, 0, typeNameCns[i]);
 				createCell(i + 1, 1, deviceNames[i]);
 				if(i!=0 && deviceNames[i].equals(deviceNames[i-1])){
-					sheet.mergeCells(0,1,0, i+2);
-					sheet.mergeCells(1,1,1, i+2);
-					sheet.mergeCells(2,1,2, i+2);
+					sheet.mergeCells(0,1,0, i+1);
+					sheet.mergeCells(1,1,1, i+1);
+					sheet.mergeCells(2,1,2, i+1);
 				}
 				createCell(i + 1, 2, deviceIps[i]);
 				createCell(i + 1, 3, portSns[i]);
