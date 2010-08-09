@@ -124,6 +124,7 @@
               <form name="form1" action="ctrl" method="get">
               		<input type="hidden" name="FUNC_ID" value="DevicePortList">
               		<input type="hidden" name="DEVICE_ID" value=<%=deviceId %>>
+              		 <input type="hidden" name=CUR_PAGE value="">
              		 <table>
                		<tr>
                 	 <td align="right">本端端口编号：</td>
