@@ -127,7 +127,7 @@ try{
 <style type="text/css">
 #orgTree {
   height:380px;
-  width:200px;
+  width:350px;
   overflow:scroll;
   background-color:#FFFFFF;
   word-wrap:break-word; 
