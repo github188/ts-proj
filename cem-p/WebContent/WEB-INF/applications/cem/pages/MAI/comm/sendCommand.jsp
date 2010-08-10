@@ -102,21 +102,6 @@
 </head>
 <base target="_self">
 <body id="mainArea">
-  <div id="mainPanel" class="panel">
-    <div class="panelHead">设备维护指令</div>
-    <div class="panelContent">
-      <div class="panelContent2">
-        <!-- Tab面板 -->
-        <div id="TabbedPanels1" class="TabbedPanels">
-        <div id="TabbedPanels1" class="TabbedPanels">
-          <div class="TabbedPanelsContentGroup">
-            <div class="TabbedPanelsContent">
-              <!-- Tab内容 -->
-                <!-- 查询面板 -->
-                <div class="panelQuery">
-                  <div class="panelHead"></div>
-                  <div class="panelContent">
-                  <div class="panelContent2">
                       <!-- 查询面板内容 -->
                   <form name="form1" action="ctrl" method="get" >
                   <input type="hidden" name="FUNC_ID" value="Disconnection">
@@ -178,21 +163,5 @@
 			 </table>				 
               
                  </form>    
-                      <!-- 查询面板内容结束 -->
-                    </div>
-                  </div>
-                </div>
-                <!-- 查询面板结束 -->
-              <!-- Tab内容结束 -->
-            </div>
-          </div>
-        </div>
-        </div>
-        <!-- Tab面板结束 -->
-  
-      </div>
-    </div>
-    <div class="panelFoot"><div></div></div>
-  </div>
 </body>
 </html>
