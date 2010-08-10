@@ -370,9 +370,6 @@ CREATE TABLE `inspect_pick_keyword` (
 --
 
 /*!40000 ALTER TABLE `inspect_pick_keyword` DISABLE KEYS */;
-INSERT INTO `inspect_pick_keyword` (`KEYWORD_ID`,`REMARK`,`KEYWORD_CONT`) VALUES 
- ('000000','测试用分拣关键字','error down reset removed remove unavailable VerifyServer failed lost fault crash failure reload reboot LOG_ERR'),
- ('000001','测试用分拣关键字11','super ddds ddddd sss boot dddssss none');
 /*!40000 ALTER TABLE `inspect_pick_keyword` ENABLE KEYS */;
 
 
@@ -496,21 +493,21 @@ CREATE TABLE `sys_id_creator` (
 
 /*!40000 ALTER TABLE `sys_id_creator` DISABLE KEYS */;
 INSERT INTO `sys_id_creator` (`CREATOR_ID`,`CREATOR_VALUE`,`CREATOR_REMARK`) VALUES 
- ('DEVICE_ID','34','Next ID of DEVICE_ID'),
- ('DEVICE_TYPE_ID','40','Next ID of DEVICE_TYPE_ID'),
- ('HOST_ID','26','Next ID of HOST_ID'),
- ('KEYWORD_ID','32','Next ID of KEYWORD_ID'),
- ('LOCATION_ID','24','Next ID of LOCATION_ID'),
- ('LOG_ID','22','Next ID of LOG_ID'),
- ('MAP_ID','36','Next ID of MAP_ID'),
+ ('DEVICE_ID','1','Next ID of DEVICE_ID'),
+ ('DEVICE_TYPE_ID','1','Next ID of DEVICE_TYPE_ID'),
+ ('HOST_ID','1','Next ID of HOST_ID'),
+ ('KEYWORD_ID','1','Next ID of KEYWORD_ID'),
+ ('LOCATION_ID','1','Next ID of LOCATION_ID'),
+ ('LOG_ID','1','Next ID of LOG_ID'),
+ ('MAP_ID','1','Next ID of MAP_ID'),
  ('ORG_ID','1','Next ID of ORG_ID'),
- ('PORT_ID','20','Next ID of PORT_ID'),
- ('SEND_ID','192','Next ID of SEND_ID'),
+ ('PORT_ID','1','Next ID of PORT_ID'),
+ ('SEND_ID','1','Next ID of SEND_ID'),
  ('STAT_ID','1','Next ID of STAT_ID'),
- ('TEAM_ID','18','Next ID of TEAM_ID'),
- ('TEMP_ID','24','Next ID of TEMP_ID'),
- ('TYPE_ID','32','Next ID of TYPE_ID'),
- ('USER_ID','11','Next ID of USER_ID');
+ ('TEAM_ID','1','Next ID of TEAM_ID'),
+ ('TEMP_ID','1','Next ID of TEMP_ID'),
+ ('TYPE_ID','1','Next ID of TYPE_ID'),
+ ('USER_ID','1','Next ID of USER_ID');
 /*!40000 ALTER TABLE `sys_id_creator` ENABLE KEYS */;
 
 
@@ -738,7 +735,7 @@ CREATE TABLE `sys_org` (
 
 /*!40000 ALTER TABLE `sys_org` DISABLE KEYS */;
 INSERT INTO `sys_org` (`ORG_ID`,`ORG_NAME`,`PARENT_ID`,`ORG_DESC`,`LINK_MAN`,`LINK_TELE`,`LINK_EMAIL`) VALUES 
- ('000000','初始机构',NULL,'yu',NULL,'12122',NULL);
+ ('000000','初始机构',NULL,'初始机构',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `sys_org` ENABLE KEYS */;
 
 
@@ -809,7 +806,7 @@ CREATE TABLE `sys_stat` (
 
 /*!40000 ALTER TABLE `sys_stat` DISABLE KEYS */;
 INSERT INTO `sys_stat` (`STAT_ID`,`STAT_NAME`,`STAT_DESC`) VALUES 
- ('000000','管理','的说法');
+ ('000000','系统管理岗位','拥有全部权限');
 /*!40000 ALTER TABLE `sys_stat` ENABLE KEYS */;
 
 
@@ -841,7 +838,7 @@ CREATE TABLE `sys_user` (
 
 /*!40000 ALTER TABLE `sys_user` DISABLE KEYS */;
 INSERT INTO `sys_user` (`USER_ID`,`USER_NAME`,`LOGIN_NAME`,`PASSWORD`,`STATUS`,`USER_ORG_ID`,`USER_STAT_ID`,`USER_DESC`,`LINK_TELE`,`LINK_EMAIL`,`USER_SEX`,`USER_BIRTH`,`MAN_FLAG`) VALUES 
- ('000000','管理员','admin','21232f297a57a5a743894a0e4a801fc3','N','000000','000000',NULL,NULL,NULL,'1','20080528','M');
+ ('000000','管理员','admin','21232f297a57a5a743894a0e4a801fc3','N','000000','000000',NULL,NULL,NULL,'1','','M');
 /*!40000 ALTER TABLE `sys_user` ENABLE KEYS */;
 
 

@@ -209,7 +209,7 @@ try{
                       </div>
                     </div>
 </td>
-<td width="1000" valign="top">
+<td width="100%" valign="top">
 <div id="noticePanel" class="panelSimple">
                         <div class="panelHead"></div>
                       <div class="panelContent">
@@ -221,12 +221,14 @@ try{
                 			<input type="hidden" name="ORG_ID" value="<%=orgId %>"> 
                 			<input type="hidden" name="PARENT_ID" value="<%=parentId %>"> 
               				<table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
-               				 <tr>
-                  <td width="95" align="right">部门名称：</td>
-                  <td width="174"><span id="spryOrgName">
+               	<tr>
+                  <td  align="right">部门名称：</td>
+                  <td ><span id="spryOrgName">
                   <input type="text" class="text" name="ORG_NAME" value="<%=orgName %>"><span class="requiredField">*</span> <span class="textfieldRequiredMsg">需要提供一个值。</span><span class="textfieldMaxCharsMsg">已超过最大字符数50。</span></span></td>
-                  <td width="74" align="right">联系人：</td>
-                  <td width="190"><span id="spryLinkMan">
+                </tr>
+                <tr>
+                <td align="right">联系人：</td>
+                  <td ><span id="spryLinkMan">
                     <input type="text" class="text" name="LINK_MAN" value="<%=linkMan %>">
                     <span class="textfieldMaxCharsMsg">已超过最大字符数50。</span>                  </span></td>
                 </tr>
@@ -235,6 +237,8 @@ try{
                   <td><span id="spryLinkTele">
                   <input type="text" class="text" name="LINK_TELE" value="<%=linkTele %>">
                   <span class="textfieldMaxCharsMsg">已超过最大字符数50。</span> </span></td>
+                </tr>
+                <tr>
                   <td align="right">电子邮件：</td>
                   <td><span id="spryLinkEmail">
                   <input type="text" class="text" name="LINK_EMAIL" value="<%=linkEmail %>">
@@ -243,7 +247,7 @@ try{
                 <tr>
                   <td align="right" valign="top">部门描述：</td>
                   <td colspan="3"><span id="spryOrgDesc">
-                    <textarea rows="5" cols="50" class="textarea" name="ORG_DESC"><%=orgDesc %></textarea>
+                    <textarea rows="5" cols="30" class="textarea" name="ORG_DESC"><%=orgDesc %></textarea>
                     <br>
                   <label>字符数:</label><span id="countspryOrgDesc">&nbsp;</span> <span class="textareaMaxCharsMsg">已超过最大字符数50。</span></span></td>
                 </tr>

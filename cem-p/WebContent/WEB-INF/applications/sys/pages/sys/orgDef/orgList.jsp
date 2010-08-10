@@ -273,9 +273,7 @@ try{
                  <tr>
                   <th width="15%">部门名称</th>
                   <th width="15%">联系人</th>
-                  <th width="15%">联系电话</th>
-                  <th width="15%">电子邮件</th>
-                 
+                  <th width="15%">联系电话</th>                 
                   <th width="15%">操作</th>
                 </tr>
             
@@ -283,8 +281,7 @@ try{
                   <td align="center"><%=orgName%></td>
                   <td align="center"><%=linkMan%></td>
                   <td align="center"><%=linkTele%></td>
-                  <td align="center"><%=linkEmail%></td>
-                  <td align="center">[ <a href="JavaScript:doEdit('<%=orgId %>')">编辑</a> <%if(orgIds ==null || orgIds.length ==0) {%>| <a href="JavaScript:doDelete('<%=orgId %>')">删除 </a><%} %> ]</td>
+                  <td align="center">[<a href="JavaScript:doEdit('<%=orgId %>')">编辑</a><%if(orgIds ==null || orgIds.length ==0) {%>|<a href="JavaScript:doDelete('<%=orgId %>')">删除</a><%} %>]</td>
                 </tr>
               
               </table>
@@ -314,8 +311,6 @@ try{
                   <th width="15%">部门名称</th>
                   <th width="15%">联系人</th>
                   <th width="15%">联系电话</th>
-                  <th width="15%">电子邮件</th>
-                 
                   <th width="15%">[ <a href="JavaScript:doAdd('<%=orgId%>')">添加</a> ]</th>
                 </tr>
               <%if (orgIds != null && orgIds.length !=0) {
@@ -325,8 +320,7 @@ try{
                   <td align="center"><%=orgNames[i]%></td>
                   <td align="center"><%=linkMans[i]%></td>
                   <td align="center"><%=linkTeles[i]%></td>
-                  <td align="center"><%=linkEmails[i]%></td>
-                  <td align="center">[ <a href="JavaScript:doEdit('<%=orgIds[i] %>')">编辑</a> | <a href="JavaScript:doDelete('<%=orgIds[i] %>')">删除 </a>]</td>
+                  <td align="center">[<a href="JavaScript:doEdit('<%=orgIds[i] %>')">编辑</a>|<a href="JavaScript:doDelete('<%=orgIds[i] %>')">删除</a>]</td>
                 </tr>
                <%} else {%>
                 <tr class="dark" onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
@@ -334,7 +328,7 @@ try{
                   <td align="center"><%=linkMans[i]%></td>
                   <td align="center"><%=linkTeles[i]%></td>
                   <td align="center"><%=linkEmails[i]%></td>
-                  <td align="center">[ <a href="JavaScript:doEdit('<%=orgIds[i] %>')">编辑</a> | <a href="JavaScript:doDelete('<%=orgIds[i] %>')">删除 </a>]</td>
+                  <td align="center">[<a href="JavaScript:doEdit('<%=orgIds[i] %>')">编辑</a>|<a href="JavaScript:doDelete('<%=orgIds[i] %>')">删除</a>]</td>
                 </tr>
                <%}}} %>
               </table>
