@@ -210,7 +210,7 @@ try{
 <style type="text/css">
 .orgTree {
   height:380px;
-  width:200px;
+  width:350px;
   overflow:scroll;
   background-color:#FFFFFF;
   word-wrap:break-word; 
@@ -226,7 +226,7 @@ try{
 <div class="panelContent2" >
 
 <!-- 机构不为空时显示bgn -->
-<table width="758" height="450" border="0" cellpadding="2" cellspacing="0" >
+<table width="100%" height="450" border="0" cellpadding="2" cellspacing="0" >
 <tr>
     <td  colspan="5" valign="top" >
     <div id="noticePanel" class="panelSimple">
@@ -255,7 +255,7 @@ try{
 
 
 </td>
-<td width="539" valign="top">
+<td width="1000" valign="top">
 
 <table width="100%">
 <%if(orgId!=null && orgId.length()!=0) {%>

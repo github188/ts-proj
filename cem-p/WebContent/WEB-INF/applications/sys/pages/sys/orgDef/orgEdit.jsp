@@ -171,7 +171,7 @@ try{
 <style type="text/css">
 #orgTree {
   height:380px;
-  width:200px;
+  width:350px;
   overflow:scroll;
   background-color:#FFFFFF;
   word-wrap:break-word; 
@@ -186,7 +186,7 @@ try{
 <div class="panelHead">机构信息管理 - 机构添加/编辑</div>
 <div class="panelContent">
 <div class="panelContent2" >
-<table width="758" height="450" border="0" cellpadding="2" cellspacing="0">
+<table width="100%" height="450" border="0" cellpadding="2" cellspacing="0">
 <tr>
     <td  colspan="5" valign="top">
 <div id="noticePanel" class="panelSimple">
@@ -209,7 +209,7 @@ try{
                       </div>
                     </div>
 </td>
-<td width="533" valign="top">
+<td width="1000" valign="top">
 <div id="noticePanel" class="panelSimple">
                         <div class="panelHead"></div>
                       <div class="panelContent">
@@ -220,7 +220,7 @@ try{
                 			<input type="hidden" name="FUNC_ID" value="OrgSubmit">
                 			<input type="hidden" name="ORG_ID" value="<%=orgId %>"> 
                 			<input type="hidden" name="PARENT_ID" value="<%=parentId %>"> 
-              				<table width="490" border="0" cellpadding="0" cellspacing="0" class="list">
+              				<table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
                				 <tr>
                   <td width="95" align="right">部门名称：</td>
                   <td width="174"><span id="spryOrgName">
