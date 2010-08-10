@@ -172,8 +172,7 @@ public class BoCommLogList implements RootBo {
 			.FormatDateTime(rsRow.getString("EXEC_BEGIN")));
 		requestXml.setItemValue("DEVICE_COMMAND_EXEC_LOG", row, "EXEC_END", DateFunc
 			.FormatDateTime(rsRow.getString("EXEC_END")));
-		requestXml.setItemValue("DEVICE_COMMAND_EXEC_LOG", row, "USER_NAME", DateFunc
-			.FormatDateTime(rsRow.getString("USER_NAME")));
+		requestXml.setItemValue("DEVICE_COMMAND_EXEC_LOG", row, "USER_NAME",  rsRow.getString("USER_NAME"));
 
 	    }
 	}
