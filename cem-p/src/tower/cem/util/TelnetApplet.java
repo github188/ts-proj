@@ -39,7 +39,6 @@ public class TelnetApplet extends Applet {
 
     PrintWriter out;
 
-    @Override
     public void init() {
 	// TODO 自动生成方法存根
 	super.init();
@@ -94,7 +93,6 @@ public class TelnetApplet extends Applet {
 	}
     }
 
-    @Override
     public void start() {
 	// TODO 自动生成方法存根
 	super.start();
@@ -193,14 +191,12 @@ public class TelnetApplet extends Applet {
 	}
     }
 
-    @Override
     public void paint(Graphics g) {
 	// TODO 自动生成方法存根
 	super.paint(g);
 
     }
 
-    @Override
     public void stop() {
 	// TODO 自动生成方法存根
 	super.stop();
@@ -215,7 +211,6 @@ public class TelnetApplet extends Applet {
 	nt.disconnect();
     }
 
-    @Override
     public void destroy() {
 	// TODO 自动生成方法存根
 	super.destroy();
