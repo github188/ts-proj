@@ -52,8 +52,11 @@ public class BoDevicePortTypeSubmit implements RootBo{
 		 typeNameEn = requestXml.getInputValue("TYPE_NAME_EN");
 		 typeNameCn = requestXml.getInputValue("TYPE_NAME_CN");
 		 standardRxMax = requestXml.getInputValue("STANDARD_RX_MAX");
+		 double standardRxMax1 = Double.valueOf(standardRxMax).doubleValue();
 		 standardRxMin = requestXml.getInputValue("STANDARD_RX_MIN");
+		 double standardRxMin1 = Double.valueOf(standardRxMin).doubleValue();
 		 netWorkRxMin = requestXml.getInputValue("NETWORK_RX_MIN");
+		 double netWorkRxMin1 = Double.valueOf(standardRxMin).doubleValue();
 		 remark = requestXml.getInputValue("REMARK");
 		/***********************************************************************
 		 * 创建数据库连接、实例化DB、EN
@@ -71,13 +74,13 @@ public class BoDevicePortTypeSubmit implements RootBo{
 		  sql2 = new StringBuffer(" TYPE_NAME_CN ='"
 					+ typeNameCn + "'");
 		  if(standardRxMax != null && standardRxMax.length() > 0){
-			  enDevicePortType.setStandardRxMax(Double.valueOf(standardRxMax));
+			  enDevicePortType.setStandardRxMax(standardRxMax1);
 		  }
 		  if(standardRxMin != null && standardRxMin.length() > 0){
-			  enDevicePortType.setStandardRxMin(Double.valueOf(standardRxMin));
+			  enDevicePortType.setStandardRxMin(standardRxMin1);
 		  }
 		  if(netWorkRxMin != null && netWorkRxMin.length() > 0){
-			  enDevicePortType.setNetworkRxMin(Double.valueOf(netWorkRxMin));
+			  enDevicePortType.setNetworkRxMin(netWorkRxMin1);
 		  }
 		  enDevicePortType.setRemark(remark);
 		  enDevicePortType.setTypeNameCn(typeNameCn);
