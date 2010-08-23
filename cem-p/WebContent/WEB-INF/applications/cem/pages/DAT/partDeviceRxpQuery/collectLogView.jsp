@@ -37,7 +37,7 @@
 </head>
 <body id="mainArea">
   <div id="mainPanel" class="panel">
-    <div class="panelHead">设备巡检日志查看</div>
+    <div class="panelHead">设备数据采集日志查看</div>
     <div class="panelContent">
       <div class="panelContent2">
         <!-- Tab面板 -->

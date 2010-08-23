@@ -111,7 +111,7 @@ function doSubmit(form) {
 </head>
 <body id="mainArea" onload="init();">
   <div id="mainPanel" class="panel">
-    <div class="panelHead">设备巡检-第二步.定义任务计划执行时间（共两步）</div>
+    <div class="panelHead">设备数据采集-第二步.定义任务计划执行时间（共两步）</div>
     <div class="panelContent">
       <div class="panelContent2">    
         <!-- 查询面板 -->
