@@ -55,7 +55,7 @@
 	  String sResult="";
 	  StringBuffer sbResult = new StringBuffer();
 	  if(frontHostId != null && frontHostId.length() > 0) {
-	    sResult = nt.FunLogin(hostIp, hostPort, hostUser, hostUser, hostPasswordPrompt, hostPassword, hostPrompt); //登录堡垒主机
+	    sResult = nt.FunLogin(hostIp, hostPort, hostUserPrompt, hostUser, hostPasswordPrompt, hostPassword, hostPrompt); //登录堡垒主机
 	    sbResult.append(sResult);
 	    if(!nt.getBflag()) {
 	      sbResult.append("登录堡垒主机失败。");

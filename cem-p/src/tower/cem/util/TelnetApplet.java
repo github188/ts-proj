@@ -133,7 +133,6 @@ public class TelnetApplet extends Applet {
 	}
 
 	nt = new NetTelnet();
-	nt.setTimeOut(0);
 	if (frontHostIp == null || frontHostIp.trim().length() == 0) {
 	    if (!(deviceIp == null || deviceIp.trim().length() == 0)) {
 		result = nt.FunLogin(deviceIp, devicePort, userPrompt, deviceUser, passwordPrompt,
@@ -149,6 +148,7 @@ public class TelnetApplet extends Applet {
 
 		if (nt.getBflag()) {
 		    lStatus.setText("连接成功");
+		    nt.setTimeOut(0);			
 		} else {
 		    lStatus.setText("连接失败");
 		}
@@ -182,6 +182,7 @@ public class TelnetApplet extends Applet {
 
 		if (nt.getBflag()) {
 		    lStatus.setText("连接成功");
+		    nt.setTimeOut(0);			
 		} else {
 		    lStatus.setText("连接失败");
 		}

@@ -142,7 +142,7 @@
               <table width="100%"  >
 				 <tr>
 				 	<td align="center">
-				 		<applet name="Test" code="tower.TelnetApplet" codebase="../sys/applet/" archive="commons-net-1.4.1.jar,applet.jar" width=800 height=500>
+				 		<applet name="TelnetApplet" code="tower.TelnetApplet" codebase="../sys/applet/" archive="commons-net-1.4.1.jar,applet.jar" width=800 height=500>
               				<param   name=DeviceIP   value= "<%=deviceIp%>">
              			 	<param   name=DevicePort   value= "<%=devicePort%>"> 
           			    	<param   name=DeviceUser   value= "<%=deviceUser%>"> 
