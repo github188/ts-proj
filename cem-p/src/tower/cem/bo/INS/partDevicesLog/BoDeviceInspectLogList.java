@@ -111,7 +111,7 @@ public class BoDeviceInspectLogList  implements RootBo{
 				sql.append(" and ");
 				sql.append(sqlWhere.toString());
 			}
-			System.out.println(sql.toString());
+
 			int page = Page.SetPageInfo(transaction, null, requestXml,
 					PubFunc.LEN_PAGE_COUNT, sql.toString());
 			rs = transaction.doQuery(null, sql.toString(), page,

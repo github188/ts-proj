@@ -54,7 +54,7 @@ public class BoAllDeviceInspectLogList implements RootBo {
 			+ " from COMMANDS_SEND_HIS a , SYS_USER f"
 			+ " where a.USER_ID  = f.USER_ID "
 			+ " and a.COMMANDS_TYPE = 'I' " + " and a.DEVICE_ID is  null ");
-	System.out.println(sql.toString());
+
 
 	if (execEndBegin != null && execEndBegin.length() != 0) {
 	    if (sqlWhere == null || sqlWhere.length() == 0) {
