@@ -27,11 +27,14 @@ public class TdRunnable implements Runnable {
 
     private String InspectLogsPath;
 
+    private String ConfigLogsPath;
+
     public TdRunnable(EnCommandsSendList enCommandsSendList, Logger logger) {
 	this.enSendList = enCommandsSendList;
 	this.log = logger;
 	this.log = Logger.getLogger("TdRunnable");
 	this.InspectLogsPath = TelnetDaemons.getTdconfigMsg("inspect_logs_path");
+	this.ConfigLogsPath = TelnetDaemons.getTdconfigMsg("config_logs_path");
     }
 
     public double collectRxpValue(String collectString, String startString, String beginString,
@@ -344,8 +347,8 @@ public class TdRunnable implements Runnable {
 		    sbResult.append("TdRunnable run()：指令模板执行任务，记录日志失败。");
 		    log.error("指令模板执行任务，记录日志失败。SID=" + enSendList.getSendId());
 		}
-
 	    }
+
 	    // command_type ="I"，处理执行设备巡检的任务
 	    else if (enSendList.getCommandsType().equals("I")) {
 
@@ -623,8 +626,8 @@ public class TdRunnable implements Runnable {
 			log.error("执行数据采集任务，记录分拣日志失败。SID=" + enSendList.getSendId());
 		    }
 		}
-
 	    }
+
 	    // command_type ="C"，处理执行光功率采集的任务
 	    else if (enSendList.getCommandsType().equals("C")) {
 
@@ -831,6 +834,223 @@ public class TdRunnable implements Runnable {
 			sGenResult = "F";
 			sbResult.append("TdRunnable run()：执行数据采集任务，记录日志失败。");
 			log.error("执行数据采集任务，记录日志失败。SID=" + enSendList.getSendId());
+		    }
+		}
+	    }
+
+	    // command_type ="E"，处理执行提取设备配置的任务
+	    else if (enSendList.getCommandsType().equals("E")) {
+
+		// Runtime Code
+		// 根据设备获取到设备信息及所属设备分类信息，当设备空时，获取全部可用的设备信息及所属设备分类信息
+		sSql = " select device_id, device_name_en, front_host_id, device_ip, device_port, "
+			+ " device_user, device_password, device_prompt, config_commands, "
+			+ " user_prompt, password_prompt " + " from device_info, device_type"
+			+ " where device_info.type_id = device_type.type_id"
+			+ " and device_info.device_status ='N'";
+
+		// 当设备类型不为空时，获取到指定设备类型的信息
+		if (!(enSendList.getDeviceTypeId() == null || enSendList.getDeviceTypeId().trim().length() == 0)) {
+		    sSql = sSql + " and device_info.type_id = '" + enSendList.getDeviceTypeId() + "'";
+		}
+
+		// 当设备编号不为空时，获取到指定的设备信息及所属设备分类信息
+		if (!(enSendList.getDeviceId() == null || enSendList.getDeviceId().trim().length() == 0)) {
+		    sSql = sSql + " and device_info.device_id ='" + enSendList.getDeviceId() + "'";
+		}
+
+		// 当设备编号及设备类型都为空，即创建全网设备配置提取日志保存目录
+		boolean bSaveConfigLog = false;
+		if (((enSendList.getDeviceTypeId() == null || enSendList.getDeviceTypeId().trim().length() == 0))
+			&& ((enSendList.getDeviceId() == null || enSendList.getDeviceId().trim().length() == 0))) {
+
+		    if (!(ConfigLogsPath == null || ConfigLogsPath.trim().length() == 0)) {
+			File fdir = new File(ConfigLogsPath);
+			if (fdir.exists()) {
+			    fdir = new File(ConfigLogsPath + "/" + enSendList.getTaskPlanTime());
+			    fdir.mkdir();
+			    bSaveConfigLog = true;
+			} else {
+			    log.error("执行全网设备配置提取任务，无法打开指定的日志保存目录：" + ConfigLogsPath);
+			}
+		    } else {
+			log.warn("执行全网设备配置提取任务，未指定的日志保存目录。");
+		    }
+		}
+
+		rs = DaemonsDBPool.doQuery(conn, sSql);
+		Vector vDeviceInfo = new Vector();
+		while (rs.next()) {
+		    enDeviceInfo = new EnDeviceInfo();
+		    enDeviceInfo.setDeviceId(rs.getString("DEVICE_ID"));
+		    enDeviceInfo.setDeviceNameEn(rs.getString("DEVICE_NAME_EN"));
+		    enDeviceInfo.setFrontHostId(rs.getString("FRONT_HOST_ID"));
+		    enDeviceInfo.setDeviceIp(rs.getString("DEVICE_IP"));
+		    enDeviceInfo.setDevicePort(rs.getString("DEVICE_PORT"));
+		    enDeviceInfo.setDeviceUser(rs.getString("DEVICE_USER"));
+		    enDeviceInfo.setDevicePassword(rs.getString("DEVICE_PASSWORD"));
+		    enDeviceInfo.setDevicePrompt(rs.getString("DEVICE_PROMPT"));
+		    enDeviceInfo.setRemark(rs.getString("CONFIG_COMMANDS"));
+		    enDeviceInfo.setUserPrompt(rs.getString("USER_PROMPT"));
+		    enDeviceInfo.setPasswordPrompt(rs.getString("PASSWORD_PROMPT"));
+		    vDeviceInfo.add(enDeviceInfo);
+		}
+
+		// 获取到全部堡垒主机列表
+		sSql = "select * from front_host_info ";
+		rs = DaemonsDBPool.doQuery(conn, sSql);
+		Vector vFrontHost = new Vector();
+		while (rs.next()) {
+		    enFrontHostInfo = new EnFrontHostInfo();
+		    enFrontHostInfo.setHostId(rs.getString("HOST_ID"));
+		    enFrontHostInfo.setHostIp(rs.getString("HOST_IP"));
+		    enFrontHostInfo.setHostPort(rs.getString("HOST_PORT"));
+		    enFrontHostInfo.setHostUser(rs.getString("HOST_USER"));
+		    enFrontHostInfo.setHostPassword(rs.getString("HOST_PASSWORD"));
+		    enFrontHostInfo.setHostPrompt(rs.getString("HOST_PROMPT"));
+		    enFrontHostInfo.setUserPrompt(rs.getString("USER_PROMPT"));
+		    enFrontHostInfo.setPasswordPrompt(rs.getString("PASSWORD_PROMPT"));
+		    vFrontHost.add(enFrontHostInfo);
+		}
+
+		// 连接设备，并执行设备配置提取指令
+		for (int i = 0; i < vDeviceInfo.size(); i++) {
+		    nt = new NetTelnet();
+		    sbResult = new StringBuffer();
+		    enDeviceInfo = (EnDeviceInfo) vDeviceInfo.get(i);
+
+		    sGenResult = "S";
+
+		    // 设备配置提取开始计时
+		    String sConfigBegin = formatter.format(new java.util.Date());
+
+		    if (enDeviceInfo.getFrontHostId() == null
+			    || enDeviceInfo.getFrontHostId().trim().length() == 0) {
+
+			// 直接登录设备
+
+			sResult = nt.FunLogin(enDeviceInfo.getDeviceIp(), enDeviceInfo.getDevicePort(),
+				enDeviceInfo.getUserPrompt(), enDeviceInfo.getDeviceUser(), enDeviceInfo
+					.getPasswordPrompt(), enDeviceInfo.getDevicePassword(), enDeviceInfo
+					.getDevicePrompt());
+			sbResult.append(sResult);
+			if (!nt.getBflag()) {
+			    sGenResult = "F";
+			    sbResult.append("TdRunnable run()：执行设备配置提取任务，登录设备失败。");
+			    log.error("执行设备配置提取任务，登录设备失败。SID=" + enSendList.getSendId());
+			}
+		    } else {
+
+			// 通过堡垒主机登录设备
+
+			// 查询堡垒主机信息
+			for (int j = 0; j < vFrontHost.size(); j++) {
+			    enFrontHostInfo = new EnFrontHostInfo();
+			    enFrontHostInfo = (EnFrontHostInfo) vFrontHost.get(j);
+			    if (enFrontHostInfo.getHostId().equals(enDeviceInfo.getFrontHostId())) {
+				break;
+			    } else {
+				enFrontHostInfo = null;
+			    }
+			}
+
+			if (enFrontHostInfo == null) {
+			    sGenResult = "F";
+			    sbResult.append("TdRunnable run()：执行设备配置提取任务，未找到堡垒主机信息。");
+			    log.error("执行设备配置提取任务，未找到堡垒主机信息。SID=" + enSendList.getSendId());
+			} else {
+			    sResult = nt.FunLogin(enFrontHostInfo.getHostIp(), enFrontHostInfo.getHostPort(),
+				    enFrontHostInfo.getUserPrompt(), enFrontHostInfo.getHostUser(),
+				    enFrontHostInfo.getPasswordPrompt(), enFrontHostInfo.getHostPassword(),
+				    enFrontHostInfo.getHostPrompt());
+			    sbResult.append(sResult);
+
+			    if (!nt.getBflag()) {
+				sGenResult = "F";
+				sbResult.append("TdRunnable run()：执行设备配置提取任务，登录堡垒主机失败。");
+				log.error("执行设备配置提取任务，登录堡垒主机失败。SID=" + enSendList.getSendId());
+			    } else {
+				sResult = nt.FunRelogin(enDeviceInfo.getDeviceIp(), enDeviceInfo
+					.getDevicePort(), enDeviceInfo.getUserPrompt(), enDeviceInfo
+					.getDeviceUser(), enDeviceInfo.getPasswordPrompt(), enDeviceInfo
+					.getDevicePassword(), enDeviceInfo.getDevicePrompt());
+				sbResult.append(sResult);
+				if (!nt.getBflag()) {
+				    sGenResult = "F";
+				    sbResult.append("TdRunnable run()：执行设备配置提取任务，通过堡垒主机登录设备失败。");
+				    log.error("执行设备配置提取任务，通过堡垒主机登录设备失败。SID=" + enSendList.getSendId());
+
+				    // 关闭之前的连接
+				    nt.disconnect();
+				}
+			    }
+			}
+		    }
+
+		    // 执行设备配置提取命令
+		    if (sGenResult.equals("S")) {
+
+			// 获取设备配置提取指令
+			String[] commLine = enDeviceInfo.getRemark().split("\n");
+			for (int k = 0; k < commLine.length; k++) {
+			    String sCommLine = commLine[k];
+			    if (!(sCommLine == null || sCommLine.trim().length() == 0)) {
+				int iCommLen = sCommLine.length();
+				if (k == commLine.length - 1) {
+				    sCommLine = sCommLine.substring(0, iCommLen);
+				} else {
+				    sCommLine = sCommLine.substring(0, iCommLen - 1);
+				}
+
+				sResult = nt.sendCommand(sCommLine);
+				sbResult.append(sResult);
+			    }
+			}
+		    }
+
+		    // 关闭连接
+		    nt.disconnect();
+
+		    // 设备配置提取完成计时
+		    String sConfigEnd = formatter.format(new java.util.Date());
+
+		    // 将执行设备配置提取的情况保存到设备配置日志中
+		    log.info("[TEL][" + enSendList.getCommandsType() + "][SendID=" + enSendList.getSendId()
+			    + "][DeviceID=" + enDeviceInfo.getDeviceId() + "][DeviceIP="
+			    + enDeviceInfo.getDeviceIp() + "][DeviceName=" + enDeviceInfo.getDeviceNameEn()
+			    + "][" + sGenResult + "]");
+
+		    sSql = "insert into device_config_log values ('" + enSendList.getSendId() + "','"
+			    + enDeviceInfo.getDeviceId() + "','" + enDeviceInfo.getDeviceNameEn() + "','"
+			    + enDeviceInfo.getDeviceIp() + "','" + enSendList.getUserId() + "','"
+			    + sConfigBegin + "','" + sConfigEnd + "','" + sGenResult + "', ?)";
+
+		    java.sql.PreparedStatement ps = null;
+		    ps = conn.prepareStatement(sSql);
+		    ps.setString(1, sbResult.toString());
+		    iSaveFlag = ps.executeUpdate();
+
+		    if (iSaveFlag < 1) {
+			sGenResult = "F";
+			sbResult.append("TdRunnable run()：执行设备配置提取任务，记录日志失败。");
+			log.error("执行设备配置提取任务，记录日志失败。SID=" + enSendList.getSendId());
+		    }
+
+		    // 将全网设备配置提取的日志保存到文件中
+		    if (bSaveConfigLog) {
+			try {
+			    BufferedWriter out = new BufferedWriter(new FileWriter(ConfigLogsPath + "/"
+				    + enSendList.getTaskPlanTime() + "/" + enDeviceInfo.getDeviceNameEn()
+				    + "-" + enDeviceInfo.getDeviceIp() + "-" + sConfigEnd + ".log"));
+			    out.write(sbResult.toString());
+			    out.flush();
+			    out.close();
+
+			} catch (Exception e) {
+			    // TODO: handle exception
+			    log.error("执行设备配置提取任务，写入日志文件失败。");
+			    log.error(e.getMessage());
+			}
 		    }
 		}
 	    }
