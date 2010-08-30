@@ -40,6 +40,11 @@ public class EnDeviceType implements java.io.Serializable {
     private String collectCommands;
 
     /**
+     * Type : text Name : CONFIG_COMMANDS
+     */
+    private String configCommands;
+
+    /**
      * Type : varchar(50) Name : RXP_LINE_START
      */
     private String rxpLineStart;
@@ -98,6 +103,11 @@ public class EnDeviceType implements java.io.Serializable {
      * Type : text Name : COLLECT_COMMANDS modify flag
      */
     private boolean _flagCollectCommands;
+
+    /**
+     * Type : text Name : CONFIG_COMMANDS modify flag
+     */
+    private boolean _flagConfigCommands;
 
     /**
      * Type : varchar(50) Name : RXP_LINE_START modify flag
@@ -259,6 +269,28 @@ public class EnDeviceType implements java.io.Serializable {
      */
     public boolean hasChangeCollectCommands() {
         return _flagCollectCommands;
+    }
+
+    /**
+     * Sets the value for configCommands
+     */
+    public void setConfigCommands(String configCommands) {
+        this.configCommands = configCommands;
+        this._flagConfigCommands = true;
+    }
+
+    /**
+     * Gets the value for configCommands
+     */
+    public String getConfigCommands() {
+        return configCommands;
+    }
+
+    /**
+     * has the value for configCommands changed?
+     */
+    public boolean hasChangeConfigCommands() {
+        return _flagConfigCommands;
     }
 
     /**

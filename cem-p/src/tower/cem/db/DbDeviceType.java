@@ -31,7 +31,7 @@ public class DbDeviceType extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
 
-        query.append("insert into device_type ( TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,COLLECT_COMMANDS,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK ) values ( ");
+        query.append("insert into device_type ( TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,COLLECT_COMMANDS,CONFIG_COMMANDS,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK ) values ( ");
         query.append(formatString(en.getTypeId()));
         query.append(",");
         query.append(formatString(en.getTypeNameEn()));
@@ -43,6 +43,8 @@ public class DbDeviceType extends RootDB{
         query.append(formatString(en.getInspectCommandsExp()));
         query.append(",");
         query.append(formatString(en.getCollectCommands()));
+        query.append(",");
+        query.append(formatString(en.getConfigCommands()));
         query.append(",");
         query.append(formatString(en.getRxpLineStart()));
         query.append(",");
@@ -134,6 +136,14 @@ public class DbDeviceType extends RootDB{
             query.append(formatString(en.getCollectCommands()));
             bChanged = true;
         }
+        if(en.hasChangeConfigCommands()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("CONFIG_COMMANDS=");
+            query.append(formatString(en.getConfigCommands()));
+            bChanged = true;
+        }
         if(en.hasChangeRxpLineStart()) {
             if(bChanged){
                 query.append(",");
@@ -197,7 +207,7 @@ public class DbDeviceType extends RootDB{
         EnDeviceType res = null;
 
         StringBuffer query;
-        query = new StringBuffer("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,COLLECT_COMMANDS,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK from device_type");
+        query = new StringBuffer("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,COLLECT_COMMANDS,CONFIG_COMMANDS,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK from device_type");
 
         query.append(" where ");
         query.append("TYPE_ID=");
@@ -294,6 +304,14 @@ public class DbDeviceType extends RootDB{
             query.append(formatString(en.getCollectCommands()));
             bChanged = true;
         }
+        if(en.hasChangeConfigCommands()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("CONFIG_COMMANDS=");
+            query.append(formatString(en.getConfigCommands()));
+            bChanged = true;
+        }
         if(en.hasChangeRxpLineStart()) {
             if(bChanged){
                 query.append(",");
@@ -357,7 +375,7 @@ public class DbDeviceType extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,COLLECT_COMMANDS,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK from device_type");
+        query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,COLLECT_COMMANDS,CONFIG_COMMANDS,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK from device_type");
 
         query.append(" where ");
         query.append("TYPE_ID like ");
@@ -395,7 +413,7 @@ public class DbDeviceType extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,COLLECT_COMMANDS,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK from device_type where ");
+        query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,COLLECT_COMMANDS,CONFIG_COMMANDS,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK from device_type where ");
         query.append(where);
         if(orderBy != null) {
             query.append(orderBy);
@@ -412,7 +430,7 @@ public class DbDeviceType extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,COLLECT_COMMANDS,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK from device_type");
+        query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,COLLECT_COMMANDS,CONFIG_COMMANDS,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK from device_type");
 
         if(orderBy != null) {
             query.append(orderBy);
@@ -479,6 +497,14 @@ public class DbDeviceType extends RootDB{
             query.append(formatString(en.getCollectCommands()));
             bChanged = true;
         }
+        if(en.hasChangeConfigCommands()) {
+            if(bChanged){
+                query.append(" and ");
+            }
+            query.append("CONFIG_COMMANDS=");
+            query.append(formatString(en.getConfigCommands()));
+            bChanged = true;
+        }
         if(en.hasChangeRxpLineStart()) {
             if(bChanged){
                 query.append(" and ");
@@ -528,9 +554,9 @@ public class DbDeviceType extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,COLLECT_COMMANDS,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK from device_type where ");
+            query.insert(0,"select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,COLLECT_COMMANDS,CONFIG_COMMANDS,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK from device_type where ");
         } else {
-            query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,COLLECT_COMMANDS,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK from device_type");
+            query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,COLLECT_COMMANDS,CONFIG_COMMANDS,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK from device_type");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -597,6 +623,14 @@ public class DbDeviceType extends RootDB{
             query.append(formatString(en.getCollectCommands()));
             bChanged = true;
         }
+        if(en.hasChangeConfigCommands()) {
+            if(bChanged){
+                query.append(" and ");
+            }
+            query.append("CONFIG_COMMANDS like ");
+            query.append(formatString(en.getConfigCommands()));
+            bChanged = true;
+        }
         if(en.hasChangeRxpLineStart()) {
             if(bChanged){
                 query.append(" and ");
@@ -646,9 +680,9 @@ public class DbDeviceType extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,COLLECT_COMMANDS,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK from device_type where ");
+            query.insert(0,"select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,COLLECT_COMMANDS,CONFIG_COMMANDS,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK from device_type where ");
         } else {
-            query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,COLLECT_COMMANDS,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK from device_type");
+            query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,COLLECT_COMMANDS,CONFIG_COMMANDS,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK from device_type");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -760,6 +794,14 @@ public class DbDeviceType extends RootDB{
             query.append(formatString(en.getCollectCommands()));
             bChanged = true;
         }
+        if(en.hasChangeConfigCommands()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("CONFIG_COMMANDS=");
+            query.append(formatString(en.getConfigCommands()));
+            bChanged = true;
+        }
         if(en.hasChangeRxpLineStart()) {
             if(bChanged){
                 query.append(",");
@@ -826,6 +868,7 @@ public class DbDeviceType extends RootDB{
         en.setInspectCommands(r.getString("INSPECT_COMMANDS"));
         en.setInspectCommandsExp(r.getString("INSPECT_COMMANDS_EXP"));
         en.setCollectCommands(r.getString("COLLECT_COMMANDS"));
+        en.setConfigCommands(r.getString("CONFIG_COMMANDS"));
         en.setRxpLineStart(r.getString("RXP_LINE_START"));
         en.setRxpValueStart(r.getString("RXP_VALUE_START"));
         en.setRxpValueEnd(r.getString("RXP_VALUE_END"));
@@ -878,6 +921,10 @@ public class DbDeviceType extends RootDB{
         stmp = (String)otmp;
         en.setCollectCommands(stmp);
 
+        otmp = xml.getInputObject("CONFIG_COMMANDS");
+        stmp = (String)otmp;
+        en.setConfigCommands(stmp);
+
         otmp = xml.getInputObject("RXP_LINE_START");
         stmp = (String)otmp;
         en.setRxpLineStart(stmp);
@@ -916,6 +963,7 @@ public class DbDeviceType extends RootDB{
         Object[] oInspectCommands;
         Object[] oInspectCommandsExp;
         Object[] oCollectCommands;
+        Object[] oConfigCommands;
         Object[] oRxpLineStart;
         Object[] oRxpValueStart;
         Object[] oRxpValueEnd;
@@ -947,6 +995,10 @@ public class DbDeviceType extends RootDB{
         oCollectCommands = xml.getInputObjects("COLLECT_COMMANDS");
         if (count == 0 && oCollectCommands.length > 0) {
             count = oCollectCommands.length;
+        }
+        oConfigCommands = xml.getInputObjects("CONFIG_COMMANDS");
+        if (count == 0 && oConfigCommands.length > 0) {
+            count = oConfigCommands.length;
         }
         oRxpLineStart = xml.getInputObjects("RXP_LINE_START");
         if (count == 0 && oRxpLineStart.length > 0) {
@@ -1005,6 +1057,11 @@ public class DbDeviceType extends RootDB{
                 en.setCollectCommands(stmp);
             }
 
+            if (oConfigCommands.length == count) {
+                stmp = (String)oConfigCommands[i];
+                en.setConfigCommands(stmp);
+            }
+
             if (oRxpLineStart.length == count) {
                 stmp = (String)oRxpLineStart[i];
                 en.setRxpLineStart(stmp);
@@ -1049,6 +1106,7 @@ public class DbDeviceType extends RootDB{
         xml.setItemValue("DEVICE_TYPE",row,"INSPECT_COMMANDS",en.getInspectCommands());
         xml.setItemValue("DEVICE_TYPE",row,"INSPECT_COMMANDS_EXP",en.getInspectCommandsExp());
         xml.setItemValue("DEVICE_TYPE",row,"COLLECT_COMMANDS",en.getCollectCommands());
+        xml.setItemValue("DEVICE_TYPE",row,"CONFIG_COMMANDS",en.getConfigCommands());
         xml.setItemValue("DEVICE_TYPE",row,"RXP_LINE_START",en.getRxpLineStart());
         xml.setItemValue("DEVICE_TYPE",row,"RXP_VALUE_START",en.getRxpValueStart());
         xml.setItemValue("DEVICE_TYPE",row,"RXP_VALUE_END",en.getRxpValueEnd());
@@ -1073,6 +1131,7 @@ public class DbDeviceType extends RootDB{
             xml.setItemValue("DEVICE_TYPE",row,"INSPECT_COMMANDS",en.getInspectCommands());
             xml.setItemValue("DEVICE_TYPE",row,"INSPECT_COMMANDS_EXP",en.getInspectCommandsExp());
             xml.setItemValue("DEVICE_TYPE",row,"COLLECT_COMMANDS",en.getCollectCommands());
+            xml.setItemValue("DEVICE_TYPE",row,"CONFIG_COMMANDS",en.getConfigCommands());
             xml.setItemValue("DEVICE_TYPE",row,"RXP_LINE_START",en.getRxpLineStart());
             xml.setItemValue("DEVICE_TYPE",row,"RXP_VALUE_START",en.getRxpValueStart());
             xml.setItemValue("DEVICE_TYPE",row,"RXP_VALUE_END",en.getRxpValueEnd());
