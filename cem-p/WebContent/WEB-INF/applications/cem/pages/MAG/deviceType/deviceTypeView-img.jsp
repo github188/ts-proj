@@ -11,6 +11,7 @@
 	String inspectCommands;
 	String inspectCommandsExp;
 	String collectCommands;
+	String configCommands;
 	String appPicture;
 	String remark;
 	String rxpLineStart;
@@ -26,6 +27,7 @@
     inspectCommands = xml.getItemValue("DEVICE_TYPE",1,"INSPECT_COMMANDS");
     inspectCommandsExp = xml.getItemValue("DEVICE_TYPE",1,"INSPECT_COMMANDS_EXP");
     collectCommands = xml.getItemValue("DEVICE_TYPE",1,"COLLECT_COMMANDS");
+    configCommands = xml.getItemValue("DEVICE_TYPE",1,"CONFIG_COMMANDS");
     appPicture = xml.getItemValue("DEVICE_TYPE",1,"APP_PICTURE");
     remark = xml.getItemValue("DEVICE_TYPE",1,"REMARK");
     rxpLineStart = xml.getItemValue("DEVICE_TYPE",1,"RXP_LINE_START");    
@@ -111,7 +113,7 @@
 		                 </td>
 		                 <td></td>
 		                 <td></td>
-		               </tr>
+		               </tr>configCommands
 		                <tr>
 		                <td width="120" align="right">数据采集指令：</td>
 		                 <td colspan="3">
