@@ -643,6 +643,51 @@
         
          <function id="DeviceCollectLogListJsp" description="全网设备光功率数据查询-采集任务查询页面" type="jsp"
         jspPath="/cem/pages/DAT/allDevicesRxpQuery/partDeivceCollectList.jsp" /> 
+        
+        <!-- 26-AllDeviceConfigExtract-全网设备配置提取 -->
+        <function id="AllDeviceConfigExtractList" description="全网设备配置提取-设备列表查询" type="bo"
+        className="tower.cem.bo.MAG.deviceType.BoDeviceTypeList"
+        forward="AllDeviceConfigExtractListJsp" /> 
+        
+        <function id="AllDeviceConfigExtractTaskAdd" description="全网设备配置提取-添加配置提取任务" type="bo"
+        className="tower.cem.bo.CONF.AllDeviceConfigExtract.BoAllDevicesConfigExtractTaskAdd"
+        forward="AllDevicesConfigExtractTaskAddSuccessJsp" /> 
+        
+        <function id="AllDeviceConfigExtractLogList" description="全网设备配置日志查询-日志列表" type="bo"
+        className="tower.cem.bo.CONF.AllDeviceConfigExtractLog.BoAllDeviceConfigExtractLogList"
+        forward="AllDeviceConfigExtractLogListJsp" /> 
+        
+        <function id="DeviceConfigExtractLogList" description="全网设备配置日志查询-设备配置列表" type="bo"
+        className="tower.cem.bo.CONF.AllDeviceConfigExtractLog.BoDeviceConfigExtractLogList"
+        forward="DeviceConfigExtractLogListJsp" /> 
+        
+        <function id="DeviceConfigView" description="全网设备配置日志查询-查看设备配置" type="bo"
+        className="tower.cem.bo.CONF.AllDeviceConfigExtractLog.BoDeviceConfigDetail"
+        forward="DeviceConfigViewJsp" /> 
          
+        <function id="DeviceConfigSave" description="全网设备配置日志查询-保存设备配置" type="bo"
+        className="tower.cem.bo.CONF.AllDeviceConfigExtractLog.BoDeviceConfigDetail"
+        forward="ServletDeviceConfigTxt" /> 
+        
+        <function id="AllDeviceConfigExtractListJsp" description="全网设备配置提取-设备类型列表面" type="jsp"
+        jspPath="/cem/pages/CONF/AllDeviceConfigExtract/allDevicesTypeList.jsp" /> 
+        
+        <function id="AllExtractTimeDefJsp" description="全网设备配置提取-配置提取任务执行时间定义界面" type="jsp"
+        jspPath="/cem/pages/CONF/AllDeviceConfigExtract/extractTimeDef.jsp" /> 
+        
+        <function id="AllDevicesConfigExtractTaskAddSuccessJsp" description="全网设备配置提取-添加配置提取任务成功提示界面" type="jsp"
+        jspPath="/cem/pages/CONF/AllDeviceConfigExtract/taskAddSuccess.jsp" /> 
+     
+        <function id="DeviceConfigViewJsp" description="全网设备配置日志查询-查看设备配置界面" type="jsp"
+        jspPath="/cem/pages/CONF/AllDeviceConfigExtractLog/deviceConfigView.jsp" /> 
+        
+         <function id="AllDeviceConfigExtractLogListJsp" description="全网设备配置提取日志查询-日志列表" type="jsp"
+        jspPath="/cem/pages/CONF/AllDeviceConfigExtractLog/allDevicesConfigExtractLogList.jsp" /> 
+        
+         <function id="DeviceConfigExtractLogListJsp" description="全网设备配置提取日志查询-设备配置列表" type="jsp"
+        jspPath="/cem/pages/CONF/AllDeviceConfigExtractLog/devicesConfigList.jsp" /> 
+        
+        <function id="ServletDeviceConfigTxt" description="设备配置信息导出txt" type="jsp"
+		jspPath="/../../servlet/ServletDeviceConfigTxt"/>
           
 </functions>
