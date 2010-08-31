@@ -204,7 +204,7 @@ function doSubmit(form) {
  				<tr height="50">
                 <td colspan="6" align="center">
                 	<input size="10" type="button" class="button"  onclick="doReturn()" value="上一步" >
-                 	<input size="10" type="submit" class="submit" style="width:100px" value="添加配置提取任务" >
+                 	<input size="10" type="submit" class="submit" style="width:90px" value="添加任务" >
                 </td>
               </tr>
               </table>
