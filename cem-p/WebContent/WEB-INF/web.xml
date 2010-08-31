@@ -64,7 +64,15 @@
 		<servlet-class>
 		tower.cem.servlet.ServletTempLogTxt</servlet-class>
 	</servlet>
-
+	<!--设备配置存为txt的Servlet定义 -->
+	<servlet>
+		<display-name>
+		ServletDeviceConfigTxt</display-name>
+		<servlet-name>ServletDeviceConfigTxt</servlet-name>
+		<servlet-class>
+		tower.cem.servlet.ServletDeviceConfigTxt</servlet-class>
+	</servlet>
+	
 	<!-- Standard Action Servlet Mapping -->
 	<servlet-mapping>
 		<servlet-name>tmvcController</servlet-name>
@@ -94,7 +102,10 @@
 		<servlet-name>ServletTempLogTxt</servlet-name>
 		<url-pattern>/servlet/ServletTempLogTxt</url-pattern>
 	</servlet-mapping>
-	
+	<servlet-mapping>
+		<servlet-name>ServletDeviceConfigTxt</servlet-name>
+		<url-pattern>/servlet/ServletDeviceConfigTxt</url-pattern>
+	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.htm</welcome-file>
 		<welcome-file>index.jsp</welcome-file>
