@@ -3,12 +3,10 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page import="tower.tmvc.XMLWrap"%>
-<%@ page import="tower.cem.util.NetTelnet"%>
 <%@ page import="tower.common.util.*"%>
 
 <%	
 	XMLWrap xml;
-	XMLWrap sessionXml;
 	
 	String deviceId;
 	String deviceNameEn;
@@ -20,20 +18,15 @@
 	String deviceUser;
 	String devicePassword;
 	String devicePrompt;
-	String typeId;
 	String typeName;
 	
 	
-	String frontHostId;
-	String frontHostName;
 	String hostIp;
 	String hostPort;
 	String hostUser;
 	String hostPassword;
 	String hostPrompt;
 	
-	String command;
-	String comms;
 	String userPrompt;
 	String passwordPrompt;
 	String hostUserPrompt;
@@ -43,7 +36,6 @@
 
 <%
 	xml = XMLWrap.getRequestXml(request,session,application);
-	sessionXml = XMLWrap.getSessionXml(request,session,application);
 	
 	deviceId = xml.getInputValue("DEVICE_ID");
 	deviceNameEn = xml.getItemValue("DEVICE_INFO",1,"DEVICE_NAME_EN");
@@ -55,7 +47,6 @@
 	deviceUser = xml.getItemValue("DEVICE_INFO",1,"DEVICE_USER");
 	devicePassword = xml.getItemValue("DEVICE_INFO",1,"DEVICE_PASSWORD");
 	devicePrompt = xml.getItemValue("DEVICE_INFO",1,"DEVICE_PROMPT");
-	typeId = xml.getItemValue("DEVICE_INFO",1,"TYPE_ID");
 	typeName = xml.getItemValue("DEVICE_INFO",1,"TYPE_NAME");
 	userPrompt = xml.getItemValue("DEVICE_INFO",1,"USER_PROMPT");
 	passwordPrompt = xml.getItemValue("DEVICE_INFO",1,"PASSWORD_PROMPT");
@@ -88,10 +79,9 @@
   }
   
  window.onbeforeunload=function(){   
- 
  var deviceId = '<%=deviceId%>';
  var execBegin = '<%=date%>';
- var comms = window.document.Test.getCommands();
+ var comms = window.document.TelnetApplet.getCommands();
  form1.COMMANDS.value = comms;
  form1.submit();
  //window.location.href = "ctrl?FUNC_ID=Disconnection&DEVICE_ID="+deviceId+"&COMMANDS="+comms+"&EXEC_BEGIN="+execBegin;
