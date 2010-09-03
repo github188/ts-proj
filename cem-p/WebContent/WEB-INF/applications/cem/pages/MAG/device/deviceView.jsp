@@ -29,8 +29,8 @@
     xml = XMLWrap.getRequestXml(request,session,application);
 	deviceId = xml.getItemValue("DEVICE_INFO",1,"DEVICE_ID");
 	deviceNameEn = xml.getItemValue("DEVICE_INFO",1,"DEVICE_NAME_EN");
-	deviceNameCn = xml.getItemValue("DEVICE_INFO",1,"DEVICE_ABB_NAME_EN");
-	deviceAbbNameEn = xml.getItemValue("DEVICE_INFO",1,"DEVICE_NAME_CN");
+	deviceNameCn = xml.getItemValue("DEVICE_INFO",1,"DEVICE_NAME_CN");
+	deviceAbbNameEn = xml.getItemValue("DEVICE_INFO",1,"DEVICE_ABB_NAME_EN");
 	typeId = xml.getItemValue("DEVICE_INFO",1,"TYPE_ID");
 	typeName = xml.getItemValue("DEVICE_INFO",1,"TYPE_NAME");
 	locationId = xml.getItemValue("DEVICE_INFO",1,"LOCATION_ID");
