@@ -62,7 +62,7 @@
   	//window.location.href="ctrl?FUNC_ID=DeviceList";
   }
    function doSelDeviceTestResult(deviceId){
-    selDialog("ctrl?FUNC_ID=DevoceTest&DEVICE_ID="+deviceId,"DEVICE_ID","DEVICE_NAME_CN",850,550,false);
+    selDialog("ctrl?FUNC_ID=DevoceTest&DEVICE_ID="+deviceId,"DEVICE_ID","DEVICE_ID",850,650,false);
   }
 -->
 </script>
