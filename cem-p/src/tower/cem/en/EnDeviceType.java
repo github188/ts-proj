@@ -75,6 +75,11 @@ public class EnDeviceType implements java.io.Serializable {
     private String remark;
 
     /**
+     * Type : int unsigned Name : PROMPT_LINES
+     */
+    private int promptLines;
+
+    /**
      * Type : char(6) Name : TYPE_ID modify flag
      */
     private boolean _flagTypeId;
@@ -138,6 +143,11 @@ public class EnDeviceType implements java.io.Serializable {
      * Type : varchar(200) Name : REMARK modify flag
      */
     private boolean _flagRemark;
+
+    /**
+     * Type : int unsigned Name : PROMPT_LINES modify flag
+     */
+    private boolean _flagPromptLines;
 
     /**
      * Sets the value for typeId
@@ -423,6 +433,28 @@ public class EnDeviceType implements java.io.Serializable {
      */
     public boolean hasChangeRemark() {
         return _flagRemark;
+    }
+
+    /**
+     * Sets the value for promptLines
+     */
+    public void setPromptLines(int promptLines) {
+        this.promptLines = promptLines;
+        this._flagPromptLines = true;
+    }
+
+    /**
+     * Gets the value for promptLines
+     */
+    public int getPromptLines() {
+        return promptLines;
+    }
+
+    /**
+     * has the value for promptLines changed?
+     */
+    public boolean hasChangePromptLines() {
+        return _flagPromptLines;
     }
 
 }
