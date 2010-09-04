@@ -42,6 +42,7 @@ public class BoDeviceTypeSubmit implements RootBo {
 	String rxpValueStart;
 	String rxpValueEnd;
 	String rxpValuePos;
+	String promptLines1;
 
 	// 上传文件第1步:声明上传文件与其工厂
 	UploadFile uploadFile;
@@ -73,6 +74,11 @@ public class BoDeviceTypeSubmit implements RootBo {
 	rxpValueEnd = requestXml.getInputValue("RXP_VALUE_END");
 	rxpValuePos = requestXml.getInputValue("RXP_VALUE_POS");
 	configCommands = requestXml.getInputValue("CONFIG_COMMANDS");
+	promptLines1 = requestXml.getInputValue("PROMPT_LINES");
+	int  promptLines =0;
+	if(promptLines1 != null && promptLines1.length() != 0){
+		promptLines = Integer.valueOf(promptLines1).intValue();
+	}
 	/***********************************************************************
          * 创建数据库连接
          **********************************************************************/
@@ -102,7 +108,7 @@ public class BoDeviceTypeSubmit implements RootBo {
 		    throw new ErrorException("MDT002", new Object[] { typeNameCn });// 设备类型名称-中文：{0}在系统中已存在,请重新输入。
 		}
 		if (fis != null) {
-		    sql = "insert into DEVICE_TYPE value(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		    sql = "insert into DEVICE_TYPE value(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		    ps = conn.prepareStatement(sql);
 		    ps.setString(1, typeId);
 		    ps.setString(2, typeNameEn);
@@ -115,10 +121,11 @@ public class BoDeviceTypeSubmit implements RootBo {
 		    ps.setString(9, rxpValueStart);
 		    ps.setString(10, rxpValueEnd);
 		    ps.setString(11, rxpValuePos);
-		    ps.setBinaryStream(12, fis, fis.available());
-		    ps.setString(13, remark);
+		    ps.setInt(12, promptLines);
+		    ps.setBinaryStream(13, fis, fis.available());
+		    ps.setString(14, remark);
 		} else {
-		    sql = "insert into DEVICE_TYPE (TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,COLLECT_COMMANDS,CONFIG_COMMANDS, RXP_LINE_START, RXP_VALUE_START, RXP_VALUE_END, RXP_VALUE_POS,REMARK) value(?,?,?,?,?,?,?,?,?,?,?,?)";
+		    sql = "insert into DEVICE_TYPE (TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,COLLECT_COMMANDS,CONFIG_COMMANDS, RXP_LINE_START, RXP_VALUE_START, RXP_VALUE_END, RXP_VALUE_POS,PROMPT_LINES,REMARK) value(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		    ps = conn.prepareStatement(sql);
 		    ps.setString(1, typeId);
 		    ps.setString(2, typeNameEn);
@@ -131,7 +138,8 @@ public class BoDeviceTypeSubmit implements RootBo {
 		    ps.setString(9, rxpValueStart);
 		    ps.setString(10, rxpValueEnd);
 		    ps.setString(11, rxpValuePos);
-		    ps.setString(12, remark);
+		    ps.setInt(12, promptLines);
+		    ps.setString(13, remark);
 		}
 
 		ps.execute();
@@ -151,7 +159,7 @@ public class BoDeviceTypeSubmit implements RootBo {
 		if (fis != null) {
 		    sql = "update DEVICE_TYPE set TYPE_NAME_EN=?, TYPE_NAME_CN=?,INSPECT_COMMANDS=?,"
 			    + "INSPECT_COMMANDS_EXP=?,COLLECT_COMMANDS=?,CONFIG_COMMANDS=?,"
-			    + "RXP_LINE_START=?, RXP_VALUE_START=?, RXP_VALUE_END=?, RXP_VALUE_POS=?,"
+			    + "RXP_LINE_START=?, RXP_VALUE_START=?, RXP_VALUE_END=?, RXP_VALUE_POS=?, PROMPT_LINES=?,"
 			    + "APP_PICTURE=?,REMARK=? where TYPE_ID='" + typeId + "'";
 		    ps = conn.prepareStatement(sql);
 		    ps.setString(1, typeNameEn);
@@ -164,12 +172,13 @@ public class BoDeviceTypeSubmit implements RootBo {
 		    ps.setString(8, rxpValueStart);
 		    ps.setString(9, rxpValueEnd);
 		    ps.setString(10, rxpValuePos);
-		    ps.setBinaryStream(11, fis, fis.available());
-		    ps.setString(12, remark);
+		    ps.setInt(11, promptLines);
+		    ps.setBinaryStream(12, fis, fis.available());
+		    ps.setString(13, remark);
 		} else {
 		    sql = "update DEVICE_TYPE set TYPE_NAME_EN=?, TYPE_NAME_CN=?,INSPECT_COMMANDS=?,"
 			    + "INSPECT_COMMANDS_EXP=?,COLLECT_COMMANDS=?, CONFIG_COMMANDS=?,"
-			    + "RXP_LINE_START=?, RXP_VALUE_START=?, RXP_VALUE_END=?, RXP_VALUE_POS=?,"
+			    + "RXP_LINE_START=?, RXP_VALUE_START=?, RXP_VALUE_END=?, RXP_VALUE_POS=?, PROMPT_LINES=?,"
 			    + "REMARK=? where TYPE_ID='" + typeId + "'";
 		    ps = conn.prepareStatement(sql);
 		    ps.setString(1, typeNameEn);
@@ -182,7 +191,8 @@ public class BoDeviceTypeSubmit implements RootBo {
 		    ps.setString(8, rxpValueStart);
 		    ps.setString(9, rxpValueEnd);
 		    ps.setString(10, rxpValuePos);
-		    ps.setString(11, remark);
+		    ps.setInt(11, promptLines);
+		    ps.setString(12, remark);
 		}
 		ps.executeUpdate();
 	    }
