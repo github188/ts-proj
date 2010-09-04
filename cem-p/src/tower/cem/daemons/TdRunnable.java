@@ -142,6 +142,7 @@ public class TdRunnable implements Runnable {
 	ResultSet rs = null;
 
 	NetTelnet nt = new NetTelnet();
+	nt.setTimeOut(30);
 	StringBuffer sbResult = new StringBuffer();
 	StringBuffer sbPickLog = new StringBuffer();
 	String sResult = "";

@@ -63,22 +63,6 @@
 	String[] deviceStatusValue = {"N","S"};
 	
 	String date = DateFunc.GenNowTime();
-	
-	String host;
-	String port;
-	String script;
-	
-	if(hostIp.trim()=="" || hostIp==null){
-	    host = deviceIp;
-	    port = devicePort;
-	    script = userPrompt + "|" + deviceUser + "|" + passwordPrompt + "|" + devicePassword;
-	}else{
-	    host = hostIp;
-	    port = hostPort;
-	    script = hostUserPrompt + "|" + hostUser + "|" + hostPasswordPrompt + "|" + hostPassword;
-	    script = script + "|" + hostPrompt+"|telnet " + deviceIp + " " + devicePort;
-	    script = script + "|" + userPrompt + "|" + deviceUser + "|" + passwordPrompt + "|" + devicePassword;
-	}
 %>
 <html>
 <head>
@@ -148,15 +132,26 @@
               <table width="100%"  >
 				 <tr>
 				 	<td align="center">
-				 		<applet name="TelnetApplet" code="de.mud.jta.Applet" codebase="../sys/applet/" archive="jta26.jar" width=800 height=550>
-					 		<param name="config" value="applet.conf">
-				 			<param name="Socket.host" value="<%=host%>">
-				 			<param name="Socket.port" value="<%=port%>">
-				 			<param name="Script.script" value="<%=script%>">
+				 		<applet name="TelnetApplet" code="tower.TelnetApplet" codebase="../sys/applet/" archive="commons-net-1.4.1.jar,applet.jar" width=800 height=500>
+              				<param   name=DeviceIP   value= "<%=deviceIp%>">
+             			 	<param   name=DevicePort   value= "<%=devicePort%>"> 
+          			    	<param   name=DeviceUser   value= "<%=deviceUser%>"> 
+         			     	<param   name=DevicePassword   value= "<%=devicePassword%>"> 
+         			     	<param   name=DevicePrompt   value= "<%=devicePrompt%>">
+         			     	<param   name=UserPrompt   value= "<%=userPrompt%>">
+         			     	<param   name=PasswordPrompt   value= "<%=passwordPrompt%>"> 
+      			        	<param   name=FrontHostIP   value= "<%=hostIp%>"> 
+       				       	<param   name=FrontHostPort   value= "<%=hostPort%>"> 
+           				   	<param   name=FrontHostUser   value= "<%=hostUser%>"> 
+           				   	<param   name=FrontHostPassword   value= "<%=hostPassword%>"> 
+           				   	<param   name=HostUserPrompt   value= "<%=hostUserPrompt%>">
+         			     	<param   name=HostPasswordPrompt   value= "<%=hostPasswordPrompt%>"> 
+         			     	<param   name=FrontHostPrompt   value= "<%=hostPrompt%>" MAYSCRIPT> 
          		      </applet>
 				 	</td>
 				 </tr>
-			 </table>
-         </form>    
+			 </table>				 
+              
+                 </form>    
 </body>
 </html>

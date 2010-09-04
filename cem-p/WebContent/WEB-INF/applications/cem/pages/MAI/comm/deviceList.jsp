@@ -107,7 +107,7 @@ function doSubmit(form) {
   } 
    
   function doSend(deviceId){
-  popSel("ctrl?FUNC_ID=SendCommand&DEVICE_ID="+deviceId,850,550,false);
+  popSel("ctrl?FUNC_ID=SendCommand&DEVICE_ID="+deviceId,850,650,false);
  }
 -->
 </script>
