@@ -118,7 +118,7 @@ public class BoDeviceTypeSubmit implements RootBo {
 		    ps.setBinaryStream(12, fis, fis.available());
 		    ps.setString(13, remark);
 		} else {
-		    sql = "insert into DEVICE_TYPE (TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,COLLECT_COMMANDS,CONFIG_COMMANDS, RXP_LINE_START, RXP_VALUE_START, RXP_VALUE_END, RXP_VALUE_POS,REMARK) value(?,?,?,?,?,?,?,?,?,?,?)";
+		    sql = "insert into DEVICE_TYPE (TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,COLLECT_COMMANDS,CONFIG_COMMANDS, RXP_LINE_START, RXP_VALUE_START, RXP_VALUE_END, RXP_VALUE_POS,REMARK) value(?,?,?,?,?,?,?,?,?,?,?,?)";
 		    ps = conn.prepareStatement(sql);
 		    ps.setString(1, typeId);
 		    ps.setString(2, typeNameEn);
