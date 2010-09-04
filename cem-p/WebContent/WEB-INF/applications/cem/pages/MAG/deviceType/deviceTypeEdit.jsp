@@ -18,6 +18,7 @@
 	String rxpValueStart;
 	String rxpValueEnd;
 	String rxpValuePos;
+	String promptLines;
 %>
 <%
     xml = XMLWrap.getRequestXml(request,session,application);
@@ -33,7 +34,8 @@
     rxpLineStart = xml.getItemValue("DEVICE_TYPE",1,"RXP_LINE_START");    
     rxpValueStart = xml.getItemValue("DEVICE_TYPE",1,"RXP_VALUE_START");
     rxpValueEnd = xml.getItemValue("DEVICE_TYPE",1,"RXP_VALUE_END");
-    rxpValuePos = xml.getItemValue("DEVICE_TYPE",1,"RXP_VALUE_POS");  
+    rxpValuePos = xml.getItemValue("DEVICE_TYPE",1,"RXP_VALUE_POS"); 
+    promptLines = xml.getItemValue("DEVICE_TYPE",1,"PROMPT_LINES"); 
 
 %>
 <html>
@@ -175,7 +177,16 @@
 		                            </span>
 		                  </td>
 		               </tr>
-		               
+		                  <tr>
+                          <td width="150" align="right">命令返回提示符行数：</td>
+		                  <td width="100">
+		                      <span id="sprytPromptLines">
+             					 <input type="text" class="text" name="PROMPT_LINES"value="<%=promptLines %>">
+             					   <span class="textfieldInvalidFormatMsg">格式无效，有效格式为实数。</span>
+		                            <span class="textfieldMaxCharsMsg">已超过最大字符数50。</span>	                          
+		                            </span>
+		                  </td>
+		               </tr>
 		                <tr>
 		                 <td width="120" align="right">备注：</td>
 		                 <td colspan="3"> 
@@ -218,12 +229,13 @@
 <!--
 var sprytextfield1 = new Spry.Widget.ValidationTextField("spryTypeNameEn","none", {required:true,maxChars:60});
 var sprytextfield2 = new Spry.Widget.ValidationTextField("sprytTypeNameCn", "none", {required:true,maxChars:60});
-var sprytextfield6 = new Spry.Widget.ValidationTextField("spryInspectCommandsExp",{isRequired:false,maxChars:200});	
-var sprytextfield8 = new Spry.Widget.ValidationTextField("spryRemark", {isRequired:false,maxChars:200});
-var sprytextfield2 = new Spry.Widget.ValidationTextField("sprytRxpLineStart",  {isRequired:false,maxChars:50});
-var sprytextfield2 = new Spry.Widget.ValidationTextField("sprytRxpValueStart", {isRequired:false,maxChars:50});
-var sprytextfield2 = new Spry.Widget.ValidationTextField("sprytRxpValueEnd",  {isRequired:false,maxChars:50});
-var sprytextfield2 = new Spry.Widget.ValidationTextField("sprytRxpValuePos", {isRequired:false,maxChars:50});
+var sprytextfield3 = new Spry.Widget.ValidationTextField("spryInspectCommandsExp",{isRequired:false,maxChars:200});	
+var sprytextfield4 = new Spry.Widget.ValidationTextField("spryRemark", {isRequired:false,maxChars:200});
+var sprytextfield5 = new Spry.Widget.ValidationTextField("sprytRxpLineStart",  {isRequired:false,maxChars:50});
+var sprytextfield6 = new Spry.Widget.ValidationTextField("sprytRxpValueStart", {isRequired:false,maxChars:50});
+var sprytextfield7 = new Spry.Widget.ValidationTextField("sprytRxpValueEnd",  {isRequired:false,maxChars:50});
+var sprytextfield8 = new Spry.Widget.ValidationTextField("sprytRxpValuePos", {isRequired:false,maxChars:50});
+var sprytextfield9 = new Spry.Widget.ValidationTextField("sprytPromptLines", "integer", {isRequired:false,useCharacterMasking:true});
 
 //-->
 </script>
