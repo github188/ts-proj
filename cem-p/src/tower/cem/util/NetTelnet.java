@@ -189,10 +189,18 @@ public class NetTelnet {
          * @param command
          * @return
          */
-    public String sendCommand(String command) {
+    public String sendCommand(String command, int promptLines) {
+	StringBuffer sbReturn = new StringBuffer();
+	int iPromptLines = promptLines;
+	if (iPromptLines < 0) {
+	    iPromptLines = 1;
+	}
 	try {
 	    write(command);
-	    return readUntil(prompt);
+	    for (int i = 0; i < promptLines; i++) {
+		sbReturn.append(readUntil(prompt));
+	    }
+	    return sbReturn.toString();
 	} catch (Exception e) {
 	    e.printStackTrace();
 	}
@@ -246,11 +254,11 @@ public class NetTelnet {
 	    } else {
 		// 在这里执行设备维护命令
 		// 命令是 ll 列出当前目录下的目录及文件
-		result = telnet.sendCommand("ll");
+		result = telnet.sendCommand("ll", 1);
 		System.out.print(result);
 
 		// 命令是 pwd 查看当前所在目录
-		result = telnet.sendCommand("pwd");
+		result = telnet.sendCommand("pwd", 1);
 		System.out.print(result);
 
 		// 断开连接
@@ -281,13 +289,13 @@ public class NetTelnet {
 		} else {
 		    // 在这里执行设备维护命令
 		    // 命令是 ll 列出当前目录下的目录及文件
-		    result = telnet.sendCommand("ll");
+		    result = telnet.sendCommand("ll", 1);
 		    System.out.print(result);
 		    // 命令是 pwd 查看当前所在目录
-		    result = telnet.sendCommand("pwd");
+		    result = telnet.sendCommand("pwd", 1);
 		    System.out.print(result);
 
-		    result = telnet.sendCommand("df");
+		    result = telnet.sendCommand("df", 1);
 		    String strSplit[] = result.split("\n");
 		    System.out.println("----split string size():=" + strSplit.length);
 		    for (int i = 0; i < strSplit.length; i++) {

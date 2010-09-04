@@ -182,8 +182,11 @@ public class TdRunnable implements Runnable {
 
 		// 根据设备编号获取到设备信息
 		enDeviceInfo = new EnDeviceInfo();
+		enDeviceType = new EnDeviceType();
+
 		if (sGenResult.equals("S")) {
-		    sSql = "select * from device_info where device_id ='" + enSendList.getDeviceId() + "'";
+		    sSql = "select * from device_info, device_type where device_info.type_id = device_type.type_id and device_id ='"
+			    + enSendList.getDeviceId() + "'";
 		    rs = DaemonsDBPool.doQuery(conn, sSql);
 
 		    if (!rs.next()) {
@@ -201,6 +204,10 @@ public class TdRunnable implements Runnable {
 			enDeviceInfo.setDevicePrompt(rs.getString("DEVICE_PROMPT"));
 			enDeviceInfo.setUserPrompt(rs.getString("USER_PROMPT"));
 			enDeviceInfo.setPasswordPrompt(rs.getString("PASSWORD_PROMPT"));
+
+			enDeviceType.setPromptLines(rs.getInt("PROMPT_LINES"));
+			if (enDeviceType.getPromptLines() < 1)
+			    enDeviceType.setPromptLines(1);
 		    }
 		}
 
@@ -314,7 +321,7 @@ public class TdRunnable implements Runnable {
 				    sCommLine = sCommLine.substring(0, iCommLen - 1);
 				}
 
-				sResult = nt.sendCommand(sCommLine);
+				sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines());
 				sbResult.append(sResult);
 			    }
 			}
@@ -357,7 +364,7 @@ public class TdRunnable implements Runnable {
 		// 根据设备获取到设备信息及所属设备分类信息，当设备空时，获取全部可用的设备信息及所属设备分类信息
 		sSql = " select device_id, device_name_en, front_host_id, device_ip, device_port, "
 			+ " device_user, device_password, device_prompt, inspect_commands, "
-			+ " user_prompt, password_prompt " + " from device_info, device_type"
+			+ " user_prompt, password_prompt, prompt_lines " + " from device_info, device_type"
 			+ " where device_info.type_id = device_type.type_id"
 			+ " and device_info.device_status ='N'";
 
@@ -373,6 +380,7 @@ public class TdRunnable implements Runnable {
 
 		// 当设备编号及设备类型都为空，即创建全网巡检日志保存目录
 		boolean bSaveInspectLog = false;
+
 		if (((enSendList.getDeviceTypeId() == null || enSendList.getDeviceTypeId().trim().length() == 0))
 			&& ((enSendList.getDeviceId() == null || enSendList.getDeviceId().trim().length() == 0))) {
 
@@ -392,6 +400,9 @@ public class TdRunnable implements Runnable {
 
 		rs = DaemonsDBPool.doQuery(conn, sSql);
 		Vector vDeviceInfo = new Vector();
+		Vector vDeviceType = new Vector();
+
+		int iCount = 0;
 		while (rs.next()) {
 		    enDeviceInfo = new EnDeviceInfo();
 		    enDeviceInfo.setDeviceId(rs.getString("DEVICE_ID"));
@@ -406,6 +417,11 @@ public class TdRunnable implements Runnable {
 		    enDeviceInfo.setUserPrompt(rs.getString("USER_PROMPT"));
 		    enDeviceInfo.setPasswordPrompt(rs.getString("PASSWORD_PROMPT"));
 		    vDeviceInfo.add(enDeviceInfo);
+
+		    enDeviceType.setPromptLines(rs.getInt("PROMPT_LINES"));
+		    if (enDeviceType.getPromptLines() < 1)
+			enDeviceType.setPromptLines(1);
+		    vDeviceType.add(enDeviceType);
 		}
 
 		// 获取到全部堡垒主机列表
@@ -430,6 +446,7 @@ public class TdRunnable implements Runnable {
 		    nt = new NetTelnet();
 		    sbResult = new StringBuffer();
 		    enDeviceInfo = (EnDeviceInfo) vDeviceInfo.get(i);
+		    enDeviceType = (EnDeviceType) vDeviceType.get(i);
 
 		    sGenResult = "S";
 
@@ -492,7 +509,7 @@ public class TdRunnable implements Runnable {
 				    sbResult.append("TdRunnable run()：执行巡检任务，通过堡垒主机登录设备失败。");
 				    log.error("执行巡检任务，通过堡垒主机登录设备失败。SID=" + enSendList.getSendId());
 
-				    // // 关闭之前的连接
+				    // 关闭之前的连接
 				    nt.disconnect();
 				}
 			    }
@@ -528,7 +545,7 @@ public class TdRunnable implements Runnable {
 				    sCommLine = sCommLine.substring(0, iCommLen - 1);
 				}
 
-				sResult = nt.sendCommand(sCommLine);
+				sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines());
 				sbResult.append(sResult);
 
 				// 根据巡检日志关键字分拣日志
@@ -637,7 +654,7 @@ public class TdRunnable implements Runnable {
 		sSql = " select device_id, device_name_en, front_host_id, device_ip, device_port, "
 			+ " device_user, device_password, device_prompt, collect_commands, "
 			+ " rxp_line_start, rxp_value_start, rxp_value_end, rxp_value_pos, "
-			+ " user_prompt, password_prompt " + " from device_info, device_type"
+			+ " user_prompt, password_prompt, prompt_lines  " + " from device_info, device_type"
 			+ " where device_info.type_id = device_type.type_id"
 			+ " and device_info.device_status ='N'";
 
@@ -654,6 +671,8 @@ public class TdRunnable implements Runnable {
 		rs = DaemonsDBPool.doQuery(conn, sSql);
 		Vector vDeviceInfo = new Vector();
 		Vector vDeviceType = new Vector();
+
+		int iCount = 0;
 		while (rs.next()) {
 		    enDeviceInfo = new EnDeviceInfo();
 		    enDeviceInfo.setDeviceId(rs.getString("DEVICE_ID"));
@@ -674,8 +693,10 @@ public class TdRunnable implements Runnable {
 		    enDeviceType.setRxpValueStart(rs.getString("RXP_VALUE_START"));
 		    enDeviceType.setRxpValueEnd(rs.getString("RXP_VALUE_END"));
 		    enDeviceType.setRxpValuePos(rs.getString("RXP_VALUE_POS"));
+		    enDeviceType.setPromptLines(rs.getInt("PROMPT_LINES"));
+		    if (enDeviceType.getPromptLines() < 1)
+			enDeviceType.setPromptLines(1);
 		    vDeviceType.add(enDeviceType);
-
 		}
 
 		// 获取到全部堡垒主机列表
@@ -763,7 +784,7 @@ public class TdRunnable implements Runnable {
 				    sbResult.append("TdRunnable run()：执行数据采集任务，通过堡垒主机登录设备失败。");
 				    log.error("执行数据采集任务，通过堡垒主机登录设备失败。SID=" + enSendList.getSendId());
 
-				    // // 关闭之前的连接
+				    // 关闭之前的连接
 				    nt.disconnect();
 				}
 			    }
@@ -785,7 +806,7 @@ public class TdRunnable implements Runnable {
 			    sCommLine = sCommLine.replaceAll("%PORT", portSn);
 
 			    if (!(sCommLine == null || sCommLine.trim().length() == 0)) {
-				sResult = nt.sendCommand(sCommLine);
+				sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines());
 				sbResult.append(sResult);
 
 				double rxp = this.collectRxpValue(sResult, enDeviceType.getRxpLineStart(),
@@ -846,7 +867,7 @@ public class TdRunnable implements Runnable {
 		// 根据设备获取到设备信息及所属设备分类信息，当设备空时，获取全部可用的设备信息及所属设备分类信息
 		sSql = " select device_id, device_name_en, front_host_id, device_ip, device_port, "
 			+ " device_user, device_password, device_prompt, config_commands, "
-			+ " user_prompt, password_prompt " + " from device_info, device_type"
+			+ " user_prompt, password_prompt, prompt_lines " + " from device_info, device_type"
 			+ " where device_info.type_id = device_type.type_id"
 			+ " and device_info.device_status ='N'";
 
@@ -881,6 +902,9 @@ public class TdRunnable implements Runnable {
 
 		rs = DaemonsDBPool.doQuery(conn, sSql);
 		Vector vDeviceInfo = new Vector();
+		Vector vDeviceType = new Vector();
+
+		int iCount = 0;
 		while (rs.next()) {
 		    enDeviceInfo = new EnDeviceInfo();
 		    enDeviceInfo.setDeviceId(rs.getString("DEVICE_ID"));
@@ -895,6 +919,11 @@ public class TdRunnable implements Runnable {
 		    enDeviceInfo.setUserPrompt(rs.getString("USER_PROMPT"));
 		    enDeviceInfo.setPasswordPrompt(rs.getString("PASSWORD_PROMPT"));
 		    vDeviceInfo.add(enDeviceInfo);
+
+		    enDeviceType.setPromptLines(rs.getInt("PROMPT_LINES"));
+		    if (enDeviceType.getPromptLines() < 1)
+			enDeviceType.setPromptLines(1);
+		    vDeviceType.add(enDeviceType);
 		}
 
 		// 获取到全部堡垒主机列表
@@ -919,6 +948,7 @@ public class TdRunnable implements Runnable {
 		    nt = new NetTelnet();
 		    sbResult = new StringBuffer();
 		    enDeviceInfo = (EnDeviceInfo) vDeviceInfo.get(i);
+		    enDeviceType = (EnDeviceType) vDeviceType.get(i);
 
 		    sGenResult = "S";
 
@@ -1003,7 +1033,7 @@ public class TdRunnable implements Runnable {
 				    sCommLine = sCommLine.substring(0, iCommLen - 1);
 				}
 
-				sResult = nt.sendCommand(sCommLine);
+				sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines());
 				sbResult.append(sResult);
 			    }
 			}
