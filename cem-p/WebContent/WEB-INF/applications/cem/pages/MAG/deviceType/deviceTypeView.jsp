@@ -18,6 +18,7 @@
 	String rxpValueStart;
 	String rxpValueEnd;
 	String rxpValuePos;
+	String promptLines;
 %>
 <%
     xml = XMLWrap.getRequestXml(request,session,application);
@@ -33,7 +34,8 @@
     rxpLineStart = xml.getItemValue("DEVICE_TYPE",1,"RXP_LINE_START");    
     rxpValueStart = xml.getItemValue("DEVICE_TYPE",1,"RXP_VALUE_START");
     rxpValueEnd = xml.getItemValue("DEVICE_TYPE",1,"RXP_VALUE_END");
-    rxpValuePos = xml.getItemValue("DEVICE_TYPE",1,"RXP_VALUE_POS");    
+    rxpValuePos = xml.getItemValue("DEVICE_TYPE",1,"RXP_VALUE_POS");   
+    promptLines = xml.getItemValue("DEVICE_TYPE",1,"PROMPT_LINES"); 
 
 %>
 <html>
@@ -144,6 +146,12 @@
               					<input type="text" class="text" name="RXP_VALUE_POS"value="<%=rxpValuePos %>" readonly>
 		                  </td>
 		               <tr>
+		                   <tr>
+                          <td width="150" align="right">命令返回提示符行数：</td>
+		                  <td width="100">
+             					 <input type="text" class="text" name="PROMPT_LINES" value="<%=promptLines %>">
+		                  </td>
+		               </tr>
 		                <tr>
 		                 <td width="120" align="right">备注：</td>
 		                 <td colspan="3"> 
