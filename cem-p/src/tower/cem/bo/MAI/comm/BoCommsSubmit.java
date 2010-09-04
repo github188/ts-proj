@@ -48,14 +48,15 @@ public class BoCommsSubmit implements RootBo {
 	/***********************************************************************
          * 执行业务逻辑、输出
          **********************************************************************/
-	    logId = SysIdCreator.GenNextId(transaction, null, IdCreatorDefine.ID_TYPE_DEVICE_COMMAND_LOG_ID,
-		    IdCreatorDefine.ID_LEN_DEVICE_COMMAND_LOG_ID);
-	    enDeviceCommandExecLog.setLogId(logId);
-	    enDeviceCommandExecLog.setUserId(userId);
-	    enDeviceCommandExecLog.setCommandCont(comms);
-	    enDeviceCommandExecLog.setDeviceId(deviceId);
-	    enDeviceCommandExecLog.setExecBegin(DateFunc.ParseDateTime(execBegin));
-	    enDeviceCommandExecLog.setExecEnd(execEnd);
-	    dbDeviceCommandExecLog.insert(enDeviceCommandExecLog);
+	logId = SysIdCreator.GenNextId(transaction, null, IdCreatorDefine.ID_TYPE_DEVICE_COMMAND_LOG_ID,
+		IdCreatorDefine.ID_LEN_DEVICE_COMMAND_LOG_ID);
+	
+	enDeviceCommandExecLog.setLogId(logId);
+	enDeviceCommandExecLog.setUserId(userId);
+	enDeviceCommandExecLog.setCommandCont(comms);
+	enDeviceCommandExecLog.setDeviceId(deviceId);
+	enDeviceCommandExecLog.setExecBegin(DateFunc.ParseDateTime(execBegin));
+	enDeviceCommandExecLog.setExecEnd(execEnd);
+	dbDeviceCommandExecLog.insert(enDeviceCommandExecLog);
     }
 }

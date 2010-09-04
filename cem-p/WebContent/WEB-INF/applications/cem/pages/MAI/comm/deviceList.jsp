@@ -129,9 +129,9 @@ function doSubmit(form) {
                <input type="hidden" name=CUR_PAGE value="">
               <table>
               	 <tr>
-              	 <td align="right">设备名称-英文：</td>
+              	 <td align="right">设备英文名称：</td>
                   <td><input type="text" class="text" name="DEVICE_NAME_EN" value="<%=deviceNameEn %>"></td>
-                 <td align="right">设备名称-中文：</td>
+                 <td align="right">设备中文名称：</td>
 	                 <td><input type="text" class="text" name="DEVICE_NAME_CN" value="<%=deviceNameCn %>"></td>
                  </tr>
                   <tr>
@@ -182,8 +182,8 @@ function doSubmit(form) {
               <!-- 列表内容 -->
              <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
                  <tr>
-                  <th>设备名称-英文</th>
-                  <th>设备名称-中文</th>
+                  <th>设备英文名称</th>
+                  <th>设备中文名称</th>
                   <th>物理位置</th>
                   <th>网络地址</th>
                   <th>网络端口</th>
@@ -194,14 +194,8 @@ function doSubmit(form) {
               <%if(deviceIds != null){
 			  for (int i = 0; i < deviceIds.length; i++) {
 				if (i % 2 == 0) {%>
-                <tr onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
-                 
-                  <td align="center">
-                  <a href="JavaScript:doView('<%=deviceIds[i]%>')">
-                  <%=deviceNameEns[i]%>
-                  </a>
-                  </td>
-                  
+                <tr onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">                 
+                  <td align="center"><%=deviceNameEns[i]%></td>                  
                   <td align="center"><%=deviceNameCns[i]%></td>
                   <td align="center"><%=locationNames[i]%></td>
                   <td align="center"><%=deviceIps[i]%></td>
@@ -219,12 +213,7 @@ function doSubmit(form) {
                <%} else {%>
                <tr class="dark" onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
                   
-                  <td align="center">
-                   <a href="JavaScript:doView('<%=deviceIds[i]%>')">
-                  <%=deviceNameEns[i]%>
-                    </a>
-                  </td>
-                
+                  <td align="center"><%=deviceNameEns[i]%></td>                
                   <td align="center"><%=deviceNameCns[i]%></td>
                   <td align="center"><%=locationNames[i]%></td>
                   <td align="center"><%=deviceIps[i]%></td>

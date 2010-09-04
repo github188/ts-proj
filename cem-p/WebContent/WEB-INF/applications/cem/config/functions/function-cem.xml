@@ -144,7 +144,7 @@
         jspPath="/cem/pages/common/selectFrontHost.jsp" /> 
      
     <function id="FrontHostTestResultsJsp" description="堡垒主机测试结果页面" type="jsp"
-        jspPath="/cem/pages/MAG/frontHost/frontHostTestResults.jsp" />   
+        jspPath="/cem/pages/MAG/frontHost/frontHostTest.jsp" />   
     
         
      <!-- 04-device-设备配置管理 -->

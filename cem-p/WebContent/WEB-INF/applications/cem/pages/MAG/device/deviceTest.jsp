@@ -51,13 +51,13 @@
 	userPrompt = xml.getItemValue("DEVICE_INFO",1,"USER_PROMPT");
 	passwordPrompt = xml.getItemValue("DEVICE_INFO",1,"PASSWORD_PROMPT");
 	
-	hostIp = xml.getItemValue("DEVICE_INFO",1,"HOST_IP");
-	hostPort = xml.getItemValue("DEVICE_INFO",1,"HOST_PORT");
-	hostUser = xml.getItemValue("DEVICE_INFO",1,"HOST_USER");
-	hostPassword = xml.getItemValue("DEVICE_INFO",1,"HOST_PASSWORD");
-	hostPrompt = xml.getItemValue("DEVICE_INFO",1,"HOST_PROMPT");
-	hostUserPrompt = xml.getItemValue("DEVICE_INFO",1,"HOST_USER_PROMPT");
-	hostPasswordPrompt = xml.getItemValue("DEVICE_INFO",1,"HOST_PASSWORD_PROMPT");
+	hostIp = xml.getItemValue("FRONT_HOST_INFO",1,"HOST_IP");
+	hostPort = xml.getItemValue("FRONT_HOST_INFO",1,"HOST_PORT");
+	hostUser = xml.getItemValue("FRONT_HOST_INFO",1,"HOST_USER");
+	hostPassword = xml.getItemValue("FRONT_HOST_INFO",1,"HOST_PASSWORD");
+	hostPrompt = xml.getItemValue("FRONT_HOST_INFO",1,"HOST_PROMPT");
+	hostUserPrompt = xml.getItemValue("FRONT_HOST_INFO",1,"USER_PROMPT");
+	hostPasswordPrompt = xml.getItemValue("FRONT_HOST_INFO",1,"PASSWORD_PROMPT");
 	
     String[] deviceStatusDesc = {"在用","停用"};
 	String[] deviceStatusValue = {"N","S"};
@@ -93,16 +93,6 @@
     form1.submit();
     window.close();
   }
- 
-/**
- window.onbeforeunload=function(){   
- var deviceId = '<%=deviceId%>';
- var execBegin = '<%=date%>';
- //var comms = window.document.TelnetApplet.getCommands();
- //form1.COMMANDS.value = comms;
- form1.submit();
- //window.location.href = "ctrl?FUNC_ID=Disconnection&DEVICE_ID="+deviceId+"&COMMANDS="+comms+"&EXEC_BEGIN="+execBegin;
-*/
 } 
 -->
 </script>

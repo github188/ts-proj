@@ -56,7 +56,7 @@
   	window.location.href="ctrl?FUNC_ID=FrontHostList";
   }
    function doSelHostTestResult(hostId){
-    selDialog("ctrl?FUNC_ID=FrontHostTest&HOST_ID="+hostId,"HOST_ID","HOST_NAME",850,550,false);
+    selDialog("ctrl?FUNC_ID=FrontHostTest&HOST_ID="+hostId,"HOST_ID","HOST_NAME",850,650,false);
   }
 -->
 </script>

@@ -54,21 +54,5 @@ public class BoFrontHostTest implements RootBo {
 	// 获取堡垒主机Ip、端口号、登录用户名、登录密码、命令提示符
 	enFrontHostInfo = dbFrontHostInfo.findByKey(hostId);
 	dbFrontHostInfo.setToXml(requestXml, enFrontHostInfo);
-	telnet = new NetTelnet();
-	// 直接登录设备
-	result = telnet.FunLogin(enFrontHostInfo.getHostIp(), enFrontHostInfo.getHostPort(), enFrontHostInfo
-		.getUserPrompt(), enFrontHostInfo.getHostUser(), enFrontHostInfo.getPasswordPrompt(),
-		enFrontHostInfo.getHostPassword(), enFrontHostInfo.getHostPrompt());
-	sbResult.append(result);
-
-	if (!telnet.getBflag()) {
-	    sbResult.append("登录堡垒主机失败！");
-	} else {
-	    sbResult.append("\n\n登录堡垒主机成功！");
-	    telnet.disconnect();
-	}
-
-	int row = requestXml.addInputRow("FRONT_HOST_TEST_RESULTS");
-	requestXml.setInputValue("FRONT_HOST_TEST_RESULTS", row, sbResult.toString());
     }
 }
