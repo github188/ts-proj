@@ -327,7 +327,6 @@ try{
                   <td align="center"><%=orgNames[i]%></td>
                   <td align="center"><%=linkMans[i]%></td>
                   <td align="center"><%=linkTeles[i]%></td>
-                  <td align="center"><%=linkEmails[i]%></td>
                   <td align="center">[<a href="JavaScript:doEdit('<%=orgIds[i] %>')">编辑</a>|<a href="JavaScript:doDelete('<%=orgIds[i] %>')">删除</a>]</td>
                 </tr>
                <%}}} %>

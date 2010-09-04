@@ -27,7 +27,7 @@
 <script type="text/javascript">
 <!--
   function doAdd() {
-		window.location="ctrl?FUNC_ID=Statview&STAT_ID";
+		window.location="ctrl?FUNC_ID=StatView&STAT_ID";
 	}
 	function doEdit(statId) {
 		 window.location="ctrl?FUNC_ID=StatEdit&STAT_ID="+statId;
