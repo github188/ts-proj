@@ -195,7 +195,7 @@
         jspPath="/cem/pages/MAG/device/devicePortList.jsp" />
         
      <function id="BoDeviceTestResultJsp" description="设备配置测试结果" type="jsp"
-        jspPath="/cem/pages/MAG/device/deviceTestResults.jsp" />
+        jspPath="/cem/pages/MAG/device/deviceTest.jsp" />
                
     <function id="SelectLocationJsp" description="设备位置选择" type="jsp"
         jspPath="/cem/pages/common/selectLocation.jsp" />
