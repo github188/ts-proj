@@ -39,7 +39,7 @@
 	
 	deviceId = xml.getInputValue("DEVICE_ID");
 	deviceNameEn = xml.getItemValue("DEVICE_INFO",1,"DEVICE_NAME_EN");
-	deviceNameCn = xml.getItemValue("DEVICE_INFO",1,"DEVICE_ABB_NAME_EN");
+	deviceNameCn = xml.getItemValue("DEVICE_INFO",1,"DEVICE_NAME_CN");
     locationNameCn = xml.getItemValue("DEVICE_INFO",1,"LOCATION_NAME");
 	deviceStatus = xml.getItemValue("DEVICE_INFO",1,"DEVICE_STATUS");
 	deviceIp = xml.getItemValue("DEVICE_INFO",1,"DEVICE_IP");
@@ -94,11 +94,12 @@
     window.close();
   }
   
- window.onbeforeunload=function(){   
+ window.onbeforeunload=function(){
  var deviceId = '<%=deviceId%>';
  var execBegin = '<%=date%>';
- var comms = window.document.TelnetApplet.getCommands();
- form1.COMMANDS.value = comms;
+ //var comms = window.document.TelnetApplet.getCommands();
+ //alert(comms);
+ //form1.COMMANDS.value = comms;
  form1.submit();
  //window.location.href = "ctrl?FUNC_ID=Disconnection&DEVICE_ID="+deviceId+"&COMMANDS="+comms+"&EXEC_BEGIN="+execBegin;
  
