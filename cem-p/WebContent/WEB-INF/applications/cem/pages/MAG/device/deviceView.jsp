@@ -9,12 +9,9 @@
 	String deviceNameEn;
 	String deviceNameCn;
 	String deviceAbbNameEn;
-	String typeId;
 	String typeName;
-	String locationId;
 	String locationNameCn;
 	String deviceStatus;
-	String frontHostId;
 	String frontHostName;
 	String deviceIp;
 	String devicePort;
@@ -31,12 +28,9 @@
 	deviceNameEn = xml.getItemValue("DEVICE_INFO",1,"DEVICE_NAME_EN");
 	deviceNameCn = xml.getItemValue("DEVICE_INFO",1,"DEVICE_NAME_CN");
 	deviceAbbNameEn = xml.getItemValue("DEVICE_INFO",1,"DEVICE_ABB_NAME_EN");
-	typeId = xml.getItemValue("DEVICE_INFO",1,"TYPE_ID");
 	typeName = xml.getItemValue("DEVICE_INFO",1,"TYPE_NAME");
-	locationId = xml.getItemValue("DEVICE_INFO",1,"LOCATION_ID");
 	locationNameCn = xml.getItemValue("DEVICE_INFO",1,"LOCATION_NAME");
 	deviceStatus = xml.getItemValue("DEVICE_INFO",1,"DEVICE_STATUS");
-	frontHostId = xml.getItemValue("DEVICE_INFO",1,"FRONT_HOST_ID");
 	frontHostName = xml.getItemValue("DEVICE_INFO",1,"FRONT_HOST_NAME");
 	deviceIp = xml.getItemValue("DEVICE_INFO",1,"DEVICE_IP");
 	devicePort = xml.getItemValue("DEVICE_INFO",1,"DEVICE_PORT");
@@ -61,8 +55,8 @@
      window.history.back();
   	//window.location.href="ctrl?FUNC_ID=DeviceList";
   }
-   function doSelDeviceTestResult(deviceId){
-    selDialog("ctrl?FUNC_ID=DevoceTest&DEVICE_ID="+deviceId,"DEVICE_ID","DEVICE_ID",850,650,false);
+  function doSelDeviceTestResult(deviceId){
+    selDialog("ctrl?FUNC_ID=DevoceTest&DEVICE_ID="+deviceId,"DEVICE_ID","DEVICE_NAME_CN",850,650,false);
   }
 -->
 </script>
@@ -88,7 +82,6 @@
                     <div class="panelContent2">
                       <!-- 查询面板内容 -->
                    <form action="ctrl" method="post"name="form1"onSubmit="return doSubmit(this)">
-                     <input type="hidden" name="FUNC_ID" value="DeviceSubmit">
                      <input type="hidden" name="DEVICE_ID" value="<%=deviceId%>"> 
                      <table>
                      	<tr>

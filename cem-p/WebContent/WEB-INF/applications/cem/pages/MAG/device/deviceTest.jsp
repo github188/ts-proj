@@ -39,7 +39,7 @@
 	
 	deviceId = xml.getInputValue("DEVICE_ID");
 	deviceNameEn = xml.getItemValue("DEVICE_INFO",1,"DEVICE_NAME_EN");
-	deviceNameCn = xml.getItemValue("DEVICE_INFO",1,"DEVICE_ABB_NAME_EN");
+	deviceNameCn = xml.getItemValue("DEVICE_INFO",1,"DEVICE_NAME_CN");
     locationNameCn = xml.getItemValue("DEVICE_INFO",1,"LOCATION_NAME");
 	deviceStatus = xml.getItemValue("DEVICE_INFO",1,"DEVICE_STATUS");
 	deviceIp = xml.getItemValue("DEVICE_INFO",1,"DEVICE_IP");
@@ -93,7 +93,6 @@
     form1.submit();
     window.close();
   }
-} 
 -->
 </script>
 </head>
