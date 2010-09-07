@@ -364,18 +364,18 @@ public class TdRunnable implements Runnable {
 		// 根据设备获取到设备信息及所属设备分类信息，当设备空时，获取全部可用的设备信息及所属设备分类信息
 		sSql = " select device_id, device_name_en, front_host_id, device_ip, device_port, "
 			+ " device_user, device_password, device_prompt, inspect_commands, "
-			+ " user_prompt, password_prompt, prompt_lines " + " from device_info, device_type"
-			+ " where device_info.type_id = device_type.type_id"
+			+ " user_prompt, password_prompt, prompt_lines " + " from device_info, device_type "
+			+ " where device_info.type_id = device_type.type_id "
 			+ " and device_info.device_status ='N'";
-
-		// 当设备类型不为空时，获取到指定设备类型的信息
-		if (!(enSendList.getDeviceTypeId() == null || enSendList.getDeviceTypeId().trim().length() == 0)) {
-		    sSql = sSql + " and device_info.type_id = '" + enSendList.getDeviceTypeId() + "'";
-		}
 
 		// 当设备编号不为空时，获取到指定的设备信息及所属设备分类信息
 		if (!(enSendList.getDeviceId() == null || enSendList.getDeviceId().trim().length() == 0)) {
-		    sSql = sSql + " and device_info.device_id ='" + enSendList.getDeviceId() + "'";
+		    sSql = sSql + " and device_info.device_id ='" + enSendList.getDeviceId() + "' ";
+		}
+		// 当设备类型不为空时，获取到指定设备类型的信息
+		else if (!(enSendList.getDeviceTypeId() == null || enSendList.getDeviceTypeId().trim()
+			.length() == 0)) {
+		    sSql = sSql + " and device_info.type_id = '" + enSendList.getDeviceTypeId() + "' ";
 		}
 
 		// 当设备编号及设备类型都为空，即创建全网巡检日志保存目录
@@ -402,7 +402,6 @@ public class TdRunnable implements Runnable {
 		Vector vDeviceInfo = new Vector();
 		Vector vDeviceType = new Vector();
 
-		int iCount = 0;
 		while (rs.next()) {
 		    enDeviceInfo = new EnDeviceInfo();
 		    enDeviceInfo.setDeviceId(rs.getString("DEVICE_ID"));
@@ -418,6 +417,7 @@ public class TdRunnable implements Runnable {
 		    enDeviceInfo.setPasswordPrompt(rs.getString("PASSWORD_PROMPT"));
 		    vDeviceInfo.add(enDeviceInfo);
 
+		    enDeviceType = new EnDeviceType();
 		    enDeviceType.setPromptLines(rs.getInt("PROMPT_LINES"));
 		    if (enDeviceType.getPromptLines() < 1)
 			enDeviceType.setPromptLines(1);
@@ -457,7 +457,6 @@ public class TdRunnable implements Runnable {
 			    || enDeviceInfo.getFrontHostId().trim().length() == 0) {
 
 			// 直接登录设备
-
 			sResult = nt.FunLogin(enDeviceInfo.getDeviceIp(), enDeviceInfo.getDevicePort(),
 				enDeviceInfo.getUserPrompt(), enDeviceInfo.getDeviceUser(), enDeviceInfo
 					.getPasswordPrompt(), enDeviceInfo.getDevicePassword(), enDeviceInfo
@@ -544,7 +543,6 @@ public class TdRunnable implements Runnable {
 				} else {
 				    sCommLine = sCommLine.substring(0, iCommLen - 1);
 				}
-
 				sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines());
 				sbResult.append(sResult);
 
@@ -658,21 +656,20 @@ public class TdRunnable implements Runnable {
 			+ " where device_info.type_id = device_type.type_id"
 			+ " and device_info.device_status ='N'";
 
-		// 当设备类型不为空时，获取到指定设备类型的信息
-		if (!(enSendList.getDeviceTypeId() == null || enSendList.getDeviceTypeId().trim().length() == 0)) {
-		    sSql = sSql + " and device_info.type_id = '" + enSendList.getDeviceTypeId() + "'";
-		}
-
 		// 当设备编号不为空时，获取到指定的设备信息及所属设备分类信息
 		if (!(enSendList.getDeviceId() == null || enSendList.getDeviceId().trim().length() == 0)) {
 		    sSql = sSql + " and device_info.device_id ='" + enSendList.getDeviceId() + "'";
+		}
+		// 当设备类型不为空时，获取到指定设备类型的信息
+		else if (!(enSendList.getDeviceTypeId() == null || enSendList.getDeviceTypeId().trim()
+			.length() == 0)) {
+		    sSql = sSql + " and device_info.type_id = '" + enSendList.getDeviceTypeId() + "'";
 		}
 
 		rs = DaemonsDBPool.doQuery(conn, sSql);
 		Vector vDeviceInfo = new Vector();
 		Vector vDeviceType = new Vector();
 
-		int iCount = 0;
 		while (rs.next()) {
 		    enDeviceInfo = new EnDeviceInfo();
 		    enDeviceInfo.setDeviceId(rs.getString("DEVICE_ID"));
@@ -904,7 +901,6 @@ public class TdRunnable implements Runnable {
 		Vector vDeviceInfo = new Vector();
 		Vector vDeviceType = new Vector();
 
-		int iCount = 0;
 		while (rs.next()) {
 		    enDeviceInfo = new EnDeviceInfo();
 		    enDeviceInfo.setDeviceId(rs.getString("DEVICE_ID"));
@@ -920,6 +916,7 @@ public class TdRunnable implements Runnable {
 		    enDeviceInfo.setPasswordPrompt(rs.getString("PASSWORD_PROMPT"));
 		    vDeviceInfo.add(enDeviceInfo);
 
+		    enDeviceType = new EnDeviceType();
 		    enDeviceType.setPromptLines(rs.getInt("PROMPT_LINES"));
 		    if (enDeviceType.getPromptLines() < 1)
 			enDeviceType.setPromptLines(1);
