@@ -5,8 +5,12 @@ import java.util.Date;
 import org.apache.log4j.Logger;
 
 import tower.cem.db.DbCommandsSendList;
+import tower.cem.db.DbDeviceInfo;
+import tower.cem.db.DbDeviceType;
 import tower.cem.db.DbMaintainCommandsTemplate;
 import tower.cem.en.EnCommandsSendList;
+import tower.cem.en.EnDeviceInfo;
+import tower.cem.en.EnDeviceType;
 import tower.cem.en.EnMaintainCommandsTemplate;
 import tower.cem.util.IdCreatorDefine;
 import tower.common.util.DateFunc;
@@ -27,10 +31,12 @@ public class BoDeviceInspectTaskAdd implements RootBo{
 		DbCommandsSendList dbCommandsSendList;
 		EnCommandsSendList enCommandsSendList;
 		
+		// 设备配置db en
+		DbDeviceInfo dbDeviceInfo;
+		EnDeviceInfo enDeviceInfo;
 		
 		//获取页面参数
 		String[] deviceIds;    //维护设备编号
-		String[] deviceTypeIds;  //维护设备类型编号
 		String sendId;        //指令发送编号
 		String taskDefineTime; //任务定义时间
 		String taskPlanTime;  //计划开始时间
@@ -47,7 +53,6 @@ public class BoDeviceInspectTaskAdd implements RootBo{
 		 * 获取输入
 		 **********************************************************************/
 		deviceIds = requestXml.getInputValues("DEVICE_ID");
-		deviceTypeIds = requestXml.getInputValues("DEVICE_TYPE_ID");
 		userId = sessionXml.getItemValue("SYS_USER", 1, "USER_ID");
 		commandsType = "I";
 		status = "N";
@@ -92,6 +97,7 @@ public class BoDeviceInspectTaskAdd implements RootBo{
 		 transaction.createDefaultConnection(null, true);
 		 dbCommandsSendList = new DbCommandsSendList(transaction,null);
 		 enCommandsSendList = new EnCommandsSendList();
+		 dbDeviceInfo = new DbDeviceInfo(transaction, null);
 		/***********************************************************************
 		 * 执行业务逻辑、输出
 		 **********************************************************************/
@@ -107,7 +113,11 @@ public class BoDeviceInspectTaskAdd implements RootBo{
 						IdCreatorDefine.ID_LEN_SEND_ID);
 			 enCommandsSendList.setSendId(sendId);
 			 enCommandsSendList.setDeviceId(deviceIds[i]);
-			 enCommandsSendList.setDeviceTypeId(deviceTypeIds[i]);
+			 //获取设备类型
+			 enDeviceInfo = dbDeviceInfo.findByKey(deviceIds[i]);
+			 if(enDeviceInfo != null){
+				 enCommandsSendList.setDeviceTypeId(enDeviceInfo.getTypeId());
+			 }
 			 dbCommandsSendList.insert(enCommandsSendList);
 		 }
 	}
