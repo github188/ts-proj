@@ -229,15 +229,9 @@ function doSubmit(form) {
                    <input type="checkbox" name="DEVICE_ID" value="<%=deviceIds[i] %>"  > 
                    <%}} %>
 				  </td>
-                  <td align="center">
-                  <a href="JavaScript:doView('<%=deviceIds[i]%>')">
-                  <%=deviceNameEns[i]%>
-                  </a>
-                  </td>
+                  <td align="center"><%=deviceNameEns[i]%></td>
                   <td align="center"><%=deviceNameCns[i]%></td>
-                   <td align="center">
-                   <%=typeNames[i]%>
-                   </td>
+                   <td align="center"><%=typeNames[i]%></td>
                   <td align="center"><%=locationNames[i]%></td>
                   <td align="center"><%=deviceIps[i]%></td>
                    <td align="center">
@@ -262,15 +256,9 @@ function doSubmit(form) {
                    <input type="checkbox" name="DEVICE_ID" value="<%=deviceIds[i] %>"  > 
                    <%}} %>
 				  </td>
-                  <td align="center">
-                  <a href="JavaScript:doView('<%=deviceIds[i]%>')">
-                  <%=deviceNameEns[i]%>
-                  </a>
-                  </td>
+                  <td align="center"><%=deviceNameEns[i]%></td>
                   <td align="center"><%=deviceNameCns[i]%></td>
-                  <td align="center">
-                   <%=typeNames[i]%>
-                   </td>
+                  <td align="center"><%=typeNames[i]%></td>
                   <td align="center"><%=locationNames[i]%></td>
                   <td align="center"><%=deviceIps[i]%></td>
                    <td align="center">
