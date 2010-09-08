@@ -17,19 +17,10 @@
 	String[] deviceIds;
 	String[] deviceNameEns;
 	String[] deviceNameCns;
-	String[] deviceAbbNameEns;
-	String[] typeIds;
-	String[] locationIds;
 	String[] locationNames;
 	String[] deviceStatuses;
-	String[] frontHostIds;
-	String[] frontHostNames;
 	String[] deviceIps;
 	String[] devicePorts;
-	String[] deviceUsers;
-	String[] devicePasswords;
-	String[] devicePrompts;
-	String[] remarks;
 %>
 <%
 	xml = XMLWrap.getRequestXml(request,session,application);
@@ -43,19 +34,11 @@
 
 	deviceIds = xml.getItemValues("DEVICE_INFO","DEVICE_ID");
 	deviceNameEns = xml.getItemValues("DEVICE_INFO", "DEVICE_NAME_EN");
-	deviceNameCns = xml.getItemValues("DEVICE_INFO", "DEVICE_ABB_NAME_EN");
-	deviceAbbNameEns = xml.getItemValues("FRONT_DEVICE_INFO", "DEVICE_NAME_CN");
-	locationIds = xml.getItemValues("FRONT_DEVICE_INFO", "LOCATION_ID");
+	deviceNameCns = xml.getItemValues("DEVICE_INFO", "DEVICE_NAME_CN");
 	locationNames = xml.getItemValues("DEVICE_INFO", "LOCATION_NAME");
 	deviceStatuses = xml.getItemValues("DEVICE_INFO", "DEVICE_STATUS");
-	frontHostIds = xml.getItemValues("DEVICE_INFO", "FRONT_HOST_ID");
-	frontHostNames = xml.getItemValues("DEVICE_INFO", "FRONT_HOST_NAME");
 	deviceIps = xml.getItemValues("DEVICE_INFO", "DEVICE_IP");
 	devicePorts = xml.getItemValues("DEVICE_INFO", "DEVICE_PORT");
-	deviceUsers = xml.getItemValues("DEVICE_INFO", "DEVICE_USER");
-	devicePasswords = xml.getItemValues("DEVICE_INFO", "DEVICE_PASSWORD");
-	devicePrompts = xml.getItemValues("DEVICE_INFO", "DEVICE_PROMPT");
-	remarks = xml.getItemValues("DEVICE_INFO", "REMARK");
     
 	String[] deviceStatusDesc = {"在用","停用"};
 	String[] deviceStatusValue = {"N","S"};

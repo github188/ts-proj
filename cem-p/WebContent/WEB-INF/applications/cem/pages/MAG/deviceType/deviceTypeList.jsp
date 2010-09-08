@@ -9,31 +9,21 @@
     XMLWrap xml;
     String typeNameEn;
     String typeNameCn;
-    String remark;
     
 	String[] typeIds;
 	String[] typeNameEns;
 	String[] typeNameCns;
-	String[] inspectCommandses;
-	String[] inspectCommandsExps;
-	String[] collectCommandses;
-	String[] appPictures;
 	String[] remarks;
 %>
 <%
     xml = XMLWrap.getRequestXml(request,session,application);
     typeNameEn = xml.getInputValue("QTYPE_NAME_EN");
     typeNameCn = xml.getInputValue("QTYPE_NAME_CN");
-    remark = xml.getInputValue("QREMARK");
     
     
     typeIds = xml.getItemValues("DEVICE_TYPE","TYPE_ID");
     typeNameEns = xml.getItemValues("DEVICE_TYPE","TYPE_NAME_EN");
     typeNameCns = xml.getItemValues("DEVICE_TYPE","TYPE_NAME_CN");
-    inspectCommandses = xml.getItemValues("DEVICE_TYPE","INSPECT_COMMANDS");
-    inspectCommandsExps = xml.getItemValues("DEVICE_TYPE","INSPECT_COMMANDS_EXP");
-    collectCommandses = xml.getItemValues("DEVICE_TYPE","COLLECT_COMMANDS");
-    appPictures = xml.getItemValues("DEVICE_TYPE","APP_PICTURE");
     remarks = xml.getItemValues("DEVICE_TYPE","REMARK");
     
 %>

@@ -11,9 +11,7 @@
 	String deviceNameCn;
 	String locationId;
 	String locationNameCn;
-	String deviceStatus;
 	String deviceIp;
-	String devicePort;
 	String beginExecEnd;//维护结束日期
 	String endExecEnd;  
 	
@@ -22,20 +20,8 @@
 	String[] deviceIds;
 	String[] deviceNameEns;
 	String[] deviceNameCns;
-	String[] deviceAbbNameEns;
-	String[] typeIds;
-	String[] locationIds;
 	String[] locationNames;
-	String[] deviceStatuses;
-	String[] frontHostIds;
-	String[] frontHostNames;
 	String[] deviceIps;
-	String[] devicePorts;
-	String[] deviceUsers;
-	String[] devicePasswords;
-	String[] devicePrompts;
-	String[] remarks;
-	String[] execBegins;
 	String[] execEnds;
 	String[] userNames;
 %>
@@ -46,9 +32,7 @@
 	deviceNameCn = xml.getInputValue("DEVICE_NAME_CN");
 	locationId = xml.getInputValue("LOCATION_ID");
 	locationNameCn = xml.getInputValue("LOCATION_NAME_CN");
-	deviceStatus = xml.getInputValue("DEVICE_STATUS");
 	deviceIp = xml.getInputValue("DEVICE_IP");
-	devicePort = xml.getInputValue("DEVICE_PORT");
 	beginExecEnd = xml.getInputValue("BENGIN_EXEC_END");
 	endExecEnd = xml.getInputValue("END_EXEC_END");
 	
@@ -56,17 +40,8 @@
 	deviceIds = xml.getItemValues("DEVICE_COMMAND_EXEC_LOG","DEVICE_ID");
 	deviceNameEns = xml.getItemValues("DEVICE_COMMAND_EXEC_LOG", "DEVICE_NAME_EN");
 	deviceNameCns = xml.getItemValues("DEVICE_COMMAND_EXEC_LOG", "DEVICE_NAME_CN");
-	deviceAbbNameEns = xml.getItemValues("DEVICE_COMMAND_EXEC_LOG", "DEVICE_ABB_NAME_EN");
 	locationNames = xml.getItemValues("DEVICE_COMMAND_EXEC_LOG", "LOCATION_NAME");
-	deviceStatuses = xml.getItemValues("DEVICE_COMMAND_EXEC_LOG", "DEVICE_STATUS");
-	frontHostNames = xml.getItemValues("DEVICE_COMMAND_EXEC_LOG", "FRONT_HOST_NAME");
 	deviceIps = xml.getItemValues("DEVICE_COMMAND_EXEC_LOG", "DEVICE_IP");
-	devicePorts = xml.getItemValues("DEVICE_COMMAND_EXEC_LOG", "DEVICE_PORT");
-	deviceUsers = xml.getItemValues("DEVICE_COMMAND_EXEC_LOG", "DEVICE_USER");
-	devicePasswords = xml.getItemValues("DEVICE_COMMAND_EXEC_LOG", "DEVICE_PASSWORD");
-	devicePrompts = xml.getItemValues("DEVICE_COMMAND_EXEC_LOG", "DEVICE_PROMPT");
-	remarks = xml.getItemValues("DEVICE_COMMAND_EXEC_LOG", "REMARK");
-	execBegins = xml.getItemValues("DEVICE_COMMAND_EXEC_LOG", "EXEC_BEGIN");
 	execEnds = xml.getItemValues("DEVICE_COMMAND_EXEC_LOG", "EXEC_END");
 	userNames = xml.getItemValues("DEVICE_COMMAND_EXEC_LOG", "USER_NAME");
     

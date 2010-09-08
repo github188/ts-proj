@@ -240,7 +240,6 @@ function doSubmit(form) {
                   <td align="center"><%=deviceNameCns[i]%></td>
                    <td align="center">
                    <%=typeNames[i]%>
-                    <input type="hidden" name="DEVICE_TYPE_ID" value="<%=typeIds[i] %>"  > 
                    </td>
                   <td align="center"><%=locationNames[i]%></td>
                   <td align="center"><%=deviceIps[i]%></td>
@@ -274,7 +273,6 @@ function doSubmit(form) {
                   <td align="center"><%=deviceNameCns[i]%></td>
                   <td align="center">
                    <%=typeNames[i]%>
-                    <input type="hidden" name="DEVICE_TYPE_ID" value="<%=typeIds[i] %>"  > 
                    </td>
                   <td align="center"><%=locationNames[i]%></td>
                   <td align="center"><%=deviceIps[i]%></td>

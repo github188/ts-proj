@@ -10,41 +10,27 @@
 	String deviceNameCn;
 	String locationId;
 	String locationNameCn;
-	String frontHostId;
-	String frontHostName;
 	String deviceStatus;
 	String deviceIp;
-	String devicePort;
 	String typeId;
 	String typeName;
  
 	String[] deviceIds;
 	String[] deviceNameEns;
 	String[] deviceNameCns;
-	String[] deviceAbbNameEns;
-	String[] typeIds;
 	String[] typeNames;
-	String[] locationIds;
 	String[] locationNames;
 	String[] deviceStatuses;
-	String[] frontHostIds;
 	String[] frontHostNames;
 	String[] deviceIps;
 	String[] devicePorts;
-	String[] deviceUsers;
-	String[] devicePasswords;
-	String[] devicePrompts;
-	String[] remarks;
 %>
 <%
 	xml = XMLWrap.getRequestXml(request,session,application);
 	deviceNameEn = xml.getInputValue("DEVICE_NAME_EN");
 	deviceNameCn = xml.getInputValue("DEVICE_NAME_CN");
-	frontHostId = xml.getInputValue("FRONT_HOST_ID");
-	frontHostName = xml.getInputValue("FRONT_HOST_NAME");
 	deviceStatus = xml.getInputValue("DEVICE_STATUS");
 	deviceIp = xml.getInputValue("DEVICE_IP");
-	devicePort = xml.getInputValue("DEVICE_PORT");
 	locationId = xml.getInputValue("LOCATION_ID");
 	locationNameCn = xml.getInputValue("LOCATION_NAME_CN");
 	typeId = xml.getInputValue("TYPE_ID");
@@ -53,16 +39,11 @@
 	deviceIds = xml.getItemValues("DEVICE_INFO","DEVICE_ID");
 	deviceNameEns = xml.getItemValues("DEVICE_INFO", "DEVICE_NAME_EN");
 	deviceNameCns = xml.getItemValues("DEVICE_INFO", "DEVICE_NAME_CN");
-	deviceAbbNameEns = xml.getItemValues("DEVICE_INFO", "DEVICE_ABB_NAME_EN");
 	locationNames = xml.getItemValues("DEVICE_INFO", "LOCATION_NAME");
 	deviceStatuses = xml.getItemValues("DEVICE_INFO", "DEVICE_STATUS");
 	frontHostNames = xml.getItemValues("DEVICE_INFO", "FRONT_HOST_NAME");
 	deviceIps = xml.getItemValues("DEVICE_INFO", "DEVICE_IP");
 	devicePorts = xml.getItemValues("DEVICE_INFO", "DEVICE_PORT");
-	deviceUsers = xml.getItemValues("DEVICE_INFO", "DEVICE_USER");
-	devicePasswords = xml.getItemValues("DEVICE_INFO", "DEVICE_PASSWORD");
-	devicePrompts = xml.getItemValues("DEVICE_INFO", "DEVICE_PROMPT");
-	remarks = xml.getItemValues("DEVICE_INFO", "REMARK");
 	typeNames = xml.getItemValues("DEVICE_INFO", "TYPE_NAME");
     
 	String[] deviceStatusDesc = {"在用","停用"};

@@ -21,7 +21,6 @@
     xml = XMLWrap.getRequestXml(request,session,application);
 	
 	deviceIds = xml.getInputValues("DEVICE_ID");
-	typeIds = xml.getInputValues("DEVICE_TYPE_ID");
 	deviceNameEn = xml.getInputValue("DEVICE_NAME_EN");
 	deviceNameCn = xml.getInputValue("DEVICE_NAME_CN");
 	deviceStatus = xml.getInputValue("DEVICE_STATUS");
@@ -138,7 +137,6 @@ function doSubmit(form) {
                <input type="hidden" name="FUNC_ID" value="PartDevicesCollectList">
               <%for(int n = 0;n < deviceIds.length;n++){ %>
                  <input type="hidden" name="DEVICE_ID" value="<%=deviceIds[n] %>">
-                  <input type="hidden" name="DEVICE_TYPE_ID" value="<%=typeIds[n] %>">
              <%} %>
                  <input type="hidden" name="DEVICE_NAME_EN" value="<%=deviceNameEn %>">
                  <input type="hidden" name="DEVICE_NAME_CN" value="<%=deviceNameCn %>">
@@ -151,7 +149,6 @@ function doSubmit(form) {
                <input type="hidden" name="FUNC_ID" value="DeviceCollectTaskAdd">
               <%for(int n = 0;n < deviceIds.length;n++){ %>
                  <input type="hidden" name="DEVICE_ID" value="<%=deviceIds[n] %>">
-                  <input type="hidden" name="DEVICE_TYPE_ID" value="<%=typeIds[n] %>">
              <%} %>
               <table border="0">
                 <tr>
