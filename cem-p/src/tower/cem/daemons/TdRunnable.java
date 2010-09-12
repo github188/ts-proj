@@ -37,6 +37,17 @@ public class TdRunnable implements Runnable {
 	this.ConfigLogsPath = TelnetDaemons.getTdconfigMsg("config_logs_path");
     }
 
+    public String collectDevicePortType(String collectString, String startLine) {
+
+	return "";
+    }
+
+    public Vector collectDevicePortsList(String collectString, int dataLine, int dataSeries,
+	    String vlanDivChar) {
+
+	return null;
+    }
+
     public double collectRxpValue(String collectString, String startString, String beginString,
 	    String endString, String pos) {
 
@@ -652,7 +663,9 @@ public class TdRunnable implements Runnable {
 		sSql = " select device_id, device_name_en, front_host_id, device_ip, device_port, "
 			+ " device_user, device_password, device_prompt, collect_commands, "
 			+ " rxp_line_start, rxp_value_start, rxp_value_end, rxp_value_pos, "
-			+ " user_prompt, password_prompt, prompt_lines  " + " from device_info, device_type"
+			+ " ports_list_commands, ports_data_row, ports_data_series, vlan_div_char,"
+			+ " user_prompt, password_prompt, prompt_lines, port_type_start  "
+			+ " from device_info, device_type"
 			+ " where device_info.type_id = device_type.type_id"
 			+ " and device_info.device_status ='N'";
 
@@ -680,7 +693,6 @@ public class TdRunnable implements Runnable {
 		    enDeviceInfo.setDeviceUser(rs.getString("DEVICE_USER"));
 		    enDeviceInfo.setDevicePassword(rs.getString("DEVICE_PASSWORD"));
 		    enDeviceInfo.setDevicePrompt(rs.getString("DEVICE_PROMPT"));
-		    enDeviceInfo.setRemark(rs.getString("COLLECT_COMMANDS"));
 		    enDeviceInfo.setUserPrompt(rs.getString("USER_PROMPT"));
 		    enDeviceInfo.setPasswordPrompt(rs.getString("PASSWORD_PROMPT"));
 		    vDeviceInfo.add(enDeviceInfo);
@@ -691,6 +703,12 @@ public class TdRunnable implements Runnable {
 		    enDeviceType.setRxpValueEnd(rs.getString("RXP_VALUE_END"));
 		    enDeviceType.setRxpValuePos(rs.getString("RXP_VALUE_POS"));
 		    enDeviceType.setPromptLines(rs.getInt("PROMPT_LINES"));
+		    enDeviceType.setPortsListCommands(rs.getString("PORTS_LIST_COMMANDS"));
+		    enDeviceType.setPortsDataRow(rs.getInt("PORTS_DATA_ROW"));
+		    enDeviceType.setPortsDataSeries(rs.getInt("PORTS_DATA_SERIES"));
+		    enDeviceType.setVlanDivChar(rs.getString("VLAN_DIV_CHAR"));
+		    enDeviceType.setPortTypeStart(rs.getString("PORT_TYPE_START"));
+		    enDeviceType.setCollectCommands(rs.getString("COLLECT_COMMANDS"));
 		    if (enDeviceType.getPromptLines() < 1)
 			enDeviceType.setPromptLines(1);
 		    vDeviceType.add(enDeviceType);
@@ -789,22 +807,28 @@ public class TdRunnable implements Runnable {
 		    }
 
 		    // 执行端口数据采集命令
+
 		    if (sGenResult.equals("S")) {
-			String sRxpCommLine = enDeviceInfo.getRemark();
 
 			// 查询设备的端口列表
-			sSql = "select * from device_port_info where device_id ='"
-				+ enDeviceInfo.getDeviceId() + "' and status ='N'";
-			rs = DaemonsDBPool.doQuery(conn, sSql);
-			
-			while (rs.next()) {
-			    String portId = rs.getString("PORT_ID");
-			    String portSn = rs.getString("PORT_SN");
-			    String sCommLine = sRxpCommLine.replaceAll("%PORT", portSn);
+			sResult = nt.sendCommand(enDeviceType.getPortsListCommands(), enDeviceType
+				.getPromptLines());
+			sbResult.append(sResult);
+
+			Vector devicePorts;
+			devicePorts = this.collectDevicePortsList(sResult, enDeviceType.getPortsDataRow(),
+				enDeviceType.getPortsDataSeries(), enDeviceType.getVlanDivChar());
+
+			for (int j = 0; j < devicePorts.size(); j++) {
+			    String portSn = (String) devicePorts.get(j);
+			    String sCommLine = enDeviceType.getCollectCommands().replaceAll("%PORT", portSn);
 
 			    if (!(sCommLine == null || sCommLine.trim().length() == 0)) {
 				sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines());
 				sbResult.append(sResult);
+
+				String portType = this.collectDevicePortType(sResult, enDeviceType
+					.getPortTypeStart());
 
 				double rxp = this.collectRxpValue(sResult, enDeviceType.getRxpLineStart(),
 					enDeviceType.getRxpValueStart(), enDeviceType.getRxpValueEnd(),
@@ -813,7 +837,7 @@ public class TdRunnable implements Runnable {
 				if (rxp < RX_MAX_VALUE) {
 				    sSql = "insert into device_port_rxp values ('" + enSendList.getSendId()
 					    + "', '" + enDeviceInfo.getDeviceId() + "', '"
-					    + enDeviceInfo.getDeviceNameEn() + "', '" + portId + "', '"
+					    + enDeviceInfo.getDeviceNameEn() + "', '" + portType + "', '"
 					    + portSn + "', " + rxp + ")";
 
 				    iSaveFlag = DaemonsDBPool.doUpdate(conn, sSql);
