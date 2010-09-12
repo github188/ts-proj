@@ -35,14 +35,44 @@ public class EnDeviceType implements java.io.Serializable {
     private String inspectCommandsExp;
 
     /**
-     * Type : text Name : COLLECT_COMMANDS
+     * Type : int Name : PROMPT_LINES
      */
-    private String collectCommands;
+    private int promptLines;
 
     /**
      * Type : text Name : CONFIG_COMMANDS
      */
     private String configCommands;
+
+    /**
+     * Type : text Name : PORTS_LIST_COMMANDS
+     */
+    private String portsListCommands;
+
+    /**
+     * Type : int Name : PORTS_DATA_ROW
+     */
+    private int portsDataRow;
+
+    /**
+     * Type : int Name : PORTS_DATA_SERIES
+     */
+    private int portsDataSeries;
+
+    /**
+     * Type : varchar(10) Name : VLAN_DIV_CHAR
+     */
+    private String vlanDivChar;
+
+    /**
+     * Type : text Name : COLLECT_COMMANDS
+     */
+    private String collectCommands;
+
+    /**
+     * Type : varchar(50) Name : PORT_TYPE_START
+     */
+    private String portTypeStart;
 
     /**
      * Type : varchar(50) Name : RXP_LINE_START
@@ -75,11 +105,6 @@ public class EnDeviceType implements java.io.Serializable {
     private String remark;
 
     /**
-     * Type : int unsigned Name : PROMPT_LINES
-     */
-    private int promptLines;
-
-    /**
      * Type : char(6) Name : TYPE_ID modify flag
      */
     private boolean _flagTypeId;
@@ -105,14 +130,44 @@ public class EnDeviceType implements java.io.Serializable {
     private boolean _flagInspectCommandsExp;
 
     /**
-     * Type : text Name : COLLECT_COMMANDS modify flag
+     * Type : int Name : PROMPT_LINES modify flag
      */
-    private boolean _flagCollectCommands;
+    private boolean _flagPromptLines;
 
     /**
      * Type : text Name : CONFIG_COMMANDS modify flag
      */
     private boolean _flagConfigCommands;
+
+    /**
+     * Type : text Name : PORTS_LIST_COMMANDS modify flag
+     */
+    private boolean _flagPortsListCommands;
+
+    /**
+     * Type : int Name : PORTS_DATA_ROW modify flag
+     */
+    private boolean _flagPortsDataRow;
+
+    /**
+     * Type : int Name : PORTS_DATA_SERIES modify flag
+     */
+    private boolean _flagPortsDataSeries;
+
+    /**
+     * Type : varchar(10) Name : VLAN_DIV_CHAR modify flag
+     */
+    private boolean _flagVlanDivChar;
+
+    /**
+     * Type : text Name : COLLECT_COMMANDS modify flag
+     */
+    private boolean _flagCollectCommands;
+
+    /**
+     * Type : varchar(50) Name : PORT_TYPE_START modify flag
+     */
+    private boolean _flagPortTypeStart;
 
     /**
      * Type : varchar(50) Name : RXP_LINE_START modify flag
@@ -143,11 +198,6 @@ public class EnDeviceType implements java.io.Serializable {
      * Type : varchar(200) Name : REMARK modify flag
      */
     private boolean _flagRemark;
-
-    /**
-     * Type : int unsigned Name : PROMPT_LINES modify flag
-     */
-    private boolean _flagPromptLines;
 
     /**
      * Sets the value for typeId
@@ -260,25 +310,25 @@ public class EnDeviceType implements java.io.Serializable {
     }
 
     /**
-     * Sets the value for collectCommands
+     * Sets the value for promptLines
      */
-    public void setCollectCommands(String collectCommands) {
-        this.collectCommands = collectCommands;
-        this._flagCollectCommands = true;
+    public void setPromptLines(int promptLines) {
+        this.promptLines = promptLines;
+        this._flagPromptLines = true;
     }
 
     /**
-     * Gets the value for collectCommands
+     * Gets the value for promptLines
      */
-    public String getCollectCommands() {
-        return collectCommands;
+    public int getPromptLines() {
+        return promptLines;
     }
 
     /**
-     * has the value for collectCommands changed?
+     * has the value for promptLines changed?
      */
-    public boolean hasChangeCollectCommands() {
-        return _flagCollectCommands;
+    public boolean hasChangePromptLines() {
+        return _flagPromptLines;
     }
 
     /**
@@ -301,6 +351,138 @@ public class EnDeviceType implements java.io.Serializable {
      */
     public boolean hasChangeConfigCommands() {
         return _flagConfigCommands;
+    }
+
+    /**
+     * Sets the value for portsListCommands
+     */
+    public void setPortsListCommands(String portsListCommands) {
+        this.portsListCommands = portsListCommands;
+        this._flagPortsListCommands = true;
+    }
+
+    /**
+     * Gets the value for portsListCommands
+     */
+    public String getPortsListCommands() {
+        return portsListCommands;
+    }
+
+    /**
+     * has the value for portsListCommands changed?
+     */
+    public boolean hasChangePortsListCommands() {
+        return _flagPortsListCommands;
+    }
+
+    /**
+     * Sets the value for portsDataRow
+     */
+    public void setPortsDataRow(int portsDataRow) {
+        this.portsDataRow = portsDataRow;
+        this._flagPortsDataRow = true;
+    }
+
+    /**
+     * Gets the value for portsDataRow
+     */
+    public int getPortsDataRow() {
+        return portsDataRow;
+    }
+
+    /**
+     * has the value for portsDataRow changed?
+     */
+    public boolean hasChangePortsDataRow() {
+        return _flagPortsDataRow;
+    }
+
+    /**
+     * Sets the value for portsDataSeries
+     */
+    public void setPortsDataSeries(int portsDataSeries) {
+        this.portsDataSeries = portsDataSeries;
+        this._flagPortsDataSeries = true;
+    }
+
+    /**
+     * Gets the value for portsDataSeries
+     */
+    public int getPortsDataSeries() {
+        return portsDataSeries;
+    }
+
+    /**
+     * has the value for portsDataSeries changed?
+     */
+    public boolean hasChangePortsDataSeries() {
+        return _flagPortsDataSeries;
+    }
+
+    /**
+     * Sets the value for vlanDivChar
+     */
+    public void setVlanDivChar(String vlanDivChar) {
+        this.vlanDivChar = vlanDivChar;
+        this._flagVlanDivChar = true;
+    }
+
+    /**
+     * Gets the value for vlanDivChar
+     */
+    public String getVlanDivChar() {
+        return vlanDivChar;
+    }
+
+    /**
+     * has the value for vlanDivChar changed?
+     */
+    public boolean hasChangeVlanDivChar() {
+        return _flagVlanDivChar;
+    }
+
+    /**
+     * Sets the value for collectCommands
+     */
+    public void setCollectCommands(String collectCommands) {
+        this.collectCommands = collectCommands;
+        this._flagCollectCommands = true;
+    }
+
+    /**
+     * Gets the value for collectCommands
+     */
+    public String getCollectCommands() {
+        return collectCommands;
+    }
+
+    /**
+     * has the value for collectCommands changed?
+     */
+    public boolean hasChangeCollectCommands() {
+        return _flagCollectCommands;
+    }
+
+    /**
+     * Sets the value for portTypeStart
+     */
+    public void setPortTypeStart(String portTypeStart) {
+        this.portTypeStart = portTypeStart;
+        this._flagPortTypeStart = true;
+    }
+
+    /**
+     * Gets the value for portTypeStart
+     */
+    public String getPortTypeStart() {
+        return portTypeStart;
+    }
+
+    /**
+     * has the value for portTypeStart changed?
+     */
+    public boolean hasChangePortTypeStart() {
+        return _flagPortTypeStart;
     }
 
     /**
@@ -433,28 +615,6 @@ public class EnDeviceType implements java.io.Serializable {
      */
     public boolean hasChangeRemark() {
         return _flagRemark;
-    }
-
-    /**
-     * Sets the value for promptLines
-     */
-    public void setPromptLines(int promptLines) {
-        this.promptLines = promptLines;
-        this._flagPromptLines = true;
-    }
-
-    /**
-     * Gets the value for promptLines
-     */
-    public int getPromptLines() {
-        return promptLines;
-    }
-
-    /**
-     * has the value for promptLines changed?
-     */
-    public boolean hasChangePromptLines() {
-        return _flagPromptLines;
     }
 
 }

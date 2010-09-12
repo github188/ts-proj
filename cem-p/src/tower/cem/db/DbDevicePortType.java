@@ -31,7 +31,7 @@ public class DbDevicePortType extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
 
-        query.append("insert into device_port_type ( TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,STANDARD_RX_MAX,STANDARD_RX_MIN,NETWORK_RX_MIN,REMARK ) values ( ");
+        query.append("insert into device_port_type ( TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,STANDARD_RX_MAX,STANDARD_RX_MIN,NETWORK_RX_MAX,NETWORK_RX_MIN,REMARK ) values ( ");
         query.append(formatString(en.getTypeId()));
         query.append(",");
         query.append(formatString(en.getTypeNameEn()));
@@ -41,6 +41,8 @@ public class DbDevicePortType extends RootDB{
         query.append(en.getStandardRxMax());
         query.append(",");
         query.append(en.getStandardRxMin());
+        query.append(",");
+        query.append(en.getNetworkRxMax());
         query.append(",");
         query.append(en.getNetworkRxMin());
         query.append(",");
@@ -116,6 +118,14 @@ public class DbDevicePortType extends RootDB{
             query.append(en.getStandardRxMin());
             bChanged = true;
         }
+        if(en.hasChangeNetworkRxMax()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("NETWORK_RX_MAX=");
+            query.append(en.getNetworkRxMax());
+            bChanged = true;
+        }
         if(en.hasChangeNetworkRxMin()) {
             if(bChanged){
                 query.append(",");
@@ -147,7 +157,7 @@ public class DbDevicePortType extends RootDB{
         EnDevicePortType res = null;
 
         StringBuffer query;
-        query = new StringBuffer("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,STANDARD_RX_MAX,STANDARD_RX_MIN,NETWORK_RX_MIN,REMARK from device_port_type");
+        query = new StringBuffer("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,STANDARD_RX_MAX,STANDARD_RX_MIN,NETWORK_RX_MAX,NETWORK_RX_MIN,REMARK from device_port_type");
 
         query.append(" where ");
         query.append("TYPE_ID=");
@@ -236,6 +246,14 @@ public class DbDevicePortType extends RootDB{
             query.append(en.getStandardRxMin());
             bChanged = true;
         }
+        if(en.hasChangeNetworkRxMax()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("NETWORK_RX_MAX=");
+            query.append(en.getNetworkRxMax());
+            bChanged = true;
+        }
         if(en.hasChangeNetworkRxMin()) {
             if(bChanged){
                 query.append(",");
@@ -267,7 +285,7 @@ public class DbDevicePortType extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,STANDARD_RX_MAX,STANDARD_RX_MIN,NETWORK_RX_MIN,REMARK from device_port_type");
+        query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,STANDARD_RX_MAX,STANDARD_RX_MIN,NETWORK_RX_MAX,NETWORK_RX_MIN,REMARK from device_port_type");
 
         query.append(" where ");
         query.append("TYPE_ID like ");
@@ -305,7 +323,7 @@ public class DbDevicePortType extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,STANDARD_RX_MAX,STANDARD_RX_MIN,NETWORK_RX_MIN,REMARK from device_port_type where ");
+        query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,STANDARD_RX_MAX,STANDARD_RX_MIN,NETWORK_RX_MAX,NETWORK_RX_MIN,REMARK from device_port_type where ");
         query.append(where);
         if(orderBy != null) {
             query.append(orderBy);
@@ -322,7 +340,7 @@ public class DbDevicePortType extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,STANDARD_RX_MAX,STANDARD_RX_MIN,NETWORK_RX_MIN,REMARK from device_port_type");
+        query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,STANDARD_RX_MAX,STANDARD_RX_MIN,NETWORK_RX_MAX,NETWORK_RX_MIN,REMARK from device_port_type");
 
         if(orderBy != null) {
             query.append(orderBy);
@@ -381,6 +399,14 @@ public class DbDevicePortType extends RootDB{
             query.append(en.getStandardRxMin());
             bChanged = true;
         }
+        if(en.hasChangeNetworkRxMax()) {
+            if(bChanged){
+                query.append(" and ");
+            }
+            query.append("NETWORK_RX_MAX=");
+            query.append(en.getNetworkRxMax());
+            bChanged = true;
+        }
         if(en.hasChangeNetworkRxMin()) {
             if(bChanged){
                 query.append(" and ");
@@ -398,9 +424,9 @@ public class DbDevicePortType extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,STANDARD_RX_MAX,STANDARD_RX_MIN,NETWORK_RX_MIN,REMARK from device_port_type where ");
+            query.insert(0,"select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,STANDARD_RX_MAX,STANDARD_RX_MIN,NETWORK_RX_MAX,NETWORK_RX_MIN,REMARK from device_port_type where ");
         } else {
-            query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,STANDARD_RX_MAX,STANDARD_RX_MIN,NETWORK_RX_MIN,REMARK from device_port_type");
+            query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,STANDARD_RX_MAX,STANDARD_RX_MIN,NETWORK_RX_MAX,NETWORK_RX_MIN,REMARK from device_port_type");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -459,6 +485,14 @@ public class DbDevicePortType extends RootDB{
             query.append(en.getStandardRxMin());
             bChanged = true;
         }
+        if(en.hasChangeNetworkRxMax()) {
+            if(bChanged){
+                query.append(" and ");
+            }
+            query.append("NETWORK_RX_MAX=");
+            query.append(en.getNetworkRxMax());
+            bChanged = true;
+        }
         if(en.hasChangeNetworkRxMin()) {
             if(bChanged){
                 query.append(" and ");
@@ -476,9 +510,9 @@ public class DbDevicePortType extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,STANDARD_RX_MAX,STANDARD_RX_MIN,NETWORK_RX_MIN,REMARK from device_port_type where ");
+            query.insert(0,"select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,STANDARD_RX_MAX,STANDARD_RX_MIN,NETWORK_RX_MAX,NETWORK_RX_MIN,REMARK from device_port_type where ");
         } else {
-            query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,STANDARD_RX_MAX,STANDARD_RX_MIN,NETWORK_RX_MIN,REMARK from device_port_type");
+            query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,STANDARD_RX_MAX,STANDARD_RX_MIN,NETWORK_RX_MAX,NETWORK_RX_MIN,REMARK from device_port_type");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -582,6 +616,14 @@ public class DbDevicePortType extends RootDB{
             query.append(en.getStandardRxMin());
             bChanged = true;
         }
+        if(en.hasChangeNetworkRxMax()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("NETWORK_RX_MAX=");
+            query.append(en.getNetworkRxMax());
+            bChanged = true;
+        }
         if(en.hasChangeNetworkRxMin()) {
             if(bChanged){
                 query.append(",");
@@ -615,6 +657,7 @@ public class DbDevicePortType extends RootDB{
         en.setTypeNameCn(r.getString("TYPE_NAME_CN"));
         en.setStandardRxMax(r.getDouble("STANDARD_RX_MAX") == null ? 0 : r.getDouble("STANDARD_RX_MAX").doubleValue());
         en.setStandardRxMin(r.getDouble("STANDARD_RX_MIN") == null ? 0 : r.getDouble("STANDARD_RX_MIN").doubleValue());
+        en.setNetworkRxMax(r.getDouble("NETWORK_RX_MAX") == null ? 0 : r.getDouble("NETWORK_RX_MAX").doubleValue());
         en.setNetworkRxMin(r.getDouble("NETWORK_RX_MIN") == null ? 0 : r.getDouble("NETWORK_RX_MIN").doubleValue());
         en.setRemark(r.getString("REMARK"));
 
@@ -663,6 +706,12 @@ public class DbDevicePortType extends RootDB{
             en.setStandardRxMin(parseDouble(stmp));
         }
 
+        otmp = xml.getInputObject("NETWORK_RX_MAX");
+        stmp = (String)otmp;
+        if (stmp != null && stmp.length() > 0) {
+            en.setNetworkRxMax(parseDouble(stmp));
+        }
+
         otmp = xml.getInputObject("NETWORK_RX_MIN");
         stmp = (String)otmp;
         if (stmp != null && stmp.length() > 0) {
@@ -688,6 +737,7 @@ public class DbDevicePortType extends RootDB{
         Object[] oTypeNameCn;
         Object[] oStandardRxMax;
         Object[] oStandardRxMin;
+        Object[] oNetworkRxMax;
         Object[] oNetworkRxMin;
         Object[] oRemark;
         int count = 0;
@@ -711,6 +761,10 @@ public class DbDevicePortType extends RootDB{
         oStandardRxMin = xml.getInputObjects("STANDARD_RX_MIN");
         if (count == 0 && oStandardRxMin.length > 0) {
             count = oStandardRxMin.length;
+        }
+        oNetworkRxMax = xml.getInputObjects("NETWORK_RX_MAX");
+        if (count == 0 && oNetworkRxMax.length > 0) {
+            count = oNetworkRxMax.length;
         }
         oNetworkRxMin = xml.getInputObjects("NETWORK_RX_MIN");
         if (count == 0 && oNetworkRxMin.length > 0) {
@@ -752,6 +806,13 @@ public class DbDevicePortType extends RootDB{
                 }
             }
 
+            if (oNetworkRxMax.length == count) {
+                stmp = (String)oNetworkRxMax[i];
+                if (stmp != null && stmp.length() > 0) {
+                    en.setNetworkRxMax(parseDouble(stmp));
+                }
+            }
+
             if (oNetworkRxMin.length == count) {
                 stmp = (String)oNetworkRxMin[i];
                 if (stmp != null && stmp.length() > 0) {
@@ -779,6 +840,7 @@ public class DbDevicePortType extends RootDB{
         xml.setItemValue("DEVICE_PORT_TYPE",row,"TYPE_NAME_CN",en.getTypeNameCn());
         xml.setItemValue("DEVICE_PORT_TYPE",row,"STANDARD_RX_MAX",en.getStandardRxMax());
         xml.setItemValue("DEVICE_PORT_TYPE",row,"STANDARD_RX_MIN",en.getStandardRxMin());
+        xml.setItemValue("DEVICE_PORT_TYPE",row,"NETWORK_RX_MAX",en.getNetworkRxMax());
         xml.setItemValue("DEVICE_PORT_TYPE",row,"NETWORK_RX_MIN",en.getNetworkRxMin());
         xml.setItemValue("DEVICE_PORT_TYPE",row,"REMARK",en.getRemark());
         return row;
@@ -798,6 +860,7 @@ public class DbDevicePortType extends RootDB{
             xml.setItemValue("DEVICE_PORT_TYPE",row,"TYPE_NAME_CN",en.getTypeNameCn());
             xml.setItemValue("DEVICE_PORT_TYPE",row,"STANDARD_RX_MAX",en.getStandardRxMax());
             xml.setItemValue("DEVICE_PORT_TYPE",row,"STANDARD_RX_MIN",en.getStandardRxMin());
+            xml.setItemValue("DEVICE_PORT_TYPE",row,"NETWORK_RX_MAX",en.getNetworkRxMax());
             xml.setItemValue("DEVICE_PORT_TYPE",row,"NETWORK_RX_MIN",en.getNetworkRxMin());
             xml.setItemValue("DEVICE_PORT_TYPE",row,"REMARK",en.getRemark());
         }

@@ -35,6 +35,11 @@ public class EnDevicePortType implements java.io.Serializable {
     private double standardRxMin;
 
     /**
+     * Type : decimal Name : NETWORK_RX_MAX
+     */
+    private double networkRxMax;
+
+    /**
      * Type : decimal Name : NETWORK_RX_MIN
      */
     private double networkRxMin;
@@ -68,6 +73,11 @@ public class EnDevicePortType implements java.io.Serializable {
      * Type : decimal Name : STANDARD_RX_MIN modify flag
      */
     private boolean _flagStandardRxMin;
+
+    /**
+     * Type : decimal Name : NETWORK_RX_MAX modify flag
+     */
+    private boolean _flagNetworkRxMax;
 
     /**
      * Type : decimal Name : NETWORK_RX_MIN modify flag
@@ -187,6 +197,28 @@ public class EnDevicePortType implements java.io.Serializable {
      */
     public boolean hasChangeStandardRxMin() {
         return _flagStandardRxMin;
+    }
+
+    /**
+     * Sets the value for networkRxMax
+     */
+    public void setNetworkRxMax(double networkRxMax) {
+        this.networkRxMax = networkRxMax;
+        this._flagNetworkRxMax = true;
+    }
+
+    /**
+     * Gets the value for networkRxMax
+     */
+    public double getNetworkRxMax() {
+        return networkRxMax;
+    }
+
+    /**
+     * has the value for networkRxMax changed?
+     */
+    public boolean hasChangeNetworkRxMax() {
+        return _flagNetworkRxMax;
     }
 
     /**

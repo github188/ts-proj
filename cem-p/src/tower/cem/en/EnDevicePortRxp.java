@@ -25,9 +25,9 @@ public class EnDevicePortRxp implements java.io.Serializable {
     private String deviceName;
 
     /**
-     * Type : char(6) Name : PORT_ID
+     * Type : varchar(60) Name : PORT_TYPE
      */
-    private String portId;
+    private String portType;
 
     /**
      * Type : varchar(60) Name : PORT_SN
@@ -55,9 +55,9 @@ public class EnDevicePortRxp implements java.io.Serializable {
     private boolean _flagDeviceName;
 
     /**
-     * Type : char(6) Name : PORT_ID modify flag
+     * Type : varchar(60) Name : PORT_TYPE modify flag
      */
-    private boolean _flagPortId;
+    private boolean _flagPortType;
 
     /**
      * Type : varchar(60) Name : PORT_SN modify flag
@@ -136,25 +136,25 @@ public class EnDevicePortRxp implements java.io.Serializable {
     }
 
     /**
-     * Sets the value for portId
+     * Sets the value for portType
      */
-    public void setPortId(String portId) {
-        this.portId = portId;
-        this._flagPortId = true;
+    public void setPortType(String portType) {
+        this.portType = portType;
+        this._flagPortType = true;
     }
 
     /**
-     * Gets the value for portId
+     * Gets the value for portType
      */
-    public String getPortId() {
-        return portId;
+    public String getPortType() {
+        return portType;
     }
 
     /**
-     * has the value for portId changed?
+     * has the value for portType changed?
      */
-    public boolean hasChangePortId() {
-        return _flagPortId;
+    public boolean hasChangePortType() {
+        return _flagPortType;
     }
 
     /**

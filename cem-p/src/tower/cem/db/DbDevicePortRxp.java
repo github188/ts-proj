@@ -30,14 +30,14 @@ public class DbDevicePortRxp extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
 
-        query.append("insert into device_port_rxp ( SEND_ID,DEVICE_ID,DEVICE_NAME,PORT_ID,PORT_SN,RXP ) values ( ");
+        query.append("insert into device_port_rxp ( SEND_ID,DEVICE_ID,DEVICE_NAME,PORT_TYPE,PORT_SN,RXP ) values ( ");
         query.append(formatString(en.getSendId()));
         query.append(",");
         query.append(formatString(en.getDeviceId()));
         query.append(",");
         query.append(formatString(en.getDeviceName()));
         query.append(",");
-        query.append(formatString(en.getPortId()));
+        query.append(formatString(en.getPortType()));
         query.append(",");
         query.append(formatString(en.getPortSn()));
         query.append(",");
@@ -55,7 +55,7 @@ public class DbDevicePortRxp extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select SEND_ID,DEVICE_ID,DEVICE_NAME,PORT_ID,PORT_SN,RXP from device_port_rxp where ");
+        query.append("select SEND_ID,DEVICE_ID,DEVICE_NAME,PORT_TYPE,PORT_SN,RXP from device_port_rxp where ");
         query.append(where);
         if(orderBy != null) {
             query.append(orderBy);
@@ -72,7 +72,7 @@ public class DbDevicePortRxp extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select SEND_ID,DEVICE_ID,DEVICE_NAME,PORT_ID,PORT_SN,RXP from device_port_rxp");
+        query.append("select SEND_ID,DEVICE_ID,DEVICE_NAME,PORT_TYPE,PORT_SN,RXP from device_port_rxp");
 
         if(orderBy != null) {
             query.append(orderBy);
@@ -115,12 +115,12 @@ public class DbDevicePortRxp extends RootDB{
             query.append(formatString(en.getDeviceName()));
             bChanged = true;
         }
-        if(en.hasChangePortId()) {
+        if(en.hasChangePortType()) {
             if(bChanged){
                 query.append(" and ");
             }
-            query.append("PORT_ID=");
-            query.append(formatString(en.getPortId()));
+            query.append("PORT_TYPE=");
+            query.append(formatString(en.getPortType()));
             bChanged = true;
         }
         if(en.hasChangePortSn()) {
@@ -140,9 +140,9 @@ public class DbDevicePortRxp extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select SEND_ID,DEVICE_ID,DEVICE_NAME,PORT_ID,PORT_SN,RXP from device_port_rxp where ");
+            query.insert(0,"select SEND_ID,DEVICE_ID,DEVICE_NAME,PORT_TYPE,PORT_SN,RXP from device_port_rxp where ");
         } else {
-            query.append("select SEND_ID,DEVICE_ID,DEVICE_NAME,PORT_ID,PORT_SN,RXP from device_port_rxp");
+            query.append("select SEND_ID,DEVICE_ID,DEVICE_NAME,PORT_TYPE,PORT_SN,RXP from device_port_rxp");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -185,12 +185,12 @@ public class DbDevicePortRxp extends RootDB{
             query.append(formatString(en.getDeviceName()));
             bChanged = true;
         }
-        if(en.hasChangePortId()) {
+        if(en.hasChangePortType()) {
             if(bChanged){
                 query.append(" and ");
             }
-            query.append("PORT_ID like ");
-            query.append(formatString(en.getPortId()));
+            query.append("PORT_TYPE like ");
+            query.append(formatString(en.getPortType()));
             bChanged = true;
         }
         if(en.hasChangePortSn()) {
@@ -210,9 +210,9 @@ public class DbDevicePortRxp extends RootDB{
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select SEND_ID,DEVICE_ID,DEVICE_NAME,PORT_ID,PORT_SN,RXP from device_port_rxp where ");
+            query.insert(0,"select SEND_ID,DEVICE_ID,DEVICE_NAME,PORT_TYPE,PORT_SN,RXP from device_port_rxp where ");
         } else {
-            query.append("select SEND_ID,DEVICE_ID,DEVICE_NAME,PORT_ID,PORT_SN,RXP from device_port_rxp");
+            query.append("select SEND_ID,DEVICE_ID,DEVICE_NAME,PORT_TYPE,PORT_SN,RXP from device_port_rxp");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -300,12 +300,12 @@ public class DbDevicePortRxp extends RootDB{
             query.append(formatString(en.getDeviceName()));
             bChanged = true;
         }
-        if(en.hasChangePortId()) {
+        if(en.hasChangePortType()) {
             if(bChanged){
                 query.append(",");
             }
-            query.append("PORT_ID=");
-            query.append(formatString(en.getPortId()));
+            query.append("PORT_TYPE=");
+            query.append(formatString(en.getPortType()));
             bChanged = true;
         }
         if(en.hasChangePortSn()) {
@@ -339,7 +339,7 @@ public class DbDevicePortRxp extends RootDB{
         en.setSendId(r.getString("SEND_ID"));
         en.setDeviceId(r.getString("DEVICE_ID"));
         en.setDeviceName(r.getString("DEVICE_NAME"));
-        en.setPortId(r.getString("PORT_ID"));
+        en.setPortType(r.getString("PORT_TYPE"));
         en.setPortSn(r.getString("PORT_SN"));
         en.setRxp(r.getDouble("RXP") == null ? 0 : r.getDouble("RXP").doubleValue());
 
@@ -376,9 +376,9 @@ public class DbDevicePortRxp extends RootDB{
         stmp = (String)otmp;
         en.setDeviceName(stmp);
 
-        otmp = xml.getInputObject("PORT_ID");
+        otmp = xml.getInputObject("PORT_TYPE");
         stmp = (String)otmp;
-        en.setPortId(stmp);
+        en.setPortType(stmp);
 
         otmp = xml.getInputObject("PORT_SN");
         stmp = (String)otmp;
@@ -403,7 +403,7 @@ public class DbDevicePortRxp extends RootDB{
         Object[] oSendId;
         Object[] oDeviceId;
         Object[] oDeviceName;
-        Object[] oPortId;
+        Object[] oPortType;
         Object[] oPortSn;
         Object[] oRxp;
         int count = 0;
@@ -420,9 +420,9 @@ public class DbDevicePortRxp extends RootDB{
         if (count == 0 && oDeviceName.length > 0) {
             count = oDeviceName.length;
         }
-        oPortId = xml.getInputObjects("PORT_ID");
-        if (count == 0 && oPortId.length > 0) {
-            count = oPortId.length;
+        oPortType = xml.getInputObjects("PORT_TYPE");
+        if (count == 0 && oPortType.length > 0) {
+            count = oPortType.length;
         }
         oPortSn = xml.getInputObjects("PORT_SN");
         if (count == 0 && oPortSn.length > 0) {
@@ -450,9 +450,9 @@ public class DbDevicePortRxp extends RootDB{
                 en.setDeviceName(stmp);
             }
 
-            if (oPortId.length == count) {
-                stmp = (String)oPortId[i];
-                en.setPortId(stmp);
+            if (oPortType.length == count) {
+                stmp = (String)oPortType[i];
+                en.setPortType(stmp);
             }
 
             if (oPortSn.length == count) {
@@ -480,7 +480,7 @@ public class DbDevicePortRxp extends RootDB{
         xml.setItemValue("DEVICE_PORT_RXP",row,"SEND_ID",en.getSendId());
         xml.setItemValue("DEVICE_PORT_RXP",row,"DEVICE_ID",en.getDeviceId());
         xml.setItemValue("DEVICE_PORT_RXP",row,"DEVICE_NAME",en.getDeviceName());
-        xml.setItemValue("DEVICE_PORT_RXP",row,"PORT_ID",en.getPortId());
+        xml.setItemValue("DEVICE_PORT_RXP",row,"PORT_TYPE",en.getPortType());
         xml.setItemValue("DEVICE_PORT_RXP",row,"PORT_SN",en.getPortSn());
         xml.setItemValue("DEVICE_PORT_RXP",row,"RXP",en.getRxp());
         return row;
@@ -498,7 +498,7 @@ public class DbDevicePortRxp extends RootDB{
             xml.setItemValue("DEVICE_PORT_RXP",row,"SEND_ID",en.getSendId());
             xml.setItemValue("DEVICE_PORT_RXP",row,"DEVICE_ID",en.getDeviceId());
             xml.setItemValue("DEVICE_PORT_RXP",row,"DEVICE_NAME",en.getDeviceName());
-            xml.setItemValue("DEVICE_PORT_RXP",row,"PORT_ID",en.getPortId());
+            xml.setItemValue("DEVICE_PORT_RXP",row,"PORT_TYPE",en.getPortType());
             xml.setItemValue("DEVICE_PORT_RXP",row,"PORT_SN",en.getPortSn());
             xml.setItemValue("DEVICE_PORT_RXP",row,"RXP",en.getRxp());
         }
