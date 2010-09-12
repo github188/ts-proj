@@ -790,17 +790,17 @@ public class TdRunnable implements Runnable {
 
 		    // 执行端口数据采集命令
 		    if (sGenResult.equals("S")) {
-			String sCommLine = enDeviceInfo.getRemark();
+			String sRxpCommLine = enDeviceInfo.getRemark();
 
 			// 查询设备的端口列表
 			sSql = "select * from device_port_info where device_id ='"
 				+ enDeviceInfo.getDeviceId() + "' and status ='N'";
 			rs = DaemonsDBPool.doQuery(conn, sSql);
-
+			
 			while (rs.next()) {
 			    String portId = rs.getString("PORT_ID");
 			    String portSn = rs.getString("PORT_SN");
-			    sCommLine = sCommLine.replaceAll("%PORT", portSn);
+			    String sCommLine = sRxpCommLine.replaceAll("%PORT", portSn);
 
 			    if (!(sCommLine == null || sCommLine.trim().length() == 0)) {
 				sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines());
