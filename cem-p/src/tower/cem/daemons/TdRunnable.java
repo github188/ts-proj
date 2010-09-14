@@ -39,13 +39,96 @@ public class TdRunnable implements Runnable {
 
     public String collectDevicePortType(String collectString, String startLine) {
 
+	String result;
+	String results[];
+	result = collectString;
+
+	if (startLine == null || startLine.length() == 0) {
+	    return "";
+	}
+
+	// 根据行起始符，截取自起始符之后的字符串
+	int ipos = result.indexOf(startLine);
+	if (ipos < 0) {
+	    return "";
+	}
+
+	result = result.substring(ipos, result.length());
+
+	// 将截取到的字符串按行分隔开，并取得第一行
+	results = result.split("\n");
+	if (results.length > 0) {
+	    result = results[0];
+	    result = result.substring(startLine.length()).trim();
+	    return result;
+	}
+
 	return "";
     }
 
     public Vector collectDevicePortsList(String collectString, int dataLine, int dataSeries,
-	    String vlanDivChar) {
+	    String vlanDivChar, int promptLines) {
 
-	return null;
+	Vector vPortsList = new Vector();
+	String result;
+	String results[];
+
+	result = collectString;
+
+	// 将数据以回车符分隔开
+	results = result.split("\n");
+
+	// 自起始行逐行处理数据
+	for (int i = dataLine; i < results.length - promptLines; i++) {
+	    String lineData = results[i];
+
+	    // 将一行数据以空格分隔开
+	    String portsData[] = lineData.split(" ");
+
+	    Vector vPortsData = new Vector();
+
+	    // 将一行数据的各列去除空格保存到Vector中
+	    for (int j = 0; j < portsData.length; j++) {
+		String portData = portsData[j].trim();
+		if (portData != null && portData.length() > 0) {
+		    vPortsData.add(portData);
+		}
+	    }
+
+	    for (int j = 0; j < vPortsData.size(); j++) {
+		// 读取指定列的内容，做为端口名称
+		if (j == dataSeries - 1) {
+		    String portData = (String) vPortsData.get(j);
+		    // 除去vlan划分标识符之后的内容
+		    if (vlanDivChar != null && vlanDivChar.length() > 0) {
+			int iPos = portData.indexOf(vlanDivChar);
+			if (iPos > 0) {
+			    portData = portData.substring(0, iPos - 1);
+			} else if (iPos == 0) {
+			    portData = "";
+			}
+		    }
+		    portData = portData.trim();
+
+		    if (portData != null && portData.length() > 0) {
+			boolean bExist = false;
+			// 检查端口名称在返回结果集中已经存在
+			for (int k = 0; k < vPortsList.size(); k++) {
+			    String portValue = (String) vPortsList.get(k);
+			    if (portValue.equals(portData)) {
+				bExist = true;
+			    }
+			}
+			// 当不存在时，加入到返回结果集中
+			if (!bExist) {
+			    vPortsList.add(portData);
+			}
+		    }
+		}
+	    }
+	}
+
+	return vPortsList;
     }
 
     public double collectRxpValue(String collectString, String startString, String beginString,
@@ -810,30 +893,34 @@ public class TdRunnable implements Runnable {
 
 		    if (sGenResult.equals("S")) {
 
-			// 查询设备的端口列表
+			// 执行获取设备端口列表指令
 			sResult = nt.sendCommand(enDeviceType.getPortsListCommands(), enDeviceType
 				.getPromptLines());
 			sbResult.append(sResult);
 
+			// 提取设备的端口列表
 			Vector devicePorts;
 			devicePorts = this.collectDevicePortsList(sResult, enDeviceType.getPortsDataRow(),
-				enDeviceType.getPortsDataSeries(), enDeviceType.getVlanDivChar());
+				enDeviceType.getPortsDataSeries(), enDeviceType.getVlanDivChar(),
+				enDeviceType.getPromptLines());
 
+			// 逐个端口采集数据
 			for (int j = 0; j < devicePorts.size(); j++) {
 			    String portSn = (String) devicePorts.get(j);
+			    // 构造端口数据采集指令
 			    String sCommLine = enDeviceType.getCollectCommands().replaceAll("%PORT", portSn);
-
 			    if (!(sCommLine == null || sCommLine.trim().length() == 0)) {
+				// 执行端口数据采集指令
 				sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines());
 				sbResult.append(sResult);
-
+				// 提取端口类型
 				String portType = this.collectDevicePortType(sResult, enDeviceType
 					.getPortTypeStart());
-
+				// 提取端口光功率指
 				double rxp = this.collectRxpValue(sResult, enDeviceType.getRxpLineStart(),
 					enDeviceType.getRxpValueStart(), enDeviceType.getRxpValueEnd(),
 					enDeviceType.getRxpValuePos());
-
+				// 保存端口光功率值
 				if (rxp < RX_MAX_VALUE) {
 				    sSql = "insert into device_port_rxp values ('" + enSendList.getSendId()
 					    + "', '" + enDeviceInfo.getDeviceId() + "', '"
