@@ -103,7 +103,7 @@ public class TdRunnable implements Runnable {
 		    if (vlanDivChar != null && vlanDivChar.length() > 0) {
 			int iPos = portData.indexOf(vlanDivChar);
 			if (iPos > 0) {
-			    portData = portData.substring(0, iPos - 1);
+			    portData = portData.substring(0, iPos);
 			} else if (iPos == 0) {
 			    portData = "";
 			}
