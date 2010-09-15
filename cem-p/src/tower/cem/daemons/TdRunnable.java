@@ -29,6 +29,8 @@ public class TdRunnable implements Runnable {
 
     private String ConfigLogsPath;
 
+    private int TelentTimeout = 30;
+
     public TdRunnable(EnCommandsSendList enCommandsSendList, Logger logger) {
 	this.enSendList = enCommandsSendList;
 	this.log = logger;
@@ -236,7 +238,7 @@ public class TdRunnable implements Runnable {
 	ResultSet rs = null;
 
 	NetTelnet nt = new NetTelnet();
-	nt.setTimeOut(30);
+	nt.setTimeOut(this.TelentTimeout);
 	StringBuffer sbResult = new StringBuffer();
 	StringBuffer sbPickLog = new StringBuffer();
 	String sResult = "";
