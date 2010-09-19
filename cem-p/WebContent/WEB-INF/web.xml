@@ -7,7 +7,7 @@
 
 	<servlet>
 		<servlet-name>tmvcController</servlet-name>
-		<servlet-class>tower.tmvc.RootServlet</servlet-class>
+		<servlet-class>tower.cem.servlet.CemServlet</servlet-class>
 		<init-param>
 			<param-name>module</param-name>
 			<param-value>cem</param-value>
