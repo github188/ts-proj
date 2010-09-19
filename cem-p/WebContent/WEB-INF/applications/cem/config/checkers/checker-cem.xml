@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkers>
+	<checker id="LogRecorder"
+		description="记录日志"
+		className="tower.cem.chk.LogRecorder"
+		forward="InLogin"
+		/>
+</checkers>
