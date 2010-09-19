@@ -52,15 +52,12 @@
 %>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>设备配置管理</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>设备类型管理</title>
 <jsp:include flush="true" page="../../../../sys/pages/common/include/css.jsp"></jsp:include>
 <jsp:include flush="true" page="../../../../sys/pages/common/include/js.jsp"></jsp:include>
-
 <script type="text/javascript">
-
 <!--
-    
   function doSelFrontHost(){
     selDialog("ctrl?FUNC_ID=SelectFrontHost","FRONT_HOST_ID","FRONT_HOST_NAME",850,550,false);
   }
@@ -84,38 +81,33 @@
     }
 -->
 </script>
-
 </head>
+
 <body id="mainArea">
   <div id="mainPanel" class="panel">
-    <%if(deviceId !=null && deviceId.length() != 0){ %>
+   <%if(deviceId !=null && deviceId.length() != 0){ %>
     <div class="panelHead">设备配置管理 - 编辑</div>
     <%}else{ %>
     <div class="panelHead">设备配置管理 - 添加</div>
     <%} %>
     <div class="panelContent">
       <div class="panelContent2">
+        
         <!-- Tab面板 -->
-        <div id="TabbedPanels1" class="TabbedPanels"> 
-        <ul class="TabbedPanelsTabGroup">
-        <%if(deviceId != null && deviceId.length() != 0){%>
-          <li class="TabbedPanelsTab TabbedPanelsTabSelected" tabindex="0" ><a onclick="window.location.href='ctrl?FUNC_ID=DeviceEdit&DEVICE_ID=<%=deviceId %>'">设备信息</a></li>
-          <li class="TabbedPanelsTab" tabindex="0"><a onclick="window.location.href='ctrl?FUNC_ID=DevicePortList&DEVICE_ID=<%=deviceId %>'">设备端口信息</a></li>
-        <%}else{ %>
-          <li class="TabbedPanelsTab TabbedPanelsTabSelected" tabindex="0" ><a onclick="window.location.href='ctrl?FUNC_ID=DeviceAdd'">设备信息</a></li>
-         <%} %>
-        </ul>
+        <div id="TabbedPanels1" class="TabbedPanels">
+        <div id="TabbedPanels1" class="TabbedPanels">
           <div class="TabbedPanelsContentGroup">
             <div class="TabbedPanelsContent">
               <!-- Tab内容 -->
                 <!-- 查询面板 -->
                 <div class="panelQuery">
+                 
                   <div class="panelHead"></div>
                   <div class="panelContent">
                     <div class="panelContent2">
                       <!-- 查询面板内容 -->
-                   <form action="ctrl" method="post"name="form1"onSubmit="return doSubmit(this)">
-                     <input type="hidden" name="FUNC_ID" value="DeviceSubmit">
+                   <form action="ctrl" method="post"name="form1" enctype="multipart/form-data" onSubmit="return doSubmit(this)">
+                    <input type="hidden" name="FUNC_ID" value="DeviceSubmit">
                       <input type="hidden" name="DEVICE_ID" value="<%=deviceId%>"> 
                      <table>
 						<tr>
@@ -306,8 +298,8 @@
       </div>
     </div>
     <div class="panelFoot"><div></div></div>
-    
-  <script type="text/javascript">
+  </div>
+   <script type="text/javascript">
 <!--
 var sprytextfield1 = new Spry.Widget.ValidationTextField("spryDeviceNameEn","none", {required:true,maxChars:60});
 var sprytextfield2 = new Spry.Widget.ValidationTextField("sprytDeviceAbbNameEn", {isRequired:false,maxChars:60});

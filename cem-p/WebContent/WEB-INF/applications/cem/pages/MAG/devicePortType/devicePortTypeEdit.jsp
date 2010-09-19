@@ -11,6 +11,7 @@
 	String standardRxMax;
 	String standardRxMin;
 	String netWorkRxMin;
+	String netWorkRxMax;
 	String remark;
 %>
 <%
@@ -21,6 +22,7 @@
     standardRxMax = xml.getItemValue("DEVICE_PORT_TYPE",1,"STANDARD_RX_MAX");
     standardRxMin = xml.getItemValue("DEVICE_PORT_TYPE",1,"STANDARD_RX_MIN");
     netWorkRxMin = xml.getItemValue("DEVICE_PORT_TYPE",1,"NETWORK_RX_MIN");
+    netWorkRxMax = xml.getItemValue("DEVICE_PORT_TYPE",1,"NETWORK_RX_MAX");
     remark = xml.getItemValue("DEVICE_PORT_TYPE",1,"REMARK");
 
 %>
@@ -152,6 +154,16 @@
 		                  </td>
 		               </tr>
 		                <tr>
+                          <td width="150" align="right">光功率/网络要求最大值：</td>
+		                  <td width="100">
+		                      <span id="spryNetWorkRxMax">
+             					 <input type="text" class="text" name="NETWORK_RX_MAX"value="<%=netWorkRxMax %>">
+             					   <span class="textfieldInvalidFormatMsg">格式无效，有效格式为实数。</span>
+		                            <span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
+		                            </span>
+		                  </td>
+		               </tr>
+		                <tr>
 		                 <td width="150" align="right">备注：</td>
 		                 <td colspan="3"> 
               			<span id="spryRemark">
@@ -196,6 +208,7 @@ var sprytextfield2 = new Spry.Widget.ValidationTextField("spryTypeNameCn", {isRe
 var sprytextfield3 = new Spry.Widget.ValidationTextField("sprytStandardRxMax","double", {isRequired:false,useCharacterMasking:true,maxChars:50});
 var sprytextfield4 = new Spry.Widget.ValidationTextField("sprytStandardRxMin", "double", {isRequired:false,useCharacterMasking:true,maxChars:50});
 var sprytextfield5 = new Spry.Widget.ValidationTextField("spryNetWorkRxMin", "double", {isRequired:false,useCharacterMasking:true,maxChars:50});
+var sprytextfield7 = new Spry.Widget.ValidationTextField("spryNetWorkRxMax", "double", {isRequired:false,useCharacterMasking:true,maxChars:50});
 var sprytextfield6 = new Spry.Widget.ValidationTextField("spryRemark",  {required:false,maxChars:200});
 
 //-->

@@ -16,7 +16,7 @@
 	String[] standardRxMaxs;
 	String[] standardRxMins;
 	String[] netWorkRxMins;
-	String[] remarks;
+	String[] netWorkRxMaxs;
 %>
 <%
     xml = XMLWrap.getRequestXml(request,session,application);
@@ -30,7 +30,7 @@
     standardRxMaxs = xml.getItemValues("DEVICE_PORT_TYPE","STANDARD_RX_MAX");
     standardRxMins = xml.getItemValues("DEVICE_PORT_TYPE","STANDARD_RX_MIN");
     netWorkRxMins = xml.getItemValues("DEVICE_PORT_TYPE","NETWORK_RX_MIN");
-    remarks = xml.getItemValues("DEVICE_PORT_TYPE","REMARK");
+    netWorkRxMaxs = xml.getItemValues("DEVICE_PORT_TYPE","NETWORK_RX_MAX");
     
 %>
 <html>
@@ -136,6 +136,7 @@ function doSubmit(form) {
                   <th>光功率/标准最大值</th>
                   <th>光功率/标准最小值</th>
                   <th>光功率/网络要求最小值</th>
+                  <th>光功率/网络要求最大值</th>
                   <th width="10%">[ <a href="JavaScript:doAdd()">添加</a> ]</th>
                 </tr>
               <%if(typeIds != null){
@@ -152,6 +153,7 @@ function doSubmit(form) {
                   <td align="center"><%=standardRxMaxs[i]%></td>
                   <td align="center"><%=standardRxMins[i]%></td>
                   <td align="center"><%=netWorkRxMins[i]%></td>
+                  <td align="center"><%=netWorkRxMaxs[i]%></td>
                  <td align="center" nowrap>[ <a href="JavaScript:doEdit('<%=typeIds[i] %>')">编辑</a> | <a href="JavaScript:doDelete('<%=typeIds[i] %>')">删除 </a>]</td>
                 </tr>
      
@@ -165,6 +167,7 @@ function doSubmit(form) {
                   <td align="center"><%=standardRxMaxs[i]%></td>
                   <td align="center"><%=standardRxMins[i]%></td>
                   <td align="center"><%=netWorkRxMins[i]%></td>
+                  <td align="center"><%=netWorkRxMaxs[i]%></td>
                   <td align="center" nowrap>[ <a href="JavaScript:doEdit('<%=typeIds[i] %>')">编辑</a> | <a href="JavaScript:doDelete('<%=typeIds[i] %>')">删除 </a>]</td>
                 </tr>
                <%}}} %>

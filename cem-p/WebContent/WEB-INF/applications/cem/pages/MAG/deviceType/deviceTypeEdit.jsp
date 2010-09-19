@@ -19,6 +19,12 @@
 	String rxpValueEnd;
 	String rxpValuePos;
 	String promptLines;
+	String portsListCommands;
+	String portsDataRow;
+	String portsDataSeries;
+	String vlanDivChar;
+	String portTypeStart;
+	
 %>
 <%
     xml = XMLWrap.getRequestXml(request,session,application);
@@ -36,6 +42,11 @@
     rxpValueEnd = xml.getItemValue("DEVICE_TYPE",1,"RXP_VALUE_END");
     rxpValuePos = xml.getItemValue("DEVICE_TYPE",1,"RXP_VALUE_POS"); 
     promptLines = xml.getItemValue("DEVICE_TYPE",1,"PROMPT_LINES"); 
+    portsListCommands =  xml.getItemValue("DEVICE_TYPE",1,"PORTS_LIST_COMMANDS"); 
+    portsDataRow =  xml.getItemValue("DEVICE_TYPE",1,"PORTS_DATA_ROW"); 
+    portsDataSeries =  xml.getItemValue("DEVICE_TYPE",1,"PORTS_DATA_SERIES"); 
+    vlanDivChar =  xml.getItemValue("DEVICE_TYPE",1,"VLAN_DIV_CHAR"); 
+    portTypeStart =  xml.getItemValue("DEVICE_TYPE",1,"PORT_TYPE_START"); 
 
 %>
 <html>
@@ -187,6 +198,58 @@
 		                            </span>
 		                  </td>
 		               </tr>
+					   <tr>
+                          <td width="150" align="right">设备端口获取指令：</td>
+		                  <td width="100">
+		                      <span id="sprytPortsListCommands">
+             					 <input type="text" class="text" name="PORTS_LIST_COMMANDS"value="<%=portsListCommands %>">
+             					   <span class="textfieldInvalidFormatMsg">格式无效，有效格式为实数。</span>
+		                            <span class="textfieldMaxCharsMsg">已超过最大字符数50。</span>	                          
+		                            </span>
+		                  </td>
+		               </tr>
+						 <tr>
+                          <td width="150" align="right">端口数据起始行：</td>
+		                  <td width="100">
+		                      <span id="sprytPortsDataRow">
+             					 <input type="text" class="text" name="PORTS_DATA_ROW"value="<%=portsDataRow %>">
+             					   <span class="textfieldInvalidFormatMsg">格式无效，有效格式为实数。</span>
+		                            <span class="textfieldMaxCharsMsg">已超过最大字符数50。</span>	                          
+		                            </span>
+		                  </td>
+		               </tr>
+						 <tr>
+                          <td width="150" align="right">端口数据列：</td>
+		                  <td width="100">
+		                      <span id="sprytPortsDataSeries">
+             					 <input type="text" class="text" name="PORTS_DATA_SERIES"value="<%=portsDataSeries %>">
+             					   <span class="textfieldInvalidFormatMsg">格式无效，有效格式为实数。</span>
+		                            <span class="textfieldMaxCharsMsg">已超过最大字符数50。</span>	                          
+		                            </span>
+		                  </td>
+		               </tr>
+						 <tr>
+                          <td width="150" align="right">V-Lan标识符：</td>
+                             <td width="100">
+		                      <span id="sprytVlanDivChar">
+             					 <input type="text" class="text" name="VLAN_DIV_CHAR"value="<%=vlanDivChar %>">
+             					   <span class="textfieldInvalidFormatMsg">格式无效，有效格式为实数。</span>
+		                            <span class="textfieldMaxCharsMsg">已超过最大字符数50。</span>	                          
+		                            </span>
+		                  </td>
+		                
+		               </tr>
+						 <tr>
+                          <td width="150" align="right">端口类型行标识符：</td>
+		                   <td width="100">
+		                      <span id="sprytPortTypeStart">
+             					 <input type="text" class="text" name="PORT_TYPE_START"value="<%=portTypeStart %>">
+             					   <span class="textfieldInvalidFormatMsg">格式无效，有效格式为实数。</span>
+		                            <span class="textfieldMaxCharsMsg">已超过最大字符数50。</span>	                          
+		                            </span>
+		                  </td>
+		               </tr>
+	
 		                <tr>
 		                 <td width="120" align="right">备注：</td>
 		                 <td colspan="3"> 
@@ -236,6 +299,8 @@ var sprytextfield6 = new Spry.Widget.ValidationTextField("sprytRxpValueStart", {
 var sprytextfield7 = new Spry.Widget.ValidationTextField("sprytRxpValueEnd",  {isRequired:false,maxChars:50});
 var sprytextfield8 = new Spry.Widget.ValidationTextField("sprytRxpValuePos", {isRequired:false,maxChars:50});
 var sprytextfield9 = new Spry.Widget.ValidationTextField("sprytPromptLines", "integer", {isRequired:false,useCharacterMasking:true});
+var sprytextfield10 = new Spry.Widget.ValidationTextField("sprytPortsDataRow", "integer", {isRequired:false,useCharacterMasking:true});
+var sprytextfield11 = new Spry.Widget.ValidationTextField("sprytPortsDataSeries", "integer", {isRequired:false,useCharacterMasking:true});
 
 //-->
 </script>
