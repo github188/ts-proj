@@ -5,11 +5,9 @@ import java.util.Vector;
 import org.apache.log4j.Logger;
 
 import tower.cem.db.DbDeviceInfo;
-import tower.cem.db.DbDevicePortInfo;
 import tower.cem.db.DbDevicePortType;
 import tower.cem.db.DbDeviceType;
 import tower.cem.en.EnDeviceInfo;
-import tower.cem.en.EnDevicePortInfo;
 import tower.cem.en.EnDevicePortType;
 import tower.cem.en.EnDeviceType;
 import tower.tmvc.ErrorException;
@@ -30,10 +28,6 @@ public class BoDevicePortTypeDelete implements RootBo{
 		/***********************************************************************
 		 * 声明变量
 		 **********************************************************************/
-		//设备端口db en
-		DbDevicePortInfo dbDevicePortInfo;
-		EnDevicePortInfo enDevicePortInfo;
-		
 		//设备端口类型db en
 		DbDevicePortType dbDevicePortType;
 		EnDevicePortType enDevicePortType;
@@ -41,8 +35,6 @@ public class BoDevicePortTypeDelete implements RootBo{
 		//设备端口类型编号
 		String typeId;
 		
-		//其他
-		Vector vDevicePortInfos;
 		/***********************************************************************
 		 * 获取输入
 		 **********************************************************************/
@@ -51,20 +43,10 @@ public class BoDevicePortTypeDelete implements RootBo{
 		 * 创建数据库连接、实例化DB、EN
 		 **********************************************************************/
 		 transaction.createDefaultConnection(null, true);
-		 dbDevicePortInfo = new DbDevicePortInfo(transaction,null);
 		 dbDevicePortType = new DbDevicePortType(transaction,null);
 		/***********************************************************************
 		 * 执行业务逻辑、输出
 		 **********************************************************************/
-		 //端口类型如果已经在“设备端口定义表”中使用,抛出异常：DPT001：设备端口类型{0}已经在设备端口定义中使用，该端口类型不能删除。
-		 vDevicePortInfos = dbDevicePortInfo.findAllWhere(" TYPE_ID ='"
-					+ typeId + "'");
-		 //获取设备类型名称
-		 enDevicePortType  = dbDevicePortType.findByKey(typeId);
-		 if (vDevicePortInfos.size() > 0) {
-				throw new ErrorException("DPT001", new Object[] { enDevicePortType.getTypeNameEn() });
-			}
-		 
 		 //根据设备端口类型编号（typeId）删除端口类型信息
 		 dbDevicePortType.deleteByKey(typeId);
 		 

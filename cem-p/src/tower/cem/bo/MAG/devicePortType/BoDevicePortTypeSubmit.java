@@ -38,6 +38,7 @@ public class BoDevicePortTypeSubmit implements RootBo{
 		String standardRxMax;          //标准最大接收光功率
 		String standardRxMin;          //标准最小接收光功率
 		String netWorkRxMin;           //网络要求的最小接收光功率
+		String netWorkRxMax;           //网络要求的最大接收光功率
 		String remark;                 //备注
 		
 		
@@ -52,11 +53,9 @@ public class BoDevicePortTypeSubmit implements RootBo{
 		 typeNameEn = requestXml.getInputValue("TYPE_NAME_EN");
 		 typeNameCn = requestXml.getInputValue("TYPE_NAME_CN");
 		 standardRxMax = requestXml.getInputValue("STANDARD_RX_MAX");
-		 double standardRxMax1 = Double.valueOf(standardRxMax).doubleValue();
 		 standardRxMin = requestXml.getInputValue("STANDARD_RX_MIN");
-		 double standardRxMin1 = Double.valueOf(standardRxMin).doubleValue();
-		 netWorkRxMin = requestXml.getInputValue("NETWORK_RX_MIN");
-		 double netWorkRxMin1 = Double.valueOf(standardRxMin).doubleValue();
+		 netWorkRxMin = requestXml.getInputValue("NETWORK_RX_MIN"); 
+		 netWorkRxMax = requestXml.getInputValue("NETWORK_RX_MAX");
 		 remark = requestXml.getInputValue("REMARK");
 		/***********************************************************************
 		 * 创建数据库连接、实例化DB、EN
@@ -74,13 +73,20 @@ public class BoDevicePortTypeSubmit implements RootBo{
 		  sql2 = new StringBuffer(" TYPE_NAME_CN ='"
 					+ typeNameCn + "'");
 		  if(standardRxMax != null && standardRxMax.length() > 0){
+			  double standardRxMax1 = Double.valueOf(standardRxMax).doubleValue();
 			  enDevicePortType.setStandardRxMax(standardRxMax1);
 		  }
 		  if(standardRxMin != null && standardRxMin.length() > 0){
+			  double standardRxMin1 = Double.valueOf(standardRxMin).doubleValue();
 			  enDevicePortType.setStandardRxMin(standardRxMin1);
 		  }
 		  if(netWorkRxMin != null && netWorkRxMin.length() > 0){
+			  double netWorkRxMin1 = Double.valueOf(netWorkRxMin).doubleValue();
 			  enDevicePortType.setNetworkRxMin(netWorkRxMin1);
+		  }
+		  if(netWorkRxMax != null && netWorkRxMax.length() > 0){
+			  double netWorkRxMax1 = Double.valueOf(netWorkRxMax).doubleValue();
+			  enDevicePortType.setNetworkRxMax(netWorkRxMax1);
 		  }
 		  enDevicePortType.setRemark(remark);
 		  enDevicePortType.setTypeNameCn(typeNameCn);

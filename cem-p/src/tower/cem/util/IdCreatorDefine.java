@@ -47,5 +47,8 @@ public class IdCreatorDefine {
 	public static final String ID_TYPE_DEVICE_COMMAND_LOG_ID = "LOG_ID";
 	public static final int ID_LEN_DEVICE_COMMAND_LOG_ID = 10;
 	
+	public static final String ID_TYPE_SYS_OPER_LOG_ID = "SYS_OPER_LOG_ID";
+	public static final int ID_LEN_SYS_OPER_LOG_ID = 10;
+	
 	
 }

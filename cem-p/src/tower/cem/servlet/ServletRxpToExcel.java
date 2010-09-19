@@ -49,6 +49,7 @@ import tower.tmvc.XMLWrap;
 		String[] rxMaxs;
 		String[] rxMins;
 		String[] netWordRxMins;
+		String[] netWordRxMaxs;
 		String[] collectEnds;
 		String[] deviceIps;
 		String[] status;
@@ -73,6 +74,7 @@ import tower.tmvc.XMLWrap;
 			rxMaxs = xml.getItemValues("DEVICE_PORT_RXP","STANDARD_RX_MAX");
 			rxMins = xml.getItemValues("DEVICE_PORT_RXP","STANDARD_RX_MIN");
 			netWordRxMins = xml.getItemValues("DEVICE_PORT_RXP","NETWORK_RX_MIN");
+			netWordRxMaxs = xml.getItemValues("DEVICE_PORT_RXP","NETWORK_RX_MAX");
 			collectEnds = xml.getItemValues("DEVICE_PORT_RXP","COLLECT_END");
 			isNormals = xml.getItemValues("DEVICE_PORT_RXP","IS_NORMAL");
 			status = xml.getItemValues("DEVICE_PORT_RXP","STATUS");
@@ -127,8 +129,9 @@ import tower.tmvc.XMLWrap;
 			createHead(0, 7, "光功率是否正常");
 			createHead(0, 8, "标准最大接收光功率（dBm）");
 			createHead(0, 9, "标准最小接收光功率（dBm）");
-			createHead(0, 10, "中国移动IP承载网要求的最小接收光功率（dBm）");
-			createHead(0, 11, "备注");
+			createHead(0, 10, "网络要求的最小接收光功率（dBm）");
+			createHead(0, 11, "网络要求的最大接收光功率（dBm）");
+			createHead(0, 12, "备注");
 
 			for (int i = 0; i < sendIds.length; i++) {
 				createCell(i + 1, 0, typeNameCns[i]);
@@ -140,19 +143,15 @@ import tower.tmvc.XMLWrap;
 				}
 				createCell(i + 1, 2, deviceIps[i]);
 				createCell(i + 1, 3, portSns[i]);
-				for(int j=0;j < deviceStatusValue.length;j++){
-					if(status[i].equals(deviceStatusValue[j])){
-						createCell(i + 1, 4, deviceStatusDesc[j]);
-					}
-				}
-				
+				createCell(i + 1, 4, "在用");
 				createCell(i + 1, 5, typeNames[i]);
 				createCell(i + 1, 6, rxps[i]);
 				createCell(i + 1, 7, isNormals[i]);
 				createCell(i + 1, 8, rxMaxs[i]);
 				createCell(i + 1, 9, rxMins[i]);
 				createCell(i + 1, 10, netWordRxMins[i]);
-				createCell(i + 1, 11, "");
+				createCell(i + 1, 11, netWordRxMaxs[i]);
+				createCell(i + 1, 12, "");
 			}
 
 			// 输出

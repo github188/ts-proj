@@ -43,6 +43,11 @@ public class BoDeviceTypeSubmit implements RootBo {
 	String rxpValueEnd;
 	String rxpValuePos;
 	String promptLines1;
+	String portsListCommands;
+	String portsDataRow;
+	String portsDataSeries;
+	String vlanDivChar;
+	String portTypeStart;
 
 	// 上传文件第1步:声明上传文件与其工厂
 	UploadFile uploadFile;
@@ -79,6 +84,12 @@ public class BoDeviceTypeSubmit implements RootBo {
 	if(promptLines1 != null && promptLines1.length() != 0){
 		promptLines = Integer.valueOf(promptLines1).intValue();
 	}
+	 portsListCommands =  requestXml.getInputValue("PORTS_LIST_COMMANDS"); 
+	 portsDataRow =   requestXml.getInputValue("PORTS_DATA_ROW"); 
+	 portsDataSeries =  requestXml.getInputValue("PORTS_DATA_SERIES"); 
+	 vlanDivChar =   requestXml.getInputValue("VLAN_DIV_CHAR"); 
+	 portTypeStart =   requestXml.getInputValue("PORT_TYPE_START"); 
+
 	/***********************************************************************
          * 创建数据库连接
          **********************************************************************/
@@ -108,7 +119,7 @@ public class BoDeviceTypeSubmit implements RootBo {
 		    throw new ErrorException("MDT002", new Object[] { typeNameCn });// 设备类型名称-中文：{0}在系统中已存在,请重新输入。
 		}
 		if (fis != null) {
-		    sql = "insert into DEVICE_TYPE value(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		    sql = "insert into DEVICE_TYPE value(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		    ps = conn.prepareStatement(sql);
 		    ps.setString(1, typeId);
 		    ps.setString(2, typeNameEn);
@@ -117,15 +128,32 @@ public class BoDeviceTypeSubmit implements RootBo {
 		    ps.setString(5, inspectCommandsExp);
 		    ps.setString(6, collectCommands);
 		    ps.setString(7, configCommands);
-		    ps.setString(8, rxpLineStart);
-		    ps.setString(9, rxpValueStart);
-		    ps.setString(10, rxpValueEnd);
-		    ps.setString(11, rxpValuePos);
-		    ps.setInt(12, promptLines);
-		    ps.setBinaryStream(13, fis, fis.available());
-		    ps.setString(14, remark);
+		    ps.setString(8, portsListCommands);
+		    ps.setString(9, portsDataRow);
+		    ps.setString(10, portsDataSeries);
+		    ps.setString(11, vlanDivChar);
+		    ps.setString(12, portTypeStart);
+		    ps.setString(13, rxpLineStart);
+		    ps.setString(14, rxpValueStart);
+		    ps.setString(15, rxpValueEnd);
+		    ps.setString(16, rxpValuePos);
+		    ps.setInt(17, promptLines);
+		    ps.setBinaryStream(18, fis, fis.available());
+		    ps.setString(19, remark);
+		    
+		    
+			 portsListCommands =  requestXml.getInputValue("PORTS_LIST_COMMANDS"); 
+			 portsDataRow =   requestXml.getInputValue("PORTS_DATA_ROW"); 
+			 portsDataSeries =  requestXml.getInputValue("PORTS_DATA_SERIES"); 
+			 vlanDivChar =   requestXml.getInputValue("VLAN_DIV_CHAR"); 
+			 portTypeStart =   requestXml.getInputValue("PORT_TYPE_START"); 
+			 
+			 
 		} else {
-		    sql = "insert into DEVICE_TYPE (TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,COLLECT_COMMANDS,CONFIG_COMMANDS, RXP_LINE_START, RXP_VALUE_START, RXP_VALUE_END, RXP_VALUE_POS,PROMPT_LINES,REMARK) value(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		    sql = "insert into DEVICE_TYPE (TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP," +
+		    		"COLLECT_COMMANDS,CONFIG_COMMANDS, PORTS_LIST_COMMANDS,PORTS_DATA_ROW,PORTS_DATA_SERIES,VLAN_DIV_CHAR,PORT_TYPE_START," +
+		    		"RXP_LINE_START, RXP_VALUE_START, RXP_VALUE_END, RXP_VALUE_POS," +
+		    		"PROMPT_LINES,REMARK) value(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		    ps = conn.prepareStatement(sql);
 		    ps.setString(1, typeId);
 		    ps.setString(2, typeNameEn);
@@ -134,12 +162,17 @@ public class BoDeviceTypeSubmit implements RootBo {
 		    ps.setString(5, inspectCommandsExp);
 		    ps.setString(6, collectCommands);
 		    ps.setString(7, configCommands);
-		    ps.setString(8, rxpLineStart);
-		    ps.setString(9, rxpValueStart);
-		    ps.setString(10, rxpValueEnd);
-		    ps.setString(11, rxpValuePos);
-		    ps.setInt(12, promptLines);
-		    ps.setString(13, remark);
+		    ps.setString(8, portsListCommands);
+		    ps.setString(9, portsDataRow);
+		    ps.setString(10, portsDataSeries);
+		    ps.setString(11, vlanDivChar);
+		    ps.setString(12, portTypeStart);
+		    ps.setString(13, rxpLineStart);
+		    ps.setString(14, rxpValueStart);
+		    ps.setString(15, rxpValueEnd);
+		    ps.setString(16, rxpValuePos);
+		    ps.setInt(17, promptLines);
+		    ps.setString(18, remark);
 		}
 
 		ps.execute();
@@ -158,7 +191,8 @@ public class BoDeviceTypeSubmit implements RootBo {
 
 		if (fis != null) {
 		    sql = "update DEVICE_TYPE set TYPE_NAME_EN=?, TYPE_NAME_CN=?,INSPECT_COMMANDS=?,"
-			    + "INSPECT_COMMANDS_EXP=?,COLLECT_COMMANDS=?,CONFIG_COMMANDS=?,"
+			    + "INSPECT_COMMANDS_EXP=?,COLLECT_COMMANDS=?,CONFIG_COMMANDS=?, PORTS_LIST_COMMANDS=?," +
+			    		"PORTS_DATA_ROW=?,PORTS_DATA_SERIES=?,VLAN_DIV_CHAR=?,PORT_TYPE_START=?,"
 			    + "RXP_LINE_START=?, RXP_VALUE_START=?, RXP_VALUE_END=?, RXP_VALUE_POS=?, PROMPT_LINES=?,"
 			    + "APP_PICTURE=?,REMARK=? where TYPE_ID='" + typeId + "'";
 		    ps = conn.prepareStatement(sql);
@@ -168,16 +202,22 @@ public class BoDeviceTypeSubmit implements RootBo {
 		    ps.setString(4, inspectCommandsExp);
 		    ps.setString(5, collectCommands);
 		    ps.setString(6, configCommands);
-		    ps.setString(7, rxpLineStart);
-		    ps.setString(8, rxpValueStart);
-		    ps.setString(9, rxpValueEnd);
-		    ps.setString(10, rxpValuePos);
-		    ps.setInt(11, promptLines);
-		    ps.setBinaryStream(12, fis, fis.available());
-		    ps.setString(13, remark);
+		    ps.setString(7, portsListCommands);
+		    ps.setString(8, portsDataRow);
+		    ps.setString(9, portsDataSeries);
+		    ps.setString(10, vlanDivChar);
+		    ps.setString(11, portTypeStart);
+		    ps.setString(12, rxpLineStart);
+		    ps.setString(13, rxpValueStart);
+		    ps.setString(14, rxpValueEnd);
+		    ps.setString(15, rxpValuePos);
+		    ps.setInt(16, promptLines);
+		    ps.setBinaryStream(17, fis, fis.available());
+		    ps.setString(18, remark);
 		} else {
 		    sql = "update DEVICE_TYPE set TYPE_NAME_EN=?, TYPE_NAME_CN=?,INSPECT_COMMANDS=?,"
-			    + "INSPECT_COMMANDS_EXP=?,COLLECT_COMMANDS=?, CONFIG_COMMANDS=?,"
+			    + "INSPECT_COMMANDS_EXP=?,COLLECT_COMMANDS=?, CONFIG_COMMANDS=?, PORTS_LIST_COMMANDS=?,PORTS_DATA_ROW=?," +
+			    		"PORTS_DATA_SERIES=?,VLAN_DIV_CHAR=?,PORT_TYPE_START=?,"
 			    + "RXP_LINE_START=?, RXP_VALUE_START=?, RXP_VALUE_END=?, RXP_VALUE_POS=?, PROMPT_LINES=?,"
 			    + "REMARK=? where TYPE_ID='" + typeId + "'";
 		    ps = conn.prepareStatement(sql);
@@ -187,12 +227,17 @@ public class BoDeviceTypeSubmit implements RootBo {
 		    ps.setString(4, inspectCommandsExp);
 		    ps.setString(5, collectCommands);
 		    ps.setString(6, configCommands);
-		    ps.setString(7, rxpLineStart);
-		    ps.setString(8, rxpValueStart);
-		    ps.setString(9, rxpValueEnd);
-		    ps.setString(10, rxpValuePos);
-		    ps.setInt(11, promptLines);
-		    ps.setString(12, remark);
+		    ps.setString(7, portsListCommands);
+		    ps.setString(8, portsDataRow);
+		    ps.setString(9, portsDataSeries);
+		    ps.setString(10, vlanDivChar);
+		    ps.setString(11, portTypeStart);
+		    ps.setString(12, rxpLineStart);
+		    ps.setString(13, rxpValueStart);
+		    ps.setString(14, rxpValueEnd);
+		    ps.setString(15, rxpValuePos);
+		    ps.setInt(16, promptLines);
+		    ps.setString(17, remark);
 		}
 		ps.executeUpdate();
 	    }

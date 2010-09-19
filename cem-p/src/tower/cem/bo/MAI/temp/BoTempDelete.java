@@ -5,11 +5,9 @@ import java.util.Vector;
 import org.apache.log4j.Logger;
 
 import tower.cem.db.DbCommandsSendList;
-import tower.cem.db.DbDevicePortInfo;
 import tower.cem.db.DbDevicePortType;
 import tower.cem.db.DbMaintainCommandsTemplate;
 import tower.cem.en.EnCommandsSendList;
-import tower.cem.en.EnDevicePortInfo;
 import tower.cem.en.EnDevicePortType;
 import tower.cem.en.EnMaintainCommandsTemplate;
 import tower.tmvc.ErrorException;

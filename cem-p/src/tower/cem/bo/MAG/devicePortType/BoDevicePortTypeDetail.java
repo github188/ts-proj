@@ -2,7 +2,6 @@ package tower.cem.bo.MAG.devicePortType;
 
 import org.apache.log4j.Logger;
 
-import tower.cem.db.DbDevicePortInfo;
 import tower.cem.db.DbDevicePortType;
 import tower.cem.db.DbDeviceType;
 import tower.cem.en.EnDevicePortType;

@@ -5,7 +5,6 @@ import java.util.Vector;
 import org.apache.log4j.Logger;
 
 import tower.cem.db.DbDeviceInfo;
-import tower.cem.db.DbDevicePortInfo;
 import tower.cem.db.DbFrontHostInfo;
 import tower.cem.db.DbLocationInfo;
 import tower.cem.db.DbMaintainTeamDeviceMap;
@@ -34,7 +33,6 @@ public class BoDeviceDelete implements RootBo {
 	// 设备配置db en
 	DbDeviceInfo dbDeviceInfo;
 	EnDeviceInfo enDeviceInfo;
-	DbDevicePortInfo dbDevicePortInfo;
 
 	// 物理位置db en
 	DbLocationInfo dbLocationInfo;
@@ -56,7 +54,6 @@ public class BoDeviceDelete implements RootBo {
          **********************************************************************/
 	transaction.createDefaultConnection(null, true);
 	dbDeviceInfo = new DbDeviceInfo(transaction, null);
-	dbDevicePortInfo = new DbDevicePortInfo(transaction, null);
 	dbMaintainTeamDeviceMap = new DbMaintainTeamDeviceMap(transaction, null);
 	dbLocationInfo = new DbLocationInfo(transaction, null);
 	/***********************************************************************
@@ -73,6 +70,5 @@ public class BoDeviceDelete implements RootBo {
 
 	// 根据设备编号（deviceId）删除设备信息
 	dbDeviceInfo.deleteByKey(deviceId);
-	dbDevicePortInfo.deleteWhere(" device_id ='" + deviceId + "'");
     }
 }

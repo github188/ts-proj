@@ -9,23 +9,16 @@ import org.apache.log4j.Logger;
 
 import tower.cem.db.DbDeviceCollectLog;
 import tower.cem.db.DbDeviceInfo;
-import tower.cem.db.DbDeviceInspectLog;
-import tower.cem.db.DbDevicePortInfo;
 import tower.cem.db.DbDevicePortRxp;
 import tower.cem.db.DbDevicePortType;
 import tower.cem.db.DbDeviceType;
 import tower.cem.en.EnDeviceCollectLog;
 import tower.cem.en.EnDeviceInfo;
-import tower.cem.en.EnDeviceInspectLog;
-import tower.cem.en.EnDevicePortInfo;
 import tower.cem.en.EnDevicePortRxp;
 import tower.cem.en.EnDevicePortType;
 import tower.cem.en.EnDeviceType;
-import tower.common.util.Page;
-import tower.common.util.PubFunc;
 import tower.tmvc.ErrorException;
 import tower.tmvc.QueryResult;
-import tower.tmvc.QueryResultRow;
 import tower.tmvc.RootBo;
 import tower.tmvc.Transaction;
 import tower.tmvc.XMLWrap;
@@ -46,9 +39,6 @@ public class BoRxpDetail implements RootBo{
 	DbDeviceInfo dbDeviceInfo;
 	EnDeviceInfo enDeviceInfo;
 	
-	//设备配置端口db en 
-	DbDevicePortInfo dbDevicePortInfo;
-	EnDevicePortInfo enDevicePortInfo;
 	
 	//设备端口类型db en
 	DbDevicePortType dbDevicePortType;
@@ -83,12 +73,12 @@ public class BoRxpDetail implements RootBo{
 	transaction.createDefaultConnection(null, true);
 	dbDevicePortRxp = new DbDevicePortRxp(transaction, null);
 	dbDeviceInfo = new DbDeviceInfo(transaction, null);
-	dbDevicePortInfo = new DbDevicePortInfo(transaction,null);
 	dbDevicePortType = new DbDevicePortType(transaction,null);
 	dbDeviceCollectLog = new DbDeviceCollectLog(transaction,null);
 	dbDeviceType = new DbDeviceType(transaction, null);
 	enDevicePortRxp = new EnDevicePortRxp();
 	dbDevicePortRxp.setOrderBy(" ORDER BY DEVICE_NAME ASC ");
+	enDevicePortType = new EnDevicePortType();
 	/*****************************************************************************************************
 	 * 执行业务逻辑、输出
 	 ****************************************************************************************************/
@@ -102,15 +92,14 @@ public class BoRxpDetail implements RootBo{
 		int row  = dbDevicePortRxp.setToXml(requestXml, enDevicePortRxp);
 		enDeviceInfo = dbDeviceInfo.findByKey(enDevicePortRxp.getDeviceId());
 		enDeviceType = dbDeviceType.findByKey(enDeviceInfo.getTypeId());
-		enDevicePortInfo = dbDevicePortInfo.findByKey(enDevicePortRxp.getPortId());
-		enDevicePortType = dbDevicePortType.findByKey(enDevicePortInfo.getTypeId());
+		enDevicePortType = dbDevicePortType.findByKey(enDevicePortRxp.getPortType());
 		requestXml.setItemValue("DEVICE_PORT_RXP", row, "DEVICE_IP",enDeviceInfo.getDeviceIp());
 		requestXml.setItemValue("DEVICE_PORT_RXP", row, "PORT_TYPE_NAME",enDevicePortType.getTypeNameCn());
 		requestXml.setItemValue("DEVICE_PORT_RXP", row, "STANDARD_RX_MAX",enDevicePortType.getStandardRxMax());
 		requestXml.setItemValue("DEVICE_PORT_RXP", row, "STANDARD_RX_MIN",enDevicePortType.getStandardRxMin());
 		requestXml.setItemValue("DEVICE_PORT_RXP", row, "NETWORK_RX_MIN",enDevicePortType.getNetworkRxMin());
+		requestXml.setItemValue("DEVICE_PORT_RXP", row, "NETWORK_RX_MAX",enDevicePortType.getNetworkRxMax());
 		requestXml.setItemValue("DEVICE_PORT_RXP", row, "COLLECT_END",enDeviceCollectLog.getCollectEnd());
-		requestXml.setItemValue("DEVICE_PORT_RXP", row, "STATUS",enDevicePortInfo.getStatus());
 		requestXml.setItemValue("DEVICE_PORT_RXP", row, "DEVICE_TYPE_NAME",enDeviceType.getTypeNameCn());
 		
 		double rxp =enDevicePortRxp.getRxp();
