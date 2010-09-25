@@ -136,11 +136,14 @@ import tower.tmvc.XMLWrap;
 			for (int i = 0; i < sendIds.length; i++) {
 				createCell(i + 1, 0, typeNameCns[i]);
 				createCell(i + 1, 1, deviceNames[i]);
+				/*
 				if(i!=0 && deviceNames[i].equals(deviceNames[i-1])){
 					sheet.mergeCells(0,1,0, i+1);
 					sheet.mergeCells(1,1,1, i+1);
 					sheet.mergeCells(2,1,2, i+1);
 				}
+				*/
+				
 				createCell(i + 1, 2, deviceIps[i]);
 				createCell(i + 1, 3, portSns[i]);
 				createCell(i + 1, 4, "在用");
@@ -152,6 +155,20 @@ import tower.tmvc.XMLWrap;
 				createCell(i + 1, 10, netWordRxMins[i]);
 				createCell(i + 1, 11, netWordRxMaxs[i]);
 				createCell(i + 1, 12, "");
+			}
+			//合并单元格
+			for (int i = 0,n=0; i < sendIds.length; i++,n++) {
+				if(i!=0 && !(deviceNames[i].equals(deviceNames[i-1]))){
+					sheet.mergeCells(0,i+1-n,0, i);
+					sheet.mergeCells(1,i+1-n,1, i);
+					sheet.mergeCells(2,i+1-n,2, i);
+					n=0;
+				}
+				if(i == sendIds.length-1){
+					sheet.mergeCells(0,i+1-n,0, i+1);
+					sheet.mergeCells(1,i+1-n,1, i+1);
+					sheet.mergeCells(2,i+1-n,2, i+1);
+				}
 			}
 
 			// 输出

@@ -38,7 +38,7 @@ import tower.tmvc.XMLWrap;
 			inspectEnd = xml.getItemValue("DEVICE_INSPECT_LOG",1,"INSPECT_END");
 			status = xml.getItemValue("DEVICE_INSPECT_LOG",1,"STATUS");
 			logCont = xml.getItemValue("DEVICE_INSPECT_LOG",1,"LOG_CONT");
-			fileName = deviceIp+"_"+inspectEnd;
+			fileName = deviceIp+"_"+inspectEnd+".txt";;
 			
 			res.setContentType("text/plain");// 两行关键的设置   
 			res.addHeader("Content-Disposition",   

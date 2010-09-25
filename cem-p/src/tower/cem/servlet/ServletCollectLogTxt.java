@@ -30,7 +30,7 @@ import tower.tmvc.XMLWrap;
 		deviceIp = xml.getItemValue("DEVICE_COLLECT_LOG",1,"DEVICE_IP");
 		collectEnd = xml.getItemValue("DEVICE_COLLECT_LOG",1,"COLLECT_END");
 		logCont = xml.getItemValue("DEVICE_COLLECT_LOG",1,"LOG_CONT");
-		fileName = "collect_"+deviceIp+"_"+collectEnd;
+		fileName = "collect_"+deviceIp+"_"+collectEnd+".txt";
 		
 		res.setContentType("text/plain");// 两行关键的设置   
 		res.addHeader("Content-Disposition",   

@@ -50,7 +50,7 @@ public class EnDeviceConfigLog implements java.io.Serializable {
     private String status;
 
     /**
-     * Type : text Name : LOG_CONT
+     * Type : longtext Name : LOG_CONT
      */
     private String logCont;
 
@@ -95,7 +95,7 @@ public class EnDeviceConfigLog implements java.io.Serializable {
     private boolean _flagStatus;
 
     /**
-     * Type : text Name : LOG_CONT modify flag
+     * Type : longtext Name : LOG_CONT modify flag
      */
     private boolean _flagLogCont;
 

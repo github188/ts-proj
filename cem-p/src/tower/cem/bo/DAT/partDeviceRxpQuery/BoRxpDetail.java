@@ -60,6 +60,7 @@ public class BoRxpDetail implements RootBo{
 	
 	Vector vector;
 	Vector vLog;
+	Vector vEnDevicePortType;
 	
 	QueryResult rs = null;
 	
@@ -92,25 +93,37 @@ public class BoRxpDetail implements RootBo{
 		int row  = dbDevicePortRxp.setToXml(requestXml, enDevicePortRxp);
 		enDeviceInfo = dbDeviceInfo.findByKey(enDevicePortRxp.getDeviceId());
 		enDeviceType = dbDeviceType.findByKey(enDeviceInfo.getTypeId());
-		enDevicePortType = dbDevicePortType.findByKey(enDevicePortRxp.getPortType());
+		
+		vEnDevicePortType = dbDevicePortType.findAllWhere(" TYPE_NAME_EN='"+enDevicePortRxp.getPortType()+"'");
+		if(vEnDevicePortType != null && vEnDevicePortType.size() != 0){
+			enDevicePortType = (EnDevicePortType)vEnDevicePortType.get(0);
+			requestXml.setItemValue("DEVICE_PORT_RXP", row, "PORT_TYPE_NAME",enDevicePortType.getTypeNameCn());
+			requestXml.setItemValue("DEVICE_PORT_RXP", row, "STANDARD_RX_MAX",enDevicePortType.getStandardRxMax());
+			requestXml.setItemValue("DEVICE_PORT_RXP", row, "STANDARD_RX_MIN",enDevicePortType.getStandardRxMin());
+			requestXml.setItemValue("DEVICE_PORT_RXP", row, "NETWORK_RX_MIN",enDevicePortType.getNetworkRxMin());
+			requestXml.setItemValue("DEVICE_PORT_RXP", row, "NETWORK_RX_MAX",enDevicePortType.getNetworkRxMax());
+			double rxp =enDevicePortRxp.getRxp();
+			double rxMax = enDevicePortType.getStandardRxMax();
+			double rxMin = enDevicePortType.getStandardRxMin();
+			
+			if(rxp >= rxMin && rxp <= rxMax){
+				requestXml.setItemValue("DEVICE_PORT_RXP", row, "IS_NORMAL","是");
+			}else{
+				requestXml.setItemValue("DEVICE_PORT_RXP", row, "IS_NORMAL","否");
+			}
+		}else{
+			requestXml.setItemValue("DEVICE_PORT_RXP", row, "PORT_TYPE_NAME","");
+			requestXml.setItemValue("DEVICE_PORT_RXP", row, "STANDARD_RX_MAX","");
+			requestXml.setItemValue("DEVICE_PORT_RXP", row, "STANDARD_RX_MIN","");
+			requestXml.setItemValue("DEVICE_PORT_RXP", row, "NETWORK_RX_MIN","");
+			requestXml.setItemValue("DEVICE_PORT_RXP", row, "NETWORK_RX_MAX","");
+			requestXml.setItemValue("DEVICE_PORT_RXP", row, "IS_NORMAL","");
+		}
+	
 		requestXml.setItemValue("DEVICE_PORT_RXP", row, "DEVICE_IP",enDeviceInfo.getDeviceIp());
-		requestXml.setItemValue("DEVICE_PORT_RXP", row, "PORT_TYPE_NAME",enDevicePortType.getTypeNameCn());
-		requestXml.setItemValue("DEVICE_PORT_RXP", row, "STANDARD_RX_MAX",enDevicePortType.getStandardRxMax());
-		requestXml.setItemValue("DEVICE_PORT_RXP", row, "STANDARD_RX_MIN",enDevicePortType.getStandardRxMin());
-		requestXml.setItemValue("DEVICE_PORT_RXP", row, "NETWORK_RX_MIN",enDevicePortType.getNetworkRxMin());
-		requestXml.setItemValue("DEVICE_PORT_RXP", row, "NETWORK_RX_MAX",enDevicePortType.getNetworkRxMax());
 		requestXml.setItemValue("DEVICE_PORT_RXP", row, "COLLECT_END",enDeviceCollectLog.getCollectEnd());
 		requestXml.setItemValue("DEVICE_PORT_RXP", row, "DEVICE_TYPE_NAME",enDeviceType.getTypeNameCn());
 		
-		double rxp =enDevicePortRxp.getRxp();
-		double rxMax = enDevicePortType.getStandardRxMax();
-		double rxMin = enDevicePortType.getStandardRxMin();
-		
-		if(rxp >= rxMin && rxp <= rxMax){
-			requestXml.setItemValue("DEVICE_PORT_RXP", row, "IS_NORMAL","是");
-		}else{
-			requestXml.setItemValue("DEVICE_PORT_RXP", row, "IS_NORMAL","否");
-		}
 		
 	}
 	

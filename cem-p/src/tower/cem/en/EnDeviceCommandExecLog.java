@@ -35,7 +35,7 @@ public class EnDeviceCommandExecLog implements java.io.Serializable {
     private String execEnd;
 
     /**
-     * Type : text Name : COMMAND_CONT
+     * Type : longtext Name : COMMAND_CONT
      */
     private String commandCont;
 
@@ -65,7 +65,7 @@ public class EnDeviceCommandExecLog implements java.io.Serializable {
     private boolean _flagExecEnd;
 
     /**
-     * Type : text Name : COMMAND_CONT modify flag
+     * Type : longtext Name : COMMAND_CONT modify flag
      */
     private boolean _flagCommandCont;
 

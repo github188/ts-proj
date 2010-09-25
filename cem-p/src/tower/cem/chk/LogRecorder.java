@@ -1,6 +1,7 @@
 package tower.cem.chk;
 
 
+import java.io.StringWriter;
 import java.util.HashSet;
 import java.util.Vector;
 
@@ -42,6 +43,7 @@ public class LogRecorder implements RootChecker{
 		String userName;
 		String operFuncId;
 		String operFuncName="";
+		String operRequest;
 		String resultCode;
 		String resultDesc;
 
@@ -57,6 +59,7 @@ public class LogRecorder implements RootChecker{
 		EnSysMenu enSysMenu;
 		
 		Vector vector;
+		StringWriter sw;
 		/***********************************************************************
 		 * 获取输入
 		 **********************************************************************/
@@ -67,7 +70,9 @@ public class LogRecorder implements RootChecker{
 		operTime = now;
 		resultCode = "000000";
 		resultDesc = "执行成功";
-		
+		sw = new StringWriter();
+		tower.tmvc.XMLWrapOutputter.output(requestXml, sw);
+		operRequest = sw.toString();
 		/***********************************************************************
 		 * 创建数据库连接、实例化DB、EN
 		 **********************************************************************/
@@ -105,7 +110,7 @@ public class LogRecorder implements RootChecker{
 				enSystemOperationLog.setOperationFunName(enSysMenu.getMenuName());
 				enSystemOperationLog.setOperationFunId(operFuncId);
 				enSystemOperationLog.setReturnCode(resultCode);
-				enSystemOperationLog.setRemark(resultDesc);
+				enSystemOperationLog.setRemark(operRequest);
 
 				dbSystemOperationLog.insert(enSystemOperationLog);
 		return true;

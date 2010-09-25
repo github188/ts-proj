@@ -39,7 +39,7 @@ public class ServletTempLogTxt extends HttpServlet implements Servlet{
 		maintainEnd = xml.getItemValue("DEVICE_MAINTAIN_LOG",1,"MAINTAIN_END");
 		status = xml.getItemValue("DEVICE_MAINTAIN_LOG",1,"STATUS");
 		logCont = xml.getItemValue("DEVICE_MAINTAIN_LOG",1,"LOG_CONT");
-		fileName = "maintain_"+deviceIp+"_"+maintainEnd;
+		fileName = "maintain_"+deviceIp+"_"+maintainEnd+".txt";;
 		
 		res.setContentType("text/plain");// 一下两行关键的设置   
 		res.addHeader("Content-Disposition",   

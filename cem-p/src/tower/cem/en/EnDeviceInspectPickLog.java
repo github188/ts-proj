@@ -20,7 +20,7 @@ public class EnDeviceInspectPickLog implements java.io.Serializable {
     private String pickTime;
 
     /**
-     * Type : text Name : LOG_CONT
+     * Type : longtext Name : LOG_CONT
      */
     private String logCont;
 
@@ -35,7 +35,7 @@ public class EnDeviceInspectPickLog implements java.io.Serializable {
     private boolean _flagPickTime;
 
     /**
-     * Type : text Name : LOG_CONT modify flag
+     * Type : longtext Name : LOG_CONT modify flag
      */
     private boolean _flagLogCont;
 
