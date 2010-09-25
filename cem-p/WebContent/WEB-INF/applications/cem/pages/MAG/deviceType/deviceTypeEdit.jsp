@@ -12,7 +12,6 @@
 	String inspectCommandsExp;
 	String collectCommands;
 	String configCommands;
-	String appPicture;
 	String remark;
 	String rxpLineStart;
 	String rxpValueStart;
@@ -35,7 +34,6 @@
     inspectCommandsExp = xml.getItemValue("DEVICE_TYPE",1,"INSPECT_COMMANDS_EXP");
     collectCommands = xml.getItemValue("DEVICE_TYPE",1,"COLLECT_COMMANDS");
     configCommands = xml.getItemValue("DEVICE_TYPE",1,"CONFIG_COMMANDS");
-    appPicture = xml.getItemValue("DEVICE_TYPE",1,"APP_PICTURE");
     remark = xml.getItemValue("DEVICE_TYPE",1,"REMARK");
     rxpLineStart = xml.getItemValue("DEVICE_TYPE",1,"RXP_LINE_START");    
     rxpValueStart = xml.getItemValue("DEVICE_TYPE",1,"RXP_VALUE_START");
@@ -102,7 +100,7 @@
                       <input type="hidden" name="TYPE_ID" value="<%=typeId%>"> 
                      <table >
                       <tr>
-                          <td width="120" align="right">设备类型英文名称：</td>
+                          <td width="150" align="right">设备类型英文名称：</td>
 		                  <td  >
 		                      <span id="spryTypeNameEn">
              					 <input type="text" class="text" name="TYPE_NAME_EN"value="<%=typeNameEn %>"><span class="requiredField">*</span>
@@ -112,7 +110,7 @@
 		                  </td>
 		                  </tr>
 		                <tr>  
-                          <td width="120" align="right">设备类型中文名称：</td>
+                          <td width="150" align="right">设备类型中文名称：</td>
 		                  <td >
 		                      <span id="sprytTypeNameCn">
               					<input type="text" class="text" name="TYPE_NAME_CN"value="<%=typeNameCn %>"><span class="requiredField">*</span>
@@ -122,14 +120,14 @@
 		                  </td>
 		               </tr>
 		               <tr>
-		                 <td width="120" align="right">巡检指令集：</td>
-		                 <td colspan="3">
+		                 <td width="150" align="right">巡检指令集：</td>
+		                 <td  width="100">
               					<textarea name="INSPECT_COMMANDS" id="textarea" class="textarea" cols="50" rows="4"><%=inspectCommands %></textarea>
 		                 </td>
 		               </tr>
 		                <tr>
-		                <td width="120" align="right">巡检指令说明：</td>
-		                <td colspan="3">
+		                <td width="150" align="right">巡检指令说明：</td>
+		                <td  width="100">
 		                   <span id="spryInspectCommandsExp">
               					<textarea name="INSPECT_COMMANDS_EXP" id="textarea" class="textarea" cols="50" rows="4"><%=inspectCommandsExp %></textarea>
               			  <span class="textfieldMaxCharsMsg">已超过最大字符数200。</span>	                          
@@ -138,20 +136,21 @@
 		                 <td></td>
 		                 <td></td>
 		               </tr>
-		                <tr>
-		                <td width="120" align="right">光功率采集指令：</td>
-		                 <td colspan="3">
-              					<textarea name="COLLECT_COMMANDS" id="textarea" class="textarea" cols="50" rows="4"><%=collectCommands %></textarea>
-		                 </td>
-		                 <td></td>
-		                </tr>
-		                    <tr>
-		                <td width="120" align="right">设备配置提取指令：</td>
-		                 <td colspan="3">
+		                 <tr>
+		                <td width="150" align="right">设备配置提取指令：</td>
+		                 <td  width="100">
               					<textarea name="CONFIG_COMMANDS" id="textarea" class="textarea" cols="50" rows="4"><%=configCommands %></textarea>
 		                 </td>
 		                 <td></td>
 		                </tr>
+		                <tr>
+		                <td width="150" align="right">光功率采集指令：</td>
+		                 <td  width="100">
+              					<textarea name="COLLECT_COMMANDS" id="textarea" class="textarea" cols="50" rows="4"><%=collectCommands %></textarea>
+		                 </td>
+		                 <td></td>
+		                </tr>
+		              
 		                <tr>
                           <td width="150" align="right">光功率/行起始符：</td>
 		                  <td width="100">
@@ -201,11 +200,7 @@
 					   <tr>
                           <td width="150" align="right">设备端口获取指令：</td>
 		                  <td width="100">
-		                      <span id="sprytPortsListCommands">
-             					 <input type="text" class="text" name="PORTS_LIST_COMMANDS"value="<%=portsListCommands %>">
-             					   <span class="textfieldInvalidFormatMsg">格式无效，有效格式为实数。</span>
-		                            <span class="textfieldMaxCharsMsg">已超过最大字符数50。</span>	                          
-		                            </span>
+              					<textarea name="PORTS_LIST_COMMANDS" id="textarea" class="textarea" cols="50" rows="4"><%=portsListCommands %></textarea>
 		                  </td>
 		               </tr>
 						 <tr>
@@ -251,7 +246,7 @@
 		               </tr>
 	
 		                <tr>
-		                 <td width="120" align="right">备注：</td>
+		                 <td width="150" align="right">备注：</td>
 		                 <td colspan="3"> 
               			<span id="spryRemark">
               					<textarea name="REMARK" id="textarea" class="textarea" cols="50" rows="4"><%=remark%></textarea>

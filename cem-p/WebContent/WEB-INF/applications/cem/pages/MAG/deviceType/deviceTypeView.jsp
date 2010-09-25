@@ -19,6 +19,11 @@
 	String rxpValueEnd;
 	String rxpValuePos;
 	String promptLines;
+	String portsListCommands;
+	String portsDataRow;
+	String portsDataSeries;
+	String vlanDivChar;
+	String portTypeStart;
 %>
 <%
     xml = XMLWrap.getRequestXml(request,session,application);
@@ -36,6 +41,11 @@
     rxpValueEnd = xml.getItemValue("DEVICE_TYPE",1,"RXP_VALUE_END");
     rxpValuePos = xml.getItemValue("DEVICE_TYPE",1,"RXP_VALUE_POS");   
     promptLines = xml.getItemValue("DEVICE_TYPE",1,"PROMPT_LINES"); 
+    portsListCommands =  xml.getItemValue("DEVICE_TYPE",1,"PORTS_LIST_COMMANDS"); 
+    portsDataRow =  xml.getItemValue("DEVICE_TYPE",1,"PORTS_DATA_ROW"); 
+    portsDataSeries =  xml.getItemValue("DEVICE_TYPE",1,"PORTS_DATA_SERIES"); 
+    vlanDivChar =  xml.getItemValue("DEVICE_TYPE",1,"VLAN_DIV_CHAR"); 
+    portTypeStart =  xml.getItemValue("DEVICE_TYPE",1,"PORT_TYPE_START"); 
 
 %>
 <html>
@@ -84,64 +94,60 @@
                       <!-- 查询面板内容 -->
                      <table >
                       <tr>
-                          <td width="120" align="right">设备类型英文名称：</td>
+                          <td width="150" align="right">设备类型英文名称：</td>
 		                  <td width="100">
              					 <input type="text" class="text" name="TYPE_NAME_EN"value="<%=typeNameEn %>" readonly><span class="requiredField">*</span>
 		                  </td>
 		                  </tr>
 		                <tr>  
-                          <td width="120" align="right">设备类型中文名称：</td>
+                          <td width="150" align="right">设备类型中文名称：</td>
 		                  <td width="100">
               					<input type="text" class="text" name="TYPE_NAME_CN"value="<%=typeNameCn %>" readonly><span class="requiredField">*</span>
 		                  </td>
 		               <tr>
-		                 <td width="120" align="right">巡检指令集：</td>
-		                 <td colspan="3">
+		                 <td width="150" align="right">巡检指令集：</td>
+		                 <td width="100">
               					<textarea name="INSPECT_COMMANDS" id="textarea" class="textarea" cols="50" rows="4" readonly><%=inspectCommands %></textarea>
 		                 </td>
 		               </tr>
 		                <tr>
-		                <td width="120" align="right">巡检指令说明：</td>
-		                <td colspan="3">
+		                <td width="150" align="right">巡检指令说明：</td>
+		                <td width="100">
               					<textarea name="INSPECT_COMMANDS_EXP" id="textarea" class="textarea" cols="50" rows="4" readonly><%=inspectCommandsExp %></textarea>
 		                 </td>
-		                 <td></td>
-		                 <td></td>
 		               </tr>
 		                <tr>
-		                <td width="120" align="right">数据采集指令：</td>
-		                 <td colspan="3">
-              					<textarea name="COLLECT_COMMANDS" id="textarea" class="textarea" cols="50" rows="4" readonly><%=collectCommands %></textarea>
-		                 </td>
-		                 <td></td>
-		                </tr>
-		                   <tr>
-		                <td width="120" align="right">设备配置提取指令：</td>
-		                 <td colspan="3">
+		                <td width="150" align="right">设备配置提取指令：</td>
+		                 <td width="100">
               					<textarea id="textarea" class="textarea" cols="50" rows="4" readonly><%=configCommands %></textarea>
 		                 </td>
-		                 <td></td>
+		                </tr>
+		                <tr>
+		                <td width="150" align="right">数据采集指令：</td>
+		                 <td width="100">
+              					<textarea name="COLLECT_COMMANDS" id="textarea" class="textarea" cols="50" rows="4" readonly><%=collectCommands %></textarea>
+		                 </td>
 		                </tr>
 		                <tr>  
-                          <td width="120" align="right">光功率/行起始符：</td>
+                          <td width="150" align="right">光功率/行起始符：</td>
 		                  <td width="100">
               					<input type="text" class="text" name="RXP_LINE_START"value="<%=rxpLineStart %>" readonly>
 		                  </td>
 		               <tr>
 		               <tr>  
-                          <td width="120" align="right">光功率/数据起始符：</td>
+                          <td width="150" align="right">光功率/数据起始符：</td>
 		                  <td width="100">
               					<input type="text" class="text" name="RXP_VALUE_START"value="<%=rxpValueStart %>" readonly>
 		                  </td>
 		               <tr>
 		               <tr>  
-                          <td width="120" align="right">光功率/数据截止符：</td>
+                          <td width="150" align="right">光功率/数据截止符：</td>
 		                  <td width="100">
               					<input type="text" class="text" name="RXP_VALUE_END"value="<%=rxpValueEnd %>" readonly>
 		                  </td>
 		               <tr>
 		               <tr>  
-                          <td width="120" align="right">光功率/数据位置：</td>
+                          <td width="150" align="right">光功率/数据位置：</td>
 		                  <td width="100">
               					<input type="text" class="text" name="RXP_VALUE_POS"value="<%=rxpValuePos %>" readonly>
 		                  </td>
@@ -152,6 +158,39 @@
              					 <input type="text" class="text" name="PROMPT_LINES" value="<%=promptLines %>">
 		                  </td>
 		               </tr>
+		                  <tr>
+                          <td width="150" align="right">设备端口获取指令：</td>
+		                  <td width="100">
+              					<textarea name="PORTS_LIST_COMMANDS" id="textarea" class="textarea" cols="50" rows="4"><%=portsListCommands %></textarea>
+		                  </td>
+		               </tr>
+						 <tr>
+                          <td width="150" align="right">端口数据起始行：</td>
+		                  <td width="100">
+             					 <input type="text" class="text" name="PORTS_DATA_ROW"value="<%=portsDataRow %>">
+		                  </td>
+		               </tr>
+						 <tr>
+                          <td width="150" align="right">端口数据列：</td>
+		                  <td width="100">
+             					 <input type="text" class="text" name="PORTS_DATA_SERIES"value="<%=portsDataSeries %>">
+		                  </td>
+		               </tr>
+						 <tr>
+                          <td width="150" align="right">V-Lan标识符：</td>
+                             <td width="100">
+             					 <input type="text" class="text" name="VLAN_DIV_CHAR"value="<%=vlanDivChar %>">
+		                  </td>
+		                
+		               </tr>
+						 <tr>
+                          <td width="150" align="right">端口类型行标识符：</td>
+		                   <td width="100">
+             					 <input type="text" class="text" name="PORT_TYPE_START"value="<%=portTypeStart %>">
+		                  </td>
+		               </tr>
+		               
+		               
 		                <tr>
 		                 <td width="120" align="right">备注：</td>
 		                 <td colspan="3"> 

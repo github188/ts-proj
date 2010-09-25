@@ -35,7 +35,7 @@
 
 	deviceIds = xml.getItemValues("DEVICE_INFO","DEVICE_ID");
 	deviceNameEns = xml.getItemValues("DEVICE_INFO", "DEVICE_NAME_EN");
-	deviceNameCns = xml.getItemValues("DEVICE_INFO", "DEVICE_ABB_NAME_EN");
+	deviceNameCns = xml.getItemValues("DEVICE_INFO", "DEVICE_NAME_CN");
 	locationNames = xml.getItemValues("DEVICE_INFO", "LOCATION_NAME");
 	deviceStatuses = xml.getItemValues("DEVICE_INFO", "DEVICE_STATUS");
 	deviceIps = xml.getItemValues("DEVICE_INFO", "DEVICE_IP");

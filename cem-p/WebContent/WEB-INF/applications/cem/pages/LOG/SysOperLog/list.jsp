@@ -114,6 +114,7 @@
           <th width="15%">操作时间</th>
           <th width="17%">操作功能代码</th>
           <th width="22%">操作功能名称</th>
+          <th width="22%">备注</th>
         </tr>
         <%for(int i=0;i<userNames.length;i++){ 
         	String dark="";
@@ -126,6 +127,7 @@
           <td align="center"><%=DateFunc.FormatDateTime(operTimes[i]) %></td>
           <td align="center"><%=operFunIds[i] %></td>
           <td align="center"><%=operFunNames[i] %></td>
+           <td align="center"><%=remark[i] %></td>
         </tr>
         <%} %>
       </table>
