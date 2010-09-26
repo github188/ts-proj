@@ -72,7 +72,7 @@
   		                 <tr>
 		               <td  align="right">备注：</td>
 		                 <td  colspan="3">
-              			 	<textarea name="REMARK" id="textarea" class="textarea" cols="80" rows="8" readonly><%=remark%></textarea>
+              			 	<textarea name="REMARK" id="textarea" class="textarea" cols="80" rows="15" readonly><%=remark%></textarea>
 		                 </td>
 		                  <td ></td>
 		                <td ></td>
