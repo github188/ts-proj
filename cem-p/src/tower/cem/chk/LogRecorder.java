@@ -73,6 +73,9 @@ public class LogRecorder implements RootChecker{
 		sw = new StringWriter();
 		tower.tmvc.XMLWrapOutputter.output(requestXml, sw);
 		operRequest = sw.toString();
+		if(operRequest != null && operRequest.length()>2000){
+			operRequest = operRequest.substring(0, 2000);
+		}
 		/***********************************************************************
 		 * 创建数据库连接、实例化DB、EN
 		 **********************************************************************/
