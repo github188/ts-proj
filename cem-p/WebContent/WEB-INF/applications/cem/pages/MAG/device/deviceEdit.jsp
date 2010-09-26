@@ -71,6 +71,10 @@
    function doSelDeviceType(){
    	selDialog("ctrl?FUNC_ID=SelectDeviceType","TYPE_ID","TYPE_NAME",850,550,false);
    }
+   function doClear(){
+      form1.FRONT_HOST_ID.value = ""
+      form1.FRONT_HOST_NAME.value = ""
+   }
    
    function doSubmit(form) 
     { 
@@ -172,6 +176,7 @@
 			                	<input name="FRONT_HOST_ID" type="hidden"  value="<%=frontHostId%>">
 		                  		<input type="text" class="date" name="FRONT_HOST_NAME"   value="<%=frontHostName%>"  readonly>
 		                   		<input type="button" name="selectOutOrg" class="selButton" value="选择" onClick="doSelFrontHost()" />
+		                   		<input type="button"  class="selButton" value="清空" onClick="doClear()" />
 			                 </td>
 		               </tr>
 		               
