@@ -181,7 +181,7 @@
 		                  </td>
 		               </tr>
 						 <tr>
-                          <td width="150" align="right">V-Lan标识符：</td>
+                          <td width="150" align="right">VLAN划分字符：</td>
                              <td width="100">
 		                      <span id="sprytVlanDivChar">
              					 <input type="text" class="text" name="VLAN_DIV_CHAR"value="<%=vlanDivChar %>">
@@ -191,7 +191,14 @@
 		                  </td>
 		                
 		               </tr>
-						 <tr>
+		                <tr>
+		                <td width="150" align="right">光功率采集指令：</td>
+		                 <td  width="100">
+              					<textarea name="COLLECT_COMMANDS" id="textarea" class="textarea" cols="50" rows="4"><%=collectCommands %></textarea>
+		                 </td>
+		                 <td></td>
+		                </tr>
+		              	 <tr>
                           <td width="150" align="right">端口类型行标识符：</td>
 		                   <td width="100">
 		                      <span id="sprytPortTypeStart">
@@ -201,14 +208,6 @@
 		                            </span>
 		                  </td>
 		               </tr>
-		                <tr>
-		                <td width="150" align="right">光功率采集指令：</td>
-		                 <td  width="100">
-              					<textarea name="COLLECT_COMMANDS" id="textarea" class="textarea" cols="50" rows="4"><%=collectCommands %></textarea>
-		                 </td>
-		                 <td></td>
-		                </tr>
-		              
 		                <tr>
                           <td width="150" align="right">光功率/行起始符：</td>
 		                  <td width="100">

@@ -147,17 +147,11 @@
 		                  </td>
 		               </tr>
 						 <tr>
-                          <td width="150" align="right">V-Lan标识符：</td>
+                          <td width="150" align="right">VLAN划分字符：</td>
                              <td width="100">
              					 <input type="text" class="text" name="VLAN_DIV_CHAR"value="<%=vlanDivChar %>">
 		                  </td>
 		                
-		               </tr>
-						 <tr>
-                          <td width="150" align="right">端口类型行标识符：</td>
-		                   <td width="100">
-             					 <input type="text" class="text" name="PORT_TYPE_START"value="<%=portTypeStart %>">
-		                  </td>
 		               </tr>
 		                <tr>
 		                <td width="150" align="right">光功率采集指令：</td>
@@ -165,6 +159,12 @@
               					<textarea name="COLLECT_COMMANDS" id="textarea" class="textarea" cols="50" rows="4" readonly><%=collectCommands %></textarea>
 		                 </td>
 		                </tr>
+		                	 <tr>
+                          <td width="150" align="right">端口类型行标识符：</td>
+		                   <td width="100">
+             					 <input type="text" class="text" name="PORT_TYPE_START"value="<%=portTypeStart %>">
+		                  </td>
+		               </tr>
 		                <tr>  
                           <td width="150" align="right">光功率/行起始符：</td>
 		                  <td width="100">
