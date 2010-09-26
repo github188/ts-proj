@@ -39,6 +39,9 @@
   function doclose(){
   	window.close();
   }
+     function doExcel(sendId){
+  	  window.location="ctrl?FUNC_ID=RxpToExcel&SEND_ID="+sendId;
+    }
 -->
 </script>
 </head>
@@ -62,7 +65,7 @@
         <form name="form2" action="ctrl" method="get" >
               <input type="hidden" name="FUNC_ID" value="RxpToExcel">
                <input type="hidden" name="SEND_ID" value="<%= sendId%>">
-                <input type="hidden" name="DEVICE_TYPE_ID" value="<%= deviceTypeId%>">
+                <input type="hidden" name="DEVICE_TYPE_ID" value="<%=deviceTypeId%>">
               <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
                    <tr>
                   		<th>设备名称</th>
@@ -94,7 +97,7 @@
               <table width="100%" border="0" cellpadding="0" cellspacing="0" height="10">
               <tr height="100">
                 <td colspan="9" align="center" height="10">
-                 <input type="submit" class="submit"  value="导出excel">
+                 <input type="button" class="button"  value="导出excel"  onclick="doExcel('<%=sendId %>');">
                 </td>
                 <td></td>
                 <td></td>
