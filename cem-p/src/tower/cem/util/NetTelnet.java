@@ -79,6 +79,8 @@ public class NetTelnet {
 	} catch (ConnectException ec) {
 	    bFlag = false;
 	} catch (Exception e) {
+	    bFlag = false;
+	    returnResult.append(e.getMessage());
 	    e.printStackTrace();
 	}
 	return returnResult.toString();
@@ -129,6 +131,8 @@ public class NetTelnet {
 		return returnResult.toString();
 	    }
 	} catch (Exception e) {
+	    bFlag = false;
+	    returnResult.append(e.getMessage());
 	    e.printStackTrace();
 	}
 	return returnResult.toString();
@@ -163,6 +167,7 @@ public class NetTelnet {
 	    bFlag = false;
 	} catch (Exception e) {
 	    bFlag = false;
+	    sb.append(e.getMessage());
 	    e.printStackTrace();
 	}
 	return sb.toString();
@@ -177,8 +182,8 @@ public class NetTelnet {
 	try {
 	    out.println(value);
 	    out.flush();
-
 	} catch (Exception e) {
+	    bFlag = false;
 	    e.printStackTrace();
 	}
     }
@@ -202,9 +207,11 @@ public class NetTelnet {
 	    }
 	    return sbReturn.toString();
 	} catch (Exception e) {
+	    bFlag = false;
+	    sbReturn.append(e.getMessage());
 	    e.printStackTrace();
 	}
-	return null;
+	return sbReturn.toString();
     }
 
     /**
