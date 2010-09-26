@@ -133,8 +133,16 @@
               			  <span class="textfieldMaxCharsMsg">已超过最大字符数200。</span>	                          
 		                  </span>
 		                 </td>
-		                 <td></td>
-		                 <td></td>
+		               </tr>
+		                 <tr>
+                          <td width="150" align="right">命令返回提示符行数：</td>
+		                  <td width="100">
+		                      <span id="sprytPromptLines">
+             					 <input type="text" class="text" name="PROMPT_LINES"value="<%=promptLines %>">
+             					   <span class="textfieldInvalidFormatMsg">格式无效，有效格式为实数。</span>
+		                            <span class="textfieldMaxCharsMsg">已超过最大字符数50。</span>	                          
+		                            </span>
+		                  </td>
 		               </tr>
 		                 <tr>
 		                <td width="150" align="right">设备配置提取指令：</td>
@@ -143,6 +151,56 @@
 		                 </td>
 		                 <td></td>
 		                </tr>
+		                    
+					   <tr>
+                          <td width="150" align="right">设备端口获取指令：</td>
+		                  <td width="100">
+              					<textarea name="PORTS_LIST_COMMANDS" id="textarea" class="textarea" cols="50" rows="4"><%=portsListCommands %></textarea>
+		                  </td>
+		               </tr>
+						
+	
+		                 <tr>
+                          <td width="150" align="right">端口数据-起始行：</td>
+		                  <td width="100">
+		                      <span id="sprytPortsDataRow">
+             					 <input type="text" class="text" name="PORTS_DATA_ROW"value="<%=portsDataRow %>">
+             					   <span class="textfieldInvalidFormatMsg">格式无效，有效格式为实数。</span>
+		                            <span class="textfieldMaxCharsMsg">已超过最大字符数50。</span>	                          
+		                            </span>
+		                  </td>
+		               </tr>
+						 <tr>
+                          <td width="150" align="right">端口数据-列：</td>
+		                  <td width="100">
+		                      <span id="sprytPortsDataSeries">
+             					 <input type="text" class="text" name="PORTS_DATA_SERIES"value="<%=portsDataSeries %>">
+             					   <span class="textfieldInvalidFormatMsg">格式无效，有效格式为实数。</span>
+		                            <span class="textfieldMaxCharsMsg">已超过最大字符数50。</span>	                          
+		                            </span>
+		                  </td>
+		               </tr>
+						 <tr>
+                          <td width="150" align="right">V-Lan标识符：</td>
+                             <td width="100">
+		                      <span id="sprytVlanDivChar">
+             					 <input type="text" class="text" name="VLAN_DIV_CHAR"value="<%=vlanDivChar %>">
+             					   <span class="textfieldInvalidFormatMsg">格式无效，有效格式为实数。</span>
+		                            <span class="textfieldMaxCharsMsg">已超过最大字符数50。</span>	                          
+		                            </span>
+		                  </td>
+		                
+		               </tr>
+						 <tr>
+                          <td width="150" align="right">端口类型行标识符：</td>
+		                   <td width="100">
+		                      <span id="sprytPortTypeStart">
+             					 <input type="text" class="text" name="PORT_TYPE_START"value="<%=portTypeStart %>">
+             					   <span class="textfieldInvalidFormatMsg">格式无效，有效格式为实数。</span>
+		                            <span class="textfieldMaxCharsMsg">已超过最大字符数50。</span>	                          
+		                            </span>
+		                  </td>
+		               </tr>
 		                <tr>
 		                <td width="150" align="right">光功率采集指令：</td>
 		                 <td  width="100">
@@ -187,64 +245,7 @@
 		                            </span>
 		                  </td>
 		               </tr>
-		                  <tr>
-                          <td width="150" align="right">命令返回提示符行数：</td>
-		                  <td width="100">
-		                      <span id="sprytPromptLines">
-             					 <input type="text" class="text" name="PROMPT_LINES"value="<%=promptLines %>">
-             					   <span class="textfieldInvalidFormatMsg">格式无效，有效格式为实数。</span>
-		                            <span class="textfieldMaxCharsMsg">已超过最大字符数50。</span>	                          
-		                            </span>
-		                  </td>
-		               </tr>
-					   <tr>
-                          <td width="150" align="right">设备端口获取指令：</td>
-		                  <td width="100">
-              					<textarea name="PORTS_LIST_COMMANDS" id="textarea" class="textarea" cols="50" rows="4"><%=portsListCommands %></textarea>
-		                  </td>
-		               </tr>
-						 <tr>
-                          <td width="150" align="right">端口数据起始行：</td>
-		                  <td width="100">
-		                      <span id="sprytPortsDataRow">
-             					 <input type="text" class="text" name="PORTS_DATA_ROW"value="<%=portsDataRow %>">
-             					   <span class="textfieldInvalidFormatMsg">格式无效，有效格式为实数。</span>
-		                            <span class="textfieldMaxCharsMsg">已超过最大字符数50。</span>	                          
-		                            </span>
-		                  </td>
-		               </tr>
-						 <tr>
-                          <td width="150" align="right">端口数据列：</td>
-		                  <td width="100">
-		                      <span id="sprytPortsDataSeries">
-             					 <input type="text" class="text" name="PORTS_DATA_SERIES"value="<%=portsDataSeries %>">
-             					   <span class="textfieldInvalidFormatMsg">格式无效，有效格式为实数。</span>
-		                            <span class="textfieldMaxCharsMsg">已超过最大字符数50。</span>	                          
-		                            </span>
-		                  </td>
-		               </tr>
-						 <tr>
-                          <td width="150" align="right">V-Lan标识符：</td>
-                             <td width="100">
-		                      <span id="sprytVlanDivChar">
-             					 <input type="text" class="text" name="VLAN_DIV_CHAR"value="<%=vlanDivChar %>">
-             					   <span class="textfieldInvalidFormatMsg">格式无效，有效格式为实数。</span>
-		                            <span class="textfieldMaxCharsMsg">已超过最大字符数50。</span>	                          
-		                            </span>
-		                  </td>
-		                
-		               </tr>
-						 <tr>
-                          <td width="150" align="right">端口类型行标识符：</td>
-		                   <td width="100">
-		                      <span id="sprytPortTypeStart">
-             					 <input type="text" class="text" name="PORT_TYPE_START"value="<%=portTypeStart %>">
-             					   <span class="textfieldInvalidFormatMsg">格式无效，有效格式为实数。</span>
-		                            <span class="textfieldMaxCharsMsg">已超过最大字符数50。</span>	                          
-		                            </span>
-		                  </td>
-		               </tr>
-	
+		            
 		                <tr>
 		                 <td width="150" align="right">备注：</td>
 		                 <td colspan="3"> 

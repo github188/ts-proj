@@ -116,48 +116,18 @@
               					<textarea name="INSPECT_COMMANDS_EXP" id="textarea" class="textarea" cols="50" rows="4" readonly><%=inspectCommandsExp %></textarea>
 		                 </td>
 		               </tr>
+		                 <tr>
+                          <td width="150" align="right">命令返回提示符行数：</td>
+		                  <td width="100">
+             					 <input type="text" class="text" name="PROMPT_LINES" value="<%=promptLines %>">
+		                  </td>
+		               </tr>
 		                <tr>
 		                <td width="150" align="right">设备配置提取指令：</td>
 		                 <td width="100">
               					<textarea id="textarea" class="textarea" cols="50" rows="4" readonly><%=configCommands %></textarea>
 		                 </td>
 		                </tr>
-		                <tr>
-		                <td width="150" align="right">数据采集指令：</td>
-		                 <td width="100">
-              					<textarea name="COLLECT_COMMANDS" id="textarea" class="textarea" cols="50" rows="4" readonly><%=collectCommands %></textarea>
-		                 </td>
-		                </tr>
-		                <tr>  
-                          <td width="150" align="right">光功率/行起始符：</td>
-		                  <td width="100">
-              					<input type="text" class="text" name="RXP_LINE_START"value="<%=rxpLineStart %>" readonly>
-		                  </td>
-		               <tr>
-		               <tr>  
-                          <td width="150" align="right">光功率/数据起始符：</td>
-		                  <td width="100">
-              					<input type="text" class="text" name="RXP_VALUE_START"value="<%=rxpValueStart %>" readonly>
-		                  </td>
-		               <tr>
-		               <tr>  
-                          <td width="150" align="right">光功率/数据截止符：</td>
-		                  <td width="100">
-              					<input type="text" class="text" name="RXP_VALUE_END"value="<%=rxpValueEnd %>" readonly>
-		                  </td>
-		               <tr>
-		               <tr>  
-                          <td width="150" align="right">光功率/数据位置：</td>
-		                  <td width="100">
-              					<input type="text" class="text" name="RXP_VALUE_POS"value="<%=rxpValuePos %>" readonly>
-		                  </td>
-		               <tr>
-		                   <tr>
-                          <td width="150" align="right">命令返回提示符行数：</td>
-		                  <td width="100">
-             					 <input type="text" class="text" name="PROMPT_LINES" value="<%=promptLines %>">
-		                  </td>
-		               </tr>
 		                  <tr>
                           <td width="150" align="right">设备端口获取指令：</td>
 		                  <td width="100">
@@ -189,8 +159,36 @@
              					 <input type="text" class="text" name="PORT_TYPE_START"value="<%=portTypeStart %>">
 		                  </td>
 		               </tr>
-		               
-		               
+		                <tr>
+		                <td width="150" align="right">光功率采集指令：</td>
+		                 <td width="100">
+              					<textarea name="COLLECT_COMMANDS" id="textarea" class="textarea" cols="50" rows="4" readonly><%=collectCommands %></textarea>
+		                 </td>
+		                </tr>
+		                <tr>  
+                          <td width="150" align="right">光功率/行起始符：</td>
+		                  <td width="100">
+              					<input type="text" class="text" name="RXP_LINE_START"value="<%=rxpLineStart %>" readonly>
+		                  </td>
+		               <tr>
+		               <tr>  
+                          <td width="150" align="right">光功率/数据起始符：</td>
+		                  <td width="100">
+              					<input type="text" class="text" name="RXP_VALUE_START"value="<%=rxpValueStart %>" readonly>
+		                  </td>
+		               <tr>
+		               <tr>  
+                          <td width="150" align="right">光功率/数据截止符：</td>
+		                  <td width="100">
+              					<input type="text" class="text" name="RXP_VALUE_END"value="<%=rxpValueEnd %>" readonly>
+		                  </td>
+		               <tr>
+		               <tr>  
+                          <td width="150" align="right">光功率/数据位置：</td>
+		                  <td width="100">
+              					<input type="text" class="text" name="RXP_VALUE_POS"value="<%=rxpValuePos %>" readonly>
+		                  </td>
+		               <tr>
 		                <tr>
 		                 <td width="120" align="right">备注：</td>
 		                 <td colspan="3"> 

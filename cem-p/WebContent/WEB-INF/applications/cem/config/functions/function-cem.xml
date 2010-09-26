@@ -4,8 +4,13 @@
 	 <function id="SysOperLogList" description="系统操作日志查询" type="bo"
         className="tower.cem.bo.SysOperLog.BoSysOperLoglist"
         forward="SysOperLogJsp" />
+      <function id="LogView" description="系统操作日志查看" type="bo"
+        className="tower.cem.bo.SysOperLog.BoSysOperLogDetail"
+        forward="SysOperLogViewJsp" />
      <function id="SysOperLogJsp" description="系统操作日志查询界面" type="jsp"
         jspPath="/cem/pages/LOG/SysOperLog/list.jsp" />
+     <function id="SysOperLogViewJsp" description="系统操作日志查看界面" type="jsp"
+        jspPath="/cem/pages/LOG/SysOperLog/view.jsp" />
      <!-- 获取图片 -->
      <function id="GetAppPic" description="获取设备类型图片" type="bo"
 		className="tower.cem.bo.MAG.deviceType.BoDownloadUploadedFile" 

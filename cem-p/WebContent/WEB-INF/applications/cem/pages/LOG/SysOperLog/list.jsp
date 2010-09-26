@@ -13,6 +13,7 @@
 	String operDateDown = xml.getInputValue("OPERATION_TIME_END");
 	String operFunc = xml.getInputValue("OPER_FUNC");
 
+	String[] logIds = xml.getItemValues("SYSTEM_OPERATION_LOG","LOG_ID");
 	String[] userNames = xml.getItemValues("SYSTEM_OPERATION_LOG","USER_NAME");
 	String[] operTimes = xml.getItemValues("SYSTEM_OPERATION_LOG","OPERATION_TIME");
 	String[] operFunIds = xml.getItemValues("SYSTEM_OPERATION_LOG","OPERATION_FUN_ID");
@@ -35,10 +36,8 @@
 		form1.OPERATION_TIME_BEGIN.value="";
 		form1.OPERATION_TIME_END.value="";
 	}
-	function doPrint(){
-		form1.FUNC_ID.value = "AdminLogListExcel";
-		form1.submit();
-		form1.FUNC_ID.value = "AdminLogList";
+	function doView(logId){
+	 window.location.href ="ctrl?FUNC_ID=LogView&LOG_ID="+logId;
 	}
 	
 	
@@ -115,6 +114,7 @@
           <th width="17%">操作功能代码</th>
           <th width="22%">操作功能名称</th>
           <th width="22%">备注</th>
+          <th width="22%">操作</th>
         </tr>
         <%for(int i=0;i<userNames.length;i++){ 
         	String dark="";
@@ -127,7 +127,8 @@
           <td align="center"><%=DateFunc.FormatDateTime(operTimes[i]) %></td>
           <td align="center"><%=operFunIds[i] %></td>
           <td align="center"><%=operFunNames[i] %></td>
-           <td align="center"><%=remark[i] %></td>
+          <td align="center"><%=remark[i] %></td>
+          <td align="center" nowrap>[ <a href="JavaScript:doView('<%=logIds[i]%>')">查看 </a>]</td>
         </tr>
         <%} %>
       </table>
