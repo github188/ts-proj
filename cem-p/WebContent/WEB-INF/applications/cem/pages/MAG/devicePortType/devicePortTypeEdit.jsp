@@ -144,20 +144,20 @@
 		                  </td>
 		               </tr>
 		                <tr>
-                          <td width="150" align="right">光功率/网络要求最小值：</td>
+                          <td width="150" align="right">光功率/网络要求最大值：</td>
 		                  <td width="100">
-		                      <span id="spryNetWorkRxMin">
-             					 <input type="text" class="text" name="NETWORK_RX_MIN"value="<%=netWorkRxMin %>">
+		                      <span id="spryNetWorkRxMax">
+             					 <input type="text" class="text" name="NETWORK_RX_MAX"value="<%=netWorkRxMax %>">
              					   <span class="textfieldInvalidFormatMsg">格式无效，有效格式为实数。</span>
 		                            <span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 		                            </span>
 		                  </td>
 		               </tr>
 		                <tr>
-                          <td width="150" align="right">光功率/网络要求最大值：</td>
+                          <td width="150" align="right">光功率/网络要求最小值：</td>
 		                  <td width="100">
-		                      <span id="spryNetWorkRxMax">
-             					 <input type="text" class="text" name="NETWORK_RX_MAX"value="<%=netWorkRxMax %>">
+		                      <span id="spryNetWorkRxMin">
+             					 <input type="text" class="text" name="NETWORK_RX_MIN"value="<%=netWorkRxMin %>">
              					   <span class="textfieldInvalidFormatMsg">格式无效，有效格式为实数。</span>
 		                            <span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 		                            </span>

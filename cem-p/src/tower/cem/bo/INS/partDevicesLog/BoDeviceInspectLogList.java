@@ -110,6 +110,7 @@ public class BoDeviceInspectLogList  implements RootBo{
 			if (sqlWhere != null && sqlWhere.length() != 0) {
 				sql.append(" and ");
 				sql.append(sqlWhere.toString());
+				sql.append(" order by a.EXEC_END_TIME ");
 			}
 
 			int page = Page.SetPageInfo(transaction, null, requestXml,

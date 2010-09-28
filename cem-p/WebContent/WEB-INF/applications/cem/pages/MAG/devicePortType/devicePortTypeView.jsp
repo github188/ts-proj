@@ -93,13 +93,7 @@
 		                   <input type="text" class="text" value="<%=standardRxMin %>" readonly>
 		                  </td>
 		               </tr>
-		                <tr>
-                          <td width="150" align="right">光功率/网络要求最小值：</td>
-		                  <td width="100">
-		                   <input type="text" class="text" value="<%=netWorkRxMin %>" readonly>
-		                  </td>
-		               </tr>
-		                   <tr>
+		               <tr>
                           <td width="150" align="right">光功率/网络要求最大值：</td>
 		                  <td width="100">
 		                      <span id="spryNetWorkRxMax">
@@ -107,6 +101,12 @@
              					   <span class="textfieldInvalidFormatMsg">格式无效，有效格式为实数。</span>
 		                            <span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 		                            </span>
+		                  </td>
+		               </tr>
+		                <tr>
+                          <td width="150" align="right">光功率/网络要求最小值：</td>
+		                  <td width="100">
+		                   <input type="text" class="text" value="<%=netWorkRxMin %>" readonly>
 		                  </td>
 		               </tr>
 		                <tr>

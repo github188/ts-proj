@@ -38,7 +38,7 @@ import tower.tmvc.XMLWrap;
 			extractEnd = xml.getItemValue("DEVICE_CONFIG_LOG",1,"EXTRACT_END");
 			status = xml.getItemValue("DEVICE_CONFIG_LOG",1,"STATUS");
 			logCont = xml.getItemValue("DEVICE_CONFIG_LOG",1,"LOG_CONT");
-			fileName = "config"+"_"+deviceName+"_"+extractEnd+".txt";;
+			fileName = "config"+"_"+deviceIp+"_"+extractEnd+".txt";;
 			
 			res.setContentType("text/plain");// 两行关键的设置   
 			res.addHeader("Content-Disposition",   

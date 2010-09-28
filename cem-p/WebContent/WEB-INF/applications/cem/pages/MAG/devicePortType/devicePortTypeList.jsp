@@ -135,8 +135,8 @@ function doSubmit(form) {
                   <th>端口类型中文名称</th>
                   <th>光功率/标准最大值</th>
                   <th>光功率/标准最小值</th>
-                  <th>光功率/网络要求最小值</th>
                   <th>光功率/网络要求最大值</th>
+                  <th>光功率/网络要求最小值</th>
                   <th width="10%">[ <a href="JavaScript:doAdd()">添加</a> ]</th>
                 </tr>
               <%if(typeIds != null){
@@ -152,8 +152,8 @@ function doSubmit(form) {
                   </td>
                   <td align="center"><%=standardRxMaxs[i]%></td>
                   <td align="center"><%=standardRxMins[i]%></td>
-                  <td align="center"><%=netWorkRxMins[i]%></td>
                   <td align="center"><%=netWorkRxMaxs[i]%></td>
+                  <td align="center"><%=netWorkRxMins[i]%></td>
                  <td align="center" nowrap>[ <a href="JavaScript:doEdit('<%=typeIds[i] %>')">编辑</a> | <a href="JavaScript:doDelete('<%=typeIds[i] %>')">删除 </a>]</td>
                 </tr>
      
@@ -166,8 +166,8 @@ function doSubmit(form) {
                   <td align="center"><%=typeNameCns[i]%></td>
                   <td align="center"><%=standardRxMaxs[i]%></td>
                   <td align="center"><%=standardRxMins[i]%></td>
-                  <td align="center"><%=netWorkRxMins[i]%></td>
                   <td align="center"><%=netWorkRxMaxs[i]%></td>
+                  <td align="center"><%=netWorkRxMins[i]%></td>
                   <td align="center" nowrap>[ <a href="JavaScript:doEdit('<%=typeIds[i] %>')">编辑</a> | <a href="JavaScript:doDelete('<%=typeIds[i] %>')">删除 </a>]</td>
                 </tr>
                <%}}} %>

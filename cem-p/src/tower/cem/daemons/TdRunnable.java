@@ -667,18 +667,15 @@ public class TdRunnable implements Runnable {
 						}
 					    }
 					}
-
 					sbPickLog.append("\n\n");
-
 					break;
 				    }
 				}
 			    }
 			}
+			// 关闭连接
+			nt.disconnect();
 		    }
-
-		    // 关闭连接
-		    nt.disconnect();
 
 		    // 巡检执行完成计时
 		    String sInspectEnd = formatter.format(new java.util.Date());
@@ -722,6 +719,9 @@ public class TdRunnable implements Runnable {
 			}
 		    }
 		}
+
+		// 修改执行任务执行状态标志
+		sGenResult = "S";
 
 		if (!(sbPickLog == null || sbPickLog.toString().trim().length() == 0)) {
 		    String sPickTime = formatter.format(new java.util.Date());
@@ -938,10 +938,9 @@ public class TdRunnable implements Runnable {
 				}
 			    }
 			}
+			// 关闭连接
+			nt.disconnect();
 		    }
-
-		    // 关闭连接
-		    nt.disconnect();
 
 		    // 端口数据采集完成计时
 		    String sCollectEnd = formatter.format(new java.util.Date());
@@ -968,6 +967,9 @@ public class TdRunnable implements Runnable {
 			log.error("执行数据采集任务，记录日志失败。SID=" + enSendList.getSendId());
 		    }
 		}
+
+		// 修改执行任务执行状态标志
+		sGenResult = "S";
 	    }
 
 	    // command_type ="E"，处理执行提取设备配置的任务
@@ -1147,10 +1149,9 @@ public class TdRunnable implements Runnable {
 				sbResult.append(sResult);
 			    }
 			}
+			// 关闭连接
+			nt.disconnect();
 		    }
-
-		    // 关闭连接
-		    nt.disconnect();
 
 		    // 设备配置提取完成计时
 		    String sConfigEnd = formatter.format(new java.util.Date());
@@ -1194,6 +1195,9 @@ public class TdRunnable implements Runnable {
 			}
 		    }
 		}
+
+		// 修改执行任务执行状态标志
+		sGenResult = "S";
 	    }
 
 	    // command_type 为其他值，未定义任务类型

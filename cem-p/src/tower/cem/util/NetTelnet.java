@@ -78,10 +78,11 @@ public class NetTelnet {
 	    }
 	} catch (ConnectException ec) {
 	    bFlag = false;
+	    returnResult.append(ec.getMessage());
 	} catch (Exception e) {
 	    bFlag = false;
 	    returnResult.append(e.getMessage());
-	    e.printStackTrace();
+//	    e.printStackTrace();
 	}
 	return returnResult.toString();
     }
@@ -133,7 +134,7 @@ public class NetTelnet {
 	} catch (Exception e) {
 	    bFlag = false;
 	    returnResult.append(e.getMessage());
-	    e.printStackTrace();
+//	    e.printStackTrace();
 	}
 	return returnResult.toString();
     }
@@ -165,10 +166,11 @@ public class NetTelnet {
 	    }
 	} catch (SocketTimeoutException eTimeout) {
 	    bFlag = false;
+	    sb.append(eTimeout.getMessage());
 	} catch (Exception e) {
 	    bFlag = false;
 	    sb.append(e.getMessage());
-	    e.printStackTrace();
+//	    e.printStackTrace();
 	}
 	return sb.toString();
     }
@@ -184,7 +186,7 @@ public class NetTelnet {
 	    out.flush();
 	} catch (Exception e) {
 	    bFlag = false;
-	    e.printStackTrace();
+//	    e.printStackTrace();
 	}
     }
 
@@ -209,7 +211,7 @@ public class NetTelnet {
 	} catch (Exception e) {
 	    bFlag = false;
 	    sbReturn.append(e.getMessage());
-	    e.printStackTrace();
+//	    e.printStackTrace();
 	}
 	return sbReturn.toString();
     }

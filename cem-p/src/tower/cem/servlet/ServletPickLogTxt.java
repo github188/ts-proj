@@ -26,7 +26,7 @@ import tower.tmvc.XMLWrap;
 			xml = (XMLWrap) req.getAttribute("XML");
 			pickTime = xml.getItemValue("DEVICE_INSPECT_PICK_LOG",1,"PICK_TIME");
 			logCont = xml.getItemValue("DEVICE_INSPECT_PICK_LOG",1,"LOG_CONT");
-			fileName = pickTime+".txt";;
+			fileName = "picklog"+pickTime+".txt";;
 			
 			res.setContentType("text/plain");// 两行关键的设置   
 			res.addHeader("Content-Disposition",   

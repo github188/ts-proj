@@ -50,7 +50,7 @@ public class TelnetDaemons extends Thread {
 	    }
 	    logger.info("TelnetDaemons.stopThread()，Success to stop thread " + threads[i].getName());
 	}
-	logger.info("The TelnetDaemons has shut down");
+	logger.info("The TelnetDaemons has shut down");	
     }
 
     // 列出所有正在运行的线程
@@ -127,6 +127,8 @@ public class TelnetDaemons extends Thread {
 		+ " order by task_plan_time";
 	PreparedStatement pstmt = null;
 
+	logger.info("-");
+	
 	try {
 
 	    // 检查参数文件是否存在，如果不存在则建立参数文件
@@ -148,7 +150,7 @@ public class TelnetDaemons extends Thread {
 	    dbPassword = getTdconfigMsg("db_password").trim();
 
 	    inspectLogsPath = getTdconfigMsg("inspect_logs_path").trim();
-	    configLogsPath =  getTdconfigMsg("config_logs_path").trim();
+	    configLogsPath = getTdconfigMsg("config_logs_path").trim();
 
 	    // 当参数未设置，提示补充参数配置
 	    if (sRunFlag == null || sDaemonsMax == null || sSleepTimer == null || dbDriver == null
