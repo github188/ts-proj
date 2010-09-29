@@ -1,0 +1,25 @@
+1. 服务程序：
+- 停止tomcat服务。
+- 以命令行方式停止后台服务进程：stoptd.bat
+- 确认MySQL服务已启动。
+
+2. 备份：
+- 备份MySQL数据库中的cem。
+- 备份$TOMCAT_HOME/webapps/cem-p目录
+
+3. 更新：
+- 将备份数据库脚本中的数据拷贝到最新数据库结构脚本中，导入，然后修改ID。需拷贝的数据表：
+  device_info 设备信息
+  device_type 设备类型
+  device_port_type 设备端口类型
+  fron_host_info 堡垒主机
+  location_info 物理位置
+  
+- 删除$TOMCAT_HOME/webapps/目录下的目录cem-p，并放入新的cem-p.war
+- 启动tomcat服务（使用控制面板）
+- 将备份$TOMCAT_HOME/webapps/cem-p/WEB-INF目录下的starttd.bat和stoptd.bat拷贝到新的cem-p目录中。
+- 以命令行方式启动后台服务器进程：starttd.bat
+
+4. 确认：
+- 通过浏览器是否能登录cem-p。
+- 增加一条巡检任务，是否能正常执行且正确返回。
