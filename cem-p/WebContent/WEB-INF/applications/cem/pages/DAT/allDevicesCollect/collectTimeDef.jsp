@@ -9,25 +9,13 @@
 	//维护设备编号
 	String[] deviceIds;
 	String[] typeIds;
-	String deviceNameEn;
-	String deviceNameCn;
-	String deviceStatus;
-	String deviceIp;
-	String typeId;
-	String typeName;
 	
 %>
 <%
     xml = XMLWrap.getRequestXml(request,session,application);
 	
 	deviceIds = xml.getInputValues("DEVICE_ID");
-	typeIds = xml.getInputValues("DEVICE_TYPE_ID");
-	deviceNameEn = xml.getInputValue("DEVICE_NAME_EN");
-	deviceNameCn = xml.getInputValue("DEVICE_NAME_CN");
-	deviceStatus = xml.getInputValue("DEVICE_STATUS");
-	deviceIp = xml.getInputValue("DEVICE_IP");
-	typeId = xml.getInputValue("QTYPE_ID");
-	typeName = xml.getInputValue("QTYPE_NAME");
+	typeIds = xml.getInputValues("TYPE_ID");
     
 	
 	String[] excTypeIds = {"0","1"};
@@ -136,22 +124,11 @@ function doSubmit(form) {
             <div class="panelContent2">
              <form action="ctrl" method="post" name="form2">
                <input type="hidden" name="FUNC_ID" value="AllDeviceTypeCollectList">
-              <%for(int n = 0;n < deviceIds.length;n++){ %>
-                 <input type="hidden" name="DEVICE_ID" value="<%=deviceIds[n] %>">
-                  <input type="hidden" name="DEVICE_TYPE_ID" value="<%=typeIds[n] %>">
-             <%} %>
-                 <input type="hidden" name="DEVICE_NAME_EN" value="<%=deviceNameEn %>">
-                 <input type="hidden" name="DEVICE_NAME_CN" value="<%=deviceNameCn %>">
-                 <input type="hidden" name="DEVICE_STATUS" value="<%=deviceStatus %>">
-                 <input type="hidden" name="DEVICE_IP" value="<%=deviceIp%>">
-                 <input type="hidden" name="QTYPE_ID" value="<%=typeId %>">
-                 <input type="hidden" name="QTYPE_NAME" value="<%=typeName %>">
              </form>
             <form action="ctrl" method="post"name="form1" onSubmit="return doSubmit(this)">
                <input type="hidden" name="FUNC_ID" value="AllDeviceCollectTaskAdd">
-              <%for(int n = 0;n < deviceIds.length;n++){ %>
-                 <input type="hidden" name="DEVICE_ID" value="<%=deviceIds[n] %>">
-                  <input type="hidden" name="DEVICE_TYPE_ID" value="<%=typeIds[n] %>">
+              <%for(int n = 0;n < typeIds.length;n++){ %>
+                  <input type="hidden" name="TYPE_ID" value="<%=typeIds[n] %>">
              <%} %>
               <table border="0">
                 <tr>

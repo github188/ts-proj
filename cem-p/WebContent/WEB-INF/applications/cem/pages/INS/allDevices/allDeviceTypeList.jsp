@@ -13,8 +13,6 @@
 	String[] typeNameCns;
 	String[] remarks;
 	
-	//设置返回条件
-	String[] Ids;
 %>
 <%
     xml = XMLWrap.getRequestXml(request,session,application);
@@ -23,8 +21,6 @@
     typeNameEns = xml.getItemValues("DEVICE_TYPE","TYPE_NAME_EN");
     typeNameCns = xml.getItemValues("DEVICE_TYPE","TYPE_NAME_CN");
     remarks = xml.getItemValues("DEVICE_TYPE","REMARK");
-    
-    Ids = xml.getInputValues("TYPE_ID");
     
     
 %>
@@ -125,14 +121,7 @@ function doSubmit(form) {
 				%>
                 <tr class="<%=style %>" onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
                    <td align="center">
-                    <%if(Ids != null && Ids.length != 0){ 
-                    for(int j=0 ;j<Ids.length;j++){
-                    	if(typeIds[i].endsWith(Ids[j])){
-                    %>
-                   <input type="checkbox" name=TYPE_ID" value="<%=typeIds[i] %>" <%if(typeIds[i].endsWith(Ids[j])){out.print("check");} %>> 
-                 <% }}}else{ %>
                    <input type="checkbox" name="TYPE_ID" value="<%=typeIds[i] %>"  > 
-                 <%} %>
 				  </td>
                   <td align="center" onClick="event.cancelBubble=true">
                   <%=typeNameEns[i]%> 

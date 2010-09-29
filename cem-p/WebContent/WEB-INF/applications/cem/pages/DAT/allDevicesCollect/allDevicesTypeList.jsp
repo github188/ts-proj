@@ -11,14 +11,7 @@
 	String[] typeIds;
 	String[] typeNameEns;
 	String[] typeNameCns;
-	String[] inspectCommandses;
-	String[] inspectCommandsExps;
-	String[] collectCommandses;
-	String[] appPictures;
 	String[] remarks;
-	
-	//设置返回条件
-	String[] Ids;
 %>
 <%
     xml = XMLWrap.getRequestXml(request,session,application);
@@ -26,13 +19,8 @@
     typeIds = xml.getItemValues("DEVICE_TYPE","TYPE_ID");
     typeNameEns = xml.getItemValues("DEVICE_TYPE","TYPE_NAME_EN");
     typeNameCns = xml.getItemValues("DEVICE_TYPE","TYPE_NAME_CN");
-    inspectCommandses = xml.getItemValues("DEVICE_TYPE","INSPECT_COMMANDS");
-    inspectCommandsExps = xml.getItemValues("DEVICE_TYPE","INSPECT_COMMANDS_EXP");
-    collectCommandses = xml.getItemValues("DEVICE_TYPE","COLLECT_COMMANDS");
-    appPictures = xml.getItemValues("DEVICE_TYPE","APP_PICTURE");
     remarks = xml.getItemValues("DEVICE_TYPE","REMARK");
     
-    Ids = xml.getInputValues("TYPE_ID");
     
     
 %>
@@ -133,17 +121,7 @@ function doSubmit(form) {
 				%>
                 <tr class="<%=style %>" onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
                    <td align="center">
-                    <%if(Ids != null && Ids.length != 0){ 
-                    for(int j=0 ;j<Ids.length;j++){
-                    	if(typeIds[i].endsWith(Ids[j])){
-                    %>
-                   <input type="checkbox" name=TYPE_ID" value="<%=typeIds[i] %>" <%if(typeIds[i].endsWith(Ids[j])){out.print("check");} %>> 
-                   <input type="hidden" name="QTYPE_ID" value="<%=typeIds[i] %>">
-                 <% }}}else{ %>
                    <input type="checkbox" name="TYPE_ID" value="<%=typeIds[i] %>"  > 
-                    <input type="hidden" name="QTYPE_ID" value="<%=typeIds[i] %>">
-                   
-                 <%} %>
 				  </td>
                   <td align="center" onClick="event.cancelBubble=true">
                   <%=typeNameEns[i]%> 

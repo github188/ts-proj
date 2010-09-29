@@ -20,9 +20,6 @@
 	String[] locationNames;
 	String[] deviceStatuses;
 	String[] deviceIps;
-	
-	//设置返回条件
-	String[] Ids;
 %>
 <%
 	xml = XMLWrap.getRequestXml(request,session,application);
@@ -41,7 +38,6 @@
 	deviceIps = xml.getItemValues("DEVICE_INFO", "DEVICE_IP");
 	typeNames = xml.getItemValues("DEVICE_INFO", "TYPE_NAME");
     
-	Ids = xml.getInputValues("DEVICE_ID");
 	
 	String[] deviceStatusDesc = {"在用","停用"};
 	String[] deviceStatusValue = {"N","S"};
@@ -203,7 +199,7 @@ function doSubmit(form) {
               <input type="hidden" name="QTYPE_NAME" value="<%=typeName %>">
               <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
                  <tr>
-                 <th></th>
+                 <th><input type="checkbox" name="ALL_DEVICE_ID" onclick="SelectAll('ALL_DEVICE_ID','DEVICE_ID');" /></th>
                   <th>设备英文名称</th>
                   <th>设备中文名称</th>
                   <th>设备类型</th>
@@ -214,20 +210,16 @@ function doSubmit(form) {
                 <%int flag=0;
                 if(deviceIds != null){
 			  for (int i = 0; i < deviceIds.length; i++) {
-				if (i % 2 == 0) {%>
-                <tr onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
+				  String dark="";
+				if (i % 2 == 0) {
+					dark="dark";
+					}
+				%>
+                <tr class='<%=dark %>'onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
                   <td align="center">
                   <%if(deviceStatuses[i].endsWith("N")){  flag = 1; %>
-                    <%if(Ids != null && Ids.length != 0){ %>
-                    <%for(int j=0 ;j<Ids.length;j++){
-                    	if(deviceIds[i].endsWith(Ids[j])){
-                   %>
-                   <input type="checkbox" name="DEVICE_ID" value="<%=deviceIds[i] %>"  checked> 
-                  <%}else{%>
                    <input type="checkbox" name="DEVICE_ID" value="<%=deviceIds[i] %>"  > 
-                 <% }  }}else{ %>
-                   <input type="checkbox" name="DEVICE_ID" value="<%=deviceIds[i] %>"  > 
-                   <%}} %>
+                   <%} %>
 				  </td>
                   <td align="center"><%=deviceNameEns[i]%></td>
                   <td align="center"><%=deviceNameCns[i]%></td>
@@ -240,34 +232,7 @@ function doSubmit(form) {
                     <%} %>
                    </td>
                 </tr>
-     
-               <%} else {%>
-               <tr class="dark" onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
-                 <td align="center">
-                  <%if(deviceStatuses[i].endsWith("N")){  flag = 1; %>
-                    <%if(Ids != null && Ids.length != 0){ %>
-                    <%for(int j=0 ;j<Ids.length;j++){
-                    	if(deviceIds[i].endsWith(Ids[j])){
-                   %>
-                   <input type="checkbox" name="DEVICE_ID" value="<%=deviceIds[i] %>"  checked> 
-                  <%}else{%>
-                   <input type="checkbox" name="DEVICE_ID" value="<%=deviceIds[i] %>"  > 
-                 <% }  }}else{ %>
-                   <input type="checkbox" name="DEVICE_ID" value="<%=deviceIds[i] %>"  > 
-                   <%}} %>
-				  </td>
-                  <td align="center"><%=deviceNameEns[i]%></td>
-                  <td align="center"><%=deviceNameCns[i]%></td>
-                  <td align="center"><%=typeNames[i]%></td>
-                  <td align="center"><%=locationNames[i]%></td>
-                  <td align="center"><%=deviceIps[i]%></td>
-                   <td align="center">
-                   <%for(int j=0;j<deviceStatusValue.length;j++){ %>
-                        <%if(deviceStatusValue[j].equals(deviceStatuses[i]))%><%=deviceStatusDesc[j] %>
-                    <%} %>
-                   </td>
-                </tr>
-               <%}}} %>
+               <%}} %>
               </table>
               
               <div class="pageBar"><%=Page.BuildPageTextByMethod(xml,"TDoChangePage") %></div>

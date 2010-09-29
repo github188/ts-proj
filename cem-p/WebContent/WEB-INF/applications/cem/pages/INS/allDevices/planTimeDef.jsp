@@ -119,9 +119,6 @@ function doSubmit(form) {
             <div class="panelContent2">
              <form action="ctrl" method="post"name="form2">
                <input type="hidden" name="FUNC_ID" value="AllDeviceTypeList">
-              <%for(int n = 0;n < typeIds.length;n++){ %>
-                  <input type="hidden" name="TYPE_ID" value="<%=typeIds[n] %>">
-             <%} %>
              </form>
             <form action="ctrl" method="post"name="form1" onSubmit="return doSubmit(this)">
                <input type="hidden" name="FUNC_ID" value="AllDeviceInspectTaskAdd">

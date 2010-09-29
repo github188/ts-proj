@@ -189,7 +189,7 @@ function doSubmit(form) {
                     <%} %>
                    </td>
                  <td align="center" nowrap>
-                 <input type="button" class="button" onClick="doSend('<%=deviceIds[i] %>');" value="发送指令">
+                 <input type="button" class="button" onClick="doSend('<%=deviceIds[i] %>');" value="连接设备">
                  </td>
                 </tr>
      
@@ -207,7 +207,7 @@ function doSubmit(form) {
                     <%} %>
                    </td>
                   <td align="center" nowrap>
-                 <input type="button" class="button" onClick="doSend('<%=deviceIds[i] %>');" value="发送指令">
+                 <input type="button" class="button" onClick="doSend('<%=deviceIds[i] %>');" value="连接设备">
                  </td>
                 </tr>
                <%}}} %>

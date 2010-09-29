@@ -24,9 +24,6 @@
     typeNameCns = xml.getItemValues("DEVICE_TYPE","TYPE_NAME_CN");
     remarks = xml.getItemValues("DEVICE_TYPE","REMARK");
     
-    Ids = xml.getInputValues("TYPE_ID");
-    
-    
 %>
 <html>
 <head>
@@ -109,11 +106,11 @@ function doSubmit(form) {
                <form name="form2" action="ctrl" method="get" onSubmit="return doSubmit();" >
               <input type="hidden" name="FUNC_ID" value="AllExtractTimeDefJsp">
              
-              <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
+               <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
                  <tr>
                  <th width="10%"></th>
-                  <th width="25%">设备类型名称-英文</th>
-                  <th width="25%">设备类型名称-中文</th>
+                  <th width="25%">设备类型英文名称</th>
+                  <th width="25%">设备类型中文名称</th>
                   <th width="40%">备注</th>
                 </tr>
               <%if(typeIds != null){
@@ -125,17 +122,7 @@ function doSubmit(form) {
 				%>
                 <tr class="<%=style %>" onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
                    <td align="center">
-                    <%if(Ids != null && Ids.length != 0){ 
-                    for(int j=0 ;j<Ids.length;j++){
-                    	if(typeIds[i].endsWith(Ids[j])){
-                    %>
-                   <input type="checkbox" name=TYPE_ID" value="<%=typeIds[i] %>" <%if(typeIds[i].endsWith(Ids[j])){out.print("check");} %>> 
-                   <input type="hidden" name="QTYPE_ID" value="<%=typeIds[i] %>">
-                 <% }}}else{ %>
                    <input type="checkbox" name="TYPE_ID" value="<%=typeIds[i] %>"  > 
-                    <input type="hidden" name="QTYPE_ID" value="<%=typeIds[i] %>">
-                   
-                 <%} %>
 				  </td>
                   <td align="center" onClick="event.cancelBubble=true">
                   <%=typeNameEns[i]%> 

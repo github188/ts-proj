@@ -189,7 +189,6 @@ function doSubmit(form) {
                   <th>网络地址</th>
                   <th>用户名</th>
                   <th>结束时间</th>
-                  <th>操作</th>
                 </tr>
             
               <%if(deviceIds != null){
@@ -203,11 +202,6 @@ function doSubmit(form) {
                   <td align="center"><%=deviceIps[i]%></td>
                   <td align="center"><%=userNames[i]%></td>
                    <td align="center"><%=execEnds[i]%></td>
-                  <td align="center" nowrap>
-                   <a href="JavaScript:doView('<%=logIdS[i] %>');">
-                     [查看指令]
-                  </a>
-                 </td>
                 </tr>
                <%} else {%>
                <tr class="dark" onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
@@ -217,11 +211,6 @@ function doSubmit(form) {
                   <td align="center"><%=deviceIps[i]%></td>
                   <td align="center"><%=userNames[i]%></td>
                    <td align="center"><%=execEnds[i]%></td>
-                  <td align="center" nowrap>
-                   <a href="JavaScript:doView('<%=logIdS[i] %>');">
-                     [查看指令]
-                  </a>
-                 </td>
                 </tr>
                <%}}} %>
               </table>

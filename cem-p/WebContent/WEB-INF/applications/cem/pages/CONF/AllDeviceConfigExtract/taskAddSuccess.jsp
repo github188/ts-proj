@@ -7,13 +7,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>设备巡检</title>
+<title>设备配置信息提取</title>
 <jsp:include flush="true" page="../../../../sys/pages/common/include/css.jsp"></jsp:include>
 <jsp:include flush="true" page="../../../../sys/pages/common/include/js.jsp"></jsp:include>
 </head>
 <body id="mainArea">
   <div id="mainPanel" class="panel">
-    <div class="panelHead">添加数据采集任务-完成！</div>
+    <div class="panelHead">设备配置信息提取任务-完成！</div>
     <div class="panelContent">
       <div class="panelContent2">
         
@@ -30,7 +30,7 @@
                   <div class="panelContent">
                     <div class="panelContent2">
                       <!-- 查询面板内容 -->
-            <form name="form1" action="ctrl" method="get"  onSubmit="return doSubmit(this)">
+            <form name="form1" action="ctrl" method="get" >
               <input type="hidden" name="FUNC_ID" value="AllDeviceConfigExtractList">
                  <table width="100%" height="100" border="0" cellpadding="0" cellspacing="0">
               	 <tr>
