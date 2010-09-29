@@ -133,6 +133,7 @@ function doSubmit(form) {
               </table>
               <div class="pageBar"><%=Page.BuildPageTextByMethod(xml,"TDoChangePage") %></div>
               <!-- 列表内容结束 -->
+              <%if(typeIds != null){ %>
           		 <table width="100%" border="0" cellpadding="0" cellspacing="0" height="10">
               <tr height="10">
                 <td colspan="10" align="center" height="10">
@@ -147,6 +148,7 @@ function doSubmit(form) {
                <td></td>
               </tr>
               </table>
+               <%} %>
             </div>
           </div>
           <div class="panelFoot"><div></div></div>
