@@ -64,6 +64,7 @@ public class BoCommDeviceList implements RootBo{
 		String deviceStatus;    // 设备状态
 		String deviceIp;        // 网络地址
 		String devicePort; 		// 网络端口
+		String typeId;          //设备类型
 		String execBeginBegin; //维护开始时间
 		String execBeginEnd;   //维护开始时间
 		String execEndBegin;   //维护结束时间
@@ -84,6 +85,7 @@ public class BoCommDeviceList implements RootBo{
 		locationId = requestXml.getInputValue("LOCATION_ID");
 		deviceStatus = requestXml.getInputValue("DEVICE_STATUS");
 		deviceIp = requestXml.getInputValue("DEVICE_IP");
+		typeId	= requestXml.getInputValue("TYPE_ID");
 		devicePort = requestXml.getInputValue("DEVICE_PORT");
 		execBeginBegin = requestXml.getInputValue("QEXEC_BEGIN_BEGIN");
 		execBeginEnd = requestXml.getInputValue("QEXEC_BEGIN_END");
@@ -151,6 +153,13 @@ public class BoCommDeviceList implements RootBo{
 			} else {
 				sqlWhere.append(" AND DEVICE_PORT LIKE '%" + devicePort + "%'");
 			}
+		}
+		if (typeId != null && typeId.length() != 0) {
+		    if (sqlWhere == null || sqlWhere.length() == 0) {
+			sqlWhere.append(" TYPE_ID  = '" + typeId +"'");
+		    } else {
+			sqlWhere.append(" AND TYPE_ID  = '" + typeId +"'");
+		    }
 		}
 		
 		// 查询表，将符合条件的保存到requestXml中返回。

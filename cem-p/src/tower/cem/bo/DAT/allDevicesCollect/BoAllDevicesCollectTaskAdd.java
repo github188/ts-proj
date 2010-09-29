@@ -25,7 +25,7 @@ public void doBusiness(Transaction transaction, XMLWrap requestXml, XMLWrap sess
 	
 	
 	//获取页面参数
-	String[]  TypeIds; //维护设备编号
+	String[]  TypeIds; //维护设备类型编号
 	String sendId;        //指令发送编号
 	String taskDefineTime; //任务定义时间
 	String taskPlanTime;  //计划开始时间
