@@ -95,14 +95,14 @@
   }
   
  window.onbeforeunload=function(){
- var deviceId = '<%=deviceId%>';
- var execBegin = '<%=date%>';
- //var comms = window.document.TelnetApplet.getCommands();
- //alert(comms);
- //form1.COMMANDS.value = comms;
- form1.submit();
- //window.location.href = "ctrl?FUNC_ID=Disconnection&DEVICE_ID="+deviceId+"&COMMANDS="+comms+"&EXEC_BEGIN="+execBegin;
- 
+     return '关闭当前页之前，请先退出设备!';
+     var deviceId = '<%=deviceId%>';
+     var execBegin = '<%=date%>';
+    //var comms = window.document.TelnetApplet.getCommands();
+    //alert(comms);
+    //form1.COMMANDS.value = comms;
+    form1.submit();
+    //window.location.href = "ctrl?FUNC_ID=Disconnection&DEVICE_ID="+deviceId+"&COMMANDS="+comms+"&EXEC_BEGIN="+execBegin;
 } 
 -->
 </script>
