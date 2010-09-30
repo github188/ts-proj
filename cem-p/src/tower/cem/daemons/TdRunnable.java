@@ -397,14 +397,13 @@ public class TdRunnable implements Runnable {
 				sbResult.append("TdRunnable run()：指令模板执行任务，通过堡垒主机登录设备失败。");
 				log.error("指令模板执行任务，通过堡垒主机登录设备失败。SID=" + enSendList.getSendId());
 
-				// 关闭之前的连接
+				// 从堡垒主机退出
 				try {
-				    // nt.sendCommand("quit", 1);
+				    nt.write("quit");
 				    nt.disconnect();
 				} catch (Exception e) {
 				    // TODO: handle exception
 				}
-
 			    }
 			}
 		    }
@@ -430,18 +429,23 @@ public class TdRunnable implements Runnable {
 
 			// 关闭连接
 			try {
-			    // if (!(enDeviceInfo.getFrontHostId() == null
-                                // || enDeviceInfo.getFrontHostId()
-			    // .trim().length() == 0)) {
-			    // nt.setPrompt(enFrontHostInfo.getHostPrompt());
-			    // nt.sendCommand("exit", 1);
-			    // nt.sendCommand("quit", 1);
-			    // } else {
-			    // nt.sendCommand("exit", 1);
-			    // }
+			    if (!(enDeviceInfo.getFrontHostId() == null || enDeviceInfo.getFrontHostId()
+				    .trim().length() == 0)) {
+				// 将命令行提示符设置为堡垒主机命令行提示符
+				nt.setPrompt(enFrontHostInfo.getHostPrompt());
+				// 从设备上退出
+				sResult = nt.sendCommand("exit", 1);
+				sbResult.append(sResult);
+				// 从堡垒主机退出
+				nt.write("quit");
+			    } else {
+				// 从设备上退出
+				nt.write("exit");
+			    }
+			    // 关闭连接
 			    nt.disconnect();
 			} catch (Exception e) {
-			    // TODO: handle exception
+			    // TODO: handle exception			    
 			}
 		    }
 		}
@@ -623,9 +627,9 @@ public class TdRunnable implements Runnable {
 				    sbResult.append("TdRunnable run()：执行巡检任务，通过堡垒主机登录设备失败。");
 				    log.error("执行巡检任务，通过堡垒主机登录设备失败。SID=" + enSendList.getSendId());
 
-				    // 关闭之前的连接
+				    // 从堡垒主机退出
 				    try {
-					// nt.sendCommand("quit", 1);
+					nt.write("quit");
 					nt.disconnect();
 				    } catch (Exception e) {
 					// TODO: handle exception
@@ -700,15 +704,20 @@ public class TdRunnable implements Runnable {
 
 			// 关闭连接
 			try {
-			    // if (!(enDeviceInfo.getFrontHostId() == null
-                                // || enDeviceInfo.getFrontHostId()
-			    // .trim().length() == 0)) {
-			    // nt.setPrompt(enFrontHostInfo.getHostPrompt());
-			    // nt.sendCommand("exit", 1);
-			    // nt.sendCommand("quit", 1);
-			    // } else {
-			    // nt.sendCommand("exit", 1);
-			    // }
+			    if (!(enDeviceInfo.getFrontHostId() == null || enDeviceInfo.getFrontHostId()
+				    .trim().length() == 0)) {
+				// 将命令行提示符设置为堡垒主机命令行提示符
+				nt.setPrompt(enFrontHostInfo.getHostPrompt());
+				// 从设备上退出
+				sResult = nt.sendCommand("exit", 1);
+				sbResult.append(sResult);
+				// 从堡垒主机退出
+				nt.write("quit");
+			    } else {
+				// 从设备上退出
+				nt.write("exit");
+			    }
+			    // 关闭连接
 			    nt.disconnect();
 			} catch (Exception e) {
 			    // TODO: handle exception
@@ -922,9 +931,9 @@ public class TdRunnable implements Runnable {
 				    sbResult.append("TdRunnable run()：执行数据采集任务，通过堡垒主机登录设备失败。");
 				    log.error("执行数据采集任务，通过堡垒主机登录设备失败。SID=" + enSendList.getSendId());
 
-				    // 关闭之前的连接
+				    // 从堡垒主机退出
 				    try {
-					// nt.sendCommand("quit", 1);
+					nt.write("quit");
 					nt.disconnect();
 				    } catch (Exception e) {
 					// TODO: handle exception
@@ -996,15 +1005,20 @@ public class TdRunnable implements Runnable {
 
 			// 关闭连接
 			try {
-			    // if (!(enDeviceInfo.getFrontHostId() == null
-                                // || enDeviceInfo.getFrontHostId()
-			    // .trim().length() == 0)) {
-			    // nt.setPrompt(enFrontHostInfo.getHostPrompt());
-			    // nt.sendCommand("exit", 1);
-			    // nt.sendCommand("quit", 1);
-			    // } else {
-			    // nt.sendCommand("exit", 1);
-			    // }
+			    if (!(enDeviceInfo.getFrontHostId() == null || enDeviceInfo.getFrontHostId()
+				    .trim().length() == 0)) {
+				// 将命令行提示符设置为堡垒主机命令行提示符
+				nt.setPrompt(enFrontHostInfo.getHostPrompt());
+				// 从设备上退出
+				sResult = nt.sendCommand("exit", 1);
+				sbResult.append(sResult);
+				// 从堡垒主机退出
+				nt.write("quit");
+			    } else {
+				// 从设备上退出
+				nt.write("exit");
+			    }
+			    // 关闭连接
 			    nt.disconnect();
 			} catch (Exception e) {
 			    // TODO: handle exception
@@ -1192,9 +1206,9 @@ public class TdRunnable implements Runnable {
 				    sbResult.append("TdRunnable run()：执行设备配置提取任务，通过堡垒主机登录设备失败。");
 				    log.error("执行设备配置提取任务，通过堡垒主机登录设备失败。SID=" + enSendList.getSendId());
 
-				    // 关闭之前的连接
+				    // 从堡垒主机退出
 				    try {
-					// nt.sendCommand("quit", 1);
+					nt.write("quit");
 					nt.disconnect();
 				    } catch (Exception e) {
 					// TODO: handle exception
@@ -1226,15 +1240,20 @@ public class TdRunnable implements Runnable {
 
 			// 关闭连接
 			try {
-			    // if (!(enDeviceInfo.getFrontHostId() == null
-                                // || enDeviceInfo.getFrontHostId()
-			    // .trim().length() == 0)) {
-			    // nt.setPrompt(enFrontHostInfo.getHostPrompt());
-			    // nt.sendCommand("exit", 1);
-			    // nt.sendCommand("quit", 1);
-			    // } else {
-			    // nt.sendCommand("exit", 1);
-			    // }
+			    if (!(enDeviceInfo.getFrontHostId() == null || enDeviceInfo.getFrontHostId()
+				    .trim().length() == 0)) {
+				// 将命令行提示符设置为堡垒主机命令行提示符
+				nt.setPrompt(enFrontHostInfo.getHostPrompt());
+				// 从设备上退出
+				sResult = nt.sendCommand("exit", 1);
+				sbResult.append(sResult);
+				// 从堡垒主机退出
+				nt.write("quit");
+			    } else {
+				// 从设备上退出
+				nt.write("exit");
+			    }
+			    // 关闭连接
 			    nt.disconnect();
 			} catch (Exception e) {
 			    // TODO: handle exception

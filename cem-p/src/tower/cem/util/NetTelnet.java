@@ -82,7 +82,7 @@ public class NetTelnet {
 	} catch (Exception e) {
 	    bFlag = false;
 	    returnResult.append(e.getMessage());
-//	    e.printStackTrace();
+	    // e.printStackTrace();
 	}
 	return returnResult.toString();
     }
@@ -134,7 +134,7 @@ public class NetTelnet {
 	} catch (Exception e) {
 	    bFlag = false;
 	    returnResult.append(e.getMessage());
-//	    e.printStackTrace();
+	    // e.printStackTrace();
 	}
 	return returnResult.toString();
     }
@@ -170,7 +170,7 @@ public class NetTelnet {
 	} catch (Exception e) {
 	    bFlag = false;
 	    sb.append(e.getMessage());
-//	    e.printStackTrace();
+	    // e.printStackTrace();
 	}
 	return sb.toString();
     }
@@ -186,7 +186,7 @@ public class NetTelnet {
 	    out.flush();
 	} catch (Exception e) {
 	    bFlag = false;
-//	    e.printStackTrace();
+	    e.printStackTrace();
 	}
     }
 
@@ -211,7 +211,7 @@ public class NetTelnet {
 	} catch (Exception e) {
 	    bFlag = false;
 	    sbReturn.append(e.getMessage());
-//	    e.printStackTrace();
+	    // e.printStackTrace();
 	}
 	return sbReturn.toString();
     }
@@ -297,27 +297,26 @@ public class NetTelnet {
 		    System.out.println("Failed to re-login server!");
 		} else {
 		    // 在这里执行设备维护命令
+		    
 		    // 命令是 ll 列出当前目录下的目录及文件
 		    result = telnet.sendCommand("ll", 1);
 		    System.out.print(result);
 		    // 命令是 pwd 查看当前所在目录
 		    result = telnet.sendCommand("pwd", 1);
-		    System.out.print(result);
+		    System.out.print(result);		    
 
-		    result = telnet.sendCommand("df", 1);
-		    String strSplit[] = result.split("\n");
-		    System.out.println("----split string size():=" + strSplit.length);
-		    for (int i = 0; i < strSplit.length; i++) {
-			System.out.println("----split string ----" + strSplit[i] + "----");
-		    }
-
-		    // 从第二台服务器退出
-		    telnet.write("exit");
+		    
+		    // 从第二台服务器退出	    
 
 		    // 重新设置为堡垒主机的提示符
 		    telnet.setPrompt("$");
+		    telnet.sendCommand("exit", 1);
+
+		    result = telnet.sendCommand("pwd", 1);
+		    System.out.print(result);		    
+		    
 		    // 关闭登录堡垒主机的连接
-		    telnet.write("exit");
+		    telnet.write("exit");   
 		}
 
 		telnet.disconnect();
