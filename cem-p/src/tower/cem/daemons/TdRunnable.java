@@ -223,8 +223,6 @@ public class TdRunnable implements Runnable {
     // 线程执行的部分
     public void run() {
 
-	boolean bHost = false;
-
 	if (this.sThreadName == null) {
 	    this.sThreadName = Thread.currentThread().getName();
 	}
