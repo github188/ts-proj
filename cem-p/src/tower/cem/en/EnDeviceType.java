@@ -105,6 +105,11 @@ public class EnDeviceType implements java.io.Serializable {
     private String remark;
 
     /**
+     * Type : int unsigned Name : COMM_LINE_MAX
+     */
+    private int commLineMax;
+
+    /**
      * Type : char(6) Name : TYPE_ID modify flag
      */
     private boolean _flagTypeId;
@@ -198,6 +203,11 @@ public class EnDeviceType implements java.io.Serializable {
      * Type : varchar(200) Name : REMARK modify flag
      */
     private boolean _flagRemark;
+
+    /**
+     * Type : int unsigned Name : COMM_LINE_MAX modify flag
+     */
+    private boolean _flagCommLineMax;
 
     /**
      * Sets the value for typeId
@@ -615,6 +625,28 @@ public class EnDeviceType implements java.io.Serializable {
      */
     public boolean hasChangeRemark() {
         return _flagRemark;
+    }
+
+    /**
+     * Sets the value for commLineMax
+     */
+    public void setCommLineMax(int commLineMax) {
+        this.commLineMax = commLineMax;
+        this._flagCommLineMax = true;
+    }
+
+    /**
+     * Gets the value for commLineMax
+     */
+    public int getCommLineMax() {
+        return commLineMax;
+    }
+
+    /**
+     * has the value for commLineMax changed?
+     */
+    public boolean hasChangeCommLineMax() {
+        return _flagCommLineMax;
     }
 
 }
