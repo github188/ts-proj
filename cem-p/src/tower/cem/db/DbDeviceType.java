@@ -31,7 +31,7 @@ public class DbDeviceType extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
 
-        query.append("insert into device_type ( TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,PROMPT_LINES,CONFIG_COMMANDS,PORTS_LIST_COMMANDS,PORTS_DATA_ROW,PORTS_DATA_SERIES,VLAN_DIV_CHAR,COLLECT_COMMANDS,PORT_TYPE_START,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK ) values ( ");
+        query.append("insert into device_type ( TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,PROMPT_LINES,CONFIG_COMMANDS,PORTS_LIST_COMMANDS,PORTS_DATA_ROW,PORTS_DATA_SERIES,VLAN_DIV_CHAR,COLLECT_COMMANDS,PORT_TYPE_START,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK,COMM_LINE_MAX ) values ( ");
         query.append(formatString(en.getTypeId()));
         query.append(",");
         query.append(formatString(en.getTypeNameEn()));
@@ -69,6 +69,8 @@ public class DbDeviceType extends RootDB{
         query.append(formatBytes(en.getAppPicture()));
         query.append(",");
         query.append(formatString(en.getRemark()));
+        query.append(",");
+        query.append(en.getCommLineMax());
         query.append(")");
 
         res = trans.doUpdate(connId,query.toString());
@@ -252,6 +254,14 @@ public class DbDeviceType extends RootDB{
             query.append(formatString(en.getRemark()));
             bChanged = true;
         }
+        if(en.hasChangeCommLineMax()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("COMM_LINE_MAX=");
+            query.append(en.getCommLineMax());
+            bChanged = true;
+        }
 
         query.append(" where ");
         query.append("TYPE_ID=");
@@ -267,7 +277,7 @@ public class DbDeviceType extends RootDB{
         EnDeviceType res = null;
 
         StringBuffer query;
-        query = new StringBuffer("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,PROMPT_LINES,CONFIG_COMMANDS,PORTS_LIST_COMMANDS,PORTS_DATA_ROW,PORTS_DATA_SERIES,VLAN_DIV_CHAR,COLLECT_COMMANDS,PORT_TYPE_START,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK from device_type");
+        query = new StringBuffer("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,PROMPT_LINES,CONFIG_COMMANDS,PORTS_LIST_COMMANDS,PORTS_DATA_ROW,PORTS_DATA_SERIES,VLAN_DIV_CHAR,COLLECT_COMMANDS,PORT_TYPE_START,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK,COMM_LINE_MAX from device_type");
 
         query.append(" where ");
         query.append("TYPE_ID=");
@@ -468,6 +478,14 @@ public class DbDeviceType extends RootDB{
             query.append(formatString(en.getRemark()));
             bChanged = true;
         }
+        if(en.hasChangeCommLineMax()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("COMM_LINE_MAX=");
+            query.append(en.getCommLineMax());
+            bChanged = true;
+        }
 
         query.append(" where ");
         query.append("TYPE_ID like ");
@@ -483,7 +501,7 @@ public class DbDeviceType extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,PROMPT_LINES,CONFIG_COMMANDS,PORTS_LIST_COMMANDS,PORTS_DATA_ROW,PORTS_DATA_SERIES,VLAN_DIV_CHAR,COLLECT_COMMANDS,PORT_TYPE_START,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK from device_type");
+        query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,PROMPT_LINES,CONFIG_COMMANDS,PORTS_LIST_COMMANDS,PORTS_DATA_ROW,PORTS_DATA_SERIES,VLAN_DIV_CHAR,COLLECT_COMMANDS,PORT_TYPE_START,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK,COMM_LINE_MAX from device_type");
 
         query.append(" where ");
         query.append("TYPE_ID like ");
@@ -521,7 +539,7 @@ public class DbDeviceType extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,PROMPT_LINES,CONFIG_COMMANDS,PORTS_LIST_COMMANDS,PORTS_DATA_ROW,PORTS_DATA_SERIES,VLAN_DIV_CHAR,COLLECT_COMMANDS,PORT_TYPE_START,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK from device_type where ");
+        query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,PROMPT_LINES,CONFIG_COMMANDS,PORTS_LIST_COMMANDS,PORTS_DATA_ROW,PORTS_DATA_SERIES,VLAN_DIV_CHAR,COLLECT_COMMANDS,PORT_TYPE_START,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK,COMM_LINE_MAX from device_type where ");
         query.append(where);
         if(orderBy != null) {
             query.append(orderBy);
@@ -538,7 +556,7 @@ public class DbDeviceType extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,PROMPT_LINES,CONFIG_COMMANDS,PORTS_LIST_COMMANDS,PORTS_DATA_ROW,PORTS_DATA_SERIES,VLAN_DIV_CHAR,COLLECT_COMMANDS,PORT_TYPE_START,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK from device_type");
+        query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,PROMPT_LINES,CONFIG_COMMANDS,PORTS_LIST_COMMANDS,PORTS_DATA_ROW,PORTS_DATA_SERIES,VLAN_DIV_CHAR,COLLECT_COMMANDS,PORT_TYPE_START,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK,COMM_LINE_MAX from device_type");
 
         if(orderBy != null) {
             query.append(orderBy);
@@ -709,10 +727,18 @@ public class DbDeviceType extends RootDB{
             query.append(formatString(en.getRemark()));
             bChanged = true;
         }
+        if(en.hasChangeCommLineMax()) {
+            if(bChanged){
+                query.append(" and ");
+            }
+            query.append("COMM_LINE_MAX=");
+            query.append(en.getCommLineMax());
+            bChanged = true;
+        }
         if(bChanged) {
-            query.insert(0,"select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,PROMPT_LINES,CONFIG_COMMANDS,PORTS_LIST_COMMANDS,PORTS_DATA_ROW,PORTS_DATA_SERIES,VLAN_DIV_CHAR,COLLECT_COMMANDS,PORT_TYPE_START,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK from device_type where ");
+            query.insert(0,"select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,PROMPT_LINES,CONFIG_COMMANDS,PORTS_LIST_COMMANDS,PORTS_DATA_ROW,PORTS_DATA_SERIES,VLAN_DIV_CHAR,COLLECT_COMMANDS,PORT_TYPE_START,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK,COMM_LINE_MAX from device_type where ");
         } else {
-            query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,PROMPT_LINES,CONFIG_COMMANDS,PORTS_LIST_COMMANDS,PORTS_DATA_ROW,PORTS_DATA_SERIES,VLAN_DIV_CHAR,COLLECT_COMMANDS,PORT_TYPE_START,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK from device_type");
+            query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,PROMPT_LINES,CONFIG_COMMANDS,PORTS_LIST_COMMANDS,PORTS_DATA_ROW,PORTS_DATA_SERIES,VLAN_DIV_CHAR,COLLECT_COMMANDS,PORT_TYPE_START,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK,COMM_LINE_MAX from device_type");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -883,10 +909,18 @@ public class DbDeviceType extends RootDB{
             query.append(formatString(en.getRemark()));
             bChanged = true;
         }
+        if(en.hasChangeCommLineMax()) {
+            if(bChanged){
+                query.append(" and ");
+            }
+            query.append("COMM_LINE_MAX=");
+            query.append(en.getCommLineMax());
+            bChanged = true;
+        }
         if(bChanged) {
-            query.insert(0,"select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,PROMPT_LINES,CONFIG_COMMANDS,PORTS_LIST_COMMANDS,PORTS_DATA_ROW,PORTS_DATA_SERIES,VLAN_DIV_CHAR,COLLECT_COMMANDS,PORT_TYPE_START,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK from device_type where ");
+            query.insert(0,"select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,PROMPT_LINES,CONFIG_COMMANDS,PORTS_LIST_COMMANDS,PORTS_DATA_ROW,PORTS_DATA_SERIES,VLAN_DIV_CHAR,COLLECT_COMMANDS,PORT_TYPE_START,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK,COMM_LINE_MAX from device_type where ");
         } else {
-            query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,PROMPT_LINES,CONFIG_COMMANDS,PORTS_LIST_COMMANDS,PORTS_DATA_ROW,PORTS_DATA_SERIES,VLAN_DIV_CHAR,COLLECT_COMMANDS,PORT_TYPE_START,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK from device_type");
+            query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,PROMPT_LINES,CONFIG_COMMANDS,PORTS_LIST_COMMANDS,PORTS_DATA_ROW,PORTS_DATA_SERIES,VLAN_DIV_CHAR,COLLECT_COMMANDS,PORT_TYPE_START,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK,COMM_LINE_MAX from device_type");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -1102,6 +1136,14 @@ public class DbDeviceType extends RootDB{
             query.append(formatString(en.getRemark()));
             bChanged = true;
         }
+        if(en.hasChangeCommLineMax()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("COMM_LINE_MAX=");
+            query.append(en.getCommLineMax());
+            bChanged = true;
+        }
         query.append(" where ");
         query.append(where);
         res = trans.doUpdate(connId,query.toString());
@@ -1133,6 +1175,7 @@ public class DbDeviceType extends RootDB{
         en.setRxpValuePos(r.getString("RXP_VALUE_POS"));
         en.setAppPicture(r.getBytes("APP_PICTURE"));
         en.setRemark(r.getString("REMARK"));
+        en.setCommLineMax(r.getInteger("COMM_LINE_MAX") == null ? 0 : r.getInteger("COMM_LINE_MAX").intValue());
 
         return en;
     }
@@ -1235,6 +1278,12 @@ public class DbDeviceType extends RootDB{
         stmp = (String)otmp;
         en.setRemark(stmp);
 
+        otmp = xml.getInputObject("COMM_LINE_MAX");
+        stmp = (String)otmp;
+        if (stmp != null && stmp.length() > 0) {
+            en.setCommLineMax(parseInt(stmp));
+        }
+
         return en;
     }
 
@@ -1264,6 +1313,7 @@ public class DbDeviceType extends RootDB{
         Object[] oRxpValuePos;
         Object[] oAppPicture;
         Object[] oRemark;
+        Object[] oCommLineMax;
         int count = 0;
 
         oTypeId = xml.getInputObjects("TYPE_ID");
@@ -1341,6 +1391,10 @@ public class DbDeviceType extends RootDB{
         oRemark = xml.getInputObjects("REMARK");
         if (count == 0 && oRemark.length > 0) {
             count = oRemark.length;
+        }
+        oCommLineMax = xml.getInputObjects("COMM_LINE_MAX");
+        if (count == 0 && oCommLineMax.length > 0) {
+            count = oCommLineMax.length;
         }
         for (int i = 0; i < count; i ++) {
             en = new EnDeviceType();
@@ -1444,6 +1498,13 @@ public class DbDeviceType extends RootDB{
                 en.setRemark(stmp);
             }
 
+            if (oCommLineMax.length == count) {
+                stmp = (String)oCommLineMax[i];
+                if (stmp != null && stmp.length() > 0) {
+                    en.setCommLineMax(parseInt(stmp));
+                }
+            }
+
             res.addElement(en);
         }
         return res;
@@ -1473,6 +1534,7 @@ public class DbDeviceType extends RootDB{
         xml.setItemValue("DEVICE_TYPE",row,"RXP_VALUE_POS",en.getRxpValuePos());
         xml.setItemValue("DEVICE_TYPE",row,"APP_PICTURE",en.getAppPicture());
         xml.setItemValue("DEVICE_TYPE",row,"REMARK",en.getRemark());
+        xml.setItemValue("DEVICE_TYPE",row,"COMM_LINE_MAX",en.getCommLineMax());
         return row;
     }
     /**
@@ -1504,6 +1566,7 @@ public class DbDeviceType extends RootDB{
             xml.setItemValue("DEVICE_TYPE",row,"RXP_VALUE_POS",en.getRxpValuePos());
             xml.setItemValue("DEVICE_TYPE",row,"APP_PICTURE",en.getAppPicture());
             xml.setItemValue("DEVICE_TYPE",row,"REMARK",en.getRemark());
+            xml.setItemValue("DEVICE_TYPE",row,"COMM_LINE_MAX",en.getCommLineMax());
         }
     }
 }
