@@ -304,6 +304,10 @@ public class TdRunnable implements Runnable {
 			enDeviceType.setPromptLines(rs.getInt("PROMPT_LINES"));
 			if (enDeviceType.getPromptLines() < 1)
 			    enDeviceType.setPromptLines(1);
+			enDeviceType.setCommLineMax(rs.getInt("COMM_LINE_MAX"));
+			if (enDeviceType.getCommLineMax() < 0)
+			    enDeviceType.setCommLineMax(0);
+
 		    }
 		}
 
@@ -422,7 +426,12 @@ public class TdRunnable implements Runnable {
 				    sCommLine = sCommLine.substring(0, iCommLen - 1);
 				}
 
-				sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines());
+				if (enDeviceType.getCommLineMax() == 0
+					|| sCommLine.length() <= enDeviceType.getCommLineMax()) {
+				    sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines());
+				} else {
+				    sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines() + 1);
+				}
 				sbResult.append(sResult);
 			    }
 			}
@@ -445,7 +454,7 @@ public class TdRunnable implements Runnable {
 			    // 关闭连接
 			    nt.disconnect();
 			} catch (Exception e) {
-			    // TODO: handle exception			    
+			    // TODO: handle exception
 			}
 		    }
 		}
@@ -479,13 +488,8 @@ public class TdRunnable implements Runnable {
 	    // command_type ="I"，处理执行设备巡检的任务
 	    else if (enSendList.getCommandsType().equals("I")) {
 
-		// Runtime Code
 		// 根据设备获取到设备信息及所属设备分类信息，当设备空时，获取全部可用的设备信息及所属设备分类信息
-		sSql = " select device_id, device_name_en, front_host_id, device_ip, device_port, "
-			+ " device_user, device_password, device_prompt, inspect_commands, "
-			+ " user_prompt, password_prompt, prompt_lines " + " from device_info, device_type "
-			+ " where device_info.type_id = device_type.type_id "
-			+ " and device_info.device_status ='N'";
+		sSql = " select * from device_info, device_type where device_info.type_id = device_type.type_id and device_info.device_status ='N'";
 
 		// 当设备编号不为空时，获取到指定的设备信息及所属设备分类信息
 		if (!(enSendList.getDeviceId() == null || enSendList.getDeviceId().trim().length() == 0)) {
@@ -540,6 +544,10 @@ public class TdRunnable implements Runnable {
 		    enDeviceType.setPromptLines(rs.getInt("PROMPT_LINES"));
 		    if (enDeviceType.getPromptLines() < 1)
 			enDeviceType.setPromptLines(1);
+		    enDeviceType.setCommLineMax(rs.getInt("COMM_LINE_MAX"));
+		    if (enDeviceType.getCommLineMax() < 0)
+			enDeviceType.setCommLineMax(0);
+
 		    vDeviceType.add(enDeviceType);
 		}
 
@@ -667,7 +675,13 @@ public class TdRunnable implements Runnable {
 				} else {
 				    sCommLine = sCommLine.substring(0, iCommLen - 1);
 				}
-				sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines());
+
+				if (enDeviceType.getCommLineMax() == 0
+					|| sCommLine.length() <= enDeviceType.getCommLineMax()) {
+				    sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines());
+				} else {
+				    sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines() + 1);
+				}
 				sbResult.append(sResult);
 
 				// 根据巡检日志关键字分拣日志
@@ -781,7 +795,7 @@ public class TdRunnable implements Runnable {
 
 		    if (iSaveFlag < 1) {
 			sGenResult = "F";
-			// sbResult.append("TdRunnable run()：执行巡检任务，记录分拣日志失败。");
+			sbResult.append("TdRunnable run()：执行巡检任务，记录分拣日志失败。");
 			log.error("执行数据采集任务，记录分拣日志失败。SID=" + enSendList.getSendId());
 		    }
 		}
@@ -790,16 +804,8 @@ public class TdRunnable implements Runnable {
 	    // command_type ="C"，处理执行光功率采集的任务
 	    else if (enSendList.getCommandsType().equals("C")) {
 
-		// Runtime Code
 		// 根据设备获取到设备信息及所属设备分类信息，当设备空时，获取全部可用的设备信息及所属设备分类信息
-		sSql = " select device_id, device_name_en, front_host_id, device_ip, device_port, "
-			+ " device_user, device_password, device_prompt, collect_commands, "
-			+ " rxp_line_start, rxp_value_start, rxp_value_end, rxp_value_pos, "
-			+ " ports_list_commands, ports_data_row, ports_data_series, vlan_div_char,"
-			+ " user_prompt, password_prompt, prompt_lines, port_type_start  "
-			+ " from device_info, device_type"
-			+ " where device_info.type_id = device_type.type_id"
-			+ " and device_info.device_status ='N'";
+		sSql = " select * from device_info, device_type where device_info.type_id = device_type.type_id and device_info.device_status ='N'";
 
 		// 当设备编号不为空时，获取到指定的设备信息及所属设备分类信息
 		if (!(enSendList.getDeviceId() == null || enSendList.getDeviceId().trim().length() == 0)) {
@@ -834,15 +840,18 @@ public class TdRunnable implements Runnable {
 		    enDeviceType.setRxpValueStart(rs.getString("RXP_VALUE_START"));
 		    enDeviceType.setRxpValueEnd(rs.getString("RXP_VALUE_END"));
 		    enDeviceType.setRxpValuePos(rs.getString("RXP_VALUE_POS"));
-		    enDeviceType.setPromptLines(rs.getInt("PROMPT_LINES"));
 		    enDeviceType.setPortsListCommands(rs.getString("PORTS_LIST_COMMANDS"));
 		    enDeviceType.setPortsDataRow(rs.getInt("PORTS_DATA_ROW"));
 		    enDeviceType.setPortsDataSeries(rs.getInt("PORTS_DATA_SERIES"));
 		    enDeviceType.setVlanDivChar(rs.getString("VLAN_DIV_CHAR"));
 		    enDeviceType.setPortTypeStart(rs.getString("PORT_TYPE_START"));
 		    enDeviceType.setCollectCommands(rs.getString("COLLECT_COMMANDS"));
+		    enDeviceType.setPromptLines(rs.getInt("PROMPT_LINES"));
 		    if (enDeviceType.getPromptLines() < 1)
 			enDeviceType.setPromptLines(1);
+		    enDeviceType.setCommLineMax(rs.getInt("COMM_LINE_MAX"));
+		    if (enDeviceType.getCommLineMax() < 0)
+			enDeviceType.setCommLineMax(0);
 		    vDeviceType.add(enDeviceType);
 		}
 
@@ -959,8 +968,14 @@ public class TdRunnable implements Runnable {
 				    sCommLine = sCommLine.substring(0, iCommLen - 1);
 				}
 
-				sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines());
+				if (enDeviceType.getCommLineMax() == 0
+					|| sCommLine.length() <= enDeviceType.getCommLineMax()) {
+				    sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines());
+				} else {
+				    sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines() + 1);
+				}
 				sbResult.append(sResult);
+
 			    }
 			}
 
@@ -977,7 +992,12 @@ public class TdRunnable implements Runnable {
 			    String sCommLine = enDeviceType.getCollectCommands().replaceAll("%PORT", portSn);
 			    if (!(sCommLine == null || sCommLine.trim().length() == 0)) {
 				// 执行端口数据采集指令
-				sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines());
+				if (enDeviceType.getCommLineMax() == 0
+					|| sCommLine.length() <= enDeviceType.getCommLineMax()) {
+				    sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines());
+				} else {
+				    sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines() + 1);
+				}
 				sbResult.append(sResult);
 				// 提取端口类型
 				String portType = this.collectDevicePortType(sResult, enDeviceType
@@ -1058,13 +1078,8 @@ public class TdRunnable implements Runnable {
 	    // command_type ="E"，处理执行提取设备配置的任务
 	    else if (enSendList.getCommandsType().equals("E")) {
 
-		// Runtime Code
 		// 根据设备获取到设备信息及所属设备分类信息，当设备空时，获取全部可用的设备信息及所属设备分类信息
-		sSql = " select device_id, device_name_en, front_host_id, device_ip, device_port, "
-			+ " device_user, device_password, device_prompt, config_commands, "
-			+ " user_prompt, password_prompt, prompt_lines " + " from device_info, device_type"
-			+ " where device_info.type_id = device_type.type_id"
-			+ " and device_info.device_status ='N'";
+		sSql = " select * from device_info, device_type where device_info.type_id = device_type.type_id and device_info.device_status ='N'";
 
 		// 当设备类型不为空时，获取到指定设备类型的信息
 		if (!(enSendList.getDeviceTypeId() == null || enSendList.getDeviceTypeId().trim().length() == 0)) {
@@ -1118,6 +1133,10 @@ public class TdRunnable implements Runnable {
 		    enDeviceType.setPromptLines(rs.getInt("PROMPT_LINES"));
 		    if (enDeviceType.getPromptLines() < 1)
 			enDeviceType.setPromptLines(1);
+		    enDeviceType.setCommLineMax(rs.getInt("COMM_LINE_MAX"));
+		    if (enDeviceType.getCommLineMax() < 0)
+			enDeviceType.setCommLineMax(0);
+
 		    vDeviceType.add(enDeviceType);
 		}
 
@@ -1233,8 +1252,14 @@ public class TdRunnable implements Runnable {
 				    sCommLine = sCommLine.substring(0, iCommLen - 1);
 				}
 
-				sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines());
+				if (enDeviceType.getCommLineMax() == 0
+					|| sCommLine.length() <= enDeviceType.getCommLineMax()) {
+				    sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines());
+				} else {
+				    sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines() + 1);
+				}
 				sbResult.append(sResult);
+
 			    }
 			}
 
