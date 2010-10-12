@@ -22,7 +22,7 @@ import tower.tmvc.util.UploadFile;
  * @author flj
  * 
  */
-public class BoDeviceTypeSubmit implements RootBo {
+public class BoDeviceTypeSubmitimg implements RootBo {
     public void doBusiness(Transaction transaction, XMLWrap requestXml, XMLWrap sessionXml,
 	    XMLWrap applicationXml, Logger logger) throws ErrorException {
 	/***********************************************************************

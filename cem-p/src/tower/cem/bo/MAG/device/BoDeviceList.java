@@ -57,6 +57,7 @@ public class BoDeviceList implements RootBo {
 		String deviceStatus;// 设备状态
 		String deviceIp; // 网络地址
 		String devicePort; // 网络端口
+		String typeId;     //设备类型
 
 		// 其他
 		Vector devices;
@@ -71,6 +72,7 @@ public class BoDeviceList implements RootBo {
 		deviceStatus = requestXml.getInputValue("DEVICE_STATUS");
 		deviceIp = requestXml.getInputValue("DEVICE_IP");
 		devicePort = requestXml.getInputValue("DEVICE_PORT");
+		typeId	= requestXml.getInputValue("TYPE_ID");
 		/*****************************************************************************************************
 		 * 创建数据库连接、实例化DB、EN
 		 ****************************************************************************************************/
@@ -132,6 +134,13 @@ public class BoDeviceList implements RootBo {
 			} else {
 				sqlWhere.append(" AND DEVICE_PORT LIKE '%" + devicePort + "%'");
 			}
+		}
+		if (typeId != null && typeId.length() != 0) {
+		    if (sqlWhere == null || sqlWhere.length() == 0) {
+			sqlWhere.append(" TYPE_ID  = '" + typeId +"'");
+		    } else {
+			sqlWhere.append(" AND TYPE_ID  = '" + typeId +"'");
+		    }
 		}
 		// 查询表，将符合条件的保存到requestXml中返回。
 		if (sqlWhere != null && sqlWhere.length() != 0) {

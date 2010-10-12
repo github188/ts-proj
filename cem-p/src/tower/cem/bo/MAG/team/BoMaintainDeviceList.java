@@ -121,7 +121,13 @@ public class BoMaintainDeviceList implements RootBo {
 					sqlWhere.append(" AND DEVICE_ABB_NAME_EN LIKE '%" + deviceAbbNameEn + "%'");
 				}
 			}
-
+			if (typeId != null && typeId.length() != 0) {
+			    if (sqlWhere == null || sqlWhere.length() == 0) {
+				sqlWhere.append(" TYPE_ID  = '" + typeId +"'");
+			    } else {
+				sqlWhere.append(" AND TYPE_ID  = '" + typeId +"'");
+			    }
+			}
 			// 查询表，将符合条件的保存到requestXml中返回。
 			if (sqlWhere != null && sqlWhere.length() != 0) {
 				Page.SetPageInfo(transaction, null, requestXml, dbDeviceInfo, PubFunc.LEN_PAGE_COUNT,
