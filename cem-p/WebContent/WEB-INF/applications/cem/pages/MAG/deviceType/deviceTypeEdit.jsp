@@ -18,6 +18,7 @@
 	String rxpValueEnd;
 	String rxpValuePos;
 	String promptLines;
+	String commLineMax;
 	String portsListCommands;
 	String portsDataRow;
 	String portsDataSeries;
@@ -40,6 +41,7 @@
     rxpValueEnd = xml.getItemValue("DEVICE_TYPE",1,"RXP_VALUE_END");
     rxpValuePos = xml.getItemValue("DEVICE_TYPE",1,"RXP_VALUE_POS"); 
     promptLines = xml.getItemValue("DEVICE_TYPE",1,"PROMPT_LINES"); 
+    commLineMax =  xml.getItemValue("DEVICE_TYPE",1,"COMM_LINE_MAX"); 
     portsListCommands =  xml.getItemValue("DEVICE_TYPE",1,"PORTS_LIST_COMMANDS"); 
     portsDataRow =  xml.getItemValue("DEVICE_TYPE",1,"PORTS_DATA_ROW"); 
     portsDataSeries =  xml.getItemValue("DEVICE_TYPE",1,"PORTS_DATA_SERIES"); 
@@ -139,6 +141,16 @@
 		                  <td width="100">
 		                      <span id="sprytPromptLines">
              					 <input type="text" class="text" name="PROMPT_LINES"value="<%=promptLines %>">
+             					   <span class="textfieldInvalidFormatMsg">格式无效，有效格式为实数。</span>
+		                            <span class="textfieldMaxCharsMsg">已超过最大字符数50。</span>	                          
+		                            </span>
+		                  </td>
+		               </tr>
+		                   <tr>
+                          <td width="150" align="right">命令行最大显示长度：</td>
+		                  <td width="100">
+		                      <span id="sprytCommLineMax">
+             					 <input type="text" class="text" name="COMM_LINE_MAX"value="<%=commLineMax %>">
              					   <span class="textfieldInvalidFormatMsg">格式无效，有效格式为实数。</span>
 		                            <span class="textfieldMaxCharsMsg">已超过最大字符数50。</span>	                          
 		                            </span>
@@ -296,6 +308,7 @@ var sprytextfield8 = new Spry.Widget.ValidationTextField("sprytRxpValuePos", {is
 var sprytextfield9 = new Spry.Widget.ValidationTextField("sprytPromptLines", "integer", {isRequired:false,useCharacterMasking:true});
 var sprytextfield10 = new Spry.Widget.ValidationTextField("sprytPortsDataRow", "integer", {isRequired:false,useCharacterMasking:true});
 var sprytextfield11 = new Spry.Widget.ValidationTextField("sprytPortsDataSeries", "integer", {isRequired:false,useCharacterMasking:true});
+var sprytextfield12 = new Spry.Widget.ValidationTextField("sprytCommLineMax", "integer", {isRequired:false,useCharacterMasking:true});
 
 //-->
 </script>

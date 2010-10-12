@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>维护人员选择</title>
+<title>维护设备选择</title>
 <jsp:include flush="true" page="../../../../sys/pages/common/include/css.jsp"></jsp:include>
 <jsp:include flush="true" page="../../../../sys/pages/common/include/js.jsp"></jsp:include>
 <script type="text/javascript">
@@ -18,6 +18,8 @@
 	form1.DEVICE_NAME_EN.value="";
 	form1.DEVICE_NAME_CN.value="";
 	form1.DEVICE_STATUS.selectedIndex=0;
+	 form1.TYPE_ID.value="";
+    form1.TYPE_NAME.value="";
 	  
 	}
 	
@@ -60,6 +62,9 @@
   	//	alert(selectedIds[i]);
   	//}
   }
+   function doSelDeviceType(){
+   	selDialog("ctrl?FUNC_ID=SelectDeviceType","TYPE_ID","TYPE_NAME",850,550,false);
+   }
 -->
 </script>
 <%@ page import="tower.tmvc.XMLWrap"%>
@@ -74,6 +79,8 @@
 	String deviceStatus;
 	String deviceIp;
 	String devicePort;
+	String typeId;
+	String typeName;
 	
 	//	维护团队信息
 	String teamId;
@@ -106,6 +113,8 @@
 	deviceStatus = xml.getInputValue("DEVICE_STATUS");
 	deviceIp = xml.getInputValue("DEVICE_IP");
 	devicePort = xml.getInputValue("DEVICE_PORT");
+	typeId = xml.getInputValue("TYPE_ID");
+	typeName = xml.getInputValue("TYPE_NAME");
 
 
     deviceIds = xml.getItemValues("DEVICE_INFO","DEVICE_ID");
@@ -167,7 +176,7 @@
                 <div class="panelContent">
                   <div class="panelContent2">
                     <!-- 查询面板内容 -->
-                     <form name="form1" action="ctrl" method="get"  onSubmit="return doSubmit(this)">
+                     <form name="form1" action="ctrl" method="get"  >
               <input type="hidden" name="FUNC_ID" value="MaintainDeviceAdd">
                <input type="hidden" name=CUR_PAGE value="">
                <input type="hidden" name="TEAM_ID" value="<%=teamId %>">
@@ -189,8 +198,12 @@
                         <%} %>
                         </select>
 					</td>
-                   <td>&nbsp;</td>
-                   <td>&nbsp;</td>
+					<td width="150" align="right">设备类型：</td>
+		        	<td>
+							<input name="TYPE_ID" type="hidden"  value="<%=typeId %>">
+		                  	<input type="text" class="date" name="TYPE_NAME"   value="<%=typeName%>"  readonly>
+		                  	<input type="button" name="selectOutOrg" class="selButton" value="选择" onClick="doSelDeviceType()" />
+  				    </td>
                    <td align="right" nowrap="nowrap"><input type="submit" class="submit"  value="查询">
                    <input type="button" class="button" onClick="doClear();" value="重置">
                    </td>

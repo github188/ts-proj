@@ -105,8 +105,6 @@ function doSubmit(form) {
     form1.TYPE_ID.value="";
     form1.TYPE_NAME.value="";
     form1.LOCATION_NAME_CN.value="";
-    form1.FRONT_HOST_ID.value="";
-    form1.FRONT_HOST_NAME.value="";
     form1.DEVICE_STATUS.selectedIndex=0;   
   }
   

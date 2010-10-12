@@ -19,6 +19,7 @@
 	String rxpValueEnd;
 	String rxpValuePos;
 	String promptLines;
+	String commLineMax;
 	String portsListCommands;
 	String portsDataRow;
 	String portsDataSeries;
@@ -41,6 +42,7 @@
     rxpValueEnd = xml.getItemValue("DEVICE_TYPE",1,"RXP_VALUE_END");
     rxpValuePos = xml.getItemValue("DEVICE_TYPE",1,"RXP_VALUE_POS");   
     promptLines = xml.getItemValue("DEVICE_TYPE",1,"PROMPT_LINES"); 
+    commLineMax =  xml.getItemValue("DEVICE_TYPE",1,"COMM_LINE_MAX"); 
     portsListCommands =  xml.getItemValue("DEVICE_TYPE",1,"PORTS_LIST_COMMANDS"); 
     portsDataRow =  xml.getItemValue("DEVICE_TYPE",1,"PORTS_DATA_ROW"); 
     portsDataSeries =  xml.getItemValue("DEVICE_TYPE",1,"PORTS_DATA_SERIES"); 
@@ -120,6 +122,12 @@
                           <td width="150" align="right">命令返回提示符行数：</td>
 		                  <td width="100">
              					 <input type="text" class="text" name="PROMPT_LINES" value="<%=promptLines %>">
+		                  </td>
+		               </tr>
+		                 <tr>
+                          <td width="150" align="right">命令行最大显示长度：</td>
+		                  <td width="100">
+             					 <input type="text" class="text" name="PROMPT_LINES" value="<%=commLineMax %>">
 		                  </td>
 		               </tr>
 		                <tr>
