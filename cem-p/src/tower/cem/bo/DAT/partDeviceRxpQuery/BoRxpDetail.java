@@ -17,6 +17,8 @@ import tower.cem.en.EnDeviceInfo;
 import tower.cem.en.EnDevicePortRxp;
 import tower.cem.en.EnDevicePortType;
 import tower.cem.en.EnDeviceType;
+import tower.common.util.Page;
+import tower.common.util.PubFunc;
 import tower.tmvc.ErrorException;
 import tower.tmvc.QueryResult;
 import tower.tmvc.RootBo;
@@ -84,6 +86,8 @@ public class BoRxpDetail implements RootBo{
 	 * 执行业务逻辑、输出
 	 ****************************************************************************************************/
 	//获取光功率数据
+	Page.SetPageInfo(transaction, null, requestXml, dbDevicePortRxp, PubFunc.LEN_PAGE_COUNT,
+			"DEVICE_PORT_RXP", "SEND_ID='"+sendId+"'");
 	vector = dbDevicePortRxp.findAllWhere(" SEND_ID='"+sendId+"'");
 	vLog = dbDeviceCollectLog.findAllWhere(" SEND_ID='"+sendId+"'");
 	enDeviceCollectLog =(EnDeviceCollectLog) vLog.get(0);
