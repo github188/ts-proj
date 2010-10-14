@@ -121,12 +121,12 @@ public class BoMaintainPersonList  implements RootBo {
 			// 3、查询表，将符合条件的保存到requestXml中返回。
 			if (sqlWhere != null && sqlWhere.length() != 0) {
 				Page.SetPageInfo(transaction, null, requestXml, dbSysUser,
-						PubFunc.LEN_PAGE_COUNT, "SYS_USER", null);
+						PubFunc.LEN_PAGE_COUNT, "SYS_USER",sqlWhere.toString());
 				vector = dbSysUser.findAllWhere(sqlWhere.toString());
 
 			} else {
 				Page.SetPageInfo(transaction, null, requestXml, dbSysUser,
-						PubFunc.LEN_PAGE_COUNT, "SYS_USER", sqlWhere.toString());
+						PubFunc.LEN_PAGE_COUNT, "SYS_USER", null);
 				vector = dbSysUser.findAll();
 
 			}

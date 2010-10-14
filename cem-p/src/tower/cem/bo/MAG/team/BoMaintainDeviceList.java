@@ -129,17 +129,10 @@ public class BoMaintainDeviceList implements RootBo {
 			    }
 			}
 			// 查询表，将符合条件的保存到requestXml中返回。
-			if (sqlWhere != null && sqlWhere.length() != 0) {
-				Page.SetPageInfo(transaction, null, requestXml, dbDeviceInfo, PubFunc.LEN_PAGE_COUNT,
-						"DEVICE_INFO", null);
-				vector = dbDeviceInfo.findAllWhere(sqlWhere.toString());
-
-			} else {
 				Page.SetPageInfo(transaction, null, requestXml, dbDeviceInfo, PubFunc.LEN_PAGE_COUNT,
 						"DEVICE_INFO", sqlWhere.toString());
-				vector = dbDeviceInfo.findAll();
+				vector = dbDeviceInfo.findAllWhere(sqlWhere.toString());
 
-			}
 			if (vector != null) {
 				for (int i = 0; i < vector.size(); i++) {
 					enDeviceInfo = (EnDeviceInfo) vector.get(i);
