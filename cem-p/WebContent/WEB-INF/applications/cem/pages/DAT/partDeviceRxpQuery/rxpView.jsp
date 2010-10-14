@@ -3,6 +3,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page import="tower.tmvc.XMLWrap"%>
+<%@ page import="tower.common.util.Page"%>
 <%	
 	XMLWrap xml;
 	String[] sendIds;
@@ -42,6 +43,10 @@
      function doExcel(sendId){
   	  window.location="ctrl?FUNC_ID=RxpToExcel&SEND_ID="+sendId;
     }
+     function TDoChangePage(curPage){
+  form1["CUR_PAGE"].value = curPage;
+  form1.submit();
+  }
 -->
 </script>
 </head>
@@ -62,6 +67,13 @@
                   <div class="panelContent">
                   <div class="panelContent2">
                       <!-- 查询面板内容 -->
+           <form name="form1" action="ctrl" method="get" >
+           <input type="hidden" name="FUNC_ID" value="RxpView">
+             <input type="hidden" name="SEND_ID" value="<%= sendId%>">
+                <input type="hidden" name="DEVICE_TYPE_ID" value="<%=deviceTypeId%>">
+                <input type="hidden" name=CUR_PAGE value="">
+           </form> 
+                 
         <form name="form2" action="ctrl" method="get" >
               <input type="hidden" name="FUNC_ID" value="RxpToExcel">
                <input type="hidden" name="SEND_ID" value="<%= sendId%>">
@@ -94,9 +106,9 @@
                <%}}} %>
                </table>
               <%if(sendIds != null &&sendIds.length != 0){%>
-              <table width="100%" border="0" cellpadding="0" cellspacing="0" height="10">
-              <tr height="100">
-                <td colspan="9" align="center" height="10">
+              <table width="100%" border="0" cellpadding="0" cellspacing="0"  >
+              <tr height="30">
+                <td colspan="9" align="center"  >
                  <input type="button" class="button"  value="导出excel"  onclick="doExcel('<%=sendId %>');">
                 </td>
                 <td></td>
@@ -106,6 +118,7 @@
               </table>
               <%} %>
               </form>
+               <div class="pageBar"><%=Page.BuildPageTextByMethod(xml,"TDoChangePage") %></div>
                       <!-- 查询面板内容结束 -->
                     </div>
                   </div>

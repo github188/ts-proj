@@ -59,7 +59,8 @@
 <script type="text/javascript">
 <!--
   function doRxpView(sendId,deviceTypeId) {
-    selDialog("ctrl?FUNC_ID=RxpView&SEND_ID="+sendId+"&DEVICE_TYPE_ID="+deviceTypeId,"SEND_ID","SEND_ID",850,550,false);
+    //selDialog("ctrl?FUNC_ID=RxpView&SEND_ID="+sendId+"&DEVICE_TYPE_ID="+deviceTypeId,"SEND_ID","SEND_ID",850,550,false);
+    window.location.href = "ctrl?FUNC_ID=RxpView&SEND_ID="+sendId+"&DEVICE_TYPE_ID="+deviceTypeId;
   }
   
   
