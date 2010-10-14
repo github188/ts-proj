@@ -13,8 +13,6 @@
   String[] deviceTreeIds;
   String[] deviceTreeNames;
   String[] deviceTreeparentIds;
-  String[] test1 =  {"a","b","c"};
-  String[][] test2 =  {{"1","2","3"},{"4","5","6"}};
   
   TreeHtmlBuilder treeHtmlBuilder;
   String treeHtml =null;
@@ -34,8 +32,8 @@
   treeHtmlBuilder = new TreeHtmlBuilder()
   .setRootId("")
   .setRootName("根")
-  .setDisplayAll(true)
-  .setOutputRoot(true);
+  .setDisplayAll(false)
+  .setOutputRoot(false);
 	  
 	
 	treeHtmlBuilder.setTreeNodeBuilder(new CommonTreeNodeBuilder(){

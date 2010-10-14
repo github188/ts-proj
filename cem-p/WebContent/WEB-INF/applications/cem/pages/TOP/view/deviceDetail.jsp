@@ -75,8 +75,8 @@
   treeHtmlBuilder = new TreeHtmlBuilder()
   .setRootId("")
   .setRootName("根")
-  .setDisplayAll(true)
-  .setOutputRoot(true);
+  .setDisplayAll(false)
+  .setOutputRoot(false);
 	  
 	
 	treeHtmlBuilder.setTreeNodeBuilder(new CommonTreeNodeBuilder(){
