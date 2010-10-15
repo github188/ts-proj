@@ -480,8 +480,11 @@ public class TdRunnable implements Runnable {
 
 		if (iSaveFlag < 1) {
 		    sGenResult = "F";
+		    conn.rollback();
 		    sbResult.append("TdRunnable run()：指令模板执行任务，记录日志失败。");
 		    log.error("指令模板执行任务，记录日志失败。SID=" + enSendList.getSendId());
+		} else {
+		    conn.commit();
 		}
 	    }
 
@@ -491,26 +494,36 @@ public class TdRunnable implements Runnable {
 		// 根据设备获取到设备信息及所属设备分类信息，当设备空时，获取全部可用的设备信息及所属设备分类信息
 		sSql = " select * from device_info, device_type where device_info.type_id = device_type.type_id and device_info.device_status ='N'";
 
+		// 当设备类型不为空时，获取到指定设备类型的信息
+		if (!(enSendList.getDeviceTypeId() == null || enSendList.getDeviceTypeId().trim().length() == 0)) {
+		    sSql = sSql + " and device_info.type_id = '" + enSendList.getDeviceTypeId() + "' ";
+		}
+
 		// 当设备编号不为空时，获取到指定的设备信息及所属设备分类信息
 		if (!(enSendList.getDeviceId() == null || enSendList.getDeviceId().trim().length() == 0)) {
 		    sSql = sSql + " and device_info.device_id ='" + enSendList.getDeviceId() + "' ";
-		}
-		// 当设备类型不为空时，获取到指定设备类型的信息
-		else if (!(enSendList.getDeviceTypeId() == null || enSendList.getDeviceTypeId().trim()
-			.length() == 0)) {
-		    sSql = sSql + " and device_info.type_id = '" + enSendList.getDeviceTypeId() + "' ";
+		} else {
+		    sSql = sSql + " and device_info.device_id in (select distinct device_id"
+			    + " from maintain_team t, maintain_team_device_map d, maintain_team_user_map u"
+			    + " where t.team_id = d.team_id and t.team_id = u.team_id" + " and u.user_id ='"
+			    + enSendList.getUserId() + "')";
 		}
 
 		// 当设备编号及设备类型都为空，即创建全网巡检日志保存目录
 		boolean bSaveInspectLog = false;
 
-		if (((enSendList.getDeviceTypeId() == null || enSendList.getDeviceTypeId().trim().length() == 0))
-			&& ((enSendList.getDeviceId() == null || enSendList.getDeviceId().trim().length() == 0))) {
+		if (enSendList.getDeviceId() == null || enSendList.getDeviceId().trim().length() == 0) {
 
 		    if (!(InspectLogsPath == null || InspectLogsPath.trim().length() == 0)) {
 			File fdir = new File(InspectLogsPath);
 			if (fdir.exists()) {
-			    fdir = new File(InspectLogsPath + "/" + enSendList.getTaskPlanTime());
+			    if (enSendList.getDeviceTypeId() == null
+				    || enSendList.getDeviceTypeId().trim().length() == 0) {
+				fdir = new File(InspectLogsPath + "/" + enSendList.getTaskPlanTime());
+			    } else {
+				fdir = new File(InspectLogsPath + "/" + enSendList.getTaskPlanTime() + "-"
+					+ enSendList.getDeviceTypeId());
+			    }
 			    fdir.mkdir();
 			    bSaveInspectLog = true;
 			} else {
@@ -759,20 +772,33 @@ public class TdRunnable implements Runnable {
 
 		    if (iSaveFlag < 1) {
 			sGenResult = "F";
+			conn.rollback();
 			sbResult.append("TdRunnable run()：执行巡检任务，记录日志失败。");
 			log.error("执行巡检任务，记录日志失败。SID=" + enSendList.getSendId());
+		    } else {
+			conn.commit();
 		    }
 
 		    // 将全网巡检的日志保存到文件中
 		    if (bSaveInspectLog) {
 			try {
-			    BufferedWriter out = new BufferedWriter(new FileWriter(InspectLogsPath + "/"
-				    + enSendList.getTaskPlanTime() + "/" + enDeviceInfo.getDeviceNameEn()
-				    + "-" + enDeviceInfo.getDeviceIp() + "-" + sInspectEnd + ".log"));
-			    out.write(sbResult.toString());
-			    out.flush();
-			    out.close();
-
+			    if (enSendList.getDeviceTypeId() == null
+				    || enSendList.getDeviceTypeId().trim().length() == 0) {
+				BufferedWriter out = new BufferedWriter(new FileWriter(InspectLogsPath + "/"
+					+ enSendList.getTaskPlanTime() + "/" + enDeviceInfo.getDeviceNameEn()
+					+ "-" + enDeviceInfo.getDeviceIp() + "-" + sInspectEnd + ".log"));
+				out.write(sbResult.toString());
+				out.flush();
+				out.close();
+			    } else {
+				BufferedWriter out = new BufferedWriter(new FileWriter(InspectLogsPath + "/"
+					+ enSendList.getTaskPlanTime() + "-" + enSendList.getDeviceTypeId()
+					+ "/" + enDeviceInfo.getDeviceNameEn() + "-"
+					+ enDeviceInfo.getDeviceIp() + "-" + sInspectEnd + ".log"));
+				out.write(sbResult.toString());
+				out.flush();
+				out.close();
+			    }
 			} catch (Exception e) {
 			    // TODO: handle exception
 			    log.error("执行巡检任务，写入日志文件失败。");
@@ -795,8 +821,11 @@ public class TdRunnable implements Runnable {
 
 		    if (iSaveFlag < 1) {
 			sGenResult = "F";
+			conn.rollback();
 			sbResult.append("TdRunnable run()：执行巡检任务，记录分拣日志失败。");
 			log.error("执行数据采集任务，记录分拣日志失败。SID=" + enSendList.getSendId());
+		    } else {
+			conn.commit();
 		    }
 		}
 	    }
@@ -807,14 +836,19 @@ public class TdRunnable implements Runnable {
 		// 根据设备获取到设备信息及所属设备分类信息，当设备空时，获取全部可用的设备信息及所属设备分类信息
 		sSql = " select * from device_info, device_type where device_info.type_id = device_type.type_id and device_info.device_status ='N'";
 
+		// 当设备类型不为空时，获取到指定设备类型的信息
+		if (!(enSendList.getDeviceTypeId() == null || enSendList.getDeviceTypeId().trim().length() == 0)) {
+		    sSql = sSql + " and device_info.type_id = '" + enSendList.getDeviceTypeId() + "'";
+		}
+
 		// 当设备编号不为空时，获取到指定的设备信息及所属设备分类信息
 		if (!(enSendList.getDeviceId() == null || enSendList.getDeviceId().trim().length() == 0)) {
 		    sSql = sSql + " and device_info.device_id ='" + enSendList.getDeviceId() + "'";
-		}
-		// 当设备类型不为空时，获取到指定设备类型的信息
-		else if (!(enSendList.getDeviceTypeId() == null || enSendList.getDeviceTypeId().trim()
-			.length() == 0)) {
-		    sSql = sSql + " and device_info.type_id = '" + enSendList.getDeviceTypeId() + "'";
+		} else {
+		    sSql = sSql + " and device_info.device_id in (select distinct device_id"
+			    + " from maintain_team t, maintain_team_device_map d, maintain_team_user_map u"
+			    + " where t.team_id = d.team_id and t.team_id = u.team_id" + " and u.user_id ='"
+			    + enSendList.getUserId() + "')";
 		}
 
 		rs = DaemonsDBPool.doQuery(conn, sSql);
@@ -1016,8 +1050,11 @@ public class TdRunnable implements Runnable {
 				    iSaveFlag = DaemonsDBPool.doUpdate(conn, sSql);
 
 				    if (iSaveFlag < 1) {
+					conn.rollback();
 					sbResult.append("TdRunnable run()：执行数据采集任务，记录光功率数据失败。");
 					log.error("执行数据采集任务，记录光功率数据失败。SID=" + enSendList.getSendId());
+				    } else {
+					conn.commit();
 				    }
 				}
 			    }
@@ -1066,9 +1103,13 @@ public class TdRunnable implements Runnable {
 
 		    if (iSaveFlag < 1) {
 			sGenResult = "F";
+			conn.rollback();
 			sbResult.append("TdRunnable run()：执行数据采集任务，记录日志失败。");
 			log.error("执行数据采集任务，记录日志失败。SID=" + enSendList.getSendId());
+		    } else {
+			conn.commit();
 		    }
+
 		}
 
 		// 修改执行任务执行状态标志
@@ -1089,17 +1130,28 @@ public class TdRunnable implements Runnable {
 		// 当设备编号不为空时，获取到指定的设备信息及所属设备分类信息
 		if (!(enSendList.getDeviceId() == null || enSendList.getDeviceId().trim().length() == 0)) {
 		    sSql = sSql + " and device_info.device_id ='" + enSendList.getDeviceId() + "'";
+		} else {
+		    sSql = sSql + " and device_info.device_id in (select distinct device_id"
+			    + " from maintain_team t, maintain_team_device_map d, maintain_team_user_map u"
+			    + " where t.team_id = d.team_id and t.team_id = u.team_id" + " and u.user_id ='"
+			    + enSendList.getUserId() + "')";
 		}
 
 		// 当设备编号及设备类型都为空，即创建全网设备配置提取日志保存目录
 		boolean bSaveConfigLog = false;
-		if (((enSendList.getDeviceTypeId() == null || enSendList.getDeviceTypeId().trim().length() == 0))
-			&& ((enSendList.getDeviceId() == null || enSendList.getDeviceId().trim().length() == 0))) {
+		if (enSendList.getDeviceId() == null || enSendList.getDeviceId().trim().length() == 0) {
 
 		    if (!(ConfigLogsPath == null || ConfigLogsPath.trim().length() == 0)) {
 			File fdir = new File(ConfigLogsPath);
 			if (fdir.exists()) {
-			    fdir = new File(ConfigLogsPath + "/" + enSendList.getTaskPlanTime());
+			    if (enSendList.getDeviceTypeId() == null
+				    || enSendList.getDeviceTypeId().trim().length() == 0) {
+				fdir = new File(ConfigLogsPath + "/" + enSendList.getTaskPlanTime());
+			    } else {
+				fdir = new File(ConfigLogsPath + "/" + enSendList.getTaskPlanTime() + "-"
+					+ enSendList.getDeviceTypeId());
+			    }
+
 			    fdir.mkdir();
 			    bSaveConfigLog = true;
 			} else {
@@ -1306,20 +1358,33 @@ public class TdRunnable implements Runnable {
 
 		    if (iSaveFlag < 1) {
 			sGenResult = "F";
+			conn.rollback();
 			sbResult.append("TdRunnable run()：执行设备配置提取任务，记录日志失败。");
 			log.error("执行设备配置提取任务，记录日志失败。SID=" + enSendList.getSendId());
+		    } else {
+			conn.commit();
 		    }
 
 		    // 将全网设备配置提取的日志保存到文件中
 		    if (bSaveConfigLog) {
 			try {
-			    BufferedWriter out = new BufferedWriter(new FileWriter(ConfigLogsPath + "/"
-				    + enSendList.getTaskPlanTime() + "/" + enDeviceInfo.getDeviceNameEn()
-				    + "-" + enDeviceInfo.getDeviceIp() + "-" + sConfigEnd + ".log"));
-			    out.write(sbResult.toString());
-			    out.flush();
-			    out.close();
-
+			    if (enSendList.getDeviceTypeId() == null
+				    || enSendList.getDeviceTypeId().trim().length() == 0) {
+				BufferedWriter out = new BufferedWriter(new FileWriter(ConfigLogsPath + "/"
+					+ enSendList.getTaskPlanTime() + "/" + enDeviceInfo.getDeviceNameEn()
+					+ "-" + enDeviceInfo.getDeviceIp() + "-" + sConfigEnd + ".log"));
+				out.write(sbResult.toString());
+				out.flush();
+				out.close();
+			    } else {
+				BufferedWriter out = new BufferedWriter(new FileWriter(ConfigLogsPath + "/"
+					+ enSendList.getTaskPlanTime() + "-" + enSendList.getDeviceTypeId()
+					+ "/" + enDeviceInfo.getDeviceNameEn() + "-"
+					+ enDeviceInfo.getDeviceIp() + "-" + sConfigEnd + ".log"));
+				out.write(sbResult.toString());
+				out.flush();
+				out.close();
+			    }
 			} catch (Exception e) {
 			    // TODO: handle exception
 			    log.error("执行设备配置提取任务，写入日志文件失败。");
