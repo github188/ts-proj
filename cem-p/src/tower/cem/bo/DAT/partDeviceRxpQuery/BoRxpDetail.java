@@ -1,4 +1,4 @@
-package tower.cem.bo.DAT.partDeviceRxpQuery;
+ package tower.cem.bo.DAT.partDeviceRxpQuery;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,6 +56,7 @@ public class BoRxpDetail implements RootBo{
 	
 	//发送编号
 	String sendId;
+	String funcId;//判断是否为导出功能
 	
 	//其他
 	StringBuffer sql = new StringBuffer();
@@ -70,6 +71,7 @@ public class BoRxpDetail implements RootBo{
 	 * 获取输入
 	 ****************************************************************************************************/
 	sendId = requestXml.getInputValue("SEND_ID");
+	funcId = requestXml.getInputValue("FUNC_ID");
 	/*****************************************************************************************************
 	 * 创建数据库连接、实例化DB、EN
 	 ****************************************************************************************************/
@@ -86,8 +88,6 @@ public class BoRxpDetail implements RootBo{
 	 * 执行业务逻辑、输出
 	 ****************************************************************************************************/
 	//获取光功率数据
-	Page.SetPageInfo(transaction, null, requestXml, dbDevicePortRxp, PubFunc.LEN_PAGE_COUNT,
-			"DEVICE_PORT_RXP", "SEND_ID='"+sendId+"'");
 	vector = dbDevicePortRxp.findAllWhere(" SEND_ID='"+sendId+"'");
 	vLog = dbDeviceCollectLog.findAllWhere(" SEND_ID='"+sendId+"'");
 	enDeviceCollectLog =(EnDeviceCollectLog) vLog.get(0);
