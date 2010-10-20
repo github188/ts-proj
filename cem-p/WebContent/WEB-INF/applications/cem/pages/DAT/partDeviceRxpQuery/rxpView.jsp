@@ -118,7 +118,6 @@
               </table>
               <%} %>
               </form>
-               <div class="pageBar"><%=Page.BuildPageTextByMethod(xml,"TDoChangePage") %></div>
                       <!-- 查询面板内容结束 -->
                     </div>
                   </div>
