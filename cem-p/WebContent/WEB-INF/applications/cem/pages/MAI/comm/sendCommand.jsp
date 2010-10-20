@@ -98,7 +98,7 @@
      var deviceId = '<%=deviceId%>';
      var execBegin = '<%=date%>';
      form1.submit();
-     return '关闭当前页之前，请先退出设备!';
+    // return '关闭当前页之前，请先退出设备!';
     
     //var comms = window.document.TelnetApplet.getCommands();
     //alert(comms);
