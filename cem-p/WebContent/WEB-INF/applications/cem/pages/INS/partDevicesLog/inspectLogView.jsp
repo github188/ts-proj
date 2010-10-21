@@ -7,12 +7,14 @@
 	XMLWrap xml;
 	String logCont;
 	String sendId;
+	String deviceId;
  
 %>
 <%
 	xml = XMLWrap.getRequestXml(request,session,application);
 	logCont = xml.getItemValue("DEVICE_INSPECT_LOG",1,"LOG_CONT");
 	sendId = xml.getItemValue("DEVICE_INSPECT_LOG",1,"SEND_ID");
+	deviceId = xml.getInputValue("DEVICE_ID");
 
 %>
 <html>
@@ -29,8 +31,8 @@
   function doclose(){
   	window.close();
   }
-    function doSaveLog(sendId) {
-    window.location.href = "ctrl?FUNC_ID=InspectLogSave&SEND_ID="+sendId;
+    function doSaveLog(sendId,deviceId) {
+    window.location.href = "ctrl?FUNC_ID=InspectLogSave&SEND_ID="+sendId+"&DEVICE_ID="+deviceId;
  }
 -->
 </script>
@@ -63,7 +65,7 @@
 				  </tr>
 				  <tr>
 				  <td align="center">
-				   <input type="button" class="button" onclick="doSaveLog('<%=sendId%>')" value="另存为">
+				   <input type="button" class="button" onclick="doSaveLog('<%=sendId%>','<%=deviceId %>')" value="另存为">
 				    <input type="button" class="button" onclick="doclose()" value="关闭"></td>
 				  </tr>
               </table>
