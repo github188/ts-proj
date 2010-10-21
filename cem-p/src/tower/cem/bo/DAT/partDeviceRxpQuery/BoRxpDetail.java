@@ -82,7 +82,7 @@ public class BoRxpDetail implements RootBo{
 	dbDeviceCollectLog = new DbDeviceCollectLog(transaction,null);
 	dbDeviceType = new DbDeviceType(transaction, null);
 	enDevicePortRxp = new EnDevicePortRxp();
-	dbDevicePortRxp.setOrderBy(" ORDER BY DEVICE_NAME ASC ");
+	dbDevicePortRxp.setOrderBy(" ORDER BY DEVICE_NAME ,PORT_SN ASC ");
 	enDevicePortType = new EnDevicePortType();
 	/*****************************************************************************************************
 	 * 执行业务逻辑、输出

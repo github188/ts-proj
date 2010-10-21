@@ -55,8 +55,10 @@ public class BoCollectLogDetail implements RootBo {
 		 * 执行业务逻辑、输出
 		 ****************************************************************************************************/
 		sqlwhere.append(" send_id='" + sendId + "'");
-		if (!(deviceId == null || deviceId.trim().length() == 0))
+		if (deviceId != null && deviceId.length() != 0){
 			sqlwhere.append(" and device_id='" + deviceId + "'");
+		}
+			
 		vector = dbDeviceCollectLog.findAllWhere(sqlwhere.toString());
 		if (vector != null && vector.size() != 0) {
 			enDeviceCollectLog = (EnDeviceCollectLog) vector.get(0);

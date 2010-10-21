@@ -35,8 +35,7 @@ public class BoDeviceCollectLogList implements RootBo {
 		/*****************************************************************************************************
 		 * 执行业务逻辑、输出
 		 ****************************************************************************************************/
-		sql
-				.append(" select a.SEND_ID,b.DEVICE_NAME_CN,e.TYPE_NAME_CN,a.DEVICE_IP,a.COLLECT_BEGIN, a.STATUS,a.COLLECT_END,a.DEVICE_ID"
+		sql.append(" select a.SEND_ID,b.DEVICE_NAME_CN,e.TYPE_NAME_CN,a.DEVICE_IP,a.COLLECT_BEGIN, a.STATUS,a.COLLECT_END,a.DEVICE_ID"
 						+ " from DEVICE_COLLECT_LOG a ,DEVICE_INFO b ,DEVICE_TYPE e"
 						+ " where  a.DEVICE_ID = b.DEVICE_ID "
 						+ " and b.TYPE_ID = e.TYPE_ID "
