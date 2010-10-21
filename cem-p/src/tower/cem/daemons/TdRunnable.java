@@ -89,11 +89,14 @@ public class TdRunnable implements Runnable {
 
 	    Vector vPortsData = new Vector();
 
-	    // 将一行数据的各列去除空格保存到Vector中
 	    for (int j = 0; j < portsData.length; j++) {
 		String portData = portsData[j].trim();
+		// 将一行数据的各列去除空格保存到Vector中
 		if (portData != null && portData.length() > 0) {
-		    vPortsData.add(portData);
+		    // 只提取状态为up的端口光功率
+		    if (portData.toLowerCase().indexOf("up") >= 0) {
+			vPortsData.add(portData);
+		    }
 		}
 	    }
 
