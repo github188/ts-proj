@@ -83,6 +83,11 @@ public class TdRunnable implements Runnable {
 	// 自起始行逐行处理数据
 	for (int i = dataLine; i < results.length - promptLines; i++) {
 	    String lineData = results[i];
+	    
+	    // 只提取状态为up的端口光功率
+	    if (lineData.toLowerCase().indexOf("up") < 0) {
+		continue;
+	    }
 
 	    // 将一行数据以空格分隔开
 	    String portsData[] = lineData.split(" ");
@@ -93,10 +98,7 @@ public class TdRunnable implements Runnable {
 		String portData = portsData[j].trim();
 		// 将一行数据的各列去除空格保存到Vector中
 		if (portData != null && portData.length() > 0) {
-		    // 只提取状态为up的端口光功率
-		    if (portData.toLowerCase().indexOf("up") >= 0) {
 			vPortsData.add(portData);
-		    }
 		}
 	    }
 
