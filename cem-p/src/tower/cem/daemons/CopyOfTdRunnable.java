@@ -18,7 +18,7 @@ import tower.cem.en.EnFrontHostInfo;
 import tower.cem.en.EnMaintainCommandsTemplate;
 import tower.cem.util.NetTelnet;
 
-public class TdRunnable implements Runnable {
+public class CopyOfTdRunnable implements Runnable {
     private EnCommandsSendList enSendList;
 
     private String sThreadName = null;
@@ -31,7 +31,7 @@ public class TdRunnable implements Runnable {
 
     private int TelentTimeout = 30;
 
-    public TdRunnable(EnCommandsSendList enCommandsSendList, Logger logger) {
+    public CopyOfTdRunnable(EnCommandsSendList enCommandsSendList, Logger logger) {
 	this.enSendList = enCommandsSendList;
 	this.log = logger;
 	this.log = Logger.getLogger("TdRunnable");
@@ -83,7 +83,7 @@ public class TdRunnable implements Runnable {
 	// 自起始行逐行处理数据
 	for (int i = dataLine; i < results.length - promptLines; i++) {
 	    String lineData = results[i];
-
+	    
 	    // 只提取状态为up的端口光功率
 	    if (lineData.toLowerCase().indexOf("up") < 0) {
 		continue;
@@ -98,7 +98,7 @@ public class TdRunnable implements Runnable {
 		String portData = portsData[j].trim();
 		// 将一行数据的各列去除空格保存到Vector中
 		if (portData != null && portData.length() > 0) {
-		    vPortsData.add(portData);
+			vPortsData.add(portData);
 		}
 	    }
 
@@ -1014,6 +1014,7 @@ public class TdRunnable implements Runnable {
 				    sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines() + 1);
 				}
 				sbResult.append(sResult);
+
 			    }
 			}
 
@@ -1028,38 +1029,15 @@ public class TdRunnable implements Runnable {
 			    String portSn = (String) devicePorts.get(j);
 			    // 构造端口数据采集指令
 			    String sCommLine = enDeviceType.getCollectCommands().replaceAll("%PORT", portSn);
-
 			    if (!(sCommLine == null || sCommLine.trim().length() == 0)) {
-				String[] commLines = sCommLine.split("\n");
-				sResult = "";
-				// 采集指令为多行时，逐行执行
-				for (int k = 0; k < commLines.length; k++) {				    
-				    sCommLine = commLines[k];
-
-				    if (!(sCommLine == null || sCommLine.trim().length() == 0)) {
-					int iCommLen = sCommLine.length();
-					if (k == commLines.length - 1) {
-					    sCommLine = sCommLine.substring(0, iCommLen);
-					} else {
-					    sCommLine = sCommLine.substring(0, iCommLen - 1);
-					}
-
-					if (enDeviceType.getCommLineMax() == 0
-						|| sCommLine.length() <= enDeviceType.getCommLineMax()) {
-					    sResult = sResult
-						    + nt
-							    .sendCommand(sCommLine, enDeviceType
-								    .getPromptLines());
-					} else {
-					    sResult = sResult
-						    + nt.sendCommand(sCommLine,
-							    enDeviceType.getPromptLines() + 1);
-					}
-				    }
+				// 执行端口数据采集指令
+				if (enDeviceType.getCommLineMax() == 0
+					|| sCommLine.length() <= enDeviceType.getCommLineMax()) {
+				    sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines());
+				} else {
+				    sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines() + 1);
 				}
-
 				sbResult.append(sResult);
-				
 				// 提取端口类型
 				String portType = this.collectDevicePortType(sResult, enDeviceType
 					.getPortTypeStart());
@@ -1338,6 +1316,7 @@ public class TdRunnable implements Runnable {
 				    sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines() + 1);
 				}
 				sbResult.append(sResult);
+
 			    }
 			}
 
