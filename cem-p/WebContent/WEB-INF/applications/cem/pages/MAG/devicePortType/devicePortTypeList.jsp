@@ -102,9 +102,9 @@ function doSubmit(form) {
                <input type="hidden" name=CUR_PAGE value="">
                <table>
               	 <tr>
-              	 <td align="right">端口类型英文名称：</td>
+              	 <td align="right">端口类型标示：</td>
                   <td><input type="text" class="text" name="QTYPE_NAME_EN" value="<%=typeNameEn %>"></td>
-                 <td align="right">端口类型中文名称：</td>
+                 <td align="right">端口类型名称：</td>
 	                 <td><input type="text" class="text" name="QTYPE_NAME_CN" value="<%=typeNameCn %>"></td>
 	                 
 	                  <td align="right" nowrap="nowrap"><input type="submit" class="submit"  value="查询">
@@ -131,8 +131,8 @@ function doSubmit(form) {
               <!-- 列表内容 -->
               <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
                  <tr>
-                  <th>端口类型英文名称</th>
-                  <th>端口类型中文名称</th>
+                  <th>端口类型标示</th>
+                  <th>端口类型名称</th>
                   <th>光功率/标准最大值</th>
                   <th>光功率/标准最小值</th>
                   <th>光功率/网络要求最大值</th>

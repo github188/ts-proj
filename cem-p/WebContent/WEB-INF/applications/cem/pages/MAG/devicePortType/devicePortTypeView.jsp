@@ -70,13 +70,13 @@
                    <form action="ctrl" method="post"name="form1"onSubmit="return doSubmit(this)">
                      <table>
                       <tr>
-                          <td width="150" align="right">端口类型英文名称：</td>
+                          <td width="150" align="right">端口类型标示：</td>
 		                  <td width="100">
 		                   <input type="text" class="text" value="<%=typeNameEn %>" readonly>
 		                  </td>
 		               </tr>
 		                <tr>		                  
-                          <td wwidth="150" align="right">端口类型中文名称：</td>
+                          <td wwidth="150" align="right">端口类型名称：</td>
 		                  <td width="100">
 		                  <input type="text" class="text" value="<%=typeNameCn %>" readonly>
 		                  </td>
