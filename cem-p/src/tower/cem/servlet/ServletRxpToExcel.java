@@ -129,8 +129,8 @@ import tower.tmvc.XMLWrap;
 			createHead(0, 7, "光功率是否正常");
 			createHead(0, 8, "标准最大接收光功率（dBm）");
 			createHead(0, 9, "标准最小接收光功率（dBm）");
-			createHead(0, 10, "网络要求的最小接收光功率（dBm）");
-			createHead(0, 11, "网络要求的最大接收光功率（dBm）");
+			createHead(0, 10, "网络要求的最大接收光功率（dBm）");
+			createHead(0, 11, "网络要求的最小接收光功率（dBm）");
 			createHead(0, 12, "备注");
 
 			for (int i = 0; i < sendIds.length; i++) {
@@ -152,8 +152,8 @@ import tower.tmvc.XMLWrap;
 				createCell(i + 1, 7, isNormals[i]);
 				createCell(i + 1, 8, rxMaxs[i]);
 				createCell(i + 1, 9, rxMins[i]);
-				createCell(i + 1, 10, netWordRxMins[i]);
-				createCell(i + 1, 11, netWordRxMaxs[i]);
+				createCell(i + 1, 10, netWordRxMaxs[i]);
+				createCell(i + 1, 11, netWordRxMins[i]);
 				createCell(i + 1, 12, "");
 			}
 			//合并单元格
