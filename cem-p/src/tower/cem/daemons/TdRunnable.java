@@ -421,6 +421,8 @@ public class TdRunnable implements Runnable {
 				// 从堡垒主机退出
 				try {
 				    nt.write("quit");
+				    nt.write("exit");
+				    nt.write("logout");
 				    nt.disconnect();
 				} catch (Exception e) {
 				    // TODO: handle exception
@@ -464,6 +466,8 @@ public class TdRunnable implements Runnable {
 				sbResult.append(sResult);
 				// 从堡垒主机退出
 				nt.write("quit");
+				nt.write("exit");
+				nt.write("logout");
 			    } else {
 				// 从设备上退出
 				nt.write("exit");
@@ -668,6 +672,8 @@ public class TdRunnable implements Runnable {
 				    // 从堡垒主机退出
 				    try {
 					nt.write("quit");
+					nt.write("exit");
+					nt.write("logout");
 					nt.disconnect();
 				    } catch (Exception e) {
 					// TODO: handle exception
@@ -757,6 +763,8 @@ public class TdRunnable implements Runnable {
 				sbResult.append(sResult);
 				// 从堡垒主机退出
 				nt.write("quit");
+				nt.write("exit");
+				nt.write("logout");
 			    } else {
 				// 从设备上退出
 				nt.write("exit");
@@ -996,6 +1004,8 @@ public class TdRunnable implements Runnable {
 				    // 从堡垒主机退出
 				    try {
 					nt.write("quit");
+					nt.write("exit");
+					nt.write("logout");
 					nt.disconnect();
 				    } catch (Exception e) {
 					// TODO: handle exception
@@ -1113,6 +1123,8 @@ public class TdRunnable implements Runnable {
 				sbResult.append(sResult);
 				// 从堡垒主机退出
 				nt.write("quit");
+				nt.write("exit");
+				nt.write("logout");
 			    } else {
 				// 从设备上退出
 				nt.write("exit");
@@ -1322,6 +1334,8 @@ public class TdRunnable implements Runnable {
 				    // 从堡垒主机退出
 				    try {
 					nt.write("quit");
+					nt.write("exit");
+					nt.write("logout");
 					nt.disconnect();
 				    } catch (Exception e) {
 					// TODO: handle exception
@@ -1367,6 +1381,8 @@ public class TdRunnable implements Runnable {
 				sbResult.append(sResult);
 				// 从堡垒主机退出
 				nt.write("quit");
+				nt.write("exit");
+				nt.write("logout");
 			    } else {
 				// 从设备上退出
 				nt.write("exit");
