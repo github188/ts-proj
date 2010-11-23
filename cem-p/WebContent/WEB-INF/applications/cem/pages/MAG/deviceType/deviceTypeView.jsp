@@ -175,7 +175,6 @@
              					 <input type="text" class="text" name="PORT_DATA_SUB_LEN"value="<%=portDataSubLen %>">
 		                  </td>
 		               </tr> 
-		               </tr>
 		                <tr>
 		                <td width="150" align="right">光功率采集指令：</td>
 		                 <td width="100">
