@@ -40,6 +40,11 @@ public class EnDeviceType implements java.io.Serializable {
     private int promptLines;
 
     /**
+     * Type : int Name : COMM_LINE_MAX
+     */
+    private int commLineMax;
+
+    /**
      * Type : text Name : CONFIG_COMMANDS
      */
     private String configCommands;
@@ -63,6 +68,16 @@ public class EnDeviceType implements java.io.Serializable {
      * Type : varchar(10) Name : VLAN_DIV_CHAR
      */
     private String vlanDivChar;
+
+    /**
+     * Type : int Name : PORT_DATA_SUB_FROM
+     */
+    private int portDataSubFrom;
+
+    /**
+     * Type : int Name : PORT_DATA_SUB_LEN
+     */
+    private int portDataSubLen;
 
     /**
      * Type : text Name : COLLECT_COMMANDS
@@ -105,11 +120,6 @@ public class EnDeviceType implements java.io.Serializable {
     private String remark;
 
     /**
-     * Type : int unsigned Name : COMM_LINE_MAX
-     */
-    private int commLineMax;
-
-    /**
      * Type : char(6) Name : TYPE_ID modify flag
      */
     private boolean _flagTypeId;
@@ -140,6 +150,11 @@ public class EnDeviceType implements java.io.Serializable {
     private boolean _flagPromptLines;
 
     /**
+     * Type : int Name : COMM_LINE_MAX modify flag
+     */
+    private boolean _flagCommLineMax;
+
+    /**
      * Type : text Name : CONFIG_COMMANDS modify flag
      */
     private boolean _flagConfigCommands;
@@ -163,6 +178,16 @@ public class EnDeviceType implements java.io.Serializable {
      * Type : varchar(10) Name : VLAN_DIV_CHAR modify flag
      */
     private boolean _flagVlanDivChar;
+
+    /**
+     * Type : int Name : PORT_DATA_SUB_FROM modify flag
+     */
+    private boolean _flagPortDataSubFrom;
+
+    /**
+     * Type : int Name : PORT_DATA_SUB_LEN modify flag
+     */
+    private boolean _flagPortDataSubLen;
 
     /**
      * Type : text Name : COLLECT_COMMANDS modify flag
@@ -203,11 +228,6 @@ public class EnDeviceType implements java.io.Serializable {
      * Type : varchar(200) Name : REMARK modify flag
      */
     private boolean _flagRemark;
-
-    /**
-     * Type : int unsigned Name : COMM_LINE_MAX modify flag
-     */
-    private boolean _flagCommLineMax;
 
     /**
      * Sets the value for typeId
@@ -342,6 +362,28 @@ public class EnDeviceType implements java.io.Serializable {
     }
 
     /**
+     * Sets the value for commLineMax
+     */
+    public void setCommLineMax(int commLineMax) {
+        this.commLineMax = commLineMax;
+        this._flagCommLineMax = true;
+    }
+
+    /**
+     * Gets the value for commLineMax
+     */
+    public int getCommLineMax() {
+        return commLineMax;
+    }
+
+    /**
+     * has the value for commLineMax changed?
+     */
+    public boolean hasChangeCommLineMax() {
+        return _flagCommLineMax;
+    }
+
+    /**
      * Sets the value for configCommands
      */
     public void setConfigCommands(String configCommands) {
@@ -449,6 +491,50 @@ public class EnDeviceType implements java.io.Serializable {
      */
     public boolean hasChangeVlanDivChar() {
         return _flagVlanDivChar;
+    }
+
+    /**
+     * Sets the value for portDataSubFrom
+     */
+    public void setPortDataSubFrom(int portDataSubFrom) {
+        this.portDataSubFrom = portDataSubFrom;
+        this._flagPortDataSubFrom = true;
+    }
+
+    /**
+     * Gets the value for portDataSubFrom
+     */
+    public int getPortDataSubFrom() {
+        return portDataSubFrom;
+    }
+
+    /**
+     * has the value for portDataSubFrom changed?
+     */
+    public boolean hasChangePortDataSubFrom() {
+        return _flagPortDataSubFrom;
+    }
+
+    /**
+     * Sets the value for portDataSubLen
+     */
+    public void setPortDataSubLen(int portDataSubLen) {
+        this.portDataSubLen = portDataSubLen;
+        this._flagPortDataSubLen = true;
+    }
+
+    /**
+     * Gets the value for portDataSubLen
+     */
+    public int getPortDataSubLen() {
+        return portDataSubLen;
+    }
+
+    /**
+     * has the value for portDataSubLen changed?
+     */
+    public boolean hasChangePortDataSubLen() {
+        return _flagPortDataSubLen;
     }
 
     /**
@@ -625,28 +711,6 @@ public class EnDeviceType implements java.io.Serializable {
      */
     public boolean hasChangeRemark() {
         return _flagRemark;
-    }
-
-    /**
-     * Sets the value for commLineMax
-     */
-    public void setCommLineMax(int commLineMax) {
-        this.commLineMax = commLineMax;
-        this._flagCommLineMax = true;
-    }
-
-    /**
-     * Gets the value for commLineMax
-     */
-    public int getCommLineMax() {
-        return commLineMax;
-    }
-
-    /**
-     * has the value for commLineMax changed?
-     */
-    public boolean hasChangeCommLineMax() {
-        return _flagCommLineMax;
     }
 
 }

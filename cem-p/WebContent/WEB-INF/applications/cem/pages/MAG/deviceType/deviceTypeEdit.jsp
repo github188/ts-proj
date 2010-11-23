@@ -24,7 +24,8 @@
 	String portsDataSeries;
 	String vlanDivChar;
 	String portTypeStart;
-	
+	String portDataSubFrom;
+	String portDataSubLen;		
 %>
 <%
     xml = XMLWrap.getRequestXml(request,session,application);
@@ -47,6 +48,8 @@
     portsDataSeries =  xml.getItemValue("DEVICE_TYPE",1,"PORTS_DATA_SERIES"); 
     vlanDivChar =  xml.getItemValue("DEVICE_TYPE",1,"VLAN_DIV_CHAR"); 
     portTypeStart =  xml.getItemValue("DEVICE_TYPE",1,"PORT_TYPE_START"); 
+    portDataSubFrom = xml.getItemValue("DEVICE_TYPE",1,"PORT_DATA_SUB_FROM"); 
+    portDataSubLen = xml.getItemValue("DEVICE_TYPE",1,"PORT_DATA_SUB_LEN");      
 
 %>
 <html>
@@ -173,7 +176,7 @@
 						
 	
 		                 <tr>
-                          <td width="150" align="right">端口数据-起始行：</td>
+                          <td width="150" align="right">端口数据/起始行：</td>
 		                  <td width="100">
 		                      <span id="sprytPortsDataRow">
              					 <input type="text" class="text" name="PORTS_DATA_ROW"value="<%=portsDataRow %>">
@@ -183,7 +186,7 @@
 		                  </td>
 		               </tr>
 						 <tr>
-                          <td width="150" align="right">端口数据-列：</td>
+                          <td width="150" align="right">端口数据/列：</td>
 		                  <td width="100">
 		                      <span id="sprytPortsDataSeries">
              					 <input type="text" class="text" name="PORTS_DATA_SERIES"value="<%=portsDataSeries %>">
@@ -200,8 +203,27 @@
              					   <span class="textfieldInvalidFormatMsg">格式无效，有效格式为实数。</span>
 		                            <span class="textfieldMaxCharsMsg">已超过最大字符数50。</span>	                          
 		                            </span>
+		                  </td>		                
+		               </tr>
+		               <tr>
+                          <td width="150" align="right">端口数据/截取起始：</td>
+		                  <td width="100">
+		                      <span id="sprytPortDataSubFrom">
+             					 <input type="text" class="text" name="PORT_DATA_SUB_FROM"value="<%=portDataSubFrom %>">
+             					   <span class="textfieldInvalidFormatMsg">格式无效，有效格式为实数。</span>
+		                            <span class="textfieldMaxCharsMsg">已超过最大字符数50。</span>	                          
+		                            </span>
 		                  </td>
-		                
+		               </tr>
+		               <tr>
+                          <td width="150" align="right">端口数据/截取长度：</td>
+		                  <td width="100">
+		                      <span id="sprytPortDataSubLen">
+             					 <input type="text" class="text" name="PORT_DATA_SUB_LEN"value="<%=portDataSubLen %>">
+             					   <span class="textfieldInvalidFormatMsg">格式无效，有效格式为实数。</span>
+		                            <span class="textfieldMaxCharsMsg">已超过最大字符数50。</span>	                          
+		                            </span>
+		                  </td>
 		               </tr>
 		                <tr>
 		                <td width="150" align="right">光功率采集指令：</td>
@@ -309,7 +331,8 @@ var sprytextfield9 = new Spry.Widget.ValidationTextField("sprytPromptLines", "in
 var sprytextfield10 = new Spry.Widget.ValidationTextField("sprytPortsDataRow", "integer", {isRequired:false,useCharacterMasking:true});
 var sprytextfield11 = new Spry.Widget.ValidationTextField("sprytPortsDataSeries", "integer", {isRequired:false,useCharacterMasking:true});
 var sprytextfield12 = new Spry.Widget.ValidationTextField("sprytCommLineMax", "integer", {isRequired:false,useCharacterMasking:true});
-
+var sprytextfield13 = new Spry.Widget.ValidationTextField("sprytPortDataSubFrom", "integer", {isRequired:false,useCharacterMasking:true});
+var sprytextfield14 = new Spry.Widget.ValidationTextField("sprytPortDataSubLen", "integer", {isRequired:false,useCharacterMasking:true});
 //-->
 </script>
 </body>

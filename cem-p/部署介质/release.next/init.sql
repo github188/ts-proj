@@ -308,11 +308,14 @@ CREATE TABLE `device_type` (
   `INSPECT_COMMANDS` text,
   `INSPECT_COMMANDS_EXP` varchar(200) default NULL,
   `PROMPT_LINES` int(11) default NULL,
+  `COMM_LINE_MAX` int(10) default NULL,  
   `CONFIG_COMMANDS` text,
   `PORTS_LIST_COMMANDS` text,
   `PORTS_DATA_ROW` int(11) default NULL,
   `PORTS_DATA_SERIES` int(11) default NULL,
   `VLAN_DIV_CHAR` varchar(10) default NULL,
+  `PORT_DATA_SUB_FROM` int(10) default NULL,
+  `PORT_DATA_SUB_LEN` int(10) default NULL,    
   `COLLECT_COMMANDS` text,
   `PORT_TYPE_START` varchar(50) default NULL,
   `RXP_LINE_START` varchar(50) default NULL,
@@ -321,7 +324,6 @@ CREATE TABLE `device_type` (
   `RXP_VALUE_POS` varchar(50) default NULL,
   `APP_PICTURE` longblob,
   `REMARK` varchar(200) default NULL,
-  `COMM_LINE_MAX` int(10) default NULL,
   PRIMARY KEY  (`TYPE_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

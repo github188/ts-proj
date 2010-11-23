@@ -69,7 +69,7 @@ public class TdRunnable implements Runnable {
     }
 
     public Vector collectDevicePortsList(String collectString, int dataLine, int dataSeries,
-	    String vlanDivChar, int promptLines) {
+	    String vlanDivChar, int promptLines, int dataSubFrom, int dataSubLen) {
 
 	Vector vPortsList = new Vector();
 	String result;
@@ -116,6 +116,18 @@ public class TdRunnable implements Runnable {
 			}
 		    }
 		    portData = portData.trim();
+
+		    // 根据截取规则，截取端口信息
+		    if (dataSubFrom > 0 && dataSubLen > 0) {
+			try {
+			    if (portData.length() < dataSubFrom - 1 + dataSubLen)
+				portData = portData.substring(dataSubFrom - 1, portData.length());
+			    else
+				portData = portData.substring(dataSubFrom - 1, dataSubFrom - 1 + dataSubLen);
+			} catch (Exception e) {
+			    portData = "";
+			}
+		    }
 
 		    if (portData != null && portData.length() > 0) {
 			boolean bExist = false;
@@ -891,6 +903,8 @@ public class TdRunnable implements Runnable {
 		    enDeviceType.setCommLineMax(rs.getInt("COMM_LINE_MAX"));
 		    if (enDeviceType.getCommLineMax() < 0)
 			enDeviceType.setCommLineMax(0);
+		    enDeviceType.setPortDataSubFrom(rs.getInt("PORT_DATA_SUB_FROM"));
+		    enDeviceType.setPortDataSubLen(rs.getInt("PORT_DATA_SUB_LEN"));
 		    vDeviceType.add(enDeviceType);
 		}
 
@@ -1021,7 +1035,8 @@ public class TdRunnable implements Runnable {
 			Vector devicePorts;
 			devicePorts = this.collectDevicePortsList(sResult, enDeviceType.getPortsDataRow(),
 				enDeviceType.getPortsDataSeries(), enDeviceType.getVlanDivChar(),
-				enDeviceType.getPromptLines());
+				enDeviceType.getPromptLines(), enDeviceType.getPortDataSubFrom(),
+				enDeviceType.getPortDataSubLen());
 
 			// 逐个端口采集数据
 			for (int j = 0; j < devicePorts.size(); j++) {
@@ -1033,7 +1048,7 @@ public class TdRunnable implements Runnable {
 				String[] commLines = sCommLine.split("\n");
 				sResult = "";
 				// 采集指令为多行时，逐行执行
-				for (int k = 0; k < commLines.length; k++) {				    
+				for (int k = 0; k < commLines.length; k++) {
 				    sCommLine = commLines[k];
 
 				    if (!(sCommLine == null || sCommLine.trim().length() == 0)) {
@@ -1059,7 +1074,7 @@ public class TdRunnable implements Runnable {
 				}
 
 				sbResult.append(sResult);
-				
+
 				// 提取端口类型
 				String portType = this.collectDevicePortType(sResult, enDeviceType
 					.getPortTypeStart());

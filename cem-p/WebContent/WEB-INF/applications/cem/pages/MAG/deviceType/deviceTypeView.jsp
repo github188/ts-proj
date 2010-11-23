@@ -25,6 +25,8 @@
 	String portsDataSeries;
 	String vlanDivChar;
 	String portTypeStart;
+	String portDataSubFrom;
+	String portDataSubLen;	
 %>
 <%
     xml = XMLWrap.getRequestXml(request,session,application);
@@ -48,6 +50,8 @@
     portsDataSeries =  xml.getItemValue("DEVICE_TYPE",1,"PORTS_DATA_SERIES"); 
     vlanDivChar =  xml.getItemValue("DEVICE_TYPE",1,"VLAN_DIV_CHAR"); 
     portTypeStart =  xml.getItemValue("DEVICE_TYPE",1,"PORT_TYPE_START"); 
+    portDataSubFrom = xml.getItemValue("DEVICE_TYPE",1,"PORT_DATA_SUB_FROM"); 
+    portDataSubLen = xml.getItemValue("DEVICE_TYPE",1,"PORT_DATA_SUB_LEN");     
 
 %>
 <html>
@@ -143,13 +147,13 @@
 		                  </td>
 		               </tr>
 						 <tr>
-                          <td width="150" align="right">端口数据起始行：</td>
+                          <td width="150" align="right">端口数据/起始行：</td>
 		                  <td width="100">
              					 <input type="text" class="text" name="PORTS_DATA_ROW"value="<%=portsDataRow %>">
 		                  </td>
 		               </tr>
 						 <tr>
-                          <td width="150" align="right">端口数据列：</td>
+                          <td width="150" align="right">端口数据/列：</td>
 		                  <td width="100">
              					 <input type="text" class="text" name="PORTS_DATA_SERIES"value="<%=portsDataSeries %>">
 		                  </td>
@@ -159,7 +163,18 @@
                              <td width="100">
              					 <input type="text" class="text" name="VLAN_DIV_CHAR"value="<%=vlanDivChar %>">
 		                  </td>
-		                
+		               <tr>
+                          <td width="150" align="right">端口数据/截取起始：</td>
+		                  <td width="100">
+             					 <input type="text" class="text" name="PORT_DATA_SUB_FROM"value="<%=portDataSubFrom %>">
+		                  </td>
+		               </tr>
+		               <tr>
+                          <td width="150" align="right">端口数据/截取长度：</td>
+		                  <td width="100">
+             					 <input type="text" class="text" name="PORT_DATA_SUB_LEN"value="<%=portDataSubLen %>">
+		                  </td>
+		               </tr> 
 		               </tr>
 		                <tr>
 		                <td width="150" align="right">光功率采集指令：</td>
