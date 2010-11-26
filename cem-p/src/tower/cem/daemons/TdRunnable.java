@@ -1017,10 +1017,11 @@ public class TdRunnable implements Runnable {
 
 		    // 执行端口数据采集命令
 
-		    if (sGenResult.equals("S")) {
-
+		    if (sGenResult.equals("S") && (!(enDeviceType.getPortsListCommands() == null))) {
 			// 执行获取设备端口列表指令
+
 			String[] commLine = enDeviceType.getPortsListCommands().split("\n");
+
 			for (int k = 0; k < commLine.length; k++) {
 			    String sCommLine = commLine[k];
 			    if (!(sCommLine == null || sCommLine.trim().length() == 0)) {
@@ -1047,7 +1048,7 @@ public class TdRunnable implements Runnable {
 				enDeviceType.getPortsDataSeries(), enDeviceType.getVlanDivChar(),
 				enDeviceType.getPromptLines(), enDeviceType.getPortDataSubFrom(),
 				enDeviceType.getPortDataSubLen());
-
+			System.out.println("collect command");
 			// 逐个端口采集数据
 			for (int j = 0; j < devicePorts.size(); j++) {
 			    String portSn = (String) devicePorts.get(j);
