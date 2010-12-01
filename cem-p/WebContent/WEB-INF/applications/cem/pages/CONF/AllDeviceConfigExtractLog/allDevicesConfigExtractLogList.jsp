@@ -39,7 +39,7 @@
 %>
 <html>
 <head>
-<title>设备巡检管理</title>
+<title>全网设备配置管理</title>
 <jsp:include flush="true" page="../../../../sys/pages/common/include/css.jsp"></jsp:include>
 <jsp:include flush="true" page="../../../../sys/pages/common/include/js.jsp"></jsp:include>
 
