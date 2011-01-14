@@ -1048,7 +1048,7 @@ public class TdRunnable implements Runnable {
 				enDeviceType.getPortsDataSeries(), enDeviceType.getVlanDivChar(),
 				enDeviceType.getPromptLines(), enDeviceType.getPortDataSubFrom(),
 				enDeviceType.getPortDataSubLen());
-			System.out.println("collect command");
+
 			// 逐个端口采集数据
 			for (int j = 0; j < devicePorts.size(); j++) {
 			    String portSn = (String) devicePorts.get(j);
