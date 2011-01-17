@@ -602,6 +602,10 @@ public class TdRunnable implements Runnable {
 		    vFrontHost.add(enFrontHostInfo);
 		}
 
+		sSql = "insert into device_inspect_log values (?,?,?,?,?,?,?,?,?)";
+		java.sql.PreparedStatement ps = null;    
+		ps = conn.prepareStatement(sSql);
+    
 		// 连接设备，并执行巡检指令
 		for (int i = 0; i < vDeviceInfo.size(); i++) {
 		    nt = new NetTelnet();
@@ -617,7 +621,7 @@ public class TdRunnable implements Runnable {
 		    if (enDeviceInfo.getFrontHostId() == null
 			    || enDeviceInfo.getFrontHostId().trim().length() == 0) {
 
-			// 直接登录设备
+			// 直接登录设备		    	
 			sResult = nt.FunLogin(enDeviceInfo.getDeviceIp(), enDeviceInfo.getDevicePort(),
 				enDeviceInfo.getUserPrompt(), enDeviceInfo.getDeviceUser(), enDeviceInfo
 					.getPasswordPrompt(), enDeviceInfo.getDevicePassword(), enDeviceInfo
@@ -720,7 +724,7 @@ public class TdRunnable implements Runnable {
 				}
 				sbResult.append(sResult);
 
-				// 根据巡检日志关键字分拣日志
+				// 根据巡检日志关键字分拣日志				
 				for (int t = 0; t < listKeyWords.size(); t++) {
 				    String sKeyWord = (String) listKeyWords.get(t);
 				    int iKeyWordPos = sResult.toLowerCase().indexOf(sKeyWord.toLowerCase());
@@ -748,7 +752,7 @@ public class TdRunnable implements Runnable {
 					sbPickLog.append("\n\n");
 					break;
 				    }
-				}
+				}		
 			    }
 			}
 
@@ -785,14 +789,15 @@ public class TdRunnable implements Runnable {
 			    + enDeviceInfo.getDeviceIp() + "][DeviceName=" + enDeviceInfo.getDeviceNameEn()
 			    + "][" + sGenResult + "]");
 
-		    sSql = "insert into device_inspect_log values ('" + enSendList.getSendId() + "','"
-			    + enDeviceInfo.getDeviceId() + "','" + enDeviceInfo.getDeviceNameEn() + "','"
-			    + enDeviceInfo.getDeviceIp() + "','" + enSendList.getUserId() + "','"
-			    + sInspectBegin + "','" + sInspectEnd + "','" + sGenResult + "', ?)";
-
-		    java.sql.PreparedStatement ps = null;
-		    ps = conn.prepareStatement(sSql);
-		    ps.setString(1, sbResult.toString());
+		    ps.setString(1, enSendList.getSendId());
+		    ps.setString(2, enDeviceInfo.getDeviceId());
+		    ps.setString(3, enDeviceInfo.getDeviceNameEn());
+		    ps.setString(4, enDeviceInfo.getDeviceIp());
+		    ps.setString(5, enSendList.getUserId());
+		    ps.setString(6, sInspectBegin);
+		    ps.setString(7, sInspectEnd);
+		    ps.setString(8, sGenResult);
+		    ps.setString(9, sbResult.toString());
 		    iSaveFlag = ps.executeUpdate();
 
 		    if (iSaveFlag < 1) {
@@ -839,7 +844,7 @@ public class TdRunnable implements Runnable {
 		    String sPickTime = formatter.format(new java.util.Date());
 		    sSql = "insert into device_inspect_pick_log values('" + enSendList.getSendId() + "','"
 			    + sPickTime + "', ?)";
-		    java.sql.PreparedStatement ps = null;
+		    ps = null;
 		    ps = conn.prepareStatement(sSql);
 		    ps.setString(1, sbPickLog.toString());
 		    iSaveFlag = ps.executeUpdate();
@@ -933,6 +938,10 @@ public class TdRunnable implements Runnable {
 		    vFrontHost.add(enFrontHostInfo);
 		}
 
+		sSql = "insert into device_collect_log values (?,?,?,?,?,?,?,?,?)";		
+		java.sql.PreparedStatement ps = null;
+		ps = conn.prepareStatement(sSql);
+		
 		// 连接设备，并执行设备端口数据采集命令
 		for (int i = 0; i < vDeviceInfo.size(); i++) {
 		    nt = new NetTelnet();
@@ -1146,14 +1155,15 @@ public class TdRunnable implements Runnable {
 			    + enDeviceInfo.getDeviceIp() + "][DeviceName=" + enDeviceInfo.getDeviceNameEn()
 			    + "][" + sGenResult + "]");
 
-		    sSql = "insert into device_collect_log values ('" + enSendList.getSendId() + "','"
-			    + enDeviceInfo.getDeviceId() + "','" + enDeviceInfo.getDeviceNameEn() + "','"
-			    + enDeviceInfo.getDeviceIp() + "','" + enSendList.getUserId() + "','"
-			    + sCollectBegin + "','" + sCollectEnd + "','" + sGenResult + "', ?)";
-
-		    java.sql.PreparedStatement ps = null;
-		    ps = conn.prepareStatement(sSql);
-		    ps.setString(1, sbResult.toString());
+		    ps.setString(1, enSendList.getSendId());
+		    ps.setString(2, enDeviceInfo.getDeviceId());
+		    ps.setString(3, enDeviceInfo.getDeviceNameEn());
+		    ps.setString(4, enDeviceInfo.getDeviceIp());
+		    ps.setString(5, enSendList.getUserId());
+		    ps.setString(6, sCollectBegin);
+		    ps.setString(7, sCollectEnd);
+		    ps.setString(8, sGenResult);
+		    ps.setString(9, sbResult.toString());
 		    iSaveFlag = ps.executeUpdate();
 
 		    if (iSaveFlag < 1) {
@@ -1264,6 +1274,10 @@ public class TdRunnable implements Runnable {
 		    vFrontHost.add(enFrontHostInfo);
 		}
 
+		sSql = "insert into device_config_log values (?,?,?,?,?,?,?,?,?)";
+		java.sql.PreparedStatement ps = null;
+		ps = conn.prepareStatement(sSql);
+    
 		// 连接设备，并执行设备配置提取指令
 		for (int i = 0; i < vDeviceInfo.size(); i++) {
 		    nt = new NetTelnet();
@@ -1404,14 +1418,15 @@ public class TdRunnable implements Runnable {
 			    + enDeviceInfo.getDeviceIp() + "][DeviceName=" + enDeviceInfo.getDeviceNameEn()
 			    + "][" + sGenResult + "]");
 
-		    sSql = "insert into device_config_log values ('" + enSendList.getSendId() + "','"
-			    + enDeviceInfo.getDeviceId() + "','" + enDeviceInfo.getDeviceNameEn() + "','"
-			    + enDeviceInfo.getDeviceIp() + "','" + enSendList.getUserId() + "','"
-			    + sConfigBegin + "','" + sConfigEnd + "','" + sGenResult + "', ?)";
-
-		    java.sql.PreparedStatement ps = null;
-		    ps = conn.prepareStatement(sSql);
-		    ps.setString(1, sbResult.toString());
+		    ps.setString(1, enSendList.getSendId());
+		    ps.setString(2, enDeviceInfo.getDeviceId());
+		    ps.setString(3, enDeviceInfo.getDeviceNameEn());
+		    ps.setString(4, enDeviceInfo.getDeviceIp());
+		    ps.setString(5, enSendList.getUserId());
+		    ps.setString(6, sConfigBegin);
+		    ps.setString(7, sConfigEnd);
+		    ps.setString(8, sGenResult);
+		    ps.setString(9, sbResult.toString());
 		    iSaveFlag = ps.executeUpdate();
 
 		    if (iSaveFlag < 1) {
