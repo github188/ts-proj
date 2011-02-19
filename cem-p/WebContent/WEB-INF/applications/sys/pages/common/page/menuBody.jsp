@@ -34,7 +34,7 @@
   
   parentIds = xml.getItemValues("SYS_MENU","PARENT_ID");
   
-  treeHtmlBuilder = new TreeHtmlBuilder().setRootId("MENU_ROOT").setDisplayAll(true);
+  treeHtmlBuilder = new TreeHtmlBuilder().setRootId("MENU_ROOT").setDisplayAll(false);
   treeHtmlBuilder.setTreeNodeBuilder(new CommonTreeNodeBuilder(){
     public void writeTitle(){
 
