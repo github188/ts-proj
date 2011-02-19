@@ -14,6 +14,7 @@
 	String deviceIp;
 	String extractEndBegin;//巡检结束日期  
 	String extractEndEnd;
+	String sendId;
 	
 	
 	String[] sendIds;
@@ -36,6 +37,7 @@
 	deviceIp = xml.getInputValue("DEVICE_IP");
 	extractEndBegin = xml.getInputValue("EXTRACT_END_BEGIN");
 	extractEndEnd = xml.getInputValue("EXTRACT_END_END");
+	sendId = xml.getInputValue("SEND_ID");
 	
 	sendIds = xml.getItemValues("DEVICE_CONFIG_LOG","SEND_ID");
 	deviceNameCns = xml.getItemValues("DEVICE_CONFIG_LOG", "DEVICE_NAME_CN");
@@ -125,11 +127,14 @@
           <div class="panelContent">
             <div class="panelContent2">
               <!-- 查询面板内容 -->
-               <!--
+              
               <form name="form1" action="ctrl" method="get"  onSubmit="return doSubmit(this)">
-              <input type="hidden" name="FUNC_ID" value="ADeviceInspectLogList">
-               <input type="hidden" name=CUR_PAGE value="">
-              <table>
+              <input type="hidden" name="FUNC_ID" value="DeviceConfigExtractLogList">
+           <input type="hidden" name="EXTRACT_END_BEGIN" value="<%=extractEndBegin %>"> 
+           <input type="hidden" name="EXTRACT_END_END" value="<%=extractEndEnd %>"> 
+             <input type="hidden" name="SEND_ID" value="<%=sendId%>"> 
+            <input type="hidden" name=CUR_PAGE value="">
+              <!-- <table>
               	 <tr>
               	 	<td align="right">英文设备名称：</td> 
                   	<td><input type="text" class="text" name="DEVICE_NAME_EN" value="<%=deviceNameEn %>"></td>
@@ -168,9 +173,9 @@
                     <input type="button" class="button" onClick="doBack();" value="返回">
                    	</td>
                  </tr>
-              </table>
+              </table> -->
                </form>
-                -->
+               
               <!-- 查询面板内容结束 -->
             </div>
           </div>
@@ -253,7 +258,7 @@
               </table>
               <div class="pageBar"><%=Page.BuildPageTextByMethod(xml,"TDoChangePage") %></div>
               <!-- 列表内容结束 -->
-           <form name="form1" action="ctrl" method="get"  onSubmit="return doSubmit(this)">
+           <form name="form2" action="ctrl" method="get"  onSubmit="return doSubmit(this)">
            <input type="hidden" name="FUNC_ID" value="AllDeviceConfigExtractLogList">
            <input type="hidden" name="EXTRACT_END_BEGIN" value="<%=extractEndBegin %>"> 
            <input type="hidden" name="EXTRACT_END_END" value="<%=extractEndEnd %>"> 
