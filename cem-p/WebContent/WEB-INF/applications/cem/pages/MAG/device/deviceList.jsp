@@ -198,7 +198,7 @@ function doSubmit(form) {
                   <th>网络地址</th>
                   <th>网络端口</th>
                   <th>设备状态</th>
-                  <th width="10%">[ <a href="JavaScript:doAdd()">添加</a> ]</th>
+                  <th width="10%">[ <a href="JavaScript:doEdit()">添加</a> ]</th>
                 </tr>
             
               <%if(deviceIds != null){
