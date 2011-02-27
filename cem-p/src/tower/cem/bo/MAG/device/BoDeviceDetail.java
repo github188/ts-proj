@@ -1,5 +1,7 @@
 package tower.cem.bo.MAG.device;
 
+import java.util.Vector;
+
 import org.apache.log4j.Logger;
 
 import tower.cem.db.DbDeviceInfo;
@@ -45,6 +47,7 @@ public class BoDeviceDetail implements RootBo {
 
 		// 堡垒主机编号
 		String deviceId;
+		Vector deviceTypes;
 
 		/*****************************************************************************************************
 		 * 获取输入
@@ -66,6 +69,7 @@ public class BoDeviceDetail implements RootBo {
 		
 		// 根据堡垒主机编号（hostId）
 		enDeviceInfo = dbDeviceInfo.findByKey(deviceId);
+		if(enDeviceInfo != null ){
 		int irow = dbDeviceInfo.setToXml(requestXml, enDeviceInfo);
 
 		if (!(enDeviceInfo.getLocationId() == null || enDeviceInfo.getLocationId().trim().length() == 0)) {
@@ -88,5 +92,9 @@ public class BoDeviceDetail implements RootBo {
 				requestXml.setItemValue("DEVICE_INFO", irow, "TYPE_NAME", enDeviceType.getTypeNameCn());
 			}
 		}
+		}
+		//获取设备类型
+		deviceTypes  = dbDeviceType.findAll();
+		dbDeviceType.setAllToXml(requestXml, deviceTypes);
 	}
 }
