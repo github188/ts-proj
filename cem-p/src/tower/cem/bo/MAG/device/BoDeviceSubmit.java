@@ -65,7 +65,7 @@ public class BoDeviceSubmit implements RootBo {
 	deviceNameEn = requestXml.getInputValue("DEVICE_NAME_EN");
 	deviceAbbNameEn = requestXml.getInputValue("DEVICE_ABB_NAME_EN");
 	deviceNameCn = requestXml.getInputValue("DEVICE_NAME_CN");
-	typeId = requestXml.getInputValue("TYPE_ID");
+	typeId = requestXml.getInputValue("TYPE_ID").substring(0,6);
 	locationId = requestXml.getInputValue("LOCATION_ID");
 	deviceStatus = requestXml.getInputValue("DEVICE_STATUS");
 	frontHostId = requestXml.getInputValue("FRONT_HOST_ID");
