@@ -83,7 +83,7 @@ public class BoDeviceTypeSubmit implements RootBo {
 		    throw new ErrorException("MDT002", new Object[] { enDeviceType.getTypeNameCn() });// 设备类型名称-中文：{0}在系统中已存在,请重新输入。
 		}
 
-		EnDeviceType enDeviceTypeEdit = new EnDeviceType();
+	/*	EnDeviceType enDeviceTypeEdit = new EnDeviceType();
 		enDeviceTypeEdit.setCollectCommands(enDeviceType.getCollectCommands());
 		enDeviceTypeEdit.setConfigCommands(enDeviceType.getConfigCommands());
 		enDeviceTypeEdit.setInspectCommands(enDeviceType.getInspectCommands());
@@ -104,7 +104,9 @@ public class BoDeviceTypeSubmit implements RootBo {
 		enDeviceTypeEdit.setVlanDivChar(enDeviceType.getVlanDivChar());
 		enDeviceTypeEdit.setPortDataSubFrom(enDeviceType.getPortDataSubFrom());
 		enDeviceTypeEdit.setPortDataSubLen(enDeviceType.getPortDataSubLen());
-		dbDeviceType.updateByKey(enDeviceType.getTypeId(), enDeviceTypeEdit);
+		enDeviceTypeEdit.setUserPrompt(enDeviceType.getUserPrompt());
+		enDeviceTypeEdit.setPasswordPrompt(enDeviceType.getPasswordPrompt());*/
+		dbDeviceType.updateByKey(enDeviceType.getTypeId(), enDeviceType);
 	    }
 
 	} catch (Exception e) {
