@@ -24,6 +24,13 @@
 	String remark;
 	String userPrompt;
 	String passwordPrompt;	
+	
+	
+	String[] deviceTypeIds;
+	String[] deviceTypeNames;
+	String[] userPrompts;
+	String[] passwordPrompts;
+	
 %>
 <%
     xml = XMLWrap.getRequestXml(request,session,application);
@@ -47,13 +54,18 @@
     userPrompt = xml.getItemValue("DEVICE_INFO",1,"USER_PROMPT");
     passwordPrompt = xml.getItemValue("DEVICE_INFO",1,"PASSWORD_PROMPT");        
     
+    deviceTypeIds = xml.getItemValues("DEVICE_TYPE","TYPE_ID");
+    deviceTypeNames = xml.getItemValues("DEVICE_TYPE","TYPE_NAME_CN");
+    userPrompts = xml.getItemValues("DEVICE_TYPE","USER_PROMPT");
+    passwordPrompts = xml.getItemValues("DEVICE_TYPE","PASSWORD_PROMPT");
+    
 	String[] deviceStatusDesc = {"在用","停用"};
 	String[] deviceStatusValue = {"N","S"};
 %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>设备类型管理</title>
+<title>设备配置管理</title>
 <jsp:include flush="true" page="../../../../sys/pages/common/include/css.jsp"></jsp:include>
 <jsp:include flush="true" page="../../../../sys/pages/common/include/js.jsp"></jsp:include>
 <script type="text/javascript">
@@ -69,7 +81,7 @@
    	selDialog("ctrl?FUNC_ID=SelectLocation","LOCATION_ID","LOCATION_NAME_CN",850,550,false);
    }
    function doSelDeviceType(){
-   	selDialog("ctrl?FUNC_ID=SelectDeviceType","TYPE_ID","TYPE_NAME",850,550,false);
+   	selDialog("ctrl?FUNC_ID=SelectDeviceType","TYPE_ID","TYPE_NAME","USER_PROMPT",850,550,false);
    }
    function doClear(){
       form1.FRONT_HOST_ID.value = ""
@@ -82,6 +94,15 @@
        if (result == false){
           return result;
        }
+  
+    }
+    
+    function doChange(){
+    var str = form1.TYPE_ID.value;
+    var array = new Array;
+    array=str.split(",");
+    form1.USER_PROMPT.value=array[1];
+    form1.PASSWORD_PROMPT.value=array[2];
     }
 -->
 </script>
@@ -160,14 +181,14 @@
 		               
 		               <tr>
 			               <td width="150" align="right">设备类型：</td>
-		        	       <td>
-		        	       		<span id="sprytTypeId">
-		                  			<input name="TYPE_ID" type="hidden"  value="<%=typeId%>">
-		                  			<input type="text" class="date" name="TYPE_NAME"   value="<%=typeName%>"  readonly><span class="requiredField">*</span>
-		                  			<input type="button" name="selectOutOrg" class="selButton" value="选择" onClick="doSelDeviceType()" />
-		                  			<span class="textfieldRequiredMsg">需要提供一个值。</span>
-		                  		</span>
-  				         	</td>
+			                <td >
+			                     <select name="TYPE_ID" class="select" id="TYPE_ID" style="width:11em" onChange="doChange();">
+			                     <option value="">请选择</option>
+            		             <%for(int i=0;i<deviceTypeIds.length;i++){ %>
+                    		    <option value="<%=deviceTypeIds[i] %>,<%=userPrompts[i]%>,<%=passwordPrompts[i] %>"  <%if(deviceTypeIds[i].equals(typeId)){out.print("selected");} %>><%=deviceTypeNames[i] %></option>
+		                        <%} %>
+        		                </select>
+							</td>
 		               </tr>
 		               
 		               <tr>
