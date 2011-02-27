@@ -101,7 +101,7 @@ public class BoRxpDetail implements RootBo{
 		vEnDevicePortType = dbDevicePortType.findAllWhere(" TYPE_NAME_EN='"+enDevicePortRxp.getPortType()+"'");
 		if(vEnDevicePortType != null && vEnDevicePortType.size() != 0){
 			enDevicePortType = (EnDevicePortType)vEnDevicePortType.get(0);
-			requestXml.setItemValue("DEVICE_PORT_RXP", row, "PORT_TYPE_NAME",enDevicePortType.getTypeNameEn());
+			requestXml.setItemValue("DEVICE_PORT_RXP", row, "PORT_TYPE_NAME",enDevicePortType.getTypeNameCn());
 			requestXml.setItemValue("DEVICE_PORT_RXP", row, "STANDARD_RX_MAX",enDevicePortType.getStandardRxMax());
 			requestXml.setItemValue("DEVICE_PORT_RXP", row, "STANDARD_RX_MIN",enDevicePortType.getStandardRxMin());
 			requestXml.setItemValue("DEVICE_PORT_RXP", row, "NETWORK_RX_MIN",enDevicePortType.getNetworkRxMin());
