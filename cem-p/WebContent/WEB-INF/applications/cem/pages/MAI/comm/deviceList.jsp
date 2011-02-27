@@ -13,6 +13,8 @@
 	String deviceStatus;
 	String deviceIp;
 	String devicePort;
+	String typeId;
+	String typeName;
  
 	String[] deviceIds;
 	String[] deviceNameEns;
@@ -31,6 +33,8 @@
 	deviceStatus = xml.getInputValue("DEVICE_STATUS");
 	deviceIp = xml.getInputValue("DEVICE_IP");
 	devicePort = xml.getInputValue("DEVICE_PORT");
+	typeId = xml.getInputValue("TYPE_ID");
+	typeName = xml.getInputValue("TYPE_NAME");
 
 	deviceIds = xml.getItemValues("DEVICE_INFO","DEVICE_ID");
 	deviceNameEns = xml.getItemValues("DEVICE_INFO", "DEVICE_NAME_EN");
@@ -45,7 +49,7 @@
 %>
 <html>
 <head>
-<title>设备配置管理</title>
+<title>设备管理</title>
 <jsp:include flush="true" page="../../../../sys/pages/common/include/css.jsp"></jsp:include>
 <jsp:include flush="true" page="../../../../sys/pages/common/include/js.jsp"></jsp:include>
 
@@ -68,7 +72,9 @@ function doSubmit(form) {
    function doSelFrontHost(){
     selDialog("ctrl?FUNC_ID=SelectFrontHost","FRONT_DEVICE_ID","FRONT_DEVICE_NAME",850,550,false);
   }
-  
+    function doSelDeviceType(){
+   	selDialog("ctrl?FUNC_ID=SelectDeviceType","TYPE_ID","TYPE_NAME",850,550,false);
+   }
    function doSelLocation(){
    	selDialog("ctrl?FUNC_ID=SelectLocation","LOCATION_ID","LOCATION_NAME_CN",850,550,false);
    }
@@ -79,7 +85,9 @@ function doSubmit(form) {
     form1.LOCATION_NAME_CN.value="";
     form1.DEVICE_IP.value="";
     form1.DEVICE_PORT.value="";
-    form1.DEVICE_STATUS.selectedIndex=0;
+    form1.DEVICE_STATUS.selectedIndex=0;  
+    form1.TYPE_ID.value="";
+    form1.TYPE_NAME.value="";
   }
   
    function onChange(selectedIds,selector){
@@ -98,7 +106,7 @@ function doSubmit(form) {
 </head>
 <body id="mainArea">
   <div id="mainPanel" class="panel">
-    <div class="panelHead">设备维护指令</div>
+    <div class="panelHead">设备登录</div>
     <div class="panelContent">
       <div class="panelContent2">    
         <!-- 查询面板 -->
@@ -118,18 +126,26 @@ function doSubmit(form) {
 	                 <td><input type="text" class="text" name="DEVICE_NAME_CN" value="<%=deviceNameCn %>"></td>
                  </tr>
                   <tr>
+                  <td width="150" align="right">设备类型：</td>
+		        	    <td>
+							<input name="TYPE_ID" type="hidden"  value="<%=typeId %>">
+		                  	<input type="text" class="date" name="TYPE_NAME"   value="<%=typeName%>"  readonly>
+		                  	<input type="button" name="selectOutOrg" class="selButton" value="选择" onClick="doSelDeviceType()" />
+  				        </td>
               	 <td align="right">物理位置：</td>
                   <td>	
                    <input name="LOCATION_ID" type="hidden"  value="<%=locationId %>">
 		            <input type="text" class="date" name="LOCATION_NAME_CN"   value="<%=locationNameCn %>"  readonly>
 		            <input type="button" name="selectOutOrg" class="selButton" value="选择" onClick="doSelLocation()" />
   				</td>
-                 <td align="right">网络地址：</td>
-	                 <td><input type="text" class="text" name="DEVICE_IP" value="<%=deviceIp %>"></td>
                  </tr>
                    <tr>
+                    <td align="right">网络地址：</td>
+	                 <td><input type="text" class="text" name="DEVICE_IP" value="<%=deviceIp %>"></td>
               	 <td align="right">网络端口：</td>
                   <td><input type="text" class="text" name="DEVICE_PORT" value="<%=devicePort %>"></td>
+                  </tr>
+                  <tr>
                 <td align="right">设备状态：</td>
 	                  <td >
 	                     <select name="DEVICE_STATUS" class="select" id="DEVICE_STATUS" style="width:11em">
