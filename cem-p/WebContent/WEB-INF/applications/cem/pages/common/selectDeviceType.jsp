@@ -9,32 +9,27 @@
     XMLWrap xml;
     String typeNameEn;
     String typeNameCn;
-    String remark;
+    
     
 	String[] typeIds;
 	String[] typeNameEns;
 	String[] typeNameCns;
-	String[] inspectCommandses;
-	String[] inspectCommandsExps;
-	String[] collectCommandses;
-	String[] appPictures;
+	String[] userPrompts;
+	String[] passwordPrompts;
 	String[] remarks;
 %>
 <%
     xml = XMLWrap.getRequestXml(request,session,application);
     typeNameEn = xml.getInputValue("QTYPE_NAME_EN");
     typeNameCn = xml.getInputValue("QTYPE_NAME_CN");
-    remark = xml.getInputValue("QREMARK");
     
     
     typeIds = xml.getItemValues("DEVICE_TYPE","TYPE_ID");
     typeNameEns = xml.getItemValues("DEVICE_TYPE","TYPE_NAME_EN");
     typeNameCns = xml.getItemValues("DEVICE_TYPE","TYPE_NAME_CN");
-    inspectCommandses = xml.getItemValues("DEVICE_TYPE","INSPECT_COMMANDS");
-    inspectCommandsExps = xml.getItemValues("DEVICE_TYPE","INSPECT_COMMANDS_EXP");
-    collectCommandses = xml.getItemValues("DEVICE_TYPE","COLLECT_COMMANDS");
-    appPictures = xml.getItemValues("DEVICE_TYPE","APP_PICTURE");
-    remarks = xml.getItemValues("DEVICE_TYPE","REMARK");
+    userPrompts = xml.getItemValues("DEVICE_TYPE","USER_PROMPT");
+    passwordPrompts = xml.getItemValues("DEVICE_TYPE","PASSWORD_PROMPT");
+    remarks = xml.getItemValues("DEVICE_TYPE","REMARKS");
     
 %>
 <html>
@@ -58,6 +53,7 @@
   	  	{
   	  		formQuery.UPPER_TYPE_ID.value = formQuery.TYPE_ID.value;
             formQuery.UPPER_TYPE_NAME.value = formQuery.TYPE_ID.nameValue;
+            formQuery.UPPER_USER_PROMPT.value = formQuery.TYPE_ID[i].nameValue1;
   	  		flg = 1;
   	  	}
     }else{
@@ -67,6 +63,7 @@
         {
           formQuery.UPPER_TYPE_ID.value = formQuery.TYPE_ID[i].value;
           formQuery.UPPER_TYPE_NAME.value = formQuery.TYPE_ID[i].nameValue;
+          formQuery.UPPER_USER_PROMPT.value = formQuery.TYPE_ID[i].nameValue1;
           flg = 1;
           break;
         }
@@ -79,7 +76,7 @@
     }
     else
     {
-      closeDialog(formQuery.UPPER_TYPE_ID.value,formQuery.UPPER_TYPE_NAME.value);
+      closeDialog(formQuery.UPPER_TYPE_ID.value,formQuery.UPPER_TYPE_NAME.value,formQuery.UPPER_USER_PROMPT.value);
   	  window.close();
     }
   }
@@ -154,6 +151,7 @@
                  <form name="formQuery" action="ctrl" method="get"  onSubmit="return doSubmit(this)">
               <input type = "hidden" name="UPPER_TYPE_ID" value="">
               <input type = "hidden" name="UPPER_TYPE_NAME" value="">
+              <input type = "hidden" name="UPPER_USER_PROMPT" value="">
               <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
                  <tr>
                   <th></th>
@@ -166,7 +164,7 @@
 				if (i % 2 == 0) {%>
                 <tr onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
                  <td>
-                <input type="radio" name="TYPE_ID"  value="<%=typeIds[i] %>" nameValue="<%=typeNameCns[i] %>"/>
+                <input type="radio" name="TYPE_ID"  value="<%=typeIds[i] %>" nameValue="<%=typeNameCns[i] %>" nameValue1="<%=userPrompts[i] %>"/>
                 </td>
                   <td align="center" onClick="event.cancelBubble=true"><%=typeNameEns[i]%></td>
                   <td align="center"><%=typeNameCns[i]%></td>
@@ -177,7 +175,7 @@
                
                    <tr class="dark" onmouseover="doMouseOver(this)" onmouseout="doMouseOut(this)">
                      <td>
-                <input type="radio" name="TYPE_ID"  value="<%=typeIds[i] %>" nameValue="<%=typeNameCns[i] %>"/>
+                <input type="radio" name="TYPE_ID"  value="<%=typeIds[i] %>" nameValue="<%=typeNameCns[i] %>" nameValue1="<%=userPrompts[i] %>"/>
                 </td>
                     <td align="center" onClick="event.cancelBubble=true"><%=typeNameEns[i]%></td>
                     <td align="center"><%=typeNameCns[i]%></td>
