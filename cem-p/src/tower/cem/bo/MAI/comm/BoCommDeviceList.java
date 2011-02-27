@@ -49,13 +49,6 @@ public class BoCommDeviceList implements RootBo{
 		DbLocationInfo dbLocationInfo;
 		EnLocationInfo enLocationInfo;
 		
-		//维护团队与设备对照DB EN 
-		DbMaintainTeamDeviceMap dbMaintainTeamDeviceMap;
-		EnMaintainTeamDeviceMap enMaintainTeamDeviceMap;
-		
-		//维护团队与人员对照DB EN 
-		DbMaintainTeamUserMap dbMaintainTeamUserMap;
-		EnMaintainTeamUserMap enMaintainTeamUserMap;
 		
 		// 查询条件：
 		String deviceNameEn;    // 设备名称-英文
@@ -65,10 +58,6 @@ public class BoCommDeviceList implements RootBo{
 		String deviceIp;        // 网络地址
 		String devicePort; 		// 网络端口
 		String typeId;          //设备类型
-		String execBeginBegin; //维护开始时间
-		String execBeginEnd;   //维护开始时间
-		String execEndBegin;   //维护结束时间
-		String execEndEnd;     //维护结束时间
 		String userId;
 		
 		// 其他
@@ -87,10 +76,6 @@ public class BoCommDeviceList implements RootBo{
 		deviceIp = requestXml.getInputValue("DEVICE_IP");
 		typeId	= requestXml.getInputValue("TYPE_ID");
 		devicePort = requestXml.getInputValue("DEVICE_PORT");
-		execBeginBegin = requestXml.getInputValue("QEXEC_BEGIN_BEGIN");
-		execBeginEnd = requestXml.getInputValue("QEXEC_BEGIN_END");
-		execEndBegin = requestXml.getInputValue("QEXEC_END_BEGIN");
-		execEndEnd = requestXml.getInputValue("QEXEC_END_END");
 		userId = sessionXml.getItemValue("SYS_USER", 1, "USER_ID");
 		/*****************************************************************************************************
 		 * 创建数据库连接、实例化DB、EN
@@ -100,8 +85,6 @@ public class BoCommDeviceList implements RootBo{
 		dbLocationInfo = new DbLocationInfo(transaction, null);
 		dbDeviceInfo = new DbDeviceInfo(transaction, null);
 		dbDeviceType = new DbDeviceType(transaction, null);
-		dbMaintainTeamDeviceMap = new DbMaintainTeamDeviceMap(transaction, null);
-		dbMaintainTeamUserMap = new DbMaintainTeamUserMap(transaction, null);
 		/*****************************************************************************************************
 		 * 执行业务逻辑、输出
 		 ****************************************************************************************************/
