@@ -40,11 +40,6 @@ public class EnDeviceType implements java.io.Serializable {
     private int promptLines;
 
     /**
-     * Type : int Name : COMM_LINE_MAX
-     */
-    private int commLineMax;
-
-    /**
      * Type : text Name : CONFIG_COMMANDS
      */
     private String configCommands;
@@ -120,6 +115,21 @@ public class EnDeviceType implements java.io.Serializable {
     private String remark;
 
     /**
+     * Type : int Name : COMM_LINE_MAX
+     */
+    private int commLineMax;
+
+    /**
+     * Type : varchar(50) Name : USER_PROMPT
+     */
+    private String userPrompt;
+
+    /**
+     * Type : varchar(50) Name : PASSWORD_PROMPT
+     */
+    private String passwordPrompt;
+
+    /**
      * Type : char(6) Name : TYPE_ID modify flag
      */
     private boolean _flagTypeId;
@@ -148,11 +158,6 @@ public class EnDeviceType implements java.io.Serializable {
      * Type : int Name : PROMPT_LINES modify flag
      */
     private boolean _flagPromptLines;
-
-    /**
-     * Type : int Name : COMM_LINE_MAX modify flag
-     */
-    private boolean _flagCommLineMax;
 
     /**
      * Type : text Name : CONFIG_COMMANDS modify flag
@@ -228,6 +233,21 @@ public class EnDeviceType implements java.io.Serializable {
      * Type : varchar(200) Name : REMARK modify flag
      */
     private boolean _flagRemark;
+
+    /**
+     * Type : int Name : COMM_LINE_MAX modify flag
+     */
+    private boolean _flagCommLineMax;
+
+    /**
+     * Type : varchar(50) Name : USER_PROMPT modify flag
+     */
+    private boolean _flagUserPrompt;
+
+    /**
+     * Type : varchar(50) Name : PASSWORD_PROMPT modify flag
+     */
+    private boolean _flagPasswordPrompt;
 
     /**
      * Sets the value for typeId
@@ -359,28 +379,6 @@ public class EnDeviceType implements java.io.Serializable {
      */
     public boolean hasChangePromptLines() {
         return _flagPromptLines;
-    }
-
-    /**
-     * Sets the value for commLineMax
-     */
-    public void setCommLineMax(int commLineMax) {
-        this.commLineMax = commLineMax;
-        this._flagCommLineMax = true;
-    }
-
-    /**
-     * Gets the value for commLineMax
-     */
-    public int getCommLineMax() {
-        return commLineMax;
-    }
-
-    /**
-     * has the value for commLineMax changed?
-     */
-    public boolean hasChangeCommLineMax() {
-        return _flagCommLineMax;
     }
 
     /**
@@ -711,6 +709,72 @@ public class EnDeviceType implements java.io.Serializable {
      */
     public boolean hasChangeRemark() {
         return _flagRemark;
+    }
+
+    /**
+     * Sets the value for commLineMax
+     */
+    public void setCommLineMax(int commLineMax) {
+        this.commLineMax = commLineMax;
+        this._flagCommLineMax = true;
+    }
+
+    /**
+     * Gets the value for commLineMax
+     */
+    public int getCommLineMax() {
+        return commLineMax;
+    }
+
+    /**
+     * has the value for commLineMax changed?
+     */
+    public boolean hasChangeCommLineMax() {
+        return _flagCommLineMax;
+    }
+
+    /**
+     * Sets the value for userPrompt
+     */
+    public void setUserPrompt(String userPrompt) {
+        this.userPrompt = userPrompt;
+        this._flagUserPrompt = true;
+    }
+
+    /**
+     * Gets the value for userPrompt
+     */
+    public String getUserPrompt() {
+        return userPrompt;
+    }
+
+    /**
+     * has the value for userPrompt changed?
+     */
+    public boolean hasChangeUserPrompt() {
+        return _flagUserPrompt;
+    }
+
+    /**
+     * Sets the value for passwordPrompt
+     */
+    public void setPasswordPrompt(String passwordPrompt) {
+        this.passwordPrompt = passwordPrompt;
+        this._flagPasswordPrompt = true;
+    }
+
+    /**
+     * Gets the value for passwordPrompt
+     */
+    public String getPasswordPrompt() {
+        return passwordPrompt;
+    }
+
+    /**
+     * has the value for passwordPrompt changed?
+     */
+    public boolean hasChangePasswordPrompt() {
+        return _flagPasswordPrompt;
     }
 
 }
