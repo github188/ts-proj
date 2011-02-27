@@ -182,12 +182,15 @@
 		               <tr>
 			               <td width="150" align="right">设备类型：</td>
 			                <td >
+			                <span id="sprytTypeId">
 			                     <select name="TYPE_ID" class="select" id="TYPE_ID" style="width:11em" onChange="doChange();">
 			                     <option value="">请选择</option>
             		             <%for(int i=0;i<deviceTypeIds.length;i++){ %>
                     		    <option value="<%=deviceTypeIds[i] %>,<%=userPrompts[i]%>,<%=passwordPrompts[i] %>"  <%if(deviceTypeIds[i].equals(typeId)){out.print("selected");} %>><%=deviceTypeNames[i] %></option>
 		                        <%} %>
-        		                </select>
+        		                </select><span class="requiredField">*</span>
+        		                <span class="selectRequiredMsg">需要提供一个值。</span>
+        		                </span>
 							</td>
 		               </tr>
 		               
@@ -337,7 +340,7 @@ var sprytextfield7 = new Spry.Widget.ValidationTextField("sprytDevicePrompt", "n
 var sprytextfield8 = new Spry.Widget.ValidationTextField("sprytRemark", "none", {maxChars:200});
 var sprytextfield9 = new Spry.Widget.ValidationTextField("sprytDeviceNameCn","none", {required:true,maxChars:60});
 var sprytextfield10 = new Spry.Widget.ValidationTextField("sprytLocationId","none", {required:true,maxChars:60});
-var sprytextfield11 = new Spry.Widget.ValidationTextField("sprytTypeId","none", {required:true,maxChars:60});
+var sprytextfield11 = new Spry.Widget.ValidationSelect("sprytTypeId");
 var sprytextfield13 = new Spry.Widget.ValidationTextField("sprytUserPrompt","none", {required:true,maxChars:60});
 var sprytextfield14 = new Spry.Widget.ValidationTextField("sprytPasswordPrompt","none", {required:true,maxChars:60});
 
