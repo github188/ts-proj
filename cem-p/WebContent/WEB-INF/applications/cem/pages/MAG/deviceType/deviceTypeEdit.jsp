@@ -26,6 +26,8 @@
 	String portTypeStart;
 	String portDataSubFrom;
 	String portDataSubLen;		
+	String userPrompt;
+	String passwordPrompt;		
 %>
 <%
     xml = XMLWrap.getRequestXml(request,session,application);
@@ -49,7 +51,9 @@
     vlanDivChar =  xml.getItemValue("DEVICE_TYPE",1,"VLAN_DIV_CHAR"); 
     portTypeStart =  xml.getItemValue("DEVICE_TYPE",1,"PORT_TYPE_START"); 
     portDataSubFrom = xml.getItemValue("DEVICE_TYPE",1,"PORT_DATA_SUB_FROM"); 
-    portDataSubLen = xml.getItemValue("DEVICE_TYPE",1,"PORT_DATA_SUB_LEN");      
+    portDataSubLen = xml.getItemValue("DEVICE_TYPE",1,"PORT_DATA_SUB_LEN");    
+    userPrompt = xml.getItemValue("DEVICE_TYPE",1,"USER_PROMPT");
+    passwordPrompt = xml.getItemValue("DEVICE_TYPE",1,"PASSWORD_PROMPT"); 
 
 %>
 <html>
@@ -123,6 +127,23 @@
 		                            <span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
 		                            </span>
 		                  </td>
+		                 <tr>
+							<td width="150" align="right">用户名提示符：</td>
+			                <td>
+		                    	<span id="sprytUserPrompt">
+              					<input type="text" class="text" name="USER_PROMPT"value="<%=userPrompt%>">
+              				  	<span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
+		                      	</span>
+		                 	</td>
+		               </tr>
+		                <tr>
+							<td width="150" align="right">密码提示符：</td>
+			                <td>
+		                    	<span id="sprytPasswordPrompt">
+              					<input type="text" class="text" name="PASSWORD_PROMPT"value="<%=passwordPrompt%>">
+              				  	<span class="textfieldMaxCharsMsg">已超过最大字符数60。</span>	                          
+		                      	</span>
+		                 	</td>
 		               </tr>
 		               <tr>
 		                 <td width="150" align="right">巡检指令集：</td>
@@ -333,6 +354,8 @@ var sprytextfield11 = new Spry.Widget.ValidationTextField("sprytPortsDataSeries"
 var sprytextfield12 = new Spry.Widget.ValidationTextField("sprytCommLineMax", "integer", {isRequired:false,useCharacterMasking:true});
 var sprytextfield13 = new Spry.Widget.ValidationTextField("sprytPortDataSubFrom", "integer", {isRequired:false,useCharacterMasking:true});
 var sprytextfield14 = new Spry.Widget.ValidationTextField("sprytPortDataSubLen", "integer", {isRequired:false,useCharacterMasking:true});
+var sprytextfield15 = new Spry.Widget.ValidationTextField("sprytUserPrompt","none", {isRequired:false,maxChars:60});
+var sprytextfield16 = new Spry.Widget.ValidationTextField("sprytPasswordPrompt","none", {isRequired:false,maxChars:60});
 //-->
 </script>
 </body>
