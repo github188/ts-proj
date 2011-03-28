@@ -180,8 +180,13 @@ public class TelnetDaemons extends Thread {
 		    inspectLogsPath, configLogsPath);
 
 	    int iSendCount = 0;
-
+	    
+	    conn = dbPool.getConn();
+	    conn.setAutoCommit(true);
+	    pstmt = conn.prepareStatement(sQuerySql);
+	    
 	    logger.info("The TelnetDaemons has started");
+	    
 
 	    for (;;) {
 
@@ -199,9 +204,9 @@ public class TelnetDaemons extends Thread {
 		try {
 
 		    // 取得数据库连接，预备Statement
-		    conn = dbPool.getConn();
-		    conn.setAutoCommit(true);
-		    pstmt = conn.prepareStatement(sQuerySql);
+//		    conn = dbPool.getConn();
+//		    conn.setAutoCommit(true);
+//		    pstmt = conn.prepareStatement(sQuerySql);
 
 		    // 当为首次执行时,将表中为maintain_commands_send.status='B'修改为'N'
 		    if (iFirstFlag == 1) {
