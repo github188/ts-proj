@@ -25,6 +25,16 @@ public class EnDeviceType implements java.io.Serializable {
     private String typeNameCn;
 
     /**
+     * Type : varchar(50) Name : USER_PROMPT
+     */
+    private String userPrompt;
+
+    /**
+     * Type : varchar(50) Name : PASSWORD_PROMPT
+     */
+    private String passwordPrompt;
+
+    /**
      * Type : text Name : INSPECT_COMMANDS
      */
     private String inspectCommands;
@@ -120,14 +130,9 @@ public class EnDeviceType implements java.io.Serializable {
     private int commLineMax;
 
     /**
-     * Type : varchar(50) Name : USER_PROMPT
+     * Type : int unsigned Name : TIME_OUT
      */
-    private String userPrompt;
-
-    /**
-     * Type : varchar(50) Name : PASSWORD_PROMPT
-     */
-    private String passwordPrompt;
+    private int timeOut;
 
     /**
      * Type : char(6) Name : TYPE_ID modify flag
@@ -143,6 +148,16 @@ public class EnDeviceType implements java.io.Serializable {
      * Type : varchar(60) Name : TYPE_NAME_CN modify flag
      */
     private boolean _flagTypeNameCn;
+
+    /**
+     * Type : varchar(50) Name : USER_PROMPT modify flag
+     */
+    private boolean _flagUserPrompt;
+
+    /**
+     * Type : varchar(50) Name : PASSWORD_PROMPT modify flag
+     */
+    private boolean _flagPasswordPrompt;
 
     /**
      * Type : text Name : INSPECT_COMMANDS modify flag
@@ -240,14 +255,9 @@ public class EnDeviceType implements java.io.Serializable {
     private boolean _flagCommLineMax;
 
     /**
-     * Type : varchar(50) Name : USER_PROMPT modify flag
+     * Type : int unsigned Name : TIME_OUT modify flag
      */
-    private boolean _flagUserPrompt;
-
-    /**
-     * Type : varchar(50) Name : PASSWORD_PROMPT modify flag
-     */
-    private boolean _flagPasswordPrompt;
+    private boolean _flagTimeOut;
 
     /**
      * Sets the value for typeId
@@ -313,6 +323,50 @@ public class EnDeviceType implements java.io.Serializable {
      */
     public boolean hasChangeTypeNameCn() {
         return _flagTypeNameCn;
+    }
+
+    /**
+     * Sets the value for userPrompt
+     */
+    public void setUserPrompt(String userPrompt) {
+        this.userPrompt = userPrompt;
+        this._flagUserPrompt = true;
+    }
+
+    /**
+     * Gets the value for userPrompt
+     */
+    public String getUserPrompt() {
+        return userPrompt;
+    }
+
+    /**
+     * has the value for userPrompt changed?
+     */
+    public boolean hasChangeUserPrompt() {
+        return _flagUserPrompt;
+    }
+
+    /**
+     * Sets the value for passwordPrompt
+     */
+    public void setPasswordPrompt(String passwordPrompt) {
+        this.passwordPrompt = passwordPrompt;
+        this._flagPasswordPrompt = true;
+    }
+
+    /**
+     * Gets the value for passwordPrompt
+     */
+    public String getPasswordPrompt() {
+        return passwordPrompt;
+    }
+
+    /**
+     * has the value for passwordPrompt changed?
+     */
+    public boolean hasChangePasswordPrompt() {
+        return _flagPasswordPrompt;
     }
 
     /**
@@ -734,47 +788,25 @@ public class EnDeviceType implements java.io.Serializable {
     }
 
     /**
-     * Sets the value for userPrompt
+     * Sets the value for timeOut
      */
-    public void setUserPrompt(String userPrompt) {
-        this.userPrompt = userPrompt;
-        this._flagUserPrompt = true;
+    public void setTimeOut(int timeOut) {
+        this.timeOut = timeOut;
+        this._flagTimeOut = true;
     }
 
     /**
-     * Gets the value for userPrompt
+     * Gets the value for timeOut
      */
-    public String getUserPrompt() {
-        return userPrompt;
+    public int getTimeOut() {
+        return timeOut;
     }
 
     /**
-     * has the value for userPrompt changed?
+     * has the value for timeOut changed?
      */
-    public boolean hasChangeUserPrompt() {
-        return _flagUserPrompt;
-    }
-
-    /**
-     * Sets the value for passwordPrompt
-     */
-    public void setPasswordPrompt(String passwordPrompt) {
-        this.passwordPrompt = passwordPrompt;
-        this._flagPasswordPrompt = true;
-    }
-
-    /**
-     * Gets the value for passwordPrompt
-     */
-    public String getPasswordPrompt() {
-        return passwordPrompt;
-    }
-
-    /**
-     * has the value for passwordPrompt changed?
-     */
-    public boolean hasChangePasswordPrompt() {
-        return _flagPasswordPrompt;
+    public boolean hasChangeTimeOut() {
+        return _flagTimeOut;
     }
 
 }
