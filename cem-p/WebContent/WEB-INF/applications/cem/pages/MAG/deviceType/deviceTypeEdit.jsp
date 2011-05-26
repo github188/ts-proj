@@ -27,7 +27,8 @@
 	String portDataSubFrom;
 	String portDataSubLen;		
 	String userPrompt;
-	String passwordPrompt;		
+	String passwordPrompt;
+	String timeOut;
 %>
 <%
     xml = XMLWrap.getRequestXml(request,session,application);
@@ -54,6 +55,11 @@
     portDataSubLen = xml.getItemValue("DEVICE_TYPE",1,"PORT_DATA_SUB_LEN");    
     userPrompt = xml.getItemValue("DEVICE_TYPE",1,"USER_PROMPT");
     passwordPrompt = xml.getItemValue("DEVICE_TYPE",1,"PASSWORD_PROMPT"); 
+    timeOut = xml.getItemValue("DEVICE_TYPE",1,"TIME_OUT");
+    
+    if(timeOut == null  || timeOut.length() == 0){
+    	timeOut = "5000";
+    }
 
 %>
 <html>
@@ -299,6 +305,16 @@
 		                            </span>
 		                  </td>
 		               </tr>
+		               <tr>
+                          <td width="150" align="right">超时时间（毫秒）：</td>
+		                  <td width="100">
+		                      <span id="sprytTimeOut">
+             					 <input type="text" class="text" name="TIME_OUT" value="<%=timeOut %>">
+		                             <span class="textfieldInvalidFormatMsg">格式无效，有效格式为实数。</span>
+		                            <span class="textfieldMaxCharsMsg">已超过最大字符数50。</span>	                        
+		                            </span>
+		                  </td>
+		               </tr>
 		            
 		                <tr>
 		                 <td width="150" align="right">备注：</td>
@@ -356,6 +372,7 @@ var sprytextfield13 = new Spry.Widget.ValidationTextField("sprytPortDataSubFrom"
 var sprytextfield14 = new Spry.Widget.ValidationTextField("sprytPortDataSubLen", "integer", {isRequired:false,useCharacterMasking:true});
 var sprytextfield15 = new Spry.Widget.ValidationTextField("sprytUserPrompt","none", {isRequired:false,maxChars:60});
 var sprytextfield16 = new Spry.Widget.ValidationTextField("sprytPasswordPrompt","none", {isRequired:false,maxChars:60});
+var sprytextfield17 = new Spry.Widget.ValidationTextField("sprytTimeOut", "integer", {isRequired:false,useCharacterMasking:true});
 //-->
 </script>
 </body>
