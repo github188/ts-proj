@@ -31,12 +31,16 @@ public class DbDeviceType extends RootDB{
         int res = -1;
         StringBuffer query = new StringBuffer();
 
-        query.append("insert into device_type ( TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,PROMPT_LINES,CONFIG_COMMANDS,PORTS_LIST_COMMANDS,PORTS_DATA_ROW,PORTS_DATA_SERIES,VLAN_DIV_CHAR,PORT_DATA_SUB_FROM,PORT_DATA_SUB_LEN,COLLECT_COMMANDS,PORT_TYPE_START,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK,COMM_LINE_MAX,USER_PROMPT,PASSWORD_PROMPT ) values ( ");
+        query.append("insert into device_type ( TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,USER_PROMPT,PASSWORD_PROMPT,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,PROMPT_LINES,CONFIG_COMMANDS,PORTS_LIST_COMMANDS,PORTS_DATA_ROW,PORTS_DATA_SERIES,VLAN_DIV_CHAR,PORT_DATA_SUB_FROM,PORT_DATA_SUB_LEN,COLLECT_COMMANDS,PORT_TYPE_START,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK,COMM_LINE_MAX,TIME_OUT ) values ( ");
         query.append(formatString(en.getTypeId()));
         query.append(",");
         query.append(formatString(en.getTypeNameEn()));
         query.append(",");
         query.append(formatString(en.getTypeNameCn()));
+        query.append(",");
+        query.append(formatString(en.getUserPrompt()));
+        query.append(",");
+        query.append(formatString(en.getPasswordPrompt()));
         query.append(",");
         query.append(formatString(en.getInspectCommands()));
         query.append(",");
@@ -76,9 +80,7 @@ public class DbDeviceType extends RootDB{
         query.append(",");
         query.append(en.getCommLineMax());
         query.append(",");
-        query.append(formatString(en.getUserPrompt()));
-        query.append(",");
-        query.append(formatString(en.getPasswordPrompt()));
+        query.append(en.getTimeOut());
         query.append(")");
 
         res = trans.doUpdate(connId,query.toString());
@@ -132,6 +134,22 @@ public class DbDeviceType extends RootDB{
             }
             query.append("TYPE_NAME_CN=");
             query.append(formatString(en.getTypeNameCn()));
+            bChanged = true;
+        }
+        if(en.hasChangeUserPrompt()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("USER_PROMPT=");
+            query.append(formatString(en.getUserPrompt()));
+            bChanged = true;
+        }
+        if(en.hasChangePasswordPrompt()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("PASSWORD_PROMPT=");
+            query.append(formatString(en.getPasswordPrompt()));
             bChanged = true;
         }
         if(en.hasChangeInspectCommands()) {
@@ -286,20 +304,12 @@ public class DbDeviceType extends RootDB{
             query.append(en.getCommLineMax());
             bChanged = true;
         }
-        if(en.hasChangeUserPrompt()) {
+        if(en.hasChangeTimeOut()) {
             if(bChanged){
                 query.append(",");
             }
-            query.append("USER_PROMPT=");
-            query.append(formatString(en.getUserPrompt()));
-            bChanged = true;
-        }
-        if(en.hasChangePasswordPrompt()) {
-            if(bChanged){
-                query.append(",");
-            }
-            query.append("PASSWORD_PROMPT=");
-            query.append(formatString(en.getPasswordPrompt()));
+            query.append("TIME_OUT=");
+            query.append(en.getTimeOut());
             bChanged = true;
         }
 
@@ -317,7 +327,7 @@ public class DbDeviceType extends RootDB{
         EnDeviceType res = null;
 
         StringBuffer query;
-        query = new StringBuffer("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,PROMPT_LINES,CONFIG_COMMANDS,PORTS_LIST_COMMANDS,PORTS_DATA_ROW,PORTS_DATA_SERIES,VLAN_DIV_CHAR,PORT_DATA_SUB_FROM,PORT_DATA_SUB_LEN,COLLECT_COMMANDS,PORT_TYPE_START,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK,COMM_LINE_MAX,USER_PROMPT,PASSWORD_PROMPT from device_type");
+        query = new StringBuffer("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,USER_PROMPT,PASSWORD_PROMPT,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,PROMPT_LINES,CONFIG_COMMANDS,PORTS_LIST_COMMANDS,PORTS_DATA_ROW,PORTS_DATA_SERIES,VLAN_DIV_CHAR,PORT_DATA_SUB_FROM,PORT_DATA_SUB_LEN,COLLECT_COMMANDS,PORT_TYPE_START,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK,COMM_LINE_MAX,TIME_OUT from device_type");
 
         query.append(" where ");
         query.append("TYPE_ID=");
@@ -390,6 +400,22 @@ public class DbDeviceType extends RootDB{
             query.append(formatString(en.getTypeNameCn()));
             bChanged = true;
         }
+        if(en.hasChangeUserPrompt()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("USER_PROMPT=");
+            query.append(formatString(en.getUserPrompt()));
+            bChanged = true;
+        }
+        if(en.hasChangePasswordPrompt()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("PASSWORD_PROMPT=");
+            query.append(formatString(en.getPasswordPrompt()));
+            bChanged = true;
+        }
         if(en.hasChangeInspectCommands()) {
             if(bChanged){
                 query.append(",");
@@ -542,20 +568,12 @@ public class DbDeviceType extends RootDB{
             query.append(en.getCommLineMax());
             bChanged = true;
         }
-        if(en.hasChangeUserPrompt()) {
+        if(en.hasChangeTimeOut()) {
             if(bChanged){
                 query.append(",");
             }
-            query.append("USER_PROMPT=");
-            query.append(formatString(en.getUserPrompt()));
-            bChanged = true;
-        }
-        if(en.hasChangePasswordPrompt()) {
-            if(bChanged){
-                query.append(",");
-            }
-            query.append("PASSWORD_PROMPT=");
-            query.append(formatString(en.getPasswordPrompt()));
+            query.append("TIME_OUT=");
+            query.append(en.getTimeOut());
             bChanged = true;
         }
 
@@ -573,7 +591,7 @@ public class DbDeviceType extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,PROMPT_LINES,CONFIG_COMMANDS,PORTS_LIST_COMMANDS,PORTS_DATA_ROW,PORTS_DATA_SERIES,VLAN_DIV_CHAR,PORT_DATA_SUB_FROM,PORT_DATA_SUB_LEN,COLLECT_COMMANDS,PORT_TYPE_START,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK,COMM_LINE_MAX,USER_PROMPT,PASSWORD_PROMPT from device_type");
+        query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,USER_PROMPT,PASSWORD_PROMPT,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,PROMPT_LINES,CONFIG_COMMANDS,PORTS_LIST_COMMANDS,PORTS_DATA_ROW,PORTS_DATA_SERIES,VLAN_DIV_CHAR,PORT_DATA_SUB_FROM,PORT_DATA_SUB_LEN,COLLECT_COMMANDS,PORT_TYPE_START,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK,COMM_LINE_MAX,TIME_OUT from device_type");
 
         query.append(" where ");
         query.append("TYPE_ID like ");
@@ -611,7 +629,7 @@ public class DbDeviceType extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,PROMPT_LINES,CONFIG_COMMANDS,PORTS_LIST_COMMANDS,PORTS_DATA_ROW,PORTS_DATA_SERIES,VLAN_DIV_CHAR,PORT_DATA_SUB_FROM,PORT_DATA_SUB_LEN,COLLECT_COMMANDS,PORT_TYPE_START,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK,COMM_LINE_MAX,USER_PROMPT,PASSWORD_PROMPT from device_type where ");
+        query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,USER_PROMPT,PASSWORD_PROMPT,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,PROMPT_LINES,CONFIG_COMMANDS,PORTS_LIST_COMMANDS,PORTS_DATA_ROW,PORTS_DATA_SERIES,VLAN_DIV_CHAR,PORT_DATA_SUB_FROM,PORT_DATA_SUB_LEN,COLLECT_COMMANDS,PORT_TYPE_START,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK,COMM_LINE_MAX,TIME_OUT from device_type where ");
         query.append(where);
         if(orderBy != null) {
             query.append(orderBy);
@@ -628,7 +646,7 @@ public class DbDeviceType extends RootDB{
         Vector retRows = new Vector();
 
         StringBuffer query = new StringBuffer();
-        query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,PROMPT_LINES,CONFIG_COMMANDS,PORTS_LIST_COMMANDS,PORTS_DATA_ROW,PORTS_DATA_SERIES,VLAN_DIV_CHAR,PORT_DATA_SUB_FROM,PORT_DATA_SUB_LEN,COLLECT_COMMANDS,PORT_TYPE_START,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK,COMM_LINE_MAX,USER_PROMPT,PASSWORD_PROMPT from device_type");
+        query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,USER_PROMPT,PASSWORD_PROMPT,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,PROMPT_LINES,CONFIG_COMMANDS,PORTS_LIST_COMMANDS,PORTS_DATA_ROW,PORTS_DATA_SERIES,VLAN_DIV_CHAR,PORT_DATA_SUB_FROM,PORT_DATA_SUB_LEN,COLLECT_COMMANDS,PORT_TYPE_START,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK,COMM_LINE_MAX,TIME_OUT from device_type");
 
         if(orderBy != null) {
             query.append(orderBy);
@@ -671,6 +689,22 @@ public class DbDeviceType extends RootDB{
             query.append(formatString(en.getTypeNameCn()));
             bChanged = true;
         }
+        if(en.hasChangeUserPrompt()) {
+            if(bChanged){
+                query.append(" and ");
+            }
+            query.append("USER_PROMPT=");
+            query.append(formatString(en.getUserPrompt()));
+            bChanged = true;
+        }
+        if(en.hasChangePasswordPrompt()) {
+            if(bChanged){
+                query.append(" and ");
+            }
+            query.append("PASSWORD_PROMPT=");
+            query.append(formatString(en.getPasswordPrompt()));
+            bChanged = true;
+        }
         if(en.hasChangeInspectCommands()) {
             if(bChanged){
                 query.append(" and ");
@@ -823,26 +857,18 @@ public class DbDeviceType extends RootDB{
             query.append(en.getCommLineMax());
             bChanged = true;
         }
-        if(en.hasChangeUserPrompt()) {
+        if(en.hasChangeTimeOut()) {
             if(bChanged){
                 query.append(" and ");
             }
-            query.append("USER_PROMPT=");
-            query.append(formatString(en.getUserPrompt()));
-            bChanged = true;
-        }
-        if(en.hasChangePasswordPrompt()) {
-            if(bChanged){
-                query.append(" and ");
-            }
-            query.append("PASSWORD_PROMPT=");
-            query.append(formatString(en.getPasswordPrompt()));
+            query.append("TIME_OUT=");
+            query.append(en.getTimeOut());
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,PROMPT_LINES,CONFIG_COMMANDS,PORTS_LIST_COMMANDS,PORTS_DATA_ROW,PORTS_DATA_SERIES,VLAN_DIV_CHAR,PORT_DATA_SUB_FROM,PORT_DATA_SUB_LEN,COLLECT_COMMANDS,PORT_TYPE_START,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK,COMM_LINE_MAX,USER_PROMPT,PASSWORD_PROMPT from device_type where ");
+            query.insert(0,"select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,USER_PROMPT,PASSWORD_PROMPT,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,PROMPT_LINES,CONFIG_COMMANDS,PORTS_LIST_COMMANDS,PORTS_DATA_ROW,PORTS_DATA_SERIES,VLAN_DIV_CHAR,PORT_DATA_SUB_FROM,PORT_DATA_SUB_LEN,COLLECT_COMMANDS,PORT_TYPE_START,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK,COMM_LINE_MAX,TIME_OUT from device_type where ");
         } else {
-            query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,PROMPT_LINES,CONFIG_COMMANDS,PORTS_LIST_COMMANDS,PORTS_DATA_ROW,PORTS_DATA_SERIES,VLAN_DIV_CHAR,PORT_DATA_SUB_FROM,PORT_DATA_SUB_LEN,COLLECT_COMMANDS,PORT_TYPE_START,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK,COMM_LINE_MAX,USER_PROMPT,PASSWORD_PROMPT from device_type");
+            query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,USER_PROMPT,PASSWORD_PROMPT,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,PROMPT_LINES,CONFIG_COMMANDS,PORTS_LIST_COMMANDS,PORTS_DATA_ROW,PORTS_DATA_SERIES,VLAN_DIV_CHAR,PORT_DATA_SUB_FROM,PORT_DATA_SUB_LEN,COLLECT_COMMANDS,PORT_TYPE_START,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK,COMM_LINE_MAX,TIME_OUT from device_type");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -883,6 +909,22 @@ public class DbDeviceType extends RootDB{
             }
             query.append("TYPE_NAME_CN like ");
             query.append(formatString(en.getTypeNameCn()));
+            bChanged = true;
+        }
+        if(en.hasChangeUserPrompt()) {
+            if(bChanged){
+                query.append(" and ");
+            }
+            query.append("USER_PROMPT like ");
+            query.append(formatString(en.getUserPrompt()));
+            bChanged = true;
+        }
+        if(en.hasChangePasswordPrompt()) {
+            if(bChanged){
+                query.append(" and ");
+            }
+            query.append("PASSWORD_PROMPT like ");
+            query.append(formatString(en.getPasswordPrompt()));
             bChanged = true;
         }
         if(en.hasChangeInspectCommands()) {
@@ -1037,26 +1079,18 @@ public class DbDeviceType extends RootDB{
             query.append(en.getCommLineMax());
             bChanged = true;
         }
-        if(en.hasChangeUserPrompt()) {
+        if(en.hasChangeTimeOut()) {
             if(bChanged){
                 query.append(" and ");
             }
-            query.append("USER_PROMPT like ");
-            query.append(formatString(en.getUserPrompt()));
-            bChanged = true;
-        }
-        if(en.hasChangePasswordPrompt()) {
-            if(bChanged){
-                query.append(" and ");
-            }
-            query.append("PASSWORD_PROMPT like ");
-            query.append(formatString(en.getPasswordPrompt()));
+            query.append("TIME_OUT=");
+            query.append(en.getTimeOut());
             bChanged = true;
         }
         if(bChanged) {
-            query.insert(0,"select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,PROMPT_LINES,CONFIG_COMMANDS,PORTS_LIST_COMMANDS,PORTS_DATA_ROW,PORTS_DATA_SERIES,VLAN_DIV_CHAR,PORT_DATA_SUB_FROM,PORT_DATA_SUB_LEN,COLLECT_COMMANDS,PORT_TYPE_START,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK,COMM_LINE_MAX,USER_PROMPT,PASSWORD_PROMPT from device_type where ");
+            query.insert(0,"select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,USER_PROMPT,PASSWORD_PROMPT,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,PROMPT_LINES,CONFIG_COMMANDS,PORTS_LIST_COMMANDS,PORTS_DATA_ROW,PORTS_DATA_SERIES,VLAN_DIV_CHAR,PORT_DATA_SUB_FROM,PORT_DATA_SUB_LEN,COLLECT_COMMANDS,PORT_TYPE_START,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK,COMM_LINE_MAX,TIME_OUT from device_type where ");
         } else {
-            query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,PROMPT_LINES,CONFIG_COMMANDS,PORTS_LIST_COMMANDS,PORTS_DATA_ROW,PORTS_DATA_SERIES,VLAN_DIV_CHAR,PORT_DATA_SUB_FROM,PORT_DATA_SUB_LEN,COLLECT_COMMANDS,PORT_TYPE_START,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK,COMM_LINE_MAX,USER_PROMPT,PASSWORD_PROMPT from device_type");
+            query.append("select TYPE_ID,TYPE_NAME_EN,TYPE_NAME_CN,USER_PROMPT,PASSWORD_PROMPT,INSPECT_COMMANDS,INSPECT_COMMANDS_EXP,PROMPT_LINES,CONFIG_COMMANDS,PORTS_LIST_COMMANDS,PORTS_DATA_ROW,PORTS_DATA_SERIES,VLAN_DIV_CHAR,PORT_DATA_SUB_FROM,PORT_DATA_SUB_LEN,COLLECT_COMMANDS,PORT_TYPE_START,RXP_LINE_START,RXP_VALUE_START,RXP_VALUE_END,RXP_VALUE_POS,APP_PICTURE,REMARK,COMM_LINE_MAX,TIME_OUT from device_type");
         }
         if(orderBy != null) {
             query.append(orderBy);
@@ -1142,6 +1176,22 @@ public class DbDeviceType extends RootDB{
             }
             query.append("TYPE_NAME_CN=");
             query.append(formatString(en.getTypeNameCn()));
+            bChanged = true;
+        }
+        if(en.hasChangeUserPrompt()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("USER_PROMPT=");
+            query.append(formatString(en.getUserPrompt()));
+            bChanged = true;
+        }
+        if(en.hasChangePasswordPrompt()) {
+            if(bChanged){
+                query.append(",");
+            }
+            query.append("PASSWORD_PROMPT=");
+            query.append(formatString(en.getPasswordPrompt()));
             bChanged = true;
         }
         if(en.hasChangeInspectCommands()) {
@@ -1296,20 +1346,12 @@ public class DbDeviceType extends RootDB{
             query.append(en.getCommLineMax());
             bChanged = true;
         }
-        if(en.hasChangeUserPrompt()) {
+        if(en.hasChangeTimeOut()) {
             if(bChanged){
                 query.append(",");
             }
-            query.append("USER_PROMPT=");
-            query.append(formatString(en.getUserPrompt()));
-            bChanged = true;
-        }
-        if(en.hasChangePasswordPrompt()) {
-            if(bChanged){
-                query.append(",");
-            }
-            query.append("PASSWORD_PROMPT=");
-            query.append(formatString(en.getPasswordPrompt()));
+            query.append("TIME_OUT=");
+            query.append(en.getTimeOut());
             bChanged = true;
         }
         query.append(" where ");
@@ -1327,6 +1369,8 @@ public class DbDeviceType extends RootDB{
         en.setTypeId(r.getString("TYPE_ID"));
         en.setTypeNameEn(r.getString("TYPE_NAME_EN"));
         en.setTypeNameCn(r.getString("TYPE_NAME_CN"));
+        en.setUserPrompt(r.getString("USER_PROMPT"));
+        en.setPasswordPrompt(r.getString("PASSWORD_PROMPT"));
         en.setInspectCommands(r.getString("INSPECT_COMMANDS"));
         en.setInspectCommandsExp(r.getString("INSPECT_COMMANDS_EXP"));
         en.setPromptLines(r.getInteger("PROMPT_LINES") == null ? 0 : r.getInteger("PROMPT_LINES").intValue());
@@ -1346,8 +1390,7 @@ public class DbDeviceType extends RootDB{
         en.setAppPicture(r.getBytes("APP_PICTURE"));
         en.setRemark(r.getString("REMARK"));
         en.setCommLineMax(r.getInteger("COMM_LINE_MAX") == null ? 0 : r.getInteger("COMM_LINE_MAX").intValue());
-        en.setUserPrompt(r.getString("USER_PROMPT"));
-        en.setPasswordPrompt(r.getString("PASSWORD_PROMPT"));
+        en.setTimeOut(r.getInteger("TIME_OUT") == null ? 0 : r.getInteger("TIME_OUT").intValue());
 
         return en;
     }
@@ -1381,6 +1424,14 @@ public class DbDeviceType extends RootDB{
         otmp = xml.getInputObject("TYPE_NAME_CN");
         stmp = (String)otmp;
         en.setTypeNameCn(stmp);
+
+        otmp = xml.getInputObject("USER_PROMPT");
+        stmp = (String)otmp;
+        en.setUserPrompt(stmp);
+
+        otmp = xml.getInputObject("PASSWORD_PROMPT");
+        stmp = (String)otmp;
+        en.setPasswordPrompt(stmp);
 
         otmp = xml.getInputObject("INSPECT_COMMANDS");
         stmp = (String)otmp;
@@ -1468,13 +1519,11 @@ public class DbDeviceType extends RootDB{
             en.setCommLineMax(parseInt(stmp));
         }
 
-        otmp = xml.getInputObject("USER_PROMPT");
+        otmp = xml.getInputObject("TIME_OUT");
         stmp = (String)otmp;
-        en.setUserPrompt(stmp);
-
-        otmp = xml.getInputObject("PASSWORD_PROMPT");
-        stmp = (String)otmp;
-        en.setPasswordPrompt(stmp);
+        if (stmp != null && stmp.length() > 0) {
+            en.setTimeOut(parseInt(stmp));
+        }
 
         return en;
     }
@@ -1489,6 +1538,8 @@ public class DbDeviceType extends RootDB{
         Object[] oTypeId;
         Object[] oTypeNameEn;
         Object[] oTypeNameCn;
+        Object[] oUserPrompt;
+        Object[] oPasswordPrompt;
         Object[] oInspectCommands;
         Object[] oInspectCommandsExp;
         Object[] oPromptLines;
@@ -1508,8 +1559,7 @@ public class DbDeviceType extends RootDB{
         Object[] oAppPicture;
         Object[] oRemark;
         Object[] oCommLineMax;
-        Object[] oUserPrompt;
-        Object[] oPasswordPrompt;
+        Object[] oTimeOut;
         int count = 0;
 
         oTypeId = xml.getInputObjects("TYPE_ID");
@@ -1523,6 +1573,14 @@ public class DbDeviceType extends RootDB{
         oTypeNameCn = xml.getInputObjects("TYPE_NAME_CN");
         if (count == 0 && oTypeNameCn.length > 0) {
             count = oTypeNameCn.length;
+        }
+        oUserPrompt = xml.getInputObjects("USER_PROMPT");
+        if (count == 0 && oUserPrompt.length > 0) {
+            count = oUserPrompt.length;
+        }
+        oPasswordPrompt = xml.getInputObjects("PASSWORD_PROMPT");
+        if (count == 0 && oPasswordPrompt.length > 0) {
+            count = oPasswordPrompt.length;
         }
         oInspectCommands = xml.getInputObjects("INSPECT_COMMANDS");
         if (count == 0 && oInspectCommands.length > 0) {
@@ -1600,13 +1658,9 @@ public class DbDeviceType extends RootDB{
         if (count == 0 && oCommLineMax.length > 0) {
             count = oCommLineMax.length;
         }
-        oUserPrompt = xml.getInputObjects("USER_PROMPT");
-        if (count == 0 && oUserPrompt.length > 0) {
-            count = oUserPrompt.length;
-        }
-        oPasswordPrompt = xml.getInputObjects("PASSWORD_PROMPT");
-        if (count == 0 && oPasswordPrompt.length > 0) {
-            count = oPasswordPrompt.length;
+        oTimeOut = xml.getInputObjects("TIME_OUT");
+        if (count == 0 && oTimeOut.length > 0) {
+            count = oTimeOut.length;
         }
         for (int i = 0; i < count; i ++) {
             en = new EnDeviceType();
@@ -1624,6 +1678,16 @@ public class DbDeviceType extends RootDB{
             if (oTypeNameCn.length == count) {
                 stmp = (String)oTypeNameCn[i];
                 en.setTypeNameCn(stmp);
+            }
+
+            if (oUserPrompt.length == count) {
+                stmp = (String)oUserPrompt[i];
+                en.setUserPrompt(stmp);
+            }
+
+            if (oPasswordPrompt.length == count) {
+                stmp = (String)oPasswordPrompt[i];
+                en.setPasswordPrompt(stmp);
             }
 
             if (oInspectCommands.length == count) {
@@ -1731,14 +1795,11 @@ public class DbDeviceType extends RootDB{
                 }
             }
 
-            if (oUserPrompt.length == count) {
-                stmp = (String)oUserPrompt[i];
-                en.setUserPrompt(stmp);
-            }
-
-            if (oPasswordPrompt.length == count) {
-                stmp = (String)oPasswordPrompt[i];
-                en.setPasswordPrompt(stmp);
+            if (oTimeOut.length == count) {
+                stmp = (String)oTimeOut[i];
+                if (stmp != null && stmp.length() > 0) {
+                    en.setTimeOut(parseInt(stmp));
+                }
             }
 
             res.addElement(en);
@@ -1754,6 +1815,8 @@ public class DbDeviceType extends RootDB{
         xml.setItemValue("DEVICE_TYPE",row,"TYPE_ID",en.getTypeId());
         xml.setItemValue("DEVICE_TYPE",row,"TYPE_NAME_EN",en.getTypeNameEn());
         xml.setItemValue("DEVICE_TYPE",row,"TYPE_NAME_CN",en.getTypeNameCn());
+        xml.setItemValue("DEVICE_TYPE",row,"USER_PROMPT",en.getUserPrompt());
+        xml.setItemValue("DEVICE_TYPE",row,"PASSWORD_PROMPT",en.getPasswordPrompt());
         xml.setItemValue("DEVICE_TYPE",row,"INSPECT_COMMANDS",en.getInspectCommands());
         xml.setItemValue("DEVICE_TYPE",row,"INSPECT_COMMANDS_EXP",en.getInspectCommandsExp());
         xml.setItemValue("DEVICE_TYPE",row,"PROMPT_LINES",en.getPromptLines());
@@ -1773,8 +1836,7 @@ public class DbDeviceType extends RootDB{
         xml.setItemValue("DEVICE_TYPE",row,"APP_PICTURE",en.getAppPicture());
         xml.setItemValue("DEVICE_TYPE",row,"REMARK",en.getRemark());
         xml.setItemValue("DEVICE_TYPE",row,"COMM_LINE_MAX",en.getCommLineMax());
-        xml.setItemValue("DEVICE_TYPE",row,"USER_PROMPT",en.getUserPrompt());
-        xml.setItemValue("DEVICE_TYPE",row,"PASSWORD_PROMPT",en.getPasswordPrompt());
+        xml.setItemValue("DEVICE_TYPE",row,"TIME_OUT",en.getTimeOut());
         return row;
     }
     /**
@@ -1790,6 +1852,8 @@ public class DbDeviceType extends RootDB{
             xml.setItemValue("DEVICE_TYPE",row,"TYPE_ID",en.getTypeId());
             xml.setItemValue("DEVICE_TYPE",row,"TYPE_NAME_EN",en.getTypeNameEn());
             xml.setItemValue("DEVICE_TYPE",row,"TYPE_NAME_CN",en.getTypeNameCn());
+            xml.setItemValue("DEVICE_TYPE",row,"USER_PROMPT",en.getUserPrompt());
+            xml.setItemValue("DEVICE_TYPE",row,"PASSWORD_PROMPT",en.getPasswordPrompt());
             xml.setItemValue("DEVICE_TYPE",row,"INSPECT_COMMANDS",en.getInspectCommands());
             xml.setItemValue("DEVICE_TYPE",row,"INSPECT_COMMANDS_EXP",en.getInspectCommandsExp());
             xml.setItemValue("DEVICE_TYPE",row,"PROMPT_LINES",en.getPromptLines());
@@ -1809,8 +1873,7 @@ public class DbDeviceType extends RootDB{
             xml.setItemValue("DEVICE_TYPE",row,"APP_PICTURE",en.getAppPicture());
             xml.setItemValue("DEVICE_TYPE",row,"REMARK",en.getRemark());
             xml.setItemValue("DEVICE_TYPE",row,"COMM_LINE_MAX",en.getCommLineMax());
-            xml.setItemValue("DEVICE_TYPE",row,"USER_PROMPT",en.getUserPrompt());
-            xml.setItemValue("DEVICE_TYPE",row,"PASSWORD_PROMPT",en.getPasswordPrompt());
+            xml.setItemValue("DEVICE_TYPE",row,"TIME_OUT",en.getTimeOut());
         }
     }
 }
