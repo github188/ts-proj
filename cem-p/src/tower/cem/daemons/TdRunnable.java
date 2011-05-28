@@ -29,7 +29,7 @@ public class TdRunnable implements Runnable {
 
     private String ConfigLogsPath;
 
-    private int TelentTimeout = 30;
+    private int TelentTimeout = 5000;
 
     public TdRunnable(EnCommandsSendList enCommandsSendList, Logger logger) {
 	this.enSendList = enCommandsSendList;
@@ -255,7 +255,6 @@ public class TdRunnable implements Runnable {
 	ResultSet rs = null;
 
 	NetTelnet nt = new NetTelnet();
-//	nt.setTimeOut(this.TelentTimeout);
 	StringBuffer sbResult = new StringBuffer();
 	StringBuffer sbPickLog = new StringBuffer();
 	String sResult = "";
@@ -324,7 +323,9 @@ public class TdRunnable implements Runnable {
 			enDeviceType.setCommLineMax(rs.getInt("COMM_LINE_MAX"));
 			if (enDeviceType.getCommLineMax() < 0)
 			    enDeviceType.setCommLineMax(0);
-
+			enDeviceType.setTimeOut(rs.getInt("TIME_OUT"));
+			if (enDeviceType.getTimeOut() <= 0)
+				enDeviceType.setTimeOut(this.TelentTimeout);
 		    }
 		}
 
@@ -379,6 +380,7 @@ public class TdRunnable implements Runnable {
 		// 连接设备，并执行命令
 		if (sGenResult.equals("S")) {
 		    nt = new NetTelnet();
+		    nt.setTimeOut(enDeviceType.getTimeOut());
 		    // 进行设备登录处理
 		    if (enDeviceInfo.getFrontHostId() == null
 			    || enDeviceInfo.getFrontHostId().trim().length() == 0) {
@@ -581,6 +583,9 @@ public class TdRunnable implements Runnable {
 		    enDeviceType.setCommLineMax(rs.getInt("COMM_LINE_MAX"));
 		    if (enDeviceType.getCommLineMax() < 0)
 			enDeviceType.setCommLineMax(0);
+		    enDeviceType.setTimeOut(rs.getInt("TIME_OUT"));
+			if (enDeviceType.getTimeOut() <= 0)
+			enDeviceType.setTimeOut(this.TelentTimeout);
 
 		    vDeviceType.add(enDeviceType);
 		}
@@ -612,6 +617,7 @@ public class TdRunnable implements Runnable {
 		    sbResult = new StringBuffer();
 		    enDeviceInfo = (EnDeviceInfo) vDeviceInfo.get(i);
 		    enDeviceType = (EnDeviceType) vDeviceType.get(i);
+		    nt.setTimeOut(enDeviceType.getTimeOut());
 
 		    sGenResult = "S";
 
@@ -918,6 +924,9 @@ public class TdRunnable implements Runnable {
 			enDeviceType.setCommLineMax(0);
 		    enDeviceType.setPortDataSubFrom(rs.getInt("PORT_DATA_SUB_FROM"));
 		    enDeviceType.setPortDataSubLen(rs.getInt("PORT_DATA_SUB_LEN"));
+		    enDeviceType.setTimeOut(rs.getInt("TIME_OUT"));
+			if (enDeviceType.getTimeOut() <= 0)
+			enDeviceType.setTimeOut(this.TelentTimeout);
 		    vDeviceType.add(enDeviceType);
 		}
 
@@ -948,6 +957,7 @@ public class TdRunnable implements Runnable {
 		    sbResult = new StringBuffer();
 		    enDeviceInfo = (EnDeviceInfo) vDeviceInfo.get(i);
 		    enDeviceType = (EnDeviceType) vDeviceType.get(i);
+		    nt.setTimeOut(enDeviceType.getTimeOut());
 
 		    sGenResult = "S";
 
@@ -1253,6 +1263,9 @@ public class TdRunnable implements Runnable {
 		    enDeviceType.setCommLineMax(rs.getInt("COMM_LINE_MAX"));
 		    if (enDeviceType.getCommLineMax() < 0)
 			enDeviceType.setCommLineMax(0);
+		    enDeviceType.setTimeOut(rs.getInt("TIME_OUT"));
+			if (enDeviceType.getTimeOut() <= 0)
+			enDeviceType.setTimeOut(this.TelentTimeout);
 
 		    vDeviceType.add(enDeviceType);
 		}
@@ -1284,6 +1297,7 @@ public class TdRunnable implements Runnable {
 		    sbResult = new StringBuffer();
 		    enDeviceInfo = (EnDeviceInfo) vDeviceInfo.get(i);
 		    enDeviceType = (EnDeviceType) vDeviceType.get(i);
+		    nt.setTimeOut(enDeviceType.getTimeOut());
 
 		    sGenResult = "S";
 
