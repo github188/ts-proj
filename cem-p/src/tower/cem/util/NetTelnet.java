@@ -277,8 +277,8 @@ public class NetTelnet {
 		return this.bFlag;
 	}
 
-	public void setTimeOut(int second) {
-		this.timeOut = second * 1000;
+	public void setTimeOut(int mSecond) {
+		this.timeOut = mSecond;
 	}
 
 	public void setPrompt(String promptStr) {
