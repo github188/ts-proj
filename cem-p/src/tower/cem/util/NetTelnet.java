@@ -230,7 +230,7 @@ public class NetTelnet {
 	 * @param command
 	 * @return
 	 */
-	public String sendCommand(String command, int promptLines) {
+	public String sendCommand(String command, int promptLines, int timeOut) {
 		StringBuffer sbReturn = new StringBuffer();
 		int iPromptLines = promptLines;
 		if (iPromptLines < 0) {
@@ -238,14 +238,16 @@ public class NetTelnet {
 		}
 		try {
 			write(command);
-
-			// 执行指令后，等待提示符出现
-			// for (int i = 0; i < promptLines; i++) {
-			// sbReturn.append(readUntil(prompt));
-			// }
-
-			// 执行指令后，等待至超时
-			sbReturn.append(readUntil());
+			
+			if (timeOut <= 0) {
+				// 执行指令后，等待提示符出现
+				for (int i = 0; i < promptLines; i++)
+					sbReturn.append(readUntil(prompt));				
+			} 
+			else {
+				// 执行指令后，等待至超时
+				sbReturn.append(readUntil());
+			}			
 
 			return sbReturn.toString();
 		} catch (Exception e) {
@@ -303,11 +305,11 @@ public class NetTelnet {
 			} else {
 				// 在这里执行设备维护命令
 				// 命令是 ll 列出当前目录下的目录及文件
-				result = telnet.sendCommand("ll", 1);
+				result = telnet.sendCommand("ll", 1, 0);
 				System.out.print(result);
 
 				// 命令是 pwd 查看当前所在目录
-				result = telnet.sendCommand("pwd", 1);
+				result = telnet.sendCommand("pwd", 1, 0);
 				System.out.print(result);
 
 				// 断开连接
@@ -339,19 +341,19 @@ public class NetTelnet {
 					// 在这里执行设备维护命令
 
 					// 命令是 ll 列出当前目录下的目录及文件
-					result = telnet.sendCommand("ll", 1);
+					result = telnet.sendCommand("ll", 1, 0);
 					System.out.print(result);
 					// 命令是 pwd 查看当前所在目录
-					result = telnet.sendCommand("pwd", 1);
+					result = telnet.sendCommand("pwd", 1, 0);
 					System.out.print(result);
 
 					// 从第二台服务器退出
 
 					// 重新设置为堡垒主机的提示符
 					telnet.setPrompt("$");
-					telnet.sendCommand("exit", 1);
+					telnet.sendCommand("exit", 1, 0);
 
-					result = telnet.sendCommand("pwd", 1);
+					result = telnet.sendCommand("pwd", 1, 0);
 					System.out.print(result);
 
 					// 关闭登录堡垒主机的连接

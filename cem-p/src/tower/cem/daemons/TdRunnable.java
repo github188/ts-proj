@@ -323,9 +323,7 @@ public class TdRunnable implements Runnable {
 			enDeviceType.setCommLineMax(rs.getInt("COMM_LINE_MAX"));
 			if (enDeviceType.getCommLineMax() < 0)
 			    enDeviceType.setCommLineMax(0);
-			enDeviceType.setTimeOut(rs.getInt("TIME_OUT"));
-			if (enDeviceType.getTimeOut() <= 0)
-				enDeviceType.setTimeOut(this.TelentTimeout);
+			enDeviceType.setTimeOut(rs.getInt("TIME_OUT"));		
 		    }
 		}
 
@@ -380,7 +378,12 @@ public class TdRunnable implements Runnable {
 		// 连接设备，并执行命令
 		if (sGenResult.equals("S")) {
 		    nt = new NetTelnet();
-		    nt.setTimeOut(enDeviceType.getTimeOut());
+		    
+		    if (enDeviceType.getTimeOut() > 0)
+		    	nt.setTimeOut(enDeviceType.getTimeOut());
+		    else
+		    	nt.setTimeOut(this.TelentTimeout);
+		    
 		    // 进行设备登录处理
 		    if (enDeviceInfo.getFrontHostId() == null
 			    || enDeviceInfo.getFrontHostId().trim().length() == 0) {
@@ -449,9 +452,9 @@ public class TdRunnable implements Runnable {
 
 				if (enDeviceType.getCommLineMax() == 0
 					|| sCommLine.length() <= enDeviceType.getCommLineMax()) {
-				    sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines());
+				    sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines(), enDeviceType.getTimeOut());
 				} else {
-				    sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines() + 1);
+				    sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines() + 1, enDeviceType.getTimeOut());
 				}
 				sbResult.append(sResult);
 			    }
@@ -464,7 +467,7 @@ public class TdRunnable implements Runnable {
 				// 将命令行提示符设置为堡垒主机命令行提示符
 				nt.setPrompt(enFrontHostInfo.getHostPrompt());
 				// 从设备上退出
-				sResult = nt.sendCommand("exit", 1);
+				sResult = nt.sendCommand("exit", 1, 0);
 				sbResult.append(sResult);
 				// 从堡垒主机退出
 				nt.write("quit");
@@ -584,8 +587,6 @@ public class TdRunnable implements Runnable {
 		    if (enDeviceType.getCommLineMax() < 0)
 			enDeviceType.setCommLineMax(0);
 		    enDeviceType.setTimeOut(rs.getInt("TIME_OUT"));
-			if (enDeviceType.getTimeOut() <= 0)
-			enDeviceType.setTimeOut(this.TelentTimeout);
 
 		    vDeviceType.add(enDeviceType);
 		}
@@ -617,7 +618,11 @@ public class TdRunnable implements Runnable {
 		    sbResult = new StringBuffer();
 		    enDeviceInfo = (EnDeviceInfo) vDeviceInfo.get(i);
 		    enDeviceType = (EnDeviceType) vDeviceType.get(i);
-		    nt.setTimeOut(enDeviceType.getTimeOut());
+		    
+		    if (enDeviceType.getTimeOut() > 0)
+		    	nt.setTimeOut(enDeviceType.getTimeOut());
+		    else
+		    	nt.setTimeOut(this.TelentTimeout);
 
 		    sGenResult = "S";
 
@@ -724,9 +729,9 @@ public class TdRunnable implements Runnable {
 
 				if (enDeviceType.getCommLineMax() == 0
 					|| sCommLine.length() <= enDeviceType.getCommLineMax()) {
-				    sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines());
+				    sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines(), enDeviceType.getTimeOut());
 				} else {
-				    sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines() + 1);
+				    sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines() + 1, enDeviceType.getTimeOut());
 				}
 				sbResult.append(sResult);
 
@@ -769,7 +774,7 @@ public class TdRunnable implements Runnable {
 				// 将命令行提示符设置为堡垒主机命令行提示符
 				nt.setPrompt(enFrontHostInfo.getHostPrompt());
 				// 从设备上退出
-				sResult = nt.sendCommand("exit", 1);
+				sResult = nt.sendCommand("exit", 1, 0);
 				sbResult.append(sResult);
 				// 从堡垒主机退出
 				nt.write("quit");
@@ -903,6 +908,7 @@ public class TdRunnable implements Runnable {
 		    enDeviceInfo.setDevicePrompt(rs.getString("DEVICE_PROMPT"));
 		    enDeviceInfo.setUserPrompt(rs.getString("USER_PROMPT"));
 		    enDeviceInfo.setPasswordPrompt(rs.getString("PASSWORD_PROMPT"));
+		    
 		    vDeviceInfo.add(enDeviceInfo);
 
 		    enDeviceType = new EnDeviceType();
@@ -925,8 +931,7 @@ public class TdRunnable implements Runnable {
 		    enDeviceType.setPortDataSubFrom(rs.getInt("PORT_DATA_SUB_FROM"));
 		    enDeviceType.setPortDataSubLen(rs.getInt("PORT_DATA_SUB_LEN"));
 		    enDeviceType.setTimeOut(rs.getInt("TIME_OUT"));
-			if (enDeviceType.getTimeOut() <= 0)
-			enDeviceType.setTimeOut(this.TelentTimeout);
+
 		    vDeviceType.add(enDeviceType);
 		}
 
@@ -957,8 +962,12 @@ public class TdRunnable implements Runnable {
 		    sbResult = new StringBuffer();
 		    enDeviceInfo = (EnDeviceInfo) vDeviceInfo.get(i);
 		    enDeviceType = (EnDeviceType) vDeviceType.get(i);
-		    nt.setTimeOut(enDeviceType.getTimeOut());
-
+		    
+		    if (enDeviceType.getTimeOut() > 0)
+		    	nt.setTimeOut(enDeviceType.getTimeOut());
+		    else
+		    	nt.setTimeOut(this.TelentTimeout);
+		    
 		    sGenResult = "S";
 
 		    // 端口数据采集开始计时
@@ -1053,9 +1062,9 @@ public class TdRunnable implements Runnable {
 
 				if (enDeviceType.getCommLineMax() == 0
 					|| sCommLine.length() <= enDeviceType.getCommLineMax()) {
-				    sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines());
+				    sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines(), enDeviceType.getTimeOut());
 				} else {
-				    sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines() + 1);
+				    sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines() + 1, enDeviceType.getTimeOut());
 				}
 				sbResult.append(sResult);
 			    }
@@ -1094,11 +1103,11 @@ public class TdRunnable implements Runnable {
 					    sResult = sResult
 						    + nt
 							    .sendCommand(sCommLine, enDeviceType
-								    .getPromptLines());
+								    .getPromptLines(), enDeviceType.getTimeOut());
 					} else {
 					    sResult = sResult
 						    + nt.sendCommand(sCommLine,
-							    enDeviceType.getPromptLines() + 1);
+							    enDeviceType.getPromptLines() + 1, enDeviceType.getTimeOut());
 					}
 				    }
 				}
@@ -1139,7 +1148,7 @@ public class TdRunnable implements Runnable {
 				// 将命令行提示符设置为堡垒主机命令行提示符
 				nt.setPrompt(enFrontHostInfo.getHostPrompt());
 				// 从设备上退出
-				sResult = nt.sendCommand("exit", 1);
+				sResult = nt.sendCommand("exit", 1, 0);
 				sbResult.append(sResult);
 				// 从堡垒主机退出
 				nt.write("quit");
@@ -1264,8 +1273,6 @@ public class TdRunnable implements Runnable {
 		    if (enDeviceType.getCommLineMax() < 0)
 			enDeviceType.setCommLineMax(0);
 		    enDeviceType.setTimeOut(rs.getInt("TIME_OUT"));
-			if (enDeviceType.getTimeOut() <= 0)
-			enDeviceType.setTimeOut(this.TelentTimeout);
 
 		    vDeviceType.add(enDeviceType);
 		}
@@ -1297,7 +1304,11 @@ public class TdRunnable implements Runnable {
 		    sbResult = new StringBuffer();
 		    enDeviceInfo = (EnDeviceInfo) vDeviceInfo.get(i);
 		    enDeviceType = (EnDeviceType) vDeviceType.get(i);
-		    nt.setTimeOut(enDeviceType.getTimeOut());
+		    
+		    if (enDeviceType.getTimeOut() > 0)
+		    	nt.setTimeOut(enDeviceType.getTimeOut());
+		    else
+		    	nt.setTimeOut(this.TelentTimeout);
 
 		    sGenResult = "S";
 
@@ -1391,9 +1402,9 @@ public class TdRunnable implements Runnable {
 
 				if (enDeviceType.getCommLineMax() == 0
 					|| sCommLine.length() <= enDeviceType.getCommLineMax()) {
-				    sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines());
+				    sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines(), enDeviceType.getTimeOut());
 				} else {
-				    sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines() + 1);
+				    sResult = nt.sendCommand(sCommLine, enDeviceType.getPromptLines() + 1, enDeviceType.getTimeOut());
 				}
 				sbResult.append(sResult);
 			    }
@@ -1406,7 +1417,7 @@ public class TdRunnable implements Runnable {
 				// 将命令行提示符设置为堡垒主机命令行提示符
 				nt.setPrompt(enFrontHostInfo.getHostPrompt());
 				// 从设备上退出
-				sResult = nt.sendCommand("exit", 1);
+				sResult = nt.sendCommand("exit", 1, 0);
 				sbResult.append(sResult);
 				// 从堡垒主机退出
 				nt.write("quit");
