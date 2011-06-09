@@ -14,6 +14,7 @@
 	String deviceIp;
 	String inspectEndBegin;//巡检结束日期  
 	String inspectEndEnd;
+	String sendId;
 	
 	
 	String[] sendIds;
@@ -36,6 +37,7 @@
 	deviceIp = xml.getInputValue("DEVICE_IP");
 	inspectEndBegin = xml.getInputValue("INSPECT_END_BEGIN");
 	inspectEndEnd = xml.getInputValue("INSPECT_END_END");
+	sendId = xml.getInputValue("SEND_ID");
 	
 	sendIds = xml.getItemValues("DEVICE_INSPECT_LOG","SEND_ID");
 	deviceNameCns = xml.getItemValues("DEVICE_INSPECT_LOG", "DEVICE_NAME_CN");
@@ -86,7 +88,7 @@
 	}
  }
  
-  function TDoChangePage(curPage){
+ function TDoChangePage(curPage){
   form1["CUR_PAGE"].value = curPage;
   form1.submit();
   }
@@ -129,10 +131,11 @@
           <div class="panelContent">
             <div class="panelContent2">
               <!-- 查询面板内容 -->
-               <!--
+                 <!--
               <form name="form1" action="ctrl" method="get"  onSubmit="return doSubmit(this)">
               <input type="hidden" name="FUNC_ID" value="ADeviceInspectLogList">
                <input type="hidden" name=CUR_PAGE value="">
+               <!--
               <table>
               	 <tr>
               	 	<td align="right">英文设备名称：</td> 
@@ -173,8 +176,10 @@
                    	</td>
                  </tr>
               </table>
+                
                </form>
-                -->
+               -->
+              
               <!-- 查询面板内容结束 -->
             </div>
           </div>
@@ -255,9 +260,15 @@
                 </tr>
                <%}}} %>
               </table>
+              <form name="form1" action="ctrl" method="get"  onSubmit="return doSubmit(this)">
+              <input type="hidden" name="FUNC_ID" value="ADeviceInspectLogList">
+               <input type="hidden" name="SEND_ID" value="<%=sendId %>">
+               <input type="hidden" name=CUR_PAGE value="">
+               </form>
               <div class="pageBar"><%=Page.BuildPageTextByMethod(xml,"TDoChangePage") %></div>
               <!-- 列表内容结束 -->
-           <form name="form1" action="ctrl" method="get"  onSubmit="return doSubmit(this)">
+           <form name="form2" action="ctrl" method="get"  onSubmit="return doSubmit(this)">
+            <input type="hidden" name=CUR_PAGE value="">
            <input type="hidden" name="FUNC_ID" value="AllDeviceInspectLogList">
            <input type="hidden" name="INSPECT_END_BEGIN" value="<%=inspectEndBegin %>"> 
            <input type="hidden" name="INSPECT_END_END" value="<%=inspectEndEnd %>"> 
